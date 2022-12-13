@@ -230,7 +230,8 @@ DETOUR_STD(HRESULT, Present, IDirect3DDevice9* device, RECT* pSourceRect, RECT* 
             y += padding_between_elements;
             ImGui::SetNextWindowPos(ImVec2(x, y));
             ImGui::Begin("fps", nullptr,
-                ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoSavedSettings);
+                ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoSavedSettings
+                    | ImGuiWindowFlags_NoBackground | ImGuiWindowFlags_NoDecoration);
             ImGui::Text("fps: %.2f", ImGui::GetIO().Framerate);
             ImGui::End();
         }
