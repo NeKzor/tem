@@ -290,7 +290,7 @@ DETOUR_STD(HRESULT, Present, IDirect3DDevice9* device, RECT* pSourceRect, RECT* 
             if (ui.show_velocity) {
                 y += padding_between_elements;
                 ImGui::SetNextWindowPos(ImVec2(x, y));
-                ImGui::SetNextWindowSize(ImVec2(110, 30));
+                ImGui::SetNextWindowSize(ImVec2(265, 30));
                 ImGui::Begin("velocity", nullptr,
                     ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoSavedSettings
                         | ImGuiWindowFlags_NoBackground | ImGuiWindowFlags_NoDecoration);
