@@ -1,0 +1,17 @@
+[book]
+authors = ["NeKz"]
+language = "en"
+multilingual = false
+src = "src"
+title = "Tron: Evolution Mod"
+
+[output.html]
+additional-css = ["custom.css"]
+git-repository-url = "https://github.com/NeKzor/tem"
+git-repository-icon = "fa-github"
+
+[output.html.search]
+enable = false
+
+[output.html.print]
+enable = false
