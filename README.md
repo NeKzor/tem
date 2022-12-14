@@ -38,7 +38,7 @@ Requires Visual Studio 2022 with MSVC Build Toolset v143.
 
 ## Dependencies
 
-Included in `mod/lib`.
+Included in `src/lib`.
 
 |Dependency|Version|Description|
 |---|---|---|
