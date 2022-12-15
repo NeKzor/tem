@@ -106,7 +106,6 @@ const std::vector<std::pair<std::string, std::string>> game_levels = {
     { "MP_CMI_V1_BIT", "Circuit Board" },
     { "MP_CMI_V2_BIT", "User Plaza" },
     { "MP_CMI_V4_BIT", "Codestream Nexus" },
-    { "GuidCache_MP1", "GuidCache_MP1" },
 };
 
 const Color rainbow_colors[] = {
