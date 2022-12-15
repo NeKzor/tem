@@ -141,6 +141,20 @@ auto TEM::find_name(FName name) -> std::string_view
 
     return "";
 }
+auto TEM::find_name_index(const char* name) -> int
+{
+    auto g_Names = reinterpret_cast<TArray<FNameEntry*>*>(Offsets::g_Names);
+    auto names = g_Names->data;
+
+    for (auto i = 0u; i < g_Names->size; ++i) {
+        auto item = names[i];
+        if (item && item->index == i << 1 && item->name && strcmp(item->name, name) == 0) {
+            return item->index >> 1;
+        }
+    }
+
+    return -1;
+}
 inline auto TEM::player_controller() -> PgPlayerController*
 {
     if (!engine || !engine->get_local_player()) {

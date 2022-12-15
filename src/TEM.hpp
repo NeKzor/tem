@@ -45,6 +45,8 @@ struct TEM {
     const float rgb_update_interval = 0.5f;
 
     auto find_name(FName name) -> std::string_view;
+    auto find_name_index(const char* name) -> int;
+
     inline auto player_controller() -> PgPlayerController*;
     inline auto pawn() -> PgPawn*;
     auto console_command(std::wstring command) -> void;
