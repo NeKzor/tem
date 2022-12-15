@@ -127,6 +127,7 @@ Package: Engine
 
 Size: 0x158 | 344 bytes
 
+<a id="texture2d-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -156,6 +157,7 @@ Size: 0x158 | 344 bytes
 |ResourceMem|Pointer|0x4|0x150|
 |FirstResourceMemMip|i32|0x4|0x154|
 
+<a id="texture2d-functions"></a>
 ### Functions
 
 |Signature|
@@ -163,6 +165,7 @@ Size: 0x158 | 344 bytes
 Create(<br>&nbsp;&nbsp;&nbsp;&nbsp;InSizeX: i32,<br>&nbsp;&nbsp;&nbsp;&nbsp;InSizeY: i32,<br>&nbsp;&nbsp;&nbsp;&nbsp;InFormat: i8,<br>) -> Texture2D*|
 SetForceMipLevelsToBeResident(<br>&nbsp;&nbsp;&nbsp;&nbsp;Seconds: f32,<br>) -> ()|
 
+<a id="texture2d-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -185,6 +188,7 @@ Package: Engine
 
 Size: 0x2b8 | 696 bytes
 
+<a id="accesscontrol-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -205,6 +209,7 @@ Size: 0x2b8 | 696 bytes
 |ACDescText|FString|0xc|0x290|
 |bDontAddDefaultAdmin|bool|0x4|0x2b4|
 
+<a id="accesscontrol-functions"></a>
 ### Functions
 
 |Signature|
@@ -249,6 +254,7 @@ Package: Engine
 
 Size: 0x50 | 80 bytes
 
+<a id="interpgroupinst-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -265,18 +271,21 @@ Package: Engine
 
 Size: 0xec | 236 bytes
 
+<a id="seqact_controlmovietexture-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
 |---|:-:|:-:|:-:|
 |MovieTexture|TextureMovie*|0x4|0xe8|
 
+<a id="seqact_controlmovietexture-functions"></a>
 ### Functions
 
 |Signature|
 |---|
 Activated(<br>&nbsp;&nbsp;&nbsp;&nbsp;PC: PlayerController*,<br>&nbsp;&nbsp;&nbsp;&nbsp;Mode: i8,<br>) -> ()|
 
+<a id="seqact_controlmovietexture-enums"></a>
 ### Enums
 
 |Enum|
@@ -291,6 +300,7 @@ Package: Engine
 
 Size: 0x1e8 | 488 bytes
 
+<a id="cylindercomponent-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -301,6 +311,7 @@ Size: 0x1e8 | 488 bytes
 |bDrawBoundingBox|bool|0x4|0x1e4|
 |bDrawNonColliding|bool|0x4|0x1e4|
 
+<a id="cylindercomponent-functions"></a>
 ### Functions
 
 |Signature|
@@ -315,6 +326,7 @@ Package: Engine
 
 Size: 0x5b8 | 1464 bytes
 
+<a id="admin-functions"></a>
 ### Functions
 
 |Signature|
@@ -347,6 +359,7 @@ Package: Engine
 
 Size: 0x1cc | 460 bytes
 
+<a id="audiocomponent-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -418,6 +431,7 @@ Size: 0x1cc | 460 bytes
 |__OnAudioFinished__Delegate|FScriptDelegate|0xc|0x1b4|
 |__OnQueueSubtitles__Delegate|FScriptDelegate|0xc|0x1c0|
 
+<a id="audiocomponent-functions"></a>
 ### Functions
 
 |Signature|
@@ -435,6 +449,7 @@ IsPlaying() -> bool|
 Stop() -> ()|
 Play() -> ()|
 
+<a id="audiocomponent-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -449,6 +464,7 @@ Package: Engine
 
 Size: 0x58 | 88 bytes
 
+<a id="distributionfloatuniform-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -464,6 +480,7 @@ Package: Engine
 
 Size: 0xc0 | 192 bytes
 
+<a id="soundcue-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -482,12 +499,14 @@ Size: 0xc0 | 192 bytes
 |CurrentPlayCount|i32|0x4|0xb4|
 |SoundGroup|FName|0x8|0xb8|
 
+<a id="soundcue-functions"></a>
 ### Functions
 
 |Signature|
 |---|
 GetCueDuration() -> f32|
 
+<a id="soundcue-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -502,6 +521,7 @@ Package: Engine
 
 Size: 0x130 | 304 bytes
 
+<a id="soundnodeambient-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -529,6 +549,7 @@ Size: 0x130 | 304 bytes
 |PitchModulation|RawDistributionFloat|0x1c|0xf8|
 |VolumeModulation|RawDistributionFloat|0x1c|0x114|
 
+<a id="soundnodeambient-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -543,6 +564,7 @@ Package: Engine
 
 Size: 0x154 | 340 bytes
 
+<a id="soundnodeambientnonloop-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -559,6 +581,7 @@ Package: Engine
 
 Size: 0x68 | 104 bytes
 
+<a id="animnotify_playfacefxanim-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -571,6 +594,7 @@ Size: 0x68 | 104 bytes
 |bOverridePlayingAnim|bool|0x4|0x60|
 |PlayFrequency|f32|0x4|0x64|
 
+<a id="animnotify_playfacefxanim-functions"></a>
 ### Functions
 
 |Signature|
@@ -585,6 +609,7 @@ Package: Engine
 
 Size: 0x22c | 556 bytes
 
+<a id="brushcomponent-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -596,6 +621,7 @@ Size: 0x22c | 556 bytes
 |CachedPhysBrushDataVersion|i32|0x4|0x224|
 |bBlockComplexCollisionTrace|bool|0x4|0x228|
 
+<a id="brushcomponent-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -610,6 +636,7 @@ Package: Engine
 
 Size: 0x1f0 | 496 bytes
 
+<a id="drawboxcomponent-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -628,6 +655,7 @@ Package: Engine
 
 Size: 0x230 | 560 bytes
 
+<a id="beastarealightcomponent-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -644,6 +672,7 @@ Package: Engine
 
 Size: 0x1fc | 508 bytes
 
+<a id="drawbeastprobesarraycomponent-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -663,6 +692,7 @@ Package: Engine
 
 Size: 0x1ec | 492 bytes
 
+<a id="broadcasthandler-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -670,6 +700,7 @@ Size: 0x1ec | 492 bytes
 |SentText|i32|0x4|0x1e4|
 |bMuteSpectators|bool|0x4|0x1e8|
 
+<a id="broadcasthandler-functions"></a>
 ### Functions
 
 |Signature|
@@ -691,6 +722,7 @@ Package: Engine
 
 Size: 0x138 | 312 bytes
 
+<a id="font-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -704,6 +736,7 @@ Size: 0x138 | 312 bytes
 |NumCharacters|i32|0x4|0x128|
 |MaxCharHeight|TArray\<i32\>|0xc|0x12c|
 
+<a id="font-functions"></a>
 ### Functions
 
 |Signature|
@@ -713,12 +746,14 @@ GetAuthoredViewportHeight(<br>&nbsp;&nbsp;&nbsp;&nbsp;ViewportHeight: f32,<br>) 
 GetScalingFactor(<br>&nbsp;&nbsp;&nbsp;&nbsp;HeightTest: f32,<br>) -> f32|
 GetResolutionPageIndex(<br>&nbsp;&nbsp;&nbsp;&nbsp;HeightTest: f32,<br>) -> i32|
 
+<a id="font-consts"></a>
 ### Consts
 
 |Constant|Value|
 |---|:-:|
 |NULLCHARACTER|127|
 
+<a id="font-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -733,6 +768,7 @@ Package: Engine
 
 Size: 0x230 | 560 bytes
 
+<a id="colorscalevolume-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -740,6 +776,7 @@ Size: 0x230 | 560 bytes
 |ColorScale|Vector|0xc|0x220|
 |InterpTime|f32|0x4|0x22c|
 
+<a id="colorscalevolume-functions"></a>
 ### Functions
 
 |Signature|
@@ -755,6 +792,7 @@ Package: Engine
 
 Size: 0x40 | 64 bytes
 
+<a id="physicslodverticalemitter-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -769,6 +807,7 @@ Package: Engine
 
 Size: 0x44 | 68 bytes
 
+<a id="physicslodverticaldestructible-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -784,6 +823,7 @@ Package: Engine
 
 Size: 0x68 | 104 bytes
 
+<a id="uicomp_event-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -793,6 +833,7 @@ Size: 0x68 | 104 bytes
 |InputProcessor|UIEvent_ProcessInput*|0x4|0x58|
 |DisabledEventAliases|TArray\<FName\>|0xc|0x5c|
 
+<a id="uicomp_event-functions"></a>
 ### Functions
 
 |Signature|
@@ -815,6 +856,7 @@ Package: Engine
 
 Size: 0x174 | 372 bytes
 
+<a id="uicomp_drawstring-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -836,6 +878,7 @@ Size: 0x174 | 372 bytes
 |TextStyleCustomization|UITextStyleOverride|0x48|0x10c|
 |StringStyle|UIStyleReference|0x20|0x154|
 
+<a id="uicomp_drawstring-functions"></a>
 ### Functions
 
 |Signature|
@@ -892,6 +935,7 @@ Package: Engine
 
 Size: 0xfc | 252 bytes
 
+<a id="uicomp_drawimage-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -903,6 +947,7 @@ Size: 0xfc | 252 bytes
 |StyleCustomization|UIImageStyleOverride|0x5c|0x80|
 |ImageStyle|UIStyleReference|0x20|0xdc|
 
+<a id="uicomp_drawimage-functions"></a>
 ### Functions
 
 |Signature|
@@ -932,6 +977,7 @@ Package: Engine
 
 Size: 0x1d4 | 468 bytes
 
+<a id="uicomp_drawstringeditbox-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -946,6 +992,7 @@ Size: 0x1d4 | 468 bytes
 |bRecalculateFirstCharacter|bool|0x4|0x1cc|
 |CaretOffset|f32|0x4|0x1d0|
 
+<a id="uicomp_drawstringeditbox-functions"></a>
 ### Functions
 
 |Signature|
@@ -959,6 +1006,7 @@ SetSelectionRange(<br>&nbsp;&nbsp;&nbsp;&nbsp;StartIndex: i32,<br>&nbsp;&nbsp;&n
 GetUserTextLength() -> i32|
 SetUserText(<br>&nbsp;&nbsp;&nbsp;&nbsp;NewValue: FString,<br>) -> bool|
 
+<a id="uicomp_drawstringeditbox-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -973,6 +1021,7 @@ Package: Engine
 
 Size: 0x454 | 1108 bytes
 
+<a id="uilabel-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -983,6 +1032,7 @@ Size: 0x454 | 1108 bytes
 |StringRenderComponent|UIComp_DrawString*|0x4|0x44c|
 |LabelBackground|UIComp_DrawImage*|0x4|0x450|
 
+<a id="uilabel-functions"></a>
 ### Functions
 
 |Signature|
@@ -1007,6 +1057,7 @@ Package: Engine
 
 Size: 0x44c | 1100 bytes
 
+<a id="uiimage-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -1015,6 +1066,7 @@ Size: 0x44c | 1100 bytes
 |ImageDataSource|UIDataStoreBinding|0x30|0x418|
 |ImageComponent|UIComp_DrawImage*|0x4|0x448|
 
+<a id="uiimage-functions"></a>
 ### Functions
 
 |Signature|
@@ -1036,6 +1088,7 @@ Package: Engine
 
 Size: 0x474 | 1140 bytes
 
+<a id="uieditbox-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -1051,6 +1104,7 @@ Size: 0x474 | 1140 bytes
 |CharacterSet|i8|0x1|0x464|
 |__OnSubmitText__Delegate|FScriptDelegate|0xc|0x468|
 
+<a id="uieditbox-functions"></a>
 ### Functions
 
 |Signature|
@@ -1087,6 +1141,7 @@ Package: Engine
 
 Size: 0x140 | 320 bytes
 
+<a id="staticmesh-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -1117,12 +1172,14 @@ Package: Engine
 
 Size: 0x1f0 | 496 bytes
 
+<a id="coverreplicator-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
 |---|:-:|:-:|:-:|
 |CoverReplicationData|TArray\<CoverReplicationInfo\>|0xc|0x1e4|
 
+<a id="coverreplicator-functions"></a>
 ### Functions
 
 |Signature|
@@ -1148,6 +1205,7 @@ ClientSetOwner(<br>&nbsp;&nbsp;&nbsp;&nbsp;PC: PlayerController*,<br>) -> ()|
 ReplicateInitialCoverInfo(<br>&nbsp;&nbsp;&nbsp;&nbsp;CoverReplicatorBase: CoverReplicator*,<br>) -> ()|
 PurgeOldEntries(<br>&nbsp;&nbsp;&nbsp;&nbsp;I: i32,<br>) -> ()|
 
+<a id="coverreplicator-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -1184,6 +1242,7 @@ Package: Engine
 
 Size: 0x5c8 | 1480 bytes
 
+<a id="debugcameracontroller-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -1193,12 +1252,14 @@ Size: 0x5c8 | 1480 bytes
 |bIsFrozenRendering|bool|0x4|0x5c0|
 |DrawFrustum|DrawFrustumComponent*|0x4|0x5c4|
 
+<a id="debugcameracontroller-states"></a>
 ### States
 
 |Signature|
 |---|
 |PlayerMove_PlayerWaiting(<br>&nbsp;&nbsp;&nbsp;&nbsp;DeltaTime: f32,<br>&nbsp;&nbsp;&nbsp;&nbsp;X: Vector,<br>&nbsp;&nbsp;&nbsp;&nbsp;Y: Vector,<br>&nbsp;&nbsp;&nbsp;&nbsp;Z: Vector,<br>) -> ()|
 
+<a id="debugcameracontroller-functions"></a>
 ### Functions
 
 |Signature|
@@ -1219,6 +1280,7 @@ Package: Engine
 
 Size: 0x478 | 1144 bytes
 
+<a id="debugcamerahud-functions"></a>
 ### Functions
 
 |Signature|
@@ -1241,6 +1303,7 @@ Package: Engine
 
 Size: 0x300 | 768 bytes
 
+<a id="decalcomponent-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -1297,6 +1360,7 @@ Size: 0x300 | 768 bytes
 |OriginalParentRelativeLocation|Vector|0xc|0x2e8|
 |OriginalParentRelativeOrientationVec|Vector|0xc|0x2f4|
 
+<a id="decalcomponent-functions"></a>
 ### Functions
 
 |Signature|
@@ -1305,6 +1369,7 @@ GetDecalMaterial() -> MaterialInterface*|
 SetDecalMaterial(<br>&nbsp;&nbsp;&nbsp;&nbsp;NewDecalMaterial: MaterialInterface*,<br>) -> ()|
 ResetToDefaults() -> ()|
 
+<a id="decalcomponent-enums"></a>
 ### Enums
 
 |Enum|
@@ -1312,6 +1377,7 @@ ResetToDefaults() -> ()|
 |EFilterMode {<br>&nbsp;&nbsp;&nbsp;&nbsp;FM_None,<br>&nbsp;&nbsp;&nbsp;&nbsp;FM_Ignore,<br>&nbsp;&nbsp;&nbsp;&nbsp;FM_Affect,<br>&nbsp;&nbsp;&nbsp;&nbsp;FM_MAX,<br>}|
 |EDecalTransform {<br>&nbsp;&nbsp;&nbsp;&nbsp;DecalTransform_OwnerAbsolute,<br>&nbsp;&nbsp;&nbsp;&nbsp;DecalTransform_OwnerRelative,<br>&nbsp;&nbsp;&nbsp;&nbsp;DecalTransform_SpawnRelative,<br>&nbsp;&nbsp;&nbsp;&nbsp;DecalTransform_MAX,<br>}|
 
+<a id="decalcomponent-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -1326,6 +1392,7 @@ Package: Engine
 
 Size: 0x1bc | 444 bytes
 
+<a id="directionallightcomponent-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -1333,6 +1400,7 @@ Size: 0x1bc | 444 bytes
 |TraceDistance|f32|0x4|0x1a8|
 |LightmassSettings|LightmassDirectionalLightSettings|0x10|0x1ac|
 
+<a id="directionallightcomponent-functions"></a>
 ### Functions
 
 |Signature|
@@ -1376,6 +1444,7 @@ Package: Engine
 
 Size: 0x27c | 636 bytes
 
+<a id="dominantdirectionallightcomponent-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -1383,6 +1452,7 @@ Size: 0x27c | 636 bytes
 |DominantLightShadowInfo|DominantShadowInfo|0xb0|0x1c0|
 |DominantLightShadowMap|Array_Mirror|0xc|0x270|
 
+<a id="dominantdirectionallightcomponent-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -1397,6 +1467,7 @@ Package: Engine
 
 Size: 0x224 | 548 bytes
 
+<a id="pointlightcomponent-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -1412,6 +1483,7 @@ Size: 0x224 | 548 bytes
 |LightmassSettings|LightmassPointLightSettings|0x10|0x210|
 |PreviewLightSourceRadius|DrawLightRadiusComponent*|0x4|0x220|
 
+<a id="pointlightcomponent-functions"></a>
 ### Functions
 
 |Signature|
@@ -1435,6 +1507,7 @@ Package: Engine
 
 Size: 0x234 | 564 bytes
 
+<a id="spotlightcomponent-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -1466,6 +1539,7 @@ Package: Engine
 
 Size: 0x118 | 280 bytes
 
+<a id="dynamiclightenvironmentcomponent-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -1510,6 +1584,7 @@ Size: 0x118 | 280 bytes
 |OverriddenLightingChannels|LightingChannelContainer|0x4|0x108|
 |OverriddenLightComponents|TArray\<LightComponent*\>|0xc|0x10c|
 
+<a id="dynamiclightenvironmentcomponent-enums"></a>
 ### Enums
 
 |Enum|
@@ -1524,6 +1599,7 @@ Package: Engine
 
 Size: 0x23c | 572 bytes
 
+<a id="staticmeshcomponent-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -1545,6 +1621,7 @@ Size: 0x23c | 572 bytes
 |LODData|TArray\<StaticMeshComponentLODInfo\>|0xc|0x218|
 |LightmassSettings|LightmassPrimitiveSettings|0x18|0x224|
 
+<a id="staticmeshcomponent-functions"></a>
 ### Functions
 
 |Signature|
@@ -1553,6 +1630,7 @@ SetForceStaticDecals(<br>&nbsp;&nbsp;&nbsp;&nbsp;bInForceStaticDecals: bool,<br>
 DisableRBCollisionWithSMC(<br>&nbsp;&nbsp;&nbsp;&nbsp;OtherSMC: StaticMeshComponent*,<br>&nbsp;&nbsp;&nbsp;&nbsp;bDisabled: bool,<br>) -> ()|
 SetStaticMesh(<br>&nbsp;&nbsp;&nbsp;&nbsp;NewMesh: StaticMesh*,<br>&nbsp;&nbsp;&nbsp;&nbsp;bForce: bool,<br>) -> bool|
 
+<a id="staticmeshcomponent-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -1581,6 +1659,7 @@ Package: Engine
 
 Size: 0x2cc | 716 bytes
 
+<a id="particlesystemcomponent-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -1640,6 +1719,7 @@ Size: 0x2cc | 716 bytes
 |EmitterDelay|f32|0x4|0x2bc|
 |__OnSystemFinished__Delegate|FScriptDelegate|0xc|0x2c0|
 
+<a id="particlesystemcomponent-functions"></a>
 ### Functions
 
 |Signature|
@@ -1684,6 +1764,7 @@ ActivateSystem(<br>&nbsp;&nbsp;&nbsp;&nbsp;bFlagAsJustAttached: bool,<br>) -> ()
 SetTemplate(<br>&nbsp;&nbsp;&nbsp;&nbsp;NewTemplate: ParticleSystem*,<br>) -> ()|
 OnSystemFinished(<br>&nbsp;&nbsp;&nbsp;&nbsp;PSystem: ParticleSystemComponent*,<br>) -> ()|
 
+<a id="particlesystemcomponent-enums"></a>
 ### Enums
 
 |Enum|
@@ -1692,6 +1773,7 @@ OnSystemFinished(<br>&nbsp;&nbsp;&nbsp;&nbsp;PSystem: ParticleSystemComponent*,<
 |ParticleReplayState {<br>&nbsp;&nbsp;&nbsp;&nbsp;PRS_Disabled,<br>&nbsp;&nbsp;&nbsp;&nbsp;PRS_Capturing,<br>&nbsp;&nbsp;&nbsp;&nbsp;PRS_Replaying,<br>&nbsp;&nbsp;&nbsp;&nbsp;PRS_MAX,<br>}|
 |EParticleSysParamType {<br>&nbsp;&nbsp;&nbsp;&nbsp;PSPT_None,<br>&nbsp;&nbsp;&nbsp;&nbsp;PSPT_Scalar,<br>&nbsp;&nbsp;&nbsp;&nbsp;PSPT_Vector,<br>&nbsp;&nbsp;&nbsp;&nbsp;PSPT_Color,<br>&nbsp;&nbsp;&nbsp;&nbsp;PSPT_Actor,<br>&nbsp;&nbsp;&nbsp;&nbsp;PSPT_Material,<br>&nbsp;&nbsp;&nbsp;&nbsp;PSPT_MAX,<br>}|
 
+<a id="particlesystemcomponent-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -1714,12 +1796,14 @@ Package: Engine
 
 Size: 0x1f4 | 500 bytes
 
+<a id="emitterspawnable-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
 |---|:-:|:-:|:-:|
 |ParticleTemplate|ParticleSystem*|0x4|0x1f0|
 
+<a id="emitterspawnable-functions"></a>
 ### Functions
 
 |Signature|
@@ -1735,6 +1819,7 @@ Package: Engine
 
 Size: 0x50 | 80 bytes
 
+<a id="localmessage-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -1750,6 +1835,7 @@ Size: 0x50 | 80 bytes
 |PosY|f32|0x4|0x48|
 |FontSize|i32|0x4|0x4c|
 
+<a id="localmessage-functions"></a>
 ### Functions
 
 |Signature|
@@ -1773,12 +1859,14 @@ Package: Engine
 
 Size: 0x80 | 128 bytes
 
+<a id="failedconnect-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
 |---|:-:|:-:|:-:|
 |FailMessage|FString|0xc|0x50|
 
+<a id="failedconnect-functions"></a>
 ### Functions
 
 |Signature|
@@ -1794,6 +1882,7 @@ Package: Engine
 
 Size: 0x238 | 568 bytes
 
+<a id="fluidinfluencecomponent-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -1825,6 +1914,7 @@ Size: 0x238 | 568 bytes
 |CurrentTimer|f32|0x4|0x230|
 |CurrentFluidActor|FluidSurfaceActor*|0x4|0x234|
 
+<a id="fluidinfluencecomponent-enums"></a>
 ### Enums
 
 |Enum|
@@ -1839,6 +1929,7 @@ Package: Engine
 
 Size: 0x2b4 | 692 bytes
 
+<a id="fluidsurfacecomponent-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -1896,6 +1987,7 @@ Size: 0x2b4 | 692 bytes
 |LightMap|LightMapRef|0x4|0x2ac|
 |FluidSimulation|Pointer|0x4|0x2b0|
 
+<a id="fluidsurfacecomponent-functions"></a>
 ### Functions
 
 |Signature|
@@ -1904,6 +1996,7 @@ SetSimulationPosition(<br>&nbsp;&nbsp;&nbsp;&nbsp;WorldPos: Vector,<br>) -> ()|
 SetDetailPosition(<br>&nbsp;&nbsp;&nbsp;&nbsp;WorldPos: Vector,<br>) -> ()|
 ApplyForce(<br>&nbsp;&nbsp;&nbsp;&nbsp;WorldPos: Vector,<br>&nbsp;&nbsp;&nbsp;&nbsp;Strength: f32,<br>&nbsp;&nbsp;&nbsp;&nbsp;Radius: f32,<br>&nbsp;&nbsp;&nbsp;&nbsp;bImpulse: bool,<br>) -> ()|
 
+<a id="fluidsurfacecomponent-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -1918,6 +2011,7 @@ Package: Engine
 
 Size: 0x374 | 884 bytes
 
+<a id="material-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -1994,12 +2088,14 @@ Size: 0x374 | 884 bytes
 |ReferencedTextureGuids|TArray\<Guid\>|0xc|0x354|
 |BeastMaterialProperties|BeastMaterialPropertiesContainer|0x14|0x360|
 
+<a id="material-functions"></a>
 ### Functions
 
 |Signature|
 |---|
 GetTextures() -> TArray\<Texture*\>|
 
+<a id="material-enums"></a>
 ### Enums
 
 |Enum|
@@ -2010,6 +2106,7 @@ GetTextures() -> TArray\<Texture*\>|
 |EMaterialLightingModel {<br>&nbsp;&nbsp;&nbsp;&nbsp;MLM_Phong,<br>&nbsp;&nbsp;&nbsp;&nbsp;MLM_NonDirectional,<br>&nbsp;&nbsp;&nbsp;&nbsp;MLM_Unlit,<br>&nbsp;&nbsp;&nbsp;&nbsp;MLM_SHPRT,<br>&nbsp;&nbsp;&nbsp;&nbsp;MLM_Custom,<br>&nbsp;&nbsp;&nbsp;&nbsp;MLM_Anisotropic,<br>&nbsp;&nbsp;&nbsp;&nbsp;MLM_MAX,<br>}|
 |EBlendMode {<br>&nbsp;&nbsp;&nbsp;&nbsp;BLEND_Opaque,<br>&nbsp;&nbsp;&nbsp;&nbsp;BLEND_Masked,<br>&nbsp;&nbsp;&nbsp;&nbsp;BLEND_Translucent,<br>&nbsp;&nbsp;&nbsp;&nbsp;BLEND_Additive,<br>&nbsp;&nbsp;&nbsp;&nbsp;BLEND_Modulate,<br>&nbsp;&nbsp;&nbsp;&nbsp;BLEND_AlphaComposite,<br>&nbsp;&nbsp;&nbsp;&nbsp;BLEND_MAX,<br>}|
 
+<a id="material-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -2029,6 +2126,7 @@ Package: Engine
 
 Size: 0xbc | 188 bytes
 
+<a id="fogvolumeconedensitycomponent-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -2048,6 +2146,7 @@ Package: Engine
 
 Size: 0x98 | 152 bytes
 
+<a id="fogvolumeconstantdensitycomponent-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -2062,6 +2161,7 @@ Package: Engine
 
 Size: 0xb0 | 176 bytes
 
+<a id="fogvolumelinearhalfspacedensitycomponent-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -2077,6 +2177,7 @@ Package: Engine
 
 Size: 0xac | 172 bytes
 
+<a id="fogvolumesphericaldensitycomponent-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -2094,6 +2195,7 @@ Package: Engine
 
 Size: 0x1ec | 492 bytes
 
+<a id="drawcapsulecomponent-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -2113,6 +2215,7 @@ Package: Engine
 
 Size: 0x1ec | 492 bytes
 
+<a id="drawspherecomponent-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -2132,6 +2235,7 @@ Package: Engine
 
 Size: 0x280 | 640 bytes
 
+<a id="fracturedskinnedmeshcomponent-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -2150,6 +2254,7 @@ Package: Engine
 
 Size: 0x2a0 | 672 bytes
 
+<a id="fracturedstaticmeshcomponent-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -2166,6 +2271,7 @@ Size: 0x2a0 | 672 bytes
 |FragmentBoundsMinZ|f32|0x4|0x298|
 |SkinnedComponent|FracturedSkinnedMeshComponent*|0x4|0x29c|
 
+<a id="fracturedstaticmeshcomponent-functions"></a>
 ### Functions
 
 |Signature|
@@ -2182,6 +2288,7 @@ IsRootFragment(<br>&nbsp;&nbsp;&nbsp;&nbsp;FragmentIndex: i32,<br>) -> bool|
 IsFragmentDestroyable(<br>&nbsp;&nbsp;&nbsp;&nbsp;FragmentIndex: i32,<br>) -> bool|
 SetVisibleFragments(<br>&nbsp;&nbsp;&nbsp;&nbsp;VisibilityFactors: TArray\<i8\>,<br>) -> ()|
 
+<a id="fracturedstaticmeshcomponent-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -2203,6 +2310,7 @@ Package: Engine
 
 Size: 0x164 | 356 bytes
 
+<a id="gamemessage-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -2231,6 +2339,7 @@ Size: 0x164 | 356 bytes
 |NewSpecMessage|FString|0xc|0x14c|
 |SpecEnteredMessage|FString|0xc|0x158|
 
+<a id="gamemessage-functions"></a>
 ### Functions
 
 |Signature|
@@ -2245,6 +2354,7 @@ Package: Engine
 
 Size: 0x1ec | 492 bytes
 
+<a id="heightfog-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -2252,6 +2362,7 @@ Size: 0x1ec | 492 bytes
 |Component|HeightFogComponent*|0x4|0x1e4|
 |bEnabled|bool|0x4|0x1e8|
 
+<a id="heightfog-functions"></a>
 ### Functions
 
 |Signature|
@@ -2268,6 +2379,7 @@ Package: Engine
 
 Size: 0x74 | 116 bytes
 
+<a id="heightfogcomponent-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -2280,6 +2392,7 @@ Size: 0x74 | 116 bytes
 |ExtinctionDistance|f32|0x4|0x6c|
 |StartDistance|f32|0x4|0x70|
 
+<a id="heightfogcomponent-functions"></a>
 ### Functions
 
 |Signature|
@@ -2294,6 +2407,7 @@ Package: Engine
 
 Size: 0x53c | 1340 bytes
 
+<a id="skeletalmeshcomponent-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -2460,6 +2574,7 @@ Size: 0x53c | 1340 bytes
 |BoneVisibility|TArray\<i8\>|0xc|0x52c|
 |ProgressiveDrawingFraction|f32|0x4|0x538|
 
+<a id="skeletalmeshcomponent-functions"></a>
 ### Functions
 
 |Signature|
@@ -2579,6 +2694,7 @@ AttachComponentToSocket(<br>&nbsp;&nbsp;&nbsp;&nbsp;Component: ActorComponent*,<
 DetachComponent(<br>&nbsp;&nbsp;&nbsp;&nbsp;Component: ActorComponent*,<br>) -> ()|
 AttachComponent(<br>&nbsp;&nbsp;&nbsp;&nbsp;Component: ActorComponent*,<br>&nbsp;&nbsp;&nbsp;&nbsp;BoneName: FName,<br>&nbsp;&nbsp;&nbsp;&nbsp;RelativeLocation: Vector,<br>&nbsp;&nbsp;&nbsp;&nbsp;RelativeRotation: Rotator,<br>&nbsp;&nbsp;&nbsp;&nbsp;RelativeScale: Vector,<br>) -> ()|
 
+<a id="skeletalmeshcomponent-enums"></a>
 ### Enums
 
 |Enum|
@@ -2589,6 +2705,7 @@ AttachComponent(<br>&nbsp;&nbsp;&nbsp;&nbsp;Component: ActorComponent*,<br>&nbsp
 |ERootMotionRotationMode {<br>&nbsp;&nbsp;&nbsp;&nbsp;RMRM_Ignore,<br>&nbsp;&nbsp;&nbsp;&nbsp;RMRM_RotateActor,<br>&nbsp;&nbsp;&nbsp;&nbsp;RMRM_MAX,<br>}|
 |ERootMotionMode {<br>&nbsp;&nbsp;&nbsp;&nbsp;RMM_Translate,<br>&nbsp;&nbsp;&nbsp;&nbsp;RMM_Velocity,<br>&nbsp;&nbsp;&nbsp;&nbsp;RMM_Ignore,<br>&nbsp;&nbsp;&nbsp;&nbsp;RMM_Accel,<br>&nbsp;&nbsp;&nbsp;&nbsp;RMM_Relative,<br>&nbsp;&nbsp;&nbsp;&nbsp;RMM_MAX,<br>}|
 
+<a id="skeletalmeshcomponent-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -2612,6 +2729,7 @@ Package: Engine
 
 Size: 0x54 | 84 bytes
 
+<a id="distributionfloatconstant-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -2626,6 +2744,7 @@ Package: Engine
 
 Size: 0x61 | 97 bytes
 
+<a id="distributionvectorconstant-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -2642,6 +2761,7 @@ Package: Engine
 
 Size: 0x210 | 528 bytes
 
+<a id="lensflarecomponent-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -2663,6 +2783,7 @@ Size: 0x210 | 528 bytes
 |SourceColor|LinearColor|0x10|0x1fc|
 |ReleaseResourcesFence|Pointer|0x4|0x20c|
 
+<a id="lensflarecomponent-functions"></a>
 ### Functions
 
 |Signature|
@@ -2671,6 +2792,7 @@ SetIsActive(<br>&nbsp;&nbsp;&nbsp;&nbsp;bInIsActive: bool,<br>) -> ()|
 SetSourceColor(<br>&nbsp;&nbsp;&nbsp;&nbsp;InSourceColor: LinearColor,<br>) -> ()|
 SetTemplate(<br>&nbsp;&nbsp;&nbsp;&nbsp;NewTemplate: LensFlare*,<br>) -> ()|
 
+<a id="lensflarecomponent-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -2685,6 +2807,7 @@ Package: Engine
 
 Size: 0x114 | 276 bytes
 
+<a id="texturecube-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -2716,6 +2839,7 @@ Package: Engine
 
 Size: 0x1f4 | 500 bytes
 
+<a id="spritecomponent-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -2728,6 +2852,7 @@ Size: 0x1f4 | 500 bytes
 |V|f32|0x4|0x1ec|
 |VL|f32|0x4|0x1f0|
 
+<a id="spritecomponent-functions"></a>
 ### Functions
 
 |Signature|
@@ -2744,12 +2869,14 @@ Package: Engine
 
 Size: 0x48 | 72 bytes
 
+<a id="onlineaccountinterface-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
 |---|:-:|:-:|:-:|
 |__OnCreateOnlineAccountCompleted__Delegate|FScriptDelegate|0xc|0x3c|
 
+<a id="onlineaccountinterface-functions"></a>
 ### Functions
 
 |Signature|
@@ -2771,6 +2898,7 @@ Package: Engine
 
 Size: 0x78 | 120 bytes
 
+<a id="onlinecommunitycontentinterface-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -2781,6 +2909,7 @@ Size: 0x78 | 120 bytes
 |__OnDownloadContentComplete__Delegate|FScriptDelegate|0xc|0x60|
 |__OnGetContentPayloadComplete__Delegate|FScriptDelegate|0xc|0x6c|
 
+<a id="onlinecommunitycontentinterface-functions"></a>
 ### Functions
 
 |Signature|
@@ -2819,6 +2948,7 @@ Package: Engine
 
 Size: 0x60 | 96 bytes
 
+<a id="onlinecontentinterface-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -2827,6 +2957,7 @@ Size: 0x60 | 96 bytes
 |__OnReadContentComplete__Delegate|FScriptDelegate|0xc|0x48|
 |__OnQueryAvailableDownloadsComplete__Delegate|FScriptDelegate|0xc|0x54|
 
+<a id="onlinecontentinterface-functions"></a>
 ### Functions
 
 |Signature|
@@ -2853,6 +2984,7 @@ Package: Engine
 
 Size: 0x3c | 60 bytes
 
+<a id="onlineeventsinterface-functions"></a>
 ### Functions
 
 |Signature|
@@ -2869,6 +3001,7 @@ Package: Engine
 
 Size: 0xcc | 204 bytes
 
+<a id="onlinegameinterface-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -2886,6 +3019,7 @@ Size: 0xcc | 204 bytes
 |__OnArbitrationRegistrationComplete__Delegate|FScriptDelegate|0xc|0xb4|
 |__OnGameInviteAccepted__Delegate|FScriptDelegate|0xc|0xc0|
 
+<a id="onlinegameinterface-functions"></a>
 ### Functions
 
 |Signature|
@@ -2957,12 +3091,14 @@ Package: Engine
 
 Size: 0x48 | 72 bytes
 
+<a id="onlinenewsinterface-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
 |---|:-:|:-:|:-:|
 |__OnReadNewsCompleted__Delegate|FScriptDelegate|0xc|0x3c|
 
+<a id="onlinenewsinterface-functions"></a>
 ### Functions
 
 |Signature|
@@ -2981,6 +3117,7 @@ Package: Engine
 
 Size: 0x12c | 300 bytes
 
+<a id="onlineplayerinterface-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -3006,6 +3143,7 @@ Size: 0x12c | 300 bytes
 |__OnJoinFriendGameComplete__Delegate|FScriptDelegate|0xc|0x114|
 |__OnFriendMessageReceived__Delegate|FScriptDelegate|0xc|0x120|
 
+<a id="onlineplayerinterface-functions"></a>
 ### Functions
 
 |Signature|
@@ -3124,6 +3262,7 @@ Package: Engine
 
 Size: 0x6c | 108 bytes
 
+<a id="onlineplayerinterfaceex-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -3133,6 +3272,7 @@ Size: 0x6c | 108 bytes
 |__OnProfileDataChanged__Delegate|FScriptDelegate|0xc|0x54|
 |__OnReadAchievementsComplete__Delegate|FScriptDelegate|0xc|0x60|
 
+<a id="onlineplayerinterfaceex-functions"></a>
 ### Functions
 
 |Signature|
@@ -3175,6 +3315,7 @@ Package: Engine
 
 Size: 0xa0 | 160 bytes
 
+<a id="onlineplaylistgametypeprovider-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -3192,6 +3333,7 @@ Package: Engine
 
 Size: 0x98 | 152 bytes
 
+<a id="onlineplaylistprovider-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -3208,6 +3350,7 @@ Package: Engine
 
 Size: 0xa8 | 168 bytes
 
+<a id="onlinerecentplayerslist-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -3221,6 +3364,7 @@ Size: 0xa8 | 168 bytes
 |RecentPartiesAddIndex|i32|0x4|0x98|
 |CurrentPlayers|TArray\<CurrentPlayerMet\>|0xc|0x9c|
 
+<a id="onlinerecentplayerslist-functions"></a>
 ### Functions
 
 |Signature|
@@ -3241,6 +3385,7 @@ AddPartyToRecentParties(<br>&nbsp;&nbsp;&nbsp;&nbsp;PartyLeader: UniqueNetId,<br
 ClearRecentPlayers() -> ()|
 AddPlayerToRecentPlayers(<br>&nbsp;&nbsp;&nbsp;&nbsp;NewPlayer: UniqueNetId,<br>&nbsp;&nbsp;&nbsp;&nbsp;FindIndex: i32,<br>) -> ()|
 
+<a id="onlinerecentplayerslist-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -3256,6 +3401,7 @@ Package: Engine
 
 Size: 0x60 | 96 bytes
 
+<a id="onlinestatsinterface-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -3264,6 +3410,7 @@ Size: 0x60 | 96 bytes
 |__OnFlushOnlineStatsComplete__Delegate|FScriptDelegate|0xc|0x48|
 |__OnRegisterHostStatGuidComplete__Delegate|FScriptDelegate|0xc|0x54|
 
+<a id="onlinestatsinterface-functions"></a>
 ### Functions
 
 |Signature|
@@ -3298,6 +3445,7 @@ Package: Engine
 
 Size: 0x90 | 144 bytes
 
+<a id="onlinesysteminterface-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -3310,6 +3458,7 @@ Size: 0x90 | 144 bytes
 |__OnReadTitleFileComplete__Delegate|FScriptDelegate|0xc|0x78|
 |__OnServiceQosCheckComplete__Delegate|FScriptDelegate|0xc|0x84|
 
+<a id="onlinesysteminterface-functions"></a>
 ### Functions
 
 |Signature|
@@ -3356,6 +3505,7 @@ Package: Engine
 
 Size: 0x54 | 84 bytes
 
+<a id="onlinevoiceinterface-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -3363,6 +3513,7 @@ Size: 0x54 | 84 bytes
 |__OnPlayerTalkingStateChange__Delegate|FScriptDelegate|0xc|0x3c|
 |__OnRecognitionComplete__Delegate|FScriptDelegate|0xc|0x48|
 
+<a id="onlinevoiceinterface-functions"></a>
 ### Functions
 
 |Signature|
@@ -3402,6 +3553,7 @@ Package: Engine
 
 Size: 0x70 | 112 bytes
 
+<a id="distributionvectoruniform-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -3421,6 +3573,7 @@ Package: Engine
 
 Size: 0x65 | 101 bytes
 
+<a id="distributionvectorconstantcurve-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -3437,6 +3590,7 @@ Package: Engine
 
 Size: 0x60 | 96 bytes
 
+<a id="distributionfloatconstantcurve-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -3458,6 +3612,7 @@ Package: Engine
 
 Size: 0x2bc | 700 bytes
 
+<a id="pathnode_dynamic-functions"></a>
 ### Functions
 
 |Signature|
@@ -3472,6 +3627,7 @@ Package: Engine
 
 Size: 0xa4 | 164 bytes
 
+<a id="scenecapturereflectcomponent-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -3487,6 +3643,7 @@ Package: Engine
 
 Size: 0xac | 172 bytes
 
+<a id="pgscenecaptureamazingreflectcomponent-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -3495,6 +3652,7 @@ Size: 0xac | 172 bytes
 |UseReflectionVector|bool|0x4|0xa8|
 |RequiresClear|bool|0x4|0xa8|
 
+<a id="pgscenecaptureamazingreflectcomponent-functions"></a>
 ### Functions
 
 |Signature|
@@ -3509,6 +3667,7 @@ Package: Engine
 
 Size: 0xa8 | 168 bytes
 
+<a id="scenecaptureportalcomponent-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -3517,6 +3676,7 @@ Size: 0xa8 | 168 bytes
 |ScaleFOV|f32|0x4|0xa0|
 |ViewDestination|Actor*|0x4|0xa4|
 
+<a id="scenecaptureportalcomponent-functions"></a>
 ### Functions
 
 |Signature|
@@ -3531,6 +3691,7 @@ Package: Engine
 
 Size: 0x1e8 | 488 bytes
 
+<a id="radialbluractor-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -3545,6 +3706,7 @@ Package: Engine
 
 Size: 0xc0 | 192 bytes
 
+<a id="radialblurcomponent-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -3560,6 +3722,7 @@ Size: 0xc0 | 192 bytes
 |bEnabled|bool|0x4|0x74|
 |LocalToWorld|Matrix|0x40|0x80|
 
+<a id="radialblurcomponent-functions"></a>
 ### Functions
 
 |Signature|
@@ -3581,6 +3744,7 @@ Package: Engine
 
 Size: 0x1dc | 476 bytes
 
+<a id="rb_constraintdrawcomponent-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -3595,6 +3759,7 @@ Package: Engine
 
 Size: 0xac | 172 bytes
 
+<a id="rb_constraintinstance-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -3629,6 +3794,7 @@ Size: 0xac | 172 bytes
 |AngularDriveForceLimit|f32|0x4|0xa4|
 |DummyKinActor|Pointer|0x4|0xa8|
 
+<a id="rb_constraintinstance-functions"></a>
 ### Functions
 
 |Signature|
@@ -3680,6 +3846,7 @@ Package: Engine
 
 Size: 0x100 | 256 bytes
 
+<a id="rb_constraintsetup-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -3721,6 +3888,7 @@ Size: 0x100 | 256 bytes
 |AngularBreakThreshold|f32|0x4|0xf8|
 |PulleyRatio|f32|0x4|0xfc|
 
+<a id="rb_constraintsetup-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -3735,6 +3903,7 @@ Package: Engine
 
 Size: 0x1f8 | 504 bytes
 
+<a id="drawcylindercomponent-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -3799,6 +3968,7 @@ Package: Engine
 
 Size: 0x1ec | 492 bytes
 
+<a id="rb_radialimpulsecomponent-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -3810,6 +3980,7 @@ Size: 0x1ec | 492 bytes
 |bCauseFracture|bool|0x4|0x1e4|
 |PreviewSphere|DrawSphereComponent*|0x4|0x1e8|
 
+<a id="rb_radialimpulsecomponent-functions"></a>
 ### Functions
 
 |Signature|
@@ -3824,6 +3995,7 @@ Package: Engine
 
 Size: 0x130 | 304 bytes
 
+<a id="scenecapture2dcomponent-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -3836,6 +4008,7 @@ Size: 0x130 | 304 bytes
 |ViewMatrix|Matrix|0x40|0xb0|
 |ProjMatrix|Matrix|0x40|0xf0|
 
+<a id="scenecapture2dcomponent-functions"></a>
 ### Functions
 
 |Signature|
@@ -3851,6 +4024,7 @@ Package: Engine
 
 Size: 0x1f0 | 496 bytes
 
+<a id="drawfrustumcomponent-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -3870,6 +4044,7 @@ Package: Engine
 
 Size: 0xbc | 188 bytes
 
+<a id="scenecapturecubemapcomponent-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -3889,12 +4064,14 @@ Package: Engine
 
 Size: 0x47c | 1148 bytes
 
+<a id="scoreboard-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
 |---|:-:|:-:|:-:|
 |bDisplayMessages|bool|0x4|0x478|
 
+<a id="scoreboard-functions"></a>
 ### Functions
 
 |Signature|
@@ -3912,6 +4089,7 @@ Package: Engine
 
 Size: 0x42c | 1068 bytes
 
+<a id="scriptconsoleentry-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -3920,6 +4098,7 @@ Size: 0x42c | 1068 bytes
 |UpperConsoleBorder|UIImage*|0x4|0x424|
 |LowerConsoleBorder|UIImage*|0x4|0x428|
 
+<a id="scriptconsoleentry-functions"></a>
 ### Functions
 
 |Signature|
@@ -3928,6 +4107,7 @@ OnCreateChild(<br>&nbsp;&nbsp;&nbsp;&nbsp;CreatedWidget: UIObject*,<br>&nbsp;&nb
 SetValue(<br>&nbsp;&nbsp;&nbsp;&nbsp;NewValue: FString,<br>) -> ()|
 PostInitialize() -> ()|
 
+<a id="scriptconsoleentry-consts"></a>
 ### Consts
 
 |Constant|Value|
@@ -3942,6 +4122,7 @@ Package: Engine
 
 Size: 0xf4 | 244 bytes
 
+<a id="seqact_addremovefacefxanimset-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -3963,6 +4144,7 @@ Package: Engine
 
 Size: 0xec | 236 bytes
 
+<a id="seqact_assigncontroller-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -3977,6 +4159,7 @@ Package: Engine
 
 Size: 0x10c | 268 bytes
 
+<a id="seqact_attachtoactor-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -3989,6 +4172,7 @@ Size: 0x10c | 268 bytes
 |RelativeOffset|Vector|0xc|0xf4|
 |RelativeRotation|Rotator|0xc|0x100|
 
+<a id="seqact_attachtoactor-functions"></a>
 ### Functions
 
 |Signature|
@@ -4003,6 +4187,7 @@ Package: Engine
 
 Size: 0xb8 | 184 bytes
 
+<a id="camerashake-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -4022,6 +4207,7 @@ Size: 0xb8 | 184 bytes
 |AnimBlendOutTime|f32|0x4|0xb0|
 |RandomAnimSegmentDuration|f32|0x4|0xb4|
 
+<a id="camerashake-functions"></a>
 ### Functions
 
 |Signature|
@@ -4029,12 +4215,14 @@ Size: 0xb8 | 184 bytes
 GetLocOscillationMagnitude(<br>&nbsp;&nbsp;&nbsp;&nbsp;V: Vector,<br>) -> f32|
 GetRotOscillationMagnitude(<br>&nbsp;&nbsp;&nbsp;&nbsp;V: Vector,<br>) -> f32|
 
+<a id="camerashake-enums"></a>
 ### Enums
 
 |Enum|
 |---|
 |EInitialOscillatorOffset {<br>&nbsp;&nbsp;&nbsp;&nbsp;EOO_OffsetRandom,<br>&nbsp;&nbsp;&nbsp;&nbsp;EOO_OffsetZero,<br>&nbsp;&nbsp;&nbsp;&nbsp;EOO_MAX,<br>}|
 
+<a id="camerashake-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -4051,6 +4239,7 @@ Package: Engine
 
 Size: 0x100 | 256 bytes
 
+<a id="seqact_consolecommand-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -4058,6 +4247,7 @@ Size: 0x100 | 256 bytes
 |Command|FString|0xc|0xe8|
 |Commands|TArray\<FString\>|0xc|0xf4|
 
+<a id="seqact_consolecommand-functions"></a>
 ### Functions
 
 |Signature|
@@ -4080,6 +4270,7 @@ Package: Engine
 
 Size: 0xf8 | 248 bytes
 
+<a id="seqact_destroy-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -4102,6 +4293,7 @@ Package: Engine
 
 Size: 0xf0 | 240 bytes
 
+<a id="seqact_forcefeedback-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -4117,6 +4309,7 @@ Package: Engine
 
 Size: 0xf8 | 248 bytes
 
+<a id="seqact_giveinventory-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -4133,12 +4326,14 @@ Package: Engine
 
 Size: 0xec | 236 bytes
 
+<a id="seqact_makenoise-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
 |---|:-:|:-:|:-:|
 |Loudness|f32|0x4|0xe8|
 
+<a id="seqact_makenoise-functions"></a>
 ### Functions
 
 |Signature|
@@ -4153,6 +4348,7 @@ Package: Engine
 
 Size: 0xec | 236 bytes
 
+<a id="seqact_setdamageinstigator-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -4167,6 +4363,7 @@ Package: Engine
 
 Size: 0xfc | 252 bytes
 
+<a id="seqact_setparticlesysparam-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -4183,6 +4380,7 @@ Package: Engine
 
 Size: 0xfc | 252 bytes
 
+<a id="seqact_setskelcontroltarget-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -4198,12 +4396,14 @@ Package: Engine
 
 Size: 0xec | 236 bytes
 
+<a id="seqact_setsoundmode-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
 |---|:-:|:-:|:-:|
 |SoundMode|SoundMode*|0x4|0xe8|
 
+<a id="seqact_setsoundmode-functions"></a>
 ### Functions
 
 |Signature|
@@ -4219,12 +4419,14 @@ Package: Engine
 
 Size: 0xf4 | 244 bytes
 
+<a id="seqact_setvector-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
 |---|:-:|:-:|:-:|
 |DefaultValue|Vector|0xc|0xe8|
 
+<a id="seqact_setvector-functions"></a>
 ### Functions
 
 |Signature|
@@ -4239,6 +4441,7 @@ Package: Engine
 
 Size: 0xfc | 252 bytes
 
+<a id="seqact_setvelocity-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -4247,6 +4450,7 @@ Size: 0xfc | 252 bytes
 |VelocityMag|f32|0x4|0xf4|
 |bVelocityRelativeToActorRotation|bool|0x4|0xf8|
 
+<a id="seqact_setvelocity-functions"></a>
 ### Functions
 
 |Signature|
@@ -4261,6 +4465,7 @@ Package: Engine
 
 Size: 0xec | 236 bytes
 
+<a id="seqact_teleport-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -4282,6 +4487,7 @@ Package: Engine
 
 Size: 0xe8 | 232 bytes
 
+<a id="seqact_toggleaffectedbyhiteffects-functions"></a>
 ### Functions
 
 |Signature|
@@ -4296,6 +4502,7 @@ Package: Engine
 
 Size: 0xf0 | 240 bytes
 
+<a id="seqact_togglecinematicmode-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -4309,6 +4516,7 @@ Size: 0xf0 | 240 bytes
 |bDroppedPickups|bool|0x4|0xe8|
 |fNearClipPlane|f32|0x4|0xec|
 
+<a id="seqact_togglecinematicmode-functions"></a>
 ### Functions
 
 |Signature|
@@ -4324,6 +4532,7 @@ Package: Engine
 
 Size: 0xec | 236 bytes
 
+<a id="seqact_toggleconstraintdrive-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -4341,6 +4550,7 @@ Package: Engine
 
 Size: 0xe8 | 232 bytes
 
+<a id="seqact_togglegodmode-functions"></a>
 ### Functions
 
 |Signature|
@@ -4355,6 +4565,7 @@ Package: Engine
 
 Size: 0xf8 | 248 bytes
 
+<a id="seqact_togglehidden-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -4362,6 +4573,7 @@ Size: 0xf8 | 248 bytes
 |bToggleBasedActors|bool|0x4|0xe8|
 |IgnoreBasedClasses|TArray\<UClass*\>|0xc|0xec|
 
+<a id="seqact_togglehidden-functions"></a>
 ### Functions
 
 |Signature|
@@ -4376,6 +4588,7 @@ Package: Engine
 
 Size: 0xe8 | 232 bytes
 
+<a id="seqact_togglehud-functions"></a>
 ### Functions
 
 |Signature|
@@ -4391,6 +4604,7 @@ Package: Engine
 
 Size: 0xec | 236 bytes
 
+<a id="seqact_toggleinput-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -4398,6 +4612,7 @@ Size: 0xec | 236 bytes
 |bToggleMovement|bool|0x4|0xe8|
 |bToggleTurning|bool|0x4|0xe8|
 
+<a id="seqact_toggleinput-functions"></a>
 ### Functions
 
 |Signature|
@@ -4412,6 +4627,7 @@ Package: Engine
 
 Size: 0xe8 | 232 bytes
 
+<a id="seqact_updatephysbonesfromanim-functions"></a>
 ### Functions
 
 |Signature|
@@ -4454,6 +4670,7 @@ Package: Engine
 
 Size: 0x10c | 268 bytes
 
+<a id="seqevent_los-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -4462,6 +4679,7 @@ Size: 0x10c | 268 bytes
 |TriggerDistance|f32|0x4|0x104|
 |bCheckForObstructions|bool|0x4|0x108|
 
+<a id="seqevent_los-functions"></a>
 ### Functions
 
 |Signature|
@@ -4483,6 +4701,7 @@ Package: Engine
 
 Size: 0x104 | 260 bytes
 
+<a id="seqevent_playerspawned-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -4539,6 +4758,7 @@ Package: Engine
 
 Size: 0x12a | 298 bytes
 
+<a id="animnodesequence-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -4581,6 +4801,7 @@ Size: 0x12a | 298 bytes
 |RootBoneOption|i8|0x1|0x124|
 |RootRotationOption|i8|0x1|0x127|
 
+<a id="animnodesequence-functions"></a>
 ### Functions
 
 |Signature|
@@ -4597,6 +4818,7 @@ StopAnim() -> ()|
 PlayAnim(<br>&nbsp;&nbsp;&nbsp;&nbsp;bLoop: bool,<br>&nbsp;&nbsp;&nbsp;&nbsp;inRate: f32,<br>&nbsp;&nbsp;&nbsp;&nbsp;StartTime: f32,<br>) -> ()|
 SetAnim(<br>&nbsp;&nbsp;&nbsp;&nbsp;Sequence: FName,<br>) -> ()|
 
+<a id="animnodesequence-enums"></a>
 ### Enums
 
 |Enum|
@@ -4619,6 +4841,7 @@ Package: Engine
 
 Size: 0x1b0 | 432 bytes
 
+<a id="skylightcomponent-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -4634,6 +4857,7 @@ Package: Engine
 
 Size: 0x2d0 | 720 bytes
 
+<a id="speedtreecomponent-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -4668,6 +4892,7 @@ Size: 0x2d0 | 720 bytes
 |LeafSettings|LightmassPrimitiveSettings|0x18|0x2a0|
 |BillboardSettings|LightmassPrimitiveSettings|0x18|0x2b8|
 
+<a id="speedtreecomponent-functions"></a>
 ### Functions
 
 |Signature|
@@ -4675,12 +4900,14 @@ Size: 0x2d0 | 720 bytes
 SetMaterial(<br>&nbsp;&nbsp;&nbsp;&nbsp;MeshType: i8,<br>&nbsp;&nbsp;&nbsp;&nbsp;Material: MaterialInterface*,<br>) -> ()|
 GetMaterial(<br>&nbsp;&nbsp;&nbsp;&nbsp;MeshType: i8,<br>) -> MaterialInterface*|
 
+<a id="speedtreecomponent-enums"></a>
 ### Enums
 
 |Enum|
 |---|
 |ESpeedTreeMeshType {<br>&nbsp;&nbsp;&nbsp;&nbsp;STMT_MinMinusOne,<br>&nbsp;&nbsp;&nbsp;&nbsp;STMT_Branches1,<br>&nbsp;&nbsp;&nbsp;&nbsp;STMT_Branches2,<br>&nbsp;&nbsp;&nbsp;&nbsp;STMT_Fronds,<br>&nbsp;&nbsp;&nbsp;&nbsp;STMT_LeafCards,<br>&nbsp;&nbsp;&nbsp;&nbsp;STMT_LeafMeshes,<br>&nbsp;&nbsp;&nbsp;&nbsp;STMT_Billboards,<br>&nbsp;&nbsp;&nbsp;&nbsp;STMT_Max,<br>}|
 
+<a id="speedtreecomponent-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -4717,12 +4944,14 @@ Package: Engine
 
 Size: 0x1fc | 508 bytes
 
+<a id="trigger_los-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
 |---|:-:|:-:|:-:|
 |PCsWithLOS|TArray\<PlayerController*\>|0xc|0x1f0|
 
+<a id="trigger_los-functions"></a>
 ### Functions
 
 |Signature|
@@ -4737,6 +4966,7 @@ Package: Engine
 
 Size: 0x2c4 | 708 bytes
 
+<a id="triggeredpath-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -4744,6 +4974,7 @@ Size: 0x2c4 | 708 bytes
 |bOpen|bool|0x4|0x2bc|
 |MyTrigger|Actor*|0x4|0x2c0|
 
+<a id="triggeredpath-functions"></a>
 ### Functions
 
 |Signature|
@@ -4760,18 +4991,21 @@ Package: Engine
 
 Size: 0x1fc | 508 bytes
 
+<a id="triggerstreaminglevel-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
 |---|:-:|:-:|:-:|
 |Levels|TArray\<LevelStreamingData\>|0xc|0x1f0|
 
+<a id="triggerstreaminglevel-functions"></a>
 ### Functions
 
 |Signature|
 |---|
 Touch(<br>&nbsp;&nbsp;&nbsp;&nbsp;Other: Actor*,<br>&nbsp;&nbsp;&nbsp;&nbsp;OtherComp: PrimitiveComponent*,<br>&nbsp;&nbsp;&nbsp;&nbsp;HitLocation: Vector,<br>&nbsp;&nbsp;&nbsp;&nbsp;HitNormal: Vector,<br>&nbsp;&nbsp;&nbsp;&nbsp;PlayerCon: PlayerController*,<br>&nbsp;&nbsp;&nbsp;&nbsp;Index: i32,<br>) -> ()|
 
+<a id="triggerstreaminglevel-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -4786,6 +5020,7 @@ Package: Engine
 
 Size: 0xf8 | 248 bytes
 
+<a id="uiaction_consolecommand-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -4807,6 +5042,7 @@ Package: Engine
 
 Size: 0x47c | 1148 bytes
 
+<a id="uicalloutbutton-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -4818,6 +5054,7 @@ Size: 0x47c | 1148 bytes
 |bSupportsButtonRepeat|bool|0x4|0x478|
 |bPlayErrorSoundWhenDisabled|bool|0x4|0x478|
 
+<a id="uicalloutbutton-functions"></a>
 ### Functions
 
 |Signature|
@@ -4845,6 +5082,7 @@ Package: Engine
 
 Size: 0xa4 | 164 bytes
 
+<a id="uicharactersummary-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -4854,6 +5092,7 @@ Size: 0xa4 | 164 bytes
 |CharacterBio|FString|0xc|0x94|
 |bIsDisabled|bool|0x4|0xa0|
 
+<a id="uicharactersummary-functions"></a>
 ### Functions
 
 |Signature|
@@ -4868,6 +5107,7 @@ Package: Engine
 
 Size: 0xd4 | 212 bytes
 
+<a id="uitexture-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -4875,6 +5115,7 @@ Size: 0xd4 | 212 bytes
 |ImageStyleData|UICombinedStyleData|0x94|0x3c|
 |ImageTexture|Surface*|0x4|0xd0|
 
+<a id="uitexture-functions"></a>
 ### Functions
 
 |Signature|
@@ -4892,6 +5133,7 @@ Package: Engine
 
 Size: 0xe0 | 224 bytes
 
+<a id="uicond_switchwidget-functions"></a>
 ### Functions
 
 |Signature|
@@ -4906,6 +5148,7 @@ Package: Engine
 
 Size: 0x104 | 260 bytes
 
+<a id="uicomp_listpresenter-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -4921,12 +5164,14 @@ Size: 0x104 | 260 bytes
 |MaxElementsPerPage|i32|0x4|0xfc|
 |bDisplayColumnHeaders|bool|0x4|0x100|
 
+<a id="uicomp_listpresenter-functions"></a>
 ### Functions
 
 |Signature|
 |---|
 FindElementIndex(<br>&nbsp;&nbsp;&nbsp;&nbsp;DataSourceIndex: i32,<br>) -> i32|
 
+<a id="uicomp_listpresenter-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -4944,6 +5189,7 @@ Package: Engine
 
 Size: 0x4e0 | 1248 bytes
 
+<a id="uiscrollbar-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -4971,6 +5217,7 @@ Size: 0x4e0 | 1248 bytes
 |__OnScrollActivity__Delegate|FScriptDelegate|0xc|0x4c8|
 |__OnClickedScrollZone__Delegate|FScriptDelegate|0xc|0x4d4|
 
+<a id="uiscrollbar-functions"></a>
 ### Functions
 
 |Signature|
@@ -5012,12 +5259,14 @@ Package: Engine
 
 Size: 0x12c | 300 bytes
 
+<a id="uievent_sceneactivated-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
 |---|:-:|:-:|:-:|
 |bInitialActivation|bool|0x4|0x128|
 
+<a id="uievent_sceneactivated-functions"></a>
 ### Functions
 
 |Signature|
@@ -5040,6 +5289,7 @@ Package: Engine
 
 Size: 0x454 | 1108 bytes
 
+<a id="uifocushint-functions"></a>
 ### Functions
 
 |Signature|
@@ -5054,6 +5304,7 @@ Package: Engine
 
 Size: 0xc8 | 200 bytes
 
+<a id="uigameinfosummary-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -5067,6 +5318,7 @@ Size: 0xc8 | 200 bytes
 |GameName|FString|0xc|0xb0|
 |Description|FString|0xc|0xbc|
 
+<a id="uigameinfosummary-functions"></a>
 ### Functions
 
 |Signature|
@@ -5095,6 +5347,7 @@ Package: Engine
 
 Size: 0x5f8 | 1528 bytes
 
+<a id="uimessageboxbase-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -5114,6 +5367,7 @@ Size: 0x5f8 | 1528 bytes
 |bPerformAutomaticLayout|bool|0x4|0x5e8|
 |__OnOptionSelected__Delegate|FScriptDelegate|0xc|0x5ec|
 
+<a id="uimessageboxbase-functions"></a>
 ### Functions
 
 |Signature|
@@ -5144,6 +5398,7 @@ Package: Engine
 
 Size: 0x5f8 | 1528 bytes
 
+<a id="uimessagebox-functions"></a>
 ### Functions
 
 |Signature|
@@ -5158,6 +5413,7 @@ Package: Engine
 
 Size: 0x488 | 1160 bytes
 
+<a id="uicalloutbuttonpanel-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -5173,6 +5429,7 @@ Size: 0x488 | 1160 bytes
 |bSupportsButtonRepeat|bool|0x4|0x484|
 |bRefreshButtonDocking|bool|0x4|0x484|
 
+<a id="uicalloutbuttonpanel-functions"></a>
 ### Functions
 
 |Signature|
@@ -5205,6 +5462,7 @@ AddedChild(<br>&nbsp;&nbsp;&nbsp;&nbsp;WidgetOwner: UIScreenObject*,<br>&nbsp;&n
 SynchronizeInputAliases(<br>&nbsp;&nbsp;&nbsp;&nbsp;AliasIdx: i32,<br>) -> ()|
 PopulateCalloutButtonArray(<br>&nbsp;&nbsp;&nbsp;&nbsp;ButtonIdx: i32,<br>&nbsp;&nbsp;&nbsp;&nbsp;AliasIdx: i32,<br>&nbsp;&nbsp;&nbsp;&nbsp;ChildButton: UICalloutButton*,<br>&nbsp;&nbsp;&nbsp;&nbsp;TempArray: TArray\<UICalloutButton*\>,<br>&nbsp;&nbsp;&nbsp;&nbsp;bCreateButton: bool,<br>) -> ()|
 
+<a id="uicalloutbuttonpanel-enums"></a>
 ### Enums
 
 |Enum|
@@ -5219,6 +5477,7 @@ Package: Engine
 
 Size: 0x420 | 1056 bytes
 
+<a id="uioptionlistbutton-functions"></a>
 ### Functions
 
 |Signature|
@@ -5240,6 +5499,7 @@ Package: Engine
 
 Size: 0x5a8 | 1448 bytes
 
+<a id="uiscriptconsolescene-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -5248,6 +5508,7 @@ Size: 0x5a8 | 1448 bytes
 |BufferBackground|UIImage*|0x4|0x5a0|
 |CommandRegion|ScriptConsoleEntry*|0x4|0x5a4|
 
+<a id="uiscriptconsolescene-functions"></a>
 ### Functions
 
 |Signature|
@@ -5270,6 +5531,7 @@ Package: Engine
 
 Size: 0xa4 | 164 bytes
 
+<a id="uiweaponsummary-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -5279,6 +5541,7 @@ Size: 0xa4 | 164 bytes
 |WeaponDescription|FString|0xc|0x94|
 |bIsDisabled|bool|0x4|0xa0|
 
+<a id="uiweaponsummary-functions"></a>
 ### Functions
 
 |Signature|
@@ -5293,12 +5556,14 @@ Package: Engine
 
 Size: 0x1e8 | 488 bytes
 
+<a id="volumetimer-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
 |---|:-:|:-:|:-:|
 |V|PhysicsVolume*|0x4|0x1e4|
 
+<a id="volumetimer-functions"></a>
 ### Functions
 
 |Signature|
@@ -5314,6 +5579,7 @@ Package: Engine
 
 Size: 0x274 | 628 bytes
 
+<a id="watervolume-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -5324,6 +5590,7 @@ Size: 0x274 | 628 bytes
 |ExitActor|UClass*|0x4|0x26c|
 |PawnEntryActor|UClass*|0x4|0x270|
 
+<a id="watervolume-functions"></a>
 ### Functions
 
 |Signature|
@@ -5341,6 +5608,7 @@ Package: Engine
 
 Size: 0x4c | 76 bytes
 
+<a id="forcefeedbackwaveform-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -5348,12 +5616,14 @@ Size: 0x4c | 76 bytes
 |bIsLooping|bool|0x4|0x3c|
 |Samples|TArray\<WaveformSample\>|0xc|0x40|
 
+<a id="forcefeedbackwaveform-enums"></a>
 ### Enums
 
 |Enum|
 |---|
 |EWaveformFunction {<br>&nbsp;&nbsp;&nbsp;&nbsp;WF_Constant,<br>&nbsp;&nbsp;&nbsp;&nbsp;WF_LinearIncreasing,<br>&nbsp;&nbsp;&nbsp;&nbsp;WF_LinearDecreasing,<br>&nbsp;&nbsp;&nbsp;&nbsp;WF_Sin0to90,<br>&nbsp;&nbsp;&nbsp;&nbsp;WF_Sin90to180,<br>&nbsp;&nbsp;&nbsp;&nbsp;WF_Sin0to180,<br>&nbsp;&nbsp;&nbsp;&nbsp;WF_Noise,<br>&nbsp;&nbsp;&nbsp;&nbsp;WF_MAX,<br>}|
 
+<a id="forcefeedbackwaveform-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -5368,6 +5638,7 @@ Package: Engine
 
 Size: 0x1e8 | 488 bytes
 
+<a id="winddirectionalsource-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -5382,6 +5653,7 @@ Package: Engine
 
 Size: 0x6c | 108 bytes
 
+<a id="winddirectionalsourcecomponent-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -5400,6 +5672,7 @@ Package: Engine
 
 Size: 0x48 | 72 bytes
 
+<a id="interpfilter-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -5414,6 +5687,7 @@ Package: Engine
 
 Size: 0x58 | 88 bytes
 
+<a id="interpfilter_classes-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -5429,6 +5703,7 @@ Package: Engine
 
 Size: 0x8c | 140 bytes
 
+<a id="materialexpressiontexturesample-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -5444,6 +5719,7 @@ Package: Engine
 
 Size: 0xa4 | 164 bytes
 
+<a id="materialexpressionmultiply-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -5459,6 +5735,7 @@ Package: Engine
 
 Size: 0x88 | 136 bytes
 
+<a id="materialexpressionscalarparameter-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -5473,6 +5750,7 @@ Package: Engine
 
 Size: 0x94 | 148 bytes
 
+<a id="materialexpressionvectorparameter-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -5487,6 +5765,7 @@ Package: Engine
 
 Size: 0x70 | 112 bytes
 
+<a id="materialexpressionconstant-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -5501,6 +5780,7 @@ Package: Engine
 
 Size: 0xcc | 204 bytes
 
+<a id="rb_bodysetup-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -5522,12 +5802,14 @@ Size: 0xcc | 204 bytes
 |PreCachedPhysData|TArray\<KCachedConvexData\>|0xc|0xbc|
 |PreCachedPhysDataVersion|i32|0x4|0xc8|
 
+<a id="rb_bodysetup-enums"></a>
 ### Enums
 
 |Enum|
 |---|
 |ESleepFamily {<br>&nbsp;&nbsp;&nbsp;&nbsp;SF_Normal,<br>&nbsp;&nbsp;&nbsp;&nbsp;SF_Sensitive,<br>&nbsp;&nbsp;&nbsp;&nbsp;SF_MAX,<br>}|
 
+<a id="rb_bodysetup-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -5613,6 +5895,7 @@ Package: Grip
 
 Size: 0x1dc | 476 bytes
 
+<a id="desvisualizationcomponent-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -5646,6 +5929,7 @@ Package: Core
 
 Size: 0x3c | 60 bytes
 
+<a id="object-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -5664,6 +5948,7 @@ Size: 0x3c | 60 bytes
 |Class|UClass*|0x4|0x34|
 |ObjectArchetype|Object*|0x4|0x38|
 
+<a id="object-functions"></a>
 ### Functions
 
 |Signature|
@@ -5948,6 +6233,7 @@ NotEqual_BoolBool(<br>&nbsp;&nbsp;&nbsp;&nbsp;A: bool,<br>&nbsp;&nbsp;&nbsp;&nbs
 EqualEqual_BoolBool(<br>&nbsp;&nbsp;&nbsp;&nbsp;A: bool,<br>&nbsp;&nbsp;&nbsp;&nbsp;B: bool,<br>) -> bool|
 Not_PreBool(<br>&nbsp;&nbsp;&nbsp;&nbsp;A: bool,<br>) -> bool|
 
+<a id="object-enums"></a>
 ### Enums
 
 |Enum|
@@ -5961,6 +6247,7 @@ Not_PreBool(<br>&nbsp;&nbsp;&nbsp;&nbsp;A: bool,<br>) -> bool|
 |EAxis {<br>&nbsp;&nbsp;&nbsp;&nbsp;AXIS_NONE,<br>&nbsp;&nbsp;&nbsp;&nbsp;AXIS_X,<br>&nbsp;&nbsp;&nbsp;&nbsp;AXIS_Y,<br>&nbsp;&nbsp;&nbsp;&nbsp;AXIS_BLANK,<br>&nbsp;&nbsp;&nbsp;&nbsp;AXIS_Z,<br>&nbsp;&nbsp;&nbsp;&nbsp;AXIS_MAX,<br>}|
 |AlphaBlendType {<br>&nbsp;&nbsp;&nbsp;&nbsp;ABT_Linear,<br>&nbsp;&nbsp;&nbsp;&nbsp;ABT_Cubic,<br>&nbsp;&nbsp;&nbsp;&nbsp;ABT_Sinusoidal,<br>&nbsp;&nbsp;&nbsp;&nbsp;ABT_EaseInOutExponent2,<br>&nbsp;&nbsp;&nbsp;&nbsp;ABT_EaseInOutExponent3,<br>&nbsp;&nbsp;&nbsp;&nbsp;ABT_EaseInOutExponent4,<br>&nbsp;&nbsp;&nbsp;&nbsp;ABT_EaseInOutExponent5,<br>&nbsp;&nbsp;&nbsp;&nbsp;ABT_MAX,<br>}|
 
+<a id="object-consts"></a>
 ### Consts
 
 |Constant|Value|
@@ -5979,6 +6266,7 @@ Not_PreBool(<br>&nbsp;&nbsp;&nbsp;&nbsp;A: bool,<br>) -> bool|
 |Pi|3.1415926535897932|
 |MaxInt|0x7fffffff|
 
+<a id="object-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -6048,6 +6336,7 @@ Package: Core
 
 Size: 0x40 | 64 bytes
 
+<a id="subsystem-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -6062,6 +6351,7 @@ Package: Core
 
 Size: 0xfc | 252 bytes
 
+<a id="system-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -6171,6 +6461,7 @@ Package: Core
 
 Size: 0x70 | 112 bytes
 
+<a id="factory-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -6193,6 +6484,7 @@ Package: Core
 
 Size: 0x64 | 100 bytes
 
+<a id="exporter-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -6208,6 +6500,7 @@ Package: Core
 
 Size: 0x48 | 72 bytes
 
+<a id="component-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -6223,6 +6516,7 @@ Package: Core
 
 Size: 0x50 | 80 bytes
 
+<a id="distributionvector-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -6231,12 +6525,14 @@ Size: 0x50 | 80 bytes
 |bCanBeBaked|bool|0x4|0x4c|
 |bIsDirty|bool|0x4|0x4c|
 
+<a id="distributionvector-functions"></a>
 ### Functions
 
 |Signature|
 |---|
 GetVectorValue(<br>&nbsp;&nbsp;&nbsp;&nbsp;F: f32,<br>&nbsp;&nbsp;&nbsp;&nbsp;LastExtreme: i32,<br>) -> Vector|
 
+<a id="distributionvector-enums"></a>
 ### Enums
 
 |Enum|
@@ -6244,6 +6540,7 @@ GetVectorValue(<br>&nbsp;&nbsp;&nbsp;&nbsp;F: f32,<br>&nbsp;&nbsp;&nbsp;&nbsp;La
 |EDistributionVectorMirrorFlags {<br>&nbsp;&nbsp;&nbsp;&nbsp;EDVMF_Same,<br>&nbsp;&nbsp;&nbsp;&nbsp;EDVMF_Different,<br>&nbsp;&nbsp;&nbsp;&nbsp;EDVMF_Mirror,<br>&nbsp;&nbsp;&nbsp;&nbsp;EDVMF_MAX,<br>}|
 |EDistributionVectorLockFlags {<br>&nbsp;&nbsp;&nbsp;&nbsp;EDVLF_None,<br>&nbsp;&nbsp;&nbsp;&nbsp;EDVLF_XY,<br>&nbsp;&nbsp;&nbsp;&nbsp;EDVLF_XZ,<br>&nbsp;&nbsp;&nbsp;&nbsp;EDVLF_YZ,<br>&nbsp;&nbsp;&nbsp;&nbsp;EDVLF_XYZ,<br>&nbsp;&nbsp;&nbsp;&nbsp;EDVLF_MAX,<br>}|
 
+<a id="distributionvector-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -6258,6 +6555,7 @@ Package: Core
 
 Size: 0x50 | 80 bytes
 
+<a id="distributionfloat-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -6266,12 +6564,14 @@ Size: 0x50 | 80 bytes
 |bCanBeBaked|bool|0x4|0x4c|
 |bIsDirty|bool|0x4|0x4c|
 
+<a id="distributionfloat-functions"></a>
 ### Functions
 
 |Signature|
 |---|
 GetFloatValue(<br>&nbsp;&nbsp;&nbsp;&nbsp;F: f32,<br>) -> f32|
 
+<a id="distributionfloat-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -6286,6 +6586,7 @@ Package: Core
 
 Size: 0x7c | 124 bytes
 
+<a id="commandlet-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -6301,6 +6602,7 @@ Size: 0x7c | 124 bytes
 |LogToConsole|bool|0x4|0x78|
 |ShowErrorCount|bool|0x4|0x78|
 
+<a id="commandlet-functions"></a>
 ### Functions
 
 |Signature|
@@ -6315,6 +6617,7 @@ Package: Core
 
 Size: 0x7c | 124 bytes
 
+<a id="helpcommandlet-functions"></a>
 ### Functions
 
 |Signature|
@@ -6329,6 +6632,7 @@ Package: Engine
 
 Size: 0x5f4 | 1524 bytes
 
+<a id="engine-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -6551,6 +6855,7 @@ Size: 0x5f4 | 1524 bytes
 |PluginSubsystemClasses|TArray\<UClass*\>|0xc|0x5ac|
 |PluginSubsystems|Map_Mirror|0x3c|0x5b8|
 
+<a id="engine-functions"></a>
 ### Functions
 
 |Signature|
@@ -6577,12 +6882,14 @@ IsGame() -> bool|
 IsEditor() -> bool|
 GetSubsystem(<br>&nbsp;&nbsp;&nbsp;&nbsp;SubsystemClass: UClass*,<br>) -> Subsystem*|
 
+<a id="engine-enums"></a>
 ### Enums
 
 |Enum|
 |---|
 |ETransitionType {<br>&nbsp;&nbsp;&nbsp;&nbsp;TT_None,<br>&nbsp;&nbsp;&nbsp;&nbsp;TT_Paused,<br>&nbsp;&nbsp;&nbsp;&nbsp;TT_Loading,<br>&nbsp;&nbsp;&nbsp;&nbsp;TT_Saving,<br>&nbsp;&nbsp;&nbsp;&nbsp;TT_Connecting,<br>&nbsp;&nbsp;&nbsp;&nbsp;TT_Precaching,<br>&nbsp;&nbsp;&nbsp;&nbsp;TT_MAX,<br>}|
 
+<a id="engine-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -6600,6 +6907,7 @@ Package: Engine
 
 Size: 0x708 | 1800 bytes
 
+<a id="gameengine-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -6627,6 +6935,7 @@ Size: 0x708 | 1800 bytes
 |PackagesToFullyLoad|TArray\<FullyLoadedPackagesInfo\>|0xc|0x6f0|
 |NamedNetDrivers|TArray\<NamedNetDriver\>|0xc|0x6fc|
 
+<a id="gameengine-functions"></a>
 ### Functions
 
 |Signature|
@@ -6635,12 +6944,14 @@ GetOnlineSubsystem() -> OnlineSubsystem*|
 DestroyNamedNetDriver(<br>&nbsp;&nbsp;&nbsp;&nbsp;NetDriverName: FName,<br>) -> ()|
 CreateNamedNetDriver(<br>&nbsp;&nbsp;&nbsp;&nbsp;NetDriverName: FName,<br>) -> bool|
 
+<a id="gameengine-enums"></a>
 ### Enums
 
 |Enum|
 |---|
 |EFullyLoadPackageType {<br>&nbsp;&nbsp;&nbsp;&nbsp;FULLYLOAD_Map,<br>&nbsp;&nbsp;&nbsp;&nbsp;FULLYLOAD_Game_PreLoadClass,<br>&nbsp;&nbsp;&nbsp;&nbsp;FULLYLOAD_Game_PostLoadClass,<br>&nbsp;&nbsp;&nbsp;&nbsp;FULLYLOAD_Always,<br>&nbsp;&nbsp;&nbsp;&nbsp;FULLYLOAD_Mutator,<br>&nbsp;&nbsp;&nbsp;&nbsp;FULLYLOAD_MAX,<br>}|
 
+<a id="gameengine-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -6658,6 +6969,7 @@ Package: Engine
 
 Size: 0x1e4 | 484 bytes
 
+<a id="actor-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -6808,6 +7120,7 @@ Size: 0x1e4 | 484 bytes
 |GeneratedEvents|TArray\<SequenceEvent*\>|0xc|0x1cc|
 |LatentActions|TArray\<SeqAct_Latent*\>|0xc|0x1d8|
 
+<a id="actor-functions"></a>
 ### Functions
 
 |Signature|
@@ -7060,6 +7373,7 @@ Sleep(<br>&nbsp;&nbsp;&nbsp;&nbsp;Seconds: f32,<br>) -> ()|
 ConsoleCommand(<br>&nbsp;&nbsp;&nbsp;&nbsp;Command: FString,<br>&nbsp;&nbsp;&nbsp;&nbsp;bWriteToLog: bool,<br>) -> FString|
 ForceUpdateComponents(<br>&nbsp;&nbsp;&nbsp;&nbsp;bCollisionUpdate: bool,<br>&nbsp;&nbsp;&nbsp;&nbsp;bTransformOnly: bool,<br>) -> ()|
 
+<a id="actor-enums"></a>
 ### Enums
 
 |Enum|
@@ -7071,6 +7385,7 @@ ForceUpdateComponents(<br>&nbsp;&nbsp;&nbsp;&nbsp;bCollisionUpdate: bool,<br>&nb
 |EMoveDir {<br>&nbsp;&nbsp;&nbsp;&nbsp;MD_Stationary,<br>&nbsp;&nbsp;&nbsp;&nbsp;MD_Forward,<br>&nbsp;&nbsp;&nbsp;&nbsp;MD_Backward,<br>&nbsp;&nbsp;&nbsp;&nbsp;MD_Left,<br>&nbsp;&nbsp;&nbsp;&nbsp;MD_Right,<br>&nbsp;&nbsp;&nbsp;&nbsp;MD_Up,<br>&nbsp;&nbsp;&nbsp;&nbsp;MD_Down,<br>&nbsp;&nbsp;&nbsp;&nbsp;MD_MAX,<br>}|
 |EPhysics {<br>&nbsp;&nbsp;&nbsp;&nbsp;PHYS_None,<br>&nbsp;&nbsp;&nbsp;&nbsp;PHYS_Walking,<br>&nbsp;&nbsp;&nbsp;&nbsp;PHYS_Falling,<br>&nbsp;&nbsp;&nbsp;&nbsp;PHYS_Swimming,<br>&nbsp;&nbsp;&nbsp;&nbsp;PHYS_Flying,<br>&nbsp;&nbsp;&nbsp;&nbsp;PHYS_Rotating,<br>&nbsp;&nbsp;&nbsp;&nbsp;PHYS_Projectile,<br>&nbsp;&nbsp;&nbsp;&nbsp;PHYS_Interpolating,<br>&nbsp;&nbsp;&nbsp;&nbsp;PHYS_Spider,<br>&nbsp;&nbsp;&nbsp;&nbsp;PHYS_Ladder,<br>&nbsp;&nbsp;&nbsp;&nbsp;PHYS_RigidBody,<br>&nbsp;&nbsp;&nbsp;&nbsp;PHYS_SoftBody,<br>&nbsp;&nbsp;&nbsp;&nbsp;PHYS_NavMeshWalking,<br>&nbsp;&nbsp;&nbsp;&nbsp;PHYS_Unused,<br>&nbsp;&nbsp;&nbsp;&nbsp;PHYS_Custom,<br>&nbsp;&nbsp;&nbsp;&nbsp;PHYS_MAX,<br>}|
 
+<a id="actor-consts"></a>
 ### Consts
 
 |Constant|Value|
@@ -7088,6 +7403,7 @@ ForceUpdateComponents(<br>&nbsp;&nbsp;&nbsp;&nbsp;bCollisionUpdate: bool,<br>&nb
 |TRACEFLAG_PhysicsVolumes|2|
 |TRACEFLAG_Bullet|1|
 
+<a id="actor-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -7115,6 +7431,7 @@ Package: Engine
 
 Size: 0x208 | 520 bytes
 
+<a id="brush-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -7129,12 +7446,14 @@ Size: 0x208 | 520 bytes
 |BrushComponent|BrushComponent*|0x4|0x1f8|
 |SavedSelections|TArray\<GeomSelection\>|0xc|0x1fc|
 
+<a id="brush-enums"></a>
 ### Enums
 
 |Enum|
 |---|
 |ECsgOper {<br>&nbsp;&nbsp;&nbsp;&nbsp;CSG_Active,<br>&nbsp;&nbsp;&nbsp;&nbsp;CSG_Add,<br>&nbsp;&nbsp;&nbsp;&nbsp;CSG_Subtract,<br>&nbsp;&nbsp;&nbsp;&nbsp;CSG_Intersect,<br>&nbsp;&nbsp;&nbsp;&nbsp;CSG_Deintersect,<br>&nbsp;&nbsp;&nbsp;&nbsp;CSG_MAX,<br>}|
 
+<a id="brush-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -7156,6 +7475,7 @@ Package: Engine
 
 Size: 0x220 | 544 bytes
 
+<a id="volume-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -7166,12 +7486,14 @@ Size: 0x220 | 544 bytes
 |bForcePawnWalk|bool|0x4|0x21c|
 |bProcessAllActors|bool|0x4|0x21c|
 
+<a id="volume-states"></a>
 ### States
 
 |Signature|
 |---|
 |BeginState_AssociatedTouch(<br>&nbsp;&nbsp;&nbsp;&nbsp;PreviousStateName: FName,<br>) -> ()|
 
+<a id="volume-functions"></a>
 ### Functions
 
 |Signature|
@@ -7193,12 +7515,14 @@ Package: Engine
 
 Size: 0x224 | 548 bytes
 
+<a id="blockingvolume-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
 |---|:-:|:-:|:-:|
 |bBlockCamera|bool|0x4|0x220|
 
+<a id="blockingvolume-functions"></a>
 ### Functions
 
 |Signature|
@@ -7213,6 +7537,7 @@ Package: Engine
 
 Size: 0x224 | 548 bytes
 
+<a id="dynamicblockingvolume-functions"></a>
 ### Functions
 
 |Signature|
@@ -7220,6 +7545,7 @@ Size: 0x224 | 548 bytes
 ApplyCheckpointRecord(<br>&nbsp;&nbsp;&nbsp;&nbsp;Record: CheckpointRecord,<br>) -> ()|
 CreateCheckpointRecord(<br>&nbsp;&nbsp;&nbsp;&nbsp;Record: CheckpointRecord,<br>) -> ()|
 
+<a id="dynamicblockingvolume-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -7234,6 +7560,7 @@ Package: Engine
 
 Size: 0x230 | 560 bytes
 
+<a id="culldistancevolume-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -7241,6 +7568,7 @@ Size: 0x230 | 560 bytes
 |CullDistances|TArray\<CullDistanceSizePair\>|0xc|0x220|
 |bEnabled|bool|0x4|0x22c|
 
+<a id="culldistancevolume-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -7255,6 +7583,7 @@ Package: Engine
 
 Size: 0x238 | 568 bytes
 
+<a id="levelstreamingvolume-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -7266,6 +7595,7 @@ Size: 0x238 | 568 bytes
 |Usage|i8|0x1|0x230|
 |TestVolumeDistance|f32|0x4|0x234|
 
+<a id="levelstreamingvolume-functions"></a>
 ### Functions
 
 |Signature|
@@ -7274,12 +7604,14 @@ ApplyCheckpointRecord(<br>&nbsp;&nbsp;&nbsp;&nbsp;Record: CheckpointRecord,<br>)
 CreateCheckpointRecord(<br>&nbsp;&nbsp;&nbsp;&nbsp;Record: CheckpointRecord,<br>) -> ()|
 OnToggle(<br>&nbsp;&nbsp;&nbsp;&nbsp;Action: SeqAct_Toggle*,<br>) -> ()|
 
+<a id="levelstreamingvolume-enums"></a>
 ### Enums
 
 |Enum|
 |---|
 |EStreamingVolumeUsage {<br>&nbsp;&nbsp;&nbsp;&nbsp;SVB_Loading,<br>&nbsp;&nbsp;&nbsp;&nbsp;SVB_LoadingAndVisibility,<br>&nbsp;&nbsp;&nbsp;&nbsp;SVB_VisibilityBlockingOnLoad,<br>&nbsp;&nbsp;&nbsp;&nbsp;SVB_BlockingOnLoad,<br>&nbsp;&nbsp;&nbsp;&nbsp;SVB_LoadingNotVisible,<br>&nbsp;&nbsp;&nbsp;&nbsp;SVB_MAX,<br>}|
 
+<a id="levelstreamingvolume-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -7308,6 +7640,7 @@ Package: Engine
 
 Size: 0x260 | 608 bytes
 
+<a id="physicsvolume-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -7339,6 +7672,7 @@ Size: 0x260 | 608 bytes
 |DamageInstigator|Controller*|0x4|0x258|
 |NextPhysicsVolume|PhysicsVolume*|0x4|0x25c|
 
+<a id="physicsvolume-functions"></a>
 ### Functions
 
 |Signature|
@@ -7364,6 +7698,7 @@ PostBeginPlay() -> ()|
 GetZoneVelocityForActor(<br>&nbsp;&nbsp;&nbsp;&nbsp;TheActor: Actor*,<br>) -> Vector|
 GetGravityZ() -> f32|
 
+<a id="physicsvolume-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -7378,6 +7713,7 @@ Package: Engine
 
 Size: 0x260 | 608 bytes
 
+<a id="defaultphysicsvolume-functions"></a>
 ### Functions
 
 |Signature|
@@ -7392,6 +7728,7 @@ Package: Engine
 
 Size: 0x264 | 612 bytes
 
+<a id="gravityvolume-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -7406,6 +7743,7 @@ Package: Engine
 
 Size: 0x294 | 660 bytes
 
+<a id="laddervolume-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -7420,6 +7758,7 @@ Size: 0x294 | 660 bytes
 |PendingClimber|Pawn*|0x4|0x28c|
 |WallDirArrow|ArrowComponent*|0x4|0x290|
 
+<a id="laddervolume-functions"></a>
 ### Functions
 
 |Signature|
@@ -7438,6 +7777,7 @@ Package: Engine
 
 Size: 0x22c | 556 bytes
 
+<a id="portalvolume-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -7452,6 +7792,7 @@ Package: Engine
 
 Size: 0x300 | 768 bytes
 
+<a id="postprocessvolume-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -7461,12 +7802,14 @@ Size: 0x300 | 768 bytes
 |NextLowerPriorityVolume|PostProcessVolume*|0x4|0x2f8|
 |bEnabled|bool|0x4|0x2fc|
 
+<a id="postprocessvolume-functions"></a>
 ### Functions
 
 |Signature|
 |---|
 OnToggle(<br>&nbsp;&nbsp;&nbsp;&nbsp;Action: SeqAct_Toggle*,<br>) -> ()|
 
+<a id="postprocessvolume-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -7481,6 +7824,7 @@ Package: Engine
 
 Size: 0x25c | 604 bytes
 
+<a id="reverbvolume-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -7490,12 +7834,14 @@ Size: 0x25c | 604 bytes
 |AmbientZoneSettings|InteriorSettings|0x24|0x234|
 |NextLowerPriorityVolume|ReverbVolume*|0x4|0x258|
 
+<a id="reverbvolume-enums"></a>
 ### Enums
 
 |Enum|
 |---|
 |ReverbPreset {<br>&nbsp;&nbsp;&nbsp;&nbsp;REVERB_Default,<br>&nbsp;&nbsp;&nbsp;&nbsp;REVERB_Bathroom,<br>&nbsp;&nbsp;&nbsp;&nbsp;REVERB_StoneRoom,<br>&nbsp;&nbsp;&nbsp;&nbsp;REVERB_Auditorium,<br>&nbsp;&nbsp;&nbsp;&nbsp;REVERB_ConcertHall,<br>&nbsp;&nbsp;&nbsp;&nbsp;REVERB_Cave,<br>&nbsp;&nbsp;&nbsp;&nbsp;REVERB_Hallway,<br>&nbsp;&nbsp;&nbsp;&nbsp;REVERB_StoneCorridor,<br>&nbsp;&nbsp;&nbsp;&nbsp;REVERB_Alley,<br>&nbsp;&nbsp;&nbsp;&nbsp;REVERB_Forest,<br>&nbsp;&nbsp;&nbsp;&nbsp;REVERB_City,<br>&nbsp;&nbsp;&nbsp;&nbsp;REVERB_Mountains,<br>&nbsp;&nbsp;&nbsp;&nbsp;REVERB_Quarry,<br>&nbsp;&nbsp;&nbsp;&nbsp;REVERB_Plain,<br>&nbsp;&nbsp;&nbsp;&nbsp;REVERB_ParkingLot,<br>&nbsp;&nbsp;&nbsp;&nbsp;REVERB_SewerPipe,<br>&nbsp;&nbsp;&nbsp;&nbsp;REVERB_Underwater,<br>&nbsp;&nbsp;&nbsp;&nbsp;REVERB_SmallRoom,<br>&nbsp;&nbsp;&nbsp;&nbsp;REVERB_MediumRoom,<br>&nbsp;&nbsp;&nbsp;&nbsp;REVERB_LargeRoom,<br>&nbsp;&nbsp;&nbsp;&nbsp;REVERB_MediumHall,<br>&nbsp;&nbsp;&nbsp;&nbsp;REVERB_LargeHall,<br>&nbsp;&nbsp;&nbsp;&nbsp;REVERB_Plate,<br>&nbsp;&nbsp;&nbsp;&nbsp;REVERB_MAX,<br>}|
 
+<a id="reverbvolume-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -7511,6 +7857,7 @@ Package: Engine
 
 Size: 0x220 | 544 bytes
 
+<a id="triggervolume-functions"></a>
 ### Functions
 
 |Signature|
@@ -7526,6 +7873,7 @@ Package: Engine
 
 Size: 0x4e4 | 1252 bytes
 
+<a id="camera-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -7570,6 +7918,7 @@ Size: 0x4e4 | 1252 bytes
 |AnimCameraActor|DynamicCameraActor*|0x4|0x40c|
 |AccumulatedCameraAnimPPSettings|PostProcessSettings|0xd4|0x410|
 
+<a id="camera-functions"></a>
 ### Functions
 
 |Signature|
@@ -7608,18 +7957,21 @@ Destroyed() -> ()|
 PostBeginPlay(<br>&nbsp;&nbsp;&nbsp;&nbsp;Idx: i32,<br>) -> ()|
 CreateCameraModifier(<br>&nbsp;&nbsp;&nbsp;&nbsp;ModifierClass: UClass*,<br>&nbsp;&nbsp;&nbsp;&nbsp;NewMod: CameraModifier*,<br>) -> CameraModifier*|
 
+<a id="camera-enums"></a>
 ### Enums
 
 |Enum|
 |---|
 |EViewTargetBlendFunction {<br>&nbsp;&nbsp;&nbsp;&nbsp;VTBlend_Linear,<br>&nbsp;&nbsp;&nbsp;&nbsp;VTBlend_Cubic,<br>&nbsp;&nbsp;&nbsp;&nbsp;VTBlend_EaseIn,<br>&nbsp;&nbsp;&nbsp;&nbsp;VTBlend_EaseOut,<br>&nbsp;&nbsp;&nbsp;&nbsp;VTBlend_EaseInOut,<br>&nbsp;&nbsp;&nbsp;&nbsp;VTBlend_MAX,<br>}|
 
+<a id="camera-consts"></a>
 ### Consts
 
 |Constant|Value|
 |---|:-:|
 |MAX_ACTIVE_CAMERA_ANIMS|8|
 
+<a id="camera-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -7636,6 +7988,7 @@ Package: Engine
 
 Size: 0x2cc | 716 bytes
 
+<a id="cameraactor-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -7648,6 +8001,7 @@ Size: 0x2cc | 716 bytes
 |DrawFrustum|DrawFrustumComponent*|0x4|0x2c4|
 |MeshComp|StaticMeshComponent*|0x4|0x2c8|
 
+<a id="cameraactor-functions"></a>
 ### Functions
 
 |Signature|
@@ -7670,6 +8024,7 @@ Package: Engine
 
 Size: 0x1f4 | 500 bytes
 
+<a id="droppedpickup-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -7679,6 +8034,7 @@ Size: 0x1f4 | 500 bytes
 |PickupCache|NavigationPoint*|0x4|0x1ec|
 |bFadeOut|bool|0x4|0x1f0|
 
+<a id="droppedpickup-states"></a>
 ### States
 
 |Signature|
@@ -7686,6 +8042,7 @@ Size: 0x1f4 | 500 bytes
 |BeginState_FadeOut(<br>&nbsp;&nbsp;&nbsp;&nbsp;PreviousStateName: FName,<br>) -> ()|
 |EndState_Pickup(<br>&nbsp;&nbsp;&nbsp;&nbsp;NextStateName: FName,<br>) -> ()|
 
+<a id="droppedpickup-functions"></a>
 ### Functions
 
 |Signature|
@@ -7712,6 +8069,7 @@ Package: Engine
 
 Size: 0x21c | 540 bytes
 
+<a id="dynamicsmactor-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -7727,6 +8085,7 @@ Size: 0x21c | 540 bytes
 |ReplicatedMeshRotation|Rotator|0xc|0x204|
 |ReplicatedMeshScale3D|Vector|0xc|0x210|
 
+<a id="dynamicsmactor-functions"></a>
 ### Functions
 
 |Signature|
@@ -7750,6 +8109,7 @@ Package: Engine
 
 Size: 0x248 | 584 bytes
 
+<a id="interpactor-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -7773,6 +8133,7 @@ Size: 0x248 | 584 bytes
 |ClosedSound|SoundCue*|0x4|0x240|
 |AmbientSoundComponent|AudioComponent*|0x4|0x244|
 
+<a id="interpactor-functions"></a>
 ### Functions
 
 |Signature|
@@ -7794,6 +8155,7 @@ EncroachingOn(<br>&nbsp;&nbsp;&nbsp;&nbsp;Other: Actor*,<br>&nbsp;&nbsp;&nbsp;&n
 SetShadowParentOnAllAttachedComponents() -> ()|
 PostBeginPlay() -> ()|
 
+<a id="interpactor-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -7808,6 +8170,7 @@ Package: Engine
 
 Size: 0x1f0 | 496 bytes
 
+<a id="emitter-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -7818,6 +8181,7 @@ Size: 0x1f0 | 496 bytes
 |bPostUpdateTickGroup|bool|0x4|0x1ec|
 |bCurrentlyActive|bool|0x4|0x1ec|
 
+<a id="emitter-functions"></a>
 ### Functions
 
 |Signature|
@@ -7840,6 +8204,7 @@ ReplicatedEvent(<br>&nbsp;&nbsp;&nbsp;&nbsp;VarName: FName,<br>) -> ()|
 PostBeginPlay() -> ()|
 SetTemplate(<br>&nbsp;&nbsp;&nbsp;&nbsp;NewTemplate: ParticleSystem*,<br>&nbsp;&nbsp;&nbsp;&nbsp;bDestroyOnFinish: bool,<br>) -> ()|
 
+<a id="emitter-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -7854,6 +8219,7 @@ Package: Engine
 
 Size: 0x23c | 572 bytes
 
+<a id="emitterpool-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -7872,6 +8238,7 @@ Size: 0x23c | 572 bytes
 |FreeSMComponents|TArray\<StaticMeshComponent*\>|0xc|0x224|
 |FreeMatInstConsts|TArray\<MaterialInstanceConstant*\>|0xc|0x230|
 
+<a id="emitterpool-functions"></a>
 ### Functions
 
 |Signature|
@@ -7888,6 +8255,7 @@ ReturnToPool(<br>&nbsp;&nbsp;&nbsp;&nbsp;PSC: ParticleSystemComponent*,<br>) -> 
 ClearPoolComponents() -> ()|
 OnParticleSystemFinished(<br>&nbsp;&nbsp;&nbsp;&nbsp;PSC: ParticleSystemComponent*,<br>&nbsp;&nbsp;&nbsp;&nbsp;I: i32,<br>) -> ()|
 
+<a id="emitterpool-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -7902,6 +8270,7 @@ Package: Engine
 
 Size: 0x478 | 1144 bytes
 
+<a id="hud-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -7943,6 +8312,7 @@ Size: 0x478 | 1144 bytes
 |DebugDisplay|TArray\<FName\>|0xc|0x460|
 |KismetTextInfo|TArray\<KismetDrawTextInfo\>|0xc|0x46c|
 
+<a id="hud-functions"></a>
 ### Functions
 
 |Signature|
@@ -7986,6 +8356,7 @@ PostBeginPlay() -> ()|
 Draw2DLine(<br>&nbsp;&nbsp;&nbsp;&nbsp;X1: i32,<br>&nbsp;&nbsp;&nbsp;&nbsp;Y1: i32,<br>&nbsp;&nbsp;&nbsp;&nbsp;X2: i32,<br>&nbsp;&nbsp;&nbsp;&nbsp;Y2: i32,<br>&nbsp;&nbsp;&nbsp;&nbsp;LineColor: Color,<br>) -> ()|
 Draw3DLine(<br>&nbsp;&nbsp;&nbsp;&nbsp;Start: Vector,<br>&nbsp;&nbsp;&nbsp;&nbsp;End: Vector,<br>&nbsp;&nbsp;&nbsp;&nbsp;LineColor: Color,<br>) -> ()|
 
+<a id="hud-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -8002,6 +8373,7 @@ Package: Engine
 
 Size: 0x1e4 | 484 bytes
 
+<a id="info-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -8018,6 +8390,7 @@ Package: Engine
 
 Size: 0x264 | 612 bytes
 
+<a id="autotestmanager-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -8048,12 +8421,14 @@ Size: 0x264 | 612 bytes
 |NumRotationsIncrement|i32|0x4|0x25c|
 |TravelPointsIncrement|i32|0x4|0x260|
 
+<a id="autotestmanager-states"></a>
 ### States
 
 |Signature|
 |---|
 |SetIncrementsForLoops_TravelTheWorld() -> ()|
 
+<a id="autotestmanager-functions"></a>
 ### Functions
 
 |Signature|
@@ -8088,6 +8463,7 @@ Package: Engine
 
 Size: 0x1f8 | 504 bytes
 
+<a id="covergroup-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -8096,6 +8472,7 @@ Size: 0x1f8 | 504 bytes
 |AutoSelectRadius|f32|0x4|0x1f0|
 |AutoSelectHeight|f32|0x4|0x1f4|
 
+<a id="covergroup-functions"></a>
 ### Functions
 
 |Signature|
@@ -8105,6 +8482,7 @@ ToggleGroup() -> ()|
 DisableGroup() -> ()|
 EnableGroup() -> ()|
 
+<a id="covergroup-enums"></a>
 ### Enums
 
 |Enum|
@@ -8119,6 +8497,7 @@ Package: Engine
 
 Size: 0x1fc | 508 bytes
 
+<a id="filewriter-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -8129,6 +8508,7 @@ Size: 0x1fc | 508 bytes
 |bFlushEachWrite|bool|0x4|0x1f8|
 |bWantsAsyncWrites|bool|0x4|0x1f8|
 
+<a id="filewriter-functions"></a>
 ### Functions
 
 |Signature|
@@ -8138,6 +8518,7 @@ Logf(<br>&nbsp;&nbsp;&nbsp;&nbsp;logString: FString,<br>) -> ()|
 CloseFile() -> ()|
 OpenFile(<br>&nbsp;&nbsp;&nbsp;&nbsp;InFilename: FString,<br>&nbsp;&nbsp;&nbsp;&nbsp;InFileType: i8,<br>&nbsp;&nbsp;&nbsp;&nbsp;InExtension: FString,<br>&nbsp;&nbsp;&nbsp;&nbsp;bUnique: bool,<br>&nbsp;&nbsp;&nbsp;&nbsp;bIncludeTimeStamp: bool,<br>) -> bool|
 
+<a id="filewriter-enums"></a>
 ### Enums
 
 |Enum|
@@ -8152,6 +8533,7 @@ Package: Engine
 
 Size: 0x1fc | 508 bytes
 
+<a id="filelog-functions"></a>
 ### Functions
 
 |Signature|
@@ -8167,6 +8549,7 @@ Package: Engine
 
 Size: 0x3d4 | 980 bytes
 
+<a id="gameinfo-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -8267,12 +8650,14 @@ Size: 0x3d4 | 980 bytes
 |iShowDESVisualization|i32|0x4|0x3c4|
 |__CanUnpause__Delegate|FScriptDelegate|0xc|0x3c8|
 
+<a id="gameinfo-states"></a>
 ### States
 
 |Signature|
 |---|
 |EndState_PendingMatch(<br>&nbsp;&nbsp;&nbsp;&nbsp;NextStateName: FName,<br>) -> ()|
 
+<a id="gameinfo-functions"></a>
 ### Functions
 
 |Signature|
@@ -8437,18 +8822,21 @@ StartDESPlayerGawk(<br>&nbsp;&nbsp;&nbsp;&nbsp;Radius: f32,<br>) -> ()|
 HideDESInfo() -> ()|
 ShowDESInfo(<br>&nbsp;&nbsp;&nbsp;&nbsp;infoType: FString,<br>) -> ()|
 
+<a id="gameinfo-enums"></a>
 ### Enums
 
 |Enum|
 |---|
 |EStandbyType {<br>&nbsp;&nbsp;&nbsp;&nbsp;STDBY_Rx,<br>&nbsp;&nbsp;&nbsp;&nbsp;STDBY_Tx,<br>&nbsp;&nbsp;&nbsp;&nbsp;STDBY_BadPing,<br>&nbsp;&nbsp;&nbsp;&nbsp;STDBY_MAX,<br>}|
 
+<a id="gameinfo-consts"></a>
 ### Consts
 
 |Constant|Value|
 |---|:-:|
 |MAX_INSTANCES_PER_CLASS|5|
 
+<a id="gameinfo-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -8465,6 +8853,7 @@ Package: Engine
 
 Size: 0x1f8 | 504 bytes
 
+<a id="mutator-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -8473,6 +8862,7 @@ Size: 0x1f8 | 504 bytes
 |GroupNames|TArray\<FString\>|0xc|0x1e8|
 |bUserAdded|bool|0x4|0x1f4|
 
+<a id="mutator-functions"></a>
 ### Functions
 
 |Signature|
@@ -8515,6 +8905,7 @@ Package: Engine
 
 Size: 0x1e4 | 484 bytes
 
+<a id="potentialclimbwatcher-functions"></a>
 ### Functions
 
 |Signature|
@@ -8529,6 +8920,7 @@ Package: Engine
 
 Size: 0x1fc | 508 bytes
 
+<a id="route-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -8538,6 +8930,7 @@ Size: 0x1fc | 508 bytes
 |RouteList|TArray\<ActorReference\>|0xc|0x1ec|
 |FudgeFactor|f32|0x4|0x1f8|
 
+<a id="route-functions"></a>
 ### Functions
 
 |Signature|
@@ -8545,6 +8938,7 @@ Size: 0x1fc | 508 bytes
 MoveOntoRoutePath(<br>&nbsp;&nbsp;&nbsp;&nbsp;P: Pawn*,<br>&nbsp;&nbsp;&nbsp;&nbsp;RouteDirection: i8,<br>&nbsp;&nbsp;&nbsp;&nbsp;DistFudgeFactor: f32,<br>) -> i32|
 ResolveRouteIndex(<br>&nbsp;&nbsp;&nbsp;&nbsp;Idx: i32,<br>&nbsp;&nbsp;&nbsp;&nbsp;RouteDirection: i8,<br>&nbsp;&nbsp;&nbsp;&nbsp;out_bComplete: i8,<br>&nbsp;&nbsp;&nbsp;&nbsp;out_bReverse: i8,<br>) -> i32|
 
+<a id="route-enums"></a>
 ### Enums
 
 |Enum|
@@ -8561,6 +8955,7 @@ Package: Engine
 
 Size: 0x1f4 | 500 bytes
 
+<a id="zoneinfo-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -8578,6 +8973,7 @@ Package: Engine
 
 Size: 0x638 | 1592 bytes
 
+<a id="worldinfo-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -8700,6 +9096,7 @@ Size: 0x638 | 1592 bytes
 |LMLevelSettings|LightmassLevelSettings*|0x4|0x5f8|
 |LightmassSettings|LightmassWorldInfoSettings|0x3c|0x5fc|
 
+<a id="worldinfo-functions"></a>
 ### Functions
 
 |Signature|
@@ -8752,6 +9149,7 @@ IsMenuLevel(<br>&nbsp;&nbsp;&nbsp;&nbsp;MapName: FString,<br>) -> bool|
 AddOnScreenDebugMessage(<br>&nbsp;&nbsp;&nbsp;&nbsp;Key: i32,<br>&nbsp;&nbsp;&nbsp;&nbsp;TimeToDisplay: f32,<br>&nbsp;&nbsp;&nbsp;&nbsp;DisplayColor: Color,<br>&nbsp;&nbsp;&nbsp;&nbsp;DebugMessage: FString,<br>) -> ()|
 ReplicatedEvent(<br>&nbsp;&nbsp;&nbsp;&nbsp;VarName: FName,<br>) -> ()|
 
+<a id="worldinfo-enums"></a>
 ### Enums
 
 |Enum|
@@ -8759,6 +9157,7 @@ ReplicatedEvent(<br>&nbsp;&nbsp;&nbsp;&nbsp;VarName: FName,<br>) -> ()|
 |EConsoleType {<br>&nbsp;&nbsp;&nbsp;&nbsp;CONSOLE_Any,<br>&nbsp;&nbsp;&nbsp;&nbsp;CONSOLE_Xbox360,<br>&nbsp;&nbsp;&nbsp;&nbsp;CONSOLE_PS3,<br>&nbsp;&nbsp;&nbsp;&nbsp;CONSOLE_MAX,<br>}|
 |ENetMode {<br>&nbsp;&nbsp;&nbsp;&nbsp;NM_Standalone,<br>&nbsp;&nbsp;&nbsp;&nbsp;NM_DedicatedServer,<br>&nbsp;&nbsp;&nbsp;&nbsp;NM_ListenServer,<br>&nbsp;&nbsp;&nbsp;&nbsp;NM_Client,<br>&nbsp;&nbsp;&nbsp;&nbsp;NM_MAX,<br>}|
 
+<a id="worldinfo-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -8781,6 +9180,7 @@ Package: Engine
 
 Size: 0x230 | 560 bytes
 
+<a id="inventory-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -8803,6 +9203,7 @@ Size: 0x230 | 560 bytes
 |PickupFactoryMesh|PrimitiveComponent*|0x4|0x228|
 |DroppedPickupParticles|ParticleSystemComponent*|0x4|0x22c|
 
+<a id="inventory-functions"></a>
 ### Functions
 
 |Signature|
@@ -8831,6 +9232,7 @@ Package: Engine
 
 Size: 0x2d4 | 724 bytes
 
+<a id="weapon-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -8862,6 +9264,7 @@ Size: 0x2d4 | 724 bytes
 |AIRating|f32|0x4|0x2cc|
 |CachedMaxRange|f32|0x4|0x2d0|
 
+<a id="weapon-states"></a>
 ### States
 
 |Signature|
@@ -8873,6 +9276,7 @@ Size: 0x2d4 | 724 bytes
 |TryPutDown_Active(<br>&nbsp;&nbsp;&nbsp;&nbsp;ReturnValue: bool,<br>) -> ()|
 |TryPutDown_Inactive(<br>&nbsp;&nbsp;&nbsp;&nbsp;ReturnValue: bool,<br>) -> ()|
 
+<a id="weapon-functions"></a>
 ### Functions
 
 |Signature|
@@ -8973,6 +9377,7 @@ IsActiveWeapon() -> bool|
 ItemRemovedFromInvManager() -> ()|
 Destroyed() -> ()|
 
+<a id="weapon-enums"></a>
 ### Enums
 
 |Enum|
@@ -8987,6 +9392,7 @@ Package: Engine
 
 Size: 0x200 | 512 bytes
 
+<a id="inventorymanager-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -8997,6 +9403,7 @@ Size: 0x200 | 512 bytes
 |bMustHoldWeapon|bool|0x4|0x1f0|
 |PendingFire|TArray\<i32\>|0xc|0x1f4|
 
+<a id="inventorymanager-functions"></a>
 ### Functions
 
 |Signature|
@@ -9055,6 +9462,7 @@ Package: Engine
 
 Size: 0x1e8 | 488 bytes
 
+<a id="materialinstanceactor-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -9069,6 +9477,7 @@ Package: Engine
 
 Size: 0x1f4 | 500 bytes
 
+<a id="matineeactor-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -9080,6 +9489,7 @@ Size: 0x1f4 | 500 bytes
 |PlayRate|f32|0x4|0x1ec|
 |Position|f32|0x4|0x1f0|
 
+<a id="matineeactor-functions"></a>
 ### Functions
 
 |Signature|
@@ -9095,6 +9505,7 @@ Package: Engine
 
 Size: 0x2bc | 700 bytes
 
+<a id="navigationpoint-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -9159,6 +9570,7 @@ Size: 0x2bc | 700 bytes
 |AnchoredPawn|Pawn*|0x4|0x2b4|
 |LastAnchoredPawnTime|f32|0x4|0x2b8|
 
+<a id="navigationpoint-functions"></a>
 ### Functions
 
 |Signature|
@@ -9183,12 +9595,14 @@ IsUsableAnchorFor(<br>&nbsp;&nbsp;&nbsp;&nbsp;P: Pawn*,<br>) -> bool|
 GetReachSpecTo(<br>&nbsp;&nbsp;&nbsp;&nbsp;Nav: NavigationPoint*,<br>&nbsp;&nbsp;&nbsp;&nbsp;SpecClass: UClass*,<br>) -> ReachSpec*|
 GetBoundingCylinder(<br>&nbsp;&nbsp;&nbsp;&nbsp;CollisionRadius: f32,<br>&nbsp;&nbsp;&nbsp;&nbsp;CollisionHeight: f32,<br>) -> ()|
 
+<a id="navigationpoint-consts"></a>
 ### Consts
 
 |Constant|Value|
 |---|:-:|
 |INFINITE_PATH_COST|10000000|
 
+<a id="navigationpoint-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -9205,6 +9619,7 @@ Package: Engine
 
 Size: 0x335 | 821 bytes
 
+<a id="coverlink-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -9240,6 +9655,7 @@ Size: 0x335 | 821 bytes
 |NextCoverLink|CoverLink*|0x4|0x330|
 |LocationDescription|i8|0x1|0x334|
 
+<a id="coverlink-functions"></a>
 ### Functions
 
 |Signature|
@@ -9281,6 +9697,7 @@ GetSlotViewPoint(<br>&nbsp;&nbsp;&nbsp;&nbsp;SlotIdx: i32,<br>&nbsp;&nbsp;&nbsp;
 GetSlotRotation(<br>&nbsp;&nbsp;&nbsp;&nbsp;SlotIdx: i32,<br>&nbsp;&nbsp;&nbsp;&nbsp;bForceUseOffset: bool,<br>) -> Rotator|
 GetSlotLocation(<br>&nbsp;&nbsp;&nbsp;&nbsp;SlotIdx: i32,<br>&nbsp;&nbsp;&nbsp;&nbsp;bForceUseOffset: bool,<br>) -> Vector|
 
+<a id="coverlink-enums"></a>
 ### Enums
 
 |Enum|
@@ -9290,6 +9707,7 @@ GetSlotLocation(<br>&nbsp;&nbsp;&nbsp;&nbsp;SlotIdx: i32,<br>&nbsp;&nbsp;&nbsp;&
 |ECoverDirection {<br>&nbsp;&nbsp;&nbsp;&nbsp;CD_Default,<br>&nbsp;&nbsp;&nbsp;&nbsp;CD_Left,<br>&nbsp;&nbsp;&nbsp;&nbsp;CD_Right,<br>&nbsp;&nbsp;&nbsp;&nbsp;CD_Up,<br>&nbsp;&nbsp;&nbsp;&nbsp;CD_MAX,<br>}|
 |ECoverAction {<br>&nbsp;&nbsp;&nbsp;&nbsp;CA_Default,<br>&nbsp;&nbsp;&nbsp;&nbsp;CA_BlindLeft,<br>&nbsp;&nbsp;&nbsp;&nbsp;CA_BlindRight,<br>&nbsp;&nbsp;&nbsp;&nbsp;CA_LeanLeft,<br>&nbsp;&nbsp;&nbsp;&nbsp;CA_LeanRight,<br>&nbsp;&nbsp;&nbsp;&nbsp;CA_PopUp,<br>&nbsp;&nbsp;&nbsp;&nbsp;CA_BlindUp,<br>&nbsp;&nbsp;&nbsp;&nbsp;CA_PeekLeft,<br>&nbsp;&nbsp;&nbsp;&nbsp;CA_PeekRight,<br>&nbsp;&nbsp;&nbsp;&nbsp;CA_PeekUp,<br>&nbsp;&nbsp;&nbsp;&nbsp;CA_MAX,<br>}|
 
+<a id="coverlink-consts"></a>
 ### Consts
 
 |Constant|Value|
@@ -9299,6 +9717,7 @@ GetSlotLocation(<br>&nbsp;&nbsp;&nbsp;&nbsp;SlotIdx: i32,<br>&nbsp;&nbsp;&nbsp;&
 |COVERLINK_EdgeCheckDot|0.25f|
 |COVERLINK_ExposureDot|0.4f|
 
+<a id="coverlink-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -9323,6 +9742,7 @@ Package: Engine
 
 Size: 0x2c8 | 712 bytes
 
+<a id="coverslotmarker-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -9331,6 +9751,7 @@ Size: 0x2c8 | 712 bytes
 |bLastChoice|bool|0x4|0x2c4|
 |bIgnoreSizeLimits|bool|0x4|0x2c4|
 
+<a id="coverslotmarker-functions"></a>
 ### Functions
 
 |Signature|
@@ -9350,6 +9771,7 @@ Package: Engine
 
 Size: 0x2cc | 716 bytes
 
+<a id="doormarker-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -9363,6 +9785,7 @@ Size: 0x2cc | 716 bytes
 |bDoorOpen|bool|0x4|0x2c8|
 |bTempDisabledCollision|bool|0x4|0x2c8|
 
+<a id="doormarker-functions"></a>
 ### Functions
 
 |Signature|
@@ -9374,6 +9797,7 @@ MoverClosed() -> ()|
 MoverOpened() -> ()|
 PostBeginPlay() -> ()|
 
+<a id="doormarker-enums"></a>
 ### Enums
 
 |Enum|
@@ -9388,6 +9812,7 @@ Package: Engine
 
 Size: 0x2c0 | 704 bytes
 
+<a id="dynamicanchor-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -9402,6 +9827,7 @@ Package: Engine
 
 Size: 0x2c4 | 708 bytes
 
+<a id="ladder-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -9409,6 +9835,7 @@ Size: 0x2c4 | 708 bytes
 |MyLadder|LadderVolume*|0x4|0x2bc|
 |LadderList|Ladder*|0x4|0x2c0|
 
+<a id="ladder-functions"></a>
 ### Functions
 
 |Signature|
@@ -9430,6 +9857,7 @@ Package: Engine
 
 Size: 0x2dc | 732 bytes
 
+<a id="liftcenter-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -9441,6 +9869,7 @@ Size: 0x2dc | 732 bytes
 |CollisionHeight|f32|0x4|0x2d4|
 |LiftTrigger|Trigger*|0x4|0x2d8|
 
+<a id="liftcenter-functions"></a>
 ### Functions
 
 |Signature|
@@ -9458,6 +9887,7 @@ Package: Engine
 
 Size: 0x2c4 | 708 bytes
 
+<a id="liftexit-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -9465,6 +9895,7 @@ Size: 0x2c4 | 708 bytes
 |MyLiftCenter|LiftCenter*|0x4|0x2bc|
 |bExitOnly|bool|0x4|0x2c0|
 
+<a id="liftexit-functions"></a>
 ### Functions
 
 |Signature|
@@ -9481,6 +9912,7 @@ Package: Engine
 
 Size: 0x2c4 | 708 bytes
 
+<a id="mantlemarker-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -9502,6 +9934,7 @@ Package: Engine
 
 Size: 0x2bc | 700 bytes
 
+<a id="pathnode-functions"></a>
 ### Functions
 
 |Signature|
@@ -9516,6 +9949,7 @@ Package: Engine
 
 Size: 0x2c4 | 708 bytes
 
+<a id="volumepathnode-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -9531,6 +9965,7 @@ Package: Engine
 
 Size: 0x2d8 | 728 bytes
 
+<a id="pickupfactory-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -9547,6 +9982,7 @@ Size: 0x2d8 | 728 bytes
 |ReplacementFactory|PickupFactory*|0x4|0x2d0|
 |OriginalFactory|PickupFactory*|0x4|0x2d4|
 
+<a id="pickupfactory-states"></a>
 ### States
 
 |Signature|
@@ -9556,6 +9992,7 @@ Size: 0x2d8 | 728 bytes
 |BeginState_WaitingForMatch(<br>&nbsp;&nbsp;&nbsp;&nbsp;PreviousStateName: FName,<br>) -> ()|
 |BeginState_Pickup(<br>&nbsp;&nbsp;&nbsp;&nbsp;PreviousStateName: FName,<br>) -> ()|
 
+<a id="pickupfactory-functions"></a>
 ### Functions
 
 |Signature|
@@ -9592,6 +10029,7 @@ Package: Engine
 
 Size: 0x2c4 | 708 bytes
 
+<a id="playerstart-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -9600,6 +10038,7 @@ Size: 0x2c4 | 708 bytes
 |bPrimaryStart|bool|0x4|0x2bc|
 |TeamIndex|i32|0x4|0x2c0|
 
+<a id="playerstart-functions"></a>
 ### Functions
 
 |Signature|
@@ -9614,12 +10053,14 @@ Package: Engine
 
 Size: 0x2c0 | 704 bytes
 
+<a id="portalmarker-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
 |---|:-:|:-:|:-:|
 |MyPortal|PortalTeleporter*|0x4|0x2bc|
 
+<a id="portalmarker-functions"></a>
 ### Functions
 
 |Signature|
@@ -9634,6 +10075,7 @@ Package: Engine
 
 Size: 0x320 | 800 bytes
 
+<a id="pylon-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -9666,6 +10108,7 @@ Size: 0x320 | 800 bytes
 |RenderingComp|NavMeshRenderingComponent*|0x4|0x318|
 |DebugEdgeCount|i32|0x4|0x31c|
 
+<a id="pylon-functions"></a>
 ### Functions
 
 |Signature|
@@ -9675,12 +10118,14 @@ OnToggle(<br>&nbsp;&nbsp;&nbsp;&nbsp;Action: SeqAct_Toggle*,<br>) -> ()|
 IsEnabled() -> bool|
 SetEnabled(<br>&nbsp;&nbsp;&nbsp;&nbsp;bEnabled: bool,<br>) -> ()|
 
+<a id="pylon-enums"></a>
 ### Enums
 
 |Enum|
 |---|
 |ENavMeshEdgeType {<br>&nbsp;&nbsp;&nbsp;&nbsp;NAVEDGE_Normal,<br>&nbsp;&nbsp;&nbsp;&nbsp;NAVEDGE_Mantle,<br>&nbsp;&nbsp;&nbsp;&nbsp;NAVEDGE_Coverslip,<br>&nbsp;&nbsp;&nbsp;&nbsp;NAVEDGE_SwatTurn,<br>&nbsp;&nbsp;&nbsp;&nbsp;NAVEDGE_DropDown,<br>&nbsp;&nbsp;&nbsp;&nbsp;NAVEDGE_PathObject,<br>&nbsp;&nbsp;&nbsp;&nbsp;NAVEDGE_MAX,<br>}|
 
+<a id="pylon-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -9695,12 +10140,14 @@ Package: Engine
 
 Size: 0x324 | 804 bytes
 
+<a id="aiswitchablepylon-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
 |---|:-:|:-:|:-:|
 |bOpen|bool|0x4|0x320|
 
+<a id="aiswitchablepylon-functions"></a>
 ### Functions
 
 |Signature|
@@ -9717,12 +10164,14 @@ Package: Engine
 
 Size: 0x324 | 804 bytes
 
+<a id="dynamicpylon-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
 |---|:-:|:-:|:-:|
 |bMoving|bool|0x4|0x320|
 
+<a id="dynamicpylon-functions"></a>
 ### Functions
 
 |Signature|
@@ -9741,6 +10190,7 @@ Package: Engine
 
 Size: 0x2e4 | 740 bytes
 
+<a id="teleporter-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -9757,6 +10207,7 @@ Size: 0x2e4 | 740 bytes
 |TargetVelocity|Vector|0xc|0x2d4|
 |LastFired|f32|0x4|0x2e0|
 
+<a id="teleporter-functions"></a>
 ### Functions
 
 |Signature|
@@ -9776,6 +10227,7 @@ Package: Engine
 
 Size: 0x1f0 | 496 bytes
 
+<a id="note-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -9790,6 +10242,7 @@ Package: Engine
 
 Size: 0x25c | 604 bytes
 
+<a id="projectile-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -9822,6 +10275,7 @@ Size: 0x25c | 604 bytes
 |mSubStepTangent|TArray\<Rotator\>|0xc|0x244|
 |mLastRenturnLocation|Vector|0xc|0x250|
 
+<a id="projectile-functions"></a>
 ### Functions
 
 |Signature|
@@ -9863,12 +10317,14 @@ Package: Engine
 
 Size: 0x1e8 | 488 bytes
 
+<a id="scenecaptureactor-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
 |---|:-:|:-:|:-:|
 |SceneCapture|SceneCaptureComponent*|0x4|0x1e4|
 
+<a id="scenecaptureactor-functions"></a>
 ### Functions
 
 |Signature|
@@ -9883,6 +10339,7 @@ Package: Engine
 
 Size: 0x1ec | 492 bytes
 
+<a id="scenecapture2dactor-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -9897,6 +10354,7 @@ Package: Engine
 
 Size: 0x1f0 | 496 bytes
 
+<a id="scenecapturecubemapactor-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -9912,6 +10370,7 @@ Package: Engine
 
 Size: 0x1f0 | 496 bytes
 
+<a id="scenecapturereflectactor-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -9941,6 +10400,7 @@ Package: Engine
 
 Size: 0x204 | 516 bytes
 
+<a id="portalteleporter-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -9953,6 +10413,7 @@ Size: 0x204 | 516 bytes
 |bAlwaysTeleportNonPawns|bool|0x4|0x200|
 |bCanTeleportVehicles|bool|0x4|0x200|
 
+<a id="portalteleporter-functions"></a>
 ### Functions
 
 |Signature|
@@ -9978,12 +10439,14 @@ Package: Engine
 
 Size: 0x1e8 | 488 bytes
 
+<a id="staticmeshactor-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
 |---|:-:|:-:|:-:|
 |StaticMeshComponent|StaticMeshComponent*|0x4|0x1e4|
 
+<a id="staticmeshactor-functions"></a>
 ### Functions
 
 |Signature|
@@ -9998,6 +10461,7 @@ Package: Engine
 
 Size: 0x1f4 | 500 bytes
 
+<a id="staticmeshcollectionactor-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -10013,6 +10477,7 @@ Package: Engine
 
 Size: 0x200 | 512 bytes
 
+<a id="staticmeshactorbasedonextremecontent-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -10021,6 +10486,7 @@ Size: 0x200 | 512 bytes
 |ExtremeContent|TArray\<SMMaterialSetterDatum\>|0xc|0x1e8|
 |NonExtremeContent|TArray\<SMMaterialSetterDatum\>|0xc|0x1f4|
 
+<a id="staticmeshactorbasedonextremecontent-functions"></a>
 ### Functions
 
 |Signature|
@@ -10028,6 +10494,7 @@ Size: 0x200 | 512 bytes
 SetMaterialBasedOnExtremeContent(<br>&nbsp;&nbsp;&nbsp;&nbsp;Idx: i32,<br>) -> ()|
 PostBeginPlay() -> ()|
 
+<a id="staticmeshactorbasedonextremecontent-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -10042,6 +10509,7 @@ Package: Engine
 
 Size: 0x1f0 | 496 bytes
 
+<a id="trigger-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -10050,6 +10518,7 @@ Size: 0x1f0 | 496 bytes
 |bRecentlyTriggered|bool|0x4|0x1e8|
 |AITriggerDelay|f32|0x4|0x1ec|
 
+<a id="trigger-functions"></a>
 ### Functions
 
 |Signature|
@@ -10062,6 +10531,7 @@ UnTrigger() -> ()|
 NotifyTriggered() -> ()|
 Touch(<br>&nbsp;&nbsp;&nbsp;&nbsp;Other: Actor*,<br>&nbsp;&nbsp;&nbsp;&nbsp;OtherComp: PrimitiveComponent*,<br>&nbsp;&nbsp;&nbsp;&nbsp;HitLocation: Vector,<br>&nbsp;&nbsp;&nbsp;&nbsp;HitNormal: Vector,<br>) -> ()|
 
+<a id="trigger-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -10076,6 +10546,7 @@ Package: Engine
 
 Size: 0x55 | 85 bytes
 
+<a id="actorcomponent-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -10088,6 +10559,7 @@ Size: 0x55 | 85 bytes
 |bNeedsUpdateTransform|bool|0x4|0x50|
 |TickGroup|i8|0x1|0x54|
 
+<a id="actorcomponent-functions"></a>
 ### Functions
 
 |Signature|
@@ -10105,6 +10577,7 @@ Package: Engine
 
 Size: 0x68 | 104 bytes
 
+<a id="lightenvironmentcomponent-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -10115,6 +10588,7 @@ Size: 0x68 | 104 bytes
 |bAllowAnyDominantLightInfluence|bool|0x4|0x58|
 |AffectedComponents|TArray\<PrimitiveComponent*\>|0xc|0x5c|
 
+<a id="lightenvironmentcomponent-functions"></a>
 ### Functions
 
 |Signature|
@@ -10130,6 +10604,7 @@ Package: Engine
 
 Size: 0x120 | 288 bytes
 
+<a id="particlelightenvironmentcomponent-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -10145,6 +10620,7 @@ Package: Engine
 
 Size: 0x1d8 | 472 bytes
 
+<a id="primitivecomponent-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -10249,6 +10725,7 @@ Size: 0x1d8 | 472 bytes
 |BeastProperties|BeastPrimPropertiesContainer|0x14|0x1c0|
 |ScriptRigidBodyCollisionThreshold|f32|0x4|0x1d4|
 
+<a id="primitivecomponent-functions"></a>
 ### Functions
 
 |Signature|
@@ -10296,6 +10773,7 @@ AddForce(<br>&nbsp;&nbsp;&nbsp;&nbsp;Force: Vector,<br>&nbsp;&nbsp;&nbsp;&nbsp;P
 AddRadialImpulse(<br>&nbsp;&nbsp;&nbsp;&nbsp;Origin: Vector,<br>&nbsp;&nbsp;&nbsp;&nbsp;Radius: f32,<br>&nbsp;&nbsp;&nbsp;&nbsp;Strength: f32,<br>&nbsp;&nbsp;&nbsp;&nbsp;Falloff: i8,<br>&nbsp;&nbsp;&nbsp;&nbsp;bVelChange: bool,<br>) -> ()|
 AddImpulse(<br>&nbsp;&nbsp;&nbsp;&nbsp;Impulse: Vector,<br>&nbsp;&nbsp;&nbsp;&nbsp;Position: Vector,<br>&nbsp;&nbsp;&nbsp;&nbsp;BoneName: FName,<br>&nbsp;&nbsp;&nbsp;&nbsp;bVelChange: bool,<br>) -> ()|
 
+<a id="primitivecomponent-enums"></a>
 ### Enums
 
 |Enum|
@@ -10304,6 +10782,7 @@ AddImpulse(<br>&nbsp;&nbsp;&nbsp;&nbsp;Impulse: Vector,<br>&nbsp;&nbsp;&nbsp;&nb
 |GJKResult {<br>&nbsp;&nbsp;&nbsp;&nbsp;GJK_Intersect,<br>&nbsp;&nbsp;&nbsp;&nbsp;GJK_NoIntersection,<br>&nbsp;&nbsp;&nbsp;&nbsp;GJK_Fail,<br>&nbsp;&nbsp;&nbsp;&nbsp;GJK_MAX,<br>}|
 |ERBCollisionChannel {<br>&nbsp;&nbsp;&nbsp;&nbsp;RBCC_Default,<br>&nbsp;&nbsp;&nbsp;&nbsp;RBCC_Nothing,<br>&nbsp;&nbsp;&nbsp;&nbsp;RBCC_Pawn,<br>&nbsp;&nbsp;&nbsp;&nbsp;RBCC_Vehicle,<br>&nbsp;&nbsp;&nbsp;&nbsp;RBCC_Water,<br>&nbsp;&nbsp;&nbsp;&nbsp;RBCC_GameplayPhysics,<br>&nbsp;&nbsp;&nbsp;&nbsp;RBCC_EffectPhysics,<br>&nbsp;&nbsp;&nbsp;&nbsp;RBCC_Untitled1,<br>&nbsp;&nbsp;&nbsp;&nbsp;RBCC_Untitled2,<br>&nbsp;&nbsp;&nbsp;&nbsp;RBCC_Untitled3,<br>&nbsp;&nbsp;&nbsp;&nbsp;RBCC_Untitled4,<br>&nbsp;&nbsp;&nbsp;&nbsp;RBCC_Cloth,<br>&nbsp;&nbsp;&nbsp;&nbsp;RBCC_FluidDrain,<br>&nbsp;&nbsp;&nbsp;&nbsp;RBCC_SoftBody,<br>&nbsp;&nbsp;&nbsp;&nbsp;RBCC_FracturedMeshPart,<br>&nbsp;&nbsp;&nbsp;&nbsp;RBCC_BlockingVolume,<br>&nbsp;&nbsp;&nbsp;&nbsp;RBCC_DeadPawn,<br>&nbsp;&nbsp;&nbsp;&nbsp;RBCC_Reserved0,<br>&nbsp;&nbsp;&nbsp;&nbsp;RBCC_Reserved1,<br>&nbsp;&nbsp;&nbsp;&nbsp;RBCC_Reserved2,<br>&nbsp;&nbsp;&nbsp;&nbsp;RBCC_Reserved3,<br>&nbsp;&nbsp;&nbsp;&nbsp;RBCC_Reserved4,<br>&nbsp;&nbsp;&nbsp;&nbsp;RBCC_Team0,<br>&nbsp;&nbsp;&nbsp;&nbsp;RBCC_Team1,<br>&nbsp;&nbsp;&nbsp;&nbsp;RBCC_Team2,<br>&nbsp;&nbsp;&nbsp;&nbsp;RBCC_Team3,<br>&nbsp;&nbsp;&nbsp;&nbsp;RBCC_Team4,<br>&nbsp;&nbsp;&nbsp;&nbsp;RBCC_Team5,<br>&nbsp;&nbsp;&nbsp;&nbsp;RBCC_Team6,<br>&nbsp;&nbsp;&nbsp;&nbsp;RBCC_Team7,<br>&nbsp;&nbsp;&nbsp;&nbsp;RBCC_Team8,<br>&nbsp;&nbsp;&nbsp;&nbsp;RBCC_Team9,<br>&nbsp;&nbsp;&nbsp;&nbsp;RBCC_Num,<br>&nbsp;&nbsp;&nbsp;&nbsp;RBCC_MAX,<br>}|
 
+<a id="primitivecomponent-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -10320,6 +10799,7 @@ Package: Engine
 
 Size: 0x1e4 | 484 bytes
 
+<a id="arrowcomponent-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -10343,6 +10823,7 @@ Package: Engine
 
 Size: 0x1e8 | 488 bytes
 
+<a id="drawconecomponent-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -10360,6 +10841,7 @@ Package: Engine
 
 Size: 0x1e4 | 484 bytes
 
+<a id="drawquadcomponent-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -10390,6 +10872,7 @@ Package: Engine
 
 Size: 0x1fc | 508 bytes
 
+<a id="linebatchcomponent-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -10408,12 +10891,14 @@ Package: Engine
 
 Size: 0x1e4 | 484 bytes
 
+<a id="meshcomponent-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
 |---|:-:|:-:|:-:|
 |Materials|TArray\<MaterialInterface*\>|0xc|0x1d8|
 
+<a id="meshcomponent-functions"></a>
 ### Functions
 
 |Signature|
@@ -10433,6 +10918,7 @@ Package: Engine
 
 Size: 0x208 | 520 bytes
 
+<a id="modelcomponent-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -10452,6 +10938,7 @@ Package: Engine
 
 Size: 0x9c | 156 bytes
 
+<a id="scenecapturecomponent-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -10474,6 +10961,7 @@ Size: 0x9c | 156 bytes
 |CaptureInfo|Pointer|0x4|0x94|
 |ViewState|Pointer|0x4|0x98|
 
+<a id="scenecapturecomponent-functions"></a>
 ### Functions
 
 |Signature|
@@ -10483,6 +10971,7 @@ SetEnabled(<br>&nbsp;&nbsp;&nbsp;&nbsp;bEnable: bool,<br>) -> ()|
 NeedsUpdate() -> bool|
 SetFrameRate(<br>&nbsp;&nbsp;&nbsp;&nbsp;NewFrameRate: f32,<br>) -> ()|
 
+<a id="scenecapturecomponent-enums"></a>
 ### Enums
 
 |Enum|
@@ -10490,6 +10979,7 @@ SetFrameRate(<br>&nbsp;&nbsp;&nbsp;&nbsp;NewFrameRate: f32,<br>) -> ()|
 |ESceneCaptureEnableState {<br>&nbsp;&nbsp;&nbsp;&nbsp;SceneCapEnable_Disable,<br>&nbsp;&nbsp;&nbsp;&nbsp;SceneCapEnable_BackgroundOnly,<br>&nbsp;&nbsp;&nbsp;&nbsp;SceneCapEnable_All,<br>&nbsp;&nbsp;&nbsp;&nbsp;SceneCapEnable_MAX,<br>}|
 |ESceneCaptureViewMode {<br>&nbsp;&nbsp;&nbsp;&nbsp;SceneCapView_Lit,<br>&nbsp;&nbsp;&nbsp;&nbsp;SceneCapView_Unlit,<br>&nbsp;&nbsp;&nbsp;&nbsp;SceneCapView_LitNoShadows,<br>&nbsp;&nbsp;&nbsp;&nbsp;SceneCapView_Wire,<br>&nbsp;&nbsp;&nbsp;&nbsp;SceneCapView_MAX,<br>}|
 
+<a id="scenecapturecomponent-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -10504,6 +10994,7 @@ Package: Engine
 
 Size: 0xbc | 188 bytes
 
+<a id="scenecapture2dhitmaskcomponent-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -10517,6 +11008,7 @@ Size: 0xbc | 188 bytes
 |FadingDurationTime|f32|0x4|0xb4|
 |FadingIntervalTime|f32|0x4|0xb8|
 
+<a id="scenecapture2dhitmaskcomponent-functions"></a>
 ### Functions
 
 |Signature|
@@ -10532,6 +11024,7 @@ Package: Engine
 
 Size: 0x58 | 88 bytes
 
+<a id="actorfactory-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -10542,6 +11035,7 @@ Size: 0x58 | 88 bytes
 |NewActorClass|UClass*|0x4|0x50|
 |bPlaceable|bool|0x4|0x54|
 
+<a id="actorfactory-functions"></a>
 ### Functions
 
 |Signature|
@@ -10556,6 +11050,7 @@ Package: Engine
 
 Size: 0x5c | 92 bytes
 
+<a id="actorfactoryactor-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -10570,6 +11065,7 @@ Package: Engine
 
 Size: 0x80 | 128 bytes
 
+<a id="actorfactoryai-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -10589,6 +11085,7 @@ Package: Engine
 
 Size: 0x5c | 92 bytes
 
+<a id="actorfactoryambientsound-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -10610,6 +11107,7 @@ Package: Engine
 
 Size: 0x5c | 92 bytes
 
+<a id="actorfactoryambientsoundsimple-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -10638,6 +11136,7 @@ Package: Engine
 
 Size: 0x5c | 92 bytes
 
+<a id="actorfactoryarchetype-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -10666,6 +11165,7 @@ Package: Engine
 
 Size: 0x6d | 109 bytes
 
+<a id="actorfactorydynamicsm-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -10694,6 +11194,7 @@ Package: Engine
 
 Size: 0x94 | 148 bytes
 
+<a id="actorfactoryrigidbody-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -10717,6 +11218,7 @@ Package: Engine
 
 Size: 0x5c | 92 bytes
 
+<a id="actorfactoryemitter-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -10731,6 +11233,7 @@ Package: Engine
 
 Size: 0x68 | 104 bytes
 
+<a id="actorfactoryfracturedstaticmesh-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -10746,6 +11249,7 @@ Package: Engine
 
 Size: 0x5c | 92 bytes
 
+<a id="actorfactorylensflare-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -10774,6 +11278,7 @@ Package: Engine
 
 Size: 0x7c | 124 bytes
 
+<a id="actorfactoryphysicsasset-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -10796,6 +11301,7 @@ Package: Engine
 
 Size: 0x68 | 104 bytes
 
+<a id="actorfactoryphysxdestructible-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -10825,6 +11331,7 @@ Package: Engine
 
 Size: 0x68 | 104 bytes
 
+<a id="actorfactoryskeletalmesh-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -10841,6 +11348,7 @@ Package: Engine
 
 Size: 0x68 | 104 bytes
 
+<a id="actorfactorystaticmesh-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -10863,6 +11371,7 @@ Package: Engine
 
 Size: 0x5c | 92 bytes
 
+<a id="actorfactoryvehicle-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -10877,6 +11386,7 @@ Package: Engine
 
 Size: 0x41 | 65 bytes
 
+<a id="akbank-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -10887,6 +11397,7 @@ Size: 0x41 | 65 bytes
 |IsLoaded|bool|0x4|0x3c|
 |mLoadState|i8|0x1|0x40|
 
+<a id="akbank-enums"></a>
 ### Enums
 
 |Enum|
@@ -10908,6 +11419,7 @@ Package: Engine
 
 Size: 0x40 | 64 bytes
 
+<a id="akevent-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -10922,6 +11434,7 @@ Package: Engine
 
 Size: 0x54 | 84 bytes
 
+<a id="bookmark-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -10937,6 +11450,7 @@ Package: Engine
 
 Size: 0x60 | 96 bytes
 
+<a id="cameraanim-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -10953,6 +11467,7 @@ Package: Engine
 
 Size: 0xdc | 220 bytes
 
+<a id="cameraaniminst-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -10984,6 +11499,7 @@ Size: 0xdc | 220 bytes
 |UserPlaySpaceRotator|Matrix|0x40|0x90|
 |UserPlaySpaceLocation|Vector|0xc|0xd0|
 
+<a id="cameraaniminst-functions"></a>
 ### Functions
 
 |Signature|
@@ -10999,6 +11515,7 @@ AdvanceAnim(<br>&nbsp;&nbsp;&nbsp;&nbsp;DeltaTime: f32,<br>&nbsp;&nbsp;&nbsp;&nb
 Update(<br>&nbsp;&nbsp;&nbsp;&nbsp;NewRate: f32,<br>&nbsp;&nbsp;&nbsp;&nbsp;NewScale: f32,<br>&nbsp;&nbsp;&nbsp;&nbsp;NewBlendInTime: f32,<br>&nbsp;&nbsp;&nbsp;&nbsp;NewBlendOutTime: f32,<br>&nbsp;&nbsp;&nbsp;&nbsp;NewDuration: f32,<br>) -> ()|
 Play(<br>&nbsp;&nbsp;&nbsp;&nbsp;Anim: CameraAnim*,<br>&nbsp;&nbsp;&nbsp;&nbsp;CamActor: Actor*,<br>&nbsp;&nbsp;&nbsp;&nbsp;inRate: f32,<br>&nbsp;&nbsp;&nbsp;&nbsp;InScale: f32,<br>&nbsp;&nbsp;&nbsp;&nbsp;InBlendInTime: f32,<br>&nbsp;&nbsp;&nbsp;&nbsp;InBlendOutTime: f32,<br>&nbsp;&nbsp;&nbsp;&nbsp;bInLoop: bool,<br>&nbsp;&nbsp;&nbsp;&nbsp;bRandomStartTime: bool,<br>&nbsp;&nbsp;&nbsp;&nbsp;Duration: f32,<br>) -> ()|
 
+<a id="cameraaniminst-enums"></a>
 ### Enums
 
 |Enum|
@@ -11013,6 +11530,7 @@ Package: Engine
 
 Size: 0x58 | 88 bytes
 
+<a id="cameramodifier-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -11028,6 +11546,7 @@ Size: 0x58 | 88 bytes
 |Alpha|f32|0x4|0x50|
 |TargetAlpha|f32|0x4|0x54|
 
+<a id="cameramodifier-functions"></a>
 ### Functions
 
 |Signature|
@@ -11051,6 +11570,7 @@ Package: Engine
 
 Size: 0x68 | 104 bytes
 
+<a id="cameramodifier_camerashake-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -11058,6 +11578,7 @@ Size: 0x68 | 104 bytes
 |ActiveShakes|TArray\<CameraShakeInstance\>|0xc|0x58|
 |SplitScreenShakeScale|f32|0x4|0x64|
 
+<a id="cameramodifier_camerashake-functions"></a>
 ### Functions
 
 |Signature|
@@ -11071,6 +11592,7 @@ InitializeShake(<br>&nbsp;&nbsp;&nbsp;&nbsp;NewShake: CameraShake*,<br>&nbsp;&nb
 ReinitShake(<br>&nbsp;&nbsp;&nbsp;&nbsp;ActiveShakeIdx: i32,<br>&nbsp;&nbsp;&nbsp;&nbsp;Scale: f32,<br>&nbsp;&nbsp;&nbsp;&nbsp;SourceShake: CameraShake*,<br>&nbsp;&nbsp;&nbsp;&nbsp;Duration: f32,<br>&nbsp;&nbsp;&nbsp;&nbsp;bRandomStart: bool,<br>&nbsp;&nbsp;&nbsp;&nbsp;bLoop: bool,<br>) -> ()|
 InitializeOffset(<br>&nbsp;&nbsp;&nbsp;&nbsp;Param: FOscillator,<br>) -> f32|
 
+<a id="cameramodifier_camerashake-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -11085,6 +11607,7 @@ Package: Engine
 
 Size: 0x94 | 148 bytes
 
+<a id="canvas-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -11107,6 +11630,7 @@ Size: 0x94 | 148 bytes
 |ColorModulate|Plane|0x10|0x80|
 |DefaultTexture|Texture2D*|0x4|0x90|
 
+<a id="canvas-functions"></a>
 ### Functions
 
 |Signature|
@@ -11144,6 +11668,7 @@ DrawMaterialTileClipped(<br>&nbsp;&nbsp;&nbsp;&nbsp;Mat: MaterialInterface*,<br>
 DrawMaterialTile(<br>&nbsp;&nbsp;&nbsp;&nbsp;Mat: MaterialInterface*,<br>&nbsp;&nbsp;&nbsp;&nbsp;XL: f32,<br>&nbsp;&nbsp;&nbsp;&nbsp;YL: f32,<br>&nbsp;&nbsp;&nbsp;&nbsp;U: f32,<br>&nbsp;&nbsp;&nbsp;&nbsp;V: f32,<br>&nbsp;&nbsp;&nbsp;&nbsp;UL: f32,<br>&nbsp;&nbsp;&nbsp;&nbsp;VL: f32,<br>) -> ()|
 DrawTile(<br>&nbsp;&nbsp;&nbsp;&nbsp;Tex: Texture*,<br>&nbsp;&nbsp;&nbsp;&nbsp;XL: f32,<br>&nbsp;&nbsp;&nbsp;&nbsp;YL: f32,<br>&nbsp;&nbsp;&nbsp;&nbsp;U: f32,<br>&nbsp;&nbsp;&nbsp;&nbsp;V: f32,<br>&nbsp;&nbsp;&nbsp;&nbsp;UL: f32,<br>&nbsp;&nbsp;&nbsp;&nbsp;VL: f32,<br>) -> ()|
 
+<a id="canvas-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -11195,6 +11720,7 @@ Package: Engine
 
 Size: 0x36c | 876 bytes
 
+<a id="controller-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -11261,6 +11787,7 @@ Size: 0x36c | 876 bytes
 |LaneOffset|f32|0x4|0x35c|
 |OldBasedRotation|Rotator|0xc|0x360|
 
+<a id="controller-states"></a>
 ### States
 
 |Signature|
@@ -11268,6 +11795,7 @@ Size: 0x36c | 876 bytes
 |BeginState_RoundEnded(<br>&nbsp;&nbsp;&nbsp;&nbsp;PreviousStateName: FName,<br>) -> ()|
 |ServerRestartPlayer_Dead() -> ()|
 
+<a id="controller-functions"></a>
 ### Functions
 
 |Signature|
@@ -11401,12 +11929,14 @@ RouteCache_AddItem(<br>&nbsp;&nbsp;&nbsp;&nbsp;Nav: NavigationPoint*,<br>) -> ()
 RouteCache_Empty() -> ()|
 IsLocalPlayerController() -> bool|
 
+<a id="controller-consts"></a>
 ### Consts
 
 |Constant|Value|
 |---|:-:|
 |LATENT_MOVETOWARD|503|
 
+<a id="controller-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -11421,6 +11951,7 @@ Package: Engine
 
 Size: 0x5b8 | 1464 bytes
 
+<a id="playercontroller-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -11536,6 +12067,7 @@ Size: 0x5b8 | 1464 bytes
 |__CanUnpause__Delegate|FScriptDelegate|0xc|0x5a0|
 |__InputMatchDelegate__Delegate|FScriptDelegate|0xc|0x5ac|
 
+<a id="playercontroller-states"></a>
 ### States
 
 |Signature|
@@ -11552,6 +12084,7 @@ Size: 0x5b8 | 1464 bytes
 |EndState_PlayerClimbing(<br>&nbsp;&nbsp;&nbsp;&nbsp;NextStateName: FName,<br>) -> ()|
 |EndState_PlayerWalking(<br>&nbsp;&nbsp;&nbsp;&nbsp;NextStateName: FName,<br>) -> ()|
 
+<a id="playercontroller-functions"></a>
 ### Functions
 
 |Signature|
@@ -11925,6 +12458,7 @@ GetPlayerNetworkAddress() -> FString|
 SetNetSpeed(<br>&nbsp;&nbsp;&nbsp;&nbsp;NewSpeed: i32,<br>) -> ()|
 ClientDrawCoordinateSystem(<br>&nbsp;&nbsp;&nbsp;&nbsp;AxisLoc: Vector,<br>&nbsp;&nbsp;&nbsp;&nbsp;AxisRot: Rotator,<br>&nbsp;&nbsp;&nbsp;&nbsp;Scale: f32,<br>&nbsp;&nbsp;&nbsp;&nbsp;bPersistentLines: bool,<br>) -> ()|
 
+<a id="playercontroller-enums"></a>
 ### Enums
 
 |Enum|
@@ -11933,6 +12467,7 @@ ClientDrawCoordinateSystem(<br>&nbsp;&nbsp;&nbsp;&nbsp;AxisLoc: Vector,<br>&nbsp
 |EInputMatchAction {<br>&nbsp;&nbsp;&nbsp;&nbsp;IMA_GreaterThan,<br>&nbsp;&nbsp;&nbsp;&nbsp;IMA_LessThan,<br>&nbsp;&nbsp;&nbsp;&nbsp;IMA_MAX,<br>}|
 |EInputTypes {<br>&nbsp;&nbsp;&nbsp;&nbsp;IT_XAxis,<br>&nbsp;&nbsp;&nbsp;&nbsp;IT_YAxis,<br>&nbsp;&nbsp;&nbsp;&nbsp;IT_MAX,<br>}|
 
+<a id="playercontroller-consts"></a>
 ### Consts
 
 |Constant|Value|
@@ -11943,6 +12478,7 @@ ClientDrawCoordinateSystem(<br>&nbsp;&nbsp;&nbsp;&nbsp;AxisLoc: Vector,<br>&nbsp
 |MAXNEARZEROVELOCITYSQUARED|9.0|
 |MAXPOSITIONERRORSQUARED|5.0|
 
+<a id="playercontroller-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -11960,6 +12496,7 @@ Package: Engine
 
 Size: 0x44 | 68 bytes
 
+<a id="cheatmanager-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -11967,6 +12504,7 @@ Size: 0x44 | 68 bytes
 |DebugCameraControllerRef|DebugCameraController*|0x4|0x3c|
 |DebugCameraControllerClass|UClass*|0x4|0x40|
 
+<a id="cheatmanager-functions"></a>
 ### Functions
 
 |Signature|
@@ -12026,6 +12564,7 @@ Package: Engine
 
 Size: 0x50 | 80 bytes
 
+<a id="client-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -12043,6 +12582,7 @@ Package: Engine
 
 Size: 0x54 | 84 bytes
 
+<a id="clippadentry-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -12058,6 +12598,7 @@ Package: Engine
 
 Size: 0x40 | 64 bytes
 
+<a id="codecmovie-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -12079,6 +12620,7 @@ Package: Engine
 
 Size: 0x44 | 68 bytes
 
+<a id="codecmoviefallback-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -12093,6 +12635,7 @@ Package: Engine
 
 Size: 0x54 | 84 bytes
 
+<a id="curveedpresetcurve-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -12100,6 +12643,7 @@ Size: 0x54 | 84 bytes
 |CurveName|FString|0xc|0x3c|
 |Points|TArray\<PresetGeneratedPoint\>|0xc|0x48|
 
+<a id="curveedpresetcurve-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -12121,6 +12665,7 @@ Package: Engine
 
 Size: 0x88 | 136 bytes
 
+<a id="damagetype-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -12148,6 +12693,7 @@ Size: 0x88 | 136 bytes
 |KilledFFWaveform|ForceFeedbackWaveform*|0x4|0x80|
 |FracturedMeshDamage|f32|0x4|0x84|
 
+<a id="damagetype-functions"></a>
 ### Functions
 
 |Signature|
@@ -12171,6 +12717,7 @@ Package: Engine
 
 Size: 0x40 | 64 bytes
 
+<a id="debugmanager-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -12185,6 +12732,7 @@ Package: Engine
 
 Size: 0x6d | 109 bytes
 
+<a id="distributionfloatparameterbase-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -12196,6 +12744,7 @@ Size: 0x6d | 109 bytes
 |MaxOutput|f32|0x4|0x68|
 |ParamMode|i8|0x1|0x6c|
 
+<a id="distributionfloatparameterbase-enums"></a>
 ### Enums
 
 |Enum|
@@ -12210,6 +12759,7 @@ Package: Engine
 
 Size: 0x60 | 96 bytes
 
+<a id="distributionfloatuniformcurve-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -12224,6 +12774,7 @@ Package: Engine
 
 Size: 0x9f | 159 bytes
 
+<a id="distributionvectorparameterbase-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -12243,6 +12794,7 @@ Package: Engine
 
 Size: 0x69 | 105 bytes
 
+<a id="distributionvectoruniformcurve-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -12276,6 +12828,7 @@ Package: Engine
 
 Size: 0x8c | 140 bytes
 
+<a id="edcoordsystem-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -12298,12 +12851,14 @@ Package: Engine
 
 Size: 0x3c | 60 bytes
 
+<a id="enginetypes-enums"></a>
 ### Enums
 
 |Enum|
 |---|
 |ELightingBuildQuality {<br>&nbsp;&nbsp;&nbsp;&nbsp;Quality_Preview,<br>&nbsp;&nbsp;&nbsp;&nbsp;Quality_Medium,<br>&nbsp;&nbsp;&nbsp;&nbsp;Quality_High,<br>&nbsp;&nbsp;&nbsp;&nbsp;Quality_Production,<br>&nbsp;&nbsp;&nbsp;&nbsp;Quality_MAX,<br>}|
 
+<a id="enginetypes-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -12325,6 +12880,7 @@ Package: Engine
 
 Size: 0x78 | 120 bytes
 
+<a id="facefxanimset-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -12345,6 +12901,7 @@ Package: Engine
 
 Size: 0x90 | 144 bytes
 
+<a id="facefxasset-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -12359,6 +12916,7 @@ Size: 0x90 | 144 bytes
 |ReferencedAkEvents|TArray\<AkEvent*\>|0xc|0x80|
 |NumLoadErrors|i32|0x4|0x8c|
 
+<a id="facefxasset-functions"></a>
 ### Functions
 
 |Signature|
@@ -12374,12 +12932,14 @@ Package: Engine
 
 Size: 0x144 | 324 bytes
 
+<a id="multifont-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
 |---|:-:|:-:|:-:|
 |ResolutionTestTable|TArray\<f32\>|0xc|0x138|
 
+<a id="multifont-functions"></a>
 ### Functions
 
 |Signature|
@@ -12394,18 +12954,21 @@ Package: Engine
 
 Size: 0xcc | 204 bytes
 
+<a id="fontimportoptions-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
 |---|:-:|:-:|:-:|
 |Data|FontImportOptionsData|0x90|0x3c|
 
+<a id="fontimportoptions-enums"></a>
 ### Enums
 
 |Enum|
 |---|
 |EFontImportCharacterSet {<br>&nbsp;&nbsp;&nbsp;&nbsp;FontICS_Default,<br>&nbsp;&nbsp;&nbsp;&nbsp;FontICS_Ansi,<br>&nbsp;&nbsp;&nbsp;&nbsp;FontICS_Symbol,<br>&nbsp;&nbsp;&nbsp;&nbsp;FontICS_MAX,<br>}|
 
+<a id="fontimportoptions-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -12420,6 +12983,7 @@ Package: Engine
 
 Size: 0x50 | 80 bytes
 
+<a id="forcefeedbackmanager-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -12431,6 +12995,7 @@ Size: 0x50 | 80 bytes
 |ElapsedTime|f32|0x4|0x48|
 |ScaleAllWaveformsBy|f32|0x4|0x4c|
 
+<a id="forcefeedbackmanager-functions"></a>
 ### Functions
 
 |Signature|
@@ -12447,6 +13012,7 @@ Package: Engine
 
 Size: 0x120 | 288 bytes
 
+<a id="gameplayevents-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -12464,6 +13030,7 @@ Size: 0x120 | 288 bytes
 |PawnClassArray|TArray\<PawnClassEventData\>|0xc|0x108|
 |ActorArray|TArray\<FString\>|0xc|0x114|
 
+<a id="gameplayevents-functions"></a>
 ### Functions
 
 |Signature|
@@ -12472,6 +13039,7 @@ GetFilename() -> FString|
 CloseStatsFile() -> ()|
 OpenStatsFile(<br>&nbsp;&nbsp;&nbsp;&nbsp;Filename: FString,<br>) -> bool|
 
+<a id="gameplayevents-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -12494,12 +13062,14 @@ Package: Engine
 
 Size: 0x12c | 300 bytes
 
+<a id="gameplayeventsreader-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
 |---|:-:|:-:|:-:|
 |EventIDFilter|TArray\<i32\>|0xc|0x120|
 
+<a id="gameplayeventsreader-functions"></a>
 ### Functions
 
 |Signature|
@@ -12527,12 +13097,14 @@ Package: Engine
 
 Size: 0x124 | 292 bytes
 
+<a id="gameplayeventswriter-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
 |---|:-:|:-:|:-:|
 |Game|GameInfo*|0x4|0x120|
 
+<a id="gameplayeventswriter-functions"></a>
 ### Functions
 
 |Signature|
@@ -12561,6 +13133,7 @@ IsSessionInProgress() -> bool|
 EndLogging() -> ()|
 StartLogging(<br>&nbsp;&nbsp;&nbsp;&nbsp;HeartbeatDelta: f32,<br>) -> ()|
 
+<a id="gameplayeventswriter-consts"></a>
 ### Consts
 
 |Constant|Value|
@@ -12605,6 +13178,7 @@ Package: Engine
 
 Size: 0x11c | 284 bytes
 
+<a id="gameviewportclient-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -12641,6 +13215,7 @@ Size: 0x11c | 284 bytes
 |__HandleInputAxis__Delegate|FScriptDelegate|0xc|0x104|
 |__HandleInputChar__Delegate|FScriptDelegate|0xc|0x110|
 
+<a id="gameviewportclient-functions"></a>
 ### Functions
 
 |Signature|
@@ -12689,6 +13264,7 @@ HandleInputChar(<br>&nbsp;&nbsp;&nbsp;&nbsp;ControllerId: i32,<br>&nbsp;&nbsp;&n
 HandleInputAxis(<br>&nbsp;&nbsp;&nbsp;&nbsp;ControllerId: i32,<br>&nbsp;&nbsp;&nbsp;&nbsp;Key: FName,<br>&nbsp;&nbsp;&nbsp;&nbsp;Delta: f32,<br>&nbsp;&nbsp;&nbsp;&nbsp;DeltaTime: f32,<br>&nbsp;&nbsp;&nbsp;&nbsp;bGamepad: bool,<br>) -> bool|
 HandleInputKey(<br>&nbsp;&nbsp;&nbsp;&nbsp;ControllerId: i32,<br>&nbsp;&nbsp;&nbsp;&nbsp;Key: FName,<br>&nbsp;&nbsp;&nbsp;&nbsp;EventType: i8,<br>&nbsp;&nbsp;&nbsp;&nbsp;AmountDepressed: f32,<br>&nbsp;&nbsp;&nbsp;&nbsp;bGamepad: bool,<br>) -> bool|
 
+<a id="gameviewportclient-enums"></a>
 ### Enums
 
 |Enum|
@@ -12696,6 +13272,7 @@ HandleInputKey(<br>&nbsp;&nbsp;&nbsp;&nbsp;ControllerId: i32,<br>&nbsp;&nbsp;&nb
 |ESafeZoneType {<br>&nbsp;&nbsp;&nbsp;&nbsp;eSZ_TOP,<br>&nbsp;&nbsp;&nbsp;&nbsp;eSZ_BOTTOM,<br>&nbsp;&nbsp;&nbsp;&nbsp;eSZ_LEFT,<br>&nbsp;&nbsp;&nbsp;&nbsp;eSZ_RIGHT,<br>&nbsp;&nbsp;&nbsp;&nbsp;eSZ_MAX,<br>}|
 |ESplitScreenType {<br>&nbsp;&nbsp;&nbsp;&nbsp;eSST_NONE,<br>&nbsp;&nbsp;&nbsp;&nbsp;eSST_2P_HORIZONTAL,<br>&nbsp;&nbsp;&nbsp;&nbsp;eSST_2P_VERTICAL,<br>&nbsp;&nbsp;&nbsp;&nbsp;eSST_3P_FAVOR_TOP,<br>&nbsp;&nbsp;&nbsp;&nbsp;eSST_3P_FAVOR_BOTTOM,<br>&nbsp;&nbsp;&nbsp;&nbsp;eSST_4P,<br>&nbsp;&nbsp;&nbsp;&nbsp;eSST_MAX,<br>}|
 
+<a id="gameviewportclient-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -12720,6 +13297,7 @@ Package: Engine
 
 Size: 0x5c | 92 bytes
 
+<a id="inilocpatcher-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -12728,6 +13306,7 @@ Size: 0x5c | 92 bytes
 |SystemInterface|OnlineSystemInterface*|0x8|0x48|
 |__OnReadTitleFileComplete__Delegate|FScriptDelegate|0xc|0x50|
 
+<a id="inilocpatcher-functions"></a>
 ### Functions
 
 |Signature|
@@ -12741,6 +13320,7 @@ DownloadFiles(<br>&nbsp;&nbsp;&nbsp;&nbsp;Index: i32,<br>) -> ()|
 Init(<br>&nbsp;&nbsp;&nbsp;&nbsp;OnlineSub: OnlineSubsystem*,<br>&nbsp;&nbsp;&nbsp;&nbsp;Index: i32,<br>) -> ()|
 OnReadTitleFileComplete(<br>&nbsp;&nbsp;&nbsp;&nbsp;bWasSuccessful: bool,<br>&nbsp;&nbsp;&nbsp;&nbsp;Filename: FString,<br>) -> ()|
 
+<a id="inilocpatcher-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -12755,6 +13335,7 @@ Package: Engine
 
 Size: 0x4c | 76 bytes
 
+<a id="interpcurveedsetup-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -12762,6 +13343,7 @@ Size: 0x4c | 76 bytes
 |Tabs|TArray\<CurveEdTab\>|0xc|0x3c|
 |ActiveTab|i32|0x4|0x48|
 
+<a id="interpcurveedsetup-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -12777,6 +13359,7 @@ Package: Engine
 
 Size: 0x5c | 92 bytes
 
+<a id="interptrack-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -12792,6 +13375,7 @@ Size: 0x5c | 92 bytes
 |bIsAnimControlTrack|bool|0x4|0x58|
 |bVisible|bool|0x4|0x58|
 
+<a id="interptrack-enums"></a>
 ### Enums
 
 |Enum|
@@ -12806,6 +13390,7 @@ Package: Engine
 
 Size: 0x80 | 128 bytes
 
+<a id="kmeshprops-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -12813,6 +13398,7 @@ Size: 0x80 | 128 bytes
 |COMNudge|Vector|0xc|0x3c|
 |AggGeom|KAggregateGeom|0x38|0x48|
 
+<a id="kmeshprops-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -12838,6 +13424,7 @@ Package: Engine
 
 Size: 0x248 | 584 bytes
 
+<a id="level-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -12874,6 +13461,7 @@ Package: Engine
 
 Size: 0x7c | 124 bytes
 
+<a id="levelstreaming-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -12913,6 +13501,7 @@ Package: Engine
 
 Size: 0x8c | 140 bytes
 
+<a id="levelstreamingdistance-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -12942,6 +13531,7 @@ Package: Engine
 
 Size: 0x4c | 76 bytes
 
+<a id="lightmappedsurfacecollection-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -12957,6 +13547,7 @@ Package: Engine
 
 Size: 0x6c | 108 bytes
 
+<a id="lightmasslevelsettings-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -12983,6 +13574,7 @@ Package: Engine
 
 Size: 0x54 | 84 bytes
 
+<a id="lightmassprimitivesettingsobject-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -13004,6 +13596,7 @@ Package: Engine
 
 Size: 0x3c | 60 bytes
 
+<a id="surface-functions"></a>
 ### Functions
 
 |Signature|
@@ -13019,6 +13612,7 @@ Package: Engine
 
 Size: 0x74 | 116 bytes
 
+<a id="materialinterface-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -13029,6 +13623,7 @@ Size: 0x74 | 116 bytes
 |PreviewMesh|FString|0xc|0x58|
 |LightingGuid|Guid|0x10|0x64|
 
+<a id="materialinterface-functions"></a>
 ### Functions
 
 |Signature|
@@ -13043,12 +13638,14 @@ GetFontParameterValue(<br>&nbsp;&nbsp;&nbsp;&nbsp;ParameterName: FName,<br>&nbsp
 GetPhysicalMaterial() -> PhysicalMaterial*|
 GetMaterial() -> Material*|
 
+<a id="materialinterface-enums"></a>
 ### Enums
 
 |Enum|
 |---|
 |EMaterialUsage {<br>&nbsp;&nbsp;&nbsp;&nbsp;MATUSAGE_SkeletalMesh,<br>&nbsp;&nbsp;&nbsp;&nbsp;MATUSAGE_FracturedMeshes,<br>&nbsp;&nbsp;&nbsp;&nbsp;MATUSAGE_ParticleSprites,<br>&nbsp;&nbsp;&nbsp;&nbsp;MATUSAGE_BeamTrails,<br>&nbsp;&nbsp;&nbsp;&nbsp;MATUSAGE_ParticleSubUV,<br>&nbsp;&nbsp;&nbsp;&nbsp;MATUSAGE_Foliage,<br>&nbsp;&nbsp;&nbsp;&nbsp;MATUSAGE_SpeedTree,<br>&nbsp;&nbsp;&nbsp;&nbsp;MATUSAGE_StaticLighting,<br>&nbsp;&nbsp;&nbsp;&nbsp;MATUSAGE_GammaCorrection,<br>&nbsp;&nbsp;&nbsp;&nbsp;MATUSAGE_LensFlare,<br>&nbsp;&nbsp;&nbsp;&nbsp;MATUSAGE_InstancedMeshParticles,<br>&nbsp;&nbsp;&nbsp;&nbsp;MATUSAGE_FluidSurface,<br>&nbsp;&nbsp;&nbsp;&nbsp;MATUSAGE_Decals,<br>&nbsp;&nbsp;&nbsp;&nbsp;MATUSAGE_MaterialEffect,<br>&nbsp;&nbsp;&nbsp;&nbsp;MATUSAGE_MorphTargets,<br>&nbsp;&nbsp;&nbsp;&nbsp;MATUSAGE_FogVolumes,<br>&nbsp;&nbsp;&nbsp;&nbsp;MATUSAGE_RadialBlur,<br>&nbsp;&nbsp;&nbsp;&nbsp;MATUSAGE_InstancedMeshes,<br>&nbsp;&nbsp;&nbsp;&nbsp;MATUSAGE_SplineMesh,<br>&nbsp;&nbsp;&nbsp;&nbsp;MATUSAGE_MAX,<br>}|
 
+<a id="materialinterface-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -13063,6 +13660,7 @@ Package: Engine
 
 Size: 0x6c | 108 bytes
 
+<a id="materialexpression-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -13080,6 +13678,7 @@ Size: 0x6c | 108 bytes
 |Desc|FString|0xc|0x54|
 |MenuCategories|TArray\<FName\>|0xc|0x60|
 
+<a id="materialexpression-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -13101,6 +13700,7 @@ Package: Engine
 
 Size: 0x3c | 60 bytes
 
+<a id="musictrackdatastructures-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -13122,6 +13722,7 @@ Package: Engine
 
 Size: 0x184 | 388 bytes
 
+<a id="netdriver-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -13149,6 +13750,7 @@ Package: Engine
 
 Size: 0x248 | 584 bytes
 
+<a id="demorecdriver-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -13166,6 +13768,7 @@ Package: Engine
 
 Size: 0x48 | 72 bytes
 
+<a id="objectreferencer-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -13180,6 +13783,7 @@ Package: Engine
 
 Size: 0x98 | 152 bytes
 
+<a id="onlinegameplayevents-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -13193,6 +13797,7 @@ Size: 0x98 | 152 bytes
 |bGameplaySessionInProgress|bool|0x4|0x84|
 |GameplaySessionID|Guid|0x10|0x88|
 
+<a id="onlinegameplayevents-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -13209,6 +13814,7 @@ Package: Engine
 
 Size: 0x68 | 104 bytes
 
+<a id="onlineplayerstorage-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -13219,6 +13825,7 @@ Size: 0x68 | 104 bytes
 |AsyncState|i8|0x1|0x58|
 |__NotifySettingValueUpdated__Delegate|FScriptDelegate|0xc|0x5c|
 
+<a id="onlineplayerstorage-functions"></a>
 ### Functions
 
 |Signature|
@@ -13251,6 +13858,7 @@ GetProfileSettingName(<br>&nbsp;&nbsp;&nbsp;&nbsp;ProfileSettingId: i32,<br>) ->
 GetProfileSettingId(<br>&nbsp;&nbsp;&nbsp;&nbsp;ProfileSettingName: FName,<br>&nbsp;&nbsp;&nbsp;&nbsp;ProfileSettingId: i32,<br>) -> bool|
 NotifySettingValueUpdated(<br>&nbsp;&nbsp;&nbsp;&nbsp;SettingName: FName,<br>) -> ()|
 
+<a id="onlineplayerstorage-enums"></a>
 ### Enums
 
 |Enum|
@@ -13258,6 +13866,7 @@ NotifySettingValueUpdated(<br>&nbsp;&nbsp;&nbsp;&nbsp;SettingName: FName,<br>) -
 |EOnlinePlayerStorageAsyncState {<br>&nbsp;&nbsp;&nbsp;&nbsp;OPAS_None,<br>&nbsp;&nbsp;&nbsp;&nbsp;OPAS_Read,<br>&nbsp;&nbsp;&nbsp;&nbsp;OPAS_Write,<br>&nbsp;&nbsp;&nbsp;&nbsp;OPAS_MAX,<br>}|
 |EOnlineProfilePropertyOwner {<br>&nbsp;&nbsp;&nbsp;&nbsp;OPPO_None,<br>&nbsp;&nbsp;&nbsp;&nbsp;OPPO_OnlineService,<br>&nbsp;&nbsp;&nbsp;&nbsp;OPPO_Game,<br>&nbsp;&nbsp;&nbsp;&nbsp;OPPO_MAX,<br>}|
 
+<a id="onlineplayerstorage-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -13272,6 +13881,7 @@ Package: Engine
 
 Size: 0x8c | 140 bytes
 
+<a id="onlineprofilesettings-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -13280,6 +13890,7 @@ Size: 0x8c | 140 bytes
 |DefaultSettings|TArray\<OnlineProfileSetting\>|0xc|0x74|
 |OwnerMappings|TArray\<IdToStringMapping\>|0xc|0x80|
 
+<a id="onlineprofilesettings-functions"></a>
 ### Functions
 
 |Signature|
@@ -13294,6 +13905,7 @@ GetProfileSettingDefaultFloat(<br>&nbsp;&nbsp;&nbsp;&nbsp;ProfileSettingId: i32,
 GetProfileSettingDefaultInt(<br>&nbsp;&nbsp;&nbsp;&nbsp;ProfileSettingId: i32,<br>&nbsp;&nbsp;&nbsp;&nbsp;DefaultInt: i32,<br>) -> bool|
 GetProfileSettingDefaultId(<br>&nbsp;&nbsp;&nbsp;&nbsp;ProfileSettingId: i32,<br>&nbsp;&nbsp;&nbsp;&nbsp;DefaultId: i32,<br>&nbsp;&nbsp;&nbsp;&nbsp;ListIndex: i32,<br>) -> bool|
 
+<a id="onlineprofilesettings-enums"></a>
 ### Enums
 
 |Enum|
@@ -13322,6 +13934,7 @@ Package: Engine
 
 Size: 0x78 | 120 bytes
 
+<a id="onlineplaylistmanager-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -13334,6 +13947,7 @@ Size: 0x78 | 120 bytes
 |VersionNumber|i32|0x4|0x68|
 |__OnReadPlaylistComplete__Delegate|FScriptDelegate|0xc|0x6c|
 
+<a id="onlineplaylistmanager-functions"></a>
 ### Functions
 
 |Signature|
@@ -13347,6 +13961,7 @@ DetermineFilesToDownload() -> ()|
 DownloadPlaylist(<br>&nbsp;&nbsp;&nbsp;&nbsp;OnlineSub: OnlineSubsystem*,<br>&nbsp;&nbsp;&nbsp;&nbsp;FileIndex: i32,<br>) -> ()|
 OnReadPlaylistComplete() -> ()|
 
+<a id="onlineplaylistmanager-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -13362,12 +13977,14 @@ Package: Engine
 
 Size: 0x48 | 72 bytes
 
+<a id="onlinestats-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
 |---|:-:|:-:|:-:|
 |ViewIdMappings|TArray\<StringIdToStringMapping\>|0xc|0x3c|
 
+<a id="onlinestats-functions"></a>
 ### Functions
 
 |Signature|
@@ -13383,6 +14000,7 @@ Package: Engine
 
 Size: 0x88 | 136 bytes
 
+<a id="onlinestatsread-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -13396,6 +14014,7 @@ Size: 0x88 | 136 bytes
 |ViewName|FString|0xc|0x78|
 |TitleId|i32|0x4|0x84|
 
+<a id="onlinestatsread-functions"></a>
 ### Functions
 
 |Signature|
@@ -13408,6 +14027,7 @@ SetIntStatValueForPlayer(<br>&nbsp;&nbsp;&nbsp;&nbsp;PlayerID: UniqueNetId,<br>&
 GetIntStatValueForPlayer(<br>&nbsp;&nbsp;&nbsp;&nbsp;PlayerID: UniqueNetId,<br>&nbsp;&nbsp;&nbsp;&nbsp;StatColumnNo: i32,<br>&nbsp;&nbsp;&nbsp;&nbsp;StatValue: i32,<br>) -> bool|
 OnReadComplete() -> ()|
 
+<a id="onlinestatsread-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -13424,6 +14044,7 @@ Package: Engine
 
 Size: 0x88 | 136 bytes
 
+<a id="onlinestatswrite-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -13435,6 +14056,7 @@ Size: 0x88 | 136 bytes
 |RatingId|i32|0x4|0x78|
 |__OnStatsWriteComplete__Delegate|FScriptDelegate|0xc|0x7c|
 
+<a id="onlinestatswrite-functions"></a>
 ### Functions
 
 |Signature|
@@ -13457,6 +14079,7 @@ Package: Engine
 
 Size: 0xc8 | 200 bytes
 
+<a id="onlinesubsystem-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -13480,6 +14103,7 @@ Size: 0xc8 | 200 bytes
 |Patcher|IniLocPatcher*|0x4|0xc0|
 |AsyncMinCompletionTime|f32|0x4|0xc4|
 
+<a id="onlinesubsystem-functions"></a>
 ### Functions
 
 |Signature|
@@ -13508,6 +14132,7 @@ Exit() -> ()|
 PostInit(<br>&nbsp;&nbsp;&nbsp;&nbsp;IniLocPatcherClass: UClass*,<br>) -> bool|
 Init() -> bool|
 
+<a id="onlinesubsystem-enums"></a>
 ### Enums
 
 |Enum|
@@ -13524,6 +14149,7 @@ Init() -> bool|
 |EFeaturePrivilegeLevel {<br>&nbsp;&nbsp;&nbsp;&nbsp;FPL_Disabled,<br>&nbsp;&nbsp;&nbsp;&nbsp;FPL_EnabledFriendsOnly,<br>&nbsp;&nbsp;&nbsp;&nbsp;FPL_Enabled,<br>&nbsp;&nbsp;&nbsp;&nbsp;FPL_MAX,<br>}|
 |ELoginStatus {<br>&nbsp;&nbsp;&nbsp;&nbsp;LS_NotLoggedIn,<br>&nbsp;&nbsp;&nbsp;&nbsp;LS_UsingLocalProfile,<br>&nbsp;&nbsp;&nbsp;&nbsp;LS_LoggedIn,<br>&nbsp;&nbsp;&nbsp;&nbsp;LS_MAX,<br>}|
 
+<a id="onlinesubsystem-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -13572,6 +14198,7 @@ Package: Engine
 
 Size: 0x60 | 96 bytes
 
+<a id="player-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -13586,6 +14213,7 @@ Size: 0x60 | 96 bytes
 |PP_MidTonesMultiplier|f32|0x4|0x58|
 |PP_ShadowsMultiplier|f32|0x4|0x5c|
 
+<a id="player-functions"></a>
 ### Functions
 
 |Signature|
@@ -13600,6 +14228,7 @@ Package: Engine
 
 Size: 0x25c | 604 bytes
 
+<a id="localplayer-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -13619,6 +14248,7 @@ Size: 0x25c | 604 bytes
 |PostProcessSettingsOverride|PostProcessSettings|0xd4|0x184|
 |PPSettingsOverrideStartBlend|f32|0x4|0x258|
 
+<a id="localplayer-functions"></a>
 ### Functions
 
 |Signature|
@@ -13639,6 +14269,7 @@ GetActorVisibility(<br>&nbsp;&nbsp;&nbsp;&nbsp;TestActor: Actor*,<br>) -> bool|
 SendSplitJoin() -> ()|
 SpawnPlayActor(<br>&nbsp;&nbsp;&nbsp;&nbsp;URL: FString,<br>&nbsp;&nbsp;&nbsp;&nbsp;OutError: FString,<br>) -> bool|
 
+<a id="localplayer-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -13654,6 +14285,7 @@ Package: Engine
 
 Size: 0x4fc4 | 20420 bytes
 
+<a id="netconnection-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -13668,6 +14300,7 @@ Package: Engine
 
 Size: 0x4fc8 | 20424 bytes
 
+<a id="childconnection-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -13696,12 +14329,14 @@ Package: Engine
 
 Size: 0x48 | 72 bytes
 
+<a id="postprocesschain-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
 |---|:-:|:-:|:-:|
 |Effects|TArray\<PostProcessEffect*\>|0xc|0x3c|
 
+<a id="postprocesschain-functions"></a>
 ### Functions
 
 |Signature|
@@ -13716,6 +14351,7 @@ Package: Engine
 
 Size: 0x61 | 97 bytes
 
+<a id="postprocesseffect-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -13741,6 +14377,7 @@ Package: Engine
 
 Size: 0xc0 | 192 bytes
 
+<a id="ambientocclusioneffect-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -13766,6 +14403,7 @@ Size: 0xc0 | 192 bytes
 |HistoryConvergenceTime|f32|0x4|0xb8|
 |HistoryWeightConvergenceTime|f32|0x4|0xbc|
 
+<a id="ambientocclusioneffect-enums"></a>
 ### Enums
 
 |Enum|
@@ -13780,6 +14418,7 @@ Package: Engine
 
 Size: 0x68 | 104 bytes
 
+<a id="blureffect-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -13794,6 +14433,7 @@ Package: Engine
 
 Size: 0x90 | 144 bytes
 
+<a id="dofeffect-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -13808,6 +14448,7 @@ Size: 0x90 | 144 bytes
 |FocusDistance|f32|0x4|0x80|
 |FocusPosition|Vector|0xc|0x84|
 
+<a id="dofeffect-enums"></a>
 ### Enums
 
 |Enum|
@@ -13822,6 +14463,7 @@ Package: Engine
 
 Size: 0xb0 | 176 bytes
 
+<a id="dofandbloomeffect-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -13843,6 +14485,7 @@ Package: Engine
 
 Size: 0xc4 | 196 bytes
 
+<a id="dofbloommotionblureffect-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -13861,6 +14504,7 @@ Package: Engine
 
 Size: 0x110 | 272 bytes
 
+<a id="uberpostprocesseffect-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -13887,6 +14531,7 @@ Package: Engine
 
 Size: 0x68 | 104 bytes
 
+<a id="materialeffect-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -13901,6 +14546,7 @@ Package: Engine
 
 Size: 0x78 | 120 bytes
 
+<a id="motionblureffect-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -13919,6 +14565,7 @@ Package: Engine
 
 Size: 0x40 | 64 bytes
 
+<a id="primitivecomponentfactory-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -13942,6 +14589,7 @@ Package: Engine
 
 Size: 0x4c | 76 bytes
 
+<a id="meshcomponentfactory-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -13956,6 +14604,7 @@ Package: Engine
 
 Size: 0x50 | 80 bytes
 
+<a id="staticmeshcomponentfactory-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -13970,6 +14619,7 @@ Package: Engine
 
 Size: 0x90 | 144 bytes
 
+<a id="reachspec-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -13993,6 +14643,7 @@ Size: 0x90 | 144 bytes
 |PruneSpecList|TArray\<UClass*\>|0xc|0x80|
 |BlockedBy|Actor*|0x4|0x8c|
 
+<a id="reachspec-functions"></a>
 ### Functions
 
 |Signature|
@@ -14002,6 +14653,7 @@ GetDirection() -> Vector|
 GetEnd() -> NavigationPoint*|
 CostFor(<br>&nbsp;&nbsp;&nbsp;&nbsp;P: Pawn*,<br>) -> i32|
 
+<a id="reachspec-consts"></a>
 ### Consts
 
 |Constant|Value|
@@ -14037,6 +14689,7 @@ Package: Engine
 
 Size: 0x91 | 145 bytes
 
+<a id="coverslipreachspec-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -14058,6 +14711,7 @@ Package: Engine
 
 Size: 0x94 | 148 bytes
 
+<a id="mantlereachspec-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -14072,6 +14726,7 @@ Package: Engine
 
 Size: 0x91 | 145 bytes
 
+<a id="slottoslotreachspec-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -14086,6 +14741,7 @@ Package: Engine
 
 Size: 0x91 | 145 bytes
 
+<a id="swatturnreachspec-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -14128,6 +14784,7 @@ Package: Engine
 
 Size: 0xd8 | 216 bytes
 
+<a id="savedmove-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -14159,6 +14816,7 @@ Size: 0xd8 | 216 bytes
 |CustomTimeDilation|f32|0x4|0xd0|
 |AccelDotThreshold|f32|0x4|0xd4|
 
+<a id="savedmove-functions"></a>
 ### Functions
 
 |Signature|
@@ -14181,6 +14839,7 @@ Package: Engine
 
 Size: 0x50 | 80 bytes
 
+<a id="savegamesummary-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -14210,6 +14869,7 @@ Package: Engine
 
 Size: 0x84 | 132 bytes
 
+<a id="settings-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -14221,6 +14881,7 @@ Size: 0x84 | 132 bytes
 |__NotifySettingValueUpdated__Delegate|FScriptDelegate|0xc|0x6c|
 |__NotifyPropertyValueUpdated__Delegate|FScriptDelegate|0xc|0x78|
 
+<a id="settings-functions"></a>
 ### Functions
 
 |Signature|
@@ -14283,6 +14944,7 @@ SetSettingsDataString(<br>&nbsp;&nbsp;&nbsp;&nbsp;Data: SettingsData,<br>&nbsp;&
 NotifyPropertyValueUpdated(<br>&nbsp;&nbsp;&nbsp;&nbsp;PropertyName: FName,<br>) -> ()|
 NotifySettingValueUpdated(<br>&nbsp;&nbsp;&nbsp;&nbsp;SettingName: FName,<br>) -> ()|
 
+<a id="settings-enums"></a>
 ### Enums
 
 |Enum|
@@ -14291,6 +14953,7 @@ NotifySettingValueUpdated(<br>&nbsp;&nbsp;&nbsp;&nbsp;SettingName: FName,<br>) -
 |ESettingsDataType {<br>&nbsp;&nbsp;&nbsp;&nbsp;SDT_Empty,<br>&nbsp;&nbsp;&nbsp;&nbsp;SDT_Int32,<br>&nbsp;&nbsp;&nbsp;&nbsp;SDT_Int64,<br>&nbsp;&nbsp;&nbsp;&nbsp;SDT_Double,<br>&nbsp;&nbsp;&nbsp;&nbsp;SDT_String,<br>&nbsp;&nbsp;&nbsp;&nbsp;SDT_Float,<br>&nbsp;&nbsp;&nbsp;&nbsp;SDT_Blob,<br>&nbsp;&nbsp;&nbsp;&nbsp;SDT_DateTime,<br>&nbsp;&nbsp;&nbsp;&nbsp;SDT_MAX,<br>}|
 |EOnlineDataAdvertisementType {<br>&nbsp;&nbsp;&nbsp;&nbsp;ODAT_DontAdvertise,<br>&nbsp;&nbsp;&nbsp;&nbsp;ODAT_OnlineService,<br>&nbsp;&nbsp;&nbsp;&nbsp;ODAT_QoS,<br>&nbsp;&nbsp;&nbsp;&nbsp;ODAT_OnlineServiceAndQoS,<br>&nbsp;&nbsp;&nbsp;&nbsp;ODAT_MAX,<br>}|
 
+<a id="settings-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -14311,6 +14974,7 @@ Package: Engine
 
 Size: 0x100 | 256 bytes
 
+<a id="onlinegamesearch-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -14327,6 +14991,7 @@ Size: 0x100 | 256 bytes
 |FilterQuery|OnlineGameSearchQuery|0x18|0xdc|
 |AdditionalSearchCriteria|FString|0xc|0xf4|
 
+<a id="onlinegamesearch-functions"></a>
 ### Functions
 
 |Signature|
@@ -14334,6 +14999,7 @@ Size: 0x100 | 256 bytes
 SortSearchResults() -> ()|
 SetSkillOverride(<br>&nbsp;&nbsp;&nbsp;&nbsp;LeaderboardId: i32,<br>&nbsp;&nbsp;&nbsp;&nbsp;Players: TArray\<UniqueNetId\>,<br>) -> ()|
 
+<a id="onlinegamesearch-enums"></a>
 ### Enums
 
 |Enum|
@@ -14342,6 +15008,7 @@ SetSkillOverride(<br>&nbsp;&nbsp;&nbsp;&nbsp;LeaderboardId: i32,<br>&nbsp;&nbsp;
 |EOnlineGameSearchComparisonType {<br>&nbsp;&nbsp;&nbsp;&nbsp;OGSCT_Equals,<br>&nbsp;&nbsp;&nbsp;&nbsp;OGSCT_NotEquals,<br>&nbsp;&nbsp;&nbsp;&nbsp;OGSCT_GreaterThan,<br>&nbsp;&nbsp;&nbsp;&nbsp;OGSCT_GreaterThanEquals,<br>&nbsp;&nbsp;&nbsp;&nbsp;OGSCT_LessThan,<br>&nbsp;&nbsp;&nbsp;&nbsp;OGSCT_LessThanEquals,<br>&nbsp;&nbsp;&nbsp;&nbsp;OGSCT_MAX,<br>}|
 |EOnlineGameSearchEntryType {<br>&nbsp;&nbsp;&nbsp;&nbsp;OGSET_Property,<br>&nbsp;&nbsp;&nbsp;&nbsp;OGSET_LocalizedSetting,<br>&nbsp;&nbsp;&nbsp;&nbsp;OGSET_ObjectProperty,<br>&nbsp;&nbsp;&nbsp;&nbsp;OGSET_MAX,<br>}|
 
+<a id="onlinegamesearch-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -14362,6 +15029,7 @@ Package: Engine
 
 Size: 0xe8 | 232 bytes
 
+<a id="onlinegamesettings-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -14405,6 +15073,7 @@ Package: Engine
 
 Size: 0x6c | 108 bytes
 
+<a id="shadowmap2d-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -14432,6 +15101,7 @@ Package: Engine
 
 Size: 0xc4 | 196 bytes
 
+<a id="speechrecognition-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -14447,6 +15117,7 @@ Size: 0xc4 | 196 bytes
 |bInitialised|bool|0x4|0xbc|
 |FnxVoiceData|Pointer|0x4|0xc0|
 
+<a id="speechrecognition-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -14463,6 +15134,7 @@ Package: Engine
 
 Size: 0x204 | 516 bytes
 
+<a id="fracturedstaticmesh-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -14503,6 +15175,7 @@ Package: Engine
 
 Size: 0x11c | 284 bytes
 
+<a id="particlesystem-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -14548,6 +15221,7 @@ Size: 0x11c | 284 bytes
 |MacroUVRadius|f32|0x4|0x10c|
 |SoloTracking|TArray\<LODSoloTrack\>|0xc|0x110|
 
+<a id="particlesystem-functions"></a>
 ### Functions
 
 |Signature|
@@ -14558,6 +15232,7 @@ GetLODDistance(<br>&nbsp;&nbsp;&nbsp;&nbsp;LODLevelIndex: i32,<br>) -> f32|
 GetLODLevelCount() -> i32|
 GetCurrentLODMethod() -> i8|
 
+<a id="particlesystem-enums"></a>
 ### Enums
 
 |Enum|
@@ -14565,6 +15240,7 @@ GetCurrentLODMethod() -> i8|
 |ParticleSystemLODMethod {<br>&nbsp;&nbsp;&nbsp;&nbsp;PARTICLESYSTEMLODMETHOD_Automatic,<br>&nbsp;&nbsp;&nbsp;&nbsp;PARTICLESYSTEMLODMETHOD_DirectSet,<br>&nbsp;&nbsp;&nbsp;&nbsp;PARTICLESYSTEMLODMETHOD_ActivateAutomatic,<br>&nbsp;&nbsp;&nbsp;&nbsp;PARTICLESYSTEMLODMETHOD_MAX,<br>}|
 |EParticleSystemUpdateMode {<br>&nbsp;&nbsp;&nbsp;&nbsp;EPSUM_RealTime,<br>&nbsp;&nbsp;&nbsp;&nbsp;EPSUM_FixedTime,<br>&nbsp;&nbsp;&nbsp;&nbsp;EPSUM_MAX,<br>}|
 
+<a id="particlesystem-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -14580,6 +15256,7 @@ Package: Engine
 
 Size: 0xe8 | 232 bytes
 
+<a id="texture-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -14619,6 +15296,7 @@ Size: 0xe8 | 232 bytes
 |AdjustHue|f32|0x4|0xe0|
 |InternalFormatLODBias|i32|0x4|0xe4|
 
+<a id="texture-enums"></a>
 ### Enums
 
 |Enum|
@@ -14651,6 +15329,7 @@ Package: Engine
 
 Size: 0x40 | 64 bytes
 
+<a id="waveformbase-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -14672,6 +15351,7 @@ Package: Engine
 
 Size: 0x22c | 556 bytes
 
+<a id="environmentvolume-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -14680,6 +15360,7 @@ Size: 0x22c | 556 bytes
 |VfTable_IInterface_NavMeshPathObject|Pointer|0x4|0x224|
 |bSplitNavMesh|bool|0x4|0x228|
 
+<a id="environmentvolume-functions"></a>
 ### Functions
 
 |Signature|
@@ -14694,6 +15375,7 @@ Package: Engine
 
 Size: 0x224 | 548 bytes
 
+<a id="testsplittingvolume-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -14708,6 +15390,7 @@ Package: Engine
 
 Size: 0x388 | 904 bytes
 
+<a id="aicontroller-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -14721,6 +15404,7 @@ Size: 0x388 | 904 bytes
 |ScriptedRouteIndex|i32|0x4|0x380|
 |ScriptedFocus|Actor*|0x4|0x384|
 
+<a id="aicontroller-states"></a>
 ### States
 
 |Signature|
@@ -14728,6 +15412,7 @@ Size: 0x388 | 904 bytes
 |PoppedState_ScriptedRouteMove() -> ()|
 |PushedState_ScriptedMove() -> ()|
 
+<a id="aicontroller-functions"></a>
 ### Functions
 
 |Signature|
@@ -14756,12 +15441,14 @@ Package: Engine
 
 Size: 0x1e8 | 488 bytes
 
+<a id="crowdagentbase-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
 |---|:-:|:-:|:-:|
 |VfTable_IInterface_NavigationHandle|Pointer|0x4|0x1e4|
 
+<a id="crowdagentbase-functions"></a>
 ### Functions
 
 |Signature|
@@ -14783,6 +15470,7 @@ Package: Engine
 
 Size: 0x1ec | 492 bytes
 
+<a id="navmeshobstacle-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -14790,6 +15478,7 @@ Size: 0x1ec | 492 bytes
 |VfTable_IInterface_NavMeshPathObstacle|Pointer|0x4|0x1e4|
 |bEnabled|bool|0x4|0x1e8|
 
+<a id="navmeshobstacle-functions"></a>
 ### Functions
 
 |Signature|
@@ -14808,6 +15497,7 @@ Package: Engine
 
 Size: 0x1e8 | 488 bytes
 
+<a id="pylonseed-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -14829,6 +15519,7 @@ Package: Engine
 
 Size: 0x260 | 608 bytes
 
+<a id="covermeshcomponent-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -14839,6 +15530,7 @@ Size: 0x260 | 608 bytes
 |AutoAdjustOff|StaticMesh*|0x4|0x258|
 |Disabled|StaticMesh*|0x4|0x25c|
 
+<a id="covermeshcomponent-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -14874,6 +15566,7 @@ Package: Engine
 
 Size: 0x3c | 60 bytes
 
+<a id="interface_navigationhandle-functions"></a>
 ### Functions
 
 |Signature|
@@ -14895,6 +15588,7 @@ Package: Engine
 
 Size: 0x3c | 60 bytes
 
+<a id="interface_navmeshpathswitch-functions"></a>
 ### Functions
 
 |Signature|
@@ -14909,6 +15603,7 @@ Package: Engine
 
 Size: 0x3c | 60 bytes
 
+<a id="interface_navmeshpathobstacle-enums"></a>
 ### Enums
 
 |Enum|
@@ -14923,6 +15618,7 @@ Package: Engine
 
 Size: 0xc4 | 196 bytes
 
+<a id="navigationhandle-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -14940,6 +15636,7 @@ Size: 0xc4 | 196 bytes
 |PathGoalList|NavMeshPathGoalEvaluator*|0x4|0x94|
 |CachedPathParams|NavMeshPathParams|0x2c|0x98|
 
+<a id="navigationhandle-functions"></a>
 ### Functions
 
 |Signature|
@@ -14973,6 +15670,7 @@ AddGoalEvaluator(<br>&nbsp;&nbsp;&nbsp;&nbsp;Evaluator: NavMeshPathGoalEvaluator
 AddPathConstraint(<br>&nbsp;&nbsp;&nbsp;&nbsp;Constraint: NavMeshPathConstraint*,<br>) -> ()|
 ClearConstraints() -> ()|
 
+<a id="navigationhandle-consts"></a>
 ### Consts
 
 |Constant|Value|
@@ -14980,6 +15678,7 @@ ClearConstraints() -> ()|
 |NUM_PATHFINDING_PARAMS|8|
 |LINECHECK_GRANULARITY|768.f|
 
+<a id="navigationhandle-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -14997,6 +15696,7 @@ Package: Engine
 
 Size: 0x50 | 80 bytes
 
+<a id="navmeshpathconstraint-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -15007,6 +15707,7 @@ Size: 0x50 | 80 bytes
 |AddedDirectCost|f32|0x4|0x48|
 |AddedHeuristicCost|f32|0x4|0x4c|
 
+<a id="navmeshpathconstraint-functions"></a>
 ### Functions
 
 |Signature|
@@ -15022,12 +15723,14 @@ Package: Engine
 
 Size: 0x5c | 92 bytes
 
+<a id="navmeshpath_alongline-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
 |---|:-:|:-:|:-:|
 |Direction|Vector|0xc|0x50|
 
+<a id="navmeshpath_alongline-functions"></a>
 ### Functions
 
 |Signature|
@@ -15043,6 +15746,7 @@ Package: Engine
 
 Size: 0x50 | 80 bytes
 
+<a id="navmeshpath_enforcetwowayedges-functions"></a>
 ### Functions
 
 |Signature|
@@ -15057,6 +15761,7 @@ Package: Engine
 
 Size: 0x61 | 97 bytes
 
+<a id="navmeshpath_mindistbetweenspecsoftype-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -15065,6 +15770,7 @@ Size: 0x61 | 97 bytes
 |InitLocation|Vector|0xc|0x54|
 |EdgeType|i8|0x1|0x60|
 
+<a id="navmeshpath_mindistbetweenspecsoftype-functions"></a>
 ### Functions
 
 |Signature|
@@ -15080,6 +15786,7 @@ Package: Engine
 
 Size: 0x60 | 96 bytes
 
+<a id="navmeshpath_toward-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -15087,6 +15794,7 @@ Size: 0x60 | 96 bytes
 |GoalActor|Actor*|0x4|0x50|
 |GoalPoint|Vector|0xc|0x54|
 
+<a id="navmeshpath_toward-functions"></a>
 ### Functions
 
 |Signature|
@@ -15103,6 +15811,7 @@ Package: Engine
 
 Size: 0x6c | 108 bytes
 
+<a id="navmeshpath_withindistanceenvelope-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -15114,6 +15823,7 @@ Size: 0x6c | 108 bytes
 |SoftStartPenalty|f32|0x4|0x5c|
 |EnvelopeTestPoint|Vector|0xc|0x60|
 
+<a id="navmeshpath_withindistanceenvelope-functions"></a>
 ### Functions
 
 |Signature|
@@ -15129,6 +15839,7 @@ Package: Engine
 
 Size: 0x5c | 92 bytes
 
+<a id="navmeshpath_withintraversaldist-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -15137,6 +15848,7 @@ Size: 0x5c | 92 bytes
 |bSoft|bool|0x4|0x54|
 |SoftStartPenalty|f32|0x4|0x58|
 
+<a id="navmeshpath_withintraversaldist-functions"></a>
 ### Functions
 
 |Signature|
@@ -15152,6 +15864,7 @@ Package: Engine
 
 Size: 0x50 | 80 bytes
 
+<a id="navmeshpathgoalevaluator-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -15162,6 +15875,7 @@ Size: 0x50 | 80 bytes
 |NumNodesThrownOut|i32|0x4|0x48|
 |NumNodesProcessed|i32|0x4|0x4c|
 
+<a id="navmeshpathgoalevaluator-functions"></a>
 ### Functions
 
 |Signature|
@@ -15177,6 +15891,7 @@ Package: Engine
 
 Size: 0x6c | 108 bytes
 
+<a id="navmeshgoal_at-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -15187,6 +15902,7 @@ Size: 0x6c | 108 bytes
 |GoalPoly|Pointer|0x4|0x64|
 |PartialGoal|Pointer|0x4|0x68|
 
+<a id="navmeshgoal_at-functions"></a>
 ### Functions
 
 |Signature|
@@ -15204,6 +15920,7 @@ Package: Engine
 
 Size: 0x9c | 156 bytes
 
+<a id="navmeshgoal_closestactorinlist-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -15212,6 +15929,7 @@ Size: 0x9c | 156 bytes
 |PolyToGoalActorMap|MultiMap_Mirror|0x3c|0x5c|
 |CachedAnchorPoly|Pointer|0x4|0x98|
 
+<a id="navmeshgoal_closestactorinlist-functions"></a>
 ### Functions
 
 |Signature|
@@ -15220,6 +15938,7 @@ RecycleInternal() -> ()|
 Recycle() -> ()|
 ClosestActorInList(<br>&nbsp;&nbsp;&nbsp;&nbsp;NavHandle: NavigationHandle*,<br>&nbsp;&nbsp;&nbsp;&nbsp;InGoalList: TArray\<BiasedGoalActor\>,<br>&nbsp;&nbsp;&nbsp;&nbsp;Eval: NavMeshGoal_ClosestActorInList*,<br>) -> NavMeshGoal_ClosestActorInList*|
 
+<a id="navmeshgoal_closestactorinlist-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -15234,12 +15953,14 @@ Package: Engine
 
 Size: 0x54 | 84 bytes
 
+<a id="navmeshgoal_null-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
 |---|:-:|:-:|:-:|
 |PartialGoal|Pointer|0x4|0x50|
 
+<a id="navmeshgoal_null-functions"></a>
 ### Functions
 
 |Signature|
@@ -15256,6 +15977,7 @@ Package: Engine
 
 Size: 0x50 | 80 bytes
 
+<a id="navmeshgoal_polyencompassesai-functions"></a>
 ### Functions
 
 |Signature|
@@ -15271,6 +15993,7 @@ Package: Engine
 
 Size: 0x44 | 68 bytes
 
+<a id="pathconstraint-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -15278,6 +16001,7 @@ Size: 0x44 | 68 bytes
 |CacheIdx|i32|0x4|0x3c|
 |NextConstraint|PathConstraint*|0x4|0x40|
 
+<a id="pathconstraint-functions"></a>
 ### Functions
 
 |Signature|
@@ -15293,12 +16017,14 @@ Package: Engine
 
 Size: 0x50 | 80 bytes
 
+<a id="path_alongline-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
 |---|:-:|:-:|:-:|
 |Direction|Vector|0xc|0x44|
 
+<a id="path_alongline-functions"></a>
 ### Functions
 
 |Signature|
@@ -15314,6 +16040,7 @@ Package: Engine
 
 Size: 0x54 | 84 bytes
 
+<a id="path_avoidinescapablenodes-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -15323,6 +16050,7 @@ Size: 0x54 | 84 bytes
 |MaxFallSpeed|i32|0x4|0x4c|
 |MoveFlags|i32|0x4|0x50|
 
+<a id="path_avoidinescapablenodes-functions"></a>
 ### Functions
 
 |Signature|
@@ -15339,6 +16067,7 @@ Package: Engine
 
 Size: 0x58 | 88 bytes
 
+<a id="path_mindistbetweenspecsoftype-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -15347,6 +16076,7 @@ Size: 0x58 | 88 bytes
 |InitLocation|Vector|0xc|0x48|
 |ReachSpecClass|UClass*|0x4|0x54|
 
+<a id="path_mindistbetweenspecsoftype-functions"></a>
 ### Functions
 
 |Signature|
@@ -15362,12 +16092,14 @@ Package: Engine
 
 Size: 0x48 | 72 bytes
 
+<a id="path_towardgoal-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
 |---|:-:|:-:|:-:|
 |GoalActor|Actor*|0x4|0x44|
 
+<a id="path_towardgoal-functions"></a>
 ### Functions
 
 |Signature|
@@ -15383,12 +16115,14 @@ Package: Engine
 
 Size: 0x50 | 80 bytes
 
+<a id="path_towardpoint-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
 |---|:-:|:-:|:-:|
 |GoalPoint|Vector|0xc|0x44|
 
+<a id="path_towardpoint-functions"></a>
 ### Functions
 
 |Signature|
@@ -15404,6 +16138,7 @@ Package: Engine
 
 Size: 0x60 | 96 bytes
 
+<a id="path_withindistanceenvelope-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -15415,6 +16150,7 @@ Size: 0x60 | 96 bytes
 |SoftStartPenalty|f32|0x4|0x50|
 |EnvelopeTestPoint|Vector|0xc|0x54|
 
+<a id="path_withindistanceenvelope-functions"></a>
 ### Functions
 
 |Signature|
@@ -15430,6 +16166,7 @@ Package: Engine
 
 Size: 0x50 | 80 bytes
 
+<a id="path_withintraversaldist-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -15438,6 +16175,7 @@ Size: 0x50 | 80 bytes
 |bSoft|bool|0x4|0x48|
 |SoftStartPenalty|f32|0x4|0x4c|
 
+<a id="path_withintraversaldist-functions"></a>
 ### Functions
 
 |Signature|
@@ -15453,6 +16191,7 @@ Package: Engine
 
 Size: 0x4c | 76 bytes
 
+<a id="pathgoalevaluator-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -15462,6 +16201,7 @@ Size: 0x4c | 76 bytes
 |MaxPathVisits|i32|0x4|0x44|
 |CacheIdx|i32|0x4|0x48|
 
+<a id="pathgoalevaluator-functions"></a>
 ### Functions
 
 |Signature|
@@ -15477,6 +16217,7 @@ Package: Engine
 
 Size: 0x58 | 88 bytes
 
+<a id="goal_atactor-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -15485,6 +16226,7 @@ Size: 0x58 | 88 bytes
 |GoalDist|f32|0x4|0x50|
 |bKeepPartial|bool|0x4|0x54|
 
+<a id="goal_atactor-functions"></a>
 ### Functions
 
 |Signature|
@@ -15500,6 +16242,7 @@ Package: Engine
 
 Size: 0x4c | 76 bytes
 
+<a id="goal_null-functions"></a>
 ### Functions
 
 |Signature|
@@ -15515,6 +16258,7 @@ Package: Engine
 
 Size: 0x208 | 520 bytes
 
+<a id="skeletalmeshactor-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -15530,6 +16274,7 @@ Size: 0x208 | 520 bytes
 |ReplicatedMaterial|MaterialInterface*|0x4|0x1f8|
 |ControlTargets|TArray\<SkelMeshActorControlTarget\>|0xc|0x1fc|
 
+<a id="skeletalmeshactor-functions"></a>
 ### Functions
 
 |Signature|
@@ -15558,6 +16303,7 @@ OnToggle(<br>&nbsp;&nbsp;&nbsp;&nbsp;Action: SeqAct_Toggle*,<br>&nbsp;&nbsp;&nbs
 ReplicatedEvent(<br>&nbsp;&nbsp;&nbsp;&nbsp;VarName: FName,<br>) -> ()|
 PostBeginPlay() -> ()|
 
+<a id="skeletalmeshactor-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -15573,6 +16319,7 @@ Package: Engine
 
 Size: 0x220 | 544 bytes
 
+<a id="skeletalmeshactorbasedonextremecontent-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -15580,6 +16327,7 @@ Size: 0x220 | 544 bytes
 |ExtremeContent|TArray\<SkelMaterialSetterDatum\>|0xc|0x208|
 |NonExtremeContent|TArray\<SkelMaterialSetterDatum\>|0xc|0x214|
 
+<a id="skeletalmeshactorbasedonextremecontent-functions"></a>
 ### Functions
 
 |Signature|
@@ -15587,6 +16335,7 @@ Size: 0x220 | 544 bytes
 SetMaterialBasedOnExtremeContent(<br>&nbsp;&nbsp;&nbsp;&nbsp;Idx: i32,<br>) -> ()|
 PostBeginPlay() -> ()|
 
+<a id="skeletalmeshactorbasedonextremecontent-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -15615,12 +16364,14 @@ Package: Engine
 
 Size: 0x214 | 532 bytes
 
+<a id="skeletalmeshactormat-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
 |---|:-:|:-:|:-:|
 |SlotNodes|TArray\<AnimNodeSlot*\>|0xc|0x208|
 
+<a id="skeletalmeshactormat-functions"></a>
 ### Functions
 
 |Signature|
@@ -15645,6 +16396,7 @@ Package: Engine
 
 Size: 0x4e | 78 bytes
 
+<a id="animationcompressionalgorithm-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -15669,6 +16421,7 @@ Package: Engine
 
 Size: 0x58 | 88 bytes
 
+<a id="animationcompressionalgorithm_removeeverysecondkey-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -15684,6 +16437,7 @@ Package: Engine
 
 Size: 0x68 | 104 bytes
 
+<a id="animationcompressionalgorithm_removelinearkeys-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -15703,6 +16457,7 @@ Package: Engine
 
 Size: 0x58 | 88 bytes
 
+<a id="animationcompressionalgorithm_removetrivialkeys-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -15732,6 +16487,7 @@ Package: Engine
 
 Size: 0x54 | 84 bytes
 
+<a id="animmetadata_skelcontrol-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -15748,6 +16504,7 @@ Package: Engine
 
 Size: 0x60 | 96 bytes
 
+<a id="animmetadata_skelcontrolkeyframe-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -15762,6 +16519,7 @@ Package: Engine
 
 Size: 0x3c | 60 bytes
 
+<a id="animnotify-functions"></a>
 ### Functions
 
 |Signature|
@@ -15776,6 +16534,7 @@ Package: Engine
 
 Size: 0x4c | 76 bytes
 
+<a id="animnotify_akevent-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -15792,6 +16551,7 @@ Package: Engine
 
 Size: 0x4c | 76 bytes
 
+<a id="animnotify_akeventproxy-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -15808,6 +16568,7 @@ Package: Engine
 
 Size: 0x40 | 64 bytes
 
+<a id="animnotify_cameraeffect-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -15822,6 +16583,7 @@ Package: Engine
 
 Size: 0x40 | 64 bytes
 
+<a id="animnotify_footjump-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -15836,6 +16598,7 @@ Package: Engine
 
 Size: 0x40 | 64 bytes
 
+<a id="animnotify_footshuffle-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -15850,6 +16613,7 @@ Package: Engine
 
 Size: 0x40 | 64 bytes
 
+<a id="animnotify_footstep-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -15864,6 +16628,7 @@ Package: Engine
 
 Size: 0x44 | 68 bytes
 
+<a id="animnotify_kismet-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -15878,6 +16643,7 @@ Package: Engine
 
 Size: 0x79 | 121 bytes
 
+<a id="animnotify_playparticleeffect-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -15902,6 +16668,7 @@ Package: Engine
 
 Size: 0x4c | 76 bytes
 
+<a id="animnotify_rumble-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -15919,6 +16686,7 @@ Package: Engine
 
 Size: 0x44 | 68 bytes
 
+<a id="animnotify_script-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -15933,6 +16701,7 @@ Package: Engine
 
 Size: 0x3c | 60 bytes
 
+<a id="animnotify_scripted-functions"></a>
 ### Functions
 
 |Signature|
@@ -15947,6 +16716,7 @@ Package: Engine
 
 Size: 0x8c | 140 bytes
 
+<a id="animnotify_viewshake-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -15964,6 +16734,7 @@ Size: 0x8c | 140 bytes
 |BoneName|FName|0x8|0x80|
 |ShakeParams|CameraShake*|0x4|0x88|
 
+<a id="animnotify_viewshake-functions"></a>
 ### Functions
 
 |Signature|
@@ -15978,6 +16749,7 @@ Package: Engine
 
 Size: 0x50 | 80 bytes
 
+<a id="animnotify_sound-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -15996,6 +16768,7 @@ Package: Engine
 
 Size: 0x60 | 96 bytes
 
+<a id="animobject-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -16016,6 +16789,7 @@ Package: Engine
 
 Size: 0xd4 | 212 bytes
 
+<a id="animnode-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -16037,6 +16811,7 @@ Size: 0xd4 | 212 bytes
 |CachedCurveKeys|TArray\<CurveKey\>|0xc|0xc4|
 |SearchTag|i32|0x4|0xd0|
 
+<a id="animnode-functions"></a>
 ### Functions
 
 |Signature|
@@ -16048,12 +16823,14 @@ OnCeaseRelevant() -> ()|
 OnBecomeRelevant() -> ()|
 OnInit() -> ()|
 
+<a id="animnode-enums"></a>
 ### Enums
 
 |Enum|
 |---|
 |ESliderType {<br>&nbsp;&nbsp;&nbsp;&nbsp;ST_1D,<br>&nbsp;&nbsp;&nbsp;&nbsp;ST_2D,<br>&nbsp;&nbsp;&nbsp;&nbsp;ST_MAX,<br>}|
 
+<a id="animnode-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -16069,6 +16846,7 @@ Package: Engine
 
 Size: 0xe5 | 229 bytes
 
+<a id="animnodeblendbase-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -16078,6 +16856,7 @@ Size: 0xe5 | 229 bytes
 |bDisableMorphTarget|bool|0x4|0xe0|
 |BlendType|i8|0x1|0xe4|
 
+<a id="animnodeblendbase-functions"></a>
 ### Functions
 
 |Signature|
@@ -16085,6 +16864,7 @@ Size: 0xe5 | 229 bytes
 StopAnim() -> ()|
 PlayAnim(<br>&nbsp;&nbsp;&nbsp;&nbsp;bLoop: bool,<br>&nbsp;&nbsp;&nbsp;&nbsp;Rate: f32,<br>&nbsp;&nbsp;&nbsp;&nbsp;StartTime: f32,<br>) -> ()|
 
+<a id="animnodeblendbase-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -16099,6 +16879,7 @@ Package: Engine
 
 Size: 0xf9 | 249 bytes
 
+<a id="animnode_multiblendperbone-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -16107,12 +16888,14 @@ Size: 0xf9 | 249 bytes
 |MaskList|TArray\<PerBoneMaskInfo\>|0xc|0xec|
 |RotationBlendType|i8|0x1|0xf8|
 
+<a id="animnode_multiblendperbone-functions"></a>
 ### Functions
 
 |Signature|
 |---|
 SetMaskWeight(<br>&nbsp;&nbsp;&nbsp;&nbsp;MaskIndex: i32,<br>&nbsp;&nbsp;&nbsp;&nbsp;DesiredWeight: f32,<br>&nbsp;&nbsp;&nbsp;&nbsp;BlendTime: f32,<br>) -> ()|
 
+<a id="animnode_multiblendperbone-enums"></a>
 ### Enums
 
 |Enum|
@@ -16120,6 +16903,7 @@ SetMaskWeight(<br>&nbsp;&nbsp;&nbsp;&nbsp;MaskIndex: i32,<br>&nbsp;&nbsp;&nbsp;&
 |EBlendType {<br>&nbsp;&nbsp;&nbsp;&nbsp;EBT_ParentBoneSpace,<br>&nbsp;&nbsp;&nbsp;&nbsp;EBT_MeshSpace,<br>&nbsp;&nbsp;&nbsp;&nbsp;EBT_MAX,<br>}|
 |EWeightCheck {<br>&nbsp;&nbsp;&nbsp;&nbsp;EWC_AnimNodeSlotNotPlaying,<br>&nbsp;&nbsp;&nbsp;&nbsp;EWC_ChildIndexFullWeight,<br>&nbsp;&nbsp;&nbsp;&nbsp;EWC_ChildIndexNotFullWeight,<br>&nbsp;&nbsp;&nbsp;&nbsp;EWC_ChildIndexRelevant,<br>&nbsp;&nbsp;&nbsp;&nbsp;EWC_ChildIndexNotRelevant,<br>&nbsp;&nbsp;&nbsp;&nbsp;EWC_MAX,<br>}|
 
+<a id="animnode_multiblendperbone-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -16137,6 +16921,7 @@ Package: Engine
 
 Size: 0x13c | 316 bytes
 
+<a id="animnodeaimoffset-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -16156,6 +16941,7 @@ Size: 0x13c | 316 bytes
 |Profiles|TArray\<AimOffsetProfile\>|0xc|0x12c|
 |CurrentProfileIndex|i32|0x4|0x138|
 
+<a id="animnodeaimoffset-functions"></a>
 ### Functions
 
 |Signature|
@@ -16163,6 +16949,7 @@ Size: 0x13c | 316 bytes
 SetActiveProfileByIndex(<br>&nbsp;&nbsp;&nbsp;&nbsp;ProfileIndex: i32,<br>) -> ()|
 SetActiveProfileByName(<br>&nbsp;&nbsp;&nbsp;&nbsp;ProfileName: FName,<br>) -> ()|
 
+<a id="animnodeaimoffset-enums"></a>
 ### Enums
 
 |Enum|
@@ -16170,6 +16957,7 @@ SetActiveProfileByName(<br>&nbsp;&nbsp;&nbsp;&nbsp;ProfileName: FName,<br>) -> (
 |EAimID {<br>&nbsp;&nbsp;&nbsp;&nbsp;EAID_LeftUp,<br>&nbsp;&nbsp;&nbsp;&nbsp;EAID_LeftDown,<br>&nbsp;&nbsp;&nbsp;&nbsp;EAID_RightUp,<br>&nbsp;&nbsp;&nbsp;&nbsp;EAID_RightDown,<br>&nbsp;&nbsp;&nbsp;&nbsp;EAID_ZeroUp,<br>&nbsp;&nbsp;&nbsp;&nbsp;EAID_ZeroDown,<br>&nbsp;&nbsp;&nbsp;&nbsp;EAID_ZeroLeft,<br>&nbsp;&nbsp;&nbsp;&nbsp;EAID_ZeroRight,<br>&nbsp;&nbsp;&nbsp;&nbsp;EAID_CellLU,<br>&nbsp;&nbsp;&nbsp;&nbsp;EAID_CellCU,<br>&nbsp;&nbsp;&nbsp;&nbsp;EAID_CellRU,<br>&nbsp;&nbsp;&nbsp;&nbsp;EAID_CellLC,<br>&nbsp;&nbsp;&nbsp;&nbsp;EAID_CellCC,<br>&nbsp;&nbsp;&nbsp;&nbsp;EAID_CellRC,<br>&nbsp;&nbsp;&nbsp;&nbsp;EAID_CellLD,<br>&nbsp;&nbsp;&nbsp;&nbsp;EAID_CellCD,<br>&nbsp;&nbsp;&nbsp;&nbsp;EAID_CellRD,<br>&nbsp;&nbsp;&nbsp;&nbsp;EAID_MAX,<br>}|
 |EAnimAimDir {<br>&nbsp;&nbsp;&nbsp;&nbsp;ANIMAIM_LEFTUP,<br>&nbsp;&nbsp;&nbsp;&nbsp;ANIMAIM_CENTERUP,<br>&nbsp;&nbsp;&nbsp;&nbsp;ANIMAIM_RIGHTUP,<br>&nbsp;&nbsp;&nbsp;&nbsp;ANIMAIM_LEFTCENTER,<br>&nbsp;&nbsp;&nbsp;&nbsp;ANIMAIM_CENTERCENTER,<br>&nbsp;&nbsp;&nbsp;&nbsp;ANIMAIM_RIGHTCENTER,<br>&nbsp;&nbsp;&nbsp;&nbsp;ANIMAIM_LEFTDOWN,<br>&nbsp;&nbsp;&nbsp;&nbsp;ANIMAIM_CENTERDOWN,<br>&nbsp;&nbsp;&nbsp;&nbsp;ANIMAIM_RIGHTDOWN,<br>&nbsp;&nbsp;&nbsp;&nbsp;ANIMAIM_MAX,<br>}|
 
+<a id="animnodeaimoffset-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -16186,6 +16974,7 @@ Package: Engine
 
 Size: 0xf8 | 248 bytes
 
+<a id="animnodeblend-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -16195,6 +16984,7 @@ Size: 0xf8 | 248 bytes
 |BlendTimeToGo|f32|0x4|0xf0|
 |bSkipBlendWhenNotRendered|bool|0x4|0xf4|
 
+<a id="animnodeblend-functions"></a>
 ### Functions
 
 |Signature|
@@ -16209,6 +16999,7 @@ Package: Engine
 
 Size: 0xfc | 252 bytes
 
+<a id="animnodeadditiveblending-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -16223,6 +17014,7 @@ Package: Engine
 
 Size: 0x120 | 288 bytes
 
+<a id="animnodeblendperbone-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -16240,6 +17032,7 @@ Package: Engine
 
 Size: 0x108 | 264 bytes
 
+<a id="animnodecrossfader-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -16248,6 +17041,7 @@ Size: 0x108 | 264 bytes
 |bDontBlendOutOneShot|bool|0x4|0x100|
 |PendingBlendOutTimeOneShot|f32|0x4|0x104|
 
+<a id="animnodecrossfader-functions"></a>
 ### Functions
 
 |Signature|
@@ -16265,6 +17059,7 @@ Package: Engine
 
 Size: 0x100 | 256 bytes
 
+<a id="animnodeplaycustomanim-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -16272,6 +17067,7 @@ Size: 0x100 | 256 bytes
 |bIsPlayingCustomAnim|bool|0x4|0xf8|
 |CustomPendingBlendOutTime|f32|0x4|0xfc|
 
+<a id="animnodeplaycustomanim-functions"></a>
 ### Functions
 
 |Signature|
@@ -16292,6 +17088,7 @@ Package: Engine
 
 Size: 0x100 | 256 bytes
 
+<a id="animnodeblenddirectional-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -16309,6 +17106,7 @@ Package: Engine
 
 Size: 0x104 | 260 bytes
 
+<a id="animnodeblendlist-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -16321,6 +17119,7 @@ Size: 0x104 | 260 bytes
 |bSkipBlendWhenNotRendered|bool|0x4|0xfc|
 |SliderPosition|f32|0x4|0x100|
 
+<a id="animnodeblendlist-functions"></a>
 ### Functions
 
 |Signature|
@@ -16335,6 +17134,7 @@ Package: Engine
 
 Size: 0x11c | 284 bytes
 
+<a id="animnodeblendbybase-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -16345,6 +17145,7 @@ Size: 0x11c | 284 bytes
 |BlendTime|f32|0x4|0x114|
 |CachedBase|Actor*|0x4|0x118|
 
+<a id="animnodeblendbybase-enums"></a>
 ### Enums
 
 |Enum|
@@ -16373,6 +17174,7 @@ Package: Engine
 
 Size: 0x12c | 300 bytes
 
+<a id="animnodeblendbyproperty-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -16395,6 +17197,7 @@ Package: Engine
 
 Size: 0x128 | 296 bytes
 
+<a id="animnodeblendbyspeed-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -16415,6 +17218,7 @@ Package: Engine
 
 Size: 0x118 | 280 bytes
 
+<a id="animnoderandom-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -16423,6 +17227,7 @@ Size: 0x118 | 280 bytes
 |PlayingSeqNode|AnimNodeSequence*|0x4|0x110|
 |PendingChildIndex|i32|0x4|0x114|
 
+<a id="animnoderandom-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -16437,6 +17242,7 @@ Package: Engine
 
 Size: 0x100 | 256 bytes
 
+<a id="animnodeblendmultibone-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -16444,12 +17250,14 @@ Size: 0x100 | 256 bytes
 |BlendTargetList|TArray\<ChildBoneBlendInfo\>|0xc|0xe8|
 |SourceRequiredBones|TArray\<i8\>|0xc|0xf4|
 
+<a id="animnodeblendmultibone-functions"></a>
 ### Functions
 
 |Signature|
 |---|
 SetTargetStartBone(<br>&nbsp;&nbsp;&nbsp;&nbsp;TargetIdx: i32,<br>&nbsp;&nbsp;&nbsp;&nbsp;StartBoneName: FName,<br>&nbsp;&nbsp;&nbsp;&nbsp;PerBoneIncrease: f32,<br>) -> ()|
 
+<a id="animnodeblendmultibone-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -16464,6 +17272,7 @@ Package: Engine
 
 Size: 0xec | 236 bytes
 
+<a id="animnodemirror-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -16478,6 +17287,7 @@ Package: Engine
 
 Size: 0xec | 236 bytes
 
+<a id="animnodescaleplayrate-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -16492,6 +17302,7 @@ Package: Engine
 
 Size: 0xf0 | 240 bytes
 
+<a id="animnodescaleratebyspeed-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -16506,6 +17317,7 @@ Package: Engine
 
 Size: 0x10c | 268 bytes
 
+<a id="animnodeslot-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -16521,6 +17333,7 @@ Size: 0x10c | 268 bytes
 |BlendTimeToGo|f32|0x4|0x104|
 |SynchNode|AnimNodeSynch*|0x4|0x108|
 
+<a id="animnodeslot-functions"></a>
 ### Functions
 
 |Signature|
@@ -16544,12 +17357,14 @@ Package: Engine
 
 Size: 0xf4 | 244 bytes
 
+<a id="animnodesynch-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
 |---|:-:|:-:|:-:|
 |Groups|TArray\<SynchGroup\>|0xc|0xe8|
 
+<a id="animnodesynch-functions"></a>
 ### Functions
 
 |Signature|
@@ -16561,6 +17376,7 @@ GetMasterNodeOfGroup(<br>&nbsp;&nbsp;&nbsp;&nbsp;GroupName: FName,<br>) -> AnimN
 RemoveNodeFromGroup(<br>&nbsp;&nbsp;&nbsp;&nbsp;SeqNode: AnimNodeSequence*,<br>&nbsp;&nbsp;&nbsp;&nbsp;GroupName: FName,<br>) -> ()|
 AddNodeToGroup(<br>&nbsp;&nbsp;&nbsp;&nbsp;SeqNode: AnimNodeSequence*,<br>&nbsp;&nbsp;&nbsp;&nbsp;GroupName: FName,<br>) -> ()|
 
+<a id="animnodesynch-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -16575,6 +17391,7 @@ Package: Engine
 
 Size: 0x1d0 | 464 bytes
 
+<a id="animtree-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -16608,6 +17425,7 @@ Size: 0x1d0 | 464 bytes
 |PreviewFloorPos|Vector|0xc|0x1c0|
 |PreviewFloorYaw|i32|0x4|0x1cc|
 
+<a id="animtree-functions"></a>
 ### Functions
 
 |Signature|
@@ -16624,6 +17442,7 @@ SetUseSavedPose(<br>&nbsp;&nbsp;&nbsp;&nbsp;bUseSaved: bool,<br>) -> ()|
 FindMorphNode(<br>&nbsp;&nbsp;&nbsp;&nbsp;InNodeName: FName,<br>) -> MorphNodeBase*|
 FindSkelControl(<br>&nbsp;&nbsp;&nbsp;&nbsp;InControlName: FName,<br>) -> SkelControlBase*|
 
+<a id="animtree-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -16642,12 +17461,14 @@ Package: Engine
 
 Size: 0x138 | 312 bytes
 
+<a id="animnodesequenceblendbase-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
 |---|:-:|:-:|:-:|
 |Anims|TArray\<AnimBlendInfo\>|0xc|0x12c|
 
+<a id="animnodesequenceblendbase-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -16663,6 +17484,7 @@ Package: Engine
 
 Size: 0x1a8 | 424 bytes
 
+<a id="animnodesequenceblendbyaim-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -16682,6 +17504,7 @@ Size: 0x1a8 | 424 bytes
 |AnimName_RC|FName|0x8|0x198|
 |AnimName_RD|FName|0x8|0x1a0|
 
+<a id="animnodesequenceblendbyaim-functions"></a>
 ### Functions
 
 |Signature|
@@ -16696,6 +17519,7 @@ Package: Engine
 
 Size: 0x6c | 108 bytes
 
+<a id="morphnodebase-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -16711,6 +17535,7 @@ Package: Engine
 
 Size: 0x90 | 144 bytes
 
+<a id="morphnodemultipose-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -16719,6 +17544,7 @@ Size: 0x90 | 144 bytes
 |MorphNames|TArray\<FName\>|0xc|0x78|
 |Weights|TArray\<f32\>|0xc|0x84|
 
+<a id="morphnodemultipose-functions"></a>
 ### Functions
 
 |Signature|
@@ -16735,6 +17561,7 @@ Package: Engine
 
 Size: 0x7c | 124 bytes
 
+<a id="morphnodepose-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -16743,6 +17570,7 @@ Size: 0x7c | 124 bytes
 |MorphName|FName|0x8|0x70|
 |Weight|f32|0x4|0x78|
 
+<a id="morphnodepose-functions"></a>
 ### Functions
 
 |Signature|
@@ -16757,12 +17585,14 @@ Package: Engine
 
 Size: 0x78 | 120 bytes
 
+<a id="morphnodeweightbase-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
 |---|:-:|:-:|:-:|
 |NodeConns|TArray\<MorphNodeConn\>|0xc|0x6c|
 
+<a id="morphnodeweightbase-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -16777,12 +17607,14 @@ Package: Engine
 
 Size: 0x7c | 124 bytes
 
+<a id="morphnodeweight-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
 |---|:-:|:-:|:-:|
 |NodeWeight|f32|0x4|0x78|
 
+<a id="morphnodeweight-functions"></a>
 ### Functions
 
 |Signature|
@@ -16797,6 +17629,7 @@ Package: Engine
 
 Size: 0xb4 | 180 bytes
 
+<a id="morphnodeweightbyboneangle-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -16815,6 +17648,7 @@ Size: 0xb4 | 180 bytes
 |MaterialInstanceConstant|MaterialInstanceConstant*|0x4|0xa4|
 |WeightArray|TArray\<BoneAngleMorph\>|0xc|0xa8|
 
+<a id="morphnodeweightbyboneangle-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -16829,6 +17663,7 @@ Package: Engine
 
 Size: 0xac | 172 bytes
 
+<a id="morphnodeweightbybonerotation-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -16852,6 +17687,7 @@ Package: Engine
 
 Size: 0xc4 | 196 bytes
 
+<a id="skelcontrolbase-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -16880,6 +17716,7 @@ Size: 0xc4 | 196 bytes
 |ControlPosX|i32|0x4|0xbc|
 |ControlPosY|i32|0x4|0xc0|
 
+<a id="skelcontrolbase-functions"></a>
 ### Functions
 
 |Signature|
@@ -16887,6 +17724,7 @@ Size: 0xc4 | 196 bytes
 SetSkelControlStrength(<br>&nbsp;&nbsp;&nbsp;&nbsp;NewStrength: f32,<br>&nbsp;&nbsp;&nbsp;&nbsp;InBlendTime: f32,<br>) -> ()|
 SetSkelControlActive(<br>&nbsp;&nbsp;&nbsp;&nbsp;bInActive: bool,<br>) -> ()|
 
+<a id="skelcontrolbase-enums"></a>
 ### Enums
 
 |Enum|
@@ -16901,6 +17739,7 @@ Package: Engine
 
 Size: 0x10c | 268 bytes
 
+<a id="skelcontrol_ccd_ik-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -16926,6 +17765,7 @@ Package: Engine
 
 Size: 0xd0 | 208 bytes
 
+<a id="skelcontrol_twistbone-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -16941,6 +17781,7 @@ Package: Engine
 
 Size: 0x104 | 260 bytes
 
+<a id="skelcontrollimb-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -16969,6 +17810,7 @@ Package: Engine
 
 Size: 0x128 | 296 bytes
 
+<a id="skelcontrolfootplacement-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -16991,6 +17833,7 @@ Package: Engine
 
 Size: 0x138 | 312 bytes
 
+<a id="skelcontrollookat-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -17026,6 +17869,7 @@ Size: 0x138 | 312 bytes
 |BaseBonePos|Vector|0xc|0x128|
 |LastCalcTime|f32|0x4|0x134|
 
+<a id="skelcontrollookat-functions"></a>
 ### Functions
 
 |Signature|
@@ -17043,6 +17887,7 @@ Package: Engine
 
 Size: 0xf4 | 244 bytes
 
+<a id="skelcontrolsinglebone-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -17067,6 +17912,7 @@ Package: Engine
 
 Size: 0x108 | 264 bytes
 
+<a id="skelcontrolhandlebars-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -17085,6 +17931,7 @@ Package: Engine
 
 Size: 0x10c | 268 bytes
 
+<a id="skelcontrolwheel-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -17106,6 +17953,7 @@ Package: Engine
 
 Size: 0xd8 | 216 bytes
 
+<a id="skelcontrolspline-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -17117,6 +17965,7 @@ Size: 0xd8 | 216 bytes
 |EndSplineTension|f32|0x4|0xd0|
 |StartSplineTension|f32|0x4|0xd4|
 
+<a id="skelcontrolspline-enums"></a>
 ### Enums
 
 |Enum|
@@ -17131,6 +17980,7 @@ Package: Engine
 
 Size: 0x140 | 320 bytes
 
+<a id="skelcontroltrail-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -17156,6 +18006,7 @@ Package: Engine
 
 Size: 0x110 | 272 bytes
 
+<a id="animsequence-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -17191,12 +18042,14 @@ Size: 0x110 | 272 bytes
 |UseScore|f32|0x4|0x100|
 |AnimTags|TArray\<AnimTag\>|0xc|0x104|
 
+<a id="animsequence-functions"></a>
 ### Functions
 
 |Signature|
 |---|
 GetNotifyTimeByClass(<br>&nbsp;&nbsp;&nbsp;&nbsp;NotifyClass: UClass*,<br>&nbsp;&nbsp;&nbsp;&nbsp;PlayRate: f32,<br>&nbsp;&nbsp;&nbsp;&nbsp;StartPosition: f32,<br>) -> f32|
 
+<a id="animsequence-enums"></a>
 ### Enums
 
 |Enum|
@@ -17204,6 +18057,7 @@ GetNotifyTimeByClass(<br>&nbsp;&nbsp;&nbsp;&nbsp;NotifyClass: UClass*,<br>&nbsp;
 |AnimationKeyFormat {<br>&nbsp;&nbsp;&nbsp;&nbsp;AKF_ConstantKeyLerp,<br>&nbsp;&nbsp;&nbsp;&nbsp;AKF_VariableKeyLerp,<br>&nbsp;&nbsp;&nbsp;&nbsp;AKF_MAX,<br>}|
 |AnimationCompressionFormat {<br>&nbsp;&nbsp;&nbsp;&nbsp;ACF_None,<br>&nbsp;&nbsp;&nbsp;&nbsp;ACF_Float96NoW,<br>&nbsp;&nbsp;&nbsp;&nbsp;ACF_Fixed48NoW,<br>&nbsp;&nbsp;&nbsp;&nbsp;ACF_IntervalFixed32NoW,<br>&nbsp;&nbsp;&nbsp;&nbsp;ACF_Fixed32NoW,<br>&nbsp;&nbsp;&nbsp;&nbsp;ACF_Float32NoW,<br>&nbsp;&nbsp;&nbsp;&nbsp;ACF_MAX,<br>}|
 
+<a id="animsequence-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -17226,6 +18080,7 @@ Package: Engine
 
 Size: 0x84 | 132 bytes
 
+<a id="animset-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -17238,6 +18093,7 @@ Size: 0x84 | 132 bytes
 |ForceMeshTranslationBoneNames|TArray\<FName\>|0xc|0x70|
 |PreviewSkelMeshName|FName|0x8|0x7c|
 
+<a id="animset-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -17252,6 +18108,7 @@ Package: Engine
 
 Size: 0x58 | 88 bytes
 
+<a id="morphtarget-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -17269,6 +18126,7 @@ Package: Engine
 
 Size: 0x58 | 88 bytes
 
+<a id="morphtargetset-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -17277,6 +18135,7 @@ Size: 0x58 | 88 bytes
 |BaseSkelMesh|SkeletalMesh*|0x4|0x48|
 |RawWedgePointIndices|TArray\<i32\>|0xc|0x4c|
 
+<a id="morphtargetset-functions"></a>
 ### Functions
 
 |Signature|
@@ -17298,6 +18157,7 @@ Package: Engine
 
 Size: 0x1e8 | 488 bytes
 
+<a id="decalactorbase-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -17326,6 +18186,7 @@ Package: Engine
 
 Size: 0x214 | 532 bytes
 
+<a id="decalmanager-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -17338,6 +18199,7 @@ Size: 0x214 | 532 bytes
 |DecalBlendRange|Vector2D|0x8|0x200|
 |ActiveDecals|TArray\<ActiveDecalInfo\>|0xc|0x208|
 
+<a id="decalmanager-functions"></a>
 ### Functions
 
 |Signature|
@@ -17349,6 +18211,7 @@ CanSpawnDecals() -> bool|
 DecalFinished(<br>&nbsp;&nbsp;&nbsp;&nbsp;Decal: DecalComponent*,<br>) -> ()|
 AreDynamicDecalsEnabled() -> bool|
 
+<a id="decalmanager-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -17363,6 +18226,7 @@ Package: Engine
 
 Size: 0x5c | 92 bytes
 
+<a id="actorfactorydecal-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -17384,6 +18248,7 @@ Package: Engine
 
 Size: 0x1f0 | 496 bytes
 
+<a id="fogvolumedensityinfo-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -17392,6 +18257,7 @@ Size: 0x1f0 | 496 bytes
 |AutomaticMeshComponent|StaticMeshComponent*|0x4|0x1e8|
 |bEnabled|bool|0x4|0x1ec|
 
+<a id="fogvolumedensityinfo-functions"></a>
 ### Functions
 
 |Signature|
@@ -17403,6 +18269,7 @@ OnToggle(<br>&nbsp;&nbsp;&nbsp;&nbsp;Action: SeqAct_Toggle*,<br>) -> ()|
 ReplicatedEvent(<br>&nbsp;&nbsp;&nbsp;&nbsp;VarName: FName,<br>) -> ()|
 PostBeginPlay() -> ()|
 
+<a id="fogvolumedensityinfo-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -17445,6 +18312,7 @@ Package: Engine
 
 Size: 0x94 | 148 bytes
 
+<a id="fogvolumedensitycomponent-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -17458,6 +18326,7 @@ Size: 0x94 | 148 bytes
 |StartDistance|f32|0x4|0x84|
 |FogVolumeActors|TArray\<Actor*\>|0xc|0x88|
 
+<a id="fogvolumedensitycomponent-functions"></a>
 ### Functions
 
 |Signature|
@@ -17472,6 +18341,7 @@ Package: Engine
 
 Size: 0x60 | 96 bytes
 
+<a id="actorfactoryfogvolumeconstantdensityinfo-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -17501,6 +18371,7 @@ Package: Engine
 
 Size: 0x248 | 584 bytes
 
+<a id="fracturedstaticmeshactor-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -17521,6 +18392,7 @@ Size: 0x248 | 584 bytes
 |ExplosionFractureSound|SoundCue*|0x4|0x240|
 |SingleChunkFractureSound|SoundCue*|0x4|0x244|
 
+<a id="fracturedstaticmeshactor-functions"></a>
 ### Functions
 
 |Signature|
@@ -17541,6 +18413,7 @@ PostBeginPlay(<br>&nbsp;&nbsp;&nbsp;&nbsp;PhysMat: PhysicalMaterial*,<br>) -> ()
 SpawnPartMulti(<br>&nbsp;&nbsp;&nbsp;&nbsp;ChunkIndices: TArray\<i32\>,<br>&nbsp;&nbsp;&nbsp;&nbsp;InitialVel: Vector,<br>&nbsp;&nbsp;&nbsp;&nbsp;InitialAngVel: Vector,<br>&nbsp;&nbsp;&nbsp;&nbsp;RelativeScale: f32,<br>&nbsp;&nbsp;&nbsp;&nbsp;bExplosion: bool,<br>) -> FracturedStaticMeshPart*|
 SpawnPart(<br>&nbsp;&nbsp;&nbsp;&nbsp;ChunkIndex: i32,<br>&nbsp;&nbsp;&nbsp;&nbsp;InitialVel: Vector,<br>&nbsp;&nbsp;&nbsp;&nbsp;InitialAngVel: Vector,<br>&nbsp;&nbsp;&nbsp;&nbsp;RelativeScale: f32,<br>&nbsp;&nbsp;&nbsp;&nbsp;bExplosion: bool,<br>) -> FracturedStaticMeshPart*|
 
+<a id="fracturedstaticmeshactor-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -17555,6 +18428,7 @@ Package: Engine
 
 Size: 0x27c | 636 bytes
 
+<a id="fracturedstaticmeshpart-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -17573,6 +18447,7 @@ Size: 0x27c | 636 bytes
 |LastImpactSoundTime|f32|0x4|0x274|
 |RelativeScale|f32|0x4|0x278|
 
+<a id="fracturedstaticmeshpart-functions"></a>
 ### Functions
 
 |Signature|
@@ -17593,6 +18468,7 @@ Package: Engine
 
 Size: 0x2cd | 717 bytes
 
+<a id="physxdestructibleactor-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -17615,6 +18491,7 @@ Size: 0x2cd | 717 bytes
 |SupportDepth|i32|0x4|0x2c8|
 |NumPartsRemaining|i8|0x1|0x2cc|
 
+<a id="physxdestructibleactor-functions"></a>
 ### Functions
 
 |Signature|
@@ -17630,6 +18507,7 @@ SpawnEffects(<br>&nbsp;&nbsp;&nbsp;&nbsp;I: i32,<br>&nbsp;&nbsp;&nbsp;&nbsp;Effe
 term() -> ()|
 Init() -> ()|
 
+<a id="physxdestructibleactor-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -17644,6 +18522,7 @@ Package: Engine
 
 Size: 0x21c | 540 bytes
 
+<a id="fracturemanager-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -17658,6 +18537,7 @@ Size: 0x21c | 540 bytes
 |FreeParts|TArray\<i32\>|0xc|0x204|
 |ActorsWithDeferredPartsToSpawn|TArray\<FracturedStaticMeshActor*\>|0xc|0x210|
 
+<a id="fracturemanager-functions"></a>
 ### Functions
 
 |Signature|
@@ -17678,6 +18558,7 @@ GetFSMDirectSpawnChanceScale() -> f32|
 GetNumFSMPartsScale() -> f32|
 SpawnChunkDestroyEffect(<br>&nbsp;&nbsp;&nbsp;&nbsp;Effect: ParticleSystem*,<br>&nbsp;&nbsp;&nbsp;&nbsp;ChunkBox: Box,<br>&nbsp;&nbsp;&nbsp;&nbsp;ChunkDir: Vector,<br>&nbsp;&nbsp;&nbsp;&nbsp;Scale: f32,<br>&nbsp;&nbsp;&nbsp;&nbsp;ChunkMiddle: Vector,<br>&nbsp;&nbsp;&nbsp;&nbsp;EffectComp: ParticleSystemComponent*,<br>) -> ()|
 
+<a id="fracturemanager-consts"></a>
 ### Consts
 
 |Constant|Value|
@@ -17692,6 +18573,7 @@ Package: Engine
 
 Size: 0x215 | 533 bytes
 
+<a id="physxdestructiblepart-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -17706,6 +18588,7 @@ Size: 0x215 | 533 bytes
 |NumChunksRemaining|TArray\<i8\>|0xc|0x208|
 |NumMeshesRemaining|i8|0x1|0x214|
 
+<a id="physxdestructiblepart-functions"></a>
 ### Functions
 
 |Signature|
@@ -17721,6 +18604,7 @@ Package: Engine
 
 Size: 0x260 | 608 bytes
 
+<a id="fracturedbasecomponent-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -17737,6 +18621,7 @@ Size: 0x260 | 608 bytes
 |ComponentIndexBufferSize|i32|0x4|0x258|
 |bResetStaticMesh|i32|0x4|0x25c|
 
+<a id="fracturedbasecomponent-functions"></a>
 ### Functions
 
 |Signature|
@@ -17755,6 +18640,7 @@ Package: Engine
 
 Size: 0x25c | 604 bytes
 
+<a id="instancedstaticmeshcomponent-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -17764,6 +18650,7 @@ Size: 0x25c | 604 bytes
 |ComponentJoinKey|i32|0x4|0x24c|
 |CachedMappings|TArray\<InstancedStaticMeshMappingInfo\>|0xc|0x250|
 
+<a id="instancedstaticmeshcomponent-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -17779,6 +18666,7 @@ Package: Engine
 
 Size: 0x2a4 | 676 bytes
 
+<a id="splinemeshcomponent-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -17787,6 +18675,7 @@ Size: 0x2a4 | 676 bytes
 |SplineXDir|Vector|0xc|0x294|
 |bSmoothInterpRollScale|bool|0x4|0x2a0|
 
+<a id="splinemeshcomponent-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -17801,6 +18690,7 @@ Package: Engine
 
 Size: 0x200 | 512 bytes
 
+<a id="physxdestructiblecomponent-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -17818,6 +18708,7 @@ Package: Engine
 
 Size: 0x88 | 136 bytes
 
+<a id="physxdestructible-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -17827,6 +18718,7 @@ Size: 0x88 | 136 bytes
 |DestructibleParameters|PhysXDestructibleParameters|0x30|0x4c|
 |CookingScales|TArray\<Vector\>|0xc|0x7c|
 
+<a id="physxdestructible-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -17842,6 +18734,7 @@ Package: Engine
 
 Size: 0x64 | 100 bytes
 
+<a id="physxdestructibleasset-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -17851,6 +18744,7 @@ Size: 0x64 | 100 bytes
 |Assets|TArray\<PhysicsAsset*\>|0xc|0x54|
 |MaxDepth|i32|0x4|0x60|
 
+<a id="physxdestructibleasset-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -17865,6 +18759,7 @@ Package: Engine
 
 Size: 0xd8 | 216 bytes
 
+<a id="physxdestructiblestructure-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -17887,6 +18782,7 @@ Size: 0xd8 | 216 bytes
 |RouteUpdateFifoStart|i32|0x4|0xd0|
 |SupportDepth|i32|0x4|0xd4|
 
+<a id="physxdestructiblestructure-functions"></a>
 ### Functions
 
 |Signature|
@@ -17897,12 +18793,14 @@ CrumbleChunk(<br>&nbsp;&nbsp;&nbsp;&nbsp;ChunkIndex: i32,<br>) -> ()|
 FractureChunk(<br>&nbsp;&nbsp;&nbsp;&nbsp;ChunkIndex: i32,<br>&nbsp;&nbsp;&nbsp;&nbsp;Point: Vector,<br>&nbsp;&nbsp;&nbsp;&nbsp;Impulse: Vector,<br>&nbsp;&nbsp;&nbsp;&nbsp;bInheritRootVel: bool,<br>) -> ()|
 DamageChunk(<br>&nbsp;&nbsp;&nbsp;&nbsp;ChunkIndex: i32,<br>&nbsp;&nbsp;&nbsp;&nbsp;Point: Vector,<br>&nbsp;&nbsp;&nbsp;&nbsp;BaseDamage: f32,<br>&nbsp;&nbsp;&nbsp;&nbsp;Radius: f32,<br>&nbsp;&nbsp;&nbsp;&nbsp;bFullDamage: bool,<br>&nbsp;&nbsp;&nbsp;&nbsp;DamageFalloffExp: f32,<br>&nbsp;&nbsp;&nbsp;&nbsp;Output: TArray\<i32\>,<br>) -> bool|
 
+<a id="physxdestructiblestructure-enums"></a>
 ### Enums
 
 |Enum|
 |---|
 |EPhysXDestructibleChunkState {<br>&nbsp;&nbsp;&nbsp;&nbsp;DCS_StaticRoot,<br>&nbsp;&nbsp;&nbsp;&nbsp;DCS_StaticChild,<br>&nbsp;&nbsp;&nbsp;&nbsp;DCS_DynamicRoot,<br>&nbsp;&nbsp;&nbsp;&nbsp;DCS_DynamicChild,<br>&nbsp;&nbsp;&nbsp;&nbsp;DCS_Hidden,<br>&nbsp;&nbsp;&nbsp;&nbsp;DCS_MAX,<br>}|
 
+<a id="physxdestructiblestructure-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -17918,6 +18816,7 @@ Package: Engine
 
 Size: 0x54 | 84 bytes
 
+<a id="interpfilter_custom-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -17932,6 +18831,7 @@ Package: Engine
 
 Size: 0x68 | 104 bytes
 
+<a id="interpgroup-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -17946,6 +18846,7 @@ Size: 0x68 | 104 bytes
 |bIsFolder|bool|0x4|0x64|
 |bIsParented|bool|0x4|0x64|
 
+<a id="interpgroup-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -17974,6 +18875,7 @@ Package: Engine
 
 Size: 0x6c | 108 bytes
 
+<a id="interptrackdirector-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -17981,6 +18883,7 @@ Size: 0x6c | 108 bytes
 |CutTrack|TArray\<DirectorTrackCut\>|0xc|0x5c|
 |bSimulateCameraCutsOnClients|bool|0x4|0x68|
 
+<a id="interptrackdirector-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -17995,6 +18898,7 @@ Package: Engine
 
 Size: 0x6c | 108 bytes
 
+<a id="interptrackevent-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -18004,6 +18908,7 @@ Size: 0x6c | 108 bytes
 |bFireEventsWhenBackwards|bool|0x4|0x68|
 |bFireEventsWhenJumpingForwards|bool|0x4|0x68|
 
+<a id="interptrackevent-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -18018,6 +18923,7 @@ Package: Engine
 
 Size: 0x84 | 132 bytes
 
+<a id="interptrackfacefx-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -18027,6 +18933,7 @@ Size: 0x84 | 132 bytes
 |CachedActorFXAsset|FaceFXAsset*|0x4|0x74|
 |FaceFXSoundCueKeys|TArray\<FaceFXSoundCueKey\>|0xc|0x78|
 
+<a id="interptrackfacefx-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -18042,6 +18949,7 @@ Package: Engine
 
 Size: 0x70 | 112 bytes
 
+<a id="interptrackfloatbase-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -18057,6 +18965,7 @@ Package: Engine
 
 Size: 0x90 | 144 bytes
 
+<a id="interptrackanimcontrol-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -18065,6 +18974,7 @@ Size: 0x90 | 144 bytes
 |SlotName|FName|0x8|0x7c|
 |AnimSeqs|TArray\<AnimControlTrackKey\>|0xc|0x84|
 
+<a id="interptrackanimcontrol-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -18079,6 +18989,7 @@ Package: Engine
 
 Size: 0x74 | 116 bytes
 
+<a id="interptrackfade-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -18093,6 +19004,7 @@ Package: Engine
 
 Size: 0x78 | 120 bytes
 
+<a id="interptrackfloatmaterialparam-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -18107,6 +19019,7 @@ Package: Engine
 
 Size: 0x78 | 120 bytes
 
+<a id="interptrackfloatparticleparam-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -18121,6 +19034,7 @@ Package: Engine
 
 Size: 0x78 | 120 bytes
 
+<a id="interptrackfloatprop-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -18135,6 +19049,7 @@ Package: Engine
 
 Size: 0x78 | 120 bytes
 
+<a id="interptrackmorphweight-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -18149,6 +19064,7 @@ Package: Engine
 
 Size: 0x78 | 120 bytes
 
+<a id="interptrackskelcontrolscale-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -18170,6 +19086,7 @@ Package: Engine
 
 Size: 0x70 | 112 bytes
 
+<a id="interptracklinearcolorbase-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -18185,6 +19102,7 @@ Package: Engine
 
 Size: 0x78 | 120 bytes
 
+<a id="interptracklinearcolorprop-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -18199,6 +19117,7 @@ Package: Engine
 
 Size: 0x9e | 158 bytes
 
+<a id="interptrackmove-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -18218,6 +19137,7 @@ Size: 0x9e | 158 bytes
 |MoveFrame|i8|0x1|0x9c|
 |RotMode|i8|0x1|0x9d|
 
+<a id="interptrackmove-enums"></a>
 ### Enums
 
 |Enum|
@@ -18225,6 +19145,7 @@ Size: 0x9e | 158 bytes
 |EInterpTrackMoveRotMode {<br>&nbsp;&nbsp;&nbsp;&nbsp;IMR_Keyframed,<br>&nbsp;&nbsp;&nbsp;&nbsp;IMR_LookAtGroup,<br>&nbsp;&nbsp;&nbsp;&nbsp;IMR_MAX,<br>}|
 |EInterpTrackMoveFrame {<br>&nbsp;&nbsp;&nbsp;&nbsp;IMF_World,<br>&nbsp;&nbsp;&nbsp;&nbsp;IMF_RelativeToInitial,<br>&nbsp;&nbsp;&nbsp;&nbsp;IMF_MAX,<br>}|
 
+<a id="interptrackmove-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -18240,6 +19161,7 @@ Package: Engine
 
 Size: 0x70 | 112 bytes
 
+<a id="interptrackparticlereplay-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -18248,6 +19170,7 @@ Size: 0x70 | 112 bytes
 |bIsCapturingReplay|bool|0x4|0x68|
 |FixedTimeStep|f32|0x4|0x6c|
 
+<a id="interptrackparticlereplay-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -18262,6 +19185,7 @@ Package: Engine
 
 Size: 0x6c | 108 bytes
 
+<a id="interptracktoggle-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -18272,12 +19196,14 @@ Size: 0x6c | 108 bytes
 |bFireEventsWhenBackwards|bool|0x4|0x68|
 |bFireEventsWhenJumpingForwards|bool|0x4|0x68|
 
+<a id="interptracktoggle-enums"></a>
 ### Enums
 
 |Enum|
 |---|
 |ETrackToggleAction {<br>&nbsp;&nbsp;&nbsp;&nbsp;ETTA_Off,<br>&nbsp;&nbsp;&nbsp;&nbsp;ETTA_On,<br>&nbsp;&nbsp;&nbsp;&nbsp;ETTA_Toggle,<br>&nbsp;&nbsp;&nbsp;&nbsp;ETTA_Trigger,<br>&nbsp;&nbsp;&nbsp;&nbsp;ETTA_MAX,<br>}|
 
+<a id="interptracktoggle-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -18292,6 +19218,7 @@ Package: Engine
 
 Size: 0x70 | 112 bytes
 
+<a id="interptrackvectorbase-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -18314,6 +19241,7 @@ Package: Engine
 
 Size: 0x78 | 120 bytes
 
+<a id="interptrackcolorprop-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -18335,6 +19263,7 @@ Package: Engine
 
 Size: 0x80 | 128 bytes
 
+<a id="interptracksound-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -18343,6 +19272,7 @@ Size: 0x80 | 128 bytes
 |bContinueSoundOnMatineeEnd|bool|0x4|0x7c|
 |bSuppressSubtitles|bool|0x4|0x7c|
 
+<a id="interptracksound-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -18357,6 +19287,7 @@ Package: Engine
 
 Size: 0x78 | 120 bytes
 
+<a id="interptrackvectormaterialparam-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -18371,6 +19302,7 @@ Package: Engine
 
 Size: 0x78 | 120 bytes
 
+<a id="interptrackvectorprop-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -18385,6 +19317,7 @@ Package: Engine
 
 Size: 0x6c | 108 bytes
 
+<a id="interptrackvisibility-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -18394,6 +19327,7 @@ Size: 0x6c | 108 bytes
 |bFireEventsWhenBackwards|bool|0x4|0x68|
 |bFireEventsWhenJumpingForwards|bool|0x4|0x68|
 
+<a id="interptrackvisibility-enums"></a>
 ### Enums
 
 |Enum|
@@ -18401,6 +19335,7 @@ Size: 0x6c | 108 bytes
 |EVisibilityTrackCondition {<br>&nbsp;&nbsp;&nbsp;&nbsp;EVTC_Always,<br>&nbsp;&nbsp;&nbsp;&nbsp;EVTC_GoreEnabled,<br>&nbsp;&nbsp;&nbsp;&nbsp;EVTC_GoreDisabled,<br>&nbsp;&nbsp;&nbsp;&nbsp;EVTC_MAX,<br>}|
 |EVisibilityTrackAction {<br>&nbsp;&nbsp;&nbsp;&nbsp;EVTA_Hide,<br>&nbsp;&nbsp;&nbsp;&nbsp;EVTA_Show,<br>&nbsp;&nbsp;&nbsp;&nbsp;EVTA_Toggle,<br>&nbsp;&nbsp;&nbsp;&nbsp;EVTA_MAX,<br>}|
 
+<a id="interptrackvisibility-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -18422,6 +19357,7 @@ Package: Engine
 
 Size: 0x40 | 64 bytes
 
+<a id="interptrackinstanimcontrol-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -18450,6 +19386,7 @@ Package: Engine
 
 Size: 0x50 | 80 bytes
 
+<a id="interptrackinstdirector-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -18466,6 +19403,7 @@ Package: Engine
 
 Size: 0x40 | 64 bytes
 
+<a id="interptrackinstevent-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -18480,6 +19418,7 @@ Package: Engine
 
 Size: 0x44 | 68 bytes
 
+<a id="interptrackinstfacefx-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -18502,6 +19441,7 @@ Package: Engine
 
 Size: 0x40 | 64 bytes
 
+<a id="interptrackinstfloatmaterialparam-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -18516,6 +19456,7 @@ Package: Engine
 
 Size: 0x40 | 64 bytes
 
+<a id="interptrackinstfloatparticleparam-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -18537,6 +19478,7 @@ Package: Engine
 
 Size: 0xb1 | 177 bytes
 
+<a id="interptrackinstmove-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -18555,6 +19497,7 @@ Package: Engine
 
 Size: 0x40 | 64 bytes
 
+<a id="interptrackinstparticlereplay-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -18569,6 +19512,7 @@ Package: Engine
 
 Size: 0x44 | 68 bytes
 
+<a id="interptrackinstproperty-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -18584,6 +19528,7 @@ Package: Engine
 
 Size: 0x4c | 76 bytes
 
+<a id="interptrackinstcolorprop-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -18599,6 +19544,7 @@ Package: Engine
 
 Size: 0x4c | 76 bytes
 
+<a id="interptrackinstfloatprop-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -18614,6 +19560,7 @@ Package: Engine
 
 Size: 0x58 | 88 bytes
 
+<a id="interptrackinstlinearcolorprop-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -18629,6 +19576,7 @@ Package: Engine
 
 Size: 0x54 | 84 bytes
 
+<a id="interptrackinstvectorprop-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -18651,6 +19599,7 @@ Package: Engine
 
 Size: 0x40 | 64 bytes
 
+<a id="interptrackinstslomo-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -18665,6 +19614,7 @@ Package: Engine
 
 Size: 0x44 | 68 bytes
 
+<a id="interptrackinstsound-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -18680,6 +19630,7 @@ Package: Engine
 
 Size: 0x48 | 72 bytes
 
+<a id="interptrackinsttoggle-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -18696,6 +19647,7 @@ Package: Engine
 
 Size: 0x48 | 72 bytes
 
+<a id="interptrackinstvectormaterialparam-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -18710,6 +19662,7 @@ Package: Engine
 
 Size: 0x44 | 68 bytes
 
+<a id="interptrackinstvisibility-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -18725,6 +19678,7 @@ Package: Engine
 
 Size: 0x88 | 136 bytes
 
+<a id="materialexpressionabs-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -18739,6 +19693,7 @@ Package: Engine
 
 Size: 0xa4 | 164 bytes
 
+<a id="materialexpressionadd-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -18754,6 +19709,7 @@ Package: Engine
 
 Size: 0xa4 | 164 bytes
 
+<a id="materialexpressionappendvector-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -18769,6 +19725,7 @@ Package: Engine
 
 Size: 0xac | 172 bytes
 
+<a id="materialexpressionbumpoffset-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -18800,6 +19757,7 @@ Package: Engine
 
 Size: 0x88 | 136 bytes
 
+<a id="materialexpressionceil-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -18814,6 +19772,7 @@ Package: Engine
 
 Size: 0xc0 | 192 bytes
 
+<a id="materialexpressionclamp-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -18830,6 +19789,7 @@ Package: Engine
 
 Size: 0x88 | 136 bytes
 
+<a id="materialexpressioncomment-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -18848,6 +19808,7 @@ Package: Engine
 
 Size: 0x8c | 140 bytes
 
+<a id="materialexpressioncomponentmask-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -18866,6 +19827,7 @@ Package: Engine
 
 Size: 0x88 | 136 bytes
 
+<a id="materialexpressioncompound-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -18882,6 +19844,7 @@ Package: Engine
 
 Size: 0x74 | 116 bytes
 
+<a id="materialexpressionconstant2vector-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -18897,6 +19860,7 @@ Package: Engine
 
 Size: 0x78 | 120 bytes
 
+<a id="materialexpressionconstant3vector-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -18913,6 +19877,7 @@ Package: Engine
 
 Size: 0x7c | 124 bytes
 
+<a id="materialexpressionconstant4vector-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -18930,6 +19895,7 @@ Package: Engine
 
 Size: 0x90 | 144 bytes
 
+<a id="materialexpressionconstantbiasscale-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -18946,6 +19912,7 @@ Package: Engine
 
 Size: 0x90 | 144 bytes
 
+<a id="materialexpressionconstantclamp-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -18962,6 +19929,7 @@ Package: Engine
 
 Size: 0x8c | 140 bytes
 
+<a id="materialexpressioncosine-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -18977,6 +19945,7 @@ Package: Engine
 
 Size: 0xa4 | 164 bytes
 
+<a id="materialexpressioncrossproduct-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -18992,6 +19961,7 @@ Package: Engine
 
 Size: 0x94 | 148 bytes
 
+<a id="materialexpressioncustom-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -19001,12 +19971,14 @@ Size: 0x94 | 148 bytes
 |Description|FString|0xc|0x7c|
 |Inputs|TArray\<CustomInput\>|0xc|0x88|
 
+<a id="materialexpressioncustom-enums"></a>
 ### Enums
 
 |Enum|
 |---|
 |ECustomMaterialOutputType {<br>&nbsp;&nbsp;&nbsp;&nbsp;CMOT_Float1,<br>&nbsp;&nbsp;&nbsp;&nbsp;CMOT_Float2,<br>&nbsp;&nbsp;&nbsp;&nbsp;CMOT_Float3,<br>&nbsp;&nbsp;&nbsp;&nbsp;CMOT_Float4,<br>&nbsp;&nbsp;&nbsp;&nbsp;CMOT_MAX,<br>}|
 
+<a id="materialexpressioncustom-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -19021,6 +19993,7 @@ Package: Engine
 
 Size: 0x70 | 112 bytes
 
+<a id="materialexpressioncustomtexture-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -19035,6 +20008,7 @@ Package: Engine
 
 Size: 0xac | 172 bytes
 
+<a id="materialexpressiondepthbiasedalpha-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -19052,6 +20026,7 @@ Package: Engine
 
 Size: 0xc8 | 200 bytes
 
+<a id="materialexpressiondepthbiasedblend-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -19070,6 +20045,7 @@ Package: Engine
 
 Size: 0x88 | 136 bytes
 
+<a id="materialexpressionderivenormalz-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -19084,6 +20060,7 @@ Package: Engine
 
 Size: 0xb4 | 180 bytes
 
+<a id="materialexpressiondesaturation-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -19107,6 +20084,7 @@ Package: Engine
 
 Size: 0x70 | 112 bytes
 
+<a id="materialexpressiondestdepth-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -19121,6 +20099,7 @@ Package: Engine
 
 Size: 0xa4 | 164 bytes
 
+<a id="materialexpressiondivide-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -19136,6 +20115,7 @@ Package: Engine
 
 Size: 0xa4 | 164 bytes
 
+<a id="materialexpressiondotproduct-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -19151,6 +20131,7 @@ Package: Engine
 
 Size: 0x78 | 120 bytes
 
+<a id="materialexpressiondynamicparameter-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -19172,6 +20153,7 @@ Package: Engine
 
 Size: 0x88 | 136 bytes
 
+<a id="materialexpressionfloor-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -19193,6 +20175,7 @@ Package: Engine
 
 Size: 0xa4 | 164 bytes
 
+<a id="materialexpressionfmod-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -19208,6 +20191,7 @@ Package: Engine
 
 Size: 0x74 | 116 bytes
 
+<a id="materialexpressionfontsample-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -19223,6 +20207,7 @@ Package: Engine
 
 Size: 0x8c | 140 bytes
 
+<a id="materialexpressionfontsampleparameter-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -19238,6 +20223,7 @@ Package: Engine
 
 Size: 0x88 | 136 bytes
 
+<a id="materialexpressionfrac-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -19252,6 +20238,7 @@ Package: Engine
 
 Size: 0x8c | 140 bytes
 
+<a id="materialexpressionfresnel-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -19267,6 +20254,7 @@ Package: Engine
 
 Size: 0x78 | 120 bytes
 
+<a id="materialexpressiongamevector-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -19281,6 +20269,7 @@ Package: Engine
 
 Size: 0xf8 | 248 bytes
 
+<a id="materialexpressionif-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -19341,6 +20330,7 @@ Package: Engine
 
 Size: 0xa4 | 164 bytes
 
+<a id="materialexpressionlightmassreplace-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -19363,6 +20353,7 @@ Package: Engine
 
 Size: 0xc0 | 192 bytes
 
+<a id="materialexpressionlinearinterpolate-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -19386,6 +20377,7 @@ Package: Engine
 
 Size: 0x88 | 136 bytes
 
+<a id="materialexpressionnormalize-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -19421,6 +20413,7 @@ Package: Engine
 
 Size: 0x88 | 136 bytes
 
+<a id="materialexpressiononeminus-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -19435,6 +20428,7 @@ Package: Engine
 
 Size: 0xac | 172 bytes
 
+<a id="materialexpressionpanner-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -19452,6 +20446,7 @@ Package: Engine
 
 Size: 0x84 | 132 bytes
 
+<a id="materialexpressionparameter-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -19467,6 +20462,7 @@ Package: Engine
 
 Size: 0xa8 | 168 bytes
 
+<a id="materialexpressionstaticcomponentmaskparameter-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -19486,6 +20482,7 @@ Package: Engine
 
 Size: 0xc4 | 196 bytes
 
+<a id="materialexpressionstaticswitchparameter-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -19504,6 +20501,7 @@ Package: Engine
 
 Size: 0x70 | 112 bytes
 
+<a id="materialexpressionparticlemacrouv-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -19518,6 +20516,7 @@ Package: Engine
 
 Size: 0x70 | 112 bytes
 
+<a id="materialexpressionpixeldepth-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -19532,6 +20531,7 @@ Package: Engine
 
 Size: 0xa4 | 164 bytes
 
+<a id="materialexpressionpower-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -19554,6 +20554,7 @@ Package: Engine
 
 Size: 0xb0 | 176 bytes
 
+<a id="materialexpressionrotator-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -19572,6 +20573,7 @@ Package: Engine
 
 Size: 0x8c | 140 bytes
 
+<a id="materialexpressionscenedepth-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -19587,6 +20589,7 @@ Package: Engine
 
 Size: 0x90 | 144 bytes
 
+<a id="materialexpressionscenetexture-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -19595,6 +20598,7 @@ Size: 0x90 | 144 bytes
 |SceneTextureType|i8|0x1|0x88|
 |ScreenAlign|bool|0x4|0x8c|
 
+<a id="materialexpressionscenetexture-enums"></a>
 ### Enums
 
 |Enum|
@@ -19609,6 +20613,7 @@ Package: Engine
 
 Size: 0x70 | 112 bytes
 
+<a id="materialexpressionscreenposition-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -19623,6 +20628,7 @@ Package: Engine
 
 Size: 0x8c | 140 bytes
 
+<a id="materialexpressionsine-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -19638,6 +20644,7 @@ Package: Engine
 
 Size: 0x88 | 136 bytes
 
+<a id="materialexpressionsquareroot-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -19652,6 +20659,7 @@ Package: Engine
 
 Size: 0xa4 | 164 bytes
 
+<a id="materialexpressionsubtract-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -19667,6 +20675,7 @@ Package: Engine
 
 Size: 0x7c | 124 bytes
 
+<a id="materialexpressiontexturecoordinate-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -19685,6 +20694,7 @@ Package: Engine
 
 Size: 0xb0 | 176 bytes
 
+<a id="materialexpressiondepthbiasblend-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -19729,6 +20739,7 @@ Package: Engine
 
 Size: 0xa4 | 164 bytes
 
+<a id="materialexpressiontexturesampleparameter-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -19786,6 +20797,7 @@ Package: Engine
 
 Size: 0xa8 | 168 bytes
 
+<a id="materialexpressiontexturesampleparameternormal-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -19800,6 +20812,7 @@ Package: Engine
 
 Size: 0x70 | 112 bytes
 
+<a id="materialexpressiontime-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -19814,6 +20827,7 @@ Package: Engine
 
 Size: 0x8a | 138 bytes
 
+<a id="materialexpressiontransform-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -19822,6 +20836,7 @@ Size: 0x8a | 138 bytes
 |TransformSourceType|i8|0x1|0x88|
 |TransformType|i8|0x1|0x89|
 
+<a id="materialexpressiontransform-enums"></a>
 ### Enums
 
 |Enum|
@@ -19837,6 +20852,7 @@ Package: Engine
 
 Size: 0x89 | 137 bytes
 
+<a id="materialexpressiontransformposition-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -19844,6 +20860,7 @@ Size: 0x89 | 137 bytes
 |Input|ExpressionInput|0x1c|0x6c|
 |TransformType|i8|0x1|0x88|
 
+<a id="materialexpressiontransformposition-enums"></a>
 ### Enums
 
 |Enum|
@@ -19879,6 +20896,7 @@ Package: Engine
 
 Size: 0xd8 | 216 bytes
 
+<a id="materialinstance-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -19896,6 +20914,7 @@ Size: 0xd8 | 216 bytes
 |ParentLightingGuid|Guid|0x10|0xb0|
 |BeastMaterialProperties|BeastMaterialInstancePropertiesContainer|0x18|0xc0|
 
+<a id="materialinstance-functions"></a>
 ### Functions
 
 |Signature|
@@ -19909,6 +20928,7 @@ SetScalarParameterValue(<br>&nbsp;&nbsp;&nbsp;&nbsp;ParameterName: FName,<br>&nb
 SetVectorParameterValue(<br>&nbsp;&nbsp;&nbsp;&nbsp;ParameterName: FName,<br>&nbsp;&nbsp;&nbsp;&nbsp;Value: LinearColor,<br>) -> ()|
 SetParent(<br>&nbsp;&nbsp;&nbsp;&nbsp;NewParent: MaterialInterface*,<br>) -> ()|
 
+<a id="materialinstance-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -19923,6 +20943,7 @@ Package: Engine
 
 Size: 0x108 | 264 bytes
 
+<a id="materialinstanceconstant-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -19932,6 +20953,7 @@ Size: 0x108 | 264 bytes
 |TextureParameterValues|TArray\<TextureParameterValue\>|0xc|0xf0|
 |VectorParameterValues|TArray\<VectorParameterValue\>|0xc|0xfc|
 
+<a id="materialinstanceconstant-functions"></a>
 ### Functions
 
 |Signature|
@@ -19943,6 +20965,7 @@ SetTextureParameterValue(<br>&nbsp;&nbsp;&nbsp;&nbsp;ParameterName: FName,<br>&n
 SetScalarParameterValue(<br>&nbsp;&nbsp;&nbsp;&nbsp;ParameterName: FName,<br>&nbsp;&nbsp;&nbsp;&nbsp;Value: f32,<br>) -> ()|
 SetParent(<br>&nbsp;&nbsp;&nbsp;&nbsp;NewParent: MaterialInterface*,<br>) -> ()|
 
+<a id="materialinstanceconstant-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -19960,6 +20983,7 @@ Package: Engine
 
 Size: 0x110 | 272 bytes
 
+<a id="materialinstancetimevarying-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -19971,6 +20995,7 @@ Size: 0x110 | 272 bytes
 |TextureParameterValues|TArray\<TextureParameterValueOverTime\>|0xc|0xf8|
 |VectorParameterValues|TArray\<VectorParameterValueOverTime\>|0xc|0x104|
 
+<a id="materialinstancetimevarying-functions"></a>
 ### Functions
 
 |Signature|
@@ -19988,6 +21013,7 @@ SetScalarCurveParameterValue(<br>&nbsp;&nbsp;&nbsp;&nbsp;ParameterName: FName,<b
 SetScalarParameterValue(<br>&nbsp;&nbsp;&nbsp;&nbsp;ParameterName: FName,<br>&nbsp;&nbsp;&nbsp;&nbsp;Value: f32,<br>) -> ()|
 SetParent(<br>&nbsp;&nbsp;&nbsp;&nbsp;NewParent: MaterialInterface*,<br>) -> ()|
 
+<a id="materialinstancetimevarying-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -20006,6 +21032,7 @@ Package: Engine
 
 Size: 0x204 | 516 bytes
 
+<a id="emittercameralenseffectbase-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -20016,6 +21043,7 @@ Size: 0x204 | 516 bytes
 |bAllowMultipleInstances|bool|0x4|0x1fc|
 |BaseCamera|Camera*|0x4|0x200|
 
+<a id="emittercameralenseffectbase-functions"></a>
 ### Functions
 
 |Signature|
@@ -20035,6 +21063,7 @@ Package: Engine
 
 Size: 0x1f8 | 504 bytes
 
+<a id="physxemitterspawnable-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -20042,6 +21071,7 @@ Size: 0x1f8 | 504 bytes
 |VolumeFill|Pointer|0x4|0x1f0|
 |ParticleTemplate|ParticleSystem*|0x4|0x1f4|
 
+<a id="physxemitterspawnable-functions"></a>
 ### Functions
 
 |Signature|
@@ -20051,6 +21081,7 @@ SetTemplate(<br>&nbsp;&nbsp;&nbsp;&nbsp;NewTemplate: ParticleSystem*,<br>&nbsp;&
 Destroyed() -> ()|
 term() -> ()|
 
+<a id="physxemitterspawnable-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -20066,6 +21097,7 @@ Package: Engine
 
 Size: 0x1e4 | 484 bytes
 
+<a id="particleeventmanager-functions"></a>
 ### Functions
 
 |Signature|
@@ -20087,6 +21119,7 @@ Package: Engine
 
 Size: 0x68 | 104 bytes
 
+<a id="particleemitter-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -20102,6 +21135,7 @@ Size: 0x68 | 104 bytes
 |PeakActiveParticles|i32|0x4|0x60|
 |InitialAllocationCount|i32|0x4|0x64|
 
+<a id="particleemitter-enums"></a>
 ### Enums
 
 |Enum|
@@ -20110,6 +21144,7 @@ Size: 0x68 | 104 bytes
 |EParticleSubUVInterpMethod {<br>&nbsp;&nbsp;&nbsp;&nbsp;PSUVIM_None,<br>&nbsp;&nbsp;&nbsp;&nbsp;PSUVIM_Linear,<br>&nbsp;&nbsp;&nbsp;&nbsp;PSUVIM_Linear_Blend,<br>&nbsp;&nbsp;&nbsp;&nbsp;PSUVIM_Random,<br>&nbsp;&nbsp;&nbsp;&nbsp;PSUVIM_Random_Blend,<br>&nbsp;&nbsp;&nbsp;&nbsp;PSUVIM_MAX,<br>}|
 |EParticleBurstMethod {<br>&nbsp;&nbsp;&nbsp;&nbsp;EPBM_Instant,<br>&nbsp;&nbsp;&nbsp;&nbsp;EPBM_Interpolated,<br>&nbsp;&nbsp;&nbsp;&nbsp;EPBM_MAX,<br>}|
 
+<a id="particleemitter-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -20124,6 +21159,7 @@ Package: Engine
 
 Size: 0x68 | 104 bytes
 
+<a id="particlespriteemitter-enums"></a>
 ### Enums
 
 |Enum|
@@ -20138,6 +21174,7 @@ Package: Engine
 
 Size: 0xa0 | 160 bytes
 
+<a id="particlelodlevel-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -20165,6 +21202,7 @@ Package: Engine
 
 Size: 0x54 | 84 bytes
 
+<a id="particlemodule-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -20181,6 +21219,7 @@ Size: 0x54 | 84 bytes
 |LODValidity|i8|0x1|0x44|
 |IdenticalIgnoreProperties|TArray\<FName\>|0xc|0x48|
 
+<a id="particlemodule-enums"></a>
 ### Enums
 
 |Enum|
@@ -20188,6 +21227,7 @@ Size: 0x54 | 84 bytes
 |EParticleSourceSelectionMethod {<br>&nbsp;&nbsp;&nbsp;&nbsp;EPSSM_Random,<br>&nbsp;&nbsp;&nbsp;&nbsp;EPSSM_Sequential,<br>&nbsp;&nbsp;&nbsp;&nbsp;EPSSM_MAX,<br>}|
 |EModuleType {<br>&nbsp;&nbsp;&nbsp;&nbsp;EPMT_General,<br>&nbsp;&nbsp;&nbsp;&nbsp;EPMT_TypeData,<br>&nbsp;&nbsp;&nbsp;&nbsp;EPMT_Beam,<br>&nbsp;&nbsp;&nbsp;&nbsp;EPMT_Trail,<br>&nbsp;&nbsp;&nbsp;&nbsp;EPMT_Spawn,<br>&nbsp;&nbsp;&nbsp;&nbsp;EPMT_Required,<br>&nbsp;&nbsp;&nbsp;&nbsp;EPMT_Event,<br>&nbsp;&nbsp;&nbsp;&nbsp;EPMT_MAX,<br>}|
 
+<a id="particlemodule-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -20209,6 +21249,7 @@ Package: Engine
 
 Size: 0x74 | 116 bytes
 
+<a id="particlemoduleacceleration-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -20224,6 +21265,7 @@ Package: Engine
 
 Size: 0x70 | 112 bytes
 
+<a id="particlemoduleaccelerationoverlifetime-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -20245,6 +21287,7 @@ Package: Engine
 
 Size: 0xa4 | 164 bytes
 
+<a id="particlemoduleattractorline-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -20262,6 +21305,7 @@ Package: Engine
 
 Size: 0xa0 | 160 bytes
 
+<a id="particlemoduleattractorparticle-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -20276,6 +21320,7 @@ Size: 0xa0 | 160 bytes
 |SelectionMethod|i8|0x1|0x98|
 |LastSelIndex|i32|0x4|0x9c|
 
+<a id="particlemoduleattractorparticle-enums"></a>
 ### Enums
 
 |Enum|
@@ -20290,6 +21335,7 @@ Package: Engine
 
 Size: 0xac | 172 bytes
 
+<a id="particlemoduleattractorpoint-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -20310,6 +21356,7 @@ Package: Engine
 
 Size: 0x54 | 84 bytes
 
+<a id="particlemodulebeambase-enums"></a>
 ### Enums
 
 |Enum|
@@ -20325,6 +21372,7 @@ Package: Engine
 
 Size: 0xbc | 188 bytes
 
+<a id="particlemodulebeammodifier-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -20338,12 +21386,14 @@ Size: 0xbc | 188 bytes
 |StrengthOptions|BeamModifierOptions|0x4|0x9c|
 |Strength|RawDistributionFloat|0x1c|0xa0|
 
+<a id="particlemodulebeammodifier-enums"></a>
 ### Enums
 
 |Enum|
 |---|
 |BeamModifierType {<br>&nbsp;&nbsp;&nbsp;&nbsp;PEB2MT_Source,<br>&nbsp;&nbsp;&nbsp;&nbsp;PEB2MT_Target,<br>&nbsp;&nbsp;&nbsp;&nbsp;PEB2MT_MAX,<br>}|
 
+<a id="particlemodulebeammodifier-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -20358,6 +21408,7 @@ Package: Engine
 
 Size: 0x100 | 256 bytes
 
+<a id="particlemodulebeamnoise-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -20391,6 +21442,7 @@ Package: Engine
 
 Size: 0xb8 | 184 bytes
 
+<a id="particlemodulebeamsource-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -20414,6 +21466,7 @@ Package: Engine
 
 Size: 0xbc | 188 bytes
 
+<a id="particlemodulebeamtarget-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -20438,6 +21491,7 @@ Package: Engine
 
 Size: 0x54 | 84 bytes
 
+<a id="particlemodulecollisionbase-enums"></a>
 ### Enums
 
 |Enum|
@@ -20452,6 +21506,7 @@ Package: Engine
 
 Size: 0xf0 | 240 bytes
 
+<a id="particlemodulecollision-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -20484,6 +21539,7 @@ Package: Engine
 
 Size: 0x90 | 144 bytes
 
+<a id="particlemodulecolor-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -20500,6 +21556,7 @@ Package: Engine
 
 Size: 0x60 | 96 bytes
 
+<a id="particlemodulecolorbyparameter-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -20515,6 +21572,7 @@ Package: Engine
 
 Size: 0x90 | 144 bytes
 
+<a id="particlemodulecoloroverlife-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -20531,6 +21589,7 @@ Package: Engine
 
 Size: 0x90 | 144 bytes
 
+<a id="particlemodulecolorscaleoverlife-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -20554,12 +21613,14 @@ Package: Engine
 
 Size: 0x60 | 96 bytes
 
+<a id="particlemoduleeventgenerator-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
 |---|:-:|:-:|:-:|
 |Events|TArray\<ParticleEvent_GenerateInfo\>|0xc|0x54|
 
+<a id="particlemoduleeventgenerator-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -20574,6 +21635,7 @@ Package: Engine
 
 Size: 0x60 | 96 bytes
 
+<a id="particlemoduleeventreceiverbase-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -20589,6 +21651,7 @@ Package: Engine
 
 Size: 0x64 | 100 bytes
 
+<a id="particlemoduleeventreceiverkillparticles-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -20603,6 +21666,7 @@ Package: Engine
 
 Size: 0xa8 | 168 bytes
 
+<a id="particlemoduleeventreceiverspawn-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -20630,6 +21694,7 @@ Package: Engine
 
 Size: 0x90 | 144 bytes
 
+<a id="particlemodulekillbox-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -20647,6 +21712,7 @@ Package: Engine
 
 Size: 0x74 | 116 bytes
 
+<a id="particlemodulekillheight-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -20670,6 +21736,7 @@ Package: Engine
 
 Size: 0x70 | 112 bytes
 
+<a id="particlemodulelifetime-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -20691,6 +21758,7 @@ Package: Engine
 
 Size: 0x70 | 112 bytes
 
+<a id="particlemodulelocation-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -20705,6 +21773,7 @@ Package: Engine
 
 Size: 0xc4 | 196 bytes
 
+<a id="particlemodulelocationdirect-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -20722,6 +21791,7 @@ Package: Engine
 
 Size: 0x6c | 108 bytes
 
+<a id="particlemodulelocationemitter-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -20733,6 +21803,7 @@ Size: 0x6c | 108 bytes
 |InheritSourceVelocityScale|f32|0x4|0x64|
 |InheritSourceRotationScale|f32|0x4|0x68|
 
+<a id="particlemodulelocationemitter-enums"></a>
 ### Enums
 
 |Enum|
@@ -20747,6 +21818,7 @@ Package: Engine
 
 Size: 0x5c | 92 bytes
 
+<a id="particlemodulelocationemitterdirect-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -20761,6 +21833,7 @@ Package: Engine
 
 Size: 0x90 | 144 bytes
 
+<a id="particlemodulelocationprimitivebase-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -20784,6 +21857,7 @@ Package: Engine
 
 Size: 0xcd | 205 bytes
 
+<a id="particlemodulelocationprimitivecylinder-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -20793,6 +21867,7 @@ Size: 0xcd | 205 bytes
 |StartHeight|RawDistributionFloat|0x1c|0xb0|
 |HeightAxis|i8|0x1|0xcc|
 
+<a id="particlemodulelocationprimitivecylinder-enums"></a>
 ### Enums
 
 |Enum|
@@ -20807,6 +21882,7 @@ Package: Engine
 
 Size: 0xac | 172 bytes
 
+<a id="particlemodulelocationprimitivesphere-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -20828,6 +21904,7 @@ Package: Engine
 
 Size: 0x6c | 108 bytes
 
+<a id="particlemodulematerialbyparameter-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -20843,6 +21920,7 @@ Package: Engine
 
 Size: 0x60 | 96 bytes
 
+<a id="particlemodulemeshmaterial-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -20857,6 +21935,7 @@ Package: Engine
 
 Size: 0x58 | 88 bytes
 
+<a id="particlemoduleorbitbase-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -20871,6 +21950,7 @@ Package: Engine
 
 Size: 0xbc | 188 bytes
 
+<a id="particlemoduleorbit-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -20883,12 +21963,14 @@ Size: 0xbc | 188 bytes
 |RotationRateAmount|RawDistributionVector|0x1c|0x9c|
 |RotationRateOptions|OrbitOptions|0x4|0xb8|
 
+<a id="particlemoduleorbit-enums"></a>
 ### Enums
 
 |Enum|
 |---|
 |EOrbitChainMode {<br>&nbsp;&nbsp;&nbsp;&nbsp;EOChainMode_Add,<br>&nbsp;&nbsp;&nbsp;&nbsp;EOChainMode_Scale,<br>&nbsp;&nbsp;&nbsp;&nbsp;EOChainMode_Link,<br>&nbsp;&nbsp;&nbsp;&nbsp;EOChainMode_MAX,<br>}|
 
+<a id="particlemoduleorbit-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -20910,6 +21992,7 @@ Package: Engine
 
 Size: 0x74 | 116 bytes
 
+<a id="particlemoduleorientationaxislock-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -20917,6 +22000,7 @@ Size: 0x74 | 116 bytes
 |LockAxisFlags|i8|0x1|0x54|
 |LockAxis|RawDistributionVector|0x1c|0x58|
 
+<a id="particlemoduleorientationaxislock-enums"></a>
 ### Enums
 
 |Enum|
@@ -20938,18 +22022,21 @@ Package: Engine
 
 Size: 0x60 | 96 bytes
 
+<a id="particlemoduleparameterdynamic-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
 |---|:-:|:-:|:-:|
 |DynamicParams|TArray\<EmitterDynamicParameter\>|0xc|0x54|
 
+<a id="particlemoduleparameterdynamic-enums"></a>
 ### Enums
 
 |Enum|
 |---|
 |EEmitterDynamicParameterValue {<br>&nbsp;&nbsp;&nbsp;&nbsp;EDPV_UserSet,<br>&nbsp;&nbsp;&nbsp;&nbsp;EDPV_VelocityX,<br>&nbsp;&nbsp;&nbsp;&nbsp;EDPV_VelocityY,<br>&nbsp;&nbsp;&nbsp;&nbsp;EDPV_VelocityZ,<br>&nbsp;&nbsp;&nbsp;&nbsp;EDPV_VelocityMag,<br>&nbsp;&nbsp;&nbsp;&nbsp;EDPV_MAX,<br>}|
 
+<a id="particlemoduleparameterdynamic-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -20964,6 +22051,7 @@ Package: Engine
 
 Size: 0xd4 | 212 bytes
 
+<a id="particlemodulerequired-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -21005,6 +22093,7 @@ Size: 0xd4 | 212 bytes
 |NormalsCylinderDirection|Vector|0xc|0xc4|
 |EmitterEditorColor|Color|0x4|0xd0|
 
+<a id="particlemodulerequired-enums"></a>
 ### Enums
 
 |Enum|
@@ -21028,6 +22117,7 @@ Package: Engine
 
 Size: 0x74 | 116 bytes
 
+<a id="particlemodulemeshrotation-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -21043,6 +22133,7 @@ Package: Engine
 
 Size: 0x70 | 112 bytes
 
+<a id="particlemodulerotation-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -21057,6 +22148,7 @@ Package: Engine
 
 Size: 0x74 | 116 bytes
 
+<a id="particlemodulerotationoverlifetime-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -21079,6 +22171,7 @@ Package: Engine
 
 Size: 0x70 | 112 bytes
 
+<a id="particlemodulemeshrotationrate-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -21093,6 +22186,7 @@ Package: Engine
 
 Size: 0x70 | 112 bytes
 
+<a id="particlemodulemeshrotationratemultiplylife-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -21107,6 +22201,7 @@ Package: Engine
 
 Size: 0x70 | 112 bytes
 
+<a id="particlemodulerotationrate-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -21121,6 +22216,7 @@ Package: Engine
 
 Size: 0x70 | 112 bytes
 
+<a id="particlemodulerotationratemultiplylife-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -21142,6 +22238,7 @@ Package: Engine
 
 Size: 0x70 | 112 bytes
 
+<a id="particlemodulesize-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -21156,6 +22253,7 @@ Package: Engine
 
 Size: 0x74 | 116 bytes
 
+<a id="particlemodulesizemultiplylife-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -21173,6 +22271,7 @@ Package: Engine
 
 Size: 0x74 | 116 bytes
 
+<a id="particlemodulesizemultiplyvelocity-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -21190,6 +22289,7 @@ Package: Engine
 
 Size: 0x74 | 116 bytes
 
+<a id="particlemodulesizescale-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -21207,6 +22307,7 @@ Package: Engine
 
 Size: 0x74 | 116 bytes
 
+<a id="particlemodulesizescalebytime-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -21224,6 +22325,7 @@ Package: Engine
 
 Size: 0x58 | 88 bytes
 
+<a id="particlemodulespawnbase-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -21239,6 +22341,7 @@ Package: Engine
 
 Size: 0xa0 | 160 bytes
 
+<a id="particlemodulespawn-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -21256,6 +22359,7 @@ Package: Engine
 
 Size: 0x80 | 128 bytes
 
+<a id="particlemodulespawnperunit-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -21294,6 +22398,7 @@ Package: Engine
 
 Size: 0x70 | 112 bytes
 
+<a id="particlemodulesubuv-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -21308,6 +22413,7 @@ Package: Engine
 
 Size: 0x94 | 148 bytes
 
+<a id="particlemodulesubuvmovie-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -21324,6 +22430,7 @@ Package: Engine
 
 Size: 0x8c | 140 bytes
 
+<a id="particlemodulesubuvdirect-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -21339,6 +22446,7 @@ Package: Engine
 
 Size: 0x70 | 112 bytes
 
+<a id="particlemodulesubuvselect-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -21360,6 +22468,7 @@ Package: Engine
 
 Size: 0x90 | 144 bytes
 
+<a id="particlemoduletrailsource-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -21373,6 +22482,7 @@ Size: 0x90 | 144 bytes
 |SourceOffsetCount|i32|0x4|0x80|
 |SourceOffsetDefaults|TArray\<Vector\>|0xc|0x84|
 
+<a id="particlemoduletrailsource-enums"></a>
 ### Enums
 
 |Enum|
@@ -21387,6 +22497,7 @@ Package: Engine
 
 Size: 0x5c | 92 bytes
 
+<a id="particlemoduletrailspawn-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -21394,6 +22505,7 @@ Size: 0x5c | 92 bytes
 |SpawnDistanceMap|DistributionFloatParticleParameter*|0x4|0x54|
 |MinSpawnVelocity|f32|0x4|0x58|
 
+<a id="particlemoduletrailspawn-enums"></a>
 ### Enums
 
 |Enum|
@@ -21408,6 +22520,7 @@ Package: Engine
 
 Size: 0x74 | 116 bytes
 
+<a id="particlemoduletrailtaper-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -21415,6 +22528,7 @@ Size: 0x74 | 116 bytes
 |TaperMethod|i8|0x1|0x54|
 |TaperFactor|RawDistributionFloat|0x1c|0x58|
 
+<a id="particlemoduletrailtaper-enums"></a>
 ### Enums
 
 |Enum|
@@ -21436,6 +22550,7 @@ Package: Engine
 
 Size: 0xf0 | 240 bytes
 
+<a id="particlemoduletypedatabeam-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -21454,6 +22569,7 @@ Size: 0xf0 | 240 bytes
 |RenderLines|bool|0x4|0xec|
 |RenderTessellation|bool|0x4|0xec|
 
+<a id="particlemoduletypedatabeam-enums"></a>
 ### Enums
 
 |Enum|
@@ -21469,6 +22585,7 @@ Package: Engine
 
 Size: 0xd4 | 212 bytes
 
+<a id="particlemoduletypedatabeam2-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -21492,6 +22609,7 @@ Size: 0xd4 | 212 bytes
 |TaperFactor|RawDistributionFloat|0x1c|0x9c|
 |TaperScale|RawDistributionFloat|0x1c|0xb8|
 
+<a id="particlemoduletypedatabeam2-enums"></a>
 ### Enums
 
 |Enum|
@@ -21499,6 +22617,7 @@ Size: 0xd4 | 212 bytes
 |EBeamTaperMethod {<br>&nbsp;&nbsp;&nbsp;&nbsp;PEBTM_None,<br>&nbsp;&nbsp;&nbsp;&nbsp;PEBTM_Full,<br>&nbsp;&nbsp;&nbsp;&nbsp;PEBTM_Partial,<br>&nbsp;&nbsp;&nbsp;&nbsp;PEBTM_MAX,<br>}|
 |EBeam2Method {<br>&nbsp;&nbsp;&nbsp;&nbsp;PEB2M_Distance,<br>&nbsp;&nbsp;&nbsp;&nbsp;PEB2M_Target,<br>&nbsp;&nbsp;&nbsp;&nbsp;PEB2M_Branch,<br>&nbsp;&nbsp;&nbsp;&nbsp;PEB2M_MAX,<br>}|
 
+<a id="particlemoduletypedatabeam2-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -21513,6 +22632,7 @@ Package: Engine
 
 Size: 0x5d | 93 bytes
 
+<a id="particlemoduletypedatamesh-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -21524,6 +22644,7 @@ Size: 0x5d | 93 bytes
 |bOverrideMaterial|bool|0x4|0x58|
 |MeshAlignment|i8|0x1|0x5c|
 
+<a id="particlemoduletypedatamesh-enums"></a>
 ### Enums
 
 |Enum|
@@ -21538,6 +22659,7 @@ Package: Engine
 
 Size: 0x80 | 128 bytes
 
+<a id="particlemoduletypedatameshphysx-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -21548,6 +22670,7 @@ Size: 0x80 | 128 bytes
 |RenderInstance|Pointer|0x4|0x6c|
 |VerticalLod|PhysXEmitterVerticalLodProperties|0x10|0x70|
 
+<a id="particlemoduletypedatameshphysx-enums"></a>
 ### Enums
 
 |Enum|
@@ -21562,6 +22685,7 @@ Package: Engine
 
 Size: 0x68 | 104 bytes
 
+<a id="particlemoduletypedataphysx-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -21569,6 +22693,7 @@ Size: 0x68 | 104 bytes
 |PhysXParSys|PhysXParticleSystem*|0x4|0x54|
 |VerticalLod|PhysXEmitterVerticalLodProperties|0x10|0x58|
 
+<a id="particlemoduletypedataphysx-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -21583,6 +22708,7 @@ Package: Engine
 
 Size: 0x84 | 132 bytes
 
+<a id="particlemoduletypedatatrail-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -21604,6 +22730,7 @@ Package: Engine
 
 Size: 0x78 | 120 bytes
 
+<a id="particlemoduletypedatatrail2-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -21630,6 +22757,7 @@ Package: Engine
 
 Size: 0x60 | 96 bytes
 
+<a id="particlemoduleuberbase-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -21644,6 +22772,7 @@ Package: Engine
 
 Size: 0x108 | 264 bytes
 
+<a id="particlemoduleuberltisivcl-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -21663,6 +22792,7 @@ Package: Engine
 
 Size: 0x124 | 292 bytes
 
+<a id="particlemoduleuberltisivclil-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -21683,6 +22813,7 @@ Package: Engine
 
 Size: 0x17c | 380 bytes
 
+<a id="particlemoduleuberltisivclilirssblirr-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -21709,6 +22840,7 @@ Package: Engine
 
 Size: 0xe8 | 232 bytes
 
+<a id="particlemoduleuberraindrops-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -21749,6 +22881,7 @@ Package: Engine
 
 Size: 0x180 | 384 bytes
 
+<a id="particlemoduleuberrainimpacts-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -21787,6 +22920,7 @@ Package: Engine
 
 Size: 0x10c | 268 bytes
 
+<a id="particlemoduleuberrainsplasha-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -21810,6 +22944,7 @@ Package: Engine
 
 Size: 0x10c | 268 bytes
 
+<a id="particlemoduleuberrainsplashb-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -21839,6 +22974,7 @@ Package: Engine
 
 Size: 0x8c | 140 bytes
 
+<a id="particlemodulevelocity-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -21854,6 +22990,7 @@ Package: Engine
 
 Size: 0x70 | 112 bytes
 
+<a id="particlemodulevelocityinheritparent-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -21868,6 +23005,7 @@ Package: Engine
 
 Size: 0x74 | 116 bytes
 
+<a id="particlemodulevelocityoverlifetime-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -21883,6 +23021,7 @@ Package: Engine
 
 Size: 0x58 | 88 bytes
 
+<a id="pgparticlemodulevelocityclamp-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -21897,6 +23036,7 @@ Package: Engine
 
 Size: 0x3c | 60 bytes
 
+<a id="particlemoduleeventsendtogame-functions"></a>
 ### Functions
 
 |Signature|
@@ -21911,6 +23051,7 @@ Package: Engine
 
 Size: 0x4c | 76 bytes
 
+<a id="particlesystemreplay-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -21918,6 +23059,7 @@ Size: 0x4c | 76 bytes
 |ClipIDNumber|i32|0x4|0x3c|
 |Frames|TArray\<ParticleSystemReplayFrame\>|0xc|0x40|
 
+<a id="particlesystemreplay-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -21933,6 +23075,7 @@ Package: Engine
 
 Size: 0x90 | 144 bytes
 
+<a id="physxparticlesystem-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -21964,6 +23107,7 @@ Size: 0x90 | 144 bytes
 |CascadeScene|Pointer|0x4|0x88|
 |PSys|Pointer|0x4|0x8c|
 
+<a id="physxparticlesystem-enums"></a>
 ### Enums
 
 |Enum|
@@ -21979,6 +23123,7 @@ Package: Engine
 
 Size: 0x2d8 | 728 bytes
 
+<a id="kactor-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -22009,6 +23154,7 @@ Size: 0x2d8 | 728 bytes
 |InitialLocation|Vector|0xc|0x2c0|
 |InitialRotation|Rotator|0xc|0x2cc|
 
+<a id="kactor-functions"></a>
 ### Functions
 
 |Signature|
@@ -22036,6 +23182,7 @@ Package: Engine
 
 Size: 0x2dc | 732 bytes
 
+<a id="kactorspawnable-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -22043,6 +23190,7 @@ Size: 0x2dc | 732 bytes
 |bRecycleScaleToZero|bool|0x4|0x2d8|
 |bScalingToZero|bool|0x4|0x2d8|
 
+<a id="kactorspawnable-functions"></a>
 ### Functions
 
 |Signature|
@@ -22061,6 +23209,7 @@ Package: Engine
 
 Size: 0x1f4 | 500 bytes
 
+<a id="kasset-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -22072,6 +23221,7 @@ Size: 0x1f4 | 500 bytes
 |ReplicatedMesh|SkeletalMesh*|0x4|0x1ec|
 |ReplicatedPhysAsset|PhysicsAsset*|0x4|0x1f0|
 
+<a id="kasset-functions"></a>
 ### Functions
 
 |Signature|
@@ -22093,6 +23243,7 @@ Package: Engine
 
 Size: 0x418 | 1048 bytes
 
+<a id="pawn-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -22274,12 +23425,14 @@ Size: 0x418 | 1048 bytes
 |MIC_PawnMat|MaterialInstanceConstant*|0x4|0x410|
 |MIC_PawnHair|MaterialInstanceConstant*|0x4|0x414|
 
+<a id="pawn-states"></a>
 ### States
 
 |Signature|
 |---|
 |BeginState_Dying(<br>&nbsp;&nbsp;&nbsp;&nbsp;PreviousStateName: FName,<br>) -> ()|
 
+<a id="pawn-functions"></a>
 ### Functions
 
 |Signature|
@@ -22516,6 +23669,7 @@ ResetDesiredRotation() -> ()|
 LockDesiredRotation(<br>&nbsp;&nbsp;&nbsp;&nbsp;Lock: bool,<br>&nbsp;&nbsp;&nbsp;&nbsp;InUnlockWhenReached: bool,<br>) -> ()|
 SetDesiredRotation(<br>&nbsp;&nbsp;&nbsp;&nbsp;TargetDesiredRotation: Rotator,<br>&nbsp;&nbsp;&nbsp;&nbsp;InLockDesiredRotation: bool,<br>&nbsp;&nbsp;&nbsp;&nbsp;InUnlockWhenReached: bool,<br>&nbsp;&nbsp;&nbsp;&nbsp;InterpolationTime: f32,<br>) -> bool|
 
+<a id="pawn-enums"></a>
 ### Enums
 
 |Enum|
@@ -22530,6 +23684,7 @@ Package: Engine
 
 Size: 0x48c | 1164 bytes
 
+<a id="vehicle-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -22570,6 +23725,7 @@ Size: 0x48c | 1164 bytes
 |VehicleMovingTime|f32|0x4|0x484|
 |TurnTime|f32|0x4|0x488|
 
+<a id="vehicle-functions"></a>
 ### Functions
 
 |Signature|
@@ -22635,6 +23791,7 @@ Package: Engine
 
 Size: 0x5a8 | 1448 bytes
 
+<a id="svehicle-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -22696,6 +23853,7 @@ Size: 0x5a8 | 1448 bytes
 |AngErrorAccumulator|f32|0x4|0x5a0|
 |RadialImpulseScaling|f32|0x4|0x5a4|
 
+<a id="svehicle-functions"></a>
 ### Functions
 
 |Signature|
@@ -22730,6 +23888,7 @@ PostInitAnimTree(<br>&nbsp;&nbsp;&nbsp;&nbsp;SkelComp: SkeletalMeshComponent*,<b
 PostBeginPlay() -> ()|
 SetWheelCollision(<br>&nbsp;&nbsp;&nbsp;&nbsp;WheelNum: i32,<br>&nbsp;&nbsp;&nbsp;&nbsp;bCollision: bool,<br>) -> ()|
 
+<a id="svehicle-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -22744,6 +23903,7 @@ Package: Engine
 
 Size: 0x200 | 512 bytes
 
+<a id="rb_constraintactor-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -22758,6 +23918,7 @@ Size: 0x200 | 512 bytes
 |PulleyPivotActor1|Actor*|0x4|0x1f8|
 |PulleyPivotActor2|Actor*|0x4|0x1fc|
 
+<a id="rb_constraintactor-functions"></a>
 ### Functions
 
 |Signature|
@@ -22777,6 +23938,7 @@ Package: Engine
 
 Size: 0x1f5 | 501 bytes
 
+<a id="rb_lineimpulseactor-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -22789,6 +23951,7 @@ Size: 0x1f5 | 501 bytes
 |Arrow|ArrowComponent*|0x4|0x1f0|
 |ImpulseCount|i8|0x1|0x1f4|
 
+<a id="rb_lineimpulseactor-functions"></a>
 ### Functions
 
 |Signature|
@@ -22805,6 +23968,7 @@ Package: Engine
 
 Size: 0x1ed | 493 bytes
 
+<a id="rb_radialimpulseactor-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -22813,6 +23977,7 @@ Size: 0x1ed | 493 bytes
 |ImpulseComponent|RB_RadialImpulseComponent*|0x4|0x1e8|
 |ImpulseCount|i8|0x1|0x1ec|
 
+<a id="rb_radialimpulseactor-functions"></a>
 ### Functions
 
 |Signature|
@@ -22828,6 +23993,7 @@ Package: Engine
 
 Size: 0x1ec | 492 bytes
 
+<a id="rb_thruster-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -22835,6 +24001,7 @@ Size: 0x1ec | 492 bytes
 |bThrustEnabled|bool|0x4|0x1e4|
 |ThrustStrength|f32|0x4|0x1e8|
 
+<a id="rb_thruster-functions"></a>
 ### Functions
 
 |Signature|
@@ -22849,6 +24016,7 @@ Package: Engine
 
 Size: 0xc0 | 192 bytes
 
+<a id="rb_handle-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -22871,6 +24039,7 @@ Size: 0xc0 | 192 bytes
 |StepSize|Vector|0xc|0xa8|
 |Location|Vector|0xc|0xb4|
 
+<a id="rb_handle-functions"></a>
 ### Functions
 
 |Signature|
@@ -22891,6 +24060,7 @@ Package: Engine
 
 Size: 0xa8 | 168 bytes
 
+<a id="rb_spring-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -22912,6 +24082,7 @@ Size: 0xa8 | 168 bytes
 |DampSaturateVel|f32|0x4|0xa0|
 |DampMaxForce|f32|0x4|0xa4|
 
+<a id="rb_spring-functions"></a>
 ### Functions
 
 |Signature|
@@ -22927,6 +24098,7 @@ Package: Engine
 
 Size: 0x90 | 144 bytes
 
+<a id="svehiclesimbase-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -22956,6 +24128,7 @@ Package: Engine
 
 Size: 0xc4 | 196 bytes
 
+<a id="svehiclesimcar-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -22979,6 +24152,7 @@ Package: Engine
 
 Size: 0xf4 | 244 bytes
 
+<a id="svehiclesimtank-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -23004,6 +24178,7 @@ Package: Engine
 
 Size: 0xa0 | 160 bytes
 
+<a id="physicalmaterial-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -23033,6 +24208,7 @@ Size: 0xa0 | 160 bytes
 |Parent|PhysicalMaterial*|0x4|0x98|
 |PhysicalMaterialProperty|PhysicalMaterialPropertyBase*|0x4|0x9c|
 
+<a id="physicalmaterial-functions"></a>
 ### Functions
 
 |Signature|
@@ -23041,6 +24217,7 @@ GetPhysicalMaterialProperty(<br>&nbsp;&nbsp;&nbsp;&nbsp;DesiredClass: UClass*,<b
 FindFractureSounds(<br>&nbsp;&nbsp;&nbsp;&nbsp;OutSoundExplosion: SoundCue*,<br>&nbsp;&nbsp;&nbsp;&nbsp;OutSoundSingle: SoundCue*,<br>&nbsp;&nbsp;&nbsp;&nbsp;TestMat: PhysicalMaterial*,<br>) -> ()|
 FindPhysEffectInfo(<br>&nbsp;&nbsp;&nbsp;&nbsp;Type: i8,<br>) -> PhysEffectInfo|
 
+<a id="physicalmaterial-enums"></a>
 ### Enums
 
 |Enum|
@@ -23062,6 +24239,7 @@ Package: Engine
 
 Size: 0xa4 | 164 bytes
 
+<a id="physicsasset-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -23073,6 +24251,7 @@ Size: 0xa4 | 164 bytes
 |ConstraintSetup|TArray\<RB_ConstraintSetup*\>|0xc|0x94|
 |DefaultInstance|PhysicsAssetInstance*|0x4|0xa0|
 
+<a id="physicsasset-functions"></a>
 ### Functions
 
 |Signature|
@@ -23087,6 +24266,7 @@ Package: Engine
 
 Size: 0xb4 | 180 bytes
 
+<a id="physicsassetinstance-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -23104,6 +24284,7 @@ Size: 0xb4 | 180 bytes
 |AngularForceLimitScale|f32|0x4|0xac|
 |bInitBodies|bool|0x4|0xb0|
 
+<a id="physicsassetinstance-functions"></a>
 ### Functions
 
 |Signature|
@@ -23133,6 +24314,7 @@ Package: Engine
 
 Size: 0x9c | 156 bytes
 
+<a id="rb_bodyinstance-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -23167,6 +24349,7 @@ Size: 0x9c | 156 bytes
 |InstanceMassScale|f32|0x4|0x94|
 |InstanceDampingScale|f32|0x4|0x98|
 
+<a id="rb_bodyinstance-functions"></a>
 ### Functions
 
 |Signature|
@@ -23212,6 +24395,7 @@ Package: Engine
 
 Size: 0x114 | 276 bytes
 
+<a id="svehiclewheel-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -23260,6 +24444,7 @@ Size: 0x114 | 276 bytes
 |WheelParticleComp|ParticleSystemComponent*|0x4|0x108|
 |SlipParticleParamName|FName|0x8|0x10c|
 
+<a id="svehiclewheel-enums"></a>
 ### Enums
 
 |Enum|
@@ -23274,6 +24459,7 @@ Package: Engine
 
 Size: 0x2ec | 748 bytes
 
+<a id="nxgenericforcefieldbrush-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -23301,6 +24487,7 @@ Size: 0x2ec | 748 bytes
 |ExclusionShapePoses|TArray\<Pointer\>|0xc|0x2dc|
 |LinearKernel|Pointer|0x4|0x2e8|
 
+<a id="nxgenericforcefieldbrush-functions"></a>
 ### Functions
 
 |Signature|
@@ -23308,6 +24495,7 @@ Size: 0x2ec | 748 bytes
 StopsProjectile(<br>&nbsp;&nbsp;&nbsp;&nbsp;P: Projectile*,<br>) -> bool|
 PostBeginPlay() -> ()|
 
+<a id="nxgenericforcefieldbrush-enums"></a>
 ### Enums
 
 |Enum|
@@ -23322,6 +24510,7 @@ Package: Engine
 
 Size: 0x224 | 548 bytes
 
+<a id="rb_forcefieldexcludevolume-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -23336,6 +24525,7 @@ Package: Engine
 
 Size: 0x224 | 548 bytes
 
+<a id="nxforcefield-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -23351,6 +24541,7 @@ Size: 0x224 | 548 bytes
 |U2NRotation|Pointer|0x4|0x21c|
 |SceneIndex|i32|0x4|0x220|
 
+<a id="nxforcefield-functions"></a>
 ### Functions
 
 |Signature|
@@ -23366,6 +24557,7 @@ Package: Engine
 
 Size: 0x250 | 592 bytes
 
+<a id="nxcylindricalforcefield-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -23390,12 +24582,14 @@ Package: Engine
 
 Size: 0x254 | 596 bytes
 
+<a id="nxcylindricalforcefieldcapsule-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
 |---|:-:|:-:|:-:|
 |RenderComponent|DrawCapsuleComponent*|0x4|0x250|
 
+<a id="nxcylindricalforcefieldcapsule-functions"></a>
 ### Functions
 
 |Signature|
@@ -23410,6 +24604,7 @@ Package: Engine
 
 Size: 0x2d4 | 724 bytes
 
+<a id="nxforcefieldgeneric-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -23435,12 +24630,14 @@ Size: 0x2d4 | 724 bytes
 |TorusRadius|f32|0x4|0x2cc|
 |LinearKernel|Pointer|0x4|0x2d0|
 
+<a id="nxforcefieldgeneric-functions"></a>
 ### Functions
 
 |Signature|
 |---|
 DoInitRBPhys() -> ()|
 
+<a id="nxforcefieldgeneric-enums"></a>
 ### Enums
 
 |Enum|
@@ -23455,6 +24652,7 @@ Package: Engine
 
 Size: 0x240 | 576 bytes
 
+<a id="nxforcefieldradial-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -23467,6 +24665,7 @@ Size: 0x240 | 576 bytes
 |ForceFalloff|i8|0x1|0x238|
 |Kernel|Pointer|0x4|0x23c|
 
+<a id="nxforcefieldradial-functions"></a>
 ### Functions
 
 |Signature|
@@ -23481,6 +24680,7 @@ Package: Engine
 
 Size: 0x25c | 604 bytes
 
+<a id="nxforcefieldtornado-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -23500,6 +24700,7 @@ Size: 0x25c | 604 bytes
 |SelfRotationStrength|f32|0x4|0x254|
 |Kernel|Pointer|0x4|0x258|
 
+<a id="nxforcefieldtornado-functions"></a>
 ### Functions
 
 |Signature|
@@ -23514,6 +24715,7 @@ Package: Engine
 
 Size: 0x2c0 | 704 bytes
 
+<a id="nxgenericforcefield-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -23542,6 +24744,7 @@ Package: Engine
 
 Size: 0x2d0 | 720 bytes
 
+<a id="nxgenericforcefieldbox-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -23549,6 +24752,7 @@ Size: 0x2d0 | 720 bytes
 |RenderComponent|DrawBoxComponent*|0x4|0x2c0|
 |BoxExtent|Vector|0xc|0x2c4|
 
+<a id="nxgenericforcefieldbox-functions"></a>
 ### Functions
 
 |Signature|
@@ -23563,6 +24767,7 @@ Package: Engine
 
 Size: 0x2cc | 716 bytes
 
+<a id="nxgenericforcefieldcapsule-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -23579,6 +24784,7 @@ Package: Engine
 
 Size: 0x238 | 568 bytes
 
+<a id="nxradialforcefield-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -23597,6 +24803,7 @@ Package: Engine
 
 Size: 0x240 | 576 bytes
 
+<a id="nxradialcustomforcefield-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -23612,6 +24819,7 @@ Package: Engine
 
 Size: 0x254 | 596 bytes
 
+<a id="nxtornadoangularforcefield-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -23637,6 +24845,7 @@ Package: Engine
 
 Size: 0x258 | 600 bytes
 
+<a id="nxtornadoangularforcefieldcapsule-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -23651,6 +24860,7 @@ Package: Engine
 
 Size: 0x250 | 592 bytes
 
+<a id="nxtornadoforcefield-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -23675,6 +24885,7 @@ Package: Engine
 
 Size: 0x254 | 596 bytes
 
+<a id="nxtornadoforcefieldcapsule-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -23689,6 +24900,7 @@ Package: Engine
 
 Size: 0x214 | 532 bytes
 
+<a id="rb_cylindricalforceactor-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -23710,6 +24922,7 @@ Size: 0x214 | 532 bytes
 |bForceApplyToProjectiles|bool|0x4|0x20c|
 |CollideWithChannels|RBCollisionChannelContainer|0x4|0x210|
 
+<a id="rb_cylindricalforceactor-functions"></a>
 ### Functions
 
 |Signature|
@@ -23724,6 +24937,7 @@ Package: Engine
 
 Size: 0x204 | 516 bytes
 
+<a id="rb_radialforceactor-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -23742,12 +24956,14 @@ Size: 0x204 | 516 bytes
 |bForceApplyToProjectiles|bool|0x4|0x1fc|
 |CollideWithChannels|RBCollisionChannelContainer|0x4|0x200|
 
+<a id="rb_radialforceactor-functions"></a>
 ### Functions
 
 |Signature|
 |---|
 OnToggle(<br>&nbsp;&nbsp;&nbsp;&nbsp;inAction: SeqAct_Toggle*,<br>) -> ()|
 
+<a id="rb_radialforceactor-enums"></a>
 ### Enums
 
 |Enum|
@@ -23762,6 +24978,7 @@ Package: Engine
 
 Size: 0x3c | 60 bytes
 
+<a id="forcefieldshape-functions"></a>
 ### Functions
 
 |Signature|
@@ -23780,12 +24997,14 @@ Package: Engine
 
 Size: 0x40 | 64 bytes
 
+<a id="forcefieldshapebox-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
 |---|:-:|:-:|:-:|
 |Shape|DrawBoxComponent*|0x4|0x3c|
 
+<a id="forcefieldshapebox-functions"></a>
 ### Functions
 
 |Signature|
@@ -23805,12 +25024,14 @@ Package: Engine
 
 Size: 0x40 | 64 bytes
 
+<a id="forcefieldshapecapsule-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
 |---|:-:|:-:|:-:|
 |Shape|DrawCapsuleComponent*|0x4|0x3c|
 
+<a id="forcefieldshapecapsule-functions"></a>
 ### Functions
 
 |Signature|
@@ -23831,12 +25052,14 @@ Package: Engine
 
 Size: 0x40 | 64 bytes
 
+<a id="forcefieldshapesphere-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
 |---|:-:|:-:|:-:|
 |Shape|DrawSphereComponent*|0x4|0x3c|
 
+<a id="forcefieldshapesphere-functions"></a>
 ### Functions
 
 |Signature|
@@ -23856,6 +25079,7 @@ Package: Engine
 
 Size: 0x2a0 | 672 bytes
 
+<a id="prefabinstance-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -23880,6 +25104,7 @@ Package: Engine
 
 Size: 0x60 | 96 bytes
 
+<a id="prefab-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -23898,6 +25123,7 @@ Package: Engine
 
 Size: 0x8c | 140 bytes
 
+<a id="sequenceobject-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -23919,6 +25145,7 @@ Size: 0x8c | 140 bytes
 |DrawWidth|i32|0x4|0x84|
 |DrawHeight|i32|0x4|0x88|
 
+<a id="sequenceobject-functions"></a>
 ### Functions
 
 |Signature|
@@ -23939,6 +25166,7 @@ Package: Engine
 
 Size: 0xac | 172 bytes
 
+<a id="sequenceframe-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -23954,6 +25182,7 @@ Size: 0xac | 172 bytes
 |FillTexture|Texture2D*|0x4|0xa4|
 |FillMaterial|Material*|0x4|0xa8|
 
+<a id="sequenceframe-functions"></a>
 ### Functions
 
 |Signature|
@@ -23975,6 +25204,7 @@ Package: Engine
 
 Size: 0xd0 | 208 bytes
 
+<a id="sequenceop-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -23991,6 +25221,7 @@ Size: 0xd0 | 208 bytes
 |ActivateCount|i32|0x4|0xc8|
 |SearchTag|i32|0x4|0xcc|
 
+<a id="sequenceop-functions"></a>
 ### Functions
 
 |Signature|
@@ -24013,6 +25244,7 @@ GetObjectVars(<br>&nbsp;&nbsp;&nbsp;&nbsp;objVars: TArray\<Object*\>,<br>&nbsp;&
 GetLinkedObjects(<br>&nbsp;&nbsp;&nbsp;&nbsp;out_Objects: TArray\<SequenceObject*\>,<br>&nbsp;&nbsp;&nbsp;&nbsp;ObjectType: UClass*,<br>&nbsp;&nbsp;&nbsp;&nbsp;bRecurse: bool,<br>) -> ()|
 HasLinkedOps(<br>&nbsp;&nbsp;&nbsp;&nbsp;bConsiderInputLinks: bool,<br>) -> bool|
 
+<a id="sequenceop-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -24031,6 +25263,7 @@ Package: Engine
 
 Size: 0x12c | 300 bytes
 
+<a id="sequence-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -24047,6 +25280,7 @@ Size: 0x12c | 300 bytes
 |DefaultViewY|i32|0x4|0x124|
 |DefaultViewZoom|f32|0x4|0x128|
 
+<a id="sequence-functions"></a>
 ### Functions
 
 |Signature|
@@ -24056,6 +25290,7 @@ Reset(<br>&nbsp;&nbsp;&nbsp;&nbsp;I: i32,<br>&nbsp;&nbsp;&nbsp;&nbsp;Op: Sequenc
 FindSeqObjectsByName(<br>&nbsp;&nbsp;&nbsp;&nbsp;SeqObjName: FString,<br>&nbsp;&nbsp;&nbsp;&nbsp;bCheckComment: bool,<br>&nbsp;&nbsp;&nbsp;&nbsp;OutputObjects: TArray\<SequenceObject*\>,<br>&nbsp;&nbsp;&nbsp;&nbsp;bRecursive: bool,<br>) -> ()|
 FindSeqObjectsByClass(<br>&nbsp;&nbsp;&nbsp;&nbsp;DesiredClass: UClass*,<br>&nbsp;&nbsp;&nbsp;&nbsp;bRecursive: bool,<br>&nbsp;&nbsp;&nbsp;&nbsp;OutputObjects: TArray\<SequenceObject*\>,<br>) -> ()|
 
+<a id="sequence-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -24071,12 +25306,14 @@ Package: Engine
 
 Size: 0x130 | 304 bytes
 
+<a id="prefabsequence-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
 |---|:-:|:-:|:-:|
 |OwnerPrefab|PrefabInstance*|0x4|0x12c|
 
+<a id="prefabsequence-functions"></a>
 ### Functions
 
 |Signature|
@@ -24099,6 +25336,7 @@ Package: Engine
 
 Size: 0xe8 | 232 bytes
 
+<a id="sequenceaction-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -24115,6 +25353,7 @@ Package: Engine
 
 Size: 0xf8 | 248 bytes
 
+<a id="seqact_activateremoteevent-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -24123,6 +25362,7 @@ Size: 0xf8 | 248 bytes
 |EventName|FName|0x8|0xec|
 |bStatusIsOk|bool|0x4|0xf4|
 
+<a id="seqact_activateremoteevent-functions"></a>
 ### Functions
 
 |Signature|
@@ -24137,6 +25377,7 @@ Package: Engine
 
 Size: 0xf0 | 240 bytes
 
+<a id="seqact_applysoundnode-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -24152,6 +25393,7 @@ Package: Engine
 
 Size: 0xec | 236 bytes
 
+<a id="seqact_attachtoevent-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -24166,6 +25408,7 @@ Package: Engine
 
 Size: 0x110 | 272 bytes
 
+<a id="seqact_camerafade-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -24178,6 +25421,7 @@ Size: 0x110 | 272 bytes
 |FadeTimeRemaining|f32|0x4|0x100|
 |CachedPCs|TArray\<PlayerController*\>|0xc|0x104|
 
+<a id="seqact_camerafade-functions"></a>
 ### Functions
 
 |Signature|
@@ -24192,6 +25436,7 @@ Package: Engine
 
 Size: 0x11c | 284 bytes
 
+<a id="seqact_cameralookat-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -24216,6 +25461,7 @@ Size: 0x11c | 284 bytes
 |CameraFOV|f32|0x4|0x114|
 |RemainingTime|f32|0x4|0x118|
 
+<a id="seqact_cameralookat-functions"></a>
 ### Functions
 
 |Signature|
@@ -24230,6 +25476,7 @@ Package: Engine
 
 Size: 0x104 | 260 bytes
 
+<a id="seqact_camerashake-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -24243,6 +25490,7 @@ Size: 0x104 | 260 bytes
 |RadialShake_Falloff|f32|0x4|0xfc|
 |LocationActor|Actor*|0x4|0x100|
 
+<a id="seqact_camerashake-functions"></a>
 ### Functions
 
 |Signature|
@@ -24257,6 +25505,7 @@ Package: Engine
 
 Size: 0xf8 | 248 bytes
 
+<a id="seqact_causedamage-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -24266,6 +25515,7 @@ Size: 0xf8 | 248 bytes
 |DamageAmount|f32|0x4|0xf0|
 |Instigator|Actor*|0x4|0xf4|
 
+<a id="seqact_causedamage-functions"></a>
 ### Functions
 
 |Signature|
@@ -24280,6 +25530,7 @@ Package: Engine
 
 Size: 0x100 | 256 bytes
 
+<a id="seqact_causedamageradial-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -24291,6 +25542,7 @@ Size: 0x100 | 256 bytes
 |bDamageFalloff|bool|0x4|0xf8|
 |Instigator|Actor*|0x4|0xfc|
 
+<a id="seqact_causedamageradial-functions"></a>
 ### Functions
 
 |Signature|
@@ -24305,6 +25557,7 @@ Package: Engine
 
 Size: 0xed | 237 bytes
 
+<a id="seqact_changecollision-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -24314,6 +25567,7 @@ Size: 0xed | 237 bytes
 |bIgnoreEncroachers|bool|0x4|0xe8|
 |CollisionType|i8|0x1|0xec|
 
+<a id="seqact_changecollision-functions"></a>
 ### Functions
 
 |Signature|
@@ -24335,6 +25589,7 @@ Package: Engine
 
 Size: 0xfc | 252 bytes
 
+<a id="seqact_converttostring-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -24343,6 +25598,7 @@ Size: 0xfc | 252 bytes
 |VarSeparator|FString|0xc|0xec|
 |NumberOfInputs|i32|0x4|0xf8|
 
+<a id="seqact_converttostring-functions"></a>
 ### Functions
 
 |Signature|
@@ -24357,6 +25613,7 @@ Package: Engine
 
 Size: 0x118 | 280 bytes
 
+<a id="seqact_drawtext-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -24365,6 +25622,7 @@ Size: 0x118 | 280 bytes
 |bDisplayOnObject|bool|0x4|0xec|
 |DrawTextInfo|KismetDrawTextInfo|0x28|0xf0|
 
+<a id="seqact_drawtext-functions"></a>
 ### Functions
 
 |Signature|
@@ -24379,6 +25637,7 @@ Package: Engine
 
 Size: 0xf4 | 244 bytes
 
+<a id="seqact_finishsequence-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -24393,6 +25652,7 @@ Package: Engine
 
 Size: 0xf4 | 244 bytes
 
+<a id="seqact_gate-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -24401,6 +25661,7 @@ Size: 0xf4 | 244 bytes
 |AutoCloseCount|i32|0x4|0xec|
 |CurrentCloseCount|i32|0x4|0xf0|
 
+<a id="seqact_gate-functions"></a>
 ### Functions
 
 |Signature|
@@ -24415,6 +25676,7 @@ Package: Engine
 
 Size: 0xec | 236 bytes
 
+<a id="seqact_getdistance-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -24429,6 +25691,7 @@ Package: Engine
 
 Size: 0x100 | 256 bytes
 
+<a id="seqact_getlocationandrotation-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -24436,6 +25699,7 @@ Size: 0x100 | 256 bytes
 |Location|Vector|0xc|0xe8|
 |RotationVector|Vector|0xc|0xf4|
 
+<a id="seqact_getlocationandrotation-functions"></a>
 ### Functions
 
 |Signature|
@@ -24450,6 +25714,7 @@ Package: Engine
 
 Size: 0xf0 | 240 bytes
 
+<a id="seqact_getproperty-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -24464,6 +25729,7 @@ Package: Engine
 
 Size: 0x100 | 256 bytes
 
+<a id="seqact_getvectorcomponents-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -24481,6 +25747,7 @@ Package: Engine
 
 Size: 0xf8 | 248 bytes
 
+<a id="seqact_getvelocity-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -24488,6 +25755,7 @@ Size: 0xf8 | 248 bytes
 |VelocityMag|f32|0x4|0xe8|
 |VelocityVect|Vector|0xc|0xec|
 
+<a id="seqact_getvelocity-functions"></a>
 ### Functions
 
 |Signature|
@@ -24502,6 +25770,7 @@ Package: Engine
 
 Size: 0xf4 | 244 bytes
 
+<a id="seqact_healdamage-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -24518,6 +25787,7 @@ Package: Engine
 
 Size: 0xec | 236 bytes
 
+<a id="seqact_isinobjectlist-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -24525,6 +25795,7 @@ Size: 0xec | 236 bytes
 |bCheckForAllObjects|bool|0x4|0xe8|
 |bObjectFound|bool|0x4|0xe8|
 
+<a id="seqact_isinobjectlist-functions"></a>
 ### Functions
 
 |Signature|
@@ -24539,6 +25810,7 @@ Package: Engine
 
 Size: 0xf8 | 248 bytes
 
+<a id="seqact_latent-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -24546,6 +25818,7 @@ Size: 0xf8 | 248 bytes
 |LatentActors|TArray\<Actor*\>|0xc|0xe8|
 |bAborted|bool|0x4|0xf4|
 
+<a id="seqact_latent-functions"></a>
 ### Functions
 
 |Signature|
@@ -24561,6 +25834,7 @@ Package: Engine
 
 Size: 0x13c | 316 bytes
 
+<a id="seqact_actorfactory-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -24579,12 +25853,14 @@ Size: 0x13c | 316 bytes
 |SpawnedCount|i32|0x4|0x134|
 |RemainingDelay|f32|0x4|0x138|
 
+<a id="seqact_actorfactory-functions"></a>
 ### Functions
 
 |Signature|
 |---|
 GetObjClassVersion() -> i32|
 
+<a id="seqact_actorfactory-enums"></a>
 ### Enums
 
 |Enum|
@@ -24606,6 +25882,7 @@ Package: Engine
 
 Size: 0x114 | 276 bytes
 
+<a id="seqact_aimovetoactor-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -24617,6 +25894,7 @@ Size: 0x114 | 276 bytes
 |LookAt|Actor*|0x4|0x10c|
 |LastDestinationChoice|i32|0x4|0x110|
 
+<a id="seqact_aimovetoactor-functions"></a>
 ### Functions
 
 |Signature|
@@ -24632,6 +25910,7 @@ Package: Engine
 
 Size: 0x10c | 268 bytes
 
+<a id="seqact_delay-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -24643,6 +25922,7 @@ Size: 0x10c | 268 bytes
 |LastUpdateTime|f32|0x4|0x104|
 |RemainingTime|f32|0x4|0x108|
 
+<a id="seqact_delay-functions"></a>
 ### Functions
 
 |Signature|
@@ -24659,6 +25939,7 @@ Package: Engine
 
 Size: 0x108 | 264 bytes
 
+<a id="seqact_delayswitch-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -24683,6 +25964,7 @@ Package: Engine
 
 Size: 0x10c | 268 bytes
 
+<a id="seqact_forcematerialmipsresident-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -24691,6 +25973,7 @@ Size: 0x10c | 268 bytes
 |ForceMaterials|TArray\<MaterialInterface*\>|0xc|0xfc|
 |RemainingTime|f32|0x4|0x108|
 
+<a id="seqact_forcematerialmipsresident-functions"></a>
 ### Functions
 
 |Signature|
@@ -24705,6 +25988,7 @@ Package: Engine
 
 Size: 0x1b8 | 440 bytes
 
+<a id="seqact_interp-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -24737,6 +26021,7 @@ Size: 0x1b8 | 440 bytes
 |CameraCuts|TArray\<CameraCutInfo\>|0xc|0x1a8|
 |TerminationTime|f32|0x4|0x1b4|
 
+<a id="seqact_interp-functions"></a>
 ### Functions
 
 |Signature|
@@ -24747,6 +26032,7 @@ AddPlayerToDirectorTracks(<br>&nbsp;&nbsp;&nbsp;&nbsp;PC: PlayerController*,<br>
 Stop() -> ()|
 SetPosition(<br>&nbsp;&nbsp;&nbsp;&nbsp;NewPosition: f32,<br>&nbsp;&nbsp;&nbsp;&nbsp;bJump: bool,<br>) -> ()|
 
+<a id="seqact_interp-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -24762,6 +26048,7 @@ Package: Engine
 
 Size: 0xfc | 252 bytes
 
+<a id="seqact_levelstreamingbase-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -24777,6 +26064,7 @@ Package: Engine
 
 Size: 0x10c | 268 bytes
 
+<a id="seqact_levelstreaming-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -24793,6 +26081,7 @@ Package: Engine
 
 Size: 0x10c | 268 bytes
 
+<a id="seqact_multilevelstreaming-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -24801,6 +26090,7 @@ Size: 0x10c | 268 bytes
 |bUnloadAllOtherLevels|bool|0x4|0x108|
 |bStatusIsOk|bool|0x4|0x108|
 
+<a id="seqact_multilevelstreaming-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -24815,6 +26105,7 @@ Package: Engine
 
 Size: 0x108 | 264 bytes
 
+<a id="seqact_levelvisibility-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -24831,6 +26122,7 @@ Package: Engine
 
 Size: 0x11c | 284 bytes
 
+<a id="seqact_playcameraanim-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -24847,6 +26139,7 @@ Size: 0x11c | 284 bytes
 |UserDefinedSpaceActor|Actor*|0x4|0x114|
 |AnimTimeRemaining|f32|0x4|0x118|
 
+<a id="seqact_playcameraanim-functions"></a>
 ### Functions
 
 |Signature|
@@ -24861,6 +26154,7 @@ Package: Engine
 
 Size: 0x118 | 280 bytes
 
+<a id="seqact_playsound-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -24875,6 +26169,7 @@ Size: 0x118 | 280 bytes
 |bSuppressSubtitles|bool|0x4|0x114|
 |bStopped|bool|0x4|0x114|
 
+<a id="seqact_playsound-functions"></a>
 ### Functions
 
 |Signature|
@@ -24889,6 +26184,7 @@ Package: Engine
 
 Size: 0x110 | 272 bytes
 
+<a id="seqact_preparemapchange-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -24906,6 +26202,7 @@ Package: Engine
 
 Size: 0x150 | 336 bytes
 
+<a id="seqact_setdofparams-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -24937,6 +26234,7 @@ Package: Engine
 
 Size: 0x108 | 264 bytes
 
+<a id="seqact_setmotionblurparams-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -24954,6 +26252,7 @@ Package: Engine
 
 Size: 0x11c | 284 bytes
 
+<a id="seqact_streamintextures-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -24965,6 +26264,7 @@ Size: 0x11c | 284 bytes
 |LocationActors|TArray\<Object*\>|0xc|0x104|
 |ForceMaterials|TArray\<MaterialInterface*\>|0xc|0x110|
 
+<a id="seqact_streamintextures-functions"></a>
 ### Functions
 
 |Signature|
@@ -24980,6 +26280,7 @@ Package: Engine
 
 Size: 0x110 | 272 bytes
 
+<a id="seqact_waitforlevelsvisible-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -24998,6 +26299,7 @@ Package: Engine
 
 Size: 0xfc | 252 bytes
 
+<a id="seqact_log-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -25007,6 +26309,7 @@ Size: 0xfc | 252 bytes
 |TargetDuration|f32|0x4|0xec|
 |TargetOffset|Vector|0xc|0xf0|
 
+<a id="seqact_log-functions"></a>
 ### Functions
 
 |Signature|
@@ -25022,6 +26325,7 @@ Package: Engine
 
 Size: 0xfc | 252 bytes
 
+<a id="seqact_modifycover-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -25038,6 +26342,7 @@ Package: Engine
 
 Size: 0x100 | 256 bytes
 
+<a id="seqact_modifyhealth-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -25051,6 +26356,7 @@ Size: 0x100 | 256 bytes
 |bFalloff|bool|0x4|0xf8|
 |Instigator|Actor*|0x4|0xfc|
 
+<a id="seqact_modifyhealth-functions"></a>
 ### Functions
 
 |Signature|
@@ -25065,6 +26371,7 @@ Package: Engine
 
 Size: 0x130 | 304 bytes
 
+<a id="seqact_particleeventgenerator-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -25079,6 +26386,7 @@ Size: 0x130 | 304 bytes
 |EventVelocity|Vector|0xc|0x118|
 |EventNormal|Vector|0xc|0x124|
 
+<a id="seqact_particleeventgenerator-functions"></a>
 ### Functions
 
 |Signature|
@@ -25093,6 +26401,7 @@ Package: Engine
 
 Size: 0x10c | 268 bytes
 
+<a id="seqact_playfacefxanim-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -25111,6 +26420,7 @@ Package: Engine
 
 Size: 0x100 | 256 bytes
 
+<a id="seqact_playmusictrack-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -25125,6 +26435,7 @@ Package: Engine
 
 Size: 0xf0 | 240 bytes
 
+<a id="seqact_possess-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -25141,12 +26452,14 @@ Package: Engine
 
 Size: 0xf4 | 244 bytes
 
+<a id="seqact_rangeswitch-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
 |---|:-:|:-:|:-:|
 |Ranges|TArray\<SwitchRange\>|0xc|0xe8|
 
+<a id="seqact_rangeswitch-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -25168,6 +26481,7 @@ Package: Engine
 
 Size: 0xf8 | 248 bytes
 
+<a id="seqact_setcameratarget-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -25175,6 +26489,7 @@ Size: 0xf8 | 248 bytes
 |CameraTarget|Actor*|0x4|0xe8|
 |TransitionParams|ViewTargetTransitionParams|0xc|0xec|
 
+<a id="seqact_setcameratarget-functions"></a>
 ### Functions
 
 |Signature|
@@ -25189,6 +26504,7 @@ Package: Engine
 
 Size: 0xf0 | 240 bytes
 
+<a id="seqact_setmaterial-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -25204,6 +26520,7 @@ Package: Engine
 
 Size: 0xf8 | 248 bytes
 
+<a id="seqact_setmatinstscalarparam-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -25220,6 +26537,7 @@ Package: Engine
 
 Size: 0xf8 | 248 bytes
 
+<a id="seqact_setmatinsttexparam-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -25236,6 +26554,7 @@ Package: Engine
 
 Size: 0x104 | 260 bytes
 
+<a id="seqact_setmatinstvectorparam-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -25252,6 +26571,7 @@ Package: Engine
 
 Size: 0xf8 | 248 bytes
 
+<a id="seqact_setmesh-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -25262,6 +26582,7 @@ Size: 0xf8 | 248 bytes
 |bIsAllowedToMove|bool|0x4|0xf4|
 |bAllowDecalsToReattach|bool|0x4|0xf4|
 
+<a id="seqact_setmesh-enums"></a>
 ### Enums
 
 |Enum|
@@ -25276,6 +26597,7 @@ Package: Engine
 
 Size: 0xe9 | 233 bytes
 
+<a id="seqact_setphysics-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -25297,6 +26619,7 @@ Package: Engine
 
 Size: 0xe8 | 232 bytes
 
+<a id="seqact_setsequencevariable-functions"></a>
 ### Functions
 
 |Signature|
@@ -25311,6 +26634,7 @@ Package: Engine
 
 Size: 0xf0 | 240 bytes
 
+<a id="seqact_accessobjectlist-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -25326,6 +26650,7 @@ Package: Engine
 
 Size: 0xf8 | 248 bytes
 
+<a id="seqact_addfloat-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -25343,6 +26668,7 @@ Package: Engine
 
 Size: 0xf8 | 248 bytes
 
+<a id="seqact_addint-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -25360,6 +26686,7 @@ Package: Engine
 
 Size: 0xf0 | 240 bytes
 
+<a id="seqact_casttofloat-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -25375,6 +26702,7 @@ Package: Engine
 
 Size: 0xf4 | 244 bytes
 
+<a id="seqact_casttoint-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -25391,6 +26719,7 @@ Package: Engine
 
 Size: 0xf8 | 248 bytes
 
+<a id="seqact_dividefloat-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -25408,6 +26737,7 @@ Package: Engine
 
 Size: 0xf8 | 248 bytes
 
+<a id="seqact_divideint-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -25425,6 +26755,7 @@ Package: Engine
 
 Size: 0xec | 236 bytes
 
+<a id="seqact_modifyobjectlist-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -25439,6 +26770,7 @@ Package: Engine
 
 Size: 0xf8 | 248 bytes
 
+<a id="seqact_multiplyfloat-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -25456,6 +26788,7 @@ Package: Engine
 
 Size: 0xf8 | 248 bytes
 
+<a id="seqact_multiplyint-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -25473,6 +26806,7 @@ Package: Engine
 
 Size: 0xec | 236 bytes
 
+<a id="seqact_setbool-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -25487,6 +26821,7 @@ Package: Engine
 
 Size: 0xf8 | 248 bytes
 
+<a id="seqact_setfloat-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -25494,6 +26829,7 @@ Size: 0xf8 | 248 bytes
 |Target|f32|0x4|0xe8|
 |Value|TArray\<f32\>|0xc|0xec|
 
+<a id="seqact_setfloat-functions"></a>
 ### Functions
 
 |Signature|
@@ -25508,6 +26844,7 @@ Package: Engine
 
 Size: 0xf8 | 248 bytes
 
+<a id="seqact_setint-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -25515,6 +26852,7 @@ Size: 0xf8 | 248 bytes
 |Target|i32|0x4|0xe8|
 |Value|TArray\<i32\>|0xc|0xec|
 
+<a id="seqact_setint-functions"></a>
 ### Functions
 
 |Signature|
@@ -25529,6 +26867,7 @@ Package: Engine
 
 Size: 0x108 | 264 bytes
 
+<a id="seqact_setlocation-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -25539,6 +26878,7 @@ Size: 0x108 | 264 bytes
 |RotationValue|Rotator|0xc|0xf8|
 |Target|Object*|0x4|0x104|
 
+<a id="seqact_setlocation-functions"></a>
 ### Functions
 
 |Signature|
@@ -25553,6 +26893,7 @@ Package: Engine
 
 Size: 0xf0 | 240 bytes
 
+<a id="seqact_setobject-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -25560,6 +26901,7 @@ Size: 0xf0 | 240 bytes
 |DefaultValue|Object*|0x4|0xe8|
 |Value|Object*|0x4|0xec|
 
+<a id="seqact_setobject-functions"></a>
 ### Functions
 
 |Signature|
@@ -25574,6 +26916,7 @@ Package: Engine
 
 Size: 0x100 | 256 bytes
 
+<a id="seqact_setstring-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -25581,6 +26924,7 @@ Size: 0x100 | 256 bytes
 |Target|FString|0xc|0xe8|
 |Value|FString|0xc|0xf4|
 
+<a id="seqact_setstring-functions"></a>
 ### Functions
 
 |Signature|
@@ -25595,6 +26939,7 @@ Package: Engine
 
 Size: 0xf8 | 248 bytes
 
+<a id="seqact_subtractfloat-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -25612,6 +26957,7 @@ Package: Engine
 
 Size: 0xf8 | 248 bytes
 
+<a id="seqact_subtractint-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -25629,6 +26975,7 @@ Package: Engine
 
 Size: 0xec | 236 bytes
 
+<a id="seqact_setskeletalmesh-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -25643,6 +26990,7 @@ Package: Engine
 
 Size: 0xf0 | 240 bytes
 
+<a id="seqact_setstaticmesh-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -25659,6 +27007,7 @@ Package: Engine
 
 Size: 0x100 | 256 bytes
 
+<a id="seqact_setvectorcomponents-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -25676,6 +27025,7 @@ Package: Engine
 
 Size: 0x100 | 256 bytes
 
+<a id="seqact_switch-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -25686,6 +27036,7 @@ Size: 0x100 | 256 bytes
 |bAutoDisableLinks|bool|0x4|0xf0|
 |Indices|TArray\<i32\>|0xc|0xf4|
 
+<a id="seqact_switch-functions"></a>
 ### Functions
 
 |Signature|
@@ -25700,6 +27051,7 @@ Package: Engine
 
 Size: 0x10c | 268 bytes
 
+<a id="seqact_randomswitch-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -25714,6 +27066,7 @@ Package: Engine
 
 Size: 0xf0 | 240 bytes
 
+<a id="seqact_timer-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -25721,6 +27074,7 @@ Size: 0xf0 | 240 bytes
 |ActivationTime|f32|0x4|0xe8|
 |Time|f32|0x4|0xec|
 
+<a id="seqact_timer-functions"></a>
 ### Functions
 
 |Signature|
@@ -25735,6 +27089,7 @@ Package: Engine
 
 Size: 0xe8 | 232 bytes
 
+<a id="seqact_toggle-functions"></a>
 ### Functions
 
 |Signature|
@@ -25756,6 +27111,7 @@ Package: Engine
 
 Size: 0x124 | 292 bytes
 
+<a id="seqact_trace-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -25769,6 +27125,7 @@ Size: 0x124 | 292 bytes
 |Distance|f32|0x4|0x114|
 |HitLocation|Vector|0xc|0x118|
 
+<a id="seqact_trace-functions"></a>
 ### Functions
 
 |Signature|
@@ -25783,6 +27140,7 @@ Package: Engine
 
 Size: 0xe8 | 232 bytes
 
+<a id="seqact_updatedynamiccover-functions"></a>
 ### Functions
 
 |Signature|
@@ -25797,6 +27155,7 @@ Package: Engine
 
 Size: 0xd0 | 208 bytes
 
+<a id="sequencecondition-functions"></a>
 ### Functions
 
 |Signature|
@@ -25818,6 +27177,7 @@ Package: Engine
 
 Size: 0xd8 | 216 bytes
 
+<a id="seqcond_comparefloat-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -25833,6 +27193,7 @@ Package: Engine
 
 Size: 0xd8 | 216 bytes
 
+<a id="seqcond_compareint-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -25855,6 +27216,7 @@ Package: Engine
 
 Size: 0xd0 | 208 bytes
 
+<a id="seqcond_getservertype-functions"></a>
 ### Functions
 
 |Signature|
@@ -25869,6 +27231,7 @@ Package: Engine
 
 Size: 0xdc | 220 bytes
 
+<a id="seqcond_increment-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -25885,6 +27248,7 @@ Package: Engine
 
 Size: 0xdc | 220 bytes
 
+<a id="seqcond_incrementfloat-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -25915,12 +27279,14 @@ Package: Engine
 
 Size: 0xd4 | 212 bytes
 
+<a id="seqcond_isloggedin-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
 |---|:-:|:-:|:-:|
 |NumNeededLoggedIn|i32|0x4|0xd0|
 
+<a id="seqcond_isloggedin-functions"></a>
 ### Functions
 
 |Signature|
@@ -25942,6 +27308,7 @@ Package: Engine
 
 Size: 0xd0 | 208 bytes
 
+<a id="seqcond_switchbase-functions"></a>
 ### Functions
 
 |Signature|
@@ -25959,12 +27326,14 @@ Package: Engine
 
 Size: 0xdc | 220 bytes
 
+<a id="seqcond_switchclass-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
 |---|:-:|:-:|:-:|
 |ClassArray|TArray\<SwitchClassInfo\>|0xc|0xd0|
 
+<a id="seqcond_switchclass-functions"></a>
 ### Functions
 
 |Signature|
@@ -25974,6 +27343,7 @@ InsertValueEntry(<br>&nbsp;&nbsp;&nbsp;&nbsp;InsertIndex: i32,<br>) -> ()|
 IsFallThruEnabled(<br>&nbsp;&nbsp;&nbsp;&nbsp;ValueIndex: i32,<br>) -> bool|
 VerifyDefaultCaseValue() -> ()|
 
+<a id="seqcond_switchclass-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -25988,6 +27358,7 @@ Package: Engine
 
 Size: 0xe0 | 224 bytes
 
+<a id="seqcond_switchobject-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -25995,6 +27366,7 @@ Size: 0xe0 | 224 bytes
 |SupportedValues|TArray\<SwitchObjectCase\>|0xc|0xd0|
 |MetaClass|UClass*|0x4|0xdc|
 
+<a id="seqcond_switchobject-functions"></a>
 ### Functions
 
 |Signature|
@@ -26004,6 +27376,7 @@ InsertValueEntry(<br>&nbsp;&nbsp;&nbsp;&nbsp;InsertIndex: i32,<br>) -> ()|
 IsFallThruEnabled(<br>&nbsp;&nbsp;&nbsp;&nbsp;ValueIndex: i32,<br>) -> bool|
 VerifyDefaultCaseValue(<br>&nbsp;&nbsp;&nbsp;&nbsp;I: i32,<br>) -> ()|
 
+<a id="seqcond_switchobject-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -26018,6 +27391,7 @@ Package: Engine
 
 Size: 0x100 | 256 bytes
 
+<a id="sequenceevent-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -26036,6 +27410,7 @@ Size: 0x100 | 256 bytes
 |Priority|i8|0x1|0xf8|
 |MaxWidth|i32|0x4|0xfc|
 
+<a id="sequenceevent-functions"></a>
 ### Functions
 
 |Signature|
@@ -26053,6 +27428,7 @@ Package: Engine
 
 Size: 0x104 | 260 bytes
 
+<a id="seqevent_aiseeenemy-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -26067,6 +27443,7 @@ Package: Engine
 
 Size: 0x108 | 264 bytes
 
+<a id="seqevent_animnotify-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -26081,6 +27458,7 @@ Package: Engine
 
 Size: 0x114 | 276 bytes
 
+<a id="seqevent_console-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -26124,6 +27502,7 @@ Package: Engine
 
 Size: 0x100 | 256 bytes
 
+<a id="seqevent_levelloaded-functions"></a>
 ### Functions
 
 |Signature|
@@ -26145,12 +27524,14 @@ Package: Engine
 
 Size: 0x104 | 260 bytes
 
+<a id="seqevent_mover-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
 |---|:-:|:-:|:-:|
 |StayOpenTime|f32|0x4|0x100|
 
+<a id="seqevent_mover-functions"></a>
 ### Functions
 
 |Signature|
@@ -26169,6 +27550,7 @@ Package: Engine
 
 Size: 0x134 | 308 bytes
 
+<a id="seqevent_particleevent-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -26181,12 +27563,14 @@ Size: 0x134 | 308 bytes
 |EventNormal|Vector|0xc|0x124|
 |UseRelfectedImpactVector|bool|0x4|0x130|
 
+<a id="seqevent_particleevent-functions"></a>
 ### Functions
 
 |Signature|
 |---|
 GetObjClassVersion() -> i32|
 
+<a id="seqevent_particleevent-enums"></a>
 ### Enums
 
 |Enum|
@@ -26201,6 +27585,7 @@ Package: Engine
 
 Size: 0x104 | 260 bytes
 
+<a id="seqevent_projectilelanded-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -26215,6 +27600,7 @@ Package: Engine
 
 Size: 0x10c | 268 bytes
 
+<a id="seqevent_remoteevent-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -26222,6 +27608,7 @@ Size: 0x10c | 268 bytes
 |EventName|FName|0x8|0x100|
 |bStatusIsOk|bool|0x4|0x108|
 
+<a id="seqevent_remoteevent-functions"></a>
 ### Functions
 
 |Signature|
@@ -26236,6 +27623,7 @@ Package: Engine
 
 Size: 0x104 | 260 bytes
 
+<a id="seqevent_rigidbodycollision-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -26257,6 +27645,7 @@ Package: Engine
 
 Size: 0x10c | 268 bytes
 
+<a id="seqevent_sequenceactivated-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -26271,6 +27660,7 @@ Package: Engine
 
 Size: 0x128 | 296 bytes
 
+<a id="seqevent_takedamage-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -26282,6 +27672,7 @@ Size: 0x128 | 296 bytes
 |CurrentDamage|f32|0x4|0x120|
 |bResetDamageOnToggle|bool|0x4|0x124|
 
+<a id="seqevent_takedamage-functions"></a>
 ### Functions
 
 |Signature|
@@ -26300,6 +27691,7 @@ Package: Engine
 
 Size: 0x128 | 296 bytes
 
+<a id="seqevent_touch-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -26311,6 +27703,7 @@ Size: 0x128 | 296 bytes
 |bAllowDeadPawns|bool|0x4|0x118|
 |TouchedList|TArray\<Actor*\>|0xc|0x11c|
 
+<a id="seqevent_touch-functions"></a>
 ### Functions
 
 |Signature|
@@ -26329,6 +27722,7 @@ Package: Engine
 
 Size: 0x130 | 304 bytes
 
+<a id="seqevent_used-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -26348,12 +27742,14 @@ Package: Engine
 
 Size: 0x94 | 148 bytes
 
+<a id="sequencevariable-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
 |---|:-:|:-:|:-:|
 |VarName|FName|0x8|0x8c|
 
+<a id="sequencevariable-functions"></a>
 ### Functions
 
 |Signature|
@@ -26368,6 +27764,7 @@ Package: Engine
 
 Size: 0xd4 | 212 bytes
 
+<a id="interpdata-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -26391,6 +27788,7 @@ Package: Engine
 
 Size: 0x98 | 152 bytes
 
+<a id="seqvar_bool-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -26405,6 +27803,7 @@ Package: Engine
 
 Size: 0xa4 | 164 bytes
 
+<a id="seqvar_external-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -26420,6 +27819,7 @@ Package: Engine
 
 Size: 0x98 | 152 bytes
 
+<a id="seqvar_float-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -26434,6 +27834,7 @@ Package: Engine
 
 Size: 0xa0 | 160 bytes
 
+<a id="seqvar_randomfloat-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -26449,6 +27850,7 @@ Package: Engine
 
 Size: 0x98 | 152 bytes
 
+<a id="seqvar_int-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -26463,6 +27865,7 @@ Package: Engine
 
 Size: 0xa0 | 160 bytes
 
+<a id="seqvar_randomint-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -26478,6 +27881,7 @@ Package: Engine
 
 Size: 0xa4 | 164 bytes
 
+<a id="seqvar_named-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -26494,6 +27898,7 @@ Package: Engine
 
 Size: 0xb0 | 176 bytes
 
+<a id="seqvar_object-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -26502,6 +27907,7 @@ Size: 0xb0 | 176 bytes
 |ActorLocation|Vector|0xc|0x98|
 |SupportedClasses|TArray\<UClass*\>|0xc|0xa4|
 
+<a id="seqvar_object-functions"></a>
 ### Functions
 
 |Signature|
@@ -26517,6 +27923,7 @@ Package: Engine
 
 Size: 0xc8 | 200 bytes
 
+<a id="seqvar_group-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -26533,12 +27940,14 @@ Package: Engine
 
 Size: 0xbc | 188 bytes
 
+<a id="seqvar_objectlist-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
 |---|:-:|:-:|:-:|
 |ObjList|TArray\<Object*\>|0xc|0xb0|
 
+<a id="seqvar_objectlist-functions"></a>
 ### Functions
 
 |Signature|
@@ -26554,6 +27963,7 @@ Package: Engine
 
 Size: 0xd0 | 208 bytes
 
+<a id="seqvar_objectvolume-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -26572,6 +27982,7 @@ Package: Engine
 
 Size: 0xc4 | 196 bytes
 
+<a id="seqvar_player-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -26580,6 +27991,7 @@ Size: 0xc4 | 196 bytes
 |bAllPlayers|bool|0x4|0xbc|
 |PlayerIdx|i32|0x4|0xc0|
 
+<a id="seqvar_player-functions"></a>
 ### Functions
 
 |Signature|
@@ -26595,6 +28007,7 @@ Package: Engine
 
 Size: 0xa0 | 160 bytes
 
+<a id="seqvar_string-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -26609,6 +28022,7 @@ Package: Engine
 
 Size: 0xa0 | 160 bytes
 
+<a id="seqvar_vector-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -26623,6 +28037,7 @@ Package: Engine
 
 Size: 0x1ec | 492 bytes
 
+<a id="ambientsound-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -26646,6 +28061,7 @@ Package: Engine
 
 Size: 0x1f8 | 504 bytes
 
+<a id="ambientsoundsimple-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -26669,6 +28085,7 @@ Package: Engine
 
 Size: 0x20c | 524 bytes
 
+<a id="ambientsoundsimpletoggleable-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -26680,6 +28097,7 @@ Size: 0x20c | 524 bytes
 |FadeOutDuration|f32|0x4|0x204|
 |FadeOutVolumeLevel|f32|0x4|0x208|
 
+<a id="ambientsoundsimpletoggleable-functions"></a>
 ### Functions
 
 |Signature|
@@ -26692,6 +28110,7 @@ StartPlaying() -> ()|
 ReplicatedEvent(<br>&nbsp;&nbsp;&nbsp;&nbsp;VarName: FName,<br>) -> ()|
 PostBeginPlay() -> ()|
 
+<a id="ambientsoundsimpletoggleable-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -26713,6 +28132,7 @@ Package: Engine
 
 Size: 0x4c | 76 bytes
 
+<a id="soundnode-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -26728,6 +28148,7 @@ Package: Engine
 
 Size: 0xd8 | 216 bytes
 
+<a id="soundnodeattenuation-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -26749,6 +28170,7 @@ Size: 0xd8 | 216 bytes
 |LPFMinRadius|RawDistributionFloat|0x1c|0xa0|
 |LPFMaxRadius|RawDistributionFloat|0x1c|0xbc|
 
+<a id="soundnodeattenuation-enums"></a>
 ### Enums
 
 |Enum|
@@ -26764,6 +28186,7 @@ Package: Engine
 
 Size: 0x58 | 88 bytes
 
+<a id="soundnodeconcatenator-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -26778,6 +28201,7 @@ Package: Engine
 
 Size: 0x70 | 112 bytes
 
+<a id="soundnodedelay-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -26794,12 +28218,14 @@ Package: Engine
 
 Size: 0x58 | 88 bytes
 
+<a id="soundnodedistancecrossfade-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
 |---|:-:|:-:|:-:|
 |CrossFadeInput|TArray\<DistanceDatum\>|0xc|0x4c|
 
+<a id="soundnodedistancecrossfade-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -26814,6 +28240,7 @@ Package: Engine
 
 Size: 0x74 | 116 bytes
 
+<a id="soundnodelooping-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -26838,6 +28265,7 @@ Package: Engine
 
 Size: 0x58 | 88 bytes
 
+<a id="soundnodemixer-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -26852,6 +28280,7 @@ Package: Engine
 
 Size: 0x94 | 148 bytes
 
+<a id="soundnodemodulator-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -26871,6 +28300,7 @@ Package: Engine
 
 Size: 0x84 | 132 bytes
 
+<a id="soundnodemodulatorcontinuous-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -26886,6 +28316,7 @@ Package: Engine
 
 Size: 0xe0 | 224 bytes
 
+<a id="soundnodeoscillator-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -26913,6 +28344,7 @@ Package: Engine
 
 Size: 0x6c | 108 bytes
 
+<a id="soundnoderandom-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -26930,6 +28362,7 @@ Package: Engine
 
 Size: 0x19c | 412 bytes
 
+<a id="soundnodewave-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -26965,6 +28398,7 @@ Size: 0x19c | 412 bytes
 |Comment|FString|0xc|0x184|
 |LocalizedSubtitles|TArray\<LocalizedSubtitle\>|0xc|0x190|
 
+<a id="soundnodewave-enums"></a>
 ### Enums
 
 |Enum|
@@ -26979,6 +28413,7 @@ Package: Engine
 
 Size: 0x54 | 84 bytes
 
+<a id="soundnodewaveparam-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -26993,6 +28428,7 @@ Package: Engine
 
 Size: 0x2fc | 764 bytes
 
+<a id="terrain-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -27049,6 +28485,7 @@ Size: 0x2fc | 764 bytes
 |LightingGuid|Guid|0x10|0x2e4|
 |BeastMaterialProperties|BeastTerrainMaterialProperties|0x8|0x2f4|
 
+<a id="terrain-functions"></a>
 ### Functions
 
 |Signature|
@@ -27056,6 +28493,7 @@ Size: 0x2fc | 764 bytes
 PostBeginPlay(<br>&nbsp;&nbsp;&nbsp;&nbsp;I: i32,<br>) -> ()|
 CalcLayerBounds() -> ()|
 
+<a id="terrain-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -27081,6 +28519,7 @@ Package: Engine
 
 Size: 0x26c | 620 bytes
 
+<a id="terraincomponent-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -27109,6 +28548,7 @@ Size: 0x26c | 620 bytes
 |RBHeightfield|Pointer|0x4|0x264|
 |bDisplayCollisionLevel|bool|0x4|0x268|
 
+<a id="terraincomponent-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -27124,6 +28564,7 @@ Package: Engine
 
 Size: 0x168 | 360 bytes
 
+<a id="terrainweightmaptexture-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -27131,6 +28572,7 @@ Size: 0x168 | 360 bytes
 |ParentTerrain|Terrain*|0x4|0x158|
 |WeightedMaterials|TArray\<Pointer\>|0xc|0x15c|
 
+<a id="terrainweightmaptexture-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -27145,12 +28587,14 @@ Package: Engine
 
 Size: 0x48 | 72 bytes
 
+<a id="terrainlayersetup-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
 |---|:-:|:-:|:-:|
 |Materials|TArray\<TerrainFilteredMaterial\>|0xc|0x3c|
 
+<a id="terrainlayersetup-functions"></a>
 ### Functions
 
 |Signature|
@@ -27158,6 +28602,7 @@ Size: 0x48 | 72 bytes
 PostBeginPlay() -> ()|
 SetMaterials(<br>&nbsp;&nbsp;&nbsp;&nbsp;NewMaterials: TArray\<TerrainFilteredMaterial\>,<br>) -> ()|
 
+<a id="terrainlayersetup-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -27173,6 +28618,7 @@ Package: Engine
 
 Size: 0xac | 172 bytes
 
+<a id="terrainmaterial-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -27188,12 +28634,14 @@ Size: 0xac | 172 bytes
 |DisplacementScale|f32|0x4|0x9c|
 |FoliageMeshes|TArray\<TerrainFoliageMesh\>|0xc|0xa0|
 
+<a id="terrainmaterial-enums"></a>
 ### Enums
 
 |Enum|
 |---|
 |ETerrainMappingType {<br>&nbsp;&nbsp;&nbsp;&nbsp;TMT_Auto,<br>&nbsp;&nbsp;&nbsp;&nbsp;TMT_XY,<br>&nbsp;&nbsp;&nbsp;&nbsp;TMT_XZ,<br>&nbsp;&nbsp;&nbsp;&nbsp;TMT_YZ,<br>&nbsp;&nbsp;&nbsp;&nbsp;TMT_MAX,<br>}|
 
+<a id="terrainmaterial-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -27208,6 +28656,7 @@ Package: Engine
 
 Size: 0x3c | 60 bytes
 
+<a id="uiroot-functions"></a>
 ### Functions
 
 |Signature|
@@ -27232,6 +28681,7 @@ IsEditor() -> bool|
 IsConsole(<br>&nbsp;&nbsp;&nbsp;&nbsp;ConsoleType: i8,<br>) -> bool|
 GetInputPlatformType(<br>&nbsp;&nbsp;&nbsp;&nbsp;OwningPlayer: LocalPlayer*,<br>) -> i8|
 
+<a id="uiroot-enums"></a>
 ### Enums
 
 |Enum|
@@ -27259,6 +28709,7 @@ GetInputPlatformType(<br>&nbsp;&nbsp;&nbsp;&nbsp;OwningPlayer: LocalPlayer*,<br>
 |EPositionEvalType {<br>&nbsp;&nbsp;&nbsp;&nbsp;EVALPOS_None,<br>&nbsp;&nbsp;&nbsp;&nbsp;EVALPOS_PixelViewport,<br>&nbsp;&nbsp;&nbsp;&nbsp;EVALPOS_PixelScene,<br>&nbsp;&nbsp;&nbsp;&nbsp;EVALPOS_PixelOwner,<br>&nbsp;&nbsp;&nbsp;&nbsp;EVALPOS_PercentageViewport,<br>&nbsp;&nbsp;&nbsp;&nbsp;EVALPOS_PercentageOwner,<br>&nbsp;&nbsp;&nbsp;&nbsp;EVALPOS_PercentageScene,<br>&nbsp;&nbsp;&nbsp;&nbsp;EVALPOS_MAX,<br>}|
 |EMaterialAdjustmentType {<br>&nbsp;&nbsp;&nbsp;&nbsp;ADJUST_None,<br>&nbsp;&nbsp;&nbsp;&nbsp;ADJUST_Normal,<br>&nbsp;&nbsp;&nbsp;&nbsp;ADJUST_Justified,<br>&nbsp;&nbsp;&nbsp;&nbsp;ADJUST_Bound,<br>&nbsp;&nbsp;&nbsp;&nbsp;ADJUST_Stretch,<br>&nbsp;&nbsp;&nbsp;&nbsp;ADJUST_MAX,<br>}|
 
+<a id="uiroot-consts"></a>
 ### Consts
 
 |Constant|Value|
@@ -27283,6 +28734,7 @@ GetInputPlatformType(<br>&nbsp;&nbsp;&nbsp;&nbsp;OwningPlayer: LocalPlayer*,<br>
 |DEFAULT_SCENE_PRIORITY|10|
 |TEMP_SPLITSCREEN_INDEX|0|
 
+<a id="uiroot-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -27353,6 +28805,7 @@ Package: Engine
 
 Size: 0x1a0 | 416 bytes
 
+<a id="uiscreenobject-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -27400,6 +28853,7 @@ Size: 0x1a0 | 416 bytes
 |__OnUIAnim_KeyFrameCompleted__Delegate|FScriptDelegate|0xc|0x188|
 |__OnUIAnim_TrackCompleted__Delegate|FScriptDelegate|0xc|0x194|
 
+<a id="uiscreenobject-functions"></a>
 ### Functions
 
 |Signature|
@@ -27577,6 +29031,7 @@ Package: Engine
 
 Size: 0x3c | 60 bytes
 
+<a id="uieventcontainer-functions"></a>
 ### Functions
 
 |Signature|
@@ -27594,6 +29049,7 @@ Package: Engine
 
 Size: 0x78 | 120 bytes
 
+<a id="datastoreclient-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -27604,6 +29060,7 @@ Size: 0x78 | 120 bytes
 |PlayerDataStoreClasses|TArray\<UClass*\>|0xc|0x60|
 |PlayerDataStores|TArray\<PlayerDataStoreGroup\>|0xc|0x6c|
 
+<a id="datastoreclient-functions"></a>
 ### Functions
 
 |Signature|
@@ -27619,6 +29076,7 @@ RegisterDataStore(<br>&nbsp;&nbsp;&nbsp;&nbsp;DataStore: UIDataStore*,<br>&nbsp;
 CreateDataStore(<br>&nbsp;&nbsp;&nbsp;&nbsp;DataStoreClass: UClass*,<br>) -> UIDataStore*|
 FindDataStore(<br>&nbsp;&nbsp;&nbsp;&nbsp;DataStoreTag: FName,<br>&nbsp;&nbsp;&nbsp;&nbsp;PlayerOwner: LocalPlayer*,<br>) -> UIDataStore*|
 
+<a id="datastoreclient-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -27633,6 +29091,7 @@ Package: Engine
 
 Size: 0x6c | 108 bytes
 
+<a id="interaction-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -27642,6 +29101,7 @@ Size: 0x6c | 108 bytes
 |__OnReceivedNativeInputChar__Delegate|FScriptDelegate|0xc|0x54|
 |__OnInitialize__Delegate|FScriptDelegate|0xc|0x60|
 
+<a id="interaction-functions"></a>
 ### Functions
 
 |Signature|
@@ -27666,6 +29126,7 @@ Package: Engine
 
 Size: 0x1d8 | 472 bytes
 
+<a id="console-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -27703,6 +29164,7 @@ Size: 0x1d8 | 472 bytes
 |AutoCompleteTree|AutoCompleteNode|0x1c|0x1b0|
 |AutoCompleteIndices|TArray\<i32\>|0xc|0x1cc|
 
+<a id="console-states"></a>
 ### States
 
 |Signature|
@@ -27710,6 +29172,7 @@ Size: 0x1d8 | 472 bytes
 |EndState_Open(<br>&nbsp;&nbsp;&nbsp;&nbsp;NextStateName: FName,<br>) -> ()|
 |EndState_Typing(<br>&nbsp;&nbsp;&nbsp;&nbsp;NextStateName: FName,<br>) -> ()|
 
+<a id="console-functions"></a>
 ### Functions
 
 |Signature|
@@ -27734,12 +29197,14 @@ SetCursorPos(<br>&nbsp;&nbsp;&nbsp;&nbsp;Position: i32,<br>) -> ()|
 SetInputText(<br>&nbsp;&nbsp;&nbsp;&nbsp;Text: FString,<br>) -> ()|
 Initialized() -> ()|
 
+<a id="console-consts"></a>
 ### Consts
 
 |Constant|Value|
 |---|:-:|
 |MaxHistory|16|
 
+<a id="console-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -27755,6 +29220,7 @@ Package: Engine
 
 Size: 0xd8 | 216 bytes
 
+<a id="input-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -27767,6 +29233,7 @@ Size: 0xd8 | 216 bytes
 |NameToPtr|TMap\<FPair\>|0x3c|0x90|
 |AxisArray|TArray\<Pointer\>|0xc|0xcc|
 
+<a id="input-functions"></a>
 ### Functions
 
 |Signature|
@@ -27775,6 +29242,7 @@ SetBind(<br>&nbsp;&nbsp;&nbsp;&nbsp;BindName: FName,<br>&nbsp;&nbsp;&nbsp;&nbsp;
 GetBind(<br>&nbsp;&nbsp;&nbsp;&nbsp;Key: FName,<br>) -> FString|
 ResetInput() -> ()|
 
+<a id="input-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -27789,6 +29257,7 @@ Package: Engine
 
 Size: 0x168 | 360 bytes
 
+<a id="playerinput-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -27842,6 +29311,7 @@ Size: 0x168 | 360 bytes
 |MouseSamplingTotal|f32|0x4|0x160|
 |AutoUnlockTurnTime|f32|0x4|0x164|
 
+<a id="playerinput-functions"></a>
 ### Functions
 
 |Signature|
@@ -27877,6 +29347,7 @@ Package: Engine
 
 Size: 0x1ac | 428 bytes
 
+<a id="uiinteraction-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -27910,6 +29381,7 @@ Size: 0x1ac | 428 bytes
 |AxisInputEmulation|UIAxisEmulationData|0x14|0x158|
 |CanvasScene|Pointer|0x4|0x1a8|
 
+<a id="uiinteraction-functions"></a>
 ### Functions
 
 |Signature|
@@ -27938,12 +29410,14 @@ GetPlayerControllerId(<br>&nbsp;&nbsp;&nbsp;&nbsp;PlayerIndex: i32,<br>) -> i32|
 GetPlayerIndex(<br>&nbsp;&nbsp;&nbsp;&nbsp;ControllerId: i32,<br>) -> i32|
 GetPlayerCount() -> i32|
 
+<a id="uiinteraction-consts"></a>
 ### Consts
 
 |Constant|Value|
 |---|:-:|
 |DEFAULT_UISKIN|"DefaultUISkin.DefaultSkin"|
 
+<a id="uiinteraction-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -27959,6 +29433,7 @@ Package: Engine
 
 Size: 0x54 | 84 bytes
 
+<a id="uiinputconfiguration-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -27966,6 +29441,7 @@ Size: 0x54 | 84 bytes
 |WidgetInputAliases|TArray\<UIInputAliasClassMap\>|0xc|0x3c|
 |AxisEmulationDefinitions|TArray\<UIAxisEmulationDefinition\>|0xc|0x48|
 
+<a id="uiinputconfiguration-functions"></a>
 ### Functions
 
 |Signature|
@@ -27988,6 +29464,7 @@ Package: Engine
 
 Size: 0xf8 | 248 bytes
 
+<a id="uisceneclient-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -28005,6 +29482,7 @@ Size: 0xf8 | 248 bytes
 |UIScenePostProcess|PostProcessChain*|0x4|0xf0|
 |bEnablePostProcess|bool|0x4|0xf4|
 
+<a id="uisceneclient-functions"></a>
 ### Functions
 
 |Signature|
@@ -28026,6 +29504,7 @@ IsSceneInitialized(<br>&nbsp;&nbsp;&nbsp;&nbsp;Scene: UIScene*,<br>) -> bool|
 IsUIActive(<br>&nbsp;&nbsp;&nbsp;&nbsp;Flags: i32,<br>) -> bool|
 ChangeActiveSkin(<br>&nbsp;&nbsp;&nbsp;&nbsp;NewActiveSkin: UISkin*,<br>) -> bool|
 
+<a id="uisceneclient-consts"></a>
 ### Consts
 
 |Constant|Value|
@@ -28047,6 +29526,7 @@ Package: Engine
 
 Size: 0x66 | 102 bytes
 
+<a id="uistate-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -28059,6 +29539,7 @@ Size: 0x66 | 102 bytes
 |PlayerIndexMask|i8|0x1|0x64|
 |StackPriority|i8|0x1|0x65|
 
+<a id="uistate-functions"></a>
 ### Functions
 
 |Signature|
@@ -28083,6 +29564,7 @@ Package: Engine
 
 Size: 0x66 | 102 bytes
 
+<a id="uistate_disabled-functions"></a>
 ### Functions
 
 |Signature|
@@ -28105,6 +29587,7 @@ Package: Engine
 
 Size: 0xe4 | 228 bytes
 
+<a id="uistring-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -28113,6 +29596,7 @@ Size: 0xe4 | 228 bytes
 |StringStyleData|UICombinedStyleData|0x94|0x48|
 |StringExtent|Vector2D|0x8|0xdc|
 
+<a id="uistring-functions"></a>
 ### Functions
 
 |Signature|
@@ -28130,6 +29614,7 @@ Package: Engine
 
 Size: 0x58 | 88 bytes
 
+<a id="uidataprovider-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -28138,6 +29623,7 @@ Size: 0x58 | 88 bytes
 |ProviderChangedNotifies|TArray\<FScriptDelegate\>|0xc|0x40|
 |__OnDataProviderPropertyChange__Delegate|FScriptDelegate|0xc|0x4c|
 
+<a id="uidataprovider-functions"></a>
 ### Functions
 
 |Signature|
@@ -28158,12 +29644,14 @@ ParseArrayDelimiter(<br>&nbsp;&nbsp;&nbsp;&nbsp;DataTag: FString,<br>) -> i32|
 GetProviderFieldType(<br>&nbsp;&nbsp;&nbsp;&nbsp;DataTag: FString,<br>&nbsp;&nbsp;&nbsp;&nbsp;out_ProviderFieldType: i8,<br>) -> bool|
 OnDataProviderPropertyChange(<br>&nbsp;&nbsp;&nbsp;&nbsp;SourceProvider: UIDataProvider*,<br>&nbsp;&nbsp;&nbsp;&nbsp;PropTag: FName,<br>) -> ()|
 
+<a id="uidataprovider-enums"></a>
 ### Enums
 
 |Enum|
 |---|
 |EProviderAccessType {<br>&nbsp;&nbsp;&nbsp;&nbsp;ACCESS_ReadOnly,<br>&nbsp;&nbsp;&nbsp;&nbsp;ACCESS_PerField,<br>&nbsp;&nbsp;&nbsp;&nbsp;ACCESS_WriteAll,<br>&nbsp;&nbsp;&nbsp;&nbsp;ACCESS_MAX,<br>}|
 
+<a id="uidataprovider-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -28178,6 +29666,7 @@ Package: Engine
 
 Size: 0x78 | 120 bytes
 
+<a id="uidatastore-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -28186,6 +29675,7 @@ Size: 0x78 | 120 bytes
 |RefreshSubscriberNotifies|TArray\<FScriptDelegate\>|0xc|0x60|
 |__OnDataStoreValueUpdated__Delegate|FScriptDelegate|0xc|0x6c|
 
+<a id="uidatastore-functions"></a>
 ### Functions
 
 |Signature|
@@ -28208,6 +29698,7 @@ Package: Engine
 
 Size: 0x1d4 | 468 bytes
 
+<a id="uiskin-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -28221,6 +29712,7 @@ Size: 0x1d4 | 468 bytes
 |CursorMap|TMap\<FPair\>|0x3c|0x15c|
 |SoundCueMap|TMap\<FPair\>|0x3c|0x198|
 
+<a id="uiskin-functions"></a>
 ### Functions
 
 |Signature|
@@ -28241,6 +29733,7 @@ AddUISoundCue(<br>&nbsp;&nbsp;&nbsp;&nbsp;SoundCueName: FName,<br>&nbsp;&nbsp;&n
 GetCursorResource(<br>&nbsp;&nbsp;&nbsp;&nbsp;CursorName: FName,<br>) -> UITexture*|
 GetAvailableStyles(<br>&nbsp;&nbsp;&nbsp;&nbsp;out_Styles: TArray\<UIStyle*\>,<br>&nbsp;&nbsp;&nbsp;&nbsp;bIncludeInheritedStyles: bool,<br>) -> ()|
 
+<a id="uiskin-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -28255,6 +29748,7 @@ Package: Engine
 
 Size: 0xac | 172 bytes
 
+<a id="uistyle-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -28266,6 +29760,7 @@ Size: 0xac | 172 bytes
 |StyleDataClass|UClass*|0x4|0x6c|
 |StateDataMap|TMap\<FPair\>|0x3c|0x70|
 
+<a id="uistyle-functions"></a>
 ### Functions
 
 |Signature|
@@ -28282,6 +29777,7 @@ Package: Engine
 
 Size: 0x414 | 1044 bytes
 
+<a id="uiobject-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -28324,6 +29820,7 @@ Size: 0x414 | 1044 bytes
 |__OnCloseContextMenu__Delegate|FScriptDelegate|0xc|0x3fc|
 |__OnContextMenuItemSelected__Delegate|FScriptDelegate|0xc|0x408|
 
+<a id="uiobject-functions"></a>
 ### Functions
 
 |Signature|
@@ -28382,6 +29879,7 @@ OnPostSceneUpdate(<br>&nbsp;&nbsp;&nbsp;&nbsp;Sender: UIObject*,<br>) -> ()|
 OnPreSceneUpdate(<br>&nbsp;&nbsp;&nbsp;&nbsp;Sender: UIObject*,<br>) -> ()|
 OnCreate(<br>&nbsp;&nbsp;&nbsp;&nbsp;CreatedWidget: UIObject*,<br>&nbsp;&nbsp;&nbsp;&nbsp;CreatorContainer: UIScreenObject*,<br>) -> ()|
 
+<a id="uiobject-consts"></a>
 ### Consts
 
 |Constant|Value|
@@ -28398,6 +29896,7 @@ Package: Engine
 
 Size: 0x4a | 74 bytes
 
+<a id="uicomp_autoalignment-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -28413,6 +29912,7 @@ Package: Engine
 
 Size: 0x6c | 108 bytes
 
+<a id="uicomp_drawcomponents-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -28425,6 +29925,7 @@ Size: 0x6c | 108 bytes
 |FadeRate|f32|0x4|0x5c|
 |__OnFadeComplete__Delegate|FScriptDelegate|0xc|0x60|
 
+<a id="uicomp_drawcomponents-functions"></a>
 ### Functions
 
 |Signature|
@@ -28434,6 +29935,7 @@ ResetFade() -> ()|
 Pulse(<br>&nbsp;&nbsp;&nbsp;&nbsp;MaxAlpha: f32,<br>&nbsp;&nbsp;&nbsp;&nbsp;MinAlpha: f32,<br>&nbsp;&nbsp;&nbsp;&nbsp;PulseRate: f32,<br>) -> ()|
 Fade(<br>&nbsp;&nbsp;&nbsp;&nbsp;FromAlpha: f32,<br>&nbsp;&nbsp;&nbsp;&nbsp;ToAlpha: f32,<br>&nbsp;&nbsp;&nbsp;&nbsp;TargetFadeTime: f32,<br>) -> ()|
 
+<a id="uicomp_drawcomponents-enums"></a>
 ### Enums
 
 |Enum|
@@ -28462,6 +29964,7 @@ Package: Engine
 
 Size: 0x6b8 | 1720 bytes
 
+<a id="uilist-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -28520,6 +30023,7 @@ Size: 0x6b8 | 1720 bytes
 |__ShouldDisableElement__Delegate|FScriptDelegate|0xc|0x6a0|
 |__OnOverrideListElementState__Delegate|FScriptDelegate|0xc|0x6ac|
 
+<a id="uilist-functions"></a>
 ### Functions
 
 |Signature|
@@ -28581,6 +30085,7 @@ ShouldDisableElement(<br>&nbsp;&nbsp;&nbsp;&nbsp;Sender: UIList*,<br>&nbsp;&nbsp
 OnListElementsSorted(<br>&nbsp;&nbsp;&nbsp;&nbsp;Sender: UIList*,<br>) -> ()|
 OnSubmitSelection(<br>&nbsp;&nbsp;&nbsp;&nbsp;Sender: UIList*,<br>&nbsp;&nbsp;&nbsp;&nbsp;PlayerIndex: i32,<br>) -> ()|
 
+<a id="uilist-enums"></a>
 ### Enums
 
 |Enum|
@@ -28589,12 +30094,14 @@ OnSubmitSelection(<br>&nbsp;&nbsp;&nbsp;&nbsp;Sender: UIList*,<br>&nbsp;&nbsp;&n
 |ECellLinkType {<br>&nbsp;&nbsp;&nbsp;&nbsp;LINKED_None,<br>&nbsp;&nbsp;&nbsp;&nbsp;LINKED_Rows,<br>&nbsp;&nbsp;&nbsp;&nbsp;LINKED_Columns,<br>&nbsp;&nbsp;&nbsp;&nbsp;LINKED_MAX,<br>}|
 |ECellAutoSizeMode {<br>&nbsp;&nbsp;&nbsp;&nbsp;CELLAUTOSIZE_None,<br>&nbsp;&nbsp;&nbsp;&nbsp;CELLAUTOSIZE_Uniform,<br>&nbsp;&nbsp;&nbsp;&nbsp;CELLAUTOSIZE_Constrain,<br>&nbsp;&nbsp;&nbsp;&nbsp;CELLAUTOSIZE_AdjustList,<br>&nbsp;&nbsp;&nbsp;&nbsp;CELLAUTOSIZE_MAX,<br>}|
 
+<a id="uilist-consts"></a>
 ### Consts
 
 |Constant|Value|
 |---|:-:|
 |ResizeBufferPixels|5|
 
+<a id="uilist-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -28616,6 +30123,7 @@ Package: Engine
 
 Size: 0x68 | 104 bytes
 
+<a id="uicomp_listelementsorter-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -28629,6 +30137,7 @@ Size: 0x68 | 104 bytes
 |SecondarySortColumn|i32|0x4|0x58|
 |__OverrideListSort__Delegate|FScriptDelegate|0xc|0x5c|
 
+<a id="uicomp_listelementsorter-functions"></a>
 ### Functions
 
 |Signature|
@@ -28638,6 +30147,7 @@ SortItems(<br>&nbsp;&nbsp;&nbsp;&nbsp;ColumnIndex: i32,<br>&nbsp;&nbsp;&nbsp;&nb
 ResetSortColumns(<br>&nbsp;&nbsp;&nbsp;&nbsp;bResort: bool,<br>) -> ()|
 OverrideListSort(<br>&nbsp;&nbsp;&nbsp;&nbsp;Sender: UIList*,<br>&nbsp;&nbsp;&nbsp;&nbsp;CollectionFieldName: FName,<br>&nbsp;&nbsp;&nbsp;&nbsp;SortParameters: UIListSortingParameters,<br>&nbsp;&nbsp;&nbsp;&nbsp;OrderedIndices: TArray\<i32\>,<br>) -> bool|
 
+<a id="uicomp_listelementsorter-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -28652,12 +30162,14 @@ Package: Engine
 
 Size: 0x4c | 76 bytes
 
+<a id="uicomp_listpresenterbase-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
 |---|:-:|:-:|:-:|
 |bReapplyFormatting|bool|0x4|0x48|
 
+<a id="uicomp_listpresenterbase-functions"></a>
 ### Functions
 
 |Signature|
@@ -28676,6 +30188,7 @@ GetSchemaCellSize(<br>&nbsp;&nbsp;&nbsp;&nbsp;SchemaCellIndex: i32,<br>&nbsp;&nb
 GetSchemaCellCount() -> i32|
 GetCellSchemaProvider() -> UIListElementCellProvider*|
 
+<a id="uicomp_listpresenterbase-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -28697,6 +30210,7 @@ Package: Engine
 
 Size: 0x6cc | 1740 bytes
 
+<a id="uicontextmenu-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -28705,6 +30219,7 @@ Size: 0x6cc | 1740 bytes
 |MenuItems|TArray\<ContextMenuItem\>|0xc|0x6bc|
 |bResolvePosition|bool|0x4|0x6c8|
 
+<a id="uicontextmenu-functions"></a>
 ### Functions
 
 |Signature|
@@ -28721,12 +30236,14 @@ Close(<br>&nbsp;&nbsp;&nbsp;&nbsp;PlayerIndex: i32,<br>) -> bool|
 Open(<br>&nbsp;&nbsp;&nbsp;&nbsp;PlayerIndex: i32,<br>) -> bool|
 IsActiveContextMenu() -> bool|
 
+<a id="uicontextmenu-enums"></a>
 ### Enums
 
 |Enum|
 |---|
 |EContextMenuItemType {<br>&nbsp;&nbsp;&nbsp;&nbsp;CMIT_Normal,<br>&nbsp;&nbsp;&nbsp;&nbsp;CMIT_Submenu,<br>&nbsp;&nbsp;&nbsp;&nbsp;CMIT_Separator,<br>&nbsp;&nbsp;&nbsp;&nbsp;CMIT_Check,<br>&nbsp;&nbsp;&nbsp;&nbsp;CMIT_Radio,<br>&nbsp;&nbsp;&nbsp;&nbsp;CMIT_MAX,<br>}|
 
+<a id="uicontextmenu-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -28748,6 +30265,7 @@ Package: Engine
 
 Size: 0x6b8 | 1720 bytes
 
+<a id="uiobjectlist-functions"></a>
 ### Functions
 
 |Signature|
@@ -28762,6 +30280,7 @@ Package: Engine
 
 Size: 0x3c | 60 bytes
 
+<a id="uidatastoresubscriber-functions"></a>
 ### Functions
 
 |Signature|
@@ -28781,6 +30300,7 @@ Package: Engine
 
 Size: 0x3c | 60 bytes
 
+<a id="uidatastorepublisher-functions"></a>
 ### Functions
 
 |Signature|
@@ -28795,6 +30315,7 @@ Package: Engine
 
 Size: 0x3c | 60 bytes
 
+<a id="uilistelementcellprovider-consts"></a>
 ### Consts
 
 |Constant|Value|
@@ -28816,6 +30337,7 @@ Package: Engine
 
 Size: 0x3c | 60 bytes
 
+<a id="uianimation-enums"></a>
 ### Enums
 
 |Enum|
@@ -28825,6 +30347,7 @@ Size: 0x3c | 60 bytes
 |EUIAnimationInterpMode {<br>&nbsp;&nbsp;&nbsp;&nbsp;UIANIMMODE_Linear,<br>&nbsp;&nbsp;&nbsp;&nbsp;UIANIMMODE_EaseIn,<br>&nbsp;&nbsp;&nbsp;&nbsp;UIANIMMODE_EaseOut,<br>&nbsp;&nbsp;&nbsp;&nbsp;UIANIMMODE_EaseInOut,<br>&nbsp;&nbsp;&nbsp;&nbsp;UIANIMMODE_MAX,<br>}|
 |EUIAnimType {<br>&nbsp;&nbsp;&nbsp;&nbsp;EAT_None,<br>&nbsp;&nbsp;&nbsp;&nbsp;EAT_Position,<br>&nbsp;&nbsp;&nbsp;&nbsp;EAT_PositionOffset,<br>&nbsp;&nbsp;&nbsp;&nbsp;EAT_RelPosition,<br>&nbsp;&nbsp;&nbsp;&nbsp;EAT_Rotation,<br>&nbsp;&nbsp;&nbsp;&nbsp;EAT_RelRotation,<br>&nbsp;&nbsp;&nbsp;&nbsp;EAT_Color,<br>&nbsp;&nbsp;&nbsp;&nbsp;EAT_Opacity,<br>&nbsp;&nbsp;&nbsp;&nbsp;EAT_Visibility,<br>&nbsp;&nbsp;&nbsp;&nbsp;EAT_Scale,<br>&nbsp;&nbsp;&nbsp;&nbsp;EAT_Left,<br>&nbsp;&nbsp;&nbsp;&nbsp;EAT_Top,<br>&nbsp;&nbsp;&nbsp;&nbsp;EAT_Right,<br>&nbsp;&nbsp;&nbsp;&nbsp;EAT_Bottom,<br>&nbsp;&nbsp;&nbsp;&nbsp;EAT_PPBloom,<br>&nbsp;&nbsp;&nbsp;&nbsp;EAT_PPBlurSampleSize,<br>&nbsp;&nbsp;&nbsp;&nbsp;EAT_PPBlurAmount,<br>&nbsp;&nbsp;&nbsp;&nbsp;EAT_MAX,<br>}|
 
+<a id="uianimation-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -28843,6 +30366,7 @@ Package: Engine
 
 Size: 0x51 | 81 bytes
 
+<a id="uianimationseq-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -28851,6 +30375,7 @@ Size: 0x51 | 81 bytes
 |Tracks|TArray\<UIAnimTrack\>|0xc|0x44|
 |LoopMode|i8|0x1|0x50|
 
+<a id="uianimationseq-functions"></a>
 ### Functions
 
 |Signature|
@@ -28875,6 +30400,7 @@ Package: Engine
 
 Size: 0x70 | 112 bytes
 
+<a id="uiconfigfileprovider-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -28890,6 +30416,7 @@ Package: Engine
 
 Size: 0x64 | 100 bytes
 
+<a id="uiconfigsectionprovider-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -28904,12 +30431,14 @@ Package: Engine
 
 Size: 0x5c | 92 bytes
 
+<a id="uidataprovider_onlineplayerdatabase-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
 |---|:-:|:-:|:-:|
 |Player|LocalPlayer*|0x4|0x58|
 
+<a id="uidataprovider_onlineplayerdatabase-functions"></a>
 ### Functions
 
 |Signature|
@@ -28925,12 +30454,14 @@ Package: Engine
 
 Size: 0x60 | 96 bytes
 
+<a id="uidataprovider_onlineclanmates-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
 |---|:-:|:-:|:-:|
 |VfTable_IUIListElementCellProvider|Pointer|0x4|0x5c|
 
+<a id="uidataprovider_onlineclanmates-functions"></a>
 ### Functions
 
 |Signature|
@@ -28946,6 +30477,7 @@ Package: Engine
 
 Size: 0xb4 | 180 bytes
 
+<a id="uidataprovider_onlinefriendmessages-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -28959,6 +30491,7 @@ Size: 0xb4 | 180 bytes
 |MessageCol|FString|0xc|0x9c|
 |LastInviteFrom|FString|0xc|0xa8|
 
+<a id="uidataprovider_onlinefriendmessages-functions"></a>
 ### Functions
 
 |Signature|
@@ -28979,6 +30512,7 @@ Package: Engine
 
 Size: 0x114 | 276 bytes
 
+<a id="uidataprovider_onlinefriends-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -29000,6 +30534,7 @@ Size: 0x114 | 276 bytes
 |AwayText|FString|0xc|0xfc|
 |BusyText|FString|0xc|0x108|
 
+<a id="uidataprovider_onlinefriends-functions"></a>
 ### Functions
 
 |Signature|
@@ -29018,12 +30553,14 @@ Package: Engine
 
 Size: 0x60 | 96 bytes
 
+<a id="uidataprovider_onlineplayers-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
 |---|:-:|:-:|:-:|
 |VfTable_IUIListElementCellProvider|Pointer|0x4|0x5c|
 
+<a id="uidataprovider_onlineplayers-functions"></a>
 ### Functions
 
 |Signature|
@@ -29039,6 +30576,7 @@ Package: Engine
 
 Size: 0x78 | 120 bytes
 
+<a id="uidataprovider_onlineplayerstorage-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -29048,6 +30586,7 @@ Size: 0x78 | 120 bytes
 |bWasErrorLastRead|bool|0x4|0x68|
 |PlayerStorageArrayProviders|TArray\<PlayerStorageArrayProvider\>|0xc|0x6c|
 
+<a id="uidataprovider_onlineplayerstorage-functions"></a>
 ### Functions
 
 |Signature|
@@ -29065,6 +30604,7 @@ AddReadCompleteDelegate(<br>&nbsp;&nbsp;&nbsp;&nbsp;PlayerInterface: OnlinePlaye
 WriteData(<br>&nbsp;&nbsp;&nbsp;&nbsp;PlayerInterface: OnlinePlayerInterface*,<br>&nbsp;&nbsp;&nbsp;&nbsp;LocalUserNum: i8,<br>&nbsp;&nbsp;&nbsp;&nbsp;PlayerStorage: OnlinePlayerStorage*,<br>) -> bool|
 ReadData(<br>&nbsp;&nbsp;&nbsp;&nbsp;PlayerInterface: OnlinePlayerInterface*,<br>&nbsp;&nbsp;&nbsp;&nbsp;LocalUserNum: i8,<br>&nbsp;&nbsp;&nbsp;&nbsp;PlayerStorage: OnlinePlayerStorage*,<br>) -> bool|
 
+<a id="uidataprovider_onlineplayerstorage-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -29079,6 +30619,7 @@ Package: Engine
 
 Size: 0x78 | 120 bytes
 
+<a id="uidataprovider_onlineprofilesettings-functions"></a>
 ### Functions
 
 |Signature|
@@ -29096,6 +30637,7 @@ Package: Engine
 
 Size: 0x6c | 108 bytes
 
+<a id="uidataprovider_playerachievements-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -29103,6 +30645,7 @@ Size: 0x6c | 108 bytes
 |VfTable_IUIListElementCellProvider|Pointer|0x4|0x5c|
 |Achievements|TArray\<AchievementDetails\>|0xc|0x60|
 
+<a id="uidataprovider_playerachievements-functions"></a>
 ### Functions
 
 |Signature|
@@ -29127,6 +30670,7 @@ Package: Engine
 
 Size: 0x88 | 136 bytes
 
+<a id="uidataprovider_onlineplayerstoragearray-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -29147,6 +30691,7 @@ Package: Engine
 
 Size: 0x88 | 136 bytes
 
+<a id="uidataprovider_settingsarray-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -29167,6 +30712,7 @@ Package: Engine
 
 Size: 0x88 | 136 bytes
 
+<a id="scenedatastore-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -29176,6 +30722,7 @@ Size: 0x88 | 136 bytes
 |OwnerScene|UIScene*|0x4|0x80|
 |SceneDataProvider|UIDynamicFieldProvider*|0x4|0x84|
 
+<a id="scenedatastore-functions"></a>
 ### Functions
 
 |Signature|
@@ -29212,6 +30759,7 @@ Package: Engine
 
 Size: 0xcc | 204 bytes
 
+<a id="uidatastore_dynamicresource-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -29222,6 +30770,7 @@ Size: 0xcc | 204 bytes
 |ResourceProviderDefinitions|TArray\<DynamicResourceProviderDefinition\>|0xc|0x84|
 |ResourceProviders|MultiMap_Mirror|0x3c|0x90|
 
+<a id="uidatastore_dynamicresource-functions"></a>
 ### Functions
 
 |Signature|
@@ -29237,6 +30786,7 @@ GetProviderCount(<br>&nbsp;&nbsp;&nbsp;&nbsp;ProviderTag: FName,<br>) -> i32|
 GenerateProviderAccessTag(<br>&nbsp;&nbsp;&nbsp;&nbsp;ProviderIndex: i32,<br>&nbsp;&nbsp;&nbsp;&nbsp;InstanceIndex: i32,<br>) -> FName|
 FindProviderTypeIndex(<br>&nbsp;&nbsp;&nbsp;&nbsp;ProviderTag: FName,<br>) -> i32|
 
+<a id="uidatastore_dynamicresource-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -29258,6 +30808,7 @@ Package: Engine
 
 Size: 0xc4 | 196 bytes
 
+<a id="uidatastore_gameresource-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -29266,6 +30817,7 @@ Size: 0xc4 | 196 bytes
 |ElementProviderTypes|TArray\<GameResourceDataProvider\>|0xc|0x7c|
 |ListElementProviders|MultiMap_Mirror|0x3c|0x88|
 
+<a id="uidatastore_gameresource-functions"></a>
 ### Functions
 
 |Signature|
@@ -29278,6 +30830,7 @@ GetProviderCount(<br>&nbsp;&nbsp;&nbsp;&nbsp;ProviderTag: FName,<br>) -> i32|
 GenerateProviderAccessTag(<br>&nbsp;&nbsp;&nbsp;&nbsp;ProviderIndex: i32,<br>&nbsp;&nbsp;&nbsp;&nbsp;InstanceIndex: i32,<br>) -> FName|
 FindProviderTypeIndex(<br>&nbsp;&nbsp;&nbsp;&nbsp;ProviderTag: FName,<br>) -> i32|
 
+<a id="uidatastore_gameresource-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -29292,6 +30845,7 @@ Package: Engine
 
 Size: 0x114 | 276 bytes
 
+<a id="uidatastore_menuitems-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -29300,6 +30854,7 @@ Size: 0x114 | 276 bytes
 |OptionProviders|MultiMap_Mirror|0x3c|0xcc|
 |DynamicProviders|TArray\<UIDataProvider_MenuItem*\>|0xc|0x108|
 
+<a id="uidatastore_menuitems-functions"></a>
 ### Functions
 
 |Signature|
@@ -29319,12 +30874,14 @@ Package: Engine
 
 Size: 0x84 | 132 bytes
 
+<a id="uidatastore_gamestate-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
 |---|:-:|:-:|:-:|
 |__OnRefreshDataFieldValue__Delegate|FScriptDelegate|0xc|0x78|
 
+<a id="uidatastore_gamestate-functions"></a>
 ### Functions
 
 |Signature|
@@ -29340,6 +30897,7 @@ Package: Engine
 
 Size: 0xc0 | 192 bytes
 
+<a id="currentgamedatastore-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -29353,6 +30911,7 @@ Size: 0xc0 | 192 bytes
 |bRefreshTeamDataProviders|bool|0x4|0xb0|
 |__OnAddTeamProvider__Delegate|FScriptDelegate|0xc|0xb4|
 
+<a id="currentgamedatastore-functions"></a>
 ### Functions
 
 |Signature|
@@ -29377,6 +30936,7 @@ RemovePlayerDataProvider(<br>&nbsp;&nbsp;&nbsp;&nbsp;PRI: PlayerReplicationInfo*
 AddPlayerDataProvider(<br>&nbsp;&nbsp;&nbsp;&nbsp;PRI: PlayerReplicationInfo*,<br>&nbsp;&nbsp;&nbsp;&nbsp;ExistingIndex: i32,<br>&nbsp;&nbsp;&nbsp;&nbsp;DataProvider: PlayerDataProvider*,<br>) -> ()|
 CreateGameDataProvider(<br>&nbsp;&nbsp;&nbsp;&nbsp;GRI: GameReplicationInfo*,<br>) -> ()|
 
+<a id="currentgamedatastore-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -29391,6 +30951,7 @@ Package: Engine
 
 Size: 0xb4 | 180 bytes
 
+<a id="playerownerdatastore-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -29401,6 +30962,7 @@ Size: 0xb4 | 180 bytes
 |WeaponList|TArray\<WeaponDataProvider*\>|0xc|0x9c|
 |PowerupList|TArray\<PowerupDataProvider*\>|0xc|0xa8|
 
+<a id="playerownerdatastore-functions"></a>
 ### Functions
 
 |Signature|
@@ -29409,6 +30971,7 @@ NotifyGameSessionEnded() -> bool|
 ClearDataProviders(<br>&nbsp;&nbsp;&nbsp;&nbsp;I: i32,<br>) -> ()|
 SetPlayerDataProvider(<br>&nbsp;&nbsp;&nbsp;&nbsp;NewPlayerData: PlayerDataProvider*,<br>) -> ()|
 
+<a id="playerownerdatastore-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -29437,12 +31000,14 @@ Package: Engine
 
 Size: 0x7c | 124 bytes
 
+<a id="uidatastore_registry-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
 |---|:-:|:-:|:-:|
 |RegistryDataProvider|UIDynamicFieldProvider*|0x4|0x78|
 
+<a id="uidatastore_registry-functions"></a>
 ### Functions
 
 |Signature|
@@ -29464,6 +31029,7 @@ Package: Engine
 
 Size: 0xa8 | 168 bytes
 
+<a id="uidatastore_onlinegamesearch-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -29477,6 +31043,7 @@ Size: 0xa8 | 168 bytes
 |SelectedIndex|i32|0x4|0xa0|
 |ActiveSearchIndex|i32|0x4|0xa4|
 
+<a id="uidatastore_onlinegamesearch-functions"></a>
 ### Functions
 
 |Signature|
@@ -29498,6 +31065,7 @@ SubmitGameSearch(<br>&nbsp;&nbsp;&nbsp;&nbsp;ControllerIndex: i8,<br>&nbsp;&nbsp
 InvalidateCurrentSearchResults(<br>&nbsp;&nbsp;&nbsp;&nbsp;ActiveSearch: OnlineGameSearch*,<br>&nbsp;&nbsp;&nbsp;&nbsp;bResult: bool,<br>) -> bool|
 Init() -> ()|
 
+<a id="uidatastore_onlinegamesearch-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -29512,6 +31080,7 @@ Package: Engine
 
 Size: 0x120 | 288 bytes
 
+<a id="uidatastore_onlineplayerdata-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -29543,6 +31112,7 @@ Size: 0x120 | 288 bytes
 |AchievementsProviderClassName|FString|0xc|0x110|
 |AchievementsProviderClass|UClass*|0x4|0x11c|
 
+<a id="uidatastore_onlineplayerdata-functions"></a>
 ### Functions
 
 |Signature|
@@ -29567,6 +31137,7 @@ Package: Engine
 
 Size: 0xe8 | 232 bytes
 
+<a id="uidatastore_onlinestats-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -29584,6 +31155,7 @@ Size: 0xe8 | 232 bytes
 |StatsInterface|OnlineStatsInterface*|0x8|0xd8|
 |PlayerInterface|OnlinePlayerInterface*|0x8|0xe0|
 
+<a id="uidatastore_onlinestats-functions"></a>
 ### Functions
 
 |Signature|
@@ -29595,12 +31167,14 @@ RefreshStats(<br>&nbsp;&nbsp;&nbsp;&nbsp;ControllerIndex: i8,<br>&nbsp;&nbsp;&nb
 SetStatsReadInfo() -> ()|
 Init(<br>&nbsp;&nbsp;&nbsp;&nbsp;OnlineSub: OnlineSubsystem*,<br>) -> ()|
 
+<a id="uidatastore_onlinestats-enums"></a>
 ### Enums
 
 |Enum|
 |---|
 |EStatsFetchType {<br>&nbsp;&nbsp;&nbsp;&nbsp;SFT_Player,<br>&nbsp;&nbsp;&nbsp;&nbsp;SFT_CenteredOnPlayer,<br>&nbsp;&nbsp;&nbsp;&nbsp;SFT_Friends,<br>&nbsp;&nbsp;&nbsp;&nbsp;SFT_TopRankings,<br>&nbsp;&nbsp;&nbsp;&nbsp;SFT_MAX,<br>}|
 
+<a id="uidatastore_onlinestats-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -29623,6 +31197,7 @@ Package: Engine
 
 Size: 0x8c | 140 bytes
 
+<a id="uidatastore_onlinegamesettings-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -29631,6 +31206,7 @@ Size: 0x8c | 140 bytes
 |SettingsProviderClass|UClass*|0x4|0x84|
 |SelectedIndex|i32|0x4|0x88|
 
+<a id="uidatastore_onlinegamesettings-functions"></a>
 ### Functions
 
 |Signature|
@@ -29646,6 +31222,7 @@ GetCurrentGameSettings() -> OnlineGameSettings*|
 CreateGame(<br>&nbsp;&nbsp;&nbsp;&nbsp;ControllerIndex: i8,<br>&nbsp;&nbsp;&nbsp;&nbsp;OnlineSub: OnlineSubsystem*,<br>&nbsp;&nbsp;&nbsp;&nbsp;GameInterface: OnlineGameInterface*,<br>) -> bool|
 OnSettingProviderChanged(<br>&nbsp;&nbsp;&nbsp;&nbsp;SourceProvider: UIDataProvider*,<br>&nbsp;&nbsp;&nbsp;&nbsp;SettingsName: FName,<br>) -> ()|
 
+<a id="uidatastore_onlinegamesettings-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -29660,6 +31237,7 @@ Package: Engine
 
 Size: 0x9c | 156 bytes
 
+<a id="uidatastore_sessionsettings-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -29668,6 +31246,7 @@ Size: 0x9c | 156 bytes
 |SessionSettingsProviderClasses|TArray\<UClass*\>|0xc|0x84|
 |SessionSettings|TArray\<SessionSettingsProvider*\>|0xc|0x90|
 
+<a id="uidatastore_sessionsettings-functions"></a>
 ### Functions
 
 |Signature|
@@ -29690,6 +31269,7 @@ Package: Engine
 
 Size: 0xc0 | 192 bytes
 
+<a id="uidatastore_inputalias-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -29697,6 +31277,7 @@ Size: 0xc0 | 192 bytes
 |InputAliases|TArray\<UIDataStoreInputAlias\>|0xc|0x78|
 |InputAliasLookupMap|TMap\<FPair\>|0x3c|0x84|
 
+<a id="uidatastore_inputalias-functions"></a>
 ### Functions
 
 |Signature|
@@ -29710,6 +31291,7 @@ GetAliasInputKeyName(<br>&nbsp;&nbsp;&nbsp;&nbsp;DesiredAlias: FName,<br>&nbsp;&
 GetAliasFontMarkupByIndex(<br>&nbsp;&nbsp;&nbsp;&nbsp;AliasIndex: i32,<br>&nbsp;&nbsp;&nbsp;&nbsp;OverridePlatform: i8,<br>) -> FString|
 GetAliasFontMarkup(<br>&nbsp;&nbsp;&nbsp;&nbsp;DesiredAlias: FName,<br>&nbsp;&nbsp;&nbsp;&nbsp;OverridePlatform: i8,<br>) -> FString|
 
+<a id="uidatastore_inputalias-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -29725,6 +31307,7 @@ Package: Engine
 
 Size: 0xc4 | 196 bytes
 
+<a id="uidatastore_stringaliasmap-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -29733,6 +31316,7 @@ Size: 0xc4 | 196 bytes
 |MenuInputSets|Map_Mirror|0x3c|0x84|
 |PlayerIndex|i32|0x4|0xc0|
 
+<a id="uidatastore_stringaliasmap-functions"></a>
 ### Functions
 
 |Signature|
@@ -29741,6 +31325,7 @@ GetStringWithFieldName(<br>&nbsp;&nbsp;&nbsp;&nbsp;FieldName: FString,<br>&nbsp;
 FindMappingWithFieldName(<br>&nbsp;&nbsp;&nbsp;&nbsp;FieldName: FString,<br>&nbsp;&nbsp;&nbsp;&nbsp;SetName: FString,<br>) -> i32|
 GetPlayerOwner() -> LocalPlayer*|
 
+<a id="uidatastore_stringaliasmap-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -29755,6 +31340,7 @@ Package: Engine
 
 Size: 0x84 | 132 bytes
 
+<a id="uidatastore_strings-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -29769,6 +31355,7 @@ Package: Engine
 
 Size: 0x210 | 528 bytes
 
+<a id="uicustomskin-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -29783,6 +31370,7 @@ Package: Engine
 
 Size: 0xe8 | 232 bytes
 
+<a id="uidynamicfieldprovider-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -29792,6 +31380,7 @@ Size: 0xe8 | 232 bytes
 |PersistentCollectionData|Map_Mirror|0x3c|0x70|
 |RuntimeCollectionData|Map_Mirror|0x3c|0xac|
 
+<a id="uidynamicfieldprovider-functions"></a>
 ### Functions
 
 |Signature|
@@ -29824,6 +31413,7 @@ Package: Engine
 
 Size: 0x70 | 112 bytes
 
+<a id="uipropertydataprovider-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -29831,6 +31421,7 @@ Size: 0x70 | 112 bytes
 |ComplexPropertyTypes|TArray\<UClass*\>|0xc|0x58|
 |__CanSupportComplexPropertyType__Delegate|FScriptDelegate|0xc|0x64|
 
+<a id="uipropertydataprovider-functions"></a>
 ### Functions
 
 |Signature|
@@ -29846,6 +31437,7 @@ Package: Engine
 
 Size: 0x7c | 124 bytes
 
+<a id="uidynamicdataprovider-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -29854,6 +31446,7 @@ Size: 0x7c | 124 bytes
 |DataClass|UClass*|0x4|0x74|
 |DataSource|Object*|0x4|0x78|
 
+<a id="uidynamicdataprovider-functions"></a>
 ### Functions
 
 |Signature|
@@ -29874,12 +31467,14 @@ Package: Engine
 
 Size: 0x80 | 128 bytes
 
+<a id="gameinfodataprovider-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
 |---|:-:|:-:|:-:|
 |GameDataSource|GameReplicationInfo*|0x4|0x7c|
 
+<a id="gameinfodataprovider-functions"></a>
 ### Functions
 
 |Signature|
@@ -29901,6 +31496,7 @@ Package: Engine
 
 Size: 0x7c | 124 bytes
 
+<a id="powerupdataprovider-functions"></a>
 ### Functions
 
 |Signature|
@@ -29943,12 +31539,14 @@ Package: Engine
 
 Size: 0x80 | 128 bytes
 
+<a id="playerownerdataprovider-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
 |---|:-:|:-:|:-:|
 |PlayerData|PlayerDataProvider*|0x4|0x7c|
 
+<a id="playerownerdataprovider-functions"></a>
 ### Functions
 
 |Signature|
@@ -29964,6 +31562,7 @@ Package: Engine
 
 Size: 0x94 | 148 bytes
 
+<a id="teamdataprovider-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -29972,6 +31571,7 @@ Size: 0x94 | 148 bytes
 |PlayerListFieldName|FName|0x8|0x80|
 |Players|TArray\<PlayerDataProvider*\>|0xc|0x88|
 
+<a id="teamdataprovider-functions"></a>
 ### Functions
 
 |Signature|
@@ -29986,6 +31586,7 @@ Package: Engine
 
 Size: 0x90 | 144 bytes
 
+<a id="uidataprovider_settings-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -29994,6 +31595,7 @@ Size: 0x90 | 144 bytes
 |SettingsArrayProviders|TArray\<SettingsArrayProvider\>|0xc|0x80|
 |bIsAListRow|bool|0x4|0x8c|
 
+<a id="uidataprovider_settings-functions"></a>
 ### Functions
 
 |Signature|
@@ -30003,6 +31605,7 @@ ArrayProviderPropertyChanged(<br>&nbsp;&nbsp;&nbsp;&nbsp;SourceProvider: UIDataP
 ProviderInstanceUnbound(<br>&nbsp;&nbsp;&nbsp;&nbsp;DataSourceInstance: Object*,<br>&nbsp;&nbsp;&nbsp;&nbsp;SettingsObject: Settings*,<br>) -> ()|
 ProviderInstanceBound(<br>&nbsp;&nbsp;&nbsp;&nbsp;DataSourceInstance: Object*,<br>&nbsp;&nbsp;&nbsp;&nbsp;SettingsObject: Settings*,<br>) -> ()|
 
+<a id="uidataprovider_settings-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -30017,6 +31620,7 @@ Package: Engine
 
 Size: 0x7c | 124 bytes
 
+<a id="uiresourcedataprovider-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -30025,6 +31629,7 @@ Size: 0x7c | 124 bytes
 |VfTable_IUIListElementCellProvider|Pointer|0x4|0x74|
 |bDataBindingPropertiesOnly|bool|0x4|0x78|
 
+<a id="uiresourcedataprovider-functions"></a>
 ### Functions
 
 |Signature|
@@ -30039,6 +31644,7 @@ Package: Engine
 
 Size: 0x104 | 260 bytes
 
+<a id="uidataprovider_menuitem-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -30066,12 +31672,14 @@ Size: 0x104 | 260 bytes
 |SchemaCellFields|TArray\<FName\>|0xc|0xec|
 |IniName|FString|0xc|0xf8|
 
+<a id="uidataprovider_menuitem-functions"></a>
 ### Functions
 
 |Signature|
 |---|
 IsFiltered() -> bool|
 
+<a id="uidataprovider_menuitem-enums"></a>
 ### Enums
 
 |Enum|
@@ -30086,6 +31694,7 @@ Package: Engine
 
 Size: 0xac | 172 bytes
 
+<a id="uimapsummary-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -30103,12 +31712,14 @@ Package: Engine
 
 Size: 0x78 | 120 bytes
 
+<a id="uisettingsprovider-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
 |---|:-:|:-:|:-:|
 |ProviderTag|FName|0x8|0x70|
 
+<a id="uisettingsprovider-functions"></a>
 ### Functions
 
 |Signature|
@@ -30126,6 +31737,7 @@ Package: Engine
 
 Size: 0x84 | 132 bytes
 
+<a id="sessionsettingsprovider-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -30134,6 +31746,7 @@ Size: 0x84 | 132 bytes
 |ProviderClientMetaClass|UClass*|0x4|0x7c|
 |ProviderClient|UClass*|0x4|0x80|
 
+<a id="sessionsettingsprovider-functions"></a>
 ### Functions
 
 |Signature|
@@ -30153,6 +31766,7 @@ Package: Engine
 
 Size: 0x68 | 104 bytes
 
+<a id="uiresourcecombinationprovider-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -30162,6 +31776,7 @@ Size: 0x68 | 104 bytes
 |StaticDataProvider|UIResourceDataProvider*|0x4|0x60|
 |ProfileProvider|UIDataProvider_OnlineProfileSettings*|0x4|0x64|
 
+<a id="uiresourcecombinationprovider-functions"></a>
 ### Functions
 
 |Signature|
@@ -30188,6 +31803,7 @@ Package: Engine
 
 Size: 0x180 | 384 bytes
 
+<a id="gameuisceneclient-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -30228,6 +31844,7 @@ Size: 0x180 | 384 bytes
 |DebugTarget|UIScreenObject*|0x4|0x170|
 |AnimSequencePool|TArray\<UIAnimationSeq*\>|0xc|0x174|
 
+<a id="gameuisceneclient-functions"></a>
 ### Functions
 
 |Signature|
@@ -30287,6 +31904,7 @@ Package: Engine
 
 Size: 0x430 | 1072 bytes
 
+<a id="consoleentry-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -30299,6 +31917,7 @@ Size: 0x430 | 1072 bytes
 |CursorPosition|i32|0x4|0x428|
 |bRenderCursor|bool|0x4|0x42c|
 
+<a id="consoleentry-functions"></a>
 ### Functions
 
 |Signature|
@@ -30309,6 +31928,7 @@ PostInitialize() -> ()|
 RemovedChild(<br>&nbsp;&nbsp;&nbsp;&nbsp;WidgetOwner: UIScreenObject*,<br>&nbsp;&nbsp;&nbsp;&nbsp;OldChild: UIObject*,<br>&nbsp;&nbsp;&nbsp;&nbsp;ExclusionSet: TArray\<UIObject*\>,<br>) -> ()|
 AddedChild(<br>&nbsp;&nbsp;&nbsp;&nbsp;WidgetOwner: UIScreenObject*,<br>&nbsp;&nbsp;&nbsp;&nbsp;NewChild: UIObject*,<br>) -> ()|
 
+<a id="consoleentry-consts"></a>
 ### Consts
 
 |Constant|Value|
@@ -30323,6 +31943,7 @@ Package: Engine
 
 Size: 0x420 | 1056 bytes
 
+<a id="uibutton-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -30330,6 +31951,7 @@ Size: 0x420 | 1056 bytes
 |BackgroundImageComponent|UIComp_DrawImage*|0x4|0x414|
 |ClickedCue|FName|0x8|0x418|
 
+<a id="uibutton-functions"></a>
 ### Functions
 
 |Signature|
@@ -30344,6 +31966,7 @@ Package: Engine
 
 Size: 0x46c | 1132 bytes
 
+<a id="uicheckbox-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -30355,6 +31978,7 @@ Size: 0x46c | 1132 bytes
 |CheckedImageComponent|UIComp_DrawImage*|0x4|0x464|
 |bIsChecked|bool|0x4|0x468|
 
+<a id="uicheckbox-functions"></a>
 ### Functions
 
 |Signature|
@@ -30378,6 +32002,7 @@ Package: Engine
 
 Size: 0x458 | 1112 bytes
 
+<a id="uilabelbutton-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -30386,6 +32011,7 @@ Size: 0x458 | 1112 bytes
 |CaptionDataSource|UIDataStoreBinding|0x30|0x424|
 |StringRenderComponent|UIComp_DrawString*|0x4|0x454|
 
+<a id="uilabelbutton-functions"></a>
 ### Functions
 
 |Signature|
@@ -30409,6 +32035,7 @@ Package: Engine
 
 Size: 0x468 | 1128 bytes
 
+<a id="uitabbutton-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -30416,6 +32043,7 @@ Size: 0x468 | 1128 bytes
 |TabPage|UITabPage*|0x4|0x458|
 |__IsActivationAllowed__Delegate|FScriptDelegate|0xc|0x45c|
 
+<a id="uitabbutton-functions"></a>
 ### Functions
 
 |Signature|
@@ -30437,6 +32065,7 @@ Package: Engine
 
 Size: 0x494 | 1172 bytes
 
+<a id="uitogglebutton-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -30446,6 +32075,7 @@ Size: 0x494 | 1172 bytes
 |CheckedStringRenderComponent|UIComp_DrawString*|0x4|0x48c|
 |CheckedBackgroundImageComponent|UIComp_DrawImage*|0x4|0x490|
 
+<a id="uitogglebutton-functions"></a>
 ### Functions
 
 |Signature|
@@ -30470,6 +32100,7 @@ Package: Engine
 
 Size: 0x4d0 | 1232 bytes
 
+<a id="uioptionlistbase-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -30490,6 +32121,7 @@ Size: 0x4d0 | 1232 bytes
 |__CreateCustomDecrementButton__Delegate|FScriptDelegate|0xc|0x4b8|
 |__CreateCustomIncrementButton__Delegate|FScriptDelegate|0xc|0x4c4|
 
+<a id="uioptionlistbase-functions"></a>
 ### Functions
 
 |Signature|
@@ -30513,6 +32145,7 @@ SetDataStoreBinding(<br>&nbsp;&nbsp;&nbsp;&nbsp;MarkupText: FString,<br>&nbsp;&n
 CreateCustomIncrementButton(<br>&nbsp;&nbsp;&nbsp;&nbsp;ButtonOwner: UIOptionListBase*,<br>) -> UIOptionListButton*|
 CreateCustomDecrementButton(<br>&nbsp;&nbsp;&nbsp;&nbsp;ButtonOwner: UIOptionListBase*,<br>) -> UIOptionListButton*|
 
+<a id="uioptionlistbase-consts"></a>
 ### Consts
 
 |Constant|Value|
@@ -30535,12 +32168,14 @@ Package: Engine
 
 Size: 0x42c | 1068 bytes
 
+<a id="uiscrollbarmarkerbutton-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
 |---|:-:|:-:|:-:|
 |__OnButtonDragged__Delegate|FScriptDelegate|0xc|0x420|
 
+<a id="uiscrollbarmarkerbutton-functions"></a>
 ### Functions
 
 |Signature|
@@ -30555,6 +32190,7 @@ Package: Engine
 
 Size: 0x4a0 | 1184 bytes
 
+<a id="uicombobox-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -30576,6 +32212,7 @@ Size: 0x4a0 | 1184 bytes
 |__CreateCustomComboButton__Delegate|FScriptDelegate|0xc|0x488|
 |__CreateCustomComboList__Delegate|FScriptDelegate|0xc|0x494|
 
+<a id="uicombobox-functions"></a>
 ### Functions
 
 |Signature|
@@ -30604,6 +32241,7 @@ CreateCustomComboList(<br>&nbsp;&nbsp;&nbsp;&nbsp;ListOwner: UIComboBox*,<br>) -
 CreateCustomComboButton(<br>&nbsp;&nbsp;&nbsp;&nbsp;ButtonOwner: UIComboBox*,<br>) -> UIToggleButton*|
 CreateCustomComboEditbox(<br>&nbsp;&nbsp;&nbsp;&nbsp;EditboxOwner: UIComboBox*,<br>) -> UIEditBox*|
 
+<a id="uicombobox-consts"></a>
 ### Consts
 
 |Constant|Value|
@@ -30620,6 +32258,7 @@ Package: Engine
 
 Size: 0x418 | 1048 bytes
 
+<a id="uicontainer-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -30634,6 +32273,7 @@ Package: Engine
 
 Size: 0x46c | 1132 bytes
 
+<a id="uiframebox-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -30641,18 +32281,21 @@ Size: 0x46c | 1132 bytes
 |BackgroundImageComponent|UIComp_DrawImage*|0x4|0x418|
 |BackgroundCornerSizes|CornerSizes|0x30|0x43c|
 
+<a id="uiframebox-functions"></a>
 ### Functions
 
 |Signature|
 |---|
 SetBackgroundImage(<br>&nbsp;&nbsp;&nbsp;&nbsp;ImageToSet: i8,<br>&nbsp;&nbsp;&nbsp;&nbsp;NewImage: Surface*,<br>) -> ()|
 
+<a id="uiframebox-enums"></a>
 ### Enums
 
 |Enum|
 |---|
 |EFrameBoxImage {<br>&nbsp;&nbsp;&nbsp;&nbsp;FBI_TopLeft,<br>&nbsp;&nbsp;&nbsp;&nbsp;FBI_Top,<br>&nbsp;&nbsp;&nbsp;&nbsp;FBI_TopRight,<br>&nbsp;&nbsp;&nbsp;&nbsp;FBI_CenterLeft,<br>&nbsp;&nbsp;&nbsp;&nbsp;FBI_Center,<br>&nbsp;&nbsp;&nbsp;&nbsp;FBI_CenterRight,<br>&nbsp;&nbsp;&nbsp;&nbsp;FBI_BottomLeft,<br>&nbsp;&nbsp;&nbsp;&nbsp;FBI_Bottom,<br>&nbsp;&nbsp;&nbsp;&nbsp;FBI_BottomRight,<br>&nbsp;&nbsp;&nbsp;&nbsp;FBI_MAX,<br>}|
 
+<a id="uiframebox-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -30667,6 +32310,7 @@ Package: Engine
 
 Size: 0x420 | 1056 bytes
 
+<a id="uipanel-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -30674,6 +32318,7 @@ Size: 0x420 | 1056 bytes
 |BackgroundImageComponent|UIComp_DrawImage*|0x4|0x418|
 |bEnforceClipping|bool|0x4|0x41c|
 
+<a id="uipanel-functions"></a>
 ### Functions
 
 |Signature|
@@ -30688,6 +32333,7 @@ Package: Engine
 
 Size: 0x428 | 1064 bytes
 
+<a id="uisaferegionpanel-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -30698,6 +32344,7 @@ Size: 0x428 | 1064 bytes
 |bUseFullRegionIn4x3|bool|0x4|0x424|
 |bPrimarySafeRegion|bool|0x4|0x424|
 
+<a id="uisaferegionpanel-enums"></a>
 ### Enums
 
 |Enum|
@@ -30712,6 +32359,7 @@ Package: Engine
 
 Size: 0x450 | 1104 bytes
 
+<a id="uiscrollframe-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -30726,6 +32374,7 @@ Size: 0x450 | 1104 bytes
 |bRefreshScrollbars|bool|0x4|0x44c|
 |bRecalculateClientRegion|bool|0x4|0x44c|
 
+<a id="uiscrollframe-functions"></a>
 ### Functions
 
 |Signature|
@@ -30754,6 +32403,7 @@ Package: Engine
 
 Size: 0x4b4 | 1204 bytes
 
+<a id="uitabpage-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -30765,6 +32415,7 @@ Size: 0x4b4 | 1204 bytes
 |ButtonToolTip|UIDataStoreBinding|0x30|0x454|
 |PageDescription|UIDataStoreBinding|0x30|0x484|
 
+<a id="uitabpage-functions"></a>
 ### Functions
 
 |Signature|
@@ -30787,6 +32438,7 @@ LinkToTabButton(<br>&nbsp;&nbsp;&nbsp;&nbsp;NewButton: UITabButton*,<br>&nbsp;&n
 CreateTabButton(<br>&nbsp;&nbsp;&nbsp;&nbsp;TabControl: UITabControl*,<br>&nbsp;&nbsp;&nbsp;&nbsp;NewTabButton: UITabButton*,<br>) -> UITabButton*|
 ActivatePage(<br>&nbsp;&nbsp;&nbsp;&nbsp;PlayerIndex: i32,<br>&nbsp;&nbsp;&nbsp;&nbsp;bActivate: bool,<br>&nbsp;&nbsp;&nbsp;&nbsp;bTakeFocus: bool,<br>&nbsp;&nbsp;&nbsp;&nbsp;bResult: bool,<br>) -> bool|
 
+<a id="uitabpage-consts"></a>
 ### Consts
 
 |Constant|Value|
@@ -30802,6 +32454,7 @@ Package: Engine
 
 Size: 0x50c | 1292 bytes
 
+<a id="uinumericeditbox-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -30815,6 +32468,7 @@ Size: 0x50c | 1292 bytes
 |IncButton_Position|UIScreenValue_Bounds|0x1c|0x4d4|
 |DecButton_Position|UIScreenValue_Bounds|0x1c|0x4f0|
 
+<a id="uinumericeditbox-functions"></a>
 ### Functions
 
 |Signature|
@@ -30834,6 +32488,7 @@ Package: Engine
 
 Size: 0x6b8 | 1720 bytes
 
+<a id="uinavigationlist-functions"></a>
 ### Functions
 
 |Signature|
@@ -30852,6 +32507,7 @@ Package: Engine
 
 Size: 0x418 | 1048 bytes
 
+<a id="uimeshwidget-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -30866,12 +32522,14 @@ Package: Engine
 
 Size: 0x4e4 | 1252 bytes
 
+<a id="uinumericoptionlist-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
 |---|:-:|:-:|:-:|
 |RangeValue|UIRangeData|0x14|0x4d0|
 
+<a id="uinumericoptionlist-functions"></a>
 ### Functions
 
 |Signature|
@@ -30887,6 +32545,7 @@ Package: Engine
 
 Size: 0x4e8 | 1256 bytes
 
+<a id="uioptionlist-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -30895,6 +32554,7 @@ Size: 0x4e8 | 1256 bytes
 |DataProvider|UIListElementProvider*|0x8|0x4d4|
 |__OnIsCurrValueValid__Delegate|FScriptDelegate|0xc|0x4dc|
 
+<a id="uioptionlist-functions"></a>
 ### Functions
 
 |Signature|
@@ -30915,6 +32575,7 @@ Package: Engine
 
 Size: 0x434 | 1076 bytes
 
+<a id="uiprefab-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -30926,6 +32587,7 @@ Size: 0x434 | 1076 bytes
 |OriginalWidth|UIScreenValue_Extent|0x8|0x424|
 |OriginalHeight|UIScreenValue_Extent|0x8|0x42c|
 
+<a id="uiprefab-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -30940,6 +32602,7 @@ Package: Engine
 
 Size: 0x4d0 | 1232 bytes
 
+<a id="uiprefabinstance-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -30956,6 +32619,7 @@ Size: 0x4d0 | 1232 bytes
 |PI_SavedNames|TArray\<FString\>|0xc|0x488|
 |PI_ObjectMap|TMap\<FPair\>|0x3c|0x494|
 
+<a id="uiprefabinstance-functions"></a>
 ### Functions
 
 |Signature|
@@ -30970,6 +32634,7 @@ Package: Engine
 
 Size: 0x46d | 1133 bytes
 
+<a id="uiprogressbar-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -30983,6 +32648,7 @@ Size: 0x46d | 1133 bytes
 |ProgressBarValue|UIRangeData|0x14|0x458|
 |ProgressBarOrientation|i8|0x1|0x46c|
 
+<a id="uiprogressbar-functions"></a>
 ### Functions
 
 |Signature|
@@ -31008,6 +32674,7 @@ Package: Engine
 
 Size: 0x49c | 1180 bytes
 
+<a id="uislider-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -31027,6 +32694,7 @@ Size: 0x49c | 1180 bytes
 |IncrementCue|FName|0x8|0x48c|
 |DecrementCue|FName|0x8|0x494|
 
+<a id="uislider-functions"></a>
 ### Functions
 
 |Signature|
@@ -31053,6 +32721,7 @@ Package: Engine
 
 Size: 0x4b4 | 1204 bytes
 
+<a id="uitabcontrol-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -31073,6 +32742,7 @@ Size: 0x4b4 | 1204 bytes
 |__OnPageInserted__Delegate|FScriptDelegate|0xc|0x49c|
 |__OnPageRemoved__Delegate|FScriptDelegate|0xc|0x4a8|
 
+<a id="uitabcontrol-functions"></a>
 ### Functions
 
 |Signature|
@@ -31103,6 +32773,7 @@ OnPageRemoved(<br>&nbsp;&nbsp;&nbsp;&nbsp;Sender: UITabControl*,<br>&nbsp;&nbsp;
 OnPageInserted(<br>&nbsp;&nbsp;&nbsp;&nbsp;Sender: UITabControl*,<br>&nbsp;&nbsp;&nbsp;&nbsp;NewPage: UITabPage*,<br>&nbsp;&nbsp;&nbsp;&nbsp;PlayerIndex: i32,<br>) -> ()|
 OnPageActivated(<br>&nbsp;&nbsp;&nbsp;&nbsp;Sender: UITabControl*,<br>&nbsp;&nbsp;&nbsp;&nbsp;NewlyActivePage: UITabPage*,<br>&nbsp;&nbsp;&nbsp;&nbsp;PlayerIndex: i32,<br>) -> ()|
 
+<a id="uitabcontrol-enums"></a>
 ### Enums
 
 |Enum|
@@ -31117,6 +32788,7 @@ Package: Engine
 
 Size: 0x59c | 1436 bytes
 
+<a id="uiscene-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -31195,6 +32867,7 @@ Size: 0x59c | 1436 bytes
 |__OnQueryBeginAnimation_DisableInput__Delegate|FScriptDelegate|0xc|0x584|
 |__OnQueryEndAnimation_EnableInput__Delegate|FScriptDelegate|0xc|0x590|
 
+<a id="uiscene-functions"></a>
 ### Functions
 
 |Signature|
@@ -31280,6 +32953,7 @@ Package: Engine
 
 Size: 0x5a0 | 1440 bytes
 
+<a id="uiprefabscene-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -31301,6 +32975,7 @@ Package: Engine
 
 Size: 0x66 | 102 bytes
 
+<a id="uistate_focused-functions"></a>
 ### Functions
 
 |Signature|
@@ -31322,6 +32997,7 @@ Package: Engine
 
 Size: 0x66 | 102 bytes
 
+<a id="uistate_targetedtab-functions"></a>
 ### Functions
 
 |Signature|
@@ -31350,6 +33026,7 @@ Package: Engine
 
 Size: 0x70 | 112 bytes
 
+<a id="uistyle_data-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -31361,6 +33038,7 @@ Size: 0x70 | 112 bytes
 |bDirty|bool|0x4|0x60|
 |__MatchesStyleData__Delegate|FScriptDelegate|0xc|0x64|
 
+<a id="uistyle_data-functions"></a>
 ### Functions
 
 |Signature|
@@ -31375,6 +33053,7 @@ Package: Engine
 
 Size: 0xb0 | 176 bytes
 
+<a id="uistyle_combo-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -31382,6 +33061,7 @@ Size: 0xb0 | 176 bytes
 |ImageStyle|StyleDataReference|0x20|0x70|
 |TextStyle|StyleDataReference|0x20|0x90|
 
+<a id="uistyle_combo-functions"></a>
 ### Functions
 
 |Signature|
@@ -31389,6 +33069,7 @@ Size: 0xb0 | 176 bytes
 GetComboImageStyle() -> UIStyle_Image*|
 GetComboTextStyle() -> UIStyle_Text*|
 
+<a id="uistyle_combo-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -31403,6 +33084,7 @@ Package: Engine
 
 Size: 0xac | 172 bytes
 
+<a id="uistyle_image-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -31419,6 +33101,7 @@ Package: Engine
 
 Size: 0x94 | 148 bytes
 
+<a id="uistyle_text-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -31440,6 +33123,7 @@ Package: Engine
 
 Size: 0x4c | 76 bytes
 
+<a id="uitickableobjectproxy-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -31447,6 +33131,7 @@ Size: 0x4c | 76 bytes
 |VfTable_IUITickableObject|Pointer|0x4|0x3c|
 |__OnScriptTick__Delegate|FScriptDelegate|0xc|0x40|
 
+<a id="uitickableobjectproxy-functions"></a>
 ### Functions
 
 |Signature|
@@ -31462,6 +33147,7 @@ Package: Engine
 
 Size: 0x3c | 60 bytes
 
+<a id="uistringrenderer-functions"></a>
 ### Functions
 
 |Signature|
@@ -31476,6 +33162,7 @@ Package: Engine
 
 Size: 0x3c | 60 bytes
 
+<a id="uistyleresolver-functions"></a>
 ### Functions
 
 |Signature|
@@ -31499,6 +33186,7 @@ Package: Engine
 
 Size: 0x13c | 316 bytes
 
+<a id="uisequence-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -31506,6 +33194,7 @@ Size: 0x13c | 316 bytes
 |VfTable_IUIEventContainer|Pointer|0x4|0x12c|
 |UIEvents|TArray\<UIEvent*\>|0xc|0x130|
 
+<a id="uisequence-functions"></a>
 ### Functions
 
 |Signature|
@@ -31524,6 +33213,7 @@ Package: Engine
 
 Size: 0x13c | 316 bytes
 
+<a id="uistatesequence-functions"></a>
 ### Functions
 
 |Signature|
@@ -31538,12 +33228,14 @@ Package: Engine
 
 Size: 0xec | 236 bytes
 
+<a id="uiaction-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
 |---|:-:|:-:|:-:|
 |bAutoTargetOwner|bool|0x4|0xe8|
 
+<a id="uiaction-functions"></a>
 ### Functions
 
 |Signature|
@@ -31562,6 +33254,7 @@ Package: Engine
 
 Size: 0xf4 | 244 bytes
 
+<a id="uiaction_activatelevelevent-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -31576,6 +33269,7 @@ Package: Engine
 
 Size: 0xf1 | 241 bytes
 
+<a id="uiaction_scene-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -31583,6 +33277,7 @@ Size: 0xf1 | 241 bytes
 |Scene|UIScene*|0x4|0xec|
 |ForcedScenePriority|i8|0x1|0xf0|
 
+<a id="uiaction_scene-functions"></a>
 ### Functions
 
 |Signature|
@@ -31590,6 +33285,7 @@ Size: 0xf1 | 241 bytes
 GetObjClassVersion() -> i32|
 IsValidLevelSequenceObject() -> bool|
 
+<a id="uiaction_scene-consts"></a>
 ### Consts
 
 |Constant|Value|
@@ -31613,6 +33309,7 @@ Package: Engine
 
 Size: 0xfc | 252 bytes
 
+<a id="uiaction_openscene-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -31620,6 +33317,7 @@ Size: 0xfc | 252 bytes
 |OpenedScene|UIScene*|0x4|0xf4|
 |DesiredPlayerIndex|i32|0x4|0xf8|
 
+<a id="uiaction_openscene-functions"></a>
 ### Functions
 
 |Signature|
@@ -31634,12 +33332,14 @@ Package: Engine
 
 Size: 0xd0 | 208 bytes
 
+<a id="uicond_isfocused-functions"></a>
 ### Functions
 
 |Signature|
 |---|
 IsValidLevelSequenceObject() -> bool|
 
+<a id="uicond_isfocused-enums"></a>
 ### Enums
 
 |Enum|
@@ -31654,6 +33354,7 @@ Package: Engine
 
 Size: 0x128 | 296 bytes
 
+<a id="uievent-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -31666,6 +33367,7 @@ Size: 0x128 | 296 bytes
 |bPropagateEvent|bool|0x4|0x118|
 |__AllowEventActivation__Delegate|FScriptDelegate|0xc|0x11c|
 
+<a id="uievent-functions"></a>
 ### Functions
 
 |Signature|
@@ -31689,12 +33391,14 @@ Package: Engine
 
 Size: 0x12c | 300 bytes
 
+<a id="uievent_calloutbuttoninputproxy-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
 |---|:-:|:-:|:-:|
 |ButtonPanel|UICalloutButtonPanel*|0x4|0x128|
 
+<a id="uievent_calloutbuttoninputproxy-functions"></a>
 ### Functions
 
 |Signature|
@@ -31715,12 +33419,14 @@ Package: Engine
 
 Size: 0x12c | 300 bytes
 
+<a id="uievent_metaobject-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
 |---|:-:|:-:|:-:|
 |VfTable_FCallbackEventDevice|Pointer|0x4|0x128|
 
+<a id="uievent_metaobject-functions"></a>
 ### Functions
 
 |Signature|
@@ -31743,12 +33449,14 @@ Package: Engine
 
 Size: 0x164 | 356 bytes
 
+<a id="uievent_processinput-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
 |---|:-:|:-:|:-:|
 |ActionMap|MultiMap_Mirror|0x3c|0x128|
 
+<a id="uievent_processinput-functions"></a>
 ### Functions
 
 |Signature|
@@ -31784,6 +33492,7 @@ Package: Engine
 
 Size: 0x3c | 60 bytes
 
+<a id="scene-enums"></a>
 ### Enums
 
 |Enum|
@@ -31791,6 +33500,7 @@ Size: 0x3c | 60 bytes
 |EDetailMode {<br>&nbsp;&nbsp;&nbsp;&nbsp;DM_Low,<br>&nbsp;&nbsp;&nbsp;&nbsp;DM_Medium,<br>&nbsp;&nbsp;&nbsp;&nbsp;DM_High,<br>&nbsp;&nbsp;&nbsp;&nbsp;DM_MAX,<br>}|
 |ESceneDepthPriorityGroup {<br>&nbsp;&nbsp;&nbsp;&nbsp;SDPG_UnrealEdBackground,<br>&nbsp;&nbsp;&nbsp;&nbsp;SDPG_World,<br>&nbsp;&nbsp;&nbsp;&nbsp;SDPG_Foreground,<br>&nbsp;&nbsp;&nbsp;&nbsp;SDPG_UnrealEdForeground,<br>&nbsp;&nbsp;&nbsp;&nbsp;SDPG_PostProcess,<br>&nbsp;&nbsp;&nbsp;&nbsp;SDPG_MAX,<br>}|
 
+<a id="scene-consts"></a>
 ### Consts
 
 |Constant|Value|
@@ -31805,6 +33515,7 @@ Package: Engine
 
 Size: 0x248 | 584 bytes
 
+<a id="foliagefactory-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -31818,6 +33529,7 @@ Size: 0x248 | 584 bytes
 |FacingFalloffExponent|f32|0x4|0x240|
 |MaxInstanceCount|i32|0x4|0x244|
 
+<a id="foliagefactory-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -31832,6 +33544,7 @@ Package: Engine
 
 Size: 0x25c | 604 bytes
 
+<a id="foliagecomponent-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -31851,6 +33564,7 @@ Size: 0x25c | 604 bytes
 |SwayScale|f32|0x4|0x240|
 |LightmassSettings|LightmassPrimitiveSettings|0x18|0x244|
 
+<a id="foliagecomponent-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -31866,6 +33580,7 @@ Package: Engine
 
 Size: 0x1f4 | 500 bytes
 
+<a id="fluidinfluenceactor-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -31876,6 +33591,7 @@ Size: 0x1f4 | 500 bytes
 |bActive|bool|0x4|0x1f0|
 |bToggled|bool|0x4|0x1f0|
 
+<a id="fluidinfluenceactor-functions"></a>
 ### Functions
 
 |Signature|
@@ -31891,6 +33607,7 @@ Package: Engine
 
 Size: 0x1ec | 492 bytes
 
+<a id="fluidsurfaceactor-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -31898,6 +33615,7 @@ Size: 0x1ec | 492 bytes
 |FluidComponent|FluidSurfaceComponent*|0x4|0x1e4|
 |ProjectileEntryEffect|ParticleSystem*|0x4|0x1e8|
 
+<a id="fluidsurfaceactor-functions"></a>
 ### Functions
 
 |Signature|
@@ -31920,6 +33638,7 @@ Package: Engine
 
 Size: 0x1e8 | 488 bytes
 
+<a id="speedtreeactor-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -31934,6 +33653,7 @@ Package: Engine
 
 Size: 0x5c | 92 bytes
 
+<a id="speedtreeactorfactory-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -31948,6 +33668,7 @@ Package: Engine
 
 Size: 0x44 | 68 bytes
 
+<a id="speedtreecomponentfactory-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -31962,6 +33683,7 @@ Package: Engine
 
 Size: 0x80 | 128 bytes
 
+<a id="speedtree-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -31987,6 +33709,7 @@ Package: Engine
 
 Size: 0x1ec | 492 bytes
 
+<a id="lensflaresource-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -31994,6 +33717,7 @@ Size: 0x1ec | 492 bytes
 |LensFlareComp|LensFlareComponent*|0x4|0x1e4|
 |bCurrentlyActive|bool|0x4|0x1e8|
 
+<a id="lensflaresource-functions"></a>
 ### Functions
 
 |Signature|
@@ -32014,6 +33738,7 @@ Package: Engine
 
 Size: 0x1f8 | 504 bytes
 
+<a id="lensflare-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -32038,6 +33763,7 @@ Size: 0x1f8 | 504 bytes
 |ThumbnailDistance|f32|0x4|0x1f0|
 |ThumbnailImage|Texture2D*|0x4|0x1f4|
 
+<a id="lensflare-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -32053,6 +33779,7 @@ Package: Engine
 
 Size: 0x198 | 408 bytes
 
+<a id="textureflipbook-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -32077,6 +33804,7 @@ Size: 0x198 | 408 bytes
 |RenderOffsetV|f32|0x4|0x190|
 |ReleaseResourcesFence|Pointer|0x4|0x194|
 
+<a id="textureflipbook-functions"></a>
 ### Functions
 
 |Signature|
@@ -32086,6 +33814,7 @@ Stop() -> ()|
 Pause() -> ()|
 Play() -> ()|
 
+<a id="textureflipbook-enums"></a>
 ### Enums
 
 |Enum|
@@ -32100,6 +33829,7 @@ Package: Engine
 
 Size: 0xf8 | 248 bytes
 
+<a id="texture2dcomposite-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -32107,6 +33837,7 @@ Size: 0xf8 | 248 bytes
 |SourceRegions|TArray\<SourceTexture2DRegion\>|0xc|0xe8|
 |MaxTextureSize|i32|0x4|0xf4|
 
+<a id="texture2dcomposite-functions"></a>
 ### Functions
 
 |Signature|
@@ -32115,6 +33846,7 @@ ResetSourceRegions() -> ()|
 UpdateCompositeTexture(<br>&nbsp;&nbsp;&nbsp;&nbsp;NumMipsToGenerate: i32,<br>) -> ()|
 SourceTexturesFullyStreamedIn() -> bool|
 
+<a id="texture2dcomposite-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -32129,6 +33861,7 @@ Package: Engine
 
 Size: 0xfc | 252 bytes
 
+<a id="texture2ddynamic-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -32139,6 +33872,7 @@ Size: 0xfc | 252 bytes
 |NumMips|i32|0x4|0xf4|
 |bIsResolveTarget|bool|0x4|0xf8|
 
+<a id="texture2ddynamic-functions"></a>
 ### Functions
 
 |Signature|
@@ -32154,6 +33888,7 @@ Package: Engine
 
 Size: 0x138 | 312 bytes
 
+<a id="texturemovie-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -32173,6 +33908,7 @@ Size: 0x138 | 312 bytes
 |Data|UntypedBulkData_Mirror|0x34|0x100|
 |ReleaseCodecFence|Pointer|0x4|0x134|
 
+<a id="texturemovie-functions"></a>
 ### Functions
 
 |Signature|
@@ -32181,6 +33917,7 @@ Stop() -> ()|
 Pause() -> ()|
 Play() -> ()|
 
+<a id="texturemovie-enums"></a>
 ### Enums
 
 |Enum|
@@ -32195,6 +33932,7 @@ Package: Engine
 
 Size: 0xec | 236 bytes
 
+<a id="texturerendertarget-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -32211,6 +33949,7 @@ Package: Engine
 
 Size: 0x10c | 268 bytes
 
+<a id="texturerendertarget2d-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -32223,6 +33962,7 @@ Size: 0x10c | 268 bytes
 |ClearColor|LinearColor|0x10|0xf8|
 |bForceLinearGamma|bool|0x4|0x108|
 
+<a id="texturerendertarget2d-functions"></a>
 ### Functions
 
 |Signature|
@@ -32237,6 +33977,7 @@ Package: Engine
 
 Size: 0x11c | 284 bytes
 
+<a id="scriptedtexture-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -32245,6 +33986,7 @@ Size: 0x11c | 284 bytes
 |bSkipNextClear|bool|0x4|0x10c|
 |__Render__Delegate|FScriptDelegate|0xc|0x110|
 
+<a id="scriptedtexture-functions"></a>
 ### Functions
 
 |Signature|
@@ -32259,6 +34001,7 @@ Package: Engine
 
 Size: 0xf1 | 241 bytes
 
+<a id="texturerendertargetcube-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -32274,6 +34017,7 @@ Package: Engine
 
 Size: 0x2a0 | 672 bytes
 
+<a id="audiodevice-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -32322,12 +34066,14 @@ Size: 0x2a0 | 672 bytes
 |TransientMasterVolume|f32|0x4|0x298|
 |LastUpdateTime|f32|0x4|0x29c|
 
+<a id="audiodevice-functions"></a>
 ### Functions
 
 |Signature|
 |---|
 SetSoundMode(<br>&nbsp;&nbsp;&nbsp;&nbsp;NewMode: FName,<br>) -> bool|
 
+<a id="audiodevice-enums"></a>
 ### Enums
 
 |Enum|
@@ -32335,6 +34081,7 @@ SetSoundMode(<br>&nbsp;&nbsp;&nbsp;&nbsp;NewMode: FName,<br>) -> bool|
 |ETTSSpeaker {<br>&nbsp;&nbsp;&nbsp;&nbsp;TTSSPEAKER_Paul,<br>&nbsp;&nbsp;&nbsp;&nbsp;TTSSPEAKER_Harry,<br>&nbsp;&nbsp;&nbsp;&nbsp;TTSSPEAKER_Frank,<br>&nbsp;&nbsp;&nbsp;&nbsp;TTSSPEAKER_Dennis,<br>&nbsp;&nbsp;&nbsp;&nbsp;TTSSPEAKER_Kit,<br>&nbsp;&nbsp;&nbsp;&nbsp;TTSSPEAKER_Betty,<br>&nbsp;&nbsp;&nbsp;&nbsp;TTSSPEAKER_Ursula,<br>&nbsp;&nbsp;&nbsp;&nbsp;TTSSPEAKER_Rita,<br>&nbsp;&nbsp;&nbsp;&nbsp;TTSSPEAKER_Wendy,<br>&nbsp;&nbsp;&nbsp;&nbsp;TTSSPEAKER_MAX,<br>}|
 |ESoundClassName {<br>&nbsp;&nbsp;&nbsp;&nbsp;Master,<br>&nbsp;&nbsp;&nbsp;&nbsp;ESoundClassName_MAX,<br>}|
 
+<a id="audiodevice-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -32350,6 +34097,7 @@ Package: Engine
 
 Size: 0xa0 | 160 bytes
 
+<a id="soundclass-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -32360,6 +34108,7 @@ Size: 0xa0 | 160 bytes
 |MenuID|i32|0x4|0x60|
 |EditorData|TMap\<FPair\>|0x3c|0x64|
 
+<a id="soundclass-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -32375,6 +34124,7 @@ Package: Engine
 
 Size: 0x80 | 128 bytes
 
+<a id="soundmode-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -32387,6 +34137,7 @@ Size: 0x80 | 128 bytes
 |Duration|f32|0x4|0x78|
 |FadeOutTime|f32|0x4|0x7c|
 
+<a id="soundmode-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -32402,6 +34153,7 @@ Package: Engine
 
 Size: 0x480 | 1152 bytes
 
+<a id="scout-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -32431,12 +34183,14 @@ Size: 0x480 | 1152 bytes
 |NavMeshGen_MaxGroundCheckSize|f32|0x4|0x478|
 |bHightlightOneWayReachSpecs|bool|0x4|0x47c|
 
+<a id="scout-functions"></a>
 ### Functions
 
 |Signature|
 |---|
 PreBeginPlay() -> ()|
 
+<a id="scout-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -32458,6 +34212,7 @@ Package: Engine
 
 Size: 0x1ec | 492 bytes
 
+<a id="light-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -32465,6 +34220,7 @@ Size: 0x1ec | 492 bytes
 |LightComponent|LightComponent*|0x4|0x1e4|
 |bEnabled|bool|0x4|0x1e8|
 
+<a id="light-functions"></a>
 ### Functions
 
 |Signature|
@@ -32522,6 +34278,7 @@ Package: Engine
 
 Size: 0x1ec | 492 bytes
 
+<a id="pointlighttoggleable-functions"></a>
 ### Functions
 
 |Signature|
@@ -32530,6 +34287,7 @@ ApplyCheckpointRecord(<br>&nbsp;&nbsp;&nbsp;&nbsp;Record: CheckpointRecord,<br>)
 CreateCheckpointRecord(<br>&nbsp;&nbsp;&nbsp;&nbsp;Record: CheckpointRecord,<br>) -> ()|
 ShouldSaveForCheckpoint() -> bool|
 
+<a id="pointlighttoggleable-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -32579,6 +34337,7 @@ Package: Engine
 
 Size: 0x1ec | 492 bytes
 
+<a id="spotlighttoggleable-functions"></a>
 ### Functions
 
 |Signature|
@@ -32587,6 +34346,7 @@ ApplyCheckpointRecord(<br>&nbsp;&nbsp;&nbsp;&nbsp;Record: CheckpointRecord,<br>)
 CreateCheckpointRecord(<br>&nbsp;&nbsp;&nbsp;&nbsp;Record: CheckpointRecord,<br>) -> ()|
 ShouldSaveForCheckpoint() -> bool|
 
+<a id="spotlighttoggleable-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -32601,6 +34361,7 @@ Package: Engine
 
 Size: 0x1fc | 508 bytes
 
+<a id="staticlightcollectionactor-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -32616,6 +34377,7 @@ Package: Engine
 
 Size: 0x1a8 | 424 bytes
 
+<a id="lightcomponent-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -32663,6 +34425,7 @@ Size: 0x1a8 | 424 bytes
 |MaxShadowResolution|i32|0x4|0x1a0|
 |ShadowFadeResolution|i32|0x4|0x1a4|
 
+<a id="lightcomponent-functions"></a>
 ### Functions
 
 |Signature|
@@ -32673,6 +34436,7 @@ GetOrigin() -> Vector|
 SetLightProperties(<br>&nbsp;&nbsp;&nbsp;&nbsp;NewBrightness: f32,<br>&nbsp;&nbsp;&nbsp;&nbsp;NewLightColor: Color,<br>&nbsp;&nbsp;&nbsp;&nbsp;NewLightFunction: LightFunction*,<br>) -> ()|
 SetEnabled(<br>&nbsp;&nbsp;&nbsp;&nbsp;bSetEnabled: bool,<br>) -> ()|
 
+<a id="lightcomponent-enums"></a>
 ### Enums
 
 |Enum|
@@ -32682,6 +34446,7 @@ SetEnabled(<br>&nbsp;&nbsp;&nbsp;&nbsp;bSetEnabled: bool,<br>) -> ()|
 |ELightShadowMode {<br>&nbsp;&nbsp;&nbsp;&nbsp;LightShadow_Normal,<br>&nbsp;&nbsp;&nbsp;&nbsp;LightShadow_Modulate,<br>&nbsp;&nbsp;&nbsp;&nbsp;LightShadow_ModulateBetter,<br>&nbsp;&nbsp;&nbsp;&nbsp;LightShadow_MAX,<br>}|
 |ELightAffectsClassification {<br>&nbsp;&nbsp;&nbsp;&nbsp;LAC_USER_SELECTED,<br>&nbsp;&nbsp;&nbsp;&nbsp;LAC_DYNAMIC_AFFECTING,<br>&nbsp;&nbsp;&nbsp;&nbsp;LAC_STATIC_AFFECTING,<br>&nbsp;&nbsp;&nbsp;&nbsp;LAC_DYNAMIC_AND_STATIC_AFFECTING,<br>&nbsp;&nbsp;&nbsp;&nbsp;LAC_MAX,<br>}|
 
+<a id="lightcomponent-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -32697,6 +34462,7 @@ Package: Engine
 
 Size: 0x244 | 580 bytes
 
+<a id="sphericalharmoniclightcomponent-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -32726,6 +34492,7 @@ Package: Engine
 
 Size: 0x4c | 76 bytes
 
+<a id="lightfunction-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -32741,6 +34508,7 @@ Package: Engine
 
 Size: 0x328 | 808 bytes
 
+<a id="skeletalmesh-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -32848,6 +34616,7 @@ Size: 0x328 | 808 bytes
 |ReleaseResourcesFence|i32|0x4|0x314|
 |SkelMeshGUID|Guid|0x10|0x318|
 
+<a id="skeletalmesh-enums"></a>
 ### Enums
 
 |Enum|
@@ -32856,6 +34625,7 @@ Size: 0x328 | 808 bytes
 |ClothBoneType {<br>&nbsp;&nbsp;&nbsp;&nbsp;CLOTHBONE_Fixed,<br>&nbsp;&nbsp;&nbsp;&nbsp;CLOTHBONE_BreakableAttachment,<br>&nbsp;&nbsp;&nbsp;&nbsp;CLOTHBONE_MAX,<br>}|
 |TriangleSortOption {<br>&nbsp;&nbsp;&nbsp;&nbsp;TRISORT_None,<br>&nbsp;&nbsp;&nbsp;&nbsp;TRISORT_CenterRadialDistance,<br>&nbsp;&nbsp;&nbsp;&nbsp;TRISORT_Random,<br>&nbsp;&nbsp;&nbsp;&nbsp;TRISORT_Tootle,<br>&nbsp;&nbsp;&nbsp;&nbsp;TRISORT_MAX,<br>}|
 
+<a id="skeletalmesh-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -32875,6 +34645,7 @@ Package: Engine
 
 Size: 0x7c | 124 bytes
 
+<a id="skeletalmeshsocket-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -32896,6 +34667,7 @@ Package: Engine
 
 Size: 0x224 | 548 bytes
 
+<a id="splineactor-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -32912,6 +34684,7 @@ Size: 0x224 | 548 bytes
 |bestPathWeight|i32|0x4|0x21c|
 |visitedWeight|i32|0x4|0x220|
 
+<a id="splineactor-functions"></a>
 ### Functions
 
 |Signature|
@@ -32932,6 +34705,7 @@ UpdateConnectedSplineComponents(<br>&nbsp;&nbsp;&nbsp;&nbsp;bFinish: bool,<br>) 
 UpdateSplineComponents(<br>&nbsp;&nbsp;&nbsp;&nbsp;bFinish: bool,<br>) -> ()|
 GetWorldSpaceTangent() -> Vector|
 
+<a id="splineactor-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -32946,6 +34720,7 @@ Package: Engine
 
 Size: 0x264 | 612 bytes
 
+<a id="splineloftactor-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -32961,6 +34736,7 @@ Size: 0x264 | 612 bytes
 |bSmoothInterpRollAndScale|bool|0x4|0x260|
 |bAcceptsLights|bool|0x4|0x260|
 
+<a id="splineloftactor-functions"></a>
 ### Functions
 
 |Signature|
@@ -32975,6 +34751,7 @@ Package: Engine
 
 Size: 0x20c | 524 bytes
 
+<a id="splinecomponent-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -32987,6 +34764,7 @@ Size: 0x20c | 524 bytes
 |bSplineDisabled|bool|0x4|0x1f8|
 |SplineReparamTable|InterpCurveFloat|0x10|0x1fc|
 
+<a id="splinecomponent-functions"></a>
 ### Functions
 
 |Signature|
@@ -33005,6 +34783,7 @@ Package: Engine
 
 Size: 0x2e4 | 740 bytes
 
+<a id="procbuilding-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -33042,6 +34821,7 @@ Size: 0x2e4 | 740 bytes
 |AttachedBuildings|TArray\<ProcBuilding*\>|0xc|0x2d4|
 |BuildingInstanceVersion|i32|0x4|0x2e0|
 
+<a id="procbuilding-functions"></a>
 ### Functions
 
 |Signature|
@@ -33053,6 +34833,7 @@ GetBaseMostBuilding() -> ProcBuilding*|
 FindComponentsForTopLevelScope(<br>&nbsp;&nbsp;&nbsp;&nbsp;TopLevelScopeIndex: i32,<br>) -> TArray\<StaticMeshComponent*\>|
 ClearBuildingMeshes() -> ()|
 
+<a id="procbuilding-enums"></a>
 ### Enums
 
 |Enum|
@@ -33060,6 +34841,7 @@ ClearBuildingMeshes() -> ()|
 |EPBCornerType {<br>&nbsp;&nbsp;&nbsp;&nbsp;EPBC_Default,<br>&nbsp;&nbsp;&nbsp;&nbsp;EPBC_Chamfer,<br>&nbsp;&nbsp;&nbsp;&nbsp;EPBC_Round,<br>&nbsp;&nbsp;&nbsp;&nbsp;EPBC_MAX,<br>}|
 |EScopeEdge {<br>&nbsp;&nbsp;&nbsp;&nbsp;EPSA_Top,<br>&nbsp;&nbsp;&nbsp;&nbsp;EPSA_Bottom,<br>&nbsp;&nbsp;&nbsp;&nbsp;EPSA_Left,<br>&nbsp;&nbsp;&nbsp;&nbsp;EPSA_Right,<br>&nbsp;&nbsp;&nbsp;&nbsp;EPSA_None,<br>&nbsp;&nbsp;&nbsp;&nbsp;EPSA_MAX,<br>}|
 
+<a id="procbuilding-consts"></a>
 ### Consts
 
 |Constant|Value|
@@ -33067,6 +34849,7 @@ ClearBuildingMeshes() -> ()|
 |PROCBUILDING_VERSION|1|
 |ROOF_MINZ|0.7|
 
+<a id="procbuilding-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -33087,6 +34870,7 @@ Package: Engine
 
 Size: 0x68 | 104 bytes
 
+<a id="pbrulenodebase-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -33099,6 +34883,7 @@ Size: 0x68 | 104 bytes
 |DrawWidth|i32|0x4|0x60|
 |DrawHeight|i32|0x4|0x64|
 
+<a id="pbrulenodebase-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -33113,6 +34898,7 @@ Package: Engine
 
 Size: 0x78 | 120 bytes
 
+<a id="pbrulenodealternate-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -33131,6 +34917,7 @@ Package: Engine
 
 Size: 0x8c | 140 bytes
 
+<a id="pbrulenodecorner-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -33143,6 +34930,7 @@ Size: 0x8c | 140 bytes
 |RoundTesselation|i32|0x4|0x84|
 |RoundCurvature|f32|0x4|0x88|
 
+<a id="pbrulenodecorner-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -33157,6 +34945,7 @@ Package: Engine
 
 Size: 0x78 | 120 bytes
 
+<a id="pbrulenodeedgeangle-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -33164,12 +34953,14 @@ Size: 0x78 | 120 bytes
 |Edge|i8|0x1|0x68|
 |Angles|TArray\<RBEdgeAngleInfo\>|0xc|0x6c|
 
+<a id="pbrulenodeedgeangle-enums"></a>
 ### Enums
 
 |Enum|
 |---|
 |EProcBuildingEdge {<br>&nbsp;&nbsp;&nbsp;&nbsp;EPBE_Top,<br>&nbsp;&nbsp;&nbsp;&nbsp;EPBE_Bottom,<br>&nbsp;&nbsp;&nbsp;&nbsp;EPBE_Left,<br>&nbsp;&nbsp;&nbsp;&nbsp;EPBE_Right,<br>&nbsp;&nbsp;&nbsp;&nbsp;EPBE_MAX,<br>}|
 
+<a id="pbrulenodeedgeangle-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -33184,6 +34975,7 @@ Package: Engine
 
 Size: 0x70 | 112 bytes
 
+<a id="pbrulenodeedgemesh-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -33199,6 +34991,7 @@ Package: Engine
 
 Size: 0x78 | 120 bytes
 
+<a id="pbrulenodeextracttopbottom-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -33216,6 +35009,7 @@ Package: Engine
 
 Size: 0x6c | 108 bytes
 
+<a id="pbrulenodelodquad-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -33230,6 +35024,7 @@ Package: Engine
 
 Size: 0xa4 | 164 bytes
 
+<a id="pbrulenodemesh-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -33239,12 +35034,14 @@ Size: 0xa4 | 164 bytes
 |bDoOcclusionTest|bool|0x4|0xa0|
 |bBlockAll|bool|0x4|0xa0|
 
+<a id="pbrulenodemesh-functions"></a>
 ### Functions
 
 |Signature|
 |---|
 PickRandomBuildingMesh() -> i32|
 
+<a id="pbrulenodemesh-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -33266,6 +35063,7 @@ Package: Engine
 
 Size: 0x78 | 120 bytes
 
+<a id="pbrulenodequad-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -33283,6 +35081,7 @@ Package: Engine
 
 Size: 0x74 | 116 bytes
 
+<a id="pbrulenoderandom-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -33299,6 +35098,7 @@ Package: Engine
 
 Size: 0x70 | 112 bytes
 
+<a id="pbrulenoderepeat-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -33314,6 +35114,7 @@ Package: Engine
 
 Size: 0x70 | 112 bytes
 
+<a id="pbrulenodesize-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -33329,6 +35130,7 @@ Package: Engine
 
 Size: 0x78 | 120 bytes
 
+<a id="pbrulenodesplit-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -33336,6 +35138,7 @@ Size: 0x78 | 120 bytes
 |SplitAxis|i8|0x1|0x68|
 |SplitSetup|TArray\<RBSplitInfo\>|0xc|0x6c|
 
+<a id="pbrulenodesplit-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -33350,6 +35153,7 @@ Package: Engine
 
 Size: 0x74 | 116 bytes
 
+<a id="procbuildingruleset-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -33371,6 +35175,7 @@ Size: 0x74 | 116 bytes
 |LODCubemap|Texture*|0x4|0x6c|
 |InteriorTexture|Texture*|0x4|0x70|
 
+<a id="procbuildingruleset-enums"></a>
 ### Enums
 
 |Enum|
@@ -33392,6 +35197,7 @@ Package: Engine
 
 Size: 0x244 | 580 bytes
 
+<a id="gamereplicationinfo-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -33413,6 +35219,7 @@ Size: 0x244 | 580 bytes
 |PRIArray|TArray\<PlayerReplicationInfo*\>|0xc|0x22c|
 |InactivePRIArray|TArray\<PlayerReplicationInfo*\>|0xc|0x238|
 
+<a id="gamereplicationinfo-functions"></a>
 ### Functions
 
 |Signature|
@@ -33448,6 +35255,7 @@ Package: Engine
 
 Size: 0x2bc | 700 bytes
 
+<a id="playerreplicationinfo-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -33497,6 +35305,7 @@ Size: 0x2bc | 700 bytes
 |StatMaxOutBPS|i32|0x4|0x2b4|
 |StatAvgOutBPS|i32|0x4|0x2b8|
 
+<a id="playerreplicationinfo-functions"></a>
 ### Functions
 
 |Signature|
@@ -33538,6 +35347,7 @@ PostBeginPlay() -> ()|
 GetPlayerAlias() -> FString|
 AreUniqueNetIdsEqual(<br>&nbsp;&nbsp;&nbsp;&nbsp;OtherPRI: PlayerReplicationInfo*,<br>) -> bool|
 
+<a id="playerreplicationinfo-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -33552,6 +35362,7 @@ Package: Engine
 
 Size: 0x200 | 512 bytes
 
+<a id="teaminfo-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -33562,6 +35373,7 @@ Size: 0x200 | 512 bytes
 |TeamIndex|i32|0x4|0x1f8|
 |TeamColor|Color|0x4|0x1fc|
 
+<a id="teaminfo-functions"></a>
 ### Functions
 
 |Signature|
@@ -33585,6 +35397,7 @@ Package: Engine
 
 Size: 0x50 | 80 bytes
 
+<a id="pglocalization-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -33593,6 +35406,7 @@ Size: 0x50 | 80 bytes
 |mCurrentLanguage|i32|0x4|0x40|
 |DefaultLanguage|FString|0xc|0x44|
 
+<a id="pglocalization-functions"></a>
 ### Functions
 
 |Signature|
@@ -33605,6 +35419,7 @@ HashAHashString(<br>&nbsp;&nbsp;&nbsp;&nbsp;hashStr: FString,<br>) -> i32|
 GetLocalizedString(<br>&nbsp;&nbsp;&nbsp;&nbsp;Hash: i32,<br>) -> FString|
 GetLanguage() -> i32|
 
+<a id="pglocalization-enums"></a>
 ### Enums
 
 |Enum|
@@ -33619,6 +35434,7 @@ Package: Engine
 
 Size: 0x224 | 548 bytes
 
+<a id="beastlightenvironmentvolume-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -33654,6 +35470,7 @@ Package: Engine
 
 Size: 0xe0 | 224 bytes
 
+<a id="beastboxsamplegenerator-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -33666,6 +35483,7 @@ Size: 0xe0 | 224 bytes
 |m_WorldToLocal|Matrix|0x40|0x60|
 |m_localToWorld|Matrix|0x40|0xa0|
 
+<a id="beastboxsamplegenerator-enums"></a>
 ### Enums
 
 |Enum|
@@ -33687,6 +35505,7 @@ Package: Engine
 
 Size: 0xa8 | 168 bytes
 
+<a id="beastlightenvironmentbox-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -33707,6 +35526,7 @@ Package: GameFramework
 
 Size: 0x3a0 | 928 bytes
 
+<a id="gameaicontroller-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -33722,12 +35542,14 @@ Size: 0x3a0 | 928 bytes
 |AILogFile|FileLog*|0x4|0x390|
 |AILogFilter|TArray\<FName\>|0xc|0x394|
 
+<a id="gameaicontroller-states"></a>
 ### States
 
 |Signature|
 |---|
 |PausedState_DEBUGSTATE() -> ()|
 
+<a id="gameaicontroller-functions"></a>
 ### Functions
 
 |Signature|
@@ -33754,6 +35576,7 @@ Package: GameFramework
 
 Size: 0x58 | 88 bytes
 
+<a id="gameaicommand-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -33768,12 +35591,14 @@ Size: 0x58 | 88 bytes
 |bIgnoreNotifies|bool|0x4|0x54|
 |bPendingPop|bool|0x4|0x54|
 
+<a id="gameaicommand-states"></a>
 ### States
 
 |Signature|
 |---|
 |PausedState_DEBUGSTATE() -> ()|
 
+<a id="gameaicommand-functions"></a>
 ### Functions
 
 |Signature|
@@ -33807,6 +35632,7 @@ Package: GameFramework
 
 Size: 0x3a4 | 932 bytes
 
+<a id="gamecrowdagent-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -33897,6 +35723,7 @@ Size: 0x3a4 | 932 bytes
 |DesiredGroupRadius|f32|0x4|0x39c|
 |DesiredGroupRadiusSq|f32|0x4|0x3a0|
 
+<a id="gamecrowdagent-functions"></a>
 ### Functions
 
 |Signature|
@@ -33938,12 +35765,14 @@ PickBehaviorFrom(<br>&nbsp;&nbsp;&nbsp;&nbsp;BehaviorList: TArray\<BehaviorEntry
 SetPanic(<br>&nbsp;&nbsp;&nbsp;&nbsp;PanicActor: Actor*,<br>&nbsp;&nbsp;&nbsp;&nbsp;bNewPanic: bool,<br>) -> ()|
 IsPanicked() -> bool|
 
+<a id="gamecrowdagent-enums"></a>
 ### Enums
 
 |Enum|
 |---|
 |EConformType {<br>&nbsp;&nbsp;&nbsp;&nbsp;CFM_NavMesh,<br>&nbsp;&nbsp;&nbsp;&nbsp;CFM_BSP,<br>&nbsp;&nbsp;&nbsp;&nbsp;CFM_World,<br>&nbsp;&nbsp;&nbsp;&nbsp;CFM_None,<br>&nbsp;&nbsp;&nbsp;&nbsp;CFM_MAX,<br>}|
 
+<a id="gamecrowdagent-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -33959,6 +35788,7 @@ Package: GameFramework
 
 Size: 0x41c | 1052 bytes
 
+<a id="gamecrowdagentskeletal-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -33984,6 +35814,7 @@ Size: 0x41c | 1052 bytes
 |bUseRootMotionVelocity|bool|0x4|0x418|
 |bIsPlayingIdleAnimation|bool|0x4|0x418|
 
+<a id="gamecrowdagentskeletal-functions"></a>
 ### Functions
 
 |Signature|
@@ -33999,6 +35830,7 @@ PlayDeath(<br>&nbsp;&nbsp;&nbsp;&nbsp;KillMomentum: Vector,<br>) -> ()|
 SetLighting(<br>&nbsp;&nbsp;&nbsp;&nbsp;bEnableLightEnvironment: bool,<br>&nbsp;&nbsp;&nbsp;&nbsp;AgentLightingChannel: LightingChannelContainer,<br>&nbsp;&nbsp;&nbsp;&nbsp;bCastShadows: bool,<br>) -> ()|
 PostBeginPlay() -> ()|
 
+<a id="gamecrowdagentskeletal-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -34014,6 +35846,7 @@ Package: GameFramework
 
 Size: 0x4c | 76 bytes
 
+<a id="gamecrowdagentbehavior-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -34026,6 +35859,7 @@ Size: 0x4c | 76 bytes
 |MaxPlayerDistance|f32|0x4|0x44|
 |MyAgent|GameCrowdAgent*|0x4|0x48|
 
+<a id="gamecrowdagentbehavior-functions"></a>
 ### Functions
 
 |Signature|
@@ -34054,6 +35888,7 @@ Package: GameFramework
 
 Size: 0x78 | 120 bytes
 
+<a id="gamecrowdbehavior_playanimation-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -34071,6 +35906,7 @@ Size: 0x78 | 120 bytes
 |AnimSequence|SeqAct_PlayAgentAnimation*|0x4|0x70|
 |AnimationIndex|i32|0x4|0x74|
 
+<a id="gamecrowdbehavior_playanimation-functions"></a>
 ### Functions
 
 |Signature|
@@ -34091,12 +35927,14 @@ Package: GameFramework
 
 Size: 0x50 | 80 bytes
 
+<a id="gamecrowdbehavior_runfrompanic-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
 |---|:-:|:-:|:-:|
 |PanicFocus|Actor*|0x4|0x4c|
 
+<a id="gamecrowdbehavior_runfrompanic-functions"></a>
 ### Functions
 
 |Signature|
@@ -34117,6 +35955,7 @@ Package: GameFramework
 
 Size: 0x4c | 76 bytes
 
+<a id="gamecrowdbehavior_waitforgroup-functions"></a>
 ### Functions
 
 |Signature|
@@ -34134,6 +35973,7 @@ Package: GameFramework
 
 Size: 0x54 | 84 bytes
 
+<a id="gamecrowdbehavior_waitinqueue-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -34141,6 +35981,7 @@ Size: 0x54 | 84 bytes
 |bStoppingBehavior|bool|0x4|0x4c|
 |QueuePosition|GameCrowdDestinationQueuePoint*|0x4|0x50|
 
+<a id="gamecrowdbehavior_waitinqueue-functions"></a>
 ### Functions
 
 |Signature|
@@ -34160,12 +36001,14 @@ Package: GameFramework
 
 Size: 0x48 | 72 bytes
 
+<a id="gamecrowdgroup-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
 |---|:-:|:-:|:-:|
 |Members|TArray\<GameCrowdAgent*\>|0xc|0x3c|
 
+<a id="gamecrowdgroup-functions"></a>
 ### Functions
 
 |Signature|
@@ -34182,6 +36025,7 @@ Package: GameFramework
 
 Size: 0x1ec | 492 bytes
 
+<a id="gamecrowdinteractionpoint-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -34189,6 +36033,7 @@ Size: 0x1ec | 492 bytes
 |bIsEnabled|bool|0x4|0x1e4|
 |CylinderComponent|CylinderComponent*|0x4|0x1e8|
 
+<a id="gamecrowdinteractionpoint-functions"></a>
 ### Functions
 
 |Signature|
@@ -34203,6 +36048,7 @@ Package: GameFramework
 
 Size: 0x270 | 624 bytes
 
+<a id="gamecrowddestination-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -34238,6 +36084,7 @@ Size: 0x270 | 624 bytes
 |SpawnRadius|f32|0x4|0x260|
 |ReachedBehaviors|TArray\<BehaviorEntry\>|0xc|0x264|
 
+<a id="gamecrowddestination-functions"></a>
 ### Functions
 
 |Signature|
@@ -34263,6 +36110,7 @@ Package: GameFramework
 
 Size: 0x208 | 520 bytes
 
+<a id="gamecrowddestinationqueuepoint-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -34276,6 +36124,7 @@ Size: 0x208 | 520 bytes
 |AverageReactionTime|f32|0x4|0x200|
 |QueueBehaviorClass|UClass*|0x4|0x204|
 
+<a id="gamecrowddestinationqueuepoint-functions"></a>
 ### Functions
 
 |Signature|
@@ -34297,6 +36146,7 @@ Package: GameFramework
 
 Size: 0x1ec | 492 bytes
 
+<a id="gamecrowdforcepoint-functions"></a>
 ### Functions
 
 |Signature|
@@ -34313,6 +36163,7 @@ Package: GameFramework
 
 Size: 0x1f4 | 500 bytes
 
+<a id="gamecrowdattractor-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -34320,6 +36171,7 @@ Size: 0x1f4 | 500 bytes
 |Attraction|f32|0x4|0x1ec|
 |bAttractionFalloff|bool|0x4|0x1f0|
 
+<a id="gamecrowdattractor-functions"></a>
 ### Functions
 
 |Signature|
@@ -34334,6 +36186,7 @@ Package: GameFramework
 
 Size: 0x1f4 | 500 bytes
 
+<a id="gamecrowdrepulsor-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -34341,6 +36194,7 @@ Size: 0x1f4 | 500 bytes
 |Repulsion|f32|0x4|0x1ec|
 |bAttractionFalloff|bool|0x4|0x1f0|
 
+<a id="gamecrowdrepulsor-functions"></a>
 ### Functions
 
 |Signature|
@@ -34355,6 +36209,7 @@ Package: GameFramework
 
 Size: 0x1f0 | 496 bytes
 
+<a id="gamecrowdreplicationactor-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -34363,6 +36218,7 @@ Size: 0x1f0 | 496 bytes
 |bSpawningActive|bool|0x4|0x1e8|
 |DestroyAllCount|i32|0x4|0x1ec|
 
+<a id="gamecrowdreplicationactor-functions"></a>
 ### Functions
 
 |Signature|
@@ -34378,6 +36234,7 @@ Package: GameFramework
 
 Size: 0xc4 | 196 bytes
 
+<a id="gamedamagetype-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -34396,6 +36253,7 @@ Size: 0xc4 | 196 bytes
 |HeadshotIcon|CanvasIcon|0x14|0xac|
 |IconScale|f32|0x4|0xc0|
 
+<a id="gamedamagetype-functions"></a>
 ### Functions
 
 |Signature|
@@ -34426,6 +36284,7 @@ Package: GameFramework
 
 Size: 0xec | 236 bytes
 
+<a id="gameexplosion-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -34488,6 +36347,7 @@ Package: GameFramework
 
 Size: 0x234 | 564 bytes
 
+<a id="gameexplosionactor-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -34511,6 +36371,7 @@ Size: 0x234 | 564 bytes
 |DirectionalExplosionMinDot|f32|0x4|0x224|
 |ExplosionDirection|Vector|0xc|0x228|
 
+<a id="gameexplosionactor-functions"></a>
 ### Functions
 
 |Signature|
@@ -34544,6 +36405,7 @@ Package: GameFramework
 
 Size: 0x49c | 1180 bytes
 
+<a id="gamehud-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -34554,6 +36416,7 @@ Size: 0x49c | 1180 bytes
 |ChapterTitleString|FString|0xc|0x484|
 |ActTitleString|FString|0xc|0x490|
 
+<a id="gamehud-functions"></a>
 ### Functions
 
 |Signature|
@@ -34562,6 +36425,7 @@ StopDrawingChapterTitle() -> ()|
 StartDrawingChapterTitle(<br>&nbsp;&nbsp;&nbsp;&nbsp;ChapterName: FString,<br>&nbsp;&nbsp;&nbsp;&nbsp;ActName: FString,<br>&nbsp;&nbsp;&nbsp;&nbsp;TotalDrawTime: f32,<br>&nbsp;&nbsp;&nbsp;&nbsp;TotalFadeTime: f32,<br>) -> ()|
 SetHUDDrawColor(<br>&nbsp;&nbsp;&nbsp;&nbsp;eColor: i8,<br>&nbsp;&nbsp;&nbsp;&nbsp;Alpha: i8,<br>) -> ()|
 
+<a id="gamehud-enums"></a>
 ### Enums
 
 |Enum|
@@ -34576,6 +36440,7 @@ Package: GameFramework
 
 Size: 0x41c | 1052 bytes
 
+<a id="gamepawn-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -34583,6 +36448,7 @@ Size: 0x41c | 1052 bytes
 |bLastHitWasHeadShot|bool|0x4|0x418|
 |bRespondToExplosions|bool|0x4|0x418|
 
+<a id="gamepawn-functions"></a>
 ### Functions
 
 |Signature|
@@ -34602,6 +36468,7 @@ Package: GameFramework
 
 Size: 0x5c8 | 1480 bytes
 
+<a id="gameplayercontroller-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -34611,6 +36478,7 @@ Size: 0x5c8 | 1480 bytes
 |AgentAwareRadius|f32|0x4|0x5bc|
 |CurrentSoundMode|FName|0x8|0x5c0|
 
+<a id="gameplayercontroller-functions"></a>
 ### Functions
 
 |Signature|
@@ -34643,12 +36511,14 @@ Package: GameFramework
 
 Size: 0x3c | 60 bytes
 
+<a id="gametypes-enums"></a>
 ### Enums
 
 |Enum|
 |---|
 |EShakeParam {<br>&nbsp;&nbsp;&nbsp;&nbsp;ESP_OffsetRandom,<br>&nbsp;&nbsp;&nbsp;&nbsp;ESP_OffsetZero,<br>&nbsp;&nbsp;&nbsp;&nbsp;ESP_MAX,<br>}|
 
+<a id="gametypes-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -34680,6 +36550,7 @@ Package: GameFramework
 
 Size: 0x14c | 332 bytes
 
+<a id="seqact_gamecrowdspawner-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -34708,6 +36579,7 @@ Size: 0x14c | 332 bytes
 |RepActor|GameCrowdReplicationActor*|0x4|0x144|
 |AgentWarmUpTime|f32|0x4|0x148|
 
+<a id="seqact_gamecrowdspawner-functions"></a>
 ### Functions
 
 |Signature|
@@ -34720,6 +36592,7 @@ KillAgents() -> ()|
 CacheSpawnerVars() -> ()|
 SpawnedAgent(<br>&nbsp;&nbsp;&nbsp;&nbsp;NewAgent: GameCrowdAgent*,<br>) -> ()|
 
+<a id="seqact_gamecrowdspawner-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -34734,12 +36607,14 @@ Package: GameFramework
 
 Size: 0xf4 | 244 bytes
 
+<a id="seqact_modifyproperty-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
 |---|:-:|:-:|:-:|
 |Properties|TArray\<PropertyInfo\>|0xc|0xe8|
 
+<a id="seqact_modifyproperty-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -34754,6 +36629,7 @@ Package: GameFramework
 
 Size: 0x11c | 284 bytes
 
+<a id="seqact_playagentanimation-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -34769,6 +36645,7 @@ Size: 0x11c | 284 bytes
 |LoopTime|f32|0x4|0x114|
 |ActionTarget|Actor*|0x4|0x118|
 
+<a id="seqact_playagentanimation-functions"></a>
 ### Functions
 
 |Signature|
@@ -34791,6 +36668,7 @@ Package: GameFramework
 
 Size: 0x140 | 320 bytes
 
+<a id="gameskelctrl_recoil-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -34802,12 +36680,14 @@ Size: 0x140 | 320 bytes
 |Recoil|RecoilDef|0x70|0xc8|
 |Aim|Vector2D|0x8|0x138|
 
+<a id="gameskelctrl_recoil-enums"></a>
 ### Enums
 
 |Enum|
 |---|
 |ERecoilStart {<br>&nbsp;&nbsp;&nbsp;&nbsp;ERS_Zero,<br>&nbsp;&nbsp;&nbsp;&nbsp;ERS_Random,<br>&nbsp;&nbsp;&nbsp;&nbsp;ERS_MAX,<br>}|
 
+<a id="gameskelctrl_recoil-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -34823,6 +36703,7 @@ Package: GameFramework
 
 Size: 0x44 | 68 bytes
 
+<a id="gamecamerabase-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -34830,6 +36711,7 @@ Size: 0x44 | 68 bytes
 |PlayerCamera|GamePlayerCamera*|0x4|0x3c|
 |bResetCameraInterpolation|bool|0x4|0x40|
 
+<a id="gamecamerabase-functions"></a>
 ### Functions
 
 |Signature|
@@ -34850,6 +36732,7 @@ Package: GameFramework
 
 Size: 0x15c | 348 bytes
 
+<a id="gamethirdpersoncamera-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -34901,6 +36784,7 @@ Size: 0x15c | 348 bytes
 |LastPreModifierCameraRot|Rotator|0xc|0x144|
 |PenetrationAvoidanceFeelers|TArray\<PenetrationAvoidanceFeeler\>|0xc|0x150|
 
+<a id="gamethirdpersoncamera-functions"></a>
 ### Functions
 
 |Signature|
@@ -34928,6 +36812,7 @@ Init() -> ()|
 Reset() -> ()|
 CreateCameraMode(<br>&nbsp;&nbsp;&nbsp;&nbsp;ModeClass: UClass*,<br>&nbsp;&nbsp;&nbsp;&nbsp;NewMode: GameThirdPersonCameraMode*,<br>) -> GameThirdPersonCameraMode*|
 
+<a id="gamethirdpersoncamera-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -34943,6 +36828,7 @@ Package: GameFramework
 
 Size: 0x550 | 1360 bytes
 
+<a id="gameplayercamera-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -34961,6 +36847,7 @@ Size: 0x550 | 1360 bytes
 |LastTargetBase|Actor*|0x4|0x508|
 |LastTargetBaseTM|Matrix|0x40|0x510|
 
+<a id="gameplayercamera-functions"></a>
 ### Functions
 
 |Signature|
@@ -34986,6 +36873,7 @@ Package: GameFramework
 
 Size: 0x234 | 564 bytes
 
+<a id="gamethirdpersoncameramode-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -35044,6 +36932,7 @@ Size: 0x234 | 564 bytes
 |DOF_RadiusDistRange|Vector2D|0x8|0x228|
 |ViewOffsetInterp|f32|0x4|0x230|
 
+<a id="gamethirdpersoncameramode-functions"></a>
 ### Functions
 
 |Signature|
@@ -35060,12 +36949,14 @@ GetPawnRelativeOffset(<br>&nbsp;&nbsp;&nbsp;&nbsp;P: Pawn*,<br>) -> Vector|
 OnBecomeInActive(<br>&nbsp;&nbsp;&nbsp;&nbsp;TargetPawn: Pawn*,<br>&nbsp;&nbsp;&nbsp;&nbsp;NewMode: GameThirdPersonCameraMode*,<br>) -> ()|
 OnBecomeActive(<br>&nbsp;&nbsp;&nbsp;&nbsp;TargetPawn: Pawn*,<br>&nbsp;&nbsp;&nbsp;&nbsp;PrevMode: GameThirdPersonCameraMode*,<br>) -> ()|
 
+<a id="gamethirdpersoncameramode-enums"></a>
 ### Enums
 
 |Enum|
 |---|
 |ECameraViewportTypes {<br>&nbsp;&nbsp;&nbsp;&nbsp;CVT_16to9_Full,<br>&nbsp;&nbsp;&nbsp;&nbsp;CVT_16to9_VertSplit,<br>&nbsp;&nbsp;&nbsp;&nbsp;CVT_16to9_HorizSplit,<br>&nbsp;&nbsp;&nbsp;&nbsp;CVT_4to3_Full,<br>&nbsp;&nbsp;&nbsp;&nbsp;CVT_4to3_HorizSplit,<br>&nbsp;&nbsp;&nbsp;&nbsp;CVT_4to3_VertSplit,<br>&nbsp;&nbsp;&nbsp;&nbsp;CVT_MAX,<br>}|
 
+<a id="gamethirdpersoncameramode-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -35080,6 +36971,7 @@ Package: GameFramework
 
 Size: 0x240 | 576 bytes
 
+<a id="gamethirdpersoncameramode_default-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -35096,6 +36988,7 @@ Package: GameFramework
 
 Size: 0x308 | 776 bytes
 
+<a id="gamedecal-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -35111,12 +37004,14 @@ Package: GameFramework
 
 Size: 0x218 | 536 bytes
 
+<a id="gamedecalmanager-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
 |---|:-:|:-:|:-:|
 |MinDecalDistanceSq|f32|0x4|0x214|
 
+<a id="gamedecalmanager-functions"></a>
 ### Functions
 
 |Signature|
@@ -35132,6 +37027,7 @@ Package: GameFramework
 
 Size: 0x1e4 | 484 bytes
 
+<a id="gameparticleeventmanager-functions"></a>
 ### Functions
 
 |Signature|
@@ -35146,6 +37042,7 @@ Package: Grip
 
 Size: 0x200 | 512 bytes
 
+<a id="desactionstationdata-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -35164,6 +37061,7 @@ Package: Grip
 
 Size: 0x214 | 532 bytes
 
+<a id="desactionstationdatasinglestate-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -35180,6 +37078,7 @@ Package: Grip
 
 Size: 0x238 | 568 bytes
 
+<a id="desactionstationdatatriplestate-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -35199,6 +37098,7 @@ Package: Grip
 
 Size: 0x1f0 | 496 bytes
 
+<a id="desattacknode-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -35215,6 +37115,7 @@ Package: Grip
 
 Size: 0x1ec | 492 bytes
 
+<a id="descollisionnode-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -35230,6 +37131,7 @@ Package: Grip
 
 Size: 0x1ec | 492 bytes
 
+<a id="deseventnode-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -35245,6 +37147,7 @@ Package: Grip
 
 Size: 0x70 | 112 bytes
 
+<a id="desextratype-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -35264,6 +37167,7 @@ Size: 0x70 | 112 bytes
 |Health|f32|0x4|0x68|
 |MeatPuppet|Actor*|0x4|0x6c|
 
+<a id="desextratype-enums"></a>
 ### Enums
 
 |Enum|
@@ -35278,6 +37182,7 @@ Package: Grip
 
 Size: 0x1fc | 508 bytes
 
+<a id="desflownode-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -35297,6 +37202,7 @@ Package: Grip
 
 Size: 0x2a4 | 676 bytes
 
+<a id="deslightpawn-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -35358,6 +37264,7 @@ Size: 0x2a4 | 676 bytes
 |HitEffect|ParticleSystem*|0x4|0x29c|
 |CustomAnim|Pointer|0x4|0x2a0|
 
+<a id="deslightpawn-functions"></a>
 ### Functions
 
 |Signature|
@@ -35397,6 +37304,7 @@ SetGuardLookAt(<br>&nbsp;&nbsp;&nbsp;&nbsp;Active: bool,<br>&nbsp;&nbsp;&nbsp;&n
 SetLookAt(<br>&nbsp;&nbsp;&nbsp;&nbsp;Active: bool,<br>&nbsp;&nbsp;&nbsp;&nbsp;instant: bool,<br>) -> ()|
 ResetAnim() -> ()|
 
+<a id="deslightpawn-enums"></a>
 ### Enums
 
 |Enum|
@@ -35411,6 +37319,7 @@ Package: Grip
 
 Size: 0x1ec | 492 bytes
 
+<a id="despointofinterestnode-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -35426,6 +37335,7 @@ Package: Grip
 
 Size: 0x1f4 | 500 bytes
 
+<a id="desspawnpoint-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -35435,6 +37345,7 @@ Size: 0x1f4 | 500 bytes
 |targetMiddleOfNode|bool|0x4|0x1ec|
 |BelongingRepresentation|i32|0x4|0x1f0|
 
+<a id="desspawnpoint-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -35449,6 +37360,7 @@ Package: Grip
 
 Size: 0x200 | 512 bytes
 
+<a id="desspawnzone-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -35476,6 +37388,7 @@ Package: Grip
 
 Size: 0x1fc | 508 bytes
 
+<a id="dessystem-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -35485,12 +37398,14 @@ Size: 0x1fc | 508 bytes
 |MeatPuppetsInitializedPerFrame|i32|0x4|0x1f4|
 |WorldManager|Pointer|0x4|0x1f8|
 
+<a id="dessystem-functions"></a>
 ### Functions
 
 |Signature|
 |---|
 SendDESReadyEvent(<br>&nbsp;&nbsp;&nbsp;&nbsp;levelSequence: Sequence*,<br>&nbsp;&nbsp;&nbsp;&nbsp;Events: TArray\<SequenceObject*\>,<br>&nbsp;&nbsp;&nbsp;&nbsp;DESReadyEvent: SeqEvent_DESReady*,<br>&nbsp;&nbsp;&nbsp;&nbsp;Idx: i32,<br>) -> ()|
 
+<a id="dessystem-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -35505,6 +37420,7 @@ Package: Grip
 
 Size: 0x1e8 | 488 bytes
 
+<a id="desthreatnode-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -35519,6 +37435,7 @@ Package: Grip
 
 Size: 0x3c | 60 bytes
 
+<a id="meatpuppet-functions"></a>
 ### Functions
 
 |Signature|
@@ -35546,6 +37463,7 @@ ResetAnim() -> ()|
 ThrowDiscFct(<br>&nbsp;&nbsp;&nbsp;&nbsp;AimDir: Vector,<br>) -> ()|
 SetDiscTarget(<br>&nbsp;&nbsp;&nbsp;&nbsp;AimDir: Vector,<br>) -> ()|
 
+<a id="meatpuppet-enums"></a>
 ### Enums
 
 |Enum|
@@ -35562,6 +37480,7 @@ Package: Grip
 
 Size: 0xec | 236 bytes
 
+<a id="seqact_attacknode-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -35576,6 +37495,7 @@ Package: Grip
 
 Size: 0xf4 | 244 bytes
 
+<a id="seqact_attackplayer-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -35592,6 +37512,7 @@ Package: Grip
 
 Size: 0xf4 | 244 bytes
 
+<a id="seqact_changestate-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -35608,6 +37529,7 @@ Package: Grip
 
 Size: 0x100 | 256 bytes
 
+<a id="seqact_configureactoravoidance-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -35625,6 +37547,7 @@ Package: Grip
 
 Size: 0xf0 | 240 bytes
 
+<a id="seqact_configureadvancedcornering-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -35640,6 +37563,7 @@ Package: Grip
 
 Size: 0xf0 | 240 bytes
 
+<a id="seqact_configuregawkavoidance-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -35655,6 +37579,7 @@ Package: Grip
 
 Size: 0xf4 | 244 bytes
 
+<a id="seqact_configureplayeravoidance-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -35671,6 +37596,7 @@ Package: Grip
 
 Size: 0x104 | 260 bytes
 
+<a id="seqact_configurestandardavoidance-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -35691,6 +37617,7 @@ Package: Grip
 
 Size: 0xf0 | 240 bytes
 
+<a id="seqact_configurestopandgo-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -35706,6 +37633,7 @@ Package: Grip
 
 Size: 0xf8 | 248 bytes
 
+<a id="seqact_desdespawn-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -35721,6 +37649,7 @@ Package: Grip
 
 Size: 0x110 | 272 bytes
 
+<a id="seqact_desspawn-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -35732,6 +37661,7 @@ Size: 0x110 | 272 bytes
 |DoingDelayedSpawn|bool|0x4|0x108|
 |SpawnsPerFrame|i32|0x4|0x10c|
 
+<a id="seqact_desspawn-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -35760,6 +37690,7 @@ Package: Grip
 
 Size: 0x104 | 260 bytes
 
+<a id="seqact_nodepoi-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -35780,6 +37711,7 @@ Package: Grip
 
 Size: 0xec | 236 bytes
 
+<a id="seqact_nodethreat-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -35794,6 +37726,7 @@ Package: Grip
 
 Size: 0x104 | 260 bytes
 
+<a id="seqact_playerpoi-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -35842,6 +37775,7 @@ Package: UnrealScriptTest
 
 Size: 0x1f8 | 504 bytes
 
+<a id="ctcomplexnestroot-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -35849,6 +37783,7 @@ Size: 0x1f8 | 504 bytes
 |SimpleNestObject|CTSimpleNestObject*|0x4|0x1e4|
 |SimpleNestObjectStruct|ComplexNestStruct|0x10|0x1e8|
 
+<a id="ctcomplexnestroot-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -35870,6 +37805,7 @@ Package: UnrealScriptTest
 
 Size: 0x20c | 524 bytes
 
+<a id="ctnonestroot-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -35889,6 +37825,7 @@ Package: UnrealScriptTest
 
 Size: 0x20c | 524 bytes
 
+<a id="ctsimplenestroot-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -35908,6 +37845,7 @@ Package: UnrealScriptTest
 
 Size: 0x80 | 128 bytes
 
+<a id="findunreferencedfunctionscommandlet-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -35922,6 +37860,7 @@ Package: UnrealScriptTest
 
 Size: 0x3c | 60 bytes
 
+<a id="test0002_interfacenative-functions"></a>
 ### Functions
 
 |Signature|
@@ -35938,6 +37877,7 @@ Package: UnrealScriptTest
 
 Size: 0xa8 | 168 bytes
 
+<a id="test0010_nativeobject-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -35950,6 +37890,7 @@ Size: 0xa8 | 168 bytes
 |DefaultComboStruct|ConstructorStructCombo|0x20|0x7c|
 |MyArray|TArray\<MyStruct\>|0xc|0x9c|
 
+<a id="test0010_nativeobject-functions"></a>
 ### Functions
 
 |Signature|
@@ -35969,6 +37910,7 @@ Test02_PassNativeInterfaceToNativeFunction(<br>&nbsp;&nbsp;&nbsp;&nbsp;Interface
 Test01_CallEventWithStruct(<br>&nbsp;&nbsp;&nbsp;&nbsp;NoCtor: NoCtorProps,<br>&nbsp;&nbsp;&nbsp;&nbsp;StringParm: ConstructorStructString,<br>&nbsp;&nbsp;&nbsp;&nbsp;ArrayParm: ConstructorStructArray,<br>&nbsp;&nbsp;&nbsp;&nbsp;ComboParm: ConstructorStructCombo,<br>&nbsp;&nbsp;&nbsp;&nbsp;PaddingBool: bool,<br>) -> ()|
 PerformNativeTest(<br>&nbsp;&nbsp;&nbsp;&nbsp;TestNumber: i32,<br>) -> ()|
 
+<a id="test0010_nativeobject-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -35988,6 +37930,7 @@ Package: UnrealScriptTest
 
 Size: 0x40 | 64 bytes
 
+<a id="test0011_nativeobjectboolorder-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -35996,6 +37939,7 @@ Size: 0x40 | 64 bytes
 |bMemberBoolB|bool|0x4|0x3c|
 |bMemberBoolC|bool|0x4|0x3c|
 
+<a id="test0011_nativeobjectboolorder-functions"></a>
 ### Functions
 
 |Signature|
@@ -36019,6 +37963,7 @@ Package: UnrealScriptTest
 
 Size: 0x40 | 64 bytes
 
+<a id="ctsimplenestobject-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -36033,6 +37978,7 @@ Package: UnrealScriptTest
 
 Size: 0x44 | 68 bytes
 
+<a id="test0025_nativeissues-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -36040,6 +37986,7 @@ Size: 0x44 | 68 bytes
 |EnumBeforeBoolTestVar|i8|0x1|0x3c|
 |bBoolAfterEnumTestVar|bool|0x4|0x40|
 
+<a id="test0025_nativeissues-functions"></a>
 ### Functions
 
 |Signature|
@@ -36047,6 +37994,7 @@ Size: 0x44 | 68 bytes
 RunTest() -> ()|
 ShowNativeBoolAssignmentTestResults() -> ()|
 
+<a id="test0025_nativeissues-enums"></a>
 ### Enums
 
 |Enum|
@@ -36061,6 +38009,7 @@ Package: UnrealScriptTest
 
 Size: 0x60 | 96 bytes
 
+<a id="testcomponentsbase-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -36076,6 +38025,7 @@ Package: UnrealScriptTest
 
 Size: 0xb0 | 176 bytes
 
+<a id="ctcomplexnestchild-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -36108,6 +38058,7 @@ Package: UnrealScriptTest
 
 Size: 0xb0 | 176 bytes
 
+<a id="ctcomplexnestparent-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -36147,6 +38098,7 @@ Package: UnrealScriptTest
 
 Size: 0xb0 | 176 bytes
 
+<a id="ctsimplenestparent-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -36172,6 +38124,7 @@ Package: IpDrv
 
 Size: 0x48 | 72 bytes
 
+<a id="clientbeaconaddressresolver-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -36187,6 +38140,7 @@ Package: IpDrv
 
 Size: 0xb68 | 2920 bytes
 
+<a id="httpdownload-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -36206,6 +38160,7 @@ Package: IpDrv
 
 Size: 0x1fc | 508 bytes
 
+<a id="internetlink-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -36220,6 +38175,7 @@ Size: 0x1fc | 508 bytes
 |PrivateResolveInfo|Pointer|0x4|0x1f4|
 |DataPending|i32|0x4|0x1f8|
 
+<a id="internetlink-functions"></a>
 ### Functions
 
 |Signature|
@@ -36234,6 +38190,7 @@ Resolve(<br>&nbsp;&nbsp;&nbsp;&nbsp;Domain: FString,<br>) -> ()|
 ParseURL(<br>&nbsp;&nbsp;&nbsp;&nbsp;URL: FString,<br>&nbsp;&nbsp;&nbsp;&nbsp;Addr: FString,<br>&nbsp;&nbsp;&nbsp;&nbsp;PortNum: i32,<br>&nbsp;&nbsp;&nbsp;&nbsp;LevelName: FString,<br>&nbsp;&nbsp;&nbsp;&nbsp;EntryName: FString,<br>) -> bool|
 IsDataPending() -> bool|
 
+<a id="internetlink-enums"></a>
 ### Enums
 
 |Enum|
@@ -36242,6 +38199,7 @@ IsDataPending() -> bool|
 |ELineMode {<br>&nbsp;&nbsp;&nbsp;&nbsp;LMODE_auto,<br>&nbsp;&nbsp;&nbsp;&nbsp;LMODE_DOS,<br>&nbsp;&nbsp;&nbsp;&nbsp;LMODE_UNIX,<br>&nbsp;&nbsp;&nbsp;&nbsp;LMODE_MAC,<br>&nbsp;&nbsp;&nbsp;&nbsp;LMODE_MAX,<br>}|
 |ELinkMode {<br>&nbsp;&nbsp;&nbsp;&nbsp;MODE_Text,<br>&nbsp;&nbsp;&nbsp;&nbsp;MODE_Line,<br>&nbsp;&nbsp;&nbsp;&nbsp;MODE_Binary,<br>&nbsp;&nbsp;&nbsp;&nbsp;MODE_MAX,<br>}|
 
+<a id="internetlink-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -36256,6 +38214,7 @@ Package: IpDrv
 
 Size: 0x224 | 548 bytes
 
+<a id="tcplink-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -36266,6 +38225,7 @@ Size: 0x224 | 548 bytes
 |SendFIFO|TArray\<i8\>|0xc|0x20c|
 |RecvBuf|FString|0xc|0x218|
 
+<a id="tcplink-functions"></a>
 ### Functions
 
 |Signature|
@@ -36286,6 +38246,7 @@ Open(<br>&nbsp;&nbsp;&nbsp;&nbsp;Addr: IpAddr,<br>) -> bool|
 Listen() -> bool|
 BindPort(<br>&nbsp;&nbsp;&nbsp;&nbsp;PortNum: i32,<br>&nbsp;&nbsp;&nbsp;&nbsp;bUseNextAvailable: bool,<br>) -> i32|
 
+<a id="tcplink-enums"></a>
 ### Enums
 
 |Enum|
@@ -36300,6 +38261,7 @@ Package: IpDrv
 
 Size: 0x40 | 64 bytes
 
+<a id="mcpbase-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -36314,6 +38276,7 @@ Package: IpDrv
 
 Size: 0x68 | 104 bytes
 
+<a id="onlineeventsinterfacemcp-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -36323,6 +38286,7 @@ Size: 0x68 | 104 bytes
 |DisabledUploadTypes|TArray\<i8\>|0xc|0x58|
 |bBinaryStats|bool|0x4|0x64|
 
+<a id="onlineeventsinterfacemcp-functions"></a>
 ### Functions
 
 |Signature|
@@ -36333,12 +38297,14 @@ UploadHardwareData(<br>&nbsp;&nbsp;&nbsp;&nbsp;UniqueId: UniqueNetId,<br>&nbsp;&
 UploadGameplayEventsData(<br>&nbsp;&nbsp;&nbsp;&nbsp;Events: OnlineGameplayEvents*,<br>) -> bool|
 UploadProfileData(<br>&nbsp;&nbsp;&nbsp;&nbsp;UniqueId: UniqueNetId,<br>&nbsp;&nbsp;&nbsp;&nbsp;PlayerNick: FString,<br>&nbsp;&nbsp;&nbsp;&nbsp;ProfileSettings: OnlineProfileSettings*,<br>) -> bool|
 
+<a id="onlineeventsinterfacemcp-enums"></a>
 ### Enums
 
 |Enum|
 |---|
 |EEventUploadType {<br>&nbsp;&nbsp;&nbsp;&nbsp;EUT_GenericStats,<br>&nbsp;&nbsp;&nbsp;&nbsp;EUT_ProfileData,<br>&nbsp;&nbsp;&nbsp;&nbsp;EUT_HardwareData,<br>&nbsp;&nbsp;&nbsp;&nbsp;EUT_MatchmakingData,<br>&nbsp;&nbsp;&nbsp;&nbsp;EUT_MAX,<br>}|
 
+<a id="onlineeventsinterfacemcp-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -36353,6 +38319,7 @@ Package: IpDrv
 
 Size: 0x68 | 104 bytes
 
+<a id="onlinenewsinterfacemcp-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -36362,6 +38329,7 @@ Size: 0x68 | 104 bytes
 |bNeedsTicking|bool|0x4|0x58|
 |__OnReadNewsCompleted__Delegate|FScriptDelegate|0xc|0x5c|
 
+<a id="onlinenewsinterfacemcp-functions"></a>
 ### Functions
 
 |Signature|
@@ -36372,6 +38340,7 @@ AddReadNewsCompletedDelegate(<br>&nbsp;&nbsp;&nbsp;&nbsp;ReadNewsDelegate: FScri
 OnReadNewsCompleted(<br>&nbsp;&nbsp;&nbsp;&nbsp;bWasSuccessful: bool,<br>&nbsp;&nbsp;&nbsp;&nbsp;NewsType: i8,<br>) -> ()|
 ReadNews(<br>&nbsp;&nbsp;&nbsp;&nbsp;LocalUserNum: i8,<br>&nbsp;&nbsp;&nbsp;&nbsp;NewsType: i8,<br>) -> bool|
 
+<a id="onlinenewsinterfacemcp-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -36386,6 +38355,7 @@ Package: IpDrv
 
 Size: 0x7c | 124 bytes
 
+<a id="onlinetitlefiledownloadmcp-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -36398,6 +38368,7 @@ Size: 0x7c | 124 bytes
 |TimeOut|f32|0x4|0x6c|
 |__OnReadTitleFileComplete__Delegate|FScriptDelegate|0xc|0x70|
 
+<a id="onlinetitlefiledownloadmcp-functions"></a>
 ### Functions
 
 |Signature|
@@ -36418,6 +38389,7 @@ Package: IpDrv
 
 Size: 0xdc | 220 bytes
 
+<a id="onlinesubsystemcommonimpl-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -36428,6 +38400,7 @@ Size: 0xdc | 220 bytes
 |bIsUsingSpeechRecognition|bool|0x4|0xd4|
 |GameInterfaceImpl|OnlineGameInterfaceImpl*|0x4|0xd8|
 
+<a id="onlinesubsystemcommonimpl-functions"></a>
 ### Functions
 
 |Signature|
@@ -36444,6 +38417,7 @@ Package: IpDrv
 
 Size: 0x160 | 352 bytes
 
+<a id="onlinegameinterfaceimpl-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -36482,6 +38456,7 @@ Size: 0x160 | 352 bytes
 |__OnArbitrationRegistrationComplete__Delegate|FScriptDelegate|0xc|0x148|
 |__OnGameInviteAccepted__Delegate|FScriptDelegate|0xc|0x154|
 
+<a id="onlinegameinterfaceimpl-functions"></a>
 ### Functions
 
 |Signature|
@@ -36553,6 +38528,7 @@ Package: IpDrv
 
 Size: 0x5c | 92 bytes
 
+<a id="partybeacon-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -36567,12 +38543,14 @@ Size: 0x5c | 92 bytes
 |ElapsedHeartbeatTime|f32|0x4|0x50|
 |BeaconName|FName|0x8|0x54|
 
+<a id="partybeacon-functions"></a>
 ### Functions
 
 |Signature|
 |---|
 DestroyBeacon() -> ()|
 
+<a id="partybeacon-enums"></a>
 ### Enums
 
 |Enum|
@@ -36580,6 +38558,7 @@ DestroyBeacon() -> ()|
 |EPartyReservationResult {<br>&nbsp;&nbsp;&nbsp;&nbsp;PRR_GeneralError,<br>&nbsp;&nbsp;&nbsp;&nbsp;PRR_PartyLimitReached,<br>&nbsp;&nbsp;&nbsp;&nbsp;PRR_IncorrectPlayerCount,<br>&nbsp;&nbsp;&nbsp;&nbsp;PRR_RequestTimedOut,<br>&nbsp;&nbsp;&nbsp;&nbsp;PRR_ReservationDuplicate,<br>&nbsp;&nbsp;&nbsp;&nbsp;PRR_ReservationNotFound,<br>&nbsp;&nbsp;&nbsp;&nbsp;PRR_ReservationAccepted,<br>&nbsp;&nbsp;&nbsp;&nbsp;PRR_MAX,<br>}|
 |EReservationPacketType {<br>&nbsp;&nbsp;&nbsp;&nbsp;RPT_UnknownPacketType,<br>&nbsp;&nbsp;&nbsp;&nbsp;RPT_ClientReservationRequest,<br>&nbsp;&nbsp;&nbsp;&nbsp;RPT_ClientReservationUpdateRequest,<br>&nbsp;&nbsp;&nbsp;&nbsp;RPT_ClientCancellationRequest,<br>&nbsp;&nbsp;&nbsp;&nbsp;RPT_HostReservationResponse,<br>&nbsp;&nbsp;&nbsp;&nbsp;RPT_HostCancellationResponse,<br>&nbsp;&nbsp;&nbsp;&nbsp;RPT_HostReservationCountUpdate,<br>&nbsp;&nbsp;&nbsp;&nbsp;RPT_HostTravelRequest,<br>&nbsp;&nbsp;&nbsp;&nbsp;RPT_HostIsReady,<br>&nbsp;&nbsp;&nbsp;&nbsp;RPT_HostHasCancelled,<br>&nbsp;&nbsp;&nbsp;&nbsp;RPT_Heartbeat,<br>&nbsp;&nbsp;&nbsp;&nbsp;RPT_MAX,<br>}|
 
+<a id="partybeacon-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -36595,6 +38574,7 @@ Package: IpDrv
 
 Size: 0x114 | 276 bytes
 
+<a id="partybeaconclient-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -36616,6 +38596,7 @@ Size: 0x114 | 276 bytes
 |__OnHostIsReady__Delegate|FScriptDelegate|0xc|0xfc|
 |__OnHostHasCancelled__Delegate|FScriptDelegate|0xc|0x108|
 
+<a id="partybeaconclient-functions"></a>
 ### Functions
 
 |Signature|
@@ -36632,6 +38613,7 @@ OnCancellationRequestComplete() -> ()|
 OnReservationUpdateRequestComplete(<br>&nbsp;&nbsp;&nbsp;&nbsp;ReservationResult: i8,<br>) -> ()|
 OnReservationRequestComplete(<br>&nbsp;&nbsp;&nbsp;&nbsp;ReservationResult: i8,<br>) -> ()|
 
+<a id="partybeaconclient-enums"></a>
 ### Enums
 
 |Enum|
@@ -36647,6 +38629,7 @@ Package: IpDrv
 
 Size: 0xb8 | 184 bytes
 
+<a id="partybeaconhost-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -36664,6 +38647,7 @@ Size: 0xb8 | 184 bytes
 |__OnReservationsFull__Delegate|FScriptDelegate|0xc|0xa0|
 |__OnClientCancellationReceived__Delegate|FScriptDelegate|0xc|0xac|
 
+<a id="partybeaconhost-functions"></a>
 ### Functions
 
 |Signature|
@@ -36686,6 +38670,7 @@ UpdatePartyReservationEntry(<br>&nbsp;&nbsp;&nbsp;&nbsp;PartyLeader: UniqueNetId
 AddPartyReservationEntry(<br>&nbsp;&nbsp;&nbsp;&nbsp;PartyLeader: UniqueNetId,<br>&nbsp;&nbsp;&nbsp;&nbsp;PlayerMembers: TArray\<PlayerReservation\>,<br>&nbsp;&nbsp;&nbsp;&nbsp;TeamNum: i32,<br>&nbsp;&nbsp;&nbsp;&nbsp;bIsHost: bool,<br>) -> i8|
 InitHostBeacon(<br>&nbsp;&nbsp;&nbsp;&nbsp;InNumTeams: i32,<br>&nbsp;&nbsp;&nbsp;&nbsp;InNumPlayersPerTeam: i32,<br>&nbsp;&nbsp;&nbsp;&nbsp;InNumReservations: i32,<br>&nbsp;&nbsp;&nbsp;&nbsp;InSessionName: FName,<br>) -> bool|
 
+<a id="partybeaconhost-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -36707,6 +38692,7 @@ Package: IpDrv
 
 Size: 0x1a0 | 416 bytes
 
+<a id="tcpnetdriver-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -36722,6 +38708,7 @@ Package: IpDrv
 
 Size: 0xf8 | 248 bytes
 
+<a id="webrequest-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -36736,6 +38723,7 @@ Size: 0xf8 | 248 bytes
 |HeaderMap|Map_Mirror|0x3c|0x80|
 |VariableMap|Map_Mirror|0x3c|0xbc|
 
+<a id="webrequest-functions"></a>
 ### Functions
 
 |Signature|
@@ -36755,6 +38743,7 @@ AddHeader(<br>&nbsp;&nbsp;&nbsp;&nbsp;HeaderName: FString,<br>&nbsp;&nbsp;&nbsp;
 EncodeBase64(<br>&nbsp;&nbsp;&nbsp;&nbsp;Decoded: FString,<br>) -> FString|
 DecodeBase64(<br>&nbsp;&nbsp;&nbsp;&nbsp;Encoded: FString,<br>) -> FString|
 
+<a id="webrequest-enums"></a>
 ### Enums
 
 |Enum|
@@ -36769,6 +38758,7 @@ Package: IpDrv
 
 Size: 0xa4 | 164 bytes
 
+<a id="webresponse-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -36781,6 +38771,7 @@ Size: 0xa4 | 164 bytes
 |bSentText|bool|0x4|0xa0|
 |bSentResponse|bool|0x4|0xa0|
 
+<a id="webresponse-functions"></a>
 ### Functions
 
 |Signature|
@@ -36822,6 +38813,7 @@ Package: GFxUI
 
 Size: 0x4c | 76 bytes
 
+<a id="gfxengine-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -36829,6 +38821,7 @@ Size: 0x4c | 76 bytes
 |GCReferences|TArray\<GCReference\>|0xc|0x3c|
 |RefCount|i32|0x4|0x48|
 
+<a id="gfxengine-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -36843,6 +38836,7 @@ Package: GFxUI
 
 Size: 0x3c | 60 bytes
 
+<a id="gfxfscmdhandler-functions"></a>
 ### Functions
 
 |Signature|
@@ -36857,6 +38851,7 @@ Package: GFxUI
 
 Size: 0x124 | 292 bytes
 
+<a id="gfxgameviewportclient-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -36864,6 +38859,7 @@ Size: 0x124 | 292 bytes
 |GFxUIControllerClass|UClass*|0x4|0x11c|
 |GFxUIController|GFxInteraction*|0x4|0x120|
 
+<a id="gfxgameviewportclient-functions"></a>
 ### Functions
 
 |Signature|
@@ -36878,12 +38874,14 @@ Package: GFxUI
 
 Size: 0x70 | 112 bytes
 
+<a id="gfxinteraction-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
 |---|:-:|:-:|:-:|
 |VfTable_FCallbackEventDevice|Pointer|0x4|0x6c|
 
+<a id="gfxinteraction-functions"></a>
 ### Functions
 
 |Signature|
@@ -36900,6 +38898,7 @@ Package: GFxUI
 
 Size: 0x98 | 152 bytes
 
+<a id="gfxmovie-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -36921,6 +38920,7 @@ Size: 0x98 | 152 bytes
 |DataStoreBindings|TArray\<GFxDataStoreBinding\>|0xc|0x88|
 |DataStoreSubscriber|GFxDataStoreSubscriber*|0x4|0x94|
 
+<a id="gfxmovie-functions"></a>
 ### Functions
 
 |Signature|
@@ -36967,6 +38967,7 @@ OnClose() -> ()|
 Close(<br>&nbsp;&nbsp;&nbsp;&nbsp;Unload: bool,<br>) -> ()|
 Start(<br>&nbsp;&nbsp;&nbsp;&nbsp;StartPaused: bool,<br>) -> bool|
 
+<a id="gfxmovie-enums"></a>
 ### Enums
 
 |Enum|
@@ -36975,6 +38976,7 @@ Start(<br>&nbsp;&nbsp;&nbsp;&nbsp;StartPaused: bool,<br>) -> bool|
 |GFxRenderTextureMode {<br>&nbsp;&nbsp;&nbsp;&nbsp;RTM_Opaque,<br>&nbsp;&nbsp;&nbsp;&nbsp;RTM_Alpha,<br>&nbsp;&nbsp;&nbsp;&nbsp;RTM_AlphaComposite,<br>&nbsp;&nbsp;&nbsp;&nbsp;RTM_MAX,<br>}|
 |GFxTimingMode {<br>&nbsp;&nbsp;&nbsp;&nbsp;TM_Game,<br>&nbsp;&nbsp;&nbsp;&nbsp;TM_Real,<br>&nbsp;&nbsp;&nbsp;&nbsp;TM_MAX,<br>}|
 
+<a id="gfxmovie-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -36991,6 +38993,7 @@ Package: GFxUI
 
 Size: 0xa8 | 168 bytes
 
+<a id="pggfxcinematic-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -37006,6 +39009,7 @@ Package: GFxUI
 
 Size: 0xbc | 188 bytes
 
+<a id="pggfxmovie-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -37017,12 +39021,14 @@ Size: 0xbc | 188 bytes
 |mAkEventToPlay|AkEvent*|0x4|0xb4|
 |mAkEventToStop|AkEvent*|0x4|0xb8|
 
+<a id="pggfxmovie-enums"></a>
 ### Enums
 
 |Enum|
 |---|
 |EHelpButton {<br>&nbsp;&nbsp;&nbsp;&nbsp;EHELPBUTTON_Cross,<br>&nbsp;&nbsp;&nbsp;&nbsp;EHELPBUTTON_Circle,<br>&nbsp;&nbsp;&nbsp;&nbsp;EHELPBUTTON_Square,<br>&nbsp;&nbsp;&nbsp;&nbsp;EHELPBUTTON_Triangle,<br>&nbsp;&nbsp;&nbsp;&nbsp;EHELPBUTTON_L1R1,<br>&nbsp;&nbsp;&nbsp;&nbsp;EHELPBUTTON_MAX,<br>}|
 
+<a id="pggfxmovie-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -37037,6 +39043,7 @@ Package: GFxUI
 
 Size: 0x7c | 124 bytes
 
+<a id="gfxmovieinfo-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -37057,6 +39064,7 @@ Package: GFxUI
 
 Size: 0xf0 | 240 bytes
 
+<a id="gfxaction_closemovie-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -37064,6 +39072,7 @@ Size: 0xf0 | 240 bytes
 |Movie|GFxMovie*|0x4|0xe8|
 |bUnload|bool|0x4|0xec|
 
+<a id="gfxaction_closemovie-functions"></a>
 ### Functions
 
 |Signature|
@@ -37078,6 +39087,7 @@ Package: GFxUI
 
 Size: 0xf8 | 248 bytes
 
+<a id="gfxaction_getvariable-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -37085,6 +39095,7 @@ Size: 0xf8 | 248 bytes
 |Movie|GFxMovie*|0x4|0xe8|
 |Variable|FString|0xc|0xec|
 
+<a id="gfxaction_getvariable-functions"></a>
 ### Functions
 
 |Signature|
@@ -37099,6 +39110,7 @@ Package: GFxUI
 
 Size: 0x104 | 260 bytes
 
+<a id="gfxaction_invoke-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -37107,6 +39119,7 @@ Size: 0x104 | 260 bytes
 |MethodName|FString|0xc|0xec|
 |Arguments|TArray\<ASValue\>|0xc|0xf8|
 
+<a id="gfxaction_invoke-functions"></a>
 ### Functions
 
 |Signature|
@@ -37121,6 +39134,7 @@ Package: GFxUI
 
 Size: 0xf1 | 241 bytes
 
+<a id="gfxaction_openmovie-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -37131,12 +39145,14 @@ Size: 0xf1 | 241 bytes
 |bStartPaused|bool|0x4|0xec|
 |mStackId|i8|0x1|0xf0|
 
+<a id="gfxaction_openmovie-functions"></a>
 ### Functions
 
 |Signature|
 |---|
 IsValidLevelSequenceObject() -> bool|
 
+<a id="gfxaction_openmovie-enums"></a>
 ### Enums
 
 |Enum|
@@ -37151,6 +39167,7 @@ Package: GFxUI
 
 Size: 0xf8 | 248 bytes
 
+<a id="gfxaction_setcapturekeys-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -37166,6 +39183,7 @@ Package: GFxUI
 
 Size: 0xf0 | 240 bytes
 
+<a id="gfxaction_setfocus-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -37181,6 +39199,7 @@ Package: GFxUI
 
 Size: 0xf8 | 248 bytes
 
+<a id="gfxaction_setvariable-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -37188,6 +39207,7 @@ Size: 0xf8 | 248 bytes
 |Movie|GFxMovie*|0x4|0xe8|
 |Variable|FString|0xc|0xec|
 
+<a id="gfxaction_setvariable-functions"></a>
 ### Functions
 
 |Signature|
@@ -37202,6 +39222,7 @@ Package: GFxUI
 
 Size: 0x110 | 272 bytes
 
+<a id="gfxevent_fscommand-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -37217,12 +39238,14 @@ Package: GFxUI
 
 Size: 0x78 | 120 bytes
 
+<a id="gfxfscmdhandler_kismet-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
 |---|:-:|:-:|:-:|
 |Events|TMap\<FPair\>|0x3c|0x3c|
 
+<a id="gfxfscmdhandler_kismet-functions"></a>
 ### Functions
 
 |Signature|
@@ -37237,6 +39260,7 @@ Package: GFxUI
 
 Size: 0x44 | 68 bytes
 
+<a id="gfxdatastoresubscriber-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -37244,6 +39268,7 @@ Size: 0x44 | 68 bytes
 |VfTable_IUIDataStorePublisher|Pointer|0x4|0x3c|
 |Movie|GFxMovie*|0x4|0x40|
 
+<a id="gfxdatastoresubscriber-functions"></a>
 ### Functions
 
 |Signature|
@@ -37265,6 +39290,7 @@ Package: GFxUI
 
 Size: 0xc8 | 200 bytes
 
+<a id="pggfxdebugmenu-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -37279,6 +39305,7 @@ Package: GFxUI
 
 Size: 0xcc | 204 bytes
 
+<a id="pggfxmenu-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -37286,6 +39313,7 @@ Size: 0xcc | 204 bytes
 |mCloseOnExecSelection|bool|0x4|0xbc|
 |mItems|TArray\<MenuItem\>|0xc|0xc0|
 
+<a id="pggfxmenu-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -37300,12 +39328,14 @@ Package: GFxUI
 
 Size: 0x44 | 68 bytes
 
+<a id="pgdebugitembase-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
 |---|:-:|:-:|:-:|
 |m_id|FName|0x8|0x3c|
 
+<a id="pgdebugitembase-enums"></a>
 ### Enums
 
 |Enum|
@@ -37320,6 +39350,7 @@ Package: GFxUI
 
 Size: 0x5c | 92 bytes
 
+<a id="pgdebugitem_command-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -37335,6 +39366,7 @@ Package: GFxUI
 
 Size: 0x54 | 84 bytes
 
+<a id="pgdebugitem_openmovie-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -37357,6 +39389,7 @@ Package: GFxUI
 
 Size: 0x68 | 104 bytes
 
+<a id="pgdebugitem_slider-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -37375,6 +39408,7 @@ Package: GFxUI
 
 Size: 0x68 | 104 bytes
 
+<a id="pgdebugitem_stepper-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -37391,6 +39425,7 @@ Package: GFxUI
 
 Size: 0xc8 | 200 bytes
 
+<a id="pggfxmenucore-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -37405,6 +39440,7 @@ Package: GFxUI
 
 Size: 0x58 | 88 bytes
 
+<a id="pgmenuitembase-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -37414,6 +39450,7 @@ Size: 0x58 | 88 bytes
 |m_action|i8|0x1|0x50|
 |mParentMovie|GFxMovie*|0x4|0x54|
 
+<a id="pgmenuitembase-enums"></a>
 ### Enums
 
 |Enum|
@@ -37428,6 +39465,7 @@ Package: GFxUI
 
 Size: 0x70 | 112 bytes
 
+<a id="pgmenuitem_command-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -37443,6 +39481,7 @@ Package: GFxUI
 
 Size: 0x68 | 104 bytes
 
+<a id="pgmenuitem_openmovie-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -37465,6 +39504,7 @@ Package: GFxUI
 
 Size: 0x7c | 124 bytes
 
+<a id="pgmenuitem_slider-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -37483,6 +39523,7 @@ Package: GFxUI
 
 Size: 0x80 | 128 bytes
 
+<a id="pgmenuitem_stepper-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -37626,6 +39667,7 @@ Package: UnrealEd
 
 Size: 0x74 | 116 bytes
 
+<a id="beastsettingsfactorynew-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -37710,6 +39752,7 @@ Package: UnrealEd
 
 Size: 0x74 | 116 bytes
 
+<a id="colladafactory-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -39124,6 +41167,7 @@ Package: UnrealEd
 
 Size: 0x68 | 104 bytes
 
+<a id="rendertargetcubeexportertga-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -39264,6 +41308,7 @@ Package: UnrealEd
 
 Size: 0x78 | 120 bytes
 
+<a id="skeletalmeshfactory-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -39306,6 +41351,7 @@ Package: UnrealEd
 
 Size: 0x84 | 132 bytes
 
+<a id="soundfactory-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -39345,6 +41391,7 @@ Package: UnrealEd
 
 Size: 0x74 | 116 bytes
 
+<a id="soundsurroundfactory-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -39359,6 +41406,7 @@ Package: UnrealEd
 
 Size: 0x94 | 148 bytes
 
+<a id="soundttsfactory-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -39393,6 +41441,7 @@ Package: UnrealEd
 
 Size: 0x84 | 132 bytes
 
+<a id="staticmeshfactory-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -39411,6 +41460,7 @@ Package: UnrealEd
 
 Size: 0x88 | 136 bytes
 
+<a id="reimportstaticmeshfactory-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -39429,6 +41479,7 @@ Package: UnrealEd
 
 Size: 0xc0 | 192 bytes
 
+<a id="texturefactory-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -39464,6 +41515,7 @@ Package: UnrealEd
 
 Size: 0xc8 | 200 bytes
 
+<a id="reimporttexturefactory-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -39660,6 +41712,7 @@ Package: UnrealEd
 
 Size: 0xc4 | 196 bytes
 
+<a id="truetypefontfactory-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -39674,6 +41727,7 @@ Package: UnrealEd
 
 Size: 0xe8 | 232 bytes
 
+<a id="truetypemultifontfactory-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -39690,6 +41744,7 @@ Package: UnrealEd
 
 Size: 0x74 | 116 bytes
 
+<a id="texturemoviefactory-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -39704,6 +41759,7 @@ Package: UnrealEd
 
 Size: 0x78 | 120 bytes
 
+<a id="texturerendertargetcubefactorynew-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -39719,6 +41775,7 @@ Package: UnrealEd
 
 Size: 0x7c | 124 bytes
 
+<a id="texturerendertargetfactorynew-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -39966,6 +42023,7 @@ Package: UnrealEd
 
 Size: 0x78 | 120 bytes
 
+<a id="uiscenefactory-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -40204,6 +42262,7 @@ Package: GFxUIEditor
 
 Size: 0x84 | 132 bytes
 
+<a id="gfxmoviefactory-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -40226,6 +42285,7 @@ Package: AkAudio
 
 Size: 0x5c | 92 bytes
 
+<a id="actorfactoryakambientsound-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -40240,6 +42300,7 @@ Package: AkAudio
 
 Size: 0x1ec | 492 bytes
 
+<a id="akambientsound-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -40257,6 +42318,7 @@ Package: AkAudio
 
 Size: 0x68 | 104 bytes
 
+<a id="akcomponent-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -40273,12 +42335,14 @@ Package: AkAudio
 
 Size: 0x68 | 104 bytes
 
+<a id="interptrackakevent-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
 |---|:-:|:-:|:-:|
 |AkEvents|TArray\<AkEventTrackKey\>|0xc|0x5c|
 
+<a id="interptrackakevent-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -40293,6 +42357,7 @@ Package: AkAudio
 
 Size: 0x7c | 124 bytes
 
+<a id="interptrackakrtpc-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -40307,6 +42372,7 @@ Package: AkAudio
 
 Size: 0x40 | 64 bytes
 
+<a id="interptrackinstakevent-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -40335,6 +42401,7 @@ Package: AkAudio
 
 Size: 0x104 | 260 bytes
 
+<a id="seqact_akloadbank-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -40352,6 +42419,7 @@ Package: AkAudio
 
 Size: 0x100 | 256 bytes
 
+<a id="seqact_akpostevent-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -40367,6 +42435,7 @@ Package: AkAudio
 
 Size: 0xf4 | 244 bytes
 
+<a id="seqact_akposttrigger-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -40381,6 +42450,7 @@ Package: AkAudio
 
 Size: 0x10c | 268 bytes
 
+<a id="seqact_aksetrtpcvalue-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -40397,6 +42467,7 @@ Package: AkAudio
 
 Size: 0x100 | 256 bytes
 
+<a id="seqact_aksetstate-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -40412,6 +42483,7 @@ Package: AkAudio
 
 Size: 0x100 | 256 bytes
 
+<a id="seqact_aksetswitch-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -40441,6 +42513,7 @@ Package: WinDrv
 
 Size: 0x1d0 | 464 bytes
 
+<a id="windowsclient-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -40470,6 +42543,7 @@ Package: OnlineSubsystemGFWL
 
 Size: 0x68 | 104 bytes
 
+<a id="onlineeventsinterfacemcpgfwl-functions"></a>
 ### Functions
 
 |Signature|
@@ -40486,6 +42560,7 @@ Package: OnlineSubsystemGFWL
 
 Size: 0xcb8 | 3256 bytes
 
+<a id="onlinesubsystemgfwl-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -40619,6 +42694,7 @@ Size: 0xcb8 | 3256 bytes
 |__OnReadAchievementsComplete__Delegate|FScriptDelegate|0xc|0xca0|
 |__OnServiceQosCheckComplete__Delegate|FScriptDelegate|0xc|0xcac|
 
+<a id="onlinesubsystemgfwl-functions"></a>
 ### Functions
 
 |Signature|
@@ -40919,6 +42995,7 @@ OnMutingChange() -> ()|
 OnLoginCancelled() -> ()|
 OnLoginChange(<br>&nbsp;&nbsp;&nbsp;&nbsp;LocalUserNum: i8,<br>) -> ()|
 
+<a id="onlinesubsystemgfwl-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -40943,6 +43020,7 @@ Package: OnlineSubsystemGFWL
 
 Size: 0xce4 | 3300 bytes
 
+<a id="pgonlinesubsystemgfwl-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -40953,6 +43031,7 @@ Size: 0xce4 | 3300 bytes
 |mPendingSessionDestroyList|TArray\<FName\>|0xc|0xccc|
 |__OnShowMarketplaceUIComplete__Delegate|FScriptDelegate|0xc|0xcd8|
 
+<a id="pgonlinesubsystemgfwl-functions"></a>
 ### Functions
 
 |Signature|
@@ -40981,6 +43060,7 @@ Package: OnlineSubsystemGFWL
 
 Size: 0x51f0 | 20976 bytes
 
+<a id="ipconnectionlive-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -40995,6 +43075,7 @@ Package: GridVehicle
 
 Size: 0x284 | 644 bytes
 
+<a id="forceddirvolume-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -41009,6 +43090,7 @@ Size: 0x284 | 644 bytes
 |ArrowDirection|Vector|0xc|0x26c|
 |TouchingVehicles|TArray\<UTVehicle*\>|0xc|0x278|
 
+<a id="forceddirvolume-functions"></a>
 ### Functions
 
 |Signature|
@@ -41027,6 +43109,7 @@ Package: GridVehicle
 
 Size: 0x180 | 384 bytes
 
+<a id="utskelcontrol_damage-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -41062,6 +43145,7 @@ Size: 0x180 | 384 bytes
 |PS_DeathOnBreak|ParticleSystem*|0x4|0x178|
 |PS_DeathTrail|ParticleSystem*|0x4|0x17c|
 
+<a id="utskelcontrol_damage-functions"></a>
 ### Functions
 
 |Signature|
@@ -41078,6 +43162,7 @@ Package: GridVehicle
 
 Size: 0x14c | 332 bytes
 
+<a id="utskelcontrol_turretconstrained-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -41101,6 +43186,7 @@ Size: 0x14c | 332 bytes
 |ConstrainedBoneRotation|Rotator|0xc|0x134|
 |__OnTurretStatusChange__Delegate|FScriptDelegate|0xc|0x140|
 
+<a id="utskelcontrol_turretconstrained-functions"></a>
 ### Functions
 
 |Signature|
@@ -41109,6 +43195,7 @@ WouldConstrainPitch(<br>&nbsp;&nbsp;&nbsp;&nbsp;TestPitch: i32,<br>&nbsp;&nbsp;&
 InitTurret(<br>&nbsp;&nbsp;&nbsp;&nbsp;InitRot: Rotator,<br>&nbsp;&nbsp;&nbsp;&nbsp;SkelComp: SkeletalMeshComponent*,<br>) -> ()|
 OnTurretStatusChange(<br>&nbsp;&nbsp;&nbsp;&nbsp;bIsMoving: bool,<br>) -> ()|
 
+<a id="utskelcontrol_turretconstrained-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -41124,6 +43211,7 @@ Package: GridVehicle
 
 Size: 0x5c0 | 1472 bytes
 
+<a id="utvehiclebase-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -41132,6 +43220,7 @@ Size: 0x5c0 | 1472 bytes
 |HudIcons|Texture2D*|0x4|0x5ac|
 |HudCoords|TextureCoordinates|0x10|0x5b0|
 
+<a id="utvehiclebase-functions"></a>
 ### Functions
 
 |Signature|
@@ -41165,6 +43254,7 @@ Package: GridVehicle
 
 Size: 0x9d4 | 2516 bytes
 
+<a id="utvehicle-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -41397,12 +43487,14 @@ Size: 0x9d4 | 2516 bytes
 |VehicleDestroyedSound|TArray\<SoundNodeWave*\>|0xc|0x9c4|
 |HeroBonus|f32|0x4|0x9d0|
 
+<a id="utvehicle-states"></a>
 ### States
 
 |Signature|
 |---|
 |PerformDeathEffects_DyingVehicle() -> ()|
 
+<a id="utvehicle-functions"></a>
 ### Functions
 
 |Signature|
@@ -41598,18 +43690,21 @@ SeatFlashCount(<br>&nbsp;&nbsp;&nbsp;&nbsp;SeatIndex: i32,<br>&nbsp;&nbsp;&nbsp;
 SeatFlashLocation(<br>&nbsp;&nbsp;&nbsp;&nbsp;SeatIndex: i32,<br>&nbsp;&nbsp;&nbsp;&nbsp;NewLoc: Vector,<br>&nbsp;&nbsp;&nbsp;&nbsp;bReadValue: bool,<br>) -> Vector|
 SeatWeaponRotation(<br>&nbsp;&nbsp;&nbsp;&nbsp;SeatIndex: i32,<br>&nbsp;&nbsp;&nbsp;&nbsp;NewRot: Rotator,<br>&nbsp;&nbsp;&nbsp;&nbsp;bReadValue: bool,<br>) -> Rotator|
 
+<a id="utvehicle-enums"></a>
 ### Enums
 
 |Enum|
 |---|
 |EAIVehiclePurpose {<br>&nbsp;&nbsp;&nbsp;&nbsp;AIP_Offensive,<br>&nbsp;&nbsp;&nbsp;&nbsp;AIP_Defensive,<br>&nbsp;&nbsp;&nbsp;&nbsp;AIP_Any,<br>&nbsp;&nbsp;&nbsp;&nbsp;AIP_MAX,<br>}|
 
+<a id="utvehicle-consts"></a>
 ### Consts
 
 |Constant|Value|
 |---|:-:|
 |UTVEHICLE_UNSET_TEAM|128|
 
+<a id="utvehicle-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -41634,6 +43729,7 @@ Package: GridVehicle
 
 Size: 0x9fc | 2556 bytes
 
+<a id="uthovervehicle-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -41646,6 +43742,7 @@ Size: 0x9fc | 2556 bytes
 |StallZGravityScaling|f32|0x4|0x9f4|
 |FullAirSpeed|f32|0x4|0x9f8|
 
+<a id="uthovervehicle-functions"></a>
 ### Functions
 
 |Signature|
@@ -41660,6 +43757,7 @@ Package: GridVehicle
 
 Size: 0xa28 | 2600 bytes
 
+<a id="utairvehicle-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -41671,12 +43769,14 @@ Size: 0xa28 | 2600 bytes
 |RadarLockMessage|FString|0xc|0xa18|
 |LastRadarLockWarnTime|f32|0x4|0xa24|
 
+<a id="utairvehicle-states"></a>
 ### States
 
 |Signature|
 |---|
 |Tick_AutoLanding(<br>&nbsp;&nbsp;&nbsp;&nbsp;DeltaTime: f32,<br>) -> ()|
 
+<a id="utairvehicle-functions"></a>
 ### Functions
 
 |Signature|
@@ -41695,6 +43795,7 @@ Package: GridVehicle
 
 Size: 0x5cc | 1484 bytes
 
+<a id="utweaponpawn-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -41703,6 +43804,7 @@ Size: 0x5cc | 1484 bytes
 |MyVehicle|UTVehicle*|0x4|0x5c4|
 |MySeatIndex|i32|0x4|0x5c8|
 
+<a id="utweaponpawn-functions"></a>
 ### Functions
 
 |Signature|
@@ -41747,6 +43849,7 @@ Package: GridVehicle
 
 Size: 0x13c | 316 bytes
 
+<a id="utvehiclesimcar-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -41787,6 +43890,7 @@ Package: GridVehicle
 
 Size: 0x134 | 308 bytes
 
+<a id="utvehiclesimchopper-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -41841,6 +43945,7 @@ Package: GridVehicle
 
 Size: 0x138 | 312 bytes
 
+<a id="utvehiclesimhover-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -41858,6 +43963,7 @@ Package: GridVehicle
 
 Size: 0x320 | 800 bytes
 
+<a id="utvehicleweapon-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -41880,6 +43986,7 @@ Size: 0x320 | 800 bytes
 |bDebugTurret|bool|0x4|0x318|
 |VehicleClass|UClass*|0x4|0x31c|
 
+<a id="utvehicleweapon-functions"></a>
 ### Functions
 
 |Signature|
@@ -41917,6 +44024,7 @@ Package: GridVehicle
 
 Size: 0x120 | 288 bytes
 
+<a id="utvehiclewheel-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -41926,6 +44034,7 @@ Size: 0x120 | 288 bytes
 |OldWheelParticleComp|ParticleSystemComponent*|0x4|0x118|
 |EffectDesiredSpinDir|f32|0x4|0x11c|
 
+<a id="utvehiclewheel-functions"></a>
 ### Functions
 
 |Signature|
@@ -41941,6 +44050,7 @@ Package: GridVehicle
 
 Size: 0x200 | 512 bytes
 
+<a id="vehiclemovementeffect-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -41974,6 +44084,7 @@ Package: GridGame
 
 Size: 0x6c | 108 bytes
 
+<a id="interptrackcollision-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -41983,12 +44094,14 @@ Size: 0x6c | 108 bytes
 |bFireEventsWhenBackwards|bool|0x4|0x68|
 |bFireEventsWhenJumpingForwards|bool|0x4|0x68|
 
+<a id="interptrackcollision-enums"></a>
 ### Enums
 
 |Enum|
 |---|
 |ETrackCollisionAction {<br>&nbsp;&nbsp;&nbsp;&nbsp;ETCA_Off,<br>&nbsp;&nbsp;&nbsp;&nbsp;ETCA_On,<br>&nbsp;&nbsp;&nbsp;&nbsp;ETCA_MAX,<br>}|
 
+<a id="interptrackcollision-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -42003,6 +44116,7 @@ Package: GridGame
 
 Size: 0x44 | 68 bytes
 
+<a id="interptrackinstcollision-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -42019,6 +44133,7 @@ Package: GridGame
 
 Size: 0x3c | 60 bytes
 
+<a id="pgaltconfig-functions"></a>
 ### Functions
 
 |Signature|
@@ -42047,6 +44162,7 @@ Package: GridGame
 
 Size: 0x3c | 60 bytes
 
+<a id="pgdamageparaminterface-functions"></a>
 ### Functions
 
 |Signature|
@@ -42069,6 +44185,7 @@ Package: GridGame
 
 Size: 0x3c | 60 bytes
 
+<a id="pgeventtrackerinterface-functions"></a>
 ### Functions
 
 |Signature|
@@ -42078,6 +44195,7 @@ GetTrackedEventInfo(<br>&nbsp;&nbsp;&nbsp;&nbsp;EventName: FName,<br>&nbsp;&nbsp
 CheckForTrackedEvent(<br>&nbsp;&nbsp;&nbsp;&nbsp;EventName: FName,<br>) -> bool|
 TrackEventByName(<br>&nbsp;&nbsp;&nbsp;&nbsp;EventName: FName,<br>&nbsp;&nbsp;&nbsp;&nbsp;HitNormal: Vector,<br>) -> ()|
 
+<a id="pgeventtrackerinterface-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -42092,6 +44210,7 @@ Package: GridGame
 
 Size: 0x8c | 140 bytes
 
+<a id="pggridprofilesettings-functions"></a>
 ### Functions
 
 |Signature|
@@ -42103,6 +44222,7 @@ GetProfileSettingValueStringByName(<br>&nbsp;&nbsp;&nbsp;&nbsp;SettingName: FNam
 GetProfileSettingValueFloatByName(<br>&nbsp;&nbsp;&nbsp;&nbsp;SettingName: FName,<br>&nbsp;&nbsp;&nbsp;&nbsp;OutValue: f32,<br>&nbsp;&nbsp;&nbsp;&nbsp;bResult: bool,<br>&nbsp;&nbsp;&nbsp;&nbsp;SettingId: i32,<br>) -> bool|
 GetProfileSettingValueIntByName(<br>&nbsp;&nbsp;&nbsp;&nbsp;SettingName: FName,<br>&nbsp;&nbsp;&nbsp;&nbsp;OutValue: i32,<br>&nbsp;&nbsp;&nbsp;&nbsp;bResult: bool,<br>&nbsp;&nbsp;&nbsp;&nbsp;SettingId: i32,<br>) -> bool|
 
+<a id="pggridprofilesettings-consts"></a>
 ### Consts
 
 |Constant|Value|
@@ -42161,12 +44281,14 @@ Package: GridGame
 
 Size: 0x3c | 60 bytes
 
+<a id="pggridtypes-enums"></a>
 ### Enums
 
 |Enum|
 |---|
 |EGridGameAchievements {<br>&nbsp;&nbsp;&nbsp;&nbsp;EGGA_InvalidAchievement,<br>&nbsp;&nbsp;&nbsp;&nbsp;EGGA_ACH,<br>&nbsp;&nbsp;&nbsp;&nbsp;EGGA_ACH,<br>&nbsp;&nbsp;&nbsp;&nbsp;EGGA_ACH,<br>&nbsp;&nbsp;&nbsp;&nbsp;EGGA_ACH,<br>&nbsp;&nbsp;&nbsp;&nbsp;EGGA_ACH,<br>&nbsp;&nbsp;&nbsp;&nbsp;EGGA_ACH,<br>&nbsp;&nbsp;&nbsp;&nbsp;EGGA_ACH,<br>&nbsp;&nbsp;&nbsp;&nbsp;EGGA_ACH,<br>&nbsp;&nbsp;&nbsp;&nbsp;EGGA_ACH,<br>&nbsp;&nbsp;&nbsp;&nbsp;EGGA_ACH,<br>&nbsp;&nbsp;&nbsp;&nbsp;EGGA_ACH,<br>&nbsp;&nbsp;&nbsp;&nbsp;EGGA_ACH,<br>&nbsp;&nbsp;&nbsp;&nbsp;EGGA_ACH,<br>&nbsp;&nbsp;&nbsp;&nbsp;EGGA_ACH,<br>&nbsp;&nbsp;&nbsp;&nbsp;EGGA_ACH,<br>&nbsp;&nbsp;&nbsp;&nbsp;EGGA_ACH,<br>&nbsp;&nbsp;&nbsp;&nbsp;EGGA_ACH,<br>&nbsp;&nbsp;&nbsp;&nbsp;EGGA_ACH,<br>&nbsp;&nbsp;&nbsp;&nbsp;EGGA_ACH,<br>&nbsp;&nbsp;&nbsp;&nbsp;EGGA_ACH,<br>&nbsp;&nbsp;&nbsp;&nbsp;EGGA_ACH,<br>&nbsp;&nbsp;&nbsp;&nbsp;EGGA_ACH,<br>&nbsp;&nbsp;&nbsp;&nbsp;EGGA_ACH,<br>&nbsp;&nbsp;&nbsp;&nbsp;EGGA_ACH,<br>&nbsp;&nbsp;&nbsp;&nbsp;EGGA_ACH,<br>&nbsp;&nbsp;&nbsp;&nbsp;EGGA_ACH,<br>&nbsp;&nbsp;&nbsp;&nbsp;EGGA_ACH,<br>&nbsp;&nbsp;&nbsp;&nbsp;EGGA_ACH,<br>&nbsp;&nbsp;&nbsp;&nbsp;EGGA_ACH,<br>&nbsp;&nbsp;&nbsp;&nbsp;EGGA_ACH,<br>&nbsp;&nbsp;&nbsp;&nbsp;EGGA_ACH,<br>&nbsp;&nbsp;&nbsp;&nbsp;EGGA_ACH,<br>&nbsp;&nbsp;&nbsp;&nbsp;EGGA_ACH,<br>&nbsp;&nbsp;&nbsp;&nbsp;EGGA_ACH,<br>&nbsp;&nbsp;&nbsp;&nbsp;EGGA_ACH,<br>&nbsp;&nbsp;&nbsp;&nbsp;EGGA_ACH,<br>&nbsp;&nbsp;&nbsp;&nbsp;EGGA_ACH,<br>&nbsp;&nbsp;&nbsp;&nbsp;EGGA_ACH,<br>&nbsp;&nbsp;&nbsp;&nbsp;EGGA_ACH,<br>&nbsp;&nbsp;&nbsp;&nbsp;EGGA_ACH,<br>&nbsp;&nbsp;&nbsp;&nbsp;EGGA_ACH,<br>&nbsp;&nbsp;&nbsp;&nbsp;EGGA_MAX,<br>}|
 
+<a id="pggridtypes-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -42181,6 +44303,7 @@ Package: GridGame
 
 Size: 0x490 | 1168 bytes
 
+<a id="pghud-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -42192,6 +44315,7 @@ Size: 0x490 | 1168 bytes
 |mGammaYL|i32|0x4|0x488|
 |mGammaMI|MaterialInterface*|0x4|0x48c|
 
+<a id="pghud-functions"></a>
 ### Functions
 
 |Signature|
@@ -42221,6 +44345,7 @@ Package: GridGame
 
 Size: 0x3c | 60 bytes
 
+<a id="pgmailmannative-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -42236,6 +44361,7 @@ Package: GridGame
 
 Size: 0x3c | 60 bytes
 
+<a id="pgmaterialinstanceinterface-functions"></a>
 ### Functions
 
 |Signature|
@@ -42258,6 +44384,7 @@ Package: GridGame
 
 Size: 0x48 | 72 bytes
 
+<a id="pgplayerinputconfiguration-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -42272,6 +44399,7 @@ Package: GridGame
 
 Size: 0x3c | 60 bytes
 
+<a id="pgplugininterface-functions"></a>
 ### Functions
 
 |Signature|
@@ -42291,6 +44419,7 @@ Package: GridGame
 
 Size: 0xd0 | 208 bytes
 
+<a id="pgradialblurcomponent-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -42312,6 +44441,7 @@ Package: GridGame
 
 Size: 0x118 | 280 bytes
 
+<a id="pgrb_stayuprightsetup-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -42327,6 +44457,7 @@ Package: GridGame
 
 Size: 0xbc | 188 bytes
 
+<a id="pgsimplemenumovie-functions"></a>
 ### Functions
 
 |Signature|
@@ -42348,6 +44479,7 @@ Package: GridGame
 
 Size: 0x3c | 60 bytes
 
+<a id="pgtargetableinterface-functions"></a>
 ### Functions
 
 |Signature|
@@ -42364,6 +44496,7 @@ Package: GridGame
 
 Size: 0x6c | 108 bytes
 
+<a id="pgactorplugin-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -42381,6 +44514,7 @@ Size: 0x6c | 108 bytes
 |mActivateDelay|f32|0x4|0x64|
 |mCurrentActivateDelay|f32|0x4|0x68|
 
+<a id="pgactorplugin-functions"></a>
 ### Functions
 
 |Signature|
@@ -42399,6 +44533,7 @@ Package: GridGame
 
 Size: 0x98 | 152 bytes
 
+<a id="pgactorpluginactorfactory-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -42415,6 +44550,7 @@ Size: 0x98 | 152 bytes
 |mRelativeRotation|Rotator|0xc|0x88|
 |mFactory|ActorFactory*|0x4|0x94|
 
+<a id="pgactorpluginactorfactory-functions"></a>
 ### Functions
 
 |Signature|
@@ -42430,6 +44566,7 @@ Package: GridGame
 
 Size: 0x88 | 136 bytes
 
+<a id="pgactorpluginaksetrtpcvalue-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -42448,6 +44585,7 @@ Package: GridGame
 
 Size: 0x7c | 124 bytes
 
+<a id="pgactorpluginaksetstate-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -42455,6 +44593,7 @@ Size: 0x7c | 124 bytes
 |mWwiseStateGroup|FName|0x8|0x6c|
 |mWwiseStateName|FName|0x8|0x74|
 
+<a id="pgactorpluginaksetstate-functions"></a>
 ### Functions
 
 |Signature|
@@ -42469,6 +44608,7 @@ Package: GridGame
 
 Size: 0x7c | 124 bytes
 
+<a id="pgactorpluginaksetswitch-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -42476,6 +44616,7 @@ Size: 0x7c | 124 bytes
 |mWwiseSwitchGroup|FName|0x8|0x6c|
 |mWwiseSwitchName|FName|0x8|0x74|
 
+<a id="pgactorpluginaksetswitch-functions"></a>
 ### Functions
 
 |Signature|
@@ -42490,6 +44631,7 @@ Package: GridGame
 
 Size: 0x7d | 125 bytes
 
+<a id="pgactorplugincomponent-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -42499,6 +44641,7 @@ Size: 0x7d | 125 bytes
 |mUseTickGroupOverride|bool|0x4|0x78|
 |mTickGroupOverride|i8|0x1|0x7c|
 
+<a id="pgactorplugincomponent-functions"></a>
 ### Functions
 
 |Signature|
@@ -42514,6 +44657,7 @@ Package: GridGame
 
 Size: 0x93 | 147 bytes
 
+<a id="pgactorpluginconditional-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -42531,6 +44675,7 @@ Size: 0x93 | 147 bytes
 |mConditionGameModeType|i8|0x1|0x91|
 |mConditionTestType|i8|0x1|0x92|
 
+<a id="pgactorpluginconditional-functions"></a>
 ### Functions
 
 |Signature|
@@ -42539,6 +44684,7 @@ Deactivate() -> ()|
 Activate() -> ()|
 Detach() -> ()|
 
+<a id="pgactorpluginconditional-enums"></a>
 ### Enums
 
 |Enum|
@@ -42555,6 +44701,7 @@ Package: GridGame
 
 Size: 0xe4 | 228 bytes
 
+<a id="pgactorpluginemitter-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -42582,6 +44729,7 @@ Size: 0xe4 | 228 bytes
 |mTeamColor|LinearColor|0x10|0xd0|
 |mLastLevel|i32|0x4|0xe0|
 
+<a id="pgactorpluginemitter-functions"></a>
 ### Functions
 
 |Signature|
@@ -42597,12 +44745,14 @@ Package: GridGame
 
 Size: 0xf0 | 240 bytes
 
+<a id="pgactorpluginbeamtrailemitter-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
 |---|:-:|:-:|:-:|
 |mEmitterList|TArray\<PgDynamicEmitter*\>|0xc|0xe4|
 
+<a id="pgactorpluginbeamtrailemitter-functions"></a>
 ### Functions
 
 |Signature|
@@ -42625,6 +44775,7 @@ Package: GridGame
 
 Size: 0x75 | 117 bytes
 
+<a id="pgactorpluginfiresideeffect-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -42633,6 +44784,7 @@ Size: 0x75 | 117 bytes
 |mbUseOwnerLocationAsEpicenter|bool|0x4|0x70|
 |mFireMode|i8|0x1|0x74|
 
+<a id="pgactorpluginfiresideeffect-functions"></a>
 ### Functions
 
 |Signature|
@@ -42648,6 +44800,7 @@ Package: GridGame
 
 Size: 0x98 | 152 bytes
 
+<a id="pgactorpluginlightwall-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -42662,6 +44815,7 @@ Size: 0x98 | 152 bytes
 |mLastWallPos|Vector|0xc|0x80|
 |mLastWallRot|Rotator|0xc|0x8c|
 
+<a id="pgactorpluginlightwall-functions"></a>
 ### Functions
 
 |Signature|
@@ -42676,6 +44830,7 @@ Package: GridGame
 
 Size: 0x118 | 280 bytes
 
+<a id="pgactorpluginmaterialparam-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -42702,6 +44857,7 @@ Size: 0x118 | 280 bytes
 |mMinRenderTime|f32|0x4|0x110|
 |mPgInterpActorOwner|PgInterpActor*|0x4|0x114|
 
+<a id="pgactorpluginmaterialparam-functions"></a>
 ### Functions
 
 |Signature|
@@ -42723,6 +44879,7 @@ Package: GridGame
 
 Size: 0x7c | 124 bytes
 
+<a id="pgactorpluginmodifycamerascore-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -42731,6 +44888,7 @@ Size: 0x7c | 124 bytes
 |mCameraStyle|FName|0x8|0x70|
 |mAmount|f32|0x4|0x78|
 
+<a id="pgactorpluginmodifycamerascore-functions"></a>
 ### Functions
 
 |Signature|
@@ -42738,6 +44896,7 @@ Size: 0x7c | 124 bytes
 Deactivate() -> ()|
 Activate() -> ()|
 
+<a id="pgactorpluginmodifycamerascore-enums"></a>
 ### Enums
 
 |Enum|
@@ -42752,6 +44911,7 @@ Package: GridGame
 
 Size: 0xb0 | 176 bytes
 
+<a id="pgactorpluginmodifyproperty-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -42768,6 +44928,7 @@ Size: 0xb0 | 176 bytes
 |mRestoreToDefaultOnDeactivate|bool|0x4|0xac|
 |mReplicate|bool|0x4|0xac|
 
+<a id="pgactorpluginmodifyproperty-functions"></a>
 ### Functions
 
 |Signature|
@@ -42775,6 +44936,7 @@ Size: 0xb0 | 176 bytes
 Deactivate() -> ()|
 Activate() -> ()|
 
+<a id="pgactorpluginmodifyproperty-enums"></a>
 ### Enums
 
 |Enum|
@@ -42789,6 +44951,7 @@ Package: GridGame
 
 Size: 0x7c | 124 bytes
 
+<a id="pgactorpluginphysmateffect-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -42797,6 +44960,7 @@ Size: 0x7c | 124 bytes
 |mTraceFromSocketName|FName|0x8|0x70|
 |mTraceDistance|f32|0x4|0x78|
 
+<a id="pgactorpluginphysmateffect-functions"></a>
 ### Functions
 
 |Signature|
@@ -42811,6 +44975,7 @@ Package: GridGame
 
 Size: 0x7c | 124 bytes
 
+<a id="pgactorpluginresetfreecamera-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -42818,6 +44983,7 @@ Size: 0x7c | 124 bytes
 |mSpringParameters|RotationSpringParameters|0xc|0x6c|
 |mActiveTime|f32|0x4|0x78|
 
+<a id="pgactorpluginresetfreecamera-functions"></a>
 ### Functions
 
 |Signature|
@@ -42832,6 +44998,7 @@ Package: GridGame
 
 Size: 0x74 | 116 bytes
 
+<a id="pgactorpluginseqaction-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -42839,6 +45006,7 @@ Size: 0x74 | 116 bytes
 |mSeqAction|SequenceAction*|0x4|0x6c|
 |mImpulseInputLink|i32|0x4|0x70|
 
+<a id="pgactorpluginseqaction-functions"></a>
 ### Functions
 
 |Signature|
@@ -42853,12 +45021,14 @@ Package: GridGame
 
 Size: 0x74 | 116 bytes
 
+<a id="pgactorpluginsetcamerastyle-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
 |---|:-:|:-:|:-:|
 |mCameraStyle|FName|0x8|0x6c|
 
+<a id="pgactorpluginsetcamerastyle-functions"></a>
 ### Functions
 
 |Signature|
@@ -42873,18 +45043,21 @@ Package: GridGame
 
 Size: 0x78 | 120 bytes
 
+<a id="pgactorpluginsetmaterial-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
 |---|:-:|:-:|:-:|
 |mNewMaterialList|TArray\<SetMaterialInfo\>|0xc|0x6c|
 
+<a id="pgactorpluginsetmaterial-functions"></a>
 ### Functions
 
 |Signature|
 |---|
 Activate() -> ()|
 
+<a id="pgactorpluginsetmaterial-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -42899,12 +45072,14 @@ Package: GridGame
 
 Size: 0x6d | 109 bytes
 
+<a id="pgactorpluginsetphysics-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
 |---|:-:|:-:|:-:|
 |mNewPhysics|i8|0x1|0x6c|
 
+<a id="pgactorpluginsetphysics-functions"></a>
 ### Functions
 
 |Signature|
@@ -42919,6 +45094,7 @@ Package: GridGame
 
 Size: 0x78 | 120 bytes
 
+<a id="pgactorpluginsetskeletalmesh-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -42926,6 +45102,7 @@ Size: 0x78 | 120 bytes
 |mSkelMesh|SkeletalMesh*|0x4|0x6c|
 |mSkelMeshName|FName|0x8|0x70|
 
+<a id="pgactorpluginsetskeletalmesh-functions"></a>
 ### Functions
 
 |Signature|
@@ -42940,6 +45117,7 @@ Package: GridGame
 
 Size: 0x80 | 128 bytes
 
+<a id="pgactorpluginsound-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -42951,6 +45129,7 @@ Size: 0x80 | 128 bytes
 |mNoRepToOwner|bool|0x4|0x74|
 |mAttachName|FName|0x8|0x78|
 
+<a id="pgactorpluginsound-functions"></a>
 ### Functions
 
 |Signature|
@@ -42966,6 +45145,7 @@ Package: GridGame
 
 Size: 0x74 | 116 bytes
 
+<a id="pgactorplugintakedamage-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -42973,6 +45153,7 @@ Size: 0x74 | 116 bytes
 |mDamageType|UClass*|0x4|0x6c|
 |mDamageAmount|f32|0x4|0x70|
 
+<a id="pgactorplugintakedamage-functions"></a>
 ### Functions
 
 |Signature|
@@ -42987,6 +45168,7 @@ Package: GridGame
 
 Size: 0x88 | 136 bytes
 
+<a id="pgpawnplugingib-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -43005,6 +45187,7 @@ Package: GridGame
 
 Size: 0xb4 | 180 bytes
 
+<a id="pgpawnpluginlean-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -43028,6 +45211,7 @@ Package: GridGame
 
 Size: 0x74 | 116 bytes
 
+<a id="pgpawnpluginspecialmove-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -43035,6 +45219,7 @@ Size: 0x74 | 116 bytes
 |mSpecialMoveAsset|PgSpecialMoveAsset*|0x4|0x6c|
 |mEndComboOnDeactivate|bool|0x4|0x70|
 
+<a id="pgpawnpluginspecialmove-functions"></a>
 ### Functions
 
 |Signature|
@@ -43050,6 +45235,7 @@ Package: GridGame
 
 Size: 0xcc | 204 bytes
 
+<a id="pgpawnpluginterrainfollow-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -43075,12 +45261,14 @@ Package: GridGame
 
 Size: 0x70 | 112 bytes
 
+<a id="pgpawnpluginvehicle-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
 |---|:-:|:-:|:-:|
 |mVehicleArchetype|PgVehicle*|0x4|0x6c|
 
+<a id="pgpawnpluginvehicle-functions"></a>
 ### Functions
 
 |Signature|
@@ -43095,6 +45283,7 @@ Package: GridGame
 
 Size: 0xb4 | 180 bytes
 
+<a id="pgplayerpluginlockon-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -43122,6 +45311,7 @@ Size: 0xb4 | 180 bytes
 |mAcquiredTargets|TArray\<Actor*\>|0xc|0xa4|
 |mDebugColor|Color|0x4|0xb0|
 
+<a id="pgplayerpluginlockon-functions"></a>
 ### Functions
 
 |Signature|
@@ -43135,6 +45325,7 @@ GetTargets(<br>&nbsp;&nbsp;&nbsp;&nbsp;Targets: TArray\<Actor*\>,<br>) -> ()|
 GetTarget(<br>&nbsp;&nbsp;&nbsp;&nbsp;TargetClass: UClass*,<br>) -> Actor*|
 DisplayDebug(<br>&nbsp;&nbsp;&nbsp;&nbsp;DeltaTime: f32,<br>) -> ()|
 
+<a id="pgplayerpluginlockon-enums"></a>
 ### Enums
 
 |Enum|
@@ -43171,6 +45362,7 @@ Package: GridGame
 
 Size: 0xb4 | 180 bytes
 
+<a id="pgplayerplugintargetselector-functions"></a>
 ### Functions
 
 |Signature|
@@ -43192,6 +45384,7 @@ Package: GridGame
 
 Size: 0xd8 | 216 bytes
 
+<a id="pgpluginlist-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -43202,6 +45395,7 @@ Size: 0xd8 | 216 bytes
 |mPlugInTickList|TArray\<PgActorPlugIn*\>|0xc|0x90|
 |mEditorData|TMap\<FPair\>|0x3c|0x9c|
 
+<a id="pgpluginlist-functions"></a>
 ### Functions
 
 |Signature|
@@ -43218,6 +45412,7 @@ Package: GridGame
 
 Size: 0x64 | 100 bytes
 
+<a id="pgactorpluginactorcomponent-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -43232,6 +45427,7 @@ Package: GridGame
 
 Size: 0x230 | 560 bytes
 
+<a id="pgdynamicsmactor-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -43243,6 +45439,7 @@ Size: 0x230 | 560 bytes
 |mDamageParam|PgDamageParam*|0x4|0x228|
 |mInstigatorController|Controller*|0x4|0x22c|
 
+<a id="pgdynamicsmactor-functions"></a>
 ### Functions
 
 |Signature|
@@ -43265,6 +45462,7 @@ Package: GridGame
 
 Size: 0x58 | 88 bytes
 
+<a id="pgpluginactivator-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -43281,6 +45479,7 @@ Package: GridGame
 
 Size: 0x5c | 92 bytes
 
+<a id="pgplugincomponent-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -43295,12 +45494,14 @@ Package: GridGame
 
 Size: 0x2c0 | 704 bytes
 
+<a id="pgpathnode-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
 |---|:-:|:-:|:-:|
 |mSmartObject|PgSmartObject*|0x4|0x2bc|
 
+<a id="pgpathnode-functions"></a>
 ### Functions
 
 |Signature|
@@ -43315,6 +45516,7 @@ Package: GridGame
 
 Size: 0x390 | 912 bytes
 
+<a id="pgrallypoint-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -43343,6 +45545,7 @@ Size: 0x390 | 912 bytes
 |mDrawActivateArrowLeft|ArrowComponent*|0x4|0x388|
 |mDrawActivateArrowRight|ArrowComponent*|0x4|0x38c|
 
+<a id="pgrallypoint-functions"></a>
 ### Functions
 
 |Signature|
@@ -43353,6 +45556,7 @@ UpdatePawnCounts() -> ()|
 GetAllRallyPointActors(<br>&nbsp;&nbsp;&nbsp;&nbsp;rallyPointActors: TArray\<Actor*\>,<br>) -> ()|
 IsValidRallyPoint(<br>&nbsp;&nbsp;&nbsp;&nbsp;Controller: PgAIController*,<br>) -> bool|
 
+<a id="pgrallypoint-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -43368,6 +45572,7 @@ Package: GridGame
 
 Size: 0x2d4 | 724 bytes
 
+<a id="pgspawnpoint-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -43386,6 +45591,7 @@ Package: GridGame
 
 Size: 0x328 | 808 bytes
 
+<a id="pgpedestrianspawnpoint-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -43416,6 +45622,7 @@ Size: 0x328 | 808 bytes
 |mDrawFacingArrowLeft|ArrowComponent*|0x4|0x320|
 |mDrawFacingArrowRight|ArrowComponent*|0x4|0x324|
 
+<a id="pgpedestrianspawnpoint-functions"></a>
 ### Functions
 
 |Signature|
@@ -43444,6 +45651,7 @@ Package: GridGame
 
 Size: 0x54 | 84 bytes
 
+<a id="pgcondition-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -43455,6 +45663,7 @@ Size: 0x54 | 84 bytes
 |mOwner|Actor*|0x4|0x44|
 |mComment|FString|0xc|0x48|
 
+<a id="pgcondition-enums"></a>
 ### Enums
 
 |Enum|
@@ -43483,6 +45692,7 @@ Package: GridGame
 
 Size: 0x64 | 100 bytes
 
+<a id="pgconditionaiobjectiveavailable-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -43499,6 +45709,7 @@ Package: GridGame
 
 Size: 0x6c | 108 bytes
 
+<a id="pgconditionbuttonpress-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -43508,6 +45719,7 @@ Size: 0x6c | 108 bytes
 |mCheckButtonName|FName|0x8|0x60|
 |mCheckPressed|bool|0x4|0x68|
 
+<a id="pgconditionbuttonpress-enums"></a>
 ### Enums
 
 |Enum|
@@ -43522,6 +45734,7 @@ Package: GridGame
 
 Size: 0x55 | 85 bytes
 
+<a id="pgconditioncanperformcombo-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -43536,6 +45749,7 @@ Package: GridGame
 
 Size: 0x58 | 88 bytes
 
+<a id="pgconditionclassisa-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -43550,6 +45764,7 @@ Package: GridGame
 
 Size: 0x55 | 85 bytes
 
+<a id="pgconditioncollision-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -43564,6 +45779,7 @@ Package: GridGame
 
 Size: 0x69 | 105 bytes
 
+<a id="pgconditioncomparedistance-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -43574,6 +45790,7 @@ Size: 0x69 | 105 bytes
 |mDistance|f32|0x4|0x64|
 |mDistanceCompare|i8|0x1|0x68|
 
+<a id="pgconditioncomparedistance-enums"></a>
 ### Enums
 
 |Enum|
@@ -43588,6 +45805,7 @@ Package: GridGame
 
 Size: 0x58 | 88 bytes
 
+<a id="pgconditioncomparedistancetocamera-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -43602,6 +45820,7 @@ Package: GridGame
 
 Size: 0x60 | 96 bytes
 
+<a id="pgconditioncomparefacing-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -43617,6 +45836,7 @@ Package: GridGame
 
 Size: 0x64 | 100 bytes
 
+<a id="pgconditiondamagetracking-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -43633,6 +45853,7 @@ Package: GridGame
 
 Size: 0x60 | 96 bytes
 
+<a id="pgconditiondiscpower-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -43648,6 +45869,7 @@ Package: GridGame
 
 Size: 0x5c | 92 bytes
 
+<a id="pgconditionenhancer-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -43662,6 +45884,7 @@ Package: GridGame
 
 Size: 0xf0 | 240 bytes
 
+<a id="pgconditionevent-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -43689,6 +45912,7 @@ Package: GridGame
 
 Size: 0x5c | 92 bytes
 
+<a id="pgconditioninvehicle-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -43703,6 +45927,7 @@ Package: GridGame
 
 Size: 0x60 | 96 bytes
 
+<a id="pgconditioninventory-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -43747,6 +45972,7 @@ Package: GridGame
 
 Size: 0x64 | 100 bytes
 
+<a id="pgconditionlist-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -43770,6 +45996,7 @@ Package: GridGame
 
 Size: 0x78 | 120 bytes
 
+<a id="pgconditionobjectproperty-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -43789,6 +46016,7 @@ Package: GridGame
 
 Size: 0x88 | 136 bytes
 
+<a id="pgconditionobjectpropertyratio-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -43811,6 +46039,7 @@ Package: GridGame
 
 Size: 0x5c | 92 bytes
 
+<a id="pgconditionpassivepower-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -43832,6 +46061,7 @@ Package: GridGame
 
 Size: 0x60 | 96 bytes
 
+<a id="pgconditionpawnisfacing-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -43847,12 +46077,14 @@ Package: GridGame
 
 Size: 0x55 | 85 bytes
 
+<a id="pgconditionpawnlastkilleris-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
 |---|:-:|:-:|:-:|
 |mLastKillerType|i8|0x1|0x54|
 
+<a id="pgconditionpawnlastkilleris-enums"></a>
 ### Enums
 
 |Enum|
@@ -43874,6 +46106,7 @@ Package: GridGame
 
 Size: 0x55 | 85 bytes
 
+<a id="pgconditionphysics-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -43888,6 +46121,7 @@ Package: GridGame
 
 Size: 0x58 | 88 bytes
 
+<a id="pgconditionplayercontrolled-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -43909,6 +46143,7 @@ Package: GridGame
 
 Size: 0x60 | 96 bytes
 
+<a id="pgconditionplayinganim-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -43924,6 +46159,7 @@ Package: GridGame
 
 Size: 0x5c | 92 bytes
 
+<a id="pgconditionplayingspecialmove-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -43938,6 +46174,7 @@ Package: GridGame
 
 Size: 0x74 | 116 bytes
 
+<a id="pgconditionpropertychanged-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -43958,6 +46195,7 @@ Package: GridGame
 
 Size: 0x58 | 88 bytes
 
+<a id="pgconditionrandom-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -43972,6 +46210,7 @@ Package: GridGame
 
 Size: 0x55 | 85 bytes
 
+<a id="pgconditionscalarmaterialparamblendtype-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -43993,6 +46232,7 @@ Package: GridGame
 
 Size: 0x5c | 92 bytes
 
+<a id="pgconditiontargetmarker-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -44007,6 +46247,7 @@ Package: GridGame
 
 Size: 0x5c | 92 bytes
 
+<a id="pgconditionteamcolor-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -44021,6 +46262,7 @@ Package: GridGame
 
 Size: 0x5c | 92 bytes
 
+<a id="pgconditionteaminfo-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -44035,6 +46277,7 @@ Package: GridGame
 
 Size: 0x60 | 96 bytes
 
+<a id="pgconditionteammateinventory-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -44050,6 +46293,7 @@ Package: GridGame
 
 Size: 0x60 | 96 bytes
 
+<a id="pgconditiontouching-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -44065,6 +46309,7 @@ Package: GridGame
 
 Size: 0x59 | 89 bytes
 
+<a id="pgconditionusingenergyactor-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -44080,6 +46325,7 @@ Package: GridGame
 
 Size: 0x5c | 92 bytes
 
+<a id="pgconditionvelocity-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -44087,6 +46333,7 @@ Size: 0x5c | 92 bytes
 |mDirection|i8|0x1|0x54|
 |mThreshold|f32|0x4|0x58|
 
+<a id="pgconditionvelocity-enums"></a>
 ### Enums
 
 |Enum|
@@ -44108,6 +46355,7 @@ Package: GridGame
 
 Size: 0x58 | 88 bytes
 
+<a id="pgconditionwaspromoted-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -44122,6 +46370,7 @@ Package: GridGame
 
 Size: 0x58 | 88 bytes
 
+<a id="pgconditionweaponstate-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -44136,6 +46385,7 @@ Package: GridGame
 
 Size: 0x420 | 1056 bytes
 
+<a id="pgaicontroller-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -44171,6 +46421,7 @@ Size: 0x420 | 1056 bytes
 |mObjectiveTarget|PgObjective*|0x4|0x3e0|
 |mMailingLists|TMap\<FPair\>|0x3c|0x3e4|
 
+<a id="pgaicontroller-states"></a>
 ### States
 
 |Signature|
@@ -44182,6 +46433,7 @@ Size: 0x420 | 1056 bytes
 |NotifyWeaponFinishedFiring_PgAIActionPaused(<br>&nbsp;&nbsp;&nbsp;&nbsp;W: Weapon*,<br>&nbsp;&nbsp;&nbsp;&nbsp;FireMode: i8,<br>) -> ()|
 |EndState_Dead(<br>&nbsp;&nbsp;&nbsp;&nbsp;NextStateName: FName,<br>) -> ()|
 
+<a id="pgaicontroller-functions"></a>
 ### Functions
 
 |Signature|
@@ -44255,6 +46507,7 @@ Package: GridGame
 
 Size: 0xa8 | 168 bytes
 
+<a id="pgaiawareness-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -44267,6 +46520,7 @@ Size: 0xa8 | 168 bytes
 |mAwarenessImpulses|TArray\<AIAwarenessStateImpulse\>|0xc|0x98|
 |mUnawareUntilPlayerSeen|bool|0x4|0xa4|
 
+<a id="pgaiawareness-functions"></a>
 ### Functions
 
 |Signature|
@@ -44280,12 +46534,14 @@ HearTarget(<br>&nbsp;&nbsp;&nbsp;&nbsp;Target: Actor*,<br>&nbsp;&nbsp;&nbsp;&nbs
 SeeTarget(<br>&nbsp;&nbsp;&nbsp;&nbsp;Target: Actor*,<br>&nbsp;&nbsp;&nbsp;&nbsp;awareness: i8,<br>) -> i8|
 DisplayDebug(<br>&nbsp;&nbsp;&nbsp;&nbsp;HUD: HUD*,<br>&nbsp;&nbsp;&nbsp;&nbsp;out_YL: f32,<br>&nbsp;&nbsp;&nbsp;&nbsp;out_YPos: f32,<br>) -> ()|
 
+<a id="pgaiawareness-enums"></a>
 ### Enums
 
 |Enum|
 |---|
 |AIAwarenessState {<br>&nbsp;&nbsp;&nbsp;&nbsp;AIAS_None,<br>&nbsp;&nbsp;&nbsp;&nbsp;AIAS_Low,<br>&nbsp;&nbsp;&nbsp;&nbsp;AIAS_Medium,<br>&nbsp;&nbsp;&nbsp;&nbsp;AIAS_High,<br>&nbsp;&nbsp;&nbsp;&nbsp;AIAS_Maximum,<br>&nbsp;&nbsp;&nbsp;&nbsp;AIAS_MAX,<br>}|
 
+<a id="pgaiawareness-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -44301,6 +46557,7 @@ Package: GridGame
 
 Size: 0x60 | 96 bytes
 
+<a id="pgaisenses-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -44309,12 +46566,14 @@ Size: 0x60 | 96 bytes
 |mSightRanges|TArray\<AISightRange\>|0xc|0x48|
 |mNoiseFilters|TArray\<AINoiseFilter\>|0xc|0x54|
 
+<a id="pgaisenses-functions"></a>
 ### Functions
 
 |Signature|
 |---|
 DisplayDebug(<br>&nbsp;&nbsp;&nbsp;&nbsp;HUD: HUD*,<br>&nbsp;&nbsp;&nbsp;&nbsp;out_YL: f32,<br>&nbsp;&nbsp;&nbsp;&nbsp;out_YPos: f32,<br>) -> ()|
 
+<a id="pgaisenses-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -44331,6 +46590,7 @@ Package: GridGame
 
 Size: 0x70 | 112 bytes
 
+<a id="pgaiplanner-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -44342,6 +46602,7 @@ Size: 0x70 | 112 bytes
 |mPauseTime|f32|0x4|0x68|
 |mAsset|PgAIPlannerAsset*|0x4|0x6c|
 
+<a id="pgaiplanner-functions"></a>
 ### Functions
 
 |Signature|
@@ -44360,6 +46621,7 @@ Package: GridGame
 
 Size: 0x84 | 132 bytes
 
+<a id="pgaiplannerasset-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -44375,6 +46637,7 @@ Package: GridGame
 
 Size: 0x70 | 112 bytes
 
+<a id="pgaiplannerobject-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -44396,6 +46659,7 @@ Package: GridGame
 
 Size: 0xac | 172 bytes
 
+<a id="pgaiaction-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -44423,6 +46687,7 @@ Package: GridGame
 
 Size: 0xb0 | 176 bytes
 
+<a id="pgaiactionattackenemy-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -44437,6 +46702,7 @@ Package: GridGame
 
 Size: 0xc0 | 192 bytes
 
+<a id="pgaiactionmovetoward-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -44455,6 +46721,7 @@ Package: GridGame
 
 Size: 0xc4 | 196 bytes
 
+<a id="pgaiactionmoveattackenemy-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -44476,6 +46743,7 @@ Package: GridGame
 
 Size: 0xc4 | 196 bytes
 
+<a id="pgaiactionmovetoactor-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -44497,6 +46765,7 @@ Package: GridGame
 
 Size: 0xc1 | 193 bytes
 
+<a id="pgaiactionmovetoobjective-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -44518,6 +46787,7 @@ Package: GridGame
 
 Size: 0xb8 | 184 bytes
 
+<a id="pgaiactionusesmartobject-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -44525,6 +46795,7 @@ Size: 0xb8 | 184 bytes
 |mUseScriptedInfo|bool|0x4|0xac|
 |mScriptedUseInfo|ScriptedSmartObjectUseInfo|0x8|0xb0|
 
+<a id="pgaiactionusesmartobject-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -44539,6 +46810,7 @@ Package: GridGame
 
 Size: 0xb4 | 180 bytes
 
+<a id="pgaiactionvehicleanimation-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -44560,6 +46832,7 @@ Package: GridGame
 
 Size: 0xa8 | 168 bytes
 
+<a id="pgaigoal-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -44580,6 +46853,7 @@ Package: GridGame
 
 Size: 0xb4 | 180 bytes
 
+<a id="pgaiactionqueue-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -44601,6 +46875,7 @@ Package: GridGame
 
 Size: 0xac | 172 bytes
 
+<a id="pgaigoalinvestigate-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -44615,6 +46890,7 @@ Package: GridGame
 
 Size: 0x4c | 76 bytes
 
+<a id="pganimbehavior-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -44625,6 +46901,7 @@ Size: 0x4c | 76 bytes
 |mStarted|bool|0x4|0x48|
 |mEnded|bool|0x4|0x48|
 
+<a id="pganimbehavior-functions"></a>
 ### Functions
 
 |Signature|
@@ -44632,6 +46909,7 @@ Size: 0x4c | 76 bytes
 DebugCompareBehaviorStates(<br>&nbsp;&nbsp;&nbsp;&nbsp;One: DebugAnimBehaviorState,<br>&nbsp;&nbsp;&nbsp;&nbsp;Two: DebugAnimBehaviorState,<br>) -> bool|
 DebugGetState() -> DebugAnimBehaviorState|
 
+<a id="pganimbehavior-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -44646,6 +46924,7 @@ Package: GridGame
 
 Size: 0x80 | 128 bytes
 
+<a id="pganimbehaviorapplyphysicsasset-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -44658,6 +46937,7 @@ Size: 0x80 | 128 bytes
 |mBlendInLength|f32|0x4|0x78|
 |mBlendOutLength|f32|0x4|0x7c|
 
+<a id="pganimbehaviorapplyphysicsasset-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -44672,6 +46952,7 @@ Package: GridGame
 
 Size: 0x50 | 80 bytes
 
+<a id="pganimbehaviorattack-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -44686,6 +46967,7 @@ Package: GridGame
 
 Size: 0x58 | 88 bytes
 
+<a id="pganimbehaviorboost-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -44700,6 +46982,7 @@ Package: GridGame
 
 Size: 0x50 | 80 bytes
 
+<a id="pganimbehaviorcollision-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -44714,6 +46997,7 @@ Package: GridGame
 
 Size: 0x54 | 84 bytes
 
+<a id="pganimbehaviorconditional-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -44729,6 +47013,7 @@ Package: GridGame
 
 Size: 0x54 | 84 bytes
 
+<a id="pganimbehaviordamageself-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -44744,6 +47029,7 @@ Package: GridGame
 
 Size: 0x58 | 88 bytes
 
+<a id="pganimbehaviorevade-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -44759,6 +47045,7 @@ Package: GridGame
 
 Size: 0x70 | 112 bytes
 
+<a id="pganimbehaviorgib-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -44777,6 +47064,7 @@ Package: GridGame
 
 Size: 0x50 | 80 bytes
 
+<a id="pganimbehaviorhitreaction-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -44791,6 +47079,7 @@ Package: GridGame
 
 Size: 0x50 | 80 bytes
 
+<a id="pganimbehaviorignoreinput-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -44806,6 +47095,7 @@ Package: GridGame
 
 Size: 0x58 | 88 bytes
 
+<a id="pganimbehaviorlineup-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -44815,6 +47105,7 @@ Size: 0x58 | 88 bytes
 |mMoveTowardsTarget|bool|0x4|0x50|
 |mMaxDistanceValid|f32|0x4|0x54|
 
+<a id="pganimbehaviorlineup-enums"></a>
 ### Enums
 
 |Enum|
@@ -44844,6 +47135,7 @@ Package: GridGame
 
 Size: 0x54 | 84 bytes
 
+<a id="pganimbehaviormanuallineup-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -44859,6 +47151,7 @@ Package: GridGame
 
 Size: 0x58 | 88 bytes
 
+<a id="pganimbehaviormodifycamerascore-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -44874,6 +47167,7 @@ Package: GridGame
 
 Size: 0x50 | 80 bytes
 
+<a id="pganimbehaviormovement-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -44888,6 +47182,7 @@ Package: GridGame
 
 Size: 0x5d | 93 bytes
 
+<a id="pganimbehaviormovementblocked-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -44904,6 +47199,7 @@ Package: GridGame
 
 Size: 0x4d | 77 bytes
 
+<a id="pganimbehaviorphysics-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -44918,6 +47214,7 @@ Package: GridGame
 
 Size: 0x54 | 84 bytes
 
+<a id="pganimbehaviorragdollboost-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -44933,6 +47230,7 @@ Package: GridGame
 
 Size: 0x6c | 108 bytes
 
+<a id="pganimbehaviorrotation-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -44942,6 +47240,7 @@ Size: 0x6c | 108 bytes
 |mSnapOptions|i8|0x1|0x64|
 |mLockRotation|bool|0x4|0x68|
 
+<a id="pganimbehaviorrotation-enums"></a>
 ### Enums
 
 |Enum|
@@ -44956,6 +47255,7 @@ Package: GridGame
 
 Size: 0x50 | 80 bytes
 
+<a id="pganimbehaviorscaledamage-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -44970,6 +47270,7 @@ Package: GridGame
 
 Size: 0x58 | 88 bytes
 
+<a id="pganimbehaviorsetrbangularvelocity-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -44984,6 +47285,7 @@ Package: GridGame
 
 Size: 0x58 | 88 bytes
 
+<a id="pganimbehaviorsetvelocity-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -44998,6 +47300,7 @@ Package: GridGame
 
 Size: 0x50 | 80 bytes
 
+<a id="pganimbehaviorshowweapon-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -45012,6 +47315,7 @@ Package: GridGame
 
 Size: 0x64 | 100 bytes
 
+<a id="pganimbehaviorterrainfollow-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -45030,6 +47334,7 @@ Package: GridGame
 
 Size: 0x50 | 80 bytes
 
+<a id="pganimbehaviortimedilation-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -45044,6 +47349,7 @@ Package: GridGame
 
 Size: 0x60 | 96 bytes
 
+<a id="pganimbehaviorvault-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -45062,6 +47368,7 @@ Package: GridGame
 
 Size: 0x50 | 80 bytes
 
+<a id="pganimbehaviorvehicle-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -45076,6 +47383,7 @@ Package: GridGame
 
 Size: 0x58 | 88 bytes
 
+<a id="pganimbehaviorweaponattach-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -45091,6 +47399,7 @@ Package: GridGame
 
 Size: 0x14ac | 5292 bytes
 
+<a id="pgpawn-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -45286,6 +47595,7 @@ Size: 0x14ac | 5292 bytes
 |mTeammateInventory|TArray\<FName\>|0xc|0x149c|
 |mMaxAnchorAge|f32|0x4|0x14a8|
 
+<a id="pgpawn-states"></a>
 ### States
 
 |Signature|
@@ -45297,6 +47607,7 @@ Size: 0x14ac | 5292 bytes
 |OnAnimEnd_MagDisc(<br>&nbsp;&nbsp;&nbsp;&nbsp;SeqNode: AnimNodeSequence*,<br>&nbsp;&nbsp;&nbsp;&nbsp;PlayedTime: f32,<br>&nbsp;&nbsp;&nbsp;&nbsp;ExcessTime: f32,<br>) -> ()|
 |OnAnimEnd_MagDiscAntic(<br>&nbsp;&nbsp;&nbsp;&nbsp;SeqNode: AnimNodeSequence*,<br>&nbsp;&nbsp;&nbsp;&nbsp;PlayedTime: f32,<br>&nbsp;&nbsp;&nbsp;&nbsp;ExcessTime: f32,<br>) -> ()|
 
+<a id="pgpawn-functions"></a>
 ### Functions
 
 |Signature|
@@ -45477,6 +47788,7 @@ SpecialMoveTo(<br>&nbsp;&nbsp;&nbsp;&nbsp;Start: NavigationPoint*,<br>&nbsp;&nbs
 Destroyed(<br>&nbsp;&nbsp;&nbsp;&nbsp;GameInfo: PgGameInfo*,<br>&nbsp;&nbsp;&nbsp;&nbsp;PgPRI: PgPlayerReplicationInfo*,<br>) -> ()|
 ReplicatedEvent(<br>&nbsp;&nbsp;&nbsp;&nbsp;VarName: FName,<br>) -> ()|
 
+<a id="pgpawn-enums"></a>
 ### Enums
 
 |Enum|
@@ -45489,6 +47801,7 @@ ReplicatedEvent(<br>&nbsp;&nbsp;&nbsp;&nbsp;VarName: FName,<br>) -> ()|
 |PgComboActionBranchability {<br>&nbsp;&nbsp;&nbsp;&nbsp;COMBOBRANCH_Invalid,<br>&nbsp;&nbsp;&nbsp;&nbsp;COMBOBRANCH_Valid,<br>&nbsp;&nbsp;&nbsp;&nbsp;COMBOBRANCH_NewTree,<br>&nbsp;&nbsp;&nbsp;&nbsp;COMBOBRANCH_MAX,<br>}|
 |PgComboAction {<br>&nbsp;&nbsp;&nbsp;&nbsp;COMBOACTION_None,<br>&nbsp;&nbsp;&nbsp;&nbsp;COMBOACTION_Jump,<br>&nbsp;&nbsp;&nbsp;&nbsp;COMBOACTION_SmartObject,<br>&nbsp;&nbsp;&nbsp;&nbsp;COMBOACTION_RangedAttack,<br>&nbsp;&nbsp;&nbsp;&nbsp;COMBOACTION_Melee,<br>&nbsp;&nbsp;&nbsp;&nbsp;COMBOACTION_Block,<br>&nbsp;&nbsp;&nbsp;&nbsp;COMBOACTION_PowerAttack,<br>&nbsp;&nbsp;&nbsp;&nbsp;COMBOACTION_Locomotion,<br>&nbsp;&nbsp;&nbsp;&nbsp;COMBOACTION_MAX,<br>}|
 
+<a id="pgpawn-consts"></a>
 ### Consts
 
 |Constant|Value|
@@ -45546,6 +47859,7 @@ ReplicatedEvent(<br>&nbsp;&nbsp;&nbsp;&nbsp;VarName: FName,<br>) -> ()|
 |CONTEXT_MAP|4|
 |CONTEXT_MODE|3|
 
+<a id="pgpawn-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -45577,6 +47891,7 @@ Package: GridGame
 
 Size: 0xac | 172 bytes
 
+<a id="pganimlocomotionsystem-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -45608,6 +47923,7 @@ Size: 0xac | 172 bytes
 |mLocoAnimNodeSeq|AnimNodeSequence*|0x4|0xa4|
 |mIdleSeconds|f32|0x4|0xa8|
 
+<a id="pganimlocomotionsystem-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -45623,12 +47939,14 @@ Package: GridGame
 
 Size: 0xfc | 252 bytes
 
+<a id="pganimnodeblendbydriving-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
 |---|:-:|:-:|:-:|
 |VfTable_IPgComboNodeInterface|Pointer|0x4|0xf8|
 
+<a id="pganimnodeblendbydriving-functions"></a>
 ### Functions
 
 |Signature|
@@ -45644,6 +47962,7 @@ Package: GridGame
 
 Size: 0x120 | 288 bytes
 
+<a id="pganimnodeblendbyphysics-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -45654,6 +47973,7 @@ Size: 0x120 | 288 bytes
 |mPhysicsToConnectorMap|TArray\<i32\>|0xc|0x110|
 |mWaitTimeBeforeBlend|f32|0x4|0x11c|
 
+<a id="pganimnodeblendbyphysics-functions"></a>
 ### Functions
 
 |Signature|
@@ -45675,6 +47995,7 @@ Package: GridGame
 
 Size: 0x108 | 264 bytes
 
+<a id="pganimnodeblendbyvehicle-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -45689,6 +48010,7 @@ Package: GridGame
 
 Size: 0xf4 | 244 bytes
 
+<a id="pganimnodeblendbyvehiclebrake-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -45705,6 +48027,7 @@ Package: GridGame
 
 Size: 0xf4 | 244 bytes
 
+<a id="pganimnodeblendbyvehiclesteering-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -45721,6 +48044,7 @@ Package: GridGame
 
 Size: 0xf4 | 244 bytes
 
+<a id="pganimnodeblendbyvehiclethrottle-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -45744,6 +48068,7 @@ Package: GridGame
 
 Size: 0x110 | 272 bytes
 
+<a id="pganimnodeblendlistsubtree-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -45758,6 +48083,7 @@ Package: GridGame
 
 Size: 0x110 | 272 bytes
 
+<a id="pganimnodeblendpreview-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -45775,6 +48101,7 @@ Package: GridGame
 
 Size: 0x13c | 316 bytes
 
+<a id="pganimnodeblendtobestmatch-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -45792,6 +48119,7 @@ Package: GridGame
 
 Size: 0x128 | 296 bytes
 
+<a id="pganimnodebranchbylandimpact-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -45808,6 +48136,7 @@ Package: GridGame
 
 Size: 0x128 | 296 bytes
 
+<a id="pganimnodebranchbylandspeed-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -45824,6 +48153,7 @@ Package: GridGame
 
 Size: 0x128 | 296 bytes
 
+<a id="pganimnodebranchbyspeed-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -45840,6 +48170,7 @@ Package: GridGame
 
 Size: 0x110 | 272 bytes
 
+<a id="pganimnodebranchbytargetdir-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -45854,6 +48185,7 @@ Package: GridGame
 
 Size: 0x148 | 328 bytes
 
+<a id="pganimnodebranchbyturnangle-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -45876,6 +48208,7 @@ Package: GridGame
 
 Size: 0x110 | 272 bytes
 
+<a id="pganimnodeimpactsystembyattack-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -45890,6 +48223,7 @@ Package: GridGame
 
 Size: 0x110 | 272 bytes
 
+<a id="pganimnodeimpactsystembybone-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -45904,6 +48238,7 @@ Package: GridGame
 
 Size: 0x138 | 312 bytes
 
+<a id="pganimnodeimpactsystemknockdown-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -45922,6 +48257,7 @@ Package: GridGame
 
 Size: 0xf4 | 244 bytes
 
+<a id="pganimnodeimpactsystemragdoll-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -45936,12 +48272,14 @@ Package: GridGame
 
 Size: 0x108 | 264 bytes
 
+<a id="pganimnodeloop-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
 |---|:-:|:-:|:-:|
 |VfTable_IPgComboNodeInterface|Pointer|0x4|0x104|
 
+<a id="pganimnodeloop-functions"></a>
 ### Functions
 
 |Signature|
@@ -45956,6 +48294,7 @@ Package: GridGame
 
 Size: 0x10c | 268 bytes
 
+<a id="pganimnodemodifyexistingblend-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -45973,6 +48312,7 @@ Package: GridGame
 
 Size: 0x100 | 256 bytes
 
+<a id="pganimnodenoise-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -45980,6 +48320,7 @@ Size: 0x100 | 256 bytes
 |HelpText1|FString|0xc|0xe8|
 |mJointSettings|TArray\<JointNoiseStruct\>|0xc|0xf4|
 
+<a id="pganimnodenoise-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -45994,6 +48335,7 @@ Package: GridGame
 
 Size: 0x12c | 300 bytes
 
+<a id="pganimnoderandom-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -46011,6 +48353,7 @@ Package: GridGame
 
 Size: 0x168 | 360 bytes
 
+<a id="pganimnodesequence-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -46034,6 +48377,7 @@ Package: GridGame
 
 Size: 0x118 | 280 bytes
 
+<a id="pganimnodesequencelist-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -46042,6 +48386,7 @@ Size: 0x118 | 280 bytes
 |_StatusText|FString|0xc|0x108|
 |mBlendTime|f32|0x4|0x114|
 
+<a id="pganimnodesequencelist-functions"></a>
 ### Functions
 
 |Signature|
@@ -46056,6 +48401,7 @@ Package: GridGame
 
 Size: 0x13c | 316 bytes
 
+<a id="pganimnodesequencestack-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -46064,6 +48410,7 @@ Size: 0x13c | 316 bytes
 |bLoopLastSequence|bool|0x4|0x12c|
 |SeqStack|TArray\<FName\>|0xc|0x130|
 
+<a id="pganimnodesequencestack-functions"></a>
 ### Functions
 
 |Signature|
@@ -46080,6 +48427,7 @@ Package: GridGame
 
 Size: 0xf0 | 240 bytes
 
+<a id="pganimnodesubtree-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -46091,6 +48439,7 @@ Size: 0xf0 | 240 bytes
 |mAnimTreeInstance|AnimTree*|0x4|0xe0|
 |mSavedPose|TArray\<BoneAtom\>|0xc|0xe4|
 
+<a id="pganimnodesubtree-functions"></a>
 ### Functions
 
 |Signature|
@@ -46108,6 +48457,7 @@ Package: GridGame
 
 Size: 0x40 | 64 bytes
 
+<a id="pganimnotify_phasemarker-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -46122,12 +48472,14 @@ Package: GridGame
 
 Size: 0x40 | 64 bytes
 
+<a id="pganimtreeinstance-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
 |---|:-:|:-:|:-:|
 |mAnimTreeInstance|AnimTree*|0x4|0x3c|
 
+<a id="pganimtreeinstance-functions"></a>
 ### Functions
 
 |Signature|
@@ -46149,12 +48501,14 @@ Package: GridGame
 
 Size: 0x264 | 612 bytes
 
+<a id="pgautotestmanager-states"></a>
 ### States
 
 |Signature|
 |---|
 |StartTest_MatineeTravel() -> ()|
 
+<a id="pgautotestmanager-functions"></a>
 ### Functions
 
 |Signature|
@@ -46176,12 +48530,14 @@ Package: GridGame
 
 Size: 0xe9 | 233 bytes
 
+<a id="pgseqact_autotestcomplete-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
 |---|:-:|:-:|:-:|
 |Status|i8|0x1|0xe8|
 
+<a id="pgseqact_autotestcomplete-enums"></a>
 ### Enums
 
 |Enum|
@@ -46196,6 +48552,7 @@ Package: GridGame
 
 Size: 0xf4 | 244 bytes
 
+<a id="pgseqact_autotestmessage-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -46217,6 +48574,7 @@ Package: GridGame
 
 Size: 0x54 | 84 bytes
 
+<a id="pgcriticallydampedspring_float-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -46227,6 +48585,7 @@ Size: 0x54 | 84 bytes
 |mParameters|SpringParameters|0x4|0x4c|
 |mGoal|f32|0x4|0x50|
 
+<a id="pgcriticallydampedspring_float-functions"></a>
 ### Functions
 
 |Signature|
@@ -46239,12 +48598,14 @@ GetVelocity() -> f32|
 GetPosition() -> f32|
 GetParameters() -> SpringParameters|
 
+<a id="pgcriticallydampedspring_float-enums"></a>
 ### Enums
 
 |Enum|
 |---|
 |Integrator {<br>&nbsp;&nbsp;&nbsp;&nbsp;INTEGRATOR_Euler,<br>&nbsp;&nbsp;&nbsp;&nbsp;INTEGRATOR_RK4,<br>&nbsp;&nbsp;&nbsp;&nbsp;INTEGRATOR_MAX,<br>}|
 
+<a id="pgcriticallydampedspring_float-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -46260,6 +48621,7 @@ Package: GridGame
 
 Size: 0x48 | 72 bytes
 
+<a id="pgcriticallydampedspring_orbit-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -46268,6 +48630,7 @@ Size: 0x48 | 72 bytes
 |Rotation|PgCriticallyDampedSpring_Rotator*|0x4|0x40|
 |Magnitude|PgCriticallyDampedSpring_Float*|0x4|0x44|
 
+<a id="pgcriticallydampedspring_orbit-functions"></a>
 ### Functions
 
 |Signature|
@@ -46279,6 +48642,7 @@ GetGoal() -> OrbitComponents|
 GetPosition() -> OrbitComponents|
 IsFullyCompressed() -> bool|
 
+<a id="pgcriticallydampedspring_orbit-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -46294,6 +48658,7 @@ Package: GridGame
 
 Size: 0x4c | 76 bytes
 
+<a id="pgcriticallydampedspring_rotator-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -46303,6 +48668,7 @@ Size: 0x4c | 76 bytes
 |Yaw|PgCriticallyDampedSpring_Float*|0x4|0x44|
 |Roll|PgCriticallyDampedSpring_Float*|0x4|0x48|
 
+<a id="pgcriticallydampedspring_rotator-functions"></a>
 ### Functions
 
 |Signature|
@@ -46315,6 +48681,7 @@ GetVelocity() -> Rotator|
 GetPosition() -> Rotator|
 GetParameters() -> RotationSpringParameters|
 
+<a id="pgcriticallydampedspring_rotator-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -46329,6 +48696,7 @@ Package: GridGame
 
 Size: 0x4c | 76 bytes
 
+<a id="pgcriticallydampedspring_vector-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -46338,6 +48706,7 @@ Size: 0x4c | 76 bytes
 |Y|PgCriticallyDampedSpring_Float*|0x4|0x44|
 |Z|PgCriticallyDampedSpring_Float*|0x4|0x48|
 
+<a id="pgcriticallydampedspring_vector-functions"></a>
 ### Functions
 
 |Signature|
@@ -46346,6 +48715,7 @@ ToString() -> FString|
 GetParameters() -> VectorSpringParameters|
 IsFullyCompressed() -> bool|
 
+<a id="pgcriticallydampedspring_vector-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -46360,6 +48730,7 @@ Package: GridGame
 
 Size: 0x50 | 80 bytes
 
+<a id="pgphysicssimulationcontainer-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -46376,6 +48747,7 @@ Package: GridGame
 
 Size: 0x58 | 88 bytes
 
+<a id="pgphysicssimulationcontainer_pgcamera-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -46397,6 +48769,7 @@ Package: GridGame
 
 Size: 0x48 | 72 bytes
 
+<a id="pgphysicssimulationobject_criticallydampedfloatspring-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -46405,6 +48778,7 @@ Size: 0x48 | 72 bytes
 |mSpring|PgCriticallyDampedSpring_Float*|0x4|0x40|
 |mPreviousState|f32|0x4|0x44|
 
+<a id="pgphysicssimulationobject_criticallydampedfloatspring-functions"></a>
 ### Functions
 
 |Signature|
@@ -46419,6 +48793,7 @@ Package: GridGame
 
 Size: 0x54 | 84 bytes
 
+<a id="pgphysicssimulationobject_criticallydampedorbitspring-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -46427,6 +48802,7 @@ Size: 0x54 | 84 bytes
 |mSpring|PgCriticallyDampedSpring_Orbit*|0x4|0x40|
 |mPreviousState|OrbitComponents|0x10|0x44|
 
+<a id="pgphysicssimulationobject_criticallydampedorbitspring-functions"></a>
 ### Functions
 
 |Signature|
@@ -46441,6 +48817,7 @@ Package: GridGame
 
 Size: 0x50 | 80 bytes
 
+<a id="pgphysicssimulationobject_criticallydampedrotatorspring-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -46449,6 +48826,7 @@ Size: 0x50 | 80 bytes
 |mSpring|PgCriticallyDampedSpring_Rotator*|0x4|0x40|
 |mPreviousState|Rotator|0xc|0x44|
 
+<a id="pgphysicssimulationobject_criticallydampedrotatorspring-functions"></a>
 ### Functions
 
 |Signature|
@@ -46463,6 +48841,7 @@ Package: GridGame
 
 Size: 0x50 | 80 bytes
 
+<a id="pgphysicssimulationobject_criticallydampedvectorspring-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -46471,6 +48850,7 @@ Size: 0x50 | 80 bytes
 |mSpring|PgCriticallyDampedSpring_Vector*|0x4|0x40|
 |mPreviousState|Vector|0xc|0x44|
 
+<a id="pgphysicssimulationobject_criticallydampedvectorspring-functions"></a>
 ### Functions
 
 |Signature|
@@ -46492,6 +48872,7 @@ Package: GridGame
 
 Size: 0x3c | 60 bytes
 
+<a id="pgcamera-functions"></a>
 ### Functions
 
 |Signature|
@@ -46511,6 +48892,7 @@ Package: GridGame
 
 Size: 0x64 | 100 bytes
 
+<a id="pgcamera_pgmatinee-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -46521,6 +48903,7 @@ Size: 0x64 | 100 bytes
 |mBlendSettings|PgCameraBlenderSettings*|0x4|0x44|
 |mPOV|TPOV|0x1c|0x48|
 
+<a id="pgcamera_pgmatinee-functions"></a>
 ### Functions
 
 |Signature|
@@ -46540,6 +48923,7 @@ Package: GridGame
 
 Size: 0xa0 | 160 bytes
 
+<a id="pgcamera_pgorbit_behaviour-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -46576,6 +48960,7 @@ Package: GridGame
 
 Size: 0xc0 | 192 bytes
 
+<a id="pgcamera_pgorbit_behaviour_collision-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -46593,6 +48978,7 @@ Package: GridGame
 
 Size: 0xcc | 204 bytes
 
+<a id="pgcamera_pgorbit_behaviour_idle-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -46617,6 +49003,7 @@ Package: GridGame
 
 Size: 0xdc | 220 bytes
 
+<a id="pgcamera_pgorbit_behaviour_keeptargetinview-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -46633,6 +49020,7 @@ Size: 0xdc | 220 bytes
 |mZoomOutPerSize|f32|0x4|0xd4|
 |mMaxZoom|f32|0x4|0xd8|
 
+<a id="pgcamera_pgorbit_behaviour_keeptargetinview-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -46647,6 +49035,7 @@ Package: GridGame
 
 Size: 0xb0 | 176 bytes
 
+<a id="pgcamera_pgorbit_behaviour_modifycameraorbit-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -46661,6 +49050,7 @@ Package: GridGame
 
 Size: 0xac | 172 bytes
 
+<a id="pgcamera_pgorbit_behaviour_modifycamerarotation-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -46675,6 +49065,7 @@ Package: GridGame
 
 Size: 0xb4 | 180 bytes
 
+<a id="pgcamera_pgorbit_behaviour_orbittoframeenemyandplayer-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -46691,6 +49082,7 @@ Package: GridGame
 
 Size: 0xa4 | 164 bytes
 
+<a id="pgcamera_pgorbit_behaviour_resumelastcamerapositiononactivate-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -46705,6 +49097,7 @@ Package: GridGame
 
 Size: 0xec | 236 bytes
 
+<a id="pgcamera_pgorbit_behaviour_rightstickfreecam-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -46723,6 +49116,7 @@ Size: 0xec | 236 bytes
 |mResetIgnoredCachedLocation|Vector|0xc|0xdc|
 |mLastTouchedTimer|f32|0x4|0xe8|
 
+<a id="pgcamera_pgorbit_behaviour_rightstickfreecam-enums"></a>
 ### Enums
 
 |Enum|
@@ -46744,6 +49138,7 @@ Package: GridGame
 
 Size: 0xb0 | 176 bytes
 
+<a id="pgcamera_pgorbit_behaviour_rightstickyawsaroundtarget-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -46761,6 +49156,7 @@ Package: GridGame
 
 Size: 0xac | 172 bytes
 
+<a id="pgcamera_pgorbit_behaviour_rollcamerawithtarget-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -46777,6 +49173,7 @@ Package: GridGame
 
 Size: 0xb0 | 176 bytes
 
+<a id="pgcamera_pgorbit_behaviour_setcameratargettolastkiller-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -46792,6 +49189,7 @@ Package: GridGame
 
 Size: 0xb0 | 176 bytes
 
+<a id="pgcamera_pgorbit_behaviour_targetrelativevelocityoffset-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -46807,6 +49205,7 @@ Package: GridGame
 
 Size: 0x134 | 308 bytes
 
+<a id="pgcamera_pgorbit_behaviour_worldspring-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -46819,6 +49218,7 @@ Size: 0x134 | 308 bytes
 |mY|SpringState|0x10|0x114|
 |mZ|SpringState|0x10|0x124|
 
+<a id="pgcamera_pgorbit_behaviour_worldspring-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -46835,6 +49235,7 @@ Package: GridGame
 
 Size: 0x50 | 80 bytes
 
+<a id="pgcameraandblenderbase-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -46843,6 +49244,7 @@ Size: 0x50 | 80 bytes
 |mPgPlayerCamera|PgPlayerCamera*|0x4|0x40|
 |mLocation|Vector|0xc|0x44|
 
+<a id="pgcameraandblenderbase-functions"></a>
 ### Functions
 
 |Signature|
@@ -46862,6 +49264,7 @@ Package: GridGame
 
 Size: 0x108 | 264 bytes
 
+<a id="pgcamerabase-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -46893,6 +49296,7 @@ Size: 0x108 | 264 bytes
 |mInitialScore|f32|0x4|0xc8|
 |mStoredScoreByObject|TMap\<FPair\>|0x3c|0xcc|
 
+<a id="pgcamerabase-functions"></a>
 ### Functions
 
 |Signature|
@@ -46905,12 +49309,14 @@ GetRootCamera() -> PgCamera*|
 GetFullCameraStyle() -> FName|
 DrawDebugInfo(<br>&nbsp;&nbsp;&nbsp;&nbsp;HUD: HUD*,<br>) -> ()|
 
+<a id="pgcamerabase-enums"></a>
 ### Enums
 
 |Enum|
 |---|
 |SocketRetrievalType {<br>&nbsp;&nbsp;&nbsp;&nbsp;SRT_Normal,<br>&nbsp;&nbsp;&nbsp;&nbsp;SRT_ZUp,<br>&nbsp;&nbsp;&nbsp;&nbsp;SRT_MAX,<br>}|
 
+<a id="pgcamerabase-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -46926,6 +49332,7 @@ Package: GridGame
 
 Size: 0x11c | 284 bytes
 
+<a id="pgcamera_pgfirstpersoncam-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -46942,6 +49349,7 @@ Package: GridGame
 
 Size: 0x10c | 268 bytes
 
+<a id="pgcamera_pgfixedcam-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -46956,6 +49364,7 @@ Package: GridGame
 
 Size: 0x188 | 392 bytes
 
+<a id="pgcamera_pgorbitcam-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -46980,12 +49389,14 @@ Size: 0x188 | 392 bytes
 |mOrbitAnchorLocation|Vector|0xc|0x178|
 |mVersionNumber|i32|0x4|0x184|
 
+<a id="pgcamera_pgorbitcam-functions"></a>
 ### Functions
 
 |Signature|
 |---|
 DrawDebugInfo(<br>&nbsp;&nbsp;&nbsp;&nbsp;HUD: HUD*,<br>) -> ()|
 
+<a id="pgcamera_pgorbitcam-consts"></a>
 ### Consts
 
 |Constant|Value|
@@ -47035,6 +49446,7 @@ Package: GridGame
 
 Size: 0x74 | 116 bytes
 
+<a id="pgcamerablender-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -47046,6 +49458,7 @@ Size: 0x74 | 116 bytes
 |mOriginalRotationOffsetDelta|Rotator|0xc|0x64|
 |mCachedPreviousBlendOutTime|f32|0x4|0x70|
 
+<a id="pgcamerablender-functions"></a>
 ### Functions
 
 |Signature|
@@ -47072,6 +49485,7 @@ Package: GridGame
 
 Size: 0x90 | 144 bytes
 
+<a id="pgcamerablenderorbit-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -47079,6 +49493,7 @@ Size: 0x90 | 144 bytes
 |mOriginalOrbitDelta|OrbitComponents|0x10|0x74|
 |mOriginalOrbitAnchorDelta|Vector|0xc|0x84|
 
+<a id="pgcamerablenderorbit-functions"></a>
 ### Functions
 
 |Signature|
@@ -47100,6 +49515,7 @@ Package: GridGame
 
 Size: 0x80 | 128 bytes
 
+<a id="pgcamerablenderworldlocation-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -47128,6 +49544,7 @@ Package: GridGame
 
 Size: 0x44 | 68 bytes
 
+<a id="pgcamerablendersettingsorbit-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -47150,6 +49567,7 @@ Package: GridGame
 
 Size: 0x44 | 68 bytes
 
+<a id="pgcamerablendersettingsworldlocation-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -47165,6 +49583,7 @@ Package: GridGame
 
 Size: 0x55 | 85 bytes
 
+<a id="pgcameralist-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -47174,6 +49593,7 @@ Size: 0x55 | 85 bytes
 |mCurrentCameraIndex|i32|0x4|0x50|
 |mCameraListType|i8|0x1|0x54|
 
+<a id="pgcameralist-functions"></a>
 ### Functions
 
 |Signature|
@@ -47189,6 +49609,7 @@ Package: GridGame
 
 Size: 0x55 | 85 bytes
 
+<a id="pgeddocameralist-functions"></a>
 ### Functions
 
 |Signature|
@@ -47203,6 +49624,7 @@ Package: GridGame
 
 Size: 0x88 | 136 bytes
 
+<a id="pgcameramodifier-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -47216,6 +49638,7 @@ Size: 0x88 | 136 bytes
 |RotationCache|Rotator|0xc|0x70|
 |TranslationCache|Vector|0xc|0x7c|
 
+<a id="pgcameramodifier-functions"></a>
 ### Functions
 
 |Signature|
@@ -47237,6 +49660,7 @@ ComputeNewTranslation(<br>&nbsp;&nbsp;&nbsp;&nbsp;TranslationDelta: Vector,<br>)
 ComputeNewRotation(<br>&nbsp;&nbsp;&nbsp;&nbsp;RotationDelta: Rotator,<br>) -> ()|
 DampenShake(<br>&nbsp;&nbsp;&nbsp;&nbsp;Rotation: Rotator,<br>&nbsp;&nbsp;&nbsp;&nbsp;Translation: Vector,<br>) -> ()|
 
+<a id="pgcameramodifier-enums"></a>
 ### Enums
 
 |Enum|
@@ -47251,6 +49675,7 @@ Package: GridGame
 
 Size: 0xd4 | 212 bytes
 
+<a id="pgcameramodifier_generic-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -47274,6 +49699,7 @@ Size: 0xd4 | 212 bytes
 |mPhaseShift|f32|0x4|0xcc|
 |mSideEffectInstance|PgSideEffect_GenericCameraModifier*|0x4|0xd0|
 
+<a id="pgcameramodifier_generic-functions"></a>
 ### Functions
 
 |Signature|
@@ -47300,6 +49726,7 @@ Package: GridGame
 
 Size: 0x50 | 80 bytes
 
+<a id="pgkeeptargetinview_viewrectifier_rotatetoenemy-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -47316,6 +49743,7 @@ Package: GridGame
 
 Size: 0x5fc | 1532 bytes
 
+<a id="pgplayercamera-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -47371,6 +49799,7 @@ Size: 0x5fc | 1532 bytes
 |mVehicleExitZVel|f32|0x4|0x5f4|
 |mVehicleExitMaxVel|f32|0x4|0x5f8|
 
+<a id="pgplayercamera-states"></a>
 ### States
 
 |Signature|
@@ -47379,6 +49808,7 @@ Size: 0x5fc | 1532 bytes
 |GetActiveCameraList_Default(<br>&nbsp;&nbsp;&nbsp;&nbsp;ReturnValue: PgCameraList*,<br>) -> ()|
 |BeginState_CommonAbstract(<br>&nbsp;&nbsp;&nbsp;&nbsp;PreviousStateName: FName,<br>) -> ()|
 
+<a id="pgplayercamera-functions"></a>
 ### Functions
 
 |Signature|
@@ -47409,6 +49839,7 @@ AreControlsCameraRelative() -> bool|
 GetPreviousCameraStyle() -> FName|
 GetNextCameraStyle() -> FName|
 
+<a id="pgplayercamera-enums"></a>
 ### Enums
 
 |Enum|
@@ -47431,6 +49862,7 @@ Package: GridGame
 
 Size: 0x70 | 112 bytes
 
+<a id="pgplayercameracomponent_setaudiogroupandstate-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -47446,6 +49878,7 @@ Package: GridGame
 
 Size: 0x1d4 | 468 bytes
 
+<a id="pgseqact_matineescrubber-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -47464,6 +49897,7 @@ Package: GridGame
 
 Size: 0xf4 | 244 bytes
 
+<a id="pgseqact_setcamerascore-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -47479,6 +49913,7 @@ Package: GridGame
 
 Size: 0xf0 | 240 bytes
 
+<a id="pgseqact_setlastkiller-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -47522,6 +49957,7 @@ Package: GridGame
 
 Size: 0x40 | 64 bytes
 
+<a id="pgdamagebehaviorfreeze-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -47536,6 +49972,7 @@ Package: GridGame
 
 Size: 0x44 | 68 bytes
 
+<a id="pgdamagebehaviorleech-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -47551,6 +49988,7 @@ Package: GridGame
 
 Size: 0x44 | 68 bytes
 
+<a id="pgdamagebehaviorstasis-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -47566,6 +50004,7 @@ Package: GridGame
 
 Size: 0x74 | 116 bytes
 
+<a id="pgdamageparam-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -47581,6 +50020,7 @@ Size: 0x74 | 116 bytes
 |mRigidBodyCollisionMult|f32|0x4|0x6c|
 |mLastFired|f32|0x4|0x70|
 
+<a id="pgdamageparam-functions"></a>
 ### Functions
 
 |Signature|
@@ -47591,6 +50031,7 @@ ScaleDamage(<br>&nbsp;&nbsp;&nbsp;&nbsp;DamageCauser: Actor*,<br>&nbsp;&nbsp;&nb
 PlayCauseDamageEffects(<br>&nbsp;&nbsp;&nbsp;&nbsp;Instigator: Actor*,<br>&nbsp;&nbsp;&nbsp;&nbsp;Location: Vector,<br>&nbsp;&nbsp;&nbsp;&nbsp;Normal: Vector,<br>&nbsp;&nbsp;&nbsp;&nbsp;PhysMat: PhysicalMaterial*,<br>) -> ()|
 ApplyDamageBehaviour(<br>&nbsp;&nbsp;&nbsp;&nbsp;damageCaused: i32,<br>&nbsp;&nbsp;&nbsp;&nbsp;damageVictim: Actor*,<br>&nbsp;&nbsp;&nbsp;&nbsp;DamageCauser: Actor*,<br>) -> ()|
 
+<a id="pgdamageparam-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -47607,6 +50048,7 @@ Package: GridGame
 
 Size: 0x16c | 364 bytes
 
+<a id="pganimnodecomboblendbyaction-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -47630,6 +50072,7 @@ Package: GridGame
 
 Size: 0x130 | 304 bytes
 
+<a id="pganimnodecomboblendbyhold-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -47648,6 +50091,7 @@ Package: GridGame
 
 Size: 0x128 | 296 bytes
 
+<a id="pganimnodecombobranchbydirection-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -47666,6 +50110,7 @@ Package: GridGame
 
 Size: 0x1cc | 460 bytes
 
+<a id="pganimnodesequencecombo-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -47681,6 +50126,7 @@ Package: GridGame
 
 Size: 0x48 | 72 bytes
 
+<a id="pganimnotify_materialparam-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -47696,6 +50142,7 @@ Package: GridGame
 
 Size: 0x44 | 68 bytes
 
+<a id="pganimnotify_namedevent-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -47710,6 +50157,7 @@ Package: GridGame
 
 Size: 0x214 | 532 bytes
 
+<a id="pgdecalmanager-functions"></a>
 ### Functions
 
 |Signature|
@@ -47724,6 +50172,7 @@ Package: GridGame
 
 Size: 0x7c | 124 bytes
 
+<a id="pgdropshadowcomponent-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -47734,6 +50183,7 @@ Size: 0x7c | 124 bytes
 |mVectorParameterName|FName|0x8|0x70|
 |mUseOwnerTeamColor|bool|0x4|0x78|
 
+<a id="pgdropshadowcomponent-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -47748,6 +50198,7 @@ Package: GridGame
 
 Size: 0x1f0 | 496 bytes
 
+<a id="pgdynamicemitter-functions"></a>
 ### Functions
 
 |Signature|
@@ -47764,6 +50215,7 @@ Package: GridGame
 
 Size: 0x1f4 | 500 bytes
 
+<a id="pgcameraemitter-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -47778,6 +50230,7 @@ Package: GridGame
 
 Size: 0x26c | 620 bytes
 
+<a id="pgemitterpool-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -47789,6 +50242,7 @@ Size: 0x26c | 620 bytes
 |mLightWallMarkerList|TArray\<LightWallMarkerInfo\>|0xc|0x254|
 |mLightWallList|TArray\<PooledActorInfo\>|0xc|0x260|
 
+<a id="pgemitterpool-functions"></a>
 ### Functions
 
 |Signature|
@@ -47802,6 +50256,7 @@ DeactivatePooledDynamicEmitter(<br>&nbsp;&nbsp;&nbsp;&nbsp;EmitterIndex: i32,<br
 GetPooledDynamicEmitter(<br>&nbsp;&nbsp;&nbsp;&nbsp;EmitterTemplate: ParticleSystem*,<br>&nbsp;&nbsp;&nbsp;&nbsp;SpawnLocation: Vector,<br>&nbsp;&nbsp;&nbsp;&nbsp;SpawnRotation: Rotator,<br>) -> PgDynamicEmitter*|
 ResetPools() -> ()|
 
+<a id="pgemitterpool-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -47817,6 +50272,7 @@ Package: GridGame
 
 Size: 0x64 | 100 bytes
 
+<a id="pgmastercomponent-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -47832,12 +50288,14 @@ Package: GridGame
 
 Size: 0x48 | 72 bytes
 
+<a id="pgphysmateffect-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
 |---|:-:|:-:|:-:|
 |mEffectList|TArray\<PhysMatEffectInfo\>|0xc|0x3c|
 
+<a id="pgphysmateffect-functions"></a>
 ### Functions
 
 |Signature|
@@ -47845,6 +50303,7 @@ Size: 0x48 | 72 bytes
 GetPhysMatEffectInfo(<br>&nbsp;&nbsp;&nbsp;&nbsp;hitMaterial: PhysicalMaterial*,<br>&nbsp;&nbsp;&nbsp;&nbsp;physProperty: PgPhysMatProperty*,<br>&nbsp;&nbsp;&nbsp;&nbsp;impactIndex: i32,<br>) -> PhysMatEffectInfo|
 PlayImpactEffects(<br>&nbsp;&nbsp;&nbsp;&nbsp;Instigator: Actor*,<br>&nbsp;&nbsp;&nbsp;&nbsp;Location: Vector,<br>&nbsp;&nbsp;&nbsp;&nbsp;Normal: Vector,<br>&nbsp;&nbsp;&nbsp;&nbsp;PhysMat: PhysicalMaterial*,<br>) -> ()|
 
+<a id="pgphysmateffect-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -47861,6 +50320,7 @@ Package: GridGame
 
 Size: 0x44 | 68 bytes
 
+<a id="pgphysmatproperty-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -47889,6 +50349,7 @@ Package: GridGame
 
 Size: 0x228 | 552 bytes
 
+<a id="pgskeletalmeshactor-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -47900,6 +50361,7 @@ Size: 0x228 | 552 bytes
 |mTakeFullDamage|bool|0x4|0x218|
 |mMaterialInstanceList|TArray\<MaterialInstanceConstant*\>|0xc|0x21c|
 
+<a id="pgskeletalmeshactor-functions"></a>
 ### Functions
 
 |Signature|
@@ -47917,6 +50379,7 @@ Package: GridGame
 
 Size: 0x6c | 108 bytes
 
+<a id="pgslavecomponent-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -47935,6 +50398,7 @@ Package: GridGame
 
 Size: 0x54 | 84 bytes
 
+<a id="pgcheatmanagerbase-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -47942,6 +50406,7 @@ Size: 0x54 | 84 bytes
 |DebugDisplay3d|TArray\<DebugDisplay3dInfo\>|0xc|0x44|
 |bShow3dDebugInfo|bool|0x4|0x50|
 
+<a id="pgcheatmanagerbase-functions"></a>
 ### Functions
 
 |Signature|
@@ -47994,6 +50459,7 @@ ToggleGripDES() -> ()|
 OnScreenWarnings() -> ()|
 ToggleSloMo(<br>&nbsp;&nbsp;&nbsp;&nbsp;GameSpeed: f32,<br>) -> ()|
 
+<a id="pgcheatmanagerbase-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -48008,6 +50474,7 @@ Package: GridGame
 
 Size: 0x7f8 | 2040 bytes
 
+<a id="pgplayercontroller-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -48085,6 +50552,7 @@ Size: 0x7f8 | 2040 bytes
 |mOnScreenActors|TArray\<Actor*\>|0xc|0x7e0|
 |__OnDestroyOnlineGameComplete__Delegate|FScriptDelegate|0xc|0x7ec|
 
+<a id="pgplayercontroller-states"></a>
 ### States
 
 |Signature|
@@ -48098,6 +50566,7 @@ Size: 0x7f8 | 2040 bytes
 |ServerRestartPlayer_PlayerWaiting() -> ()|
 |EndState_PlayerDriving(<br>&nbsp;&nbsp;&nbsp;&nbsp;NextStateName: FName,<br>) -> ()|
 
+<a id="pgplayercontroller-functions"></a>
 ### Functions
 
 |Signature|
@@ -48378,6 +50847,7 @@ AmInDebugFixedCam() -> bool|
 TryGetLocalPlayerControllerFromDebugCamera(<br>&nbsp;&nbsp;&nbsp;&nbsp;PlayerController: PlayerController*,<br>&nbsp;&nbsp;&nbsp;&nbsp;DCC: PgDebugCameraController*,<br>) -> PgPlayerController*|
 GetLocalPlayerController() -> PgPlayerController*|
 
+<a id="pgplayercontroller-enums"></a>
 ### Enums
 
 |Enum|
@@ -48385,6 +50855,7 @@ GetLocalPlayerController() -> PgPlayerController*|
 |eDifficulty {<br>&nbsp;&nbsp;&nbsp;&nbsp;eD_Casual,<br>&nbsp;&nbsp;&nbsp;&nbsp;eD_Normal,<br>&nbsp;&nbsp;&nbsp;&nbsp;eD_Hard,<br>&nbsp;&nbsp;&nbsp;&nbsp;eD_IronMan,<br>&nbsp;&nbsp;&nbsp;&nbsp;eD_MAX,<br>}|
 |PendingAck {<br>&nbsp;&nbsp;&nbsp;&nbsp;PA_BadMove,<br>&nbsp;&nbsp;&nbsp;&nbsp;PA_GoodMove,<br>&nbsp;&nbsp;&nbsp;&nbsp;PA_MAX,<br>}|
 
+<a id="pgplayercontroller-consts"></a>
 ### Consts
 
 |Constant|Value|
@@ -48440,6 +50911,7 @@ GetLocalPlayerController() -> PgPlayerController*|
 |CONTEXT_MAP|4|
 |CONTEXT_MODE|3|
 
+<a id="pgplayercontroller-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -48457,6 +50929,7 @@ Package: GridGame
 
 Size: 0x54 | 84 bytes
 
+<a id="pgcheatmanager-functions"></a>
 ### Functions
 
 |Signature|
@@ -48477,6 +50950,7 @@ Package: GridGame
 
 Size: 0x248 | 584 bytes
 
+<a id="pgplayerinput-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -48500,6 +50974,7 @@ Size: 0x248 | 584 bytes
 |mHoldKeys|TArray\<FName\>|0xc|0x230|
 |__HandleButtonInput__Delegate|FScriptDelegate|0xc|0x23c|
 
+<a id="pgplayerinput-functions"></a>
 ### Functions
 
 |Signature|
@@ -48529,6 +51004,7 @@ ButtonRelease(<br>&nbsp;&nbsp;&nbsp;&nbsp;ButtonName: FName,<br>&nbsp;&nbsp;&nbs
 ButtonPress(<br>&nbsp;&nbsp;&nbsp;&nbsp;ButtonName: FName,<br>&nbsp;&nbsp;&nbsp;&nbsp;Index: i32,<br>&nbsp;&nbsp;&nbsp;&nbsp;skipHandler: bool,<br>&nbsp;&nbsp;&nbsp;&nbsp;buttonHandler: FScriptDelegate,<br>&nbsp;&nbsp;&nbsp;&nbsp;skipButtonList: TArray\<FName\>,<br>) -> ()|
 HandleButtonInput(<br>&nbsp;&nbsp;&nbsp;&nbsp;bPressed: bool,<br>) -> ()|
 
+<a id="pgplayerinput-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -48543,6 +51019,7 @@ Package: GridGame
 
 Size: 0x248 | 584 bytes
 
+<a id="pgplayerinputvehicle-functions"></a>
 ### Functions
 
 |Signature|
@@ -48590,6 +51067,7 @@ Package: GridGame
 
 Size: 0x3c | 60 bytes
 
+<a id="pgenergyinterface-functions"></a>
 ### Functions
 
 |Signature|
@@ -48612,12 +51090,14 @@ Package: GridGame
 
 Size: 0x48 | 72 bytes
 
+<a id="pgpawndamagereaction-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
 |---|:-:|:-:|:-:|
 |mDamageReactionList|TArray\<PgDamageReactionInfo\>|0xc|0x3c|
 
+<a id="pgpawndamagereaction-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -48633,6 +51113,7 @@ Package: GridGame
 
 Size: 0x264 | 612 bytes
 
+<a id="pgspecialmovevolume-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -48642,6 +51123,7 @@ Size: 0x264 | 612 bytes
 |mRestrictWallRunHorizontal|bool|0x4|0x260|
 |mRestrictMuscleUp|bool|0x4|0x260|
 
+<a id="pgspecialmovevolume-functions"></a>
 ### Functions
 
 |Signature|
@@ -48656,6 +51138,7 @@ Package: GridGame
 
 Size: 0x68 | 104 bytes
 
+<a id="pgactorfactoryarchetype-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -48671,6 +51154,7 @@ Package: GridGame
 
 Size: 0xb8 | 184 bytes
 
+<a id="pgactorfactorypedestrian-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -48690,6 +51174,7 @@ Package: GridGame
 
 Size: 0x200 | 512 bytes
 
+<a id="pgpedestrianspawnmanager-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -48700,6 +51185,7 @@ Size: 0x200 | 512 bytes
 |mTimeLastSpawn|f32|0x4|0x1f8|
 |mSpawnDelay|f32|0x4|0x1fc|
 
+<a id="pgpedestrianspawnmanager-functions"></a>
 ### Functions
 
 |Signature|
@@ -48711,6 +51197,7 @@ GetMaxPawns() -> i32|
 GetNumPawns() -> i32|
 SetNumPawns(<br>&nbsp;&nbsp;&nbsp;&nbsp;numPawns: i32,<br>) -> ()|
 
+<a id="pgpedestrianspawnmanager-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -48733,6 +51220,7 @@ Package: GridGame
 
 Size: 0x110 | 272 bytes
 
+<a id="pgseqact_pedestrianaifactory-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -48750,6 +51238,7 @@ Package: GridGame
 
 Size: 0x10c | 268 bytes
 
+<a id="pgseqevent_pedestriankilled-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -48764,6 +51253,7 @@ Package: GridGame
 
 Size: 0x10c | 268 bytes
 
+<a id="pgseqevent_pedestrianspawned-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -48778,6 +51268,7 @@ Package: GridGame
 
 Size: 0xf0 | 240 bytes
 
+<a id="pgseqact_performspecialmove-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -48793,6 +51284,7 @@ Package: GridGame
 
 Size: 0x68 | 104 bytes
 
+<a id="pgspecialmoveasset-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -48803,6 +51295,7 @@ Size: 0x68 | 104 bytes
 |mAction|PgSpecialMoveAction*|0x4|0x60|
 |mVersion|i32|0x4|0x64|
 
+<a id="pgspecialmoveasset-functions"></a>
 ### Functions
 
 |Signature|
@@ -48825,6 +51318,7 @@ Package: GridGame
 
 Size: 0x58 | 88 bytes
 
+<a id="pgspecialmoveactionplaytree-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -48845,6 +51339,7 @@ Package: GridGame
 
 Size: 0x64 | 100 bytes
 
+<a id="pgspecialmoveactionplayanim-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -48860,6 +51355,7 @@ Package: GridGame
 
 Size: 0x134 | 308 bytes
 
+<a id="pggameplayeventswriter-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -48867,6 +51363,7 @@ Size: 0x134 | 308 bytes
 |mRemoteIP|FString|0xc|0x124|
 |mRemotePort|i32|0x4|0x130|
 
+<a id="pggameplayeventswriter-functions"></a>
 ### Functions
 
 |Signature|
@@ -48877,6 +51374,7 @@ SetConnection(<br>&nbsp;&nbsp;&nbsp;&nbsp;remoteIP: FString,<br>&nbsp;&nbsp;&nbs
 OpenStatsFile(<br>&nbsp;&nbsp;&nbsp;&nbsp;Filename: FString,<br>) -> bool|
 LogAllPlayerPositionsEvent(<br>&nbsp;&nbsp;&nbsp;&nbsp;EventID: i32,<br>) -> ()|
 
+<a id="pggameplayeventswriter-consts"></a>
 ### Consts
 
 |Constant|Value|
@@ -48892,6 +51390,7 @@ Package: GridGame
 
 Size: 0x108 | 264 bytes
 
+<a id="pgseqact_statmessage-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -48904,12 +51403,13 @@ Size: 0x108 | 264 bytes
 |mStatMessageValueCache|i32|0x4|0x100|
 |mTrackerArchetype|PgStatsTracker*|0x4|0x104|
 
+<a id="pgseqact_statmessage-enums"></a>
 ### Enums
 
 |Enum|
 |---|
 |eStatMessages {<br>&nbsp;&nbsp;&nbsp;&nbsp;ESTM_None,<br>&nbsp;&nbsp;&nbsp;&nbsp;ESTM_MAX,<br>}|
-|eStats {<br>&nbsp;&nbsp;&nbsp;&nbsp;ES,<br>&nbsp;&nbsp;&nbsp;&nbsp;ES,<br>&nbsp;&nbsp;&nbsp;&nbsp;ES,<br>&nbsp;&nbsp;&nbsp;&nbsp;ES,<br>&nbsp;&nbsp;&nbsp;&nbsp;ES,<br>&nbsp;&nbsp;&nbsp;&nbsp;ES,<br>&nbsp;&nbsp;&nbsp;&nbsp;ES,<br>&nbsp;&nbsp;&nbsp;&nbsp;ES,<br>&nbsp;&nbsp;&nbsp;&nbsp;ES,<br>&nbsp;&nbsp;&nbsp;&nbsp;ES,<br>&nbsp;&nbsp;&nbsp;&nbsp;ES,<br>&nbsp;&nbsp;&nbsp;&nbsp;ES,<br>&nbsp;&nbsp;&nbsp;&nbsp;ES,<br>&nbsp;&nbsp;&nbsp;&nbsp;ES,<br>&nbsp;&nbsp;&nbsp;&nbsp;ES,<br>&nbsp;&nbsp;&nbsp;&nbsp;ES,<br>&nbsp;&nbsp;&nbsp;&nbsp;ES,<br>&nbsp;&nbsp;&nbsp;&nbsp;ES,<br>&nbsp;&nbsp;&nbsp;&nbsp;ES,<br>&nbsp;&nbsp;&nbsp;&nbsp;ES,<br>&nbsp;&nbsp;&nbsp;&nbsp;ES,<br>&nbsp;&nbsp;&nbsp;&nbsp;ES,<br>&nbsp;&nbsp;&nbsp;&nbsp;ES,<br>&nbsp;&nbsp;&nbsp;&nbsp;ES,<br>&nbsp;&nbsp;&nbsp;&nbsp;ES,<br>&nbsp;&nbsp;&nbsp;&nbsp;ES,<br>&nbsp;&nbsp;&nbsp;&nbsp;ES,<br>&nbsp;&nbsp;&nbsp;&nbsp;ES,<br>&nbsp;&nbsp;&nbsp;&nbsp;ES,<br>&nbsp;&nbsp;&nbsp;&nbsp;ES,<br>&nbsp;&nbsp;&nbsp;&nbsp;ES,<br>&nbsp;&nbsp;&nbsp;&nbsp;ES,<br>&nbsp;&nbsp;&nbsp;&nbsp;ES,<br>&nbsp;&nbsp;&nbsp;&nbsp;ES,<br>&nbsp;&nbsp;&nbsp;&nbsp;ES,<br>&nbsp;&nbsp;&nbsp;&nbsp;ES,<br>&nbsp;&nbsp;&nbsp;&nbsp;ES,<br>&nbsp;&nbsp;&nbsp;&nbsp;ES,<br>&nbsp;&nbsp;&nbsp;&nbsp;ES,<br>&nbsp;&nbsp;&nbsp;&nbsp;ES,<br>&nbsp;&nbsp;&nbsp;&nbsp;ES,<br>&nbsp;&nbsp;&nbsp;&nbsp;ES,<br>&nbsp;&nbsp;&nbsp;&nbsp;ES,<br>&nbsp;&nbsp;&nbsp;&nbsp;ES,<br>&nbsp;&nbsp;&nbsp;&nbsp;ES,<br>&nbsp;&nbsp;&nbsp;&nbsp;ES,<br>&nbsp;&nbsp;&nbsp;&nbsp;ES,<br>&nbsp;&nbsp;&nbsp;&nbsp;ES,<br>&nbsp;&nbsp;&nbsp;&nbsp;ES,<br>&nbsp;&nbsp;&nbsp;&nbsp;ES,<br>&nbsp;&nbsp;&nbsp;&nbsp;ES,<br>&nbsp;&nbsp;&nbsp;&nbsp;ES,<br>&nbsp;&nbsp;&nbsp;&nbsp;ES,<br>&nbsp;&nbsp;&nbsp;&nbsp;ES,<br>&nbsp;&nbsp;&nbsp;&nbsp;ES,<br>&nbsp;&nbsp;&nbsp;&nbsp;ES,<br>&nbsp;&nbsp;&nbsp;&nbsp;ES,<br>&nbsp;&nbsp;&nbsp;&nbsp;ES,<br>&nbsp;&nbsp;&nbsp;&nbsp;ES,<br>&nbsp;&nbsp;&nbsp;&nbsp;ES,<br>&nbsp;&nbsp;&nbsp;&nbsp;ES,<br>&nbsp;&nbsp;&nbsp;&nbsp;ES,<br>&nbsp;&nbsp;&nbsp;&nbsp;ES,<br>&nbsp;&nbsp;&nbsp;&nbsp;ES,<br>&nbsp;&nbsp;&nbsp;&nbsp;ES,<br>&nbsp;&nbsp;&nbsp;&nbsp;ES,<br>&nbsp;&nbsp;&nbsp;&nbsp;ES,<br>&nbsp;&nbsp;&nbsp;&nbsp;ES,<br>&nbsp;&nbsp;&nbsp;&nbsp;ES,<br>&nbsp;&nbsp;&nbsp;&nbsp;ES,<br>&nbsp;&nbsp;&nbsp;&nbsp;ES,<br>&nbsp;&nbsp;&nbsp;&nbsp;ES,<br>&nbsp;&nbsp;&nbsp;&nbsp;ES,<br>&nbsp;&nbsp;&nbsp;&nbsp;ES,<br>&nbsp;&nbsp;&nbsp;&nbsp;ES,<br>&nbsp;&nbsp;&nbsp;&nbsp;ES,<br>&nbsp;&nbsp;&nbsp;&nbsp;ES,<br>&nbsp;&nbsp;&nbsp;&nbsp;ES,<br>&nbsp;&nbsp;&nbsp;&nbsp;ES,<br>&nbsp;&nbsp;&nbsp;&nbsp;ES,<br>&nbsp;&nbsp;&nbsp;&nbsp;ES,<br>&nbsp;&nbsp;&nbsp;&nbsp;ES,<br>&nbsp;&nbsp;&nbsp;&nbsp;ES,<br>&nbsp;&nbsp;&nbsp;&nbsp;ES,<br>&nbsp;&nbsp;&nbsp;&nbsp;ES,<br>&nbsp;&nbsp;&nbsp;&nbsp;ES,<br>&nbsp;&nbsp;&nbsp;&nbsp;ES,<br>&nbsp;&nbsp;&nbsp;&nbsp;ES,<br>&nbsp;&nbsp;&nbsp;&nbsp;ES,<br>&nbsp;&nbsp;&nbsp;&nbsp;ES,<br>&nbsp;&nbsp;&nbsp;&nbsp;ES,<br>&nbsp;&nbsp;&nbsp;&nbsp;ES,<br>&nbsp;&nbsp;&nbsp;&nbsp;ES,<br>&nbsp;&nbsp;&nbsp;&nbsp;ES,<br>&nbsp;&nbsp;&nbsp;&nbsp;ES_MAX,<br>}|
+|eStats {<br>&nbsp;&nbsp;&nbsp;&nbsp;ES_None,<br>&nbsp;&nbsp;&nbsp;&nbsp;ES_MAX,<br>}|
 
 ## PgSeqAct_StatOp
 
@@ -48919,6 +51419,7 @@ Package: GridGame
 
 Size: 0xf8 | 248 bytes
 
+<a id="pgseqact_statop-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -48942,6 +51443,7 @@ Package: GridGame
 
 Size: 0x100 | 256 bytes
 
+<a id="pgseqact_setstat-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -48957,6 +51459,7 @@ Package: GridGame
 
 Size: 0x10c | 268 bytes
 
+<a id="pgseqevent_statthreshold-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -48971,6 +51474,7 @@ Package: GridGame
 
 Size: 0x90 | 144 bytes
 
+<a id="pgstat-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -48991,6 +51495,7 @@ Size: 0x90 | 144 bytes
 |mImageName|FString|0xc|0x80|
 |mPlayerController|PgPlayerController*|0x4|0x8c|
 
+<a id="pgstat-functions"></a>
 ### Functions
 
 |Signature|
@@ -49005,6 +51510,7 @@ SetStatFloat(<br>&nbsp;&nbsp;&nbsp;&nbsp;statOp: i8,<br>&nbsp;&nbsp;&nbsp;&nbsp;
 SetStatBool(<br>&nbsp;&nbsp;&nbsp;&nbsp;statOp: i8,<br>&nbsp;&nbsp;&nbsp;&nbsp;StatValue: bool,<br>) -> ()|
 SetStatInt(<br>&nbsp;&nbsp;&nbsp;&nbsp;statOp: i8,<br>&nbsp;&nbsp;&nbsp;&nbsp;StatValue: i32,<br>) -> ()|
 
+<a id="pgstat-enums"></a>
 ### Enums
 
 |Enum|
@@ -49021,6 +51527,7 @@ Package: GridGame
 
 Size: 0x3c | 60 bytes
 
+<a id="pgstathandler-functions"></a>
 ### Functions
 
 |Signature|
@@ -49037,6 +51544,7 @@ Package: GridGame
 
 Size: 0x4c | 76 bytes
 
+<a id="pgdistancetravelledstathandler-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -49044,6 +51552,7 @@ Size: 0x4c | 76 bytes
 |mLastPos|Vector|0xc|0x3c|
 |mEnabled|bool|0x4|0x48|
 
+<a id="pgdistancetravelledstathandler-functions"></a>
 ### Functions
 
 |Signature|
@@ -49052,6 +51561,7 @@ Reset() -> ()|
 GetSupportedMessages() -> TArray\<FName\>|
 StatMsg(<br>&nbsp;&nbsp;&nbsp;&nbsp;msg: FName,<br>&nbsp;&nbsp;&nbsp;&nbsp;StatData: PgStat*,<br>&nbsp;&nbsp;&nbsp;&nbsp;Controller: PgPlayerController*,<br>&nbsp;&nbsp;&nbsp;&nbsp;Payload: f32,<br>) -> ()|
 
+<a id="pgdistancetravelledstathandler-enums"></a>
 ### Enums
 
 |Enum|
@@ -49066,12 +51576,14 @@ Package: GridGame
 
 Size: 0x4d | 77 bytes
 
+<a id="pgdrivingdistancestathandler-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
 |---|:-:|:-:|:-:|
 |mTravelMode|i8|0x1|0x4c|
 
+<a id="pgdrivingdistancestathandler-functions"></a>
 ### Functions
 
 |Signature|
@@ -49087,12 +51599,14 @@ Package: GridGame
 
 Size: 0x4d | 77 bytes
 
+<a id="pgwalkingdistancestathandler-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
 |---|:-:|:-:|:-:|
 |mTravelMode|i8|0x1|0x4c|
 
+<a id="pgwalkingdistancestathandler-functions"></a>
 ### Functions
 
 |Signature|
@@ -49108,12 +51622,14 @@ Package: GridGame
 
 Size: 0x40 | 64 bytes
 
+<a id="pghighestfallstathandler-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
 |---|:-:|:-:|:-:|
 |mBeginTrackHeight|f32|0x4|0x3c|
 
+<a id="pghighestfallstathandler-functions"></a>
 ### Functions
 
 |Signature|
@@ -49130,12 +51646,14 @@ Package: GridGame
 
 Size: 0x40 | 64 bytes
 
+<a id="pglongestkillstreakstathandler-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
 |---|:-:|:-:|:-:|
 |mCurrentStreak|i32|0x4|0x3c|
 
+<a id="pglongestkillstreakstathandler-functions"></a>
 ### Functions
 
 |Signature|
@@ -49152,6 +51670,7 @@ Package: GridGame
 
 Size: 0x3c | 60 bytes
 
+<a id="pgteststathandler-functions"></a>
 ### Functions
 
 |Signature|
@@ -49167,12 +51686,14 @@ Package: GridGame
 
 Size: 0x40 | 64 bytes
 
+<a id="pgtimealivestathandler-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
 |---|:-:|:-:|:-:|
 |mTimeAlive|f32|0x4|0x3c|
 
+<a id="pgtimealivestathandler-functions"></a>
 ### Functions
 
 |Signature|
@@ -49189,12 +51710,14 @@ Package: GridGame
 
 Size: 0x40 | 64 bytes
 
+<a id="pgtutorialcounterstathandler-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
 |---|:-:|:-:|:-:|
 |mEnabled|bool|0x4|0x3c|
 
+<a id="pgtutorialcounterstathandler-functions"></a>
 ### Functions
 
 |Signature|
@@ -49210,12 +51733,14 @@ Package: GridGame
 
 Size: 0x44 | 68 bytes
 
+<a id="pgstatmonitor-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
 |---|:-:|:-:|:-:|
 |mName|FName|0x8|0x3c|
 
+<a id="pgstatmonitor-functions"></a>
 ### Functions
 
 |Signature|
@@ -49233,12 +51758,14 @@ Package: GridGame
 
 Size: 0x48 | 72 bytes
 
+<a id="pgstatkismetmonitor-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
 |---|:-:|:-:|:-:|
 |mTriggerValue|f32|0x4|0x44|
 
+<a id="pgstatkismetmonitor-functions"></a>
 ### Functions
 
 |Signature|
@@ -49253,6 +51780,7 @@ Package: GridGame
 
 Size: 0x70 | 112 bytes
 
+<a id="pgstatthresholdmonitor-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -49267,6 +51795,7 @@ Size: 0x70 | 112 bytes
 |mHudMessage|FName|0x8|0x5c|
 |mDependantStats|TArray\<PgStatThresholdMonitor*\>|0xc|0x64|
 
+<a id="pgstatthresholdmonitor-functions"></a>
 ### Functions
 
 |Signature|
@@ -49279,6 +51808,7 @@ Triggered(<br>&nbsp;&nbsp;&nbsp;&nbsp;Stat: PgStat*,<br>) -> ()|
 Reset() -> ()|
 Changed(<br>&nbsp;&nbsp;&nbsp;&nbsp;Stat: PgStat*,<br>) -> ()|
 
+<a id="pgstatthresholdmonitor-enums"></a>
 ### Enums
 
 |Enum|
@@ -49294,6 +51824,7 @@ Package: GridGame
 
 Size: 0x70 | 112 bytes
 
+<a id="pgcollectablestatmonitor-functions"></a>
 ### Functions
 
 |Signature|
@@ -49308,6 +51839,7 @@ Package: GridGame
 
 Size: 0x54 | 84 bytes
 
+<a id="pgstatsdamagelookup-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -49324,6 +51856,7 @@ Package: GridGame
 
 Size: 0x70 | 112 bytes
 
+<a id="pgstatstracker-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -49335,6 +51868,7 @@ Size: 0x70 | 112 bytes
 |mNewTronFileUnlocked|bool|0x4|0x6c|
 |mNewShardsUnlocked|bool|0x4|0x6c|
 
+<a id="pgstatstracker-functions"></a>
 ### Functions
 
 |Signature|
@@ -49358,6 +51892,7 @@ Package: GridGame
 
 Size: 0x40 | 64 bytes
 
+<a id="pgstattag-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -49372,6 +51907,7 @@ Package: GridGame
 
 Size: 0x4c | 76 bytes
 
+<a id="pgstatabraxisshardtag-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -49386,6 +51922,7 @@ Package: GridGame
 
 Size: 0x50 | 80 bytes
 
+<a id="pgstattronfiletag-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -49401,6 +51938,7 @@ Package: GridGame
 
 Size: 0x64 | 100 bytes
 
+<a id="pgtutorialtracker-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -49419,6 +51957,7 @@ Package: GridGame
 
 Size: 0xa38 | 2616 bytes
 
+<a id="pgairvehicle-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -49428,6 +51967,7 @@ Size: 0xa38 | 2616 bytes
 |mPgPlayerCameraArchetype|PgPlayerCamera*|0x4|0xa30|
 |mCameraCollisionStartPointOffset|f32|0x4|0xa34|
 
+<a id="pgairvehicle-functions"></a>
 ### Functions
 
 |Signature|
@@ -49445,12 +51985,14 @@ Package: GridGame
 
 Size: 0xa00 | 2560 bytes
 
+<a id="pghovervehicle-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
 |---|:-:|:-:|:-:|
 |VfTable_IPgCommonPawnInterface|Pointer|0x4|0x9fc|
 
+<a id="pghovervehicle-functions"></a>
 ### Functions
 
 |Signature|
@@ -49465,6 +52007,7 @@ Package: GridGame
 
 Size: 0xc60 | 3168 bytes
 
+<a id="pgvehicle-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -49587,6 +52130,7 @@ Size: 0xc60 | 3168 bytes
 |mSpawnLocation|Vector|0xc|0xc48|
 |__GraphFunction__Delegate|FScriptDelegate|0xc|0xc54|
 
+<a id="pgvehicle-functions"></a>
 ### Functions
 
 |Signature|
@@ -49682,12 +52226,14 @@ AdjustSpeedOnDamage(<br>&nbsp;&nbsp;&nbsp;&nbsp;Damage: i32,<br>) -> ()|
 UnPossessed() -> ()|
 PossessedBy(<br>&nbsp;&nbsp;&nbsp;&nbsp;C: Controller*,<br>&nbsp;&nbsp;&nbsp;&nbsp;bVehicleTransition: bool,<br>) -> ()|
 
+<a id="pgvehicle-enums"></a>
 ### Enums
 
 |Enum|
 |---|
 |DriverExitAction {<br>&nbsp;&nbsp;&nbsp;&nbsp;DEA_Leave,<br>&nbsp;&nbsp;&nbsp;&nbsp;DEA_Hide,<br>&nbsp;&nbsp;&nbsp;&nbsp;DEA_Destroy,<br>&nbsp;&nbsp;&nbsp;&nbsp;DEA_MAX,<br>}|
 
+<a id="pgvehicle-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -49709,6 +52255,7 @@ Package: GridGame
 
 Size: 0xc8 | 200 bytes
 
+<a id="pgvehicleboost-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -49737,6 +52284,7 @@ Size: 0xc8 | 200 bytes
 |DefaultUprightTorqueFactor|f32|0x4|0xc0|
 |DefaultUprightMaxTorque|f32|0x4|0xc4|
 
+<a id="pgvehicleboost-functions"></a>
 ### Functions
 
 |Signature|
@@ -49756,6 +52304,7 @@ Package: GridGame
 
 Size: 0xc8 | 200 bytes
 
+<a id="pgvehicleboostenter-functions"></a>
 ### Functions
 
 |Signature|
@@ -49770,6 +52319,7 @@ Package: GridGame
 
 Size: 0x50 | 80 bytes
 
+<a id="pgvehicleretroturn-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -49778,12 +52328,14 @@ Size: 0x50 | 80 bytes
 |mMaxTimeOffGround|f32|0x4|0x40|
 |mEventTags|TArray\<RetroTurnEventInfo\>|0xc|0x44|
 
+<a id="pgvehicleretroturn-functions"></a>
 ### Functions
 
 |Signature|
 |---|
 TurnVehicle(<br>&nbsp;&nbsp;&nbsp;&nbsp;Direction: i8,<br>) -> ()|
 
+<a id="pgvehicleretroturn-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -49798,6 +52350,7 @@ Package: GridGame
 
 Size: 0x3c | 60 bytes
 
+<a id="pgvehiclesetinputs-functions"></a>
 ### Functions
 
 |Signature|
@@ -49813,6 +52366,7 @@ Package: GridGame
 
 Size: 0x8c | 140 bytes
 
+<a id="pgvehiclesetinputstank-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -49826,6 +52380,7 @@ Size: 0x8c | 140 bytes
 |mReverseThreshold|f32|0x4|0x78|
 |mReverseThresholdCurve|InterpCurveFloat|0x10|0x7c|
 
+<a id="pgvehiclesetinputstank-functions"></a>
 ### Functions
 
 |Signature|
@@ -49846,6 +52401,7 @@ Package: GridGame
 
 Size: 0x16c | 364 bytes
 
+<a id="pgvehiclesimcar-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -49882,6 +52438,7 @@ Package: GridGame
 
 Size: 0x118 | 280 bytes
 
+<a id="pgvehiclesimtank-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -49908,6 +52465,7 @@ Package: GridGame
 
 Size: 0xfc | 252 bytes
 
+<a id="pgexplosion-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -49923,6 +52481,7 @@ Package: GridGame
 
 Size: 0x24c | 588 bytes
 
+<a id="pgexplosionactor-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -49932,6 +52491,7 @@ Size: 0x24c | 588 bytes
 |mProjectileInstigator|PgProjectile*|0x4|0x23c|
 |mSpawnRotation|Rotator|0xc|0x240|
 
+<a id="pgexplosionactor-functions"></a>
 ### Functions
 
 |Signature|
@@ -49949,6 +52509,7 @@ Package: GridGame
 
 Size: 0x258 | 600 bytes
 
+<a id="pginventory-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -49962,6 +52523,7 @@ Size: 0x258 | 600 bytes
 |mPlugIns|PgPlugInList*|0x4|0x24c|
 |mTypeName|FName|0x8|0x250|
 
+<a id="pginventory-functions"></a>
 ### Functions
 
 |Signature|
@@ -49974,6 +52536,7 @@ GetLocalString(<br>&nbsp;&nbsp;&nbsp;&nbsp;Switch: i32,<br>&nbsp;&nbsp;&nbsp;&nb
 DetachPlugin() -> ()|
 AttachPlugin(<br>&nbsp;&nbsp;&nbsp;&nbsp;Pawn: Pawn*,<br>) -> ()|
 
+<a id="pginventory-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -50002,12 +52565,14 @@ Package: GridGame
 
 Size: 0x264 | 612 bytes
 
+<a id="pginventorypower-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
 |---|:-:|:-:|:-:|
 |mPowerGrp|TArray\<PgPowerGroup\>|0xc|0x258|
 
+<a id="pginventorypower-functions"></a>
 ### Functions
 
 |Signature|
@@ -50023,6 +52588,7 @@ CanUsePowerLevel(<br>&nbsp;&nbsp;&nbsp;&nbsp;Pawn: PgPawn*,<br>&nbsp;&nbsp;&nbsp
 CanUsePower(<br>&nbsp;&nbsp;&nbsp;&nbsp;Pawn: PgPawn*,<br>) -> bool|
 UseBestPower(<br>&nbsp;&nbsp;&nbsp;&nbsp;powerUser: Pawn*,<br>&nbsp;&nbsp;&nbsp;&nbsp;powerDeduct: PgPawn*,<br>&nbsp;&nbsp;&nbsp;&nbsp;behaviorClass: TArray\<UClass*\>,<br>) -> PgProjectile*|
 
+<a id="pginventorypower-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -50038,6 +52604,7 @@ Package: GridGame
 
 Size: 0x200 | 512 bytes
 
+<a id="pginventorymanager-functions"></a>
 ### Functions
 
 |Signature|
@@ -50066,6 +52633,7 @@ Package: GridGame
 
 Size: 0x280 | 640 bytes
 
+<a id="pginventorypickup-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -50094,12 +52662,14 @@ Size: 0x280 | 640 bytes
 |mDeInitPluginsFuncName|FName|0x8|0x23c|
 |mMailingLists|TMap\<FPair\>|0x3c|0x244|
 
+<a id="pginventorypickup-states"></a>
 ### States
 
 |Signature|
 |---|
 |EndState_Pickup(<br>&nbsp;&nbsp;&nbsp;&nbsp;NextStateName: FName,<br>) -> ()|
 
+<a id="pginventorypickup-functions"></a>
 ### Functions
 
 |Signature|
@@ -50130,6 +52700,7 @@ Package: GridGame
 
 Size: 0x3c | 60 bytes
 
+<a id="pgpowerbehavior-functions"></a>
 ### Functions
 
 |Signature|
@@ -50144,12 +52715,14 @@ Package: GridGame
 
 Size: 0x40 | 64 bytes
 
+<a id="pgpowerbehaviorboost-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
 |---|:-:|:-:|:-:|
 |mBoostLevel|i32|0x4|0x3c|
 
+<a id="pgpowerbehaviorboost-functions"></a>
 ### Functions
 
 |Signature|
@@ -50164,6 +52737,7 @@ Package: GridGame
 
 Size: 0x44 | 68 bytes
 
+<a id="pgpowerbehaviordamagescaling-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -50171,6 +52745,7 @@ Size: 0x44 | 68 bytes
 |mDamageScaling|f32|0x4|0x3c|
 |mDuration|f32|0x4|0x40|
 
+<a id="pgpowerbehaviordamagescaling-functions"></a>
 ### Functions
 
 |Signature|
@@ -50185,12 +52760,14 @@ Package: GridGame
 
 Size: 0x40 | 64 bytes
 
+<a id="pgpowerbehaviorprojectile-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
 |---|:-:|:-:|:-:|
 |mProjectileArchetype|PgProjectile*|0x4|0x3c|
 
+<a id="pgpowerbehaviorprojectile-functions"></a>
 ### Functions
 
 |Signature|
@@ -50219,6 +52796,7 @@ Package: GridGame
 
 Size: 0x3a4 | 932 bytes
 
+<a id="pgprojectile-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -50279,6 +52857,7 @@ Size: 0x3a4 | 932 bytes
 |mMailingLists|TMap\<FPair\>|0x3c|0x32c|
 |mMailboxes|TMap\<FPair\>|0x3c|0x368|
 
+<a id="pgprojectile-functions"></a>
 ### Functions
 
 |Signature|
@@ -50306,6 +52885,7 @@ PostEvent(<br>&nbsp;&nbsp;&nbsp;&nbsp;EventName: FName,<br>&nbsp;&nbsp;&nbsp;&nb
 GetMaterialInstanceList() -> TArray\<MaterialInstanceConstant*\>|
 InitMaterialInstanceList() -> ()|
 
+<a id="pgprojectile-enums"></a>
 ### Enums
 
 |Enum|
@@ -50320,6 +52900,7 @@ Package: GridGame
 
 Size: 0x10c | 268 bytes
 
+<a id="pgseqevent_pickupstatuschange-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -50334,6 +52915,7 @@ Package: GridGame
 
 Size: 0x308 | 776 bytes
 
+<a id="pgweapon-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -50348,12 +52930,14 @@ Size: 0x308 | 776 bytes
 |mAttachEquippedSocketName|FName|0x8|0x2f8|
 |mCurrentSocketName|FName|0x8|0x300|
 
+<a id="pgweapon-states"></a>
 ### States
 
 |Signature|
 |---|
 |EndState_PendingClientWeaponSet(<br>&nbsp;&nbsp;&nbsp;&nbsp;NextStateName: FName,<br>) -> ()|
 
+<a id="pgweapon-functions"></a>
 ### Functions
 
 |Signature|
@@ -50378,6 +52962,7 @@ Package: GridGame
 
 Size: 0x324 | 804 bytes
 
+<a id="pgweaponcombo-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -50386,12 +52971,14 @@ Size: 0x324 | 804 bytes
 |mFireModeToSpecialMove|TArray\<PgSpecialMoveAsset*\>|0xc|0x314|
 |mCurrentPgWeaponFireType|PgWeaponFireType*|0x4|0x320|
 
+<a id="pgweaponcombo-states"></a>
 ### States
 
 |Signature|
 |---|
 |EndFire_Active(<br>&nbsp;&nbsp;&nbsp;&nbsp;FireModeNum: i8,<br>) -> ()|
 
+<a id="pgweaponcombo-functions"></a>
 ### Functions
 
 |Signature|
@@ -50418,6 +53005,7 @@ Package: GridGame
 
 Size: 0x3c | 60 bytes
 
+<a id="pgweaponfiretype-functions"></a>
 ### Functions
 
 |Signature|
@@ -50432,6 +53020,7 @@ Package: GridGame
 
 Size: 0x5c | 92 bytes
 
+<a id="pgweapfiretypemelee-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -50443,6 +53032,7 @@ Size: 0x5c | 92 bytes
 |mOffset|Vector|0xc|0x4c|
 |mDebugDraw|bool|0x4|0x58|
 
+<a id="pgweapfiretypemelee-functions"></a>
 ### Functions
 
 |Signature|
@@ -50457,6 +53047,7 @@ Package: GridGame
 
 Size: 0x5c | 92 bytes
 
+<a id="pgweapfiretypeprojectile-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -50467,6 +53058,7 @@ Size: 0x5c | 92 bytes
 |mSpawnAtSocket|FName|0x8|0x48|
 |mSpawnOffset|Vector|0xc|0x50|
 
+<a id="pgweapfiretypeprojectile-functions"></a>
 ### Functions
 
 |Signature|
@@ -50484,12 +53076,14 @@ Package: GridGame
 
 Size: 0x68 | 104 bytes
 
+<a id="pgweapfiretypepower-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
 |---|:-:|:-:|:-:|
 |mBehaviorClasses|TArray\<UClass*\>|0xc|0x5c|
 
+<a id="pgweapfiretypepower-functions"></a>
 ### Functions
 
 |Signature|
@@ -50505,6 +53099,7 @@ Package: GridGame
 
 Size: 0x3c | 60 bytes
 
+<a id="pgweapfiretypevehicledriver-functions"></a>
 ### Functions
 
 |Signature|
@@ -50519,12 +53114,14 @@ Package: GridGame
 
 Size: 0x3c | 60 bytes
 
+<a id="pgteamenumeration-enums"></a>
 ### Enums
 
 |Enum|
 |---|
 |eTeamAlignment {<br>&nbsp;&nbsp;&nbsp;&nbsp;TEAMALIGN_MyTeam,<br>&nbsp;&nbsp;&nbsp;&nbsp;TEAMALIGN_EnemyTeam,<br>&nbsp;&nbsp;&nbsp;&nbsp;TEAMALIGN_Neutral,<br>&nbsp;&nbsp;&nbsp;&nbsp;TEAMALIGN_MAX,<br>}|
 
+<a id="pgteamenumeration-consts"></a>
 ### Consts
 
 |Constant|Value|
@@ -50588,6 +53185,7 @@ Package: GridGame
 
 Size: 0x54 | 84 bytes
 
+<a id="pgonline-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -50598,6 +53196,7 @@ Size: 0x54 | 84 bytes
 |mLoginManager|PgOnlineLoginManager*|0x4|0x4c|
 |mLeaderboard|PgOnlineLeaderboard*|0x4|0x50|
 
+<a id="pgonline-functions"></a>
 ### Functions
 
 |Signature|
@@ -50614,6 +53213,7 @@ IsHost() -> bool|
 IsMultiplayer() -> bool|
 GetInstance() -> PgOnline*|
 
+<a id="pgonline-enums"></a>
 ### Enums
 
 |Enum|
@@ -50628,6 +53228,7 @@ Package: GridGame
 
 Size: 0x8c | 140 bytes
 
+<a id="pgonlinegamemanager-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -50644,6 +53245,7 @@ Size: 0x8c | 140 bytes
 |mQosWarningEnabled|bool|0x4|0x84|
 |mMaxPlayers|i32|0x4|0x88|
 
+<a id="pgonlinegamemanager-functions"></a>
 ### Functions
 
 |Signature|
@@ -50692,6 +53294,7 @@ GameCompleted() -> ()|
 LaunchGame(<br>&nbsp;&nbsp;&nbsp;&nbsp;bForceHardLoad: bool,<br>&nbsp;&nbsp;&nbsp;&nbsp;bIgnoreChapterPoints: bool,<br>) -> ()|
 InitGRI() -> ()|
 
+<a id="pgonlinegamemanager-consts"></a>
 ### Consts
 
 |Constant|Value|
@@ -50745,6 +53348,7 @@ InitGRI() -> ()|
 |CONTEXT_MAP|4|
 |CONTEXT_MODE|3|
 
+<a id="pgonlinegamemanager-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -50759,6 +53363,7 @@ Package: GridGame
 
 Size: 0xa4 | 164 bytes
 
+<a id="pgonlineleaderboard-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -50780,6 +53385,7 @@ Size: 0xa4 | 164 bytes
 |__OnStartOnlineGameComplete__Delegate|FScriptDelegate|0xc|0x8c|
 |__OnDestroyOnlineGameComplete__Delegate|FScriptDelegate|0xc|0x98|
 
+<a id="pgonlineleaderboard-functions"></a>
 ### Functions
 
 |Signature|
@@ -50832,6 +53438,7 @@ ReadFriends(<br>&nbsp;&nbsp;&nbsp;&nbsp;LeaderboardId: i32,<br>&nbsp;&nbsp;&nbsp
 ReadPlayersEx(<br>&nbsp;&nbsp;&nbsp;&nbsp;LeaderboardId: i32,<br>&nbsp;&nbsp;&nbsp;&nbsp;playerIds: TArray\<UniqueNetId\>,<br>) -> ()|
 ReadPlayers(<br>&nbsp;&nbsp;&nbsp;&nbsp;LeaderboardId: i32,<br>&nbsp;&nbsp;&nbsp;&nbsp;onlyLocalPlayer: bool,<br>) -> ()|
 
+<a id="pgonlineleaderboard-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -50847,12 +53454,14 @@ Package: GridGame
 
 Size: 0x4c | 76 bytes
 
+<a id="pgonlineplayerlist-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
 |---|:-:|:-:|:-:|
 |__OnPlayerUpdated__Delegate|FScriptDelegate|0xc|0x40|
 
+<a id="pgonlineplayerlist-functions"></a>
 ### Functions
 
 |Signature|
@@ -50880,6 +53489,7 @@ GetNumAIPlayers() -> i32|
 GetNumHumanPlayers() -> i32|
 GetNumPlayers() -> i32|
 
+<a id="pgonlineplayerlist-enums"></a>
 ### Enums
 
 |Enum|
@@ -50894,6 +53504,7 @@ Package: GridGame
 
 Size: 0xec | 236 bytes
 
+<a id="pgonlinesessionmanager-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -50924,6 +53535,7 @@ Size: 0xec | 236 bytes
 |__OnStartOnlineGameComplete__Delegate|FScriptDelegate|0xc|0xd4|
 |__OnEndOnlineGameComplete__Delegate|FScriptDelegate|0xc|0xe0|
 
+<a id="pgonlinesessionmanager-functions"></a>
 ### Functions
 
 |Signature|
@@ -51037,6 +53649,7 @@ IsQuickmatch() -> bool|
 IsStrictNAT() -> bool|
 GetNewPlayerState() -> i8|
 
+<a id="pgonlinesessionmanager-consts"></a>
 ### Consts
 
 |Constant|Value|
@@ -51098,6 +53711,7 @@ Package: GridGame
 
 Size: 0x10c | 268 bytes
 
+<a id="pgonlinegamesearch-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -51106,6 +53720,7 @@ Size: 0x10c | 268 bytes
 |mRoomInviteSearch|bool|0x4|0x104|
 |mNumServersToPing|i32|0x4|0x108|
 
+<a id="pgonlinegamesearch-functions"></a>
 ### Functions
 
 |Signature|
@@ -51123,6 +53738,7 @@ SetMinNumPlayers(<br>&nbsp;&nbsp;&nbsp;&nbsp;N: i32,<br>) -> ()|
 GetGameMode() -> i8|
 SetGameMode(<br>&nbsp;&nbsp;&nbsp;&nbsp;gameMode: i8,<br>) -> ()|
 
+<a id="pgonlinegamesearch-consts"></a>
 ### Consts
 
 |Constant|Value|
@@ -51189,6 +53805,7 @@ Package: GridGame
 
 Size: 0xf8 | 248 bytes
 
+<a id="pgonlinegamesettings-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -51196,6 +53813,7 @@ Size: 0xf8 | 248 bytes
 |mPingRequestIds|i32|0x4|0xe8|
 |mPingsCompleted|i32|0x4|0xf4|
 
+<a id="pgonlinegamesettings-functions"></a>
 ### Functions
 
 |Signature|
@@ -51226,6 +53844,7 @@ GetHostName() -> FString|
 SetHostName(<br>&nbsp;&nbsp;&nbsp;&nbsp;S: FString,<br>) -> ()|
 Copy(<br>&nbsp;&nbsp;&nbsp;&nbsp;GameSettings: PgOnlineGameSettings*,<br>) -> ()|
 
+<a id="pgonlinegamesettings-consts"></a>
 ### Consts
 
 |Constant|Value|
@@ -51294,6 +53913,7 @@ Package: GridGame
 
 Size: 0x48 | 72 bytes
 
+<a id="pgonlineloginmanager-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -51304,6 +53924,7 @@ Size: 0x48 | 72 bytes
 |mSeamlessOnlineGame|bool|0x4|0x40|
 |mMainControllerId|i32|0x4|0x44|
 
+<a id="pgonlineloginmanager-functions"></a>
 ### Functions
 
 |Signature|
@@ -51343,12 +53964,14 @@ OnConnectionStatusChange(<br>&nbsp;&nbsp;&nbsp;&nbsp;ConnectionStatus: i8,<br>) 
 OnLinkStatusChanged(<br>&nbsp;&nbsp;&nbsp;&nbsp;bIsConnected: bool,<br>) -> ()|
 OnExternalUIChanged(<br>&nbsp;&nbsp;&nbsp;&nbsp;bIsOpening: bool,<br>) -> ()|
 
+<a id="pgonlineloginmanager-enums"></a>
 ### Enums
 
 |Enum|
 |---|
 |ELoginAttemptResult {<br>&nbsp;&nbsp;&nbsp;&nbsp;LoginAttempt_Cancelled,<br>&nbsp;&nbsp;&nbsp;&nbsp;LoginAttempt_Failure,<br>&nbsp;&nbsp;&nbsp;&nbsp;LoginAttempt_Success,<br>&nbsp;&nbsp;&nbsp;&nbsp;LoginAttempt_NotReqd,<br>&nbsp;&nbsp;&nbsp;&nbsp;LoginAttempt_MAX,<br>}|
 
+<a id="pgonlineloginmanager-consts"></a>
 ### Consts
 
 |Constant|Value|
@@ -51410,6 +54033,7 @@ Package: GridGame
 
 Size: 0x88 | 136 bytes
 
+<a id="pgonlineleaderboardread_elo-consts"></a>
 ### Consts
 
 |Constant|Value|
@@ -51506,6 +54130,7 @@ Package: GridGame
 
 Size: 0x88 | 136 bytes
 
+<a id="pgonlineleaderboardwrite-functions"></a>
 ### Functions
 
 |Signature|
@@ -51522,6 +54147,7 @@ Package: GridGame
 
 Size: 0x88 | 136 bytes
 
+<a id="pgonlineleaderboardwrite_elo-functions"></a>
 ### Functions
 
 |Signature|
@@ -51529,6 +54155,7 @@ Size: 0x88 | 136 bytes
 UpdateFromLocalData() -> ()|
 UpdateFromPRI(<br>&nbsp;&nbsp;&nbsp;&nbsp;PRI: PgPlayerReplicationInfo*,<br>) -> ()|
 
+<a id="pgonlineleaderboardwrite_elo-consts"></a>
 ### Consts
 
 |Constant|Value|
@@ -51590,6 +54217,7 @@ Package: GridGame
 
 Size: 0x88 | 136 bytes
 
+<a id="pgonlineleaderboardwrite_exp-functions"></a>
 ### Functions
 
 |Signature|
@@ -51597,6 +54225,7 @@ Size: 0x88 | 136 bytes
 UpdateFromLocalData() -> ()|
 UpdateFromPRI(<br>&nbsp;&nbsp;&nbsp;&nbsp;PRI: PgPlayerReplicationInfo*,<br>) -> ()|
 
+<a id="pgonlineleaderboardwrite_exp-consts"></a>
 ### Consts
 
 |Constant|Value|
@@ -51658,6 +54287,7 @@ Package: GridGame
 
 Size: 0x88 | 136 bytes
 
+<a id="pgonlineleaderboardwrite_gamemodebr-functions"></a>
 ### Functions
 
 |Signature|
@@ -51665,6 +54295,7 @@ Size: 0x88 | 136 bytes
 UpdateFromLocalData() -> ()|
 UpdateFromPRI(<br>&nbsp;&nbsp;&nbsp;&nbsp;PRI: PgPlayerReplicationInfo*,<br>) -> ()|
 
+<a id="pgonlineleaderboardwrite_gamemodebr-consts"></a>
 ### Consts
 
 |Constant|Value|
@@ -51726,6 +54357,7 @@ Package: GridGame
 
 Size: 0x88 | 136 bytes
 
+<a id="pgonlineleaderboardwrite_gamemodedm-functions"></a>
 ### Functions
 
 |Signature|
@@ -51733,6 +54365,7 @@ Size: 0x88 | 136 bytes
 UpdateFromLocalData() -> ()|
 UpdateFromPRI(<br>&nbsp;&nbsp;&nbsp;&nbsp;PRI: PgPlayerReplicationInfo*,<br>) -> ()|
 
+<a id="pgonlineleaderboardwrite_gamemodedm-consts"></a>
 ### Consts
 
 |Constant|Value|
@@ -51794,6 +54427,7 @@ Package: GridGame
 
 Size: 0x88 | 136 bytes
 
+<a id="pgonlineleaderboardwrite_gamemodepm-functions"></a>
 ### Functions
 
 |Signature|
@@ -51801,6 +54435,7 @@ Size: 0x88 | 136 bytes
 UpdateFromLocalData() -> ()|
 UpdateFromPRI(<br>&nbsp;&nbsp;&nbsp;&nbsp;PRI: PgPlayerReplicationInfo*,<br>) -> ()|
 
+<a id="pgonlineleaderboardwrite_gamemodepm-consts"></a>
 ### Consts
 
 |Constant|Value|
@@ -51862,6 +54497,7 @@ Package: GridGame
 
 Size: 0x88 | 136 bytes
 
+<a id="pgonlineleaderboardwrite_gamemodetdm-functions"></a>
 ### Functions
 
 |Signature|
@@ -51869,6 +54505,7 @@ Size: 0x88 | 136 bytes
 UpdateFromLocalData() -> ()|
 UpdateFromPRI(<br>&nbsp;&nbsp;&nbsp;&nbsp;PRI: PgPlayerReplicationInfo*,<br>) -> ()|
 
+<a id="pgonlineleaderboardwrite_gamemodetdm-consts"></a>
 ### Consts
 
 |Constant|Value|
@@ -51930,6 +54567,7 @@ Package: GridGame
 
 Size: 0xd4 | 212 bytes
 
+<a id="pgonlineenumerations-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -51959,6 +54597,7 @@ Size: 0xd4 | 212 bytes
 |kInvulnerability_Timer|f32|0x4|0xcc|
 |kPreGameTips_Timer|f32|0x4|0xd0|
 
+<a id="pgonlineenumerations-functions"></a>
 ### Functions
 
 |Signature|
@@ -51979,6 +54618,7 @@ GetNumMaps() -> i32|
 GetUIProfileIndexByName(<br>&nbsp;&nbsp;&nbsp;&nbsp;ProfileName: FString,<br>&nbsp;&nbsp;&nbsp;&nbsp;ProfileIndex: i32,<br>) -> bool|
 GetNumUIProfiles() -> i32|
 
+<a id="pgonlineenumerations-enums"></a>
 ### Enums
 
 |Enum|
@@ -51987,6 +54627,7 @@ GetNumUIProfiles() -> i32|
 |EEventBoxMessageType {<br>&nbsp;&nbsp;&nbsp;&nbsp;EBM_Kill_Bike,<br>&nbsp;&nbsp;&nbsp;&nbsp;EBM_Kill_Disc,<br>&nbsp;&nbsp;&nbsp;&nbsp;EBM_Kill_Bomb,<br>&nbsp;&nbsp;&nbsp;&nbsp;EBM_Kill_Heavy,<br>&nbsp;&nbsp;&nbsp;&nbsp;EBM_Kill_Corruption,<br>&nbsp;&nbsp;&nbsp;&nbsp;EBM_Kill_Stasis,<br>&nbsp;&nbsp;&nbsp;&nbsp;EBM_Kill_Melee,<br>&nbsp;&nbsp;&nbsp;&nbsp;EBM_Kill_Tank,<br>&nbsp;&nbsp;&nbsp;&nbsp;EBM_Kill_Other,<br>&nbsp;&nbsp;&nbsp;&nbsp;EBM_Kill_Suicide,<br>&nbsp;&nbsp;&nbsp;&nbsp;EBM_Bit_Stolen,<br>&nbsp;&nbsp;&nbsp;&nbsp;EBM_Bit_Dropped,<br>&nbsp;&nbsp;&nbsp;&nbsp;EBM_Bit_Returned,<br>&nbsp;&nbsp;&nbsp;&nbsp;EBM_Bit_Captured,<br>&nbsp;&nbsp;&nbsp;&nbsp;EBM_Game_Joined,<br>&nbsp;&nbsp;&nbsp;&nbsp;EBM_Game_Left,<br>&nbsp;&nbsp;&nbsp;&nbsp;EBM_Game_Countdown,<br>&nbsp;&nbsp;&nbsp;&nbsp;EBM_PlayerPromoted,<br>&nbsp;&nbsp;&nbsp;&nbsp;EBM_Node_Captured,<br>&nbsp;&nbsp;&nbsp;&nbsp;EBM_Node_Attacked,<br>&nbsp;&nbsp;&nbsp;&nbsp;EBM_TankNode_Captured,<br>&nbsp;&nbsp;&nbsp;&nbsp;EBM_TankNode_Attacked,<br>&nbsp;&nbsp;&nbsp;&nbsp;EBM_AutoUpgrade,<br>&nbsp;&nbsp;&nbsp;&nbsp;EBM_UpgradeUnlocked,<br>&nbsp;&nbsp;&nbsp;&nbsp;EBM_AwardKillBonus,<br>&nbsp;&nbsp;&nbsp;&nbsp;EBM_AwardXp,<br>&nbsp;&nbsp;&nbsp;&nbsp;EBM_TestMessage,<br>&nbsp;&nbsp;&nbsp;&nbsp;EBM_MAX,<br>}|
 |EGameMode {<br>&nbsp;&nbsp;&nbsp;&nbsp;CONTEXT_GAME_MODE_MULTIPLAYER,<br>&nbsp;&nbsp;&nbsp;&nbsp;GAME_MODE_MAX,<br>&nbsp;&nbsp;&nbsp;&nbsp;EGameMode_MAX,<br>}|
 
+<a id="pgonlineenumerations-consts"></a>
 ### Consts
 
 |Constant|Value|
@@ -52057,6 +54698,7 @@ GetNumUIProfiles() -> i32|
 |CONTEXT_MAP|4|
 |CONTEXT_MODE|3|
 
+<a id="pgonlineenumerations-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -52076,6 +54718,7 @@ Package: GridGame
 
 Size: 0x4c0 | 1216 bytes
 
+<a id="pggameinfo-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -52096,6 +54739,7 @@ Size: 0x4c0 | 1216 bytes
 |mGameplayEventsWriter|PgGameplayEventsWriter*|0x4|0x4b8|
 |mDebugForcedPlayerStart|PlayerStart*|0x4|0x4bc|
 
+<a id="pggameinfo-functions"></a>
 ### Functions
 
 |Signature|
@@ -52212,6 +54856,7 @@ InitGame(<br>&nbsp;&nbsp;&nbsp;&nbsp;Options: FString,<br>&nbsp;&nbsp;&nbsp;&nbs
 SetGameType(<br>&nbsp;&nbsp;&nbsp;&nbsp;MapName: FString,<br>&nbsp;&nbsp;&nbsp;&nbsp;Options: FString,<br>&nbsp;&nbsp;&nbsp;&nbsp;Portal: FString,<br>) -> UClass*|
 GetGameInfo() -> PgGameInfo*|
 
+<a id="pggameinfo-consts"></a>
 ### Consts
 
 |Constant|Value|
@@ -52298,6 +54943,7 @@ GetGameInfo() -> PgGameInfo*|
 |CONTEXT_MAP|4|
 |CONTEXT_MODE|3|
 
+<a id="pggameinfo-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -52321,6 +54967,7 @@ Package: GridGame
 
 Size: 0x4c0 | 1216 bytes
 
+<a id="pgmplobbygameinfo-functions"></a>
 ### Functions
 
 |Signature|
@@ -52335,6 +54982,7 @@ Package: GridGame
 
 Size: 0x4e5 | 1253 bytes
 
+<a id="pgmpgameinfo-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -52350,11 +54998,13 @@ Size: 0x4e5 | 1253 bytes
 |mInSeamlessTravel|bool|0x4|0x4e0|
 |mDelayedMPKismetEvent|i8|0x1|0x4e4|
 
+<a id="pgmpgameinfo-states"></a>
 ### States
 
 |Signature|
 |---|
 
+<a id="pgmpgameinfo-functions"></a>
 ### Functions
 
 |Signature|
@@ -52414,6 +55064,7 @@ Logout(<br>&nbsp;&nbsp;&nbsp;&nbsp;Exiting: Controller*,<br>) -> ()|
 PostLogin(<br>&nbsp;&nbsp;&nbsp;&nbsp;NewPlayer: PlayerController*,<br>) -> ()|
 InitGame(<br>&nbsp;&nbsp;&nbsp;&nbsp;Options: FString,<br>&nbsp;&nbsp;&nbsp;&nbsp;ErrorMessage: FString,<br>) -> ()|
 
+<a id="pgmpgameinfo-enums"></a>
 ### Enums
 
 |Enum|
@@ -52435,6 +55086,7 @@ Package: GridGame
 
 Size: 0x284 | 644 bytes
 
+<a id="pggamereplicationinfo-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -52458,6 +55110,7 @@ Size: 0x284 | 644 bytes
 |mNumFreeVoiceTokens|i32|0x4|0x27c|
 |mGameModeRepCount|i32|0x4|0x280|
 
+<a id="pggamereplicationinfo-functions"></a>
 ### Functions
 
 |Signature|
@@ -52493,6 +55146,7 @@ GetGRI() -> PgGameReplicationInfo*|
 _ReplicatedEvent(<br>&nbsp;&nbsp;&nbsp;&nbsp;VarName: FName,<br>) -> ()|
 ReplicatedEvent(<br>&nbsp;&nbsp;&nbsp;&nbsp;VarName: FName,<br>) -> ()|
 
+<a id="pggamereplicationinfo-consts"></a>
 ### Consts
 
 |Constant|Value|
@@ -52554,6 +55208,7 @@ Package: GridGame
 
 Size: 0x334 | 820 bytes
 
+<a id="pgplayerreplicationinfo-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -52584,6 +55239,7 @@ Size: 0x334 | 820 bytes
 |mCachedColorIndex|i32|0x4|0x324|
 |__OnPlayerSpeaking__Delegate|FScriptDelegate|0xc|0x328|
 
+<a id="pgplayerreplicationinfo-functions"></a>
 ### Functions
 
 |Signature|
@@ -52626,6 +55282,7 @@ ClientInitialize(<br>&nbsp;&nbsp;&nbsp;&nbsp;C: Controller*,<br>) -> ()|
 _ReplicatedEvent(<br>&nbsp;&nbsp;&nbsp;&nbsp;VarName: FName,<br>) -> ()|
 ReplicatedEvent(<br>&nbsp;&nbsp;&nbsp;&nbsp;VarName: FName,<br>) -> ()|
 
+<a id="pgplayerreplicationinfo-consts"></a>
 ### Consts
 
 |Constant|Value|
@@ -52687,6 +55344,7 @@ Package: GridGame
 
 Size: 0x2d4 | 724 bytes
 
+<a id="pgplayerstart-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -52696,6 +55354,7 @@ Size: 0x2d4 | 724 bytes
 |mDrawStandOnCylinder|DrawCylinderComponent*|0x4|0x2cc|
 |mDrawLookAtCylinder|DrawCylinderComponent*|0x4|0x2d0|
 
+<a id="pgplayerstart-functions"></a>
 ### Functions
 
 |Signature|
@@ -52712,12 +55371,14 @@ Package: GridGame
 
 Size: 0x44 | 68 bytes
 
+<a id="pgrule-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
 |---|:-:|:-:|:-:|
 |mOptionName|FName|0x8|0x3c|
 
+<a id="pgrule-functions"></a>
 ### Functions
 
 |Signature|
@@ -52727,6 +55388,7 @@ InOrder(<br>&nbsp;&nbsp;&nbsp;&nbsp;Order: i8,<br>&nbsp;&nbsp;&nbsp;&nbsp;Value1
 GetCmdLineString() -> FString|
 GetValue() -> f32|
 
+<a id="pgrule-enums"></a>
 ### Enums
 
 |Enum|
@@ -52742,12 +55404,14 @@ Package: GridGame
 
 Size: 0x4c | 76 bytes
 
+<a id="pgendrule-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
 |---|:-:|:-:|:-:|
 |kReason|FName|0x8|0x44|
 
+<a id="pgendrule-functions"></a>
 ### Functions
 
 |Signature|
@@ -52762,6 +55426,7 @@ Package: GridGame
 
 Size: 0x5c | 92 bytes
 
+<a id="pggoalreachedendrule-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -52770,6 +55435,7 @@ Size: 0x5c | 92 bytes
 |mComparison|i8|0x1|0x54|
 |mGoal|f32|0x4|0x58|
 
+<a id="pggoalreachedendrule-functions"></a>
 ### Functions
 
 |Signature|
@@ -52785,6 +55451,7 @@ Package: GridGame
 
 Size: 0x5c | 92 bytes
 
+<a id="pgoneremainingendrule-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -52793,6 +55460,7 @@ Size: 0x5c | 92 bytes
 |mComparison|i8|0x1|0x54|
 |mThreshold|f32|0x4|0x58|
 
+<a id="pgoneremainingendrule-functions"></a>
 ### Functions
 
 |Signature|
@@ -52808,12 +55476,14 @@ Package: GridGame
 
 Size: 0x50 | 80 bytes
 
+<a id="pgtimelimitendrule-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
 |---|:-:|:-:|:-:|
 |mTimeLimit|i32|0x4|0x4c|
 
+<a id="pgtimelimitendrule-functions"></a>
 ### Functions
 
 |Signature|
@@ -52830,12 +55500,14 @@ Package: GridGame
 
 Size: 0x48 | 72 bytes
 
+<a id="pggamerule-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
 |---|:-:|:-:|:-:|
 |mCondition|PgCondition*|0x4|0x44|
 
+<a id="pggamerule-functions"></a>
 ### Functions
 
 |Signature|
@@ -52851,6 +55523,7 @@ Package: GridGame
 
 Size: 0x50 | 80 bytes
 
+<a id="pgscorerule-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -52858,6 +55531,7 @@ Size: 0x50 | 80 bytes
 |mOperation|i8|0x1|0x44|
 |mStat|FName|0x8|0x48|
 
+<a id="pgscorerule-functions"></a>
 ### Functions
 
 |Signature|
@@ -52876,6 +55550,7 @@ Package: GridGame
 
 Size: 0x5c | 92 bytes
 
+<a id="pgcustomscorerule-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -52883,6 +55558,7 @@ Size: 0x5c | 92 bytes
 |mTag|FName|0x8|0x50|
 |mValue|f32|0x4|0x58|
 
+<a id="pgcustomscorerule-functions"></a>
 ### Functions
 
 |Signature|
@@ -52898,6 +55574,7 @@ Package: GridGame
 
 Size: 0x5c | 92 bytes
 
+<a id="pgpresetscorerule-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -52905,6 +55582,7 @@ Size: 0x5c | 92 bytes
 |mTag|FName|0x8|0x50|
 |mValue|f32|0x4|0x58|
 
+<a id="pgpresetscorerule-functions"></a>
 ### Functions
 
 |Signature|
@@ -52955,6 +55633,7 @@ Package: GridGame
 
 Size: 0x44 | 68 bytes
 
+<a id="pgwinrule-functions"></a>
 ### Functions
 
 |Signature|
@@ -52972,6 +55651,7 @@ Package: GridGame
 
 Size: 0x50 | 80 bytes
 
+<a id="pgbeststatwinrule-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -52979,6 +55659,7 @@ Size: 0x50 | 80 bytes
 |mOrder|i8|0x1|0x44|
 |mStat|FName|0x8|0x48|
 
+<a id="pgbeststatwinrule-functions"></a>
 ### Functions
 
 |Signature|
@@ -52994,6 +55675,7 @@ Package: GridGame
 
 Size: 0x54 | 84 bytes
 
+<a id="pgstatthresholdwinrule-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -53002,6 +55684,7 @@ Size: 0x54 | 84 bytes
 |mComparison|i8|0x1|0x4c|
 |mThreshold|f32|0x4|0x50|
 
+<a id="pgstatthresholdwinrule-functions"></a>
 ### Functions
 
 |Signature|
@@ -53017,6 +55700,7 @@ Package: GridGame
 
 Size: 0x24c | 588 bytes
 
+<a id="pgruleset-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -53043,6 +55727,7 @@ Size: 0x24c | 588 bytes
 |mXPModifier|f32|0x4|0x240|
 |mWinStatName|FName|0x8|0x244|
 
+<a id="pgruleset-functions"></a>
 ### Functions
 
 |Signature|
@@ -53064,6 +55749,7 @@ Score(<br>&nbsp;&nbsp;&nbsp;&nbsp;Event: FName,<br>&nbsp;&nbsp;&nbsp;&nbsp;Score
 GetCmdLineString() -> FString|
 GetRuleSet() -> PgRuleSet*|
 
+<a id="pgruleset-consts"></a>
 ### Consts
 
 |Constant|Value|
@@ -53117,6 +55803,7 @@ GetRuleSet() -> PgRuleSet*|
 |CONTEXT_MAP|4|
 |CONTEXT_MODE|3|
 
+<a id="pgruleset-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -53132,6 +55819,7 @@ Package: GridGame
 
 Size: 0xec | 236 bytes
 
+<a id="pgseqact_awardxp-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -53146,6 +55834,7 @@ Package: GridGame
 
 Size: 0xf0 | 240 bytes
 
+<a id="pgseqact_score-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -53160,12 +55849,14 @@ Package: GridGame
 
 Size: 0x2ac | 684 bytes
 
+<a id="pgstatinfo-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
 |---|:-:|:-:|:-:|
 |mStats|GameStatData|0x14|0x1e4|
 
+<a id="pgstatinfo-functions"></a>
 ### Functions
 
 |Signature|
@@ -53178,6 +55869,7 @@ HasStat(<br>&nbsp;&nbsp;&nbsp;&nbsp;Stat: FName,<br>) -> bool|
 _ReplicatedEvent(<br>&nbsp;&nbsp;&nbsp;&nbsp;VarName: FName,<br>) -> ()|
 ReplicatedEvent(<br>&nbsp;&nbsp;&nbsp;&nbsp;VarName: FName,<br>) -> ()|
 
+<a id="pgstatinfo-enums"></a>
 ### Enums
 
 |Enum|
@@ -53185,6 +55877,7 @@ ReplicatedEvent(<br>&nbsp;&nbsp;&nbsp;&nbsp;VarName: FName,<br>) -> ()|
 |eStatResetCondition {<br>&nbsp;&nbsp;&nbsp;&nbsp;SRC_RoundStart,<br>&nbsp;&nbsp;&nbsp;&nbsp;SRC_GameStart,<br>&nbsp;&nbsp;&nbsp;&nbsp;SRC_Death,<br>&nbsp;&nbsp;&nbsp;&nbsp;SRC_MAX,<br>}|
 |eStatOp {<br>&nbsp;&nbsp;&nbsp;&nbsp;SO_Add,<br>&nbsp;&nbsp;&nbsp;&nbsp;SO_Set,<br>&nbsp;&nbsp;&nbsp;&nbsp;SO_MAX,<br>}|
 
+<a id="pgstatinfo-consts"></a>
 ### Consts
 
 |Constant|Value|
@@ -53238,6 +55931,7 @@ ReplicatedEvent(<br>&nbsp;&nbsp;&nbsp;&nbsp;VarName: FName,<br>) -> ()|
 |CONTEXT_MAP|4|
 |CONTEXT_MODE|3|
 
+<a id="pgstatinfo-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -53252,6 +55946,7 @@ Package: GridGame
 
 Size: 0x200 | 512 bytes
 
+<a id="pgteambase-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -53264,12 +55959,14 @@ Size: 0x200 | 512 bytes
 |mTeamColorCylinder|DrawCylinderComponent*|0x4|0x1f8|
 |mRadiusCylinder|DrawCylinderComponent*|0x4|0x1fc|
 
+<a id="pgteambase-functions"></a>
 ### Functions
 
 |Signature|
 |---|
 OnToggle(<br>&nbsp;&nbsp;&nbsp;&nbsp;Action: SeqAct_Toggle*,<br>) -> ()|
 
+<a id="pgteambase-consts"></a>
 ### Consts
 
 |Constant|Value|
@@ -53331,6 +56028,7 @@ Package: GridGame
 
 Size: 0x284 | 644 bytes
 
+<a id="pgteaminfo-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -53342,6 +56040,7 @@ Size: 0x284 | 644 bytes
 |mTeamFName|FName|0x8|0x274|
 |mTeamColorName|FName|0x8|0x27c|
 
+<a id="pgteaminfo-functions"></a>
 ### Functions
 
 |Signature|
@@ -53361,6 +56060,7 @@ Reset() -> ()|
 _RemoveFromTeam(<br>&nbsp;&nbsp;&nbsp;&nbsp;Member: Controller*,<br>) -> ()|
 _AddToTeam(<br>&nbsp;&nbsp;&nbsp;&nbsp;NewMember: Controller*,<br>) -> bool|
 
+<a id="pgteaminfo-consts"></a>
 ### Consts
 
 |Constant|Value|
@@ -53422,6 +56122,7 @@ Package: GridGame
 
 Size: 0x234 | 564 bytes
 
+<a id="pgblockingvolume-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -53430,6 +56131,7 @@ Size: 0x234 | 564 bytes
 |mAllowPlayers|bool|0x4|0x230|
 |mAllowAI|bool|0x4|0x230|
 
+<a id="pgblockingvolume-functions"></a>
 ### Functions
 
 |Signature|
@@ -53444,6 +56146,7 @@ Package: GridGame
 
 Size: 0x2a4 | 676 bytes
 
+<a id="pgenergyactor-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -53483,6 +56186,7 @@ Size: 0x2a4 | 676 bytes
 |mTeamRatio|f32|0x4|0x29c|
 |mStateRatio|f32|0x4|0x2a0|
 
+<a id="pgenergyactor-functions"></a>
 ### Functions
 
 |Signature|
@@ -53501,12 +56205,14 @@ IsPositiveFlow(<br>&nbsp;&nbsp;&nbsp;&nbsp;thePawn: PgPawn*,<br>) -> bool|
 CanUseEnergyActor(<br>&nbsp;&nbsp;&nbsp;&nbsp;thePawn: Pawn*,<br>) -> bool|
 SetCooldown(<br>&nbsp;&nbsp;&nbsp;&nbsp;cooldown: f32,<br>) -> ()|
 
+<a id="pgenergyactor-enums"></a>
 ### Enums
 
 |Enum|
 |---|
 |EEnergyActorType {<br>&nbsp;&nbsp;&nbsp;&nbsp;EEAT_Health,<br>&nbsp;&nbsp;&nbsp;&nbsp;EEAT_Energy,<br>&nbsp;&nbsp;&nbsp;&nbsp;EEAT_MAX,<br>}|
 
+<a id="pgenergyactor-consts"></a>
 ### Consts
 
 |Constant|Value|
@@ -53545,6 +56251,7 @@ SetCooldown(<br>&nbsp;&nbsp;&nbsp;&nbsp;cooldown: f32,<br>) -> ()|
 |GAMEEVENT_MATCH_ENDED|1|
 |GAMEEVENT_MATCH_STARTED|0|
 
+<a id="pgenergyactor-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -53559,6 +56266,7 @@ Package: GridGame
 
 Size: 0x288 | 648 bytes
 
+<a id="pginterpactor-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -53576,6 +56284,7 @@ Size: 0x288 | 648 bytes
 |mMaterialInstanceList|TArray\<MaterialInstanceConstant*\>|0xc|0x270|
 |mPgScalarParamBlend|TArray\<PgScalarParamBlend\>|0xc|0x27c|
 
+<a id="pginterpactor-functions"></a>
 ### Functions
 
 |Signature|
@@ -53592,12 +56301,14 @@ TickMaterialParamBlend(<br>&nbsp;&nbsp;&nbsp;&nbsp;DeltaTime: f32,<br>) -> ()|
 GetMaterialInstanceList() -> TArray\<MaterialInstanceConstant*\>|
 InitMaterialInstanceList() -> ()|
 
+<a id="pginterpactor-enums"></a>
 ### Enums
 
 |Enum|
 |---|
 |PgInterpActorBlend {<br>&nbsp;&nbsp;&nbsp;&nbsp;PGBLEND_POPTOLOW,<br>&nbsp;&nbsp;&nbsp;&nbsp;PGBLEND_BLENDTOLOW,<br>&nbsp;&nbsp;&nbsp;&nbsp;PGBLEND_POPTOHIGH,<br>&nbsp;&nbsp;&nbsp;&nbsp;PGBLEND_BLENDTOHIGH,<br>&nbsp;&nbsp;&nbsp;&nbsp;PGBLEND_None,<br>&nbsp;&nbsp;&nbsp;&nbsp;PGBLEND_MAX,<br>}|
 
+<a id="pginterpactor-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -53612,6 +56323,7 @@ Package: GridGame
 
 Size: 0x214 | 532 bytes
 
+<a id="pgobjective-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -53628,6 +56340,7 @@ Size: 0x214 | 532 bytes
 |mTeamIndex|i8|0x1|0x204|
 |mClaimedBy|TArray\<AIController*\>|0xc|0x208|
 
+<a id="pgobjective-functions"></a>
 ### Functions
 
 |Signature|
@@ -53653,6 +56366,7 @@ Package: GridGame
 
 Size: 0x258 | 600 bytes
 
+<a id="pgcapturepoint-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -53667,6 +56381,7 @@ Size: 0x258 | 600 bytes
 |mDepleteRate|f32|0x4|0x250|
 |mUniqueNumber|i32|0x4|0x254|
 
+<a id="pgcapturepoint-functions"></a>
 ### Functions
 
 |Signature|
@@ -53684,6 +56399,7 @@ ClearProgress() -> ()|
 Deplete(<br>&nbsp;&nbsp;&nbsp;&nbsp;DepleteRate: f32,<br>) -> ()|
 Capture(<br>&nbsp;&nbsp;&nbsp;&nbsp;Captors: TArray\<Actor*\>,<br>&nbsp;&nbsp;&nbsp;&nbsp;CaptureRate: f32,<br>) -> ()|
 
+<a id="pgcapturepoint-consts"></a>
 ### Consts
 
 |Constant|Value|
@@ -53746,6 +56462,7 @@ Package: GridGame
 
 Size: 0x204 | 516 bytes
 
+<a id="pgpowerline-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -53756,6 +56473,7 @@ Size: 0x204 | 516 bytes
 |mTeamBase|PgTeamBase*|0x4|0x1fc|
 |mPowerSource|PgPowerSource*|0x4|0x200|
 
+<a id="pgpowerline-functions"></a>
 ### Functions
 
 |Signature|
@@ -53764,6 +56482,7 @@ KismetFireConnected(<br>&nbsp;&nbsp;&nbsp;&nbsp;Connected: bool,<br>) -> ()|
 Contains(<br>&nbsp;&nbsp;&nbsp;&nbsp;Point: PgCapturePoint*,<br>) -> bool|
 IsConnected() -> bool|
 
+<a id="pgpowerline-consts"></a>
 ### Consts
 
 |Constant|Value|
@@ -53839,6 +56558,7 @@ Package: GridGame
 
 Size: 0x64 | 100 bytes
 
+<a id="pgsaveloadmanager-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -53855,6 +56575,7 @@ Size: 0x64 | 100 bytes
 |mEnablePCSaveLoad|bool|0x4|0x54|
 |mHardBuffer|TArray\<i8\>|0xc|0x58|
 
+<a id="pgsaveloadmanager-functions"></a>
 ### Functions
 
 |Signature|
@@ -53913,6 +56634,7 @@ Package: GridGame
 
 Size: 0x3c | 60 bytes
 
+<a id="pgscalarmaterialparamblendinterface-functions"></a>
 ### Functions
 
 |Signature|
@@ -53929,6 +56651,7 @@ Package: GridGame
 
 Size: 0xf0 | 240 bytes
 
+<a id="pgseqact_capturepointcontrol-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -53944,6 +56667,7 @@ Package: GridGame
 
 Size: 0xec | 236 bytes
 
+<a id="pgseqact_checkcondition-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -53958,6 +56682,7 @@ Package: GridGame
 
 Size: 0xf0 | 240 bytes
 
+<a id="pgseqact_drivevehicle-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -53966,6 +56691,7 @@ Size: 0xf0 | 240 bytes
 |mSpawnDefaultControllerForDriver|bool|0x4|0xec|
 |mPlayDriverEnter|bool|0x4|0xec|
 
+<a id="pgseqact_drivevehicle-functions"></a>
 ### Functions
 
 |Signature|
@@ -53981,12 +56707,14 @@ Package: GridGame
 
 Size: 0xf5 | 245 bytes
 
+<a id="pgseqact_modifyproperty-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
 |---|:-:|:-:|:-:|
 |mOperation|i8|0x1|0xf4|
 
+<a id="pgseqact_modifyproperty-enums"></a>
 ### Enums
 
 |Enum|
@@ -54001,6 +56729,7 @@ Package: GridGame
 
 Size: 0xf8 | 248 bytes
 
+<a id="pgseqact_numobjects-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -54023,6 +56752,7 @@ Package: GridGame
 
 Size: 0x104 | 260 bytes
 
+<a id="pgseqact_pawncounter-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -54044,6 +56774,7 @@ Package: GridGame
 
 Size: 0xfc | 252 bytes
 
+<a id="pgseqact_queueaiactions-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -54058,6 +56789,7 @@ Package: GridGame
 
 Size: 0x10c | 268 bytes
 
+<a id="pgseqact_saveatcheckpoint-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -54085,6 +56817,7 @@ Package: GridGame
 
 Size: 0xfc | 252 bytes
 
+<a id="pgseqact_triggeruse-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -54107,6 +56840,7 @@ Package: GridGame
 
 Size: 0x104 | 260 bytes
 
+<a id="pgseqact_waitforloading-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -54130,12 +56864,14 @@ Package: GridGame
 
 Size: 0x10c | 268 bytes
 
+<a id="pgseqevent_chapterpoint-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
 |---|:-:|:-:|:-:|
 |SubLevelsToLoad|TArray\<LevelRecord\>|0xc|0x100|
 
+<a id="pgseqevent_chapterpoint-functions"></a>
 ### Functions
 
 |Signature|
@@ -54143,6 +56879,7 @@ Size: 0x10c | 268 bytes
 Deactivated() -> ()|
 Activated() -> ()|
 
+<a id="pgseqevent_chapterpoint-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -54171,6 +56908,7 @@ Package: GridGame
 
 Size: 0x102 | 258 bytes
 
+<a id="pgseqevent_death-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -54178,6 +56916,7 @@ Size: 0x102 | 258 bytes
 |mFireIfKillerIs|i8|0x1|0x100|
 |mFireIfDeceasedIs|i8|0x1|0x101|
 
+<a id="pgseqevent_death-enums"></a>
 ### Enums
 
 |Enum|
@@ -54200,6 +56939,7 @@ Package: GridGame
 
 Size: 0x10c | 268 bytes
 
+<a id="pgseqevent_input-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -54231,6 +56971,7 @@ Package: GridGame
 
 Size: 0xc4 | 196 bytes
 
+<a id="pgseqvar_humanplayer-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -54239,6 +56980,7 @@ Size: 0xc4 | 196 bytes
 |mAllHumans|bool|0x4|0xbc|
 |mHumanIndex|i32|0x4|0xc0|
 
+<a id="pgseqvar_humanplayer-functions"></a>
 ### Functions
 
 |Signature|
@@ -54254,12 +56996,14 @@ Package: GridGame
 
 Size: 0xb8 | 184 bytes
 
+<a id="pgseqvar_team-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
 |---|:-:|:-:|:-:|
 |TeamName|FName|0x8|0xb0|
 
+<a id="pgseqvar_team-functions"></a>
 ### Functions
 
 |Signature|
@@ -54274,6 +57018,7 @@ Package: GridGame
 
 Size: 0x264 | 612 bytes
 
+<a id="pgtargetactor-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -54289,6 +57034,7 @@ Size: 0x264 | 612 bytes
 |mTeamName|FName|0x8|0x250|
 |mTargetActorLink|TargetActorLinkedListMirror|0xc|0x258|
 
+<a id="pgtargetactor-functions"></a>
 ### Functions
 
 |Signature|
@@ -54305,6 +57051,7 @@ ApplyState(<br>&nbsp;&nbsp;&nbsp;&nbsp;changeCauser: Actor*,<br>&nbsp;&nbsp;&nbs
 HandleStateChange(<br>&nbsp;&nbsp;&nbsp;&nbsp;changeCauser: Actor*,<br>&nbsp;&nbsp;&nbsp;&nbsp;shouldFireEvent: bool,<br>) -> ()|
 HandleTakeDamage(<br>&nbsp;&nbsp;&nbsp;&nbsp;DamageCauser: Actor*,<br>) -> ()|
 
+<a id="pgtargetactor-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -54322,6 +57069,7 @@ Package: GridGame
 
 Size: 0x220 | 544 bytes
 
+<a id="pgvolume-functions"></a>
 ### Functions
 
 |Signature|
@@ -54336,6 +57084,7 @@ Package: GridGame
 
 Size: 0x234 | 564 bytes
 
+<a id="pgscenecaptureenablervolume-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -54344,6 +57093,7 @@ Size: 0x234 | 564 bytes
 |mStateTimer|Info*|0x4|0x22c|
 |mNumberControllersTouching|i32|0x4|0x230|
 
+<a id="pgscenecaptureenablervolume-functions"></a>
 ### Functions
 
 |Signature|
@@ -54354,6 +57104,7 @@ UpdateSceneCapture(<br>&nbsp;&nbsp;&nbsp;&nbsp;UpdateCauser: Controller*,<br>&nb
 _PlayerControllerSpawned(<br>&nbsp;&nbsp;&nbsp;&nbsp;NewController: Controller*,<br>) -> ()|
 PopulateTouchingActors() -> ()|
 
+<a id="pgscenecaptureenablervolume-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -54368,6 +57119,7 @@ Package: GridGame
 
 Size: 0x60 | 96 bytes
 
+<a id="pgcubicspline-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -54376,6 +57128,7 @@ Size: 0x60 | 96 bytes
 |mY|TArray\<f32\>|0xc|0x48|
 |mY2|TArray\<f32\>|0xc|0x54|
 
+<a id="pgcubicspline-functions"></a>
 ### Functions
 
 |Signature|
@@ -54390,6 +57143,7 @@ Package: GridGame
 
 Size: 0x60 | 96 bytes
 
+<a id="pgforcefeedbackcomponent-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -54397,6 +57151,7 @@ Size: 0x60 | 96 bytes
 |mSideEffect|PgSideEffect_ForceFeedback*|0x4|0x58|
 |mpEpicenter|Actor*|0x4|0x5c|
 
+<a id="pgforcefeedbackcomponent-functions"></a>
 ### Functions
 
 |Signature|
@@ -54413,6 +57168,7 @@ Package: GridGame
 
 Size: 0x9c | 156 bytes
 
+<a id="pggenericcameramodifiersignature-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -54436,6 +57192,7 @@ Package: GridGame
 
 Size: 0xf0 | 240 bytes
 
+<a id="pgseqact_firesideeffectcontainer-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -54451,6 +57208,7 @@ Package: GridGame
 
 Size: 0x3c | 60 bytes
 
+<a id="pgsideeffect-enums"></a>
 ### Enums
 
 |Enum|
@@ -54465,6 +57223,7 @@ Package: GridGame
 
 Size: 0x4c | 76 bytes
 
+<a id="pgsideeffect_forcefeedback-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -54482,6 +57241,7 @@ Package: GridGame
 
 Size: 0x54 | 84 bytes
 
+<a id="pgsideeffect_genericcameramodifier-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -54502,12 +57262,14 @@ Package: GridGame
 
 Size: 0x48 | 72 bytes
 
+<a id="pgsideeffectcontainer-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
 |---|:-:|:-:|:-:|
 |mEffects|TArray\<PgSideEffect*\>|0xc|0x3c|
 
+<a id="pgsideeffectcontainer-enums"></a>
 ### Enums
 
 |Enum|
@@ -54522,6 +57284,7 @@ Package: GridGame
 
 Size: 0x2a8 | 680 bytes
 
+<a id="pgsmartobject-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -54560,6 +57323,7 @@ Size: 0x2a8 | 680 bytes
 |mPreviewCollisionComp|DrawCylinderComponent*|0x4|0x298|
 |mSmartObjectLink|SmartObjectLinkedListMirror|0xc|0x29c|
 
+<a id="pgsmartobject-functions"></a>
 ### Functions
 
 |Signature|
@@ -54573,6 +57337,7 @@ TryAndUseSmartObject(<br>&nbsp;&nbsp;&nbsp;&nbsp;User: Actor*,<br>&nbsp;&nbsp;&n
 CanUseSmartObject(<br>&nbsp;&nbsp;&nbsp;&nbsp;User: Actor*,<br>&nbsp;&nbsp;&nbsp;&nbsp;useInfoIndex: i32,<br>&nbsp;&nbsp;&nbsp;&nbsp;pressed: bool,<br>&nbsp;&nbsp;&nbsp;&nbsp;ButtonName: FName,<br>) -> bool|
 CanPathThroughSmartObject(<br>&nbsp;&nbsp;&nbsp;&nbsp;Pawn: Pawn*,<br>) -> bool|
 
+<a id="pgsmartobject-enums"></a>
 ### Enums
 
 |Enum|
@@ -54581,6 +57346,7 @@ CanPathThroughSmartObject(<br>&nbsp;&nbsp;&nbsp;&nbsp;Pawn: Pawn*,<br>) -> bool|
 |ESmartObjectUseAngleType {<br>&nbsp;&nbsp;&nbsp;&nbsp;ESOUAT_None,<br>&nbsp;&nbsp;&nbsp;&nbsp;ESOUAT_SmartObject,<br>&nbsp;&nbsp;&nbsp;&nbsp;ESOUAT_LineUp,<br>&nbsp;&nbsp;&nbsp;&nbsp;ESOUAT_MAX,<br>}|
 |ESmartObjectLineUpType {<br>&nbsp;&nbsp;&nbsp;&nbsp;ESOLT_Standard,<br>&nbsp;&nbsp;&nbsp;&nbsp;ESOLT_CalcLoc,<br>&nbsp;&nbsp;&nbsp;&nbsp;ESOLT_CalcRot,<br>&nbsp;&nbsp;&nbsp;&nbsp;ESOLT_CalcBoth,<br>&nbsp;&nbsp;&nbsp;&nbsp;ESOLT_MAX,<br>}|
 
+<a id="pgsmartobject-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -54598,6 +57364,7 @@ Package: GridGame
 
 Size: 0x4c | 76 bytes
 
+<a id="pgfirecontroller-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -54605,6 +57372,7 @@ Size: 0x4c | 76 bytes
 |mCurrentTarget|Actor*|0x4|0x3c|
 |mTargetInfo|TArray\<AIFireControlTargetInfo\>|0xc|0x40|
 
+<a id="pgfirecontroller-functions"></a>
 ### Functions
 
 |Signature|
@@ -54615,12 +57383,14 @@ TargetNotVisible(<br>&nbsp;&nbsp;&nbsp;&nbsp;Target: Actor*,<br>) -> ()|
 SeeTarget(<br>&nbsp;&nbsp;&nbsp;&nbsp;Target: Actor*,<br>) -> ()|
 DisplayDebug(<br>&nbsp;&nbsp;&nbsp;&nbsp;HUD: HUD*,<br>&nbsp;&nbsp;&nbsp;&nbsp;out_YL: f32,<br>&nbsp;&nbsp;&nbsp;&nbsp;out_YPos: f32,<br>) -> ()|
 
+<a id="pgfirecontroller-enums"></a>
 ### Enums
 
 |Enum|
 |---|
 |AIFireControlState {<br>&nbsp;&nbsp;&nbsp;&nbsp;AIFCS_WeaponsHold,<br>&nbsp;&nbsp;&nbsp;&nbsp;AIFCS_WeaponsTight,<br>&nbsp;&nbsp;&nbsp;&nbsp;AIFCS_WeaponsFree,<br>&nbsp;&nbsp;&nbsp;&nbsp;AIFCS_MAX,<br>}|
 
+<a id="pgfirecontroller-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -54635,6 +57405,7 @@ Package: GridGame
 
 Size: 0x70 | 112 bytes
 
+<a id="pgfirecontrollerai-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -54643,6 +57414,7 @@ Size: 0x70 | 112 bytes
 |mFriendlies|TArray\<FName\>|0xc|0x58|
 |mMaxTargeters|TArray\<AIMaxTargetersInfo\>|0xc|0x64|
 
+<a id="pgfirecontrollerai-functions"></a>
 ### Functions
 
 |Signature|
@@ -54650,6 +57422,7 @@ Size: 0x70 | 112 bytes
 IsFriendly(<br>&nbsp;&nbsp;&nbsp;&nbsp;Target: Actor*,<br>) -> bool|
 GetFireControlState() -> i8|
 
+<a id="pgfirecontrollerai-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -54665,6 +57438,7 @@ Package: GridGame
 
 Size: 0x208 | 520 bytes
 
+<a id="pgtargetmarker-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -54677,6 +57451,7 @@ Size: 0x208 | 520 bytes
 |mAwareness|i8|0x1|0x200|
 |mLOS|bool|0x4|0x204|
 
+<a id="pgtargetmarker-functions"></a>
 ### Functions
 
 |Signature|
@@ -54691,18 +57466,21 @@ Package: GridGame
 
 Size: 0x48 | 72 bytes
 
+<a id="pginputlabels-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
 |---|:-:|:-:|:-:|
 |mPgInputLabels|TArray\<PgInputLabel\>|0xc|0x3c|
 
+<a id="pginputlabels-enums"></a>
 ### Enums
 
 |Enum|
 |---|
 |ePgInputControlType {<br>&nbsp;&nbsp;&nbsp;&nbsp;PGINPUT_CONTROLTYPE_Combat,<br>&nbsp;&nbsp;&nbsp;&nbsp;PGINPUT_CONTROLTYPE_Vehicle,<br>&nbsp;&nbsp;&nbsp;&nbsp;PGINPUT_CONTROLTYPE_Tank,<br>&nbsp;&nbsp;&nbsp;&nbsp;PGINPUT_CONTROLTYPE_MAX,<br>}|
 
+<a id="pginputlabels-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -54717,6 +57495,7 @@ Package: GridGame
 
 Size: 0xa0 | 160 bytes
 
+<a id="pginterface-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -54744,6 +57523,7 @@ Size: 0xa0 | 160 bytes
 |mNumNewDLCs|i32|0x4|0x98|
 |mNumHiddenDLCs|i32|0x4|0x9c|
 
+<a id="pginterface-functions"></a>
 ### Functions
 
 |Signature|
@@ -54754,12 +57534,14 @@ ShowDebugMenu() -> ()|
 ScreenProject(<br>&nbsp;&nbsp;&nbsp;&nbsp;InVector: Vector,<br>&nbsp;&nbsp;&nbsp;&nbsp;OutVector: Vector2D,<br>) -> ()|
 GetInstance() -> PgInterface*|
 
+<a id="pginterface-enums"></a>
 ### Enums
 
 |Enum|
 |---|
 |HudDisplay {<br>&nbsp;&nbsp;&nbsp;&nbsp;HUD_Off,<br>&nbsp;&nbsp;&nbsp;&nbsp;HUD_On,<br>&nbsp;&nbsp;&nbsp;&nbsp;HUD_AutoHide,<br>&nbsp;&nbsp;&nbsp;&nbsp;HUD_MAX,<br>}|
 
+<a id="pginterface-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -54774,6 +57556,7 @@ Package: GridGame
 
 Size: 0x104 | 260 bytes
 
+<a id="pgseqact_arjiacityhud-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -54782,6 +57565,7 @@ Size: 0x104 | 260 bytes
 |mIsVisible|bool|0x4|0xfc|
 |mCurPercent|f32|0x4|0x100|
 
+<a id="pgseqact_arjiacityhud-functions"></a>
 ### Functions
 
 |Signature|
@@ -54796,6 +57580,7 @@ Package: GridGame
 
 Size: 0x11c | 284 bytes
 
+<a id="pgseqact_hudbar-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -54810,6 +57595,7 @@ Size: 0x11c | 284 bytes
 |mY|f32|0x4|0x114|
 |mScale|f32|0x4|0x118|
 
+<a id="pgseqact_hudbar-functions"></a>
 ### Functions
 
 |Signature|
@@ -54824,6 +57610,7 @@ Package: GridGame
 
 Size: 0x11c | 284 bytes
 
+<a id="pgseqact_hudtext-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -54836,12 +57623,14 @@ Size: 0x11c | 284 bytes
 |mIsLocationText|bool|0x4|0x114|
 |mLifeTime|f32|0x4|0x118|
 
+<a id="pgseqact_hudtext-functions"></a>
 ### Functions
 
 |Signature|
 |---|
 IsValidLevelSequenceObject() -> bool|
 
+<a id="pgseqact_hudtext-enums"></a>
 ### Enums
 
 |Enum|
@@ -54856,6 +57645,7 @@ Package: GridGame
 
 Size: 0x104 | 260 bytes
 
+<a id="pgseqact_opengfxmovie-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -54872,6 +57662,7 @@ Package: GridGame
 
 Size: 0x110 | 272 bytes
 
+<a id="pgseqact_playfmv-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -54885,6 +57676,7 @@ Size: 0x110 | 272 bytes
 |m_previousStackId|i32|0x4|0x108|
 |m_PointerReserveForm_mailbox|Pointer|0x4|0x10c|
 
+<a id="pgseqact_playfmv-functions"></a>
 ### Functions
 
 |Signature|
@@ -54900,6 +57692,7 @@ Package: GridGame
 
 Size: 0x104 | 260 bytes
 
+<a id="pgseqact_queuesubtitle-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -54918,6 +57711,7 @@ Package: GridGame
 
 Size: 0xf0 | 240 bytes
 
+<a id="pgseqact_sethud-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -54947,6 +57741,7 @@ Package: GridGame
 
 Size: 0xdc | 220 bytes
 
+<a id="pgseqcond_checkforbootflow-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -54961,6 +57756,7 @@ Package: GridGame
 
 Size: 0xdc | 220 bytes
 
+<a id="pgseqcond_isstereoscopic3d-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -54975,6 +57771,7 @@ Package: GridGame
 
 Size: 0x130 | 304 bytes
 
+<a id="pgseqact_createonlinegame-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -54989,6 +57786,7 @@ Size: 0x130 | 304 bytes
 |mAISkill|i32|0x4|0x128|
 |m_ReserveSpace|Pointer|0x4|0x12c|
 
+<a id="pgseqact_createonlinegame-consts"></a>
 ### Consts
 
 |Constant|Value|
@@ -55057,6 +57855,7 @@ Package: GridGame
 
 Size: 0xe9 | 233 bytes
 
+<a id="pgseqact_eventboxmessage-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -55071,6 +57870,7 @@ Package: GridGame
 
 Size: 0xdc | 220 bytes
 
+<a id="pgseqcond_iscoop-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -55099,6 +57899,7 @@ Package: GridGame
 
 Size: 0x258 | 600 bytes
 
+<a id="pgfracturedstaticmeshactor-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -55108,6 +57909,7 @@ Size: 0x258 | 600 bytes
 |mHitDelay|f32|0x4|0x250|
 |mLastFire|f32|0x4|0x254|
 
+<a id="pgfracturedstaticmeshactor-functions"></a>
 ### Functions
 
 |Signature|
@@ -55123,6 +57925,7 @@ Package: GridGame
 
 Size: 0x14c | 332 bytes
 
+<a id="pggfxgameviewportclient-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -55137,6 +57940,7 @@ Size: 0x14c | 332 bytes
 |mAutoQuickmatchDelay|f32|0x4|0x144|
 |mAutoQuickmatchTimeout|f32|0x4|0x148|
 
+<a id="pggfxgameviewportclient-functions"></a>
 ### Functions
 
 |Signature|
@@ -55156,6 +57960,7 @@ DisplayProgressMessage(<br>&nbsp;&nbsp;&nbsp;&nbsp;Canvas: Canvas*,<br>) -> ()|
 _NotifyConnectionError(<br>&nbsp;&nbsp;&nbsp;&nbsp;msg: FString,<br>&nbsp;&nbsp;&nbsp;&nbsp;Title: FString,<br>) -> ()|
 Init(<br>&nbsp;&nbsp;&nbsp;&nbsp;OutError: FString,<br>) -> bool|
 
+<a id="pggfxgameviewportclient-enums"></a>
 ### Enums
 
 |Enum|
@@ -55170,6 +57975,7 @@ Package: GridGame
 
 Size: 0xac | 172 bytes
 
+<a id="pgparticlemoduleeventreceiverspawn-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -55191,12 +57997,14 @@ Package: GridGame
 
 Size: 0x60 | 96 bytes
 
+<a id="pgparticlemodulenotify-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
 |---|:-:|:-:|:-:|
 |mParticleNotifies|TArray\<ParticleNotify\>|0xc|0x54|
 
+<a id="pgparticlemodulenotify-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -55218,6 +58026,7 @@ Package: GridGame
 
 Size: 0x48 | 72 bytes
 
+<a id="pgparticlenotifyakevent-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -55234,6 +58043,7 @@ Package: GridGame
 
 Size: 0x108 | 264 bytes
 
+<a id="pgseqact_akplaysound-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -55243,6 +58053,7 @@ Size: 0x108 | 264 bytes
 |mEventsPlaying|i32|0x4|0x100|
 |mStopped|bool|0x4|0x104|
 
+<a id="pgseqact_akplaysound-functions"></a>
 ### Functions
 
 |Signature|
@@ -55257,6 +58068,7 @@ Package: GridGame
 
 Size: 0x58 | 88 bytes
 
+<a id="pgxpsystem-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -55265,12 +58077,14 @@ Size: 0x58 | 88 bytes
 |kXPRankData|TArray\<XPRank\>|0xc|0x40|
 |kXPComboBonusData|TArray\<XPComboBonus\>|0xc|0x4c|
 
+<a id="pgxpsystem-functions"></a>
 ### Functions
 
 |Signature|
 |---|
 GetNumXPRanks() -> i32|
 
+<a id="pgxpsystem-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -55286,6 +58100,7 @@ Package: GridGame
 
 Size: 0x6c | 108 bytes
 
+<a id="pgmploadoutbuilder-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -55297,6 +58112,7 @@ Size: 0x6c | 108 bytes
 |Upgrades|TArray\<PgUnlockItemPlayerUpgrade*\>|0xc|0x5c|
 |PlayerSkin|PgUnlockItemPlayerSkin*|0x4|0x68|
 
+<a id="pgmploadoutbuilder-functions"></a>
 ### Functions
 
 |Signature|
@@ -55312,6 +58128,7 @@ WriteLoadout(<br>&nbsp;&nbsp;&nbsp;&nbsp;unlockSystem: PgUnlockSystem*,<br>&nbsp
 ReadLoadout(<br>&nbsp;&nbsp;&nbsp;&nbsp;unlockSystem: PgUnlockSystem*,<br>&nbsp;&nbsp;&nbsp;&nbsp;LoadoutIndex: i32,<br>&nbsp;&nbsp;&nbsp;&nbsp;loadout: MPPlayerLoadout,<br>) -> ()|
 SelectItem(<br>&nbsp;&nbsp;&nbsp;&nbsp;Item: PgUnlockItem*,<br>&nbsp;&nbsp;&nbsp;&nbsp;ArrayIndex: i32,<br>) -> ()|
 
+<a id="pgmploadoutbuilder-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -55326,6 +58143,7 @@ Package: GridGame
 
 Size: 0x54 | 84 bytes
 
+<a id="pgstoryloadoutbuilder-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -55333,6 +58151,7 @@ Size: 0x54 | 84 bytes
 |InventoryItems|TArray\<PgUnlockItemInventory*\>|0xc|0x3c|
 |Upgrades|TArray\<PgUnlockItemPlayerUpgrade*\>|0xc|0x48|
 
+<a id="pgstoryloadoutbuilder-functions"></a>
 ### Functions
 
 |Signature|
@@ -55349,6 +58168,7 @@ Package: GridGame
 
 Size: 0xc0 | 192 bytes
 
+<a id="pgunlockitem-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -55373,6 +58193,7 @@ Size: 0xc0 | 192 bytes
 |mTankEffectText|FString|0xc|0xb0|
 |mGameGridFlags|i32|0x4|0xbc|
 
+<a id="pgunlockitem-functions"></a>
 ### Functions
 
 |Signature|
@@ -55404,6 +58225,7 @@ GetDisplayUnlockCondition() -> FString|
 GetDisplayDescription() -> FString|
 GetDisplayName() -> FString|
 
+<a id="pgunlockitem-enums"></a>
 ### Enums
 
 |Enum|
@@ -55419,12 +58241,14 @@ Package: GridGame
 
 Size: 0xcc | 204 bytes
 
+<a id="pgunlockiteminventory-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
 |---|:-:|:-:|:-:|
 |mInventoryName|FString|0xc|0xc0|
 
+<a id="pgunlockiteminventory-functions"></a>
 ### Functions
 
 |Signature|
@@ -55439,12 +58263,14 @@ Package: GridGame
 
 Size: 0xcd | 205 bytes
 
+<a id="pgunlockitemdisc-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
 |---|:-:|:-:|:-:|
 |mDiscType|i8|0x1|0xcc|
 
+<a id="pgunlockitemdisc-enums"></a>
 ### Enums
 
 |Enum|
@@ -55459,6 +58285,7 @@ Package: GridGame
 
 Size: 0xd5 | 213 bytes
 
+<a id="pgunlockitemdiscpower-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -55466,6 +58293,7 @@ Size: 0xd5 | 213 bytes
 |MakeWarningGoAway|i32|0x4|0xd0|
 |mPowerType|i8|0x1|0xd4|
 
+<a id="pgunlockitemdiscpower-enums"></a>
 ### Enums
 
 |Enum|
@@ -55480,6 +58308,7 @@ Package: GridGame
 
 Size: 0xcc | 204 bytes
 
+<a id="pgunlockitemperk-functions"></a>
 ### Functions
 
 |Signature|
@@ -55494,12 +58323,14 @@ Package: GridGame
 
 Size: 0xc4 | 196 bytes
 
+<a id="pgunlockitemplayerloadout-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
 |---|:-:|:-:|:-:|
 |mNumSlots|i32|0x4|0xc0|
 
+<a id="pgunlockitemplayerloadout-functions"></a>
 ### Functions
 
 |Signature|
@@ -55515,6 +58346,7 @@ Package: GridGame
 
 Size: 0xc4 | 196 bytes
 
+<a id="pgunlockitemplayerskin-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -55529,12 +58361,14 @@ Package: GridGame
 
 Size: 0xcc | 204 bytes
 
+<a id="pgunlockitemplayerupgrade-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
 |---|:-:|:-:|:-:|
 |mUpgradeName|FString|0xc|0xc0|
 
+<a id="pgunlockitemplayerupgrade-functions"></a>
 ### Functions
 
 |Signature|
@@ -55549,6 +58383,7 @@ Package: GridGame
 
 Size: 0xd4 | 212 bytes
 
+<a id="pgunlockitemvehicle-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -55559,6 +58394,7 @@ Size: 0xd4 | 212 bytes
 |mHandling|i32|0x4|0xcc|
 |mToughness|i32|0x4|0xd0|
 
+<a id="pgunlockitemvehicle-functions"></a>
 ### Functions
 
 |Signature|
@@ -55573,6 +58409,7 @@ Package: GridGame
 
 Size: 0x8c | 140 bytes
 
+<a id="pgunlocksystem-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -55588,6 +58425,7 @@ Size: 0x8c | 140 bytes
 |LoginOptions|FString|0xc|0x74|
 |OverrideConnectionString|FString|0xc|0x80|
 
+<a id="pgunlocksystem-functions"></a>
 ### Functions
 
 |Signature|
@@ -55631,6 +58469,7 @@ ItemPurchased(<br>&nbsp;&nbsp;&nbsp;&nbsp;Item: PgUnlockItem*,<br>&nbsp;&nbsp;&n
 ResetToDefaults() -> ()|
 Initialize() -> ()|
 
+<a id="pgunlocksystem-enums"></a>
 ### Enums
 
 |Enum|
@@ -55645,6 +58484,7 @@ Package: GridGame
 
 Size: 0x54 | 84 bytes
 
+<a id="pgdlcutils-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -55652,6 +58492,7 @@ Size: 0x54 | 84 bytes
 |kDLCItems|TArray\<DLCItem\>|0xc|0x3c|
 |kPS3DLCFolder|FString|0xc|0x48|
 
+<a id="pgdlcutils-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -55890,6 +58731,7 @@ Package: GameFramework
 
 Size: 0x3c | 60 bytes
 
+<a id="gamecrowdspawninterface-functions"></a>
 ### Functions
 
 |Signature|
@@ -55904,12 +58746,14 @@ Package: GameFramework
 
 Size: 0x48 | 72 bytes
 
+<a id="gamefixedcamera-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
 |---|:-:|:-:|:-:|
 |DefaultFOV|f32|0x4|0x44|
 
+<a id="gamefixedcamera-functions"></a>
 ### Functions
 
 |Signature|
@@ -55925,6 +58769,7 @@ Package: GameFramework
 
 Size: 0x2d8 | 728 bytes
 
+<a id="gamekactorspawnableeffect-functions"></a>
 ### Functions
 
 |Signature|
@@ -55941,6 +58786,7 @@ Package: GameFramework
 
 Size: 0x4c | 76 bytes
 
+<a id="gamewaveforms-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -55958,6 +58804,7 @@ Package: GameFramework
 
 Size: 0x40 | 64 bytes
 
+<a id="pmestg_leaveadecalbase-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -55972,6 +58819,7 @@ Package: UnrealScriptTest
 
 Size: 0x64 | 100 bytes
 
+<a id="nestingtest_secondlevelcomponent-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -55986,6 +58834,7 @@ Package: UnrealScriptTest
 
 Size: 0x68 | 104 bytes
 
+<a id="inheritancetestbase-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -56008,6 +58857,7 @@ Package: UnrealScriptTest
 
 Size: 0x40 | 64 bytes
 
+<a id="nestingtest_secondlevelsubobject-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -56022,6 +58872,7 @@ Package: UnrealScriptTest
 
 Size: 0x68 | 104 bytes
 
+<a id="nestingtest_firstlevelcomponent-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -56037,6 +58888,7 @@ Package: UnrealScriptTest
 
 Size: 0x54 | 84 bytes
 
+<a id="nestingtest_firstlevelsubobject-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -56045,6 +58897,7 @@ Size: 0x54 | 84 bytes
 |NestedComponent|NestingTest_SecondLevelComponent*|0x4|0x40|
 |NestedStruct|NestedObjectStruct|0x10|0x44|
 
+<a id="nestingtest_firstlevelsubobject-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -56094,6 +58947,7 @@ Package: UnrealScriptTest
 
 Size: 0x7c | 124 bytes
 
+<a id="test0003_commandlet-functions"></a>
 ### Functions
 
 |Signature|
@@ -56109,6 +58963,7 @@ Package: UnrealScriptTest
 
 Size: 0x3c | 60 bytes
 
+<a id="test0003_derivedclass-functions"></a>
 ### Functions
 
 |Signature|
@@ -56128,6 +58983,7 @@ Package: UnrealScriptTest
 
 Size: 0x3c | 60 bytes
 
+<a id="test0003_interface-functions"></a>
 ### Functions
 
 |Signature|
@@ -56147,6 +59003,7 @@ Package: UnrealScriptTest
 
 Size: 0x3c | 60 bytes
 
+<a id="test0004_baseclass-functions"></a>
 ### Functions
 
 |Signature|
@@ -56166,6 +59023,7 @@ Package: UnrealScriptTest
 
 Size: 0x3c | 60 bytes
 
+<a id="test0004_derivedclass-functions"></a>
 ### Functions
 
 |Signature|
@@ -56180,6 +59038,7 @@ Package: UnrealScriptTest
 
 Size: 0x3c | 60 bytes
 
+<a id="test0004_interface-functions"></a>
 ### Functions
 
 |Signature|
@@ -56199,6 +59058,7 @@ Package: UnrealScriptTest
 
 Size: 0x7c | 124 bytes
 
+<a id="test0005_commandlet-functions"></a>
 ### Functions
 
 |Signature|
@@ -56214,6 +59074,7 @@ Package: UnrealScriptTest
 
 Size: 0x3c | 60 bytes
 
+<a id="test0005_implementingclass-functions"></a>
 ### Functions
 
 |Signature|
@@ -56229,6 +59090,7 @@ Package: UnrealScriptTest
 
 Size: 0x3c | 60 bytes
 
+<a id="test0005_interfacebase-functions"></a>
 ### Functions
 
 |Signature|
@@ -56243,6 +59105,7 @@ Package: UnrealScriptTest
 
 Size: 0x3c | 60 bytes
 
+<a id="test0005_interfacederived-functions"></a>
 ### Functions
 
 |Signature|
@@ -56285,6 +59148,7 @@ Package: UnrealScriptTest
 
 Size: 0x7c | 124 bytes
 
+<a id="test0010_commandlet-functions"></a>
 ### Functions
 
 |Signature|
@@ -56301,6 +59165,7 @@ Package: UnrealScriptTest
 
 Size: 0x7c | 124 bytes
 
+<a id="test0011_commandlet-functions"></a>
 ### Functions
 
 |Signature|
@@ -56316,6 +59181,7 @@ Package: UnrealScriptTest
 
 Size: 0x3c | 60 bytes
 
+<a id="test0012_ifvarequalequalenum-functions"></a>
 ### Functions
 
 |Signature|
@@ -56323,6 +59189,7 @@ Size: 0x3c | 60 bytes
 VarEqualEqualEnumTypeEnum(<br>&nbsp;&nbsp;&nbsp;&nbsp;AnEnum: i8,<br>) -> ()|
 VarEqualEqualEnum(<br>&nbsp;&nbsp;&nbsp;&nbsp;AnEnum: i8,<br>) -> ()|
 
+<a id="test0012_ifvarequalequalenum-enums"></a>
 ### Enums
 
 |Enum|
@@ -56337,6 +59204,7 @@ Package: UnrealScriptTest
 
 Size: 0x3c | 60 bytes
 
+<a id="test0012_ifvarequalequalenumderivedclass-functions"></a>
 ### Functions
 
 |Signature|
@@ -56352,6 +59220,7 @@ Package: UnrealScriptTest
 
 Size: 0x7c | 124 bytes
 
+<a id="test0013_commandlet-functions"></a>
 ### Functions
 
 |Signature|
@@ -56366,6 +59235,7 @@ Package: UnrealScriptTest
 
 Size: 0x40 | 64 bytes
 
+<a id="test0013_ifenumequalequalvar-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -56375,6 +59245,7 @@ Size: 0x40 | 64 bytes
 |MirrorEnumTest|i8|0x1|0x3e|
 |InvalidMirrorEnumTest|i8|0x1|0x3f|
 
+<a id="test0013_ifenumequalequalvar-functions"></a>
 ### Functions
 
 |Signature|
@@ -56383,6 +59254,7 @@ CompareDifferentEnumTypes(<br>&nbsp;&nbsp;&nbsp;&nbsp;TestActor: Actor*,<br>) ->
 EnumTypeEnumEqualEqualVar(<br>&nbsp;&nbsp;&nbsp;&nbsp;AnEnum: i8,<br>) -> ()|
 EnumEqualEqualVar() -> ()|
 
+<a id="test0013_ifenumequalequalvar-enums"></a>
 ### Enums
 
 |Enum|
@@ -56400,6 +59272,7 @@ Package: UnrealScriptTest
 
 Size: 0x40 | 64 bytes
 
+<a id="test0013_ifenumequalequalvarderivedclass-functions"></a>
 ### Functions
 
 |Signature|
@@ -56415,6 +59288,7 @@ Package: UnrealScriptTest
 
 Size: 0x3c | 60 bytes
 
+<a id="test0014_fullyqualifiedenumfunction-functions"></a>
 ### Functions
 
 |Signature|
@@ -56422,6 +59296,7 @@ Size: 0x3c | 60 bytes
 Caller() -> ()|
 FullyQualifiedEnum(<br>&nbsp;&nbsp;&nbsp;&nbsp;Val: i8,<br>) -> ()|
 
+<a id="test0014_fullyqualifiedenumfunction-enums"></a>
 ### Enums
 
 |Enum|
@@ -56436,6 +59311,7 @@ Package: UnrealScriptTest
 
 Size: 0x3c | 60 bytes
 
+<a id="test0014_fullyqualifiedenumfunctionderivedclass-functions"></a>
 ### Functions
 
 |Signature|
@@ -56451,12 +59327,14 @@ Package: UnrealScriptTest
 
 Size: 0x3c | 60 bytes
 
+<a id="test0015_fullyqualifiedenumswitchcase-functions"></a>
 ### Functions
 
 |Signature|
 |---|
 CaseStatementWithFullQualifiedEnum(<br>&nbsp;&nbsp;&nbsp;&nbsp;AnEnum: i8,<br>) -> ()|
 
+<a id="test0015_fullyqualifiedenumswitchcase-enums"></a>
 ### Enums
 
 |Enum|
@@ -56471,6 +59349,7 @@ Package: UnrealScriptTest
 
 Size: 0x3c | 60 bytes
 
+<a id="test0015_fullyqualifiedenumswitchcasederivedclass-functions"></a>
 ### Functions
 
 |Signature|
@@ -56485,6 +59364,7 @@ Package: UnrealScriptTest
 
 Size: 0x4c | 76 bytes
 
+<a id="test0016_propertyassignment-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -56507,6 +59387,7 @@ Package: UnrealScriptTest
 
 Size: 0x3c | 60 bytes
 
+<a id="test0018_interfaceasavarinastruct-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -56521,6 +59402,7 @@ Package: UnrealScriptTest
 
 Size: 0x44 | 68 bytes
 
+<a id="test0019_macrosandunderscores-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -56536,6 +59418,7 @@ Package: UnrealScriptTest
 
 Size: 0x7c | 124 bytes
 
+<a id="test0020_commandlet-functions"></a>
 ### Functions
 
 |Signature|
@@ -56551,6 +59434,7 @@ Package: UnrealScriptTest
 
 Size: 0x98 | 152 bytes
 
+<a id="test0020_structdefaults-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -56561,12 +59445,14 @@ Size: 0x98 | 152 bytes
 |ClassIntVar|i32|0x4|0x88|
 |ClassStringVar|FString|0xc|0x8c|
 
+<a id="test0020_structdefaults-functions"></a>
 ### Functions
 
 |Signature|
 |---|
 LogPropertyValues(<br>&nbsp;&nbsp;&nbsp;&nbsp;ParameterStruct: TestStruct,<br>) -> ()|
 
+<a id="test0020_structdefaults-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -56585,6 +59471,7 @@ Package: UnrealScriptTest
 
 Size: 0x7c | 124 bytes
 
+<a id="test0021_commandlet-functions"></a>
 ### Functions
 
 |Signature|
@@ -56600,6 +59487,7 @@ Package: UnrealScriptTest
 
 Size: 0x3c | 60 bytes
 
+<a id="test0021_privatefunctionlookupbase-functions"></a>
 ### Functions
 
 |Signature|
@@ -56615,6 +59503,7 @@ Package: UnrealScriptTest
 
 Size: 0x3c | 60 bytes
 
+<a id="test0021_privatefunctionlookupderived-functions"></a>
 ### Functions
 
 |Signature|
@@ -56629,6 +59518,7 @@ Package: UnrealScriptTest
 
 Size: 0x7c | 124 bytes
 
+<a id="test0022_commandlet-functions"></a>
 ### Functions
 
 |Signature|
@@ -56643,6 +59533,7 @@ Package: UnrealScriptTest
 
 Size: 0x98 | 152 bytes
 
+<a id="test0022_structmemberaccess-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -56656,6 +59547,7 @@ Size: 0x98 | 152 bytes
 |m_ConstStructDelegateProp|FScriptDelegate|0xc|0x80|
 |__ReturnStructDelegate__Delegate|FScriptDelegate|0xc|0x8c|
 
+<a id="test0022_structmemberaccess-functions"></a>
 ### Functions
 
 |Signature|
@@ -56671,6 +59563,7 @@ SimpleStructAccess_CtorTest(<br>&nbsp;&nbsp;&nbsp;&nbsp;ValueString: FString,<br
 SimpleStructAccess_NonCtorTest(<br>&nbsp;&nbsp;&nbsp;&nbsp;ValueFloat: f32,<br>&nbsp;&nbsp;&nbsp;&nbsp;ValueInt: i32,<br>) -> ()|
 ReturnStructDelegate() -> OuterStruct|
 
+<a id="test0022_structmemberaccess-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -56688,12 +59581,14 @@ Package: UnrealScriptTest
 
 Size: 0x88 | 136 bytes
 
+<a id="test0024_commandlet-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
 |---|:-:|:-:|:-:|
 |__CommandletDelegate__Delegate|FScriptDelegate|0xc|0x7c|
 
+<a id="test0024_commandlet-functions"></a>
 ### Functions
 
 |Signature|
@@ -56710,6 +59605,7 @@ Package: UnrealScriptTest
 
 Size: 0x58 | 88 bytes
 
+<a id="test0024_delegatecomparison-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -56718,6 +59614,7 @@ Size: 0x58 | 88 bytes
 |__ComparisonDelegate__Delegate|FScriptDelegate|0xc|0x40|
 |__SomeOtherDelegate__Delegate|FScriptDelegate|0xc|0x4c|
 
+<a id="test0024_delegatecomparison-functions"></a>
 ### Functions
 
 |Signature|
@@ -56736,6 +59633,7 @@ Package: UnrealScriptTest
 
 Size: 0x80 | 128 bytes
 
+<a id="test0025_commandlet-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -56744,6 +59642,7 @@ Size: 0x80 | 128 bytes
 |SecondBool|bool|0x4|0x7c|
 |ThirdBool|bool|0x4|0x7c|
 
+<a id="test0025_commandlet-functions"></a>
 ### Functions
 
 |Signature|
@@ -56759,6 +59658,7 @@ Package: UnrealScriptTest
 
 Size: 0x7c | 124 bytes
 
+<a id="testcommandlet-functions"></a>
 ### Functions
 
 |Signature|
@@ -56773,6 +59673,7 @@ Package: UnrealScriptTest
 
 Size: 0x1ec | 492 bytes
 
+<a id="testplaceableactor-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -56788,6 +59689,7 @@ Package: UnrealScriptTest
 
 Size: 0x7c | 124 bytes
 
+<a id="udebuggerregressioncommandlet-functions"></a>
 ### Functions
 
 |Signature|
@@ -56802,6 +59704,7 @@ Package: IpDrv
 
 Size: 0x50 | 80 bytes
 
+<a id="webapplication-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -56810,6 +59713,7 @@ Size: 0x50 | 80 bytes
 |WebServer|WebServer*|0x4|0x40|
 |Path|FString|0xc|0x44|
 
+<a id="webapplication-functions"></a>
 ### Functions
 
 |Signature|
@@ -56829,6 +59733,7 @@ Package: IpDrv
 
 Size: 0x50 | 80 bytes
 
+<a id="helloweb-functions"></a>
 ### Functions
 
 |Signature|
@@ -56844,6 +59749,7 @@ Package: IpDrv
 
 Size: 0x50 | 80 bytes
 
+<a id="imageserver-functions"></a>
 ### Functions
 
 |Signature|
@@ -56858,6 +59764,7 @@ Package: IpDrv
 
 Size: 0x68 | 104 bytes
 
+<a id="inilocpatchermcp-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -56865,6 +59772,7 @@ Size: 0x68 | 104 bytes
 |McpDownloaderName|FName|0x8|0x5c|
 |Downloader|OnlineTitleFileDownloadMcp*|0x4|0x64|
 
+<a id="inilocpatchermcp-functions"></a>
 ### Functions
 
 |Signature|
@@ -56883,6 +59791,7 @@ Package: IpDrv
 
 Size: 0x254 | 596 bytes
 
+<a id="webconnection-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -56898,6 +59807,7 @@ Size: 0x254 | 596 bytes
 |MaxLineLength|i32|0x4|0x24c|
 |ConnId|i32|0x4|0x250|
 
+<a id="webconnection-functions"></a>
 ### Functions
 
 |Signature|
@@ -56924,6 +59834,7 @@ Package: IpDrv
 
 Size: 0x370 | 880 bytes
 
+<a id="webserver-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -56941,6 +59852,7 @@ Size: 0x370 | 880 bytes
 |ConnectionCount|i32|0x4|0x368|
 |ConnId|i32|0x4|0x36c|
 
+<a id="webserver-functions"></a>
 ### Functions
 
 |Signature|
@@ -56966,12 +59878,14 @@ Package: GridVehicle
 
 Size: 0xec | 236 bytes
 
+<a id="utseqact_entervehicle-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
 |---|:-:|:-:|:-:|
 |SeatIndex|i32|0x4|0xe8|
 
+<a id="utseqact_entervehicle-functions"></a>
 ### Functions
 
 |Signature|
@@ -56986,6 +59900,7 @@ Package: GridGame
 
 Size: 0x2b8 | 696 bytes
 
+<a id="deslightattackpawn-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -56994,6 +59909,7 @@ Size: 0x2b8 | 696 bytes
 |DiscProjectile|Projectile*|0x4|0x2a8|
 |DiscTargetPos|Vector|0xc|0x2ac|
 
+<a id="deslightattackpawn-functions"></a>
 ### Functions
 
 |Signature|
@@ -57087,6 +60003,7 @@ Package: GridGame
 
 Size: 0x3c | 60 bytes
 
+<a id="pgcameraspecifierinterface-functions"></a>
 ### Functions
 
 |Signature|
@@ -57102,6 +60019,7 @@ Package: GridGame
 
 Size: 0x54 | 84 bytes
 
+<a id="pgcheatmanagerdebugcamera-functions"></a>
 ### Functions
 
 |Signature|
@@ -57117,12 +60035,14 @@ Package: GridGame
 
 Size: 0x4e8 | 1256 bytes
 
+<a id="pgdebugcamera-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
 |---|:-:|:-:|:-:|
 |mOldCamera|Camera*|0x4|0x4e4|
 
+<a id="pgdebugcamera-functions"></a>
 ### Functions
 
 |Signature|
@@ -57138,18 +60058,21 @@ Package: GridGame
 
 Size: 0x5c9 | 1481 bytes
 
+<a id="pgdebugcameracontroller-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
 |---|:-:|:-:|:-:|
 |mState|i8|0x1|0x5c8|
 
+<a id="pgdebugcameracontroller-states"></a>
 ### States
 
 |Signature|
 |---|
 |PlayerMove_PlayerWaiting(<br>&nbsp;&nbsp;&nbsp;&nbsp;DeltaTime: f32,<br>) -> ()|
 
+<a id="pgdebugcameracontroller-functions"></a>
 ### Functions
 
 |Signature|
@@ -57162,6 +60085,7 @@ OnDeactivate(<br>&nbsp;&nbsp;&nbsp;&nbsp;PC: PlayerController*,<br>) -> ()|
 OnActivate(<br>&nbsp;&nbsp;&nbsp;&nbsp;PC: PlayerController*,<br>) -> ()|
 CopyCommonPlayerControllerSettings(<br>&nbsp;&nbsp;&nbsp;&nbsp;From: PlayerController*,<br>&nbsp;&nbsp;&nbsp;&nbsp;To: PlayerController*,<br>) -> ()|
 
+<a id="pgdebugcameracontroller-enums"></a>
 ### Enums
 
 |Enum|
@@ -57176,6 +60100,7 @@ Package: GridGame
 
 Size: 0x168 | 360 bytes
 
+<a id="pgdebugcamerainput-functions"></a>
 ### Functions
 
 |Signature|
@@ -57190,6 +60115,7 @@ Package: GridGame
 
 Size: 0x4c | 76 bytes
 
+<a id="pgdisplaydebughelper-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -57199,6 +60125,7 @@ Size: 0x4c | 76 bytes
 |YPos|f32|0x4|0x44|
 |IndentLevel|f32|0x4|0x48|
 
+<a id="pgdisplaydebughelper-functions"></a>
 ### Functions
 
 |Signature|
@@ -57224,6 +60151,7 @@ Package: GridGame
 
 Size: 0x1f8 | 504 bytes
 
+<a id="pgsavedmove-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -57247,6 +60175,7 @@ Size: 0x1f8 | 504 bytes
 |mSendAttempts|i32|0x4|0x1e8|
 |mDebugBehaviorStates|TArray\<DebugAnimBehaviorState\>|0xc|0x1ec|
 
+<a id="pgsavedmove-functions"></a>
 ### Functions
 
 |Signature|
@@ -57268,6 +60197,7 @@ GetMoveRepStruct(<br>&nbsp;&nbsp;&nbsp;&nbsp;repStruct: PgSavedMoveRepParams,<br
 GetComboRepStruct(<br>&nbsp;&nbsp;&nbsp;&nbsp;comboRepStruct: PgSavedMoveComboParams,<br>) -> PgSavedMoveComboParams|
 CopyComboChainArray(<br>&nbsp;&nbsp;&nbsp;&nbsp;fromArray: PgSpecialMoveAsset*,<br>&nbsp;&nbsp;&nbsp;&nbsp;toArray: PgSpecialMoveAsset*,<br>&nbsp;&nbsp;&nbsp;&nbsp;I: i32,<br>) -> ()|
 
+<a id="pgsavedmove-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -57283,6 +60213,7 @@ Package: GridGame
 
 Size: 0xec | 236 bytes
 
+<a id="pgseqact_assigncontrollerarch-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -57297,12 +60228,14 @@ Package: GridGame
 
 Size: 0xfc | 252 bytes
 
+<a id="pgseqact_clientsetcameratarget-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
 |---|:-:|:-:|:-:|
 |mDelayTime|f32|0x4|0xf8|
 
+<a id="pgseqact_clientsetcameratarget-functions"></a>
 ### Functions
 
 |Signature|
@@ -57317,6 +60250,7 @@ Package: GridGame
 
 Size: 0x100 | 256 bytes
 
+<a id="pgseqact_clothsim-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -57332,6 +60266,7 @@ Package: GridGame
 
 Size: 0xf0 | 240 bytes
 
+<a id="pgseqact_energyactor-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -57347,6 +60282,7 @@ Package: GridGame
 
 Size: 0xf8 | 248 bytes
 
+<a id="pgseqact_giveinventoryarch-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -57362,6 +60298,7 @@ Package: GridGame
 
 Size: 0xe9 | 233 bytes
 
+<a id="pgseqact_interpactor-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -57376,6 +60313,7 @@ Package: GridGame
 
 Size: 0xf4 | 244 bytes
 
+<a id="pgseqact_radialknockdownpawn-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -57392,6 +60330,7 @@ Package: GridGame
 
 Size: 0xf4 | 244 bytes
 
+<a id="pgseqact_removeinventoryarch-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -57406,6 +60345,7 @@ Package: GridGame
 
 Size: 0xec | 236 bytes
 
+<a id="pgseqact_setcamerasystem-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -57427,6 +60367,7 @@ Package: GridGame
 
 Size: 0xf0 | 240 bytes
 
+<a id="pgseqact_uigetobjectproperty-functions"></a>
 ### Functions
 
 |Signature|
@@ -57456,6 +60397,7 @@ Package: GridGame
 
 Size: 0x268 | 616 bytes
 
+<a id="pgvehiclevolume-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -57463,6 +60405,7 @@ Size: 0x268 | 616 bytes
 |mVehicleArchetype|PgVehicle*|0x4|0x260|
 |mPlayDriverEnter|bool|0x4|0x264|
 
+<a id="pgvehiclevolume-functions"></a>
 ### Functions
 
 |Signature|
@@ -57479,6 +60422,7 @@ Package: GridGame
 
 Size: 0x344 | 836 bytes
 
+<a id="pgvehicleweapon-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
@@ -57487,12 +60431,14 @@ Size: 0x344 | 836 bytes
 |mAltFireTriggerTags|TArray\<FName\>|0xc|0x32c|
 |mFireTypeInfoList|TArray\<FireTypeInfo\>|0xc|0x338|
 
+<a id="pgvehicleweapon-states"></a>
 ### States
 
 |Signature|
 |---|
 |RefireCheckTimer_WeaponFiring() -> ()|
 
+<a id="pgvehicleweapon-functions"></a>
 ### Functions
 
 |Signature|
@@ -57502,6 +60448,7 @@ CustomFire(<br>&nbsp;&nbsp;&nbsp;&nbsp;Index: i32,<br>) -> ()|
 StartFire(<br>&nbsp;&nbsp;&nbsp;&nbsp;FireModeNum: i8,<br>&nbsp;&nbsp;&nbsp;&nbsp;PgVehicle: PgVehicle*,<br>) -> ()|
 PostBeginPlay(<br>&nbsp;&nbsp;&nbsp;&nbsp;Index: i32,<br>) -> ()|
 
+<a id="pgvehicleweapon-script-structs"></a>
 ### Script Structs
 
 |Struct|Size|
@@ -57537,12 +60484,14 @@ Package: GridGame
 
 Size: 0x40 | 64 bytes
 
+<a id="pgweapfiretypeinstanthit-properties"></a>
 ### Properties
 
 |Property|Type|Size|Offset|
 |---|:-:|:-:|:-:|
 |mInstantHitMomentum|f32|0x4|0x3c|
 
+<a id="pgweapfiretypeinstanthit-functions"></a>
 ### Functions
 
 |Signature|
