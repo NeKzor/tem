@@ -18,6 +18,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "injector", "injector\injector.csproj", "{BB5EC649-37A2-4E8B-933E-DF289A6B48D5}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{5ADB3353-6244-4795-B917-CADEC6A65454}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{4E5CAA53-FD31-4020-9D4E-69F1EFA9E366}"
+	ProjectSection(SolutionItems) = preProject
+		.github\workflows\doc.yaml = .github\workflows\doc.yaml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -67,6 +74,10 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{5ADB3353-6244-4795-B917-CADEC6A65454} = {9F6ADB8E-439B-44B2-A22C-BA807847B1C1}
+		{4E5CAA53-FD31-4020-9D4E-69F1EFA9E366} = {5ADB3353-6244-4795-B917-CADEC6A65454}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5F5F0765-2833-4E04-99C1-07237851869D}
