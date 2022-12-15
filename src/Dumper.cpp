@@ -67,20 +67,77 @@ auto dump_engine() -> void
 // TODO: figure this out
 auto dump_engine_to_markdown() -> void
 {
-    auto g_Names = reinterpret_cast<TArray<FNameEntry*>*>(Offsets::g_Names);
-    auto names = g_Names->data;
+    std::ofstream stream("C:\\Users\\nekz\\git\\tem\\doc\\src\\engine\\classes.md");
 
-    auto g_Objects = reinterpret_cast<TArray<UObject*>*>(Offsets::g_Objects);
-    auto objects = g_Objects->data;
+    auto g_Objects = *reinterpret_cast<TArray<UObject*>*>(Offsets::g_Objects);
+    auto g_Names = *reinterpret_cast<TArray<FNameEntry*>*>(Offsets::g_Names);
 
-    std::ofstream classes_stream("trom_evolution_classes_dump.md");
-    classes_stream << "# Tron: Evolution Classes" << std::endl << std::endl;
+    auto get_object_name = [&g_Names](UObject* object) -> const char* {
+        return object && g_Names[object->name.index] ? g_Names[object->name.index]->name : "unk";
+    };
+
+    auto get_outer_object_name = [&g_Names](UObject* object) -> const char* {
+        return object->outer_object && g_Names[object->outer_object->name.index]
+            ? g_Names[object->outer_object->name.index]->name
+            : "unk";
+    };
+
+    auto get_class_object_name = [&g_Names](UObject* object) -> const char* {
+        return object->class_object && g_Names[object->class_object->name.index]
+            ? g_Names[object->class_object->name.index]->name
+            : "unk";
+    };
+
+    auto resolve_type = [](const char* type_name) -> const char* {
+        if (strcmp(type_name, "Function") == 0) {
+            return "fn() -> ()";
+        } else if (strcmp(type_name, "ScriptStruct") == 0) {
+            return "script_struct_t";
+        } else if (strcmp(type_name, "StructProperty") == 0) {
+            return "struct_t";
+        } else if (strcmp(type_name, "IntProperty") == 0) {
+            return "i32";
+        } else if (strcmp(type_name, "ByteProperty") == 0) {
+            return "i8";
+        } else if (strcmp(type_name, "BoolProperty") == 0) {
+            return "bool";
+        } else if (strcmp(type_name, "FloatProperty") == 0) {
+            return "f32";
+        } else if (strcmp(type_name, "NameProperty") == 0) {
+            return "FName";
+        } else if (strcmp(type_name, "ArrayProperty") == 0) {
+            return "TArray<unknown_t>";
+        } else if (strcmp(type_name, "StrProperty") == 0) {
+            return "FString";
+        } else if (strcmp(type_name, "ClassProperty") == 0) {
+            return "UClass*";
+        } else if (strcmp(type_name, "ObjectProperty") == 0) {
+            return "UObject*";
+        } else if (strcmp(type_name, "Enum") == 0) {
+            return "i32";
+        } else if (strcmp(type_name, "MapProperty") == 0) {
+            return "TMap<unknown_t, unknown_t>";
+        } else if (strcmp(type_name, "ComponentProperty") == 0) {
+            return "UComponent*";
+        } else if (strcmp(type_name, "DelegateProperty") == 0) {
+            return "UDelegate*";
+        } else if (strcmp(type_name, "Const") == 0) {
+            return "UConst*";
+        } else if (strcmp(type_name, "InterfaceProperty") == 0) {
+            return "UInterface*";
+        } else if (strcmp(type_name, "State") == 0) {
+            return "UState*";
+        } else {
+            return "unknown_t";
+        }
+    };
+
+    stream << "# Classes" << std::endl << std::endl;
 
     auto unique_classes = std::set<UClass*>();
 
-    for (auto i = 0u; i < g_Objects->size; ++i) {
-        auto item = objects[i];
-
+    foreach_item(item, g_Objects)
+    {
         if (!item || !item->name.index) {
             continue;
         }
@@ -92,97 +149,162 @@ auto dump_engine_to_markdown() -> void
 
         unique_classes.emplace(class_object);
 
-        auto class_name = std::string(names[class_object->name.index] ? names[class_object->name.index]->name : "");
-        auto outer_name = class_object->outer_object && names[class_object->outer_object->name.index]
-            ? names[class_object->outer_object->name.index]->name
-            : "";
+        auto class_name = get_object_name(class_object);
+        auto outer_name = get_outer_object_name(class_object);
 
-        classes_stream << "## " << class_name << std::endl << std::endl;
-        classes_stream << "Package: " << outer_name << std::endl << std::endl;
-        classes_stream << "Size: 0x" << std::hex << class_object->property_size << " bytes" << std::endl;
+        stream << "## " << class_name << std::endl << std::endl;
+
+        if (class_object->super_field) {
+            stream << "Instance of: ";
+
+            auto super_field = class_object->super_field;
+            while (super_field) {
+                auto super_field_name = get_object_name(super_field);
+
+                stream << "[" << super_field_name << "](#";
+
+                while (*super_field_name) {
+                    stream << char(tolower(*super_field_name));
+                    ++super_field_name;
+                }
+
+                stream << ")";
+
+                super_field = super_field->super_field;
+                if (super_field) {
+                    stream << " \\> ";
+                }
+            }
+
+            stream << std::endl << std::endl;
+        }
+
+        stream << "Package: " << outer_name << std::endl << std::endl;
+        stream << "Size: 0x" << std::hex << class_object->property_size << " | " << std::dec
+               << class_object->property_size << " bytes" << std::endl;
 
         auto child_field = class_object->children;
         if (child_field) {
-            classes_stream << std::endl;
-            classes_stream << "### Fields" << std::endl << std::endl;
-            classes_stream << "|Field|Type|Size|Offset|" << std::endl;
-            classes_stream << "|---|---|---|---|" << std::endl;
-
+            auto has_properties = false;
+            auto has_states = false; // These are like mixins or trait functions; is return value always void?
+            auto has_script_structs = false;
+            auto has_consts = false;
+            auto has_enums = false;
             auto has_functions = false;
 
             while (child_field) {
-                auto child_name = names[child_field->name.index];
-                auto type_name = child_field->class_object && names[child_field->class_object->name.index]
-                    ? names[child_field->class_object->name.index]->name
-                    : "unk";
+                auto type_name = get_class_object_name(child_field);
 
                 if (strstr(type_name, "Property")) {
-                    auto type_object = child_field->as<UProperty>();
-                    classes_stream << "|" << (child_name ? child_name->name : "unk") << "|" << type_name << "|0x"
-                                   << std::hex << type_object->property_size << "|0x" << std::hex << type_object->offset
-                                   << "|" << std::endl;
-                } else if (strcmp(type_name, "Function") != 0) {
-                    classes_stream << "|" << (child_name ? child_name->name : "unk") << "|" << type_name << "|-|-|"
-                                   << std::endl;
-                } else {
+                    has_properties = true;
+                } else if (strcmp(type_name, "State") == 0) {
+                    has_states = true;
+                } else if (strcmp(type_name, "ScriptStruct") == 0) {
+                    has_script_structs = true;
+                } else if (strcmp(type_name, "Const") == 0) {
+                    has_consts = true;
+                } else if (strcmp(type_name, "Enum") == 0) {
+                    has_enums = true;
+                } else if (strcmp(type_name, "Function") == 0) {
                     has_functions = true;
                 }
 
                 child_field = child_field->next;
             }
 
-            if (has_functions) {
-                classes_stream << std::endl << "### Functions" << std::endl << std::endl;
-                classes_stream << "|Signature|Params|Params Sizes|" << std::endl;
-                classes_stream << "|---|---|---|" << std::endl;
+            if (has_properties) {
+                stream << std::endl;
+                stream << "### Properties" << std::endl << std::endl;
+                stream << "|Property|Type|Size|Offset|" << std::endl;
+                stream << "|---|---|---|---|" << std::endl;
 
                 child_field = class_object->children;
                 while (child_field) {
-                    auto type_name = child_field->class_object && names[child_field->class_object->name.index]
-                        ? names[child_field->class_object->name.index]->name
-                        : "unk";
+                    auto child_name = get_object_name(child_field);
+                    auto type_name = get_class_object_name(child_field);
 
-                    if (strcmp(type_name, "Function") == 0) {
-                        auto child_name = names[child_field->name.index];
-                        auto type_object = child_field->as<UFunction>();
+                    if (strstr(type_name, "Property")) {
+                        auto type_object = child_field->as<UProperty>();
+                        stream << "|" << child_name << "|" << resolve_type(type_name) << "|0x" << std::hex
+                               << type_object->property_size << "|0x" << std::hex << type_object->offset << "|"
+                               << std::endl;
+                    }
 
-                        /*auto child_child_field = type_object->children;
-                        if (child_child_field) {
-                            auto return_value_name = names[child_child_field->name.index];
-                            auto child_type_name
-                                = child_child_field->class_object && names[child_child_field->class_object->name.index]
-                                ? names[child_child_field->class_object->name.index]->name
-                                : "unk";
+                    child_field = child_field->next;
+                }
+            }
 
-                            classes_stream << "|" << (return_value_name ? return_value_name->name : "unk") << " "
-                                           << (child_name ? child_name->name : "unk") << "(";
+            if (has_states) {
+                stream << std::endl << "### States" << std::endl << std::endl;
+                stream << "|Signature|" << std::endl;
+                stream << "|---|" << std::endl;
 
-                            child_child_field = child_child_field->next;
+                child_field = class_object->children;
+                while (child_field) {
+                    auto type_name = get_class_object_name(child_field);
 
-                            while (child_child_field) {
-                                auto child_child_name = names[child_child_field->name.index];
-                                auto child_type_name = child_child_field->class_object
-                                        && names[child_child_field->class_object->name.index]
-                                    ? names[child_child_field->class_object->name.index]->name
-                                    : "unk";
+                    if (strcmp(type_name, "State") == 0) {
+                        auto state_name = get_object_name(child_field);
+                        auto state_child = child_field->as<UState>()->children;
 
-                                classes_stream << child_type_name << " "
-                                               << (child_child_name ? child_child_name->name : "unk");
+                        if (state_child) {
+                            auto state_child_name = get_object_name(state_child);
+                            stream << "|" << state_child_name << "_" << state_name << "(";
 
-                                child_child_field = child_child_field->next;
+                            if (state_child->super_field) {
+                                auto state_parameter = state_child->super_field->as<UState>()->children;
+                                while (state_parameter) {
+                                    stream << "<br>&nbsp;&nbsp;&nbsp;&nbsp;";
 
-                                if (child_child_field) {
-                                    classes_stream << ", ";
+                                    auto state_parameter_name = get_object_name(state_parameter);
+                                    auto state_parameter_type = get_class_object_name(state_parameter);
+
+                                    stream << state_parameter_name << ": " << resolve_type(state_parameter_type) << ",";
+
+                                    state_parameter = state_parameter->next;
                                 }
                             }
-                            classes_stream << ")|";
-                        } else {
-                            classes_stream << "|" << (child_name ? child_name->name : "unk")  << "()|";
-                        }*/
-                        classes_stream << "|" << (child_name ? child_name->name : "unk") << "|";
 
-                        classes_stream << type_object->num_params << "|" << type_object->params_size << "|"
-                                       << std::endl;
+                            stream << "<br>) -> ()|" << std::endl;
+                        }
+                    }
+
+                    child_field = child_field->next;
+                }
+            }
+
+            if (has_functions) {
+                stream << std::endl << "### Functions" << std::endl << std::endl;
+                stream << "|Signature|" << std::endl;
+                stream << "|---|" << std::endl;
+
+                child_field = class_object->children;
+                while (child_field) {
+                    auto type_name = get_class_object_name(child_field);
+
+                    if (strcmp(type_name, "Function") == 0) {
+                        auto function_name = get_object_name(child_field);
+                        auto function_parameter = child_field->as<UFunction>()->children;
+
+                        stream << function_name << "(";
+
+                        auto return_value_type = "()";
+
+                        while (function_parameter) {
+                            auto parameter_name = get_object_name(function_parameter);
+                            auto parameter_type = get_class_object_name(function_parameter);
+
+                            if (strcmp(parameter_name, "ReturnValue") == 0) {
+                                return_value_type = resolve_type(parameter_type);
+                            } else {
+                                stream << "<br>&nbsp;&nbsp;&nbsp;&nbsp;" << parameter_name << ": "
+                                       << resolve_type(parameter_type) << ",";
+                            }
+
+                            function_parameter = function_parameter->next;
+                        }
+
+                        stream << "<br>) -> " << return_value_type << "|" << std::endl;
                     }
 
                     child_field = child_field->next;
@@ -190,7 +312,7 @@ auto dump_engine_to_markdown() -> void
             }
         }
 
-        classes_stream << std::endl;
+        stream << std::endl;
     }
 }
 
