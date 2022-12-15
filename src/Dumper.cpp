@@ -64,10 +64,10 @@ auto dump_engine() -> void
     }
 }
 
-// TODO: figure this out
 auto dump_engine_to_markdown() -> void
 {
-    std::ofstream stream("C:\\Users\\nekz\\git\\tem\\doc\\src\\engine\\classes.md");
+    std::ofstream stream("classes.md");
+    std::ofstream navigation("classes_navigation.md");
 
     auto g_Objects = *reinterpret_cast<TArray<UObject*>*>(Offsets::g_Objects);
     auto g_Names = *reinterpret_cast<TArray<FNameEntry*>*>(Offsets::g_Names);
@@ -134,6 +134,9 @@ auto dump_engine_to_markdown() -> void
         return result;
     };
 
+    navigation << "|Class|Properties|States|Functions|Enums|Consts|Structs|" << std::endl;
+    navigation << "|---|---|---|---|---|---|---|" << std::endl;
+
     stream << "# Classes" << std::endl << std::endl;
 
     auto unique_classes = std::set<UClass*>();
@@ -154,7 +157,15 @@ auto dump_engine_to_markdown() -> void
         auto class_name = get_object_name(class_object);
         auto outer_name = get_outer_object_name(class_object);
 
+        auto class_name_lowercase = _strdup(class_name);
+        auto class_name_lowercase_ptr = class_name_lowercase;
+        while (*class_name_lowercase_ptr) {
+            *class_name_lowercase_ptr = char(tolower(*class_name_lowercase_ptr));
+            ++class_name_lowercase_ptr;
+        }
+
         stream << "## " << class_name << std::endl << std::endl;
+        navigation << "|[" << class_name << "](./classes.md#" << class_name_lowercase << ")|";
 
         if (class_object->super_field) {
             stream << "Inherits: ";
@@ -215,7 +226,8 @@ auto dump_engine_to_markdown() -> void
             }
 
             if (has_properties) {
-                stream << std::endl;
+                navigation << "[Properties](./classes.md#" << class_name_lowercase << "-properties)|";
+                stream << std::endl << "<a id=\"" << class_name_lowercase << "-properties\"></a>" << std::endl;
                 stream << "### Properties" << std::endl << std::endl;
                 stream << "|Property|Type|Size|Offset|" << std::endl;
                 stream << "|---|:-:|:-:|:-:|" << std::endl;
@@ -234,10 +246,14 @@ auto dump_engine_to_markdown() -> void
 
                     child_field = child_field->next;
                 }
+            } else {
+                navigation << "|";
             }
 
             if (has_states) {
-                stream << std::endl << "### States" << std::endl << std::endl;
+                navigation << "[States](./classes.md#" << class_name_lowercase << "-states)|";
+                stream << std::endl <<  "<a id=\"" << class_name_lowercase << "-states\"></a>" << std::endl;
+                stream <<"### States" << std::endl << std::endl;
                 stream << "|Signature|" << std::endl;
                 stream << "|---|" << std::endl;
 
@@ -279,10 +295,14 @@ auto dump_engine_to_markdown() -> void
 
                     child_field = child_field->next;
                 }
+            } else {
+                navigation << "|";
             }
 
             if (has_functions) {
-                stream << std::endl << "### Functions" << std::endl << std::endl;
+                navigation << "[Functions](./classes.md#" << class_name_lowercase << "-functions)|";
+                stream << std::endl << "<a id=\"" << class_name_lowercase << "-functions\"></a>" << std::endl;
+                stream << "### Functions" << std::endl << std::endl;
                 stream << "|Signature|" << std::endl;
                 stream << "|---|" << std::endl;
 
@@ -324,10 +344,13 @@ auto dump_engine_to_markdown() -> void
 
                     child_field = child_field->next;
                 }
+            } else {
+                navigation << "|";
             }
 
             if (has_enums) {
-                stream << std::endl;
+                navigation << "[Enums](./classes.md#" << class_name_lowercase << "-enums)|";
+                stream << std::endl << "<a id=\"" << class_name_lowercase << "-enums\"></a>" << std::endl;
                 stream << "### Enums" << std::endl << std::endl;
                 stream << "|Enum|" << std::endl;
                 stream << "|---|" << std::endl;
@@ -352,10 +375,13 @@ auto dump_engine_to_markdown() -> void
 
                     child_field = child_field->next;
                 }
+            } else {
+                navigation << "|";
             }
 
             if (has_consts) {
-                stream << std::endl;
+                navigation << "[Consts](./classes.md#" << class_name_lowercase << "-consts)|";
+                stream << std::endl << "<a id=\"" << class_name_lowercase << "-consts\"></a>" << std::endl;
                 stream << "### Consts" << std::endl << std::endl;
                 stream << "|Constant|Value|" << std::endl;
                 stream << "|---|:-:|" << std::endl;
@@ -372,10 +398,13 @@ auto dump_engine_to_markdown() -> void
 
                     child_field = child_field->next;
                 }
+            } else {
+                navigation << "|";
             }
 
             if (has_script_structs) {
-                stream << std::endl;
+                navigation << "[Structs](./classes.md#" << class_name_lowercase << "-script-structs)|";
+                stream << std::endl << "<a id=\"" << class_name_lowercase << "-script-structs\"></a>" << std::endl;
                 stream << "### Script Structs" << std::endl << std::endl;
                 stream << "|Struct|Size|" << std::endl;
                 stream << "|---|:-:|" << std::endl;
@@ -430,10 +459,18 @@ auto dump_engine_to_markdown() -> void
 
                     child_field = child_field->next;
                 }
+            } else {
+                navigation << "|";
             }
 
             stream << std::endl;
+        } else {
+            navigation << "||||||";
         }
+
+        free(class_name_lowercase);
+
+        navigation << std::endl;
     }
 }
 
