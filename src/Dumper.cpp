@@ -72,6 +72,9 @@ auto dump_engine_to_markdown() -> void
     auto g_Objects = *reinterpret_cast<TArray<UObject*>*>(Offsets::g_Objects);
     auto g_Names = *reinterpret_cast<TArray<FNameEntry*>*>(Offsets::g_Names);
 
+    auto get_name
+        = [&g_Names](FName& name) -> const char* { return g_Names[name.index] ? g_Names[name.index]->name : "unk"; };
+
     auto get_object_name = [&g_Names](UObject* object) -> const char* {
         return object && g_Names[object->name.index] ? g_Names[object->name.index]->name : "unk";
     };
@@ -216,7 +219,7 @@ auto dump_engine_to_markdown() -> void
                 stream << std::endl;
                 stream << "### Properties" << std::endl << std::endl;
                 stream << "|Property|Type|Size|Offset|" << std::endl;
-                stream << "|---|---|---|---|" << std::endl;
+                stream << "|---|:-:|:-:|:-:|" << std::endl;
 
                 child_field = class_object->children;
                 while (child_field) {
@@ -310,9 +313,57 @@ auto dump_engine_to_markdown() -> void
                     child_field = child_field->next;
                 }
             }
-        }
 
-        stream << std::endl;
+            if (has_enums) {
+                stream << std::endl;
+                stream << "### Enums" << std::endl << std::endl;
+                stream << "|Enum|" << std::endl;
+                stream << "|---|" << std::endl;
+
+                child_field = class_object->children;
+                while (child_field) {
+                    auto child_name = get_object_name(child_field);
+                    auto type_name = get_class_object_name(child_field);
+
+                    if (strstr(type_name, "Enum")) {
+                        stream << "|" << child_name << " {";
+
+                        auto names = child_field->as<UEnum>()->names;
+
+                        foreach_item(enum_name, names)
+                        {
+                            stream << "<br>&nbsp;&nbsp;&nbsp;&nbsp;" << get_name(enum_name) << ",";
+                        }
+
+                        stream << "<br>}|" << std::endl;
+                    }
+
+                    child_field = child_field->next;
+                }
+            }
+
+            if (has_consts) {
+                stream << std::endl;
+                stream << "### Consts" << std::endl << std::endl;
+                stream << "|Constant|Value|" << std::endl;
+                stream << "|---|:-:|" << std::endl;
+
+                child_field = class_object->children;
+                while (child_field) {
+                    auto child_name = get_object_name(child_field);
+                    auto type_name = get_class_object_name(child_field);
+
+                    if (strstr(type_name, "Const")) {
+                        auto value = child_field->as<UConst>()->value;
+                        stream << "|" << child_name << "|" << value.str() << "|" << std::endl;
+                    }
+
+                    child_field = child_field->next;
+                }
+            }
+
+            stream << std::endl;
+        }
     }
 }
 
