@@ -91,48 +91,47 @@ auto dump_engine_to_markdown() -> void
             : "unk";
     };
 
-    auto resolve_type = [](const char* type_name) -> const char* {
-        if (strcmp(type_name, "Function") == 0) {
-            return "fn() -> ()";
-        } else if (strcmp(type_name, "ScriptStruct") == 0) {
-            return "script_struct_t";
-        } else if (strcmp(type_name, "StructProperty") == 0) {
-            return "struct_t";
+    std::function<std::string(UField*)> resolve_type;
+
+    resolve_type = [&get_class_object_name, &get_object_name, &resolve_type](UField* field) -> std::string {
+        auto result = std::string("");
+        auto type_name = get_class_object_name(field);
+
+        if (strcmp(type_name, "StructProperty") == 0) {
+            result = get_object_name(field->as<UStructProperty>()->property_struct);
         } else if (strcmp(type_name, "IntProperty") == 0) {
-            return "i32";
+            result = "i32";
         } else if (strcmp(type_name, "ByteProperty") == 0) {
-            return "i8";
+            result = "i8";
         } else if (strcmp(type_name, "BoolProperty") == 0) {
-            return "bool";
+            result = "bool";
         } else if (strcmp(type_name, "FloatProperty") == 0) {
-            return "f32";
+            result = "f32";
         } else if (strcmp(type_name, "NameProperty") == 0) {
-            return "FName";
+            result = "FName";
         } else if (strcmp(type_name, "ArrayProperty") == 0) {
-            return "TArray<unknown_t>";
+            result = std::string("TArray\\<") + resolve_type(field->as<UArrayProperty>()->inner) + "\\>";
         } else if (strcmp(type_name, "StrProperty") == 0) {
-            return "FString";
+            result = "FString";
         } else if (strcmp(type_name, "ClassProperty") == 0) {
-            return "UClass*";
+            result = "UClass*";
         } else if (strcmp(type_name, "ObjectProperty") == 0) {
-            return "UObject*";
-        } else if (strcmp(type_name, "Enum") == 0) {
-            return "i32";
+            result = std::string(get_object_name(field->as<UObjectProperty>()->property_class)) + "*";
         } else if (strcmp(type_name, "MapProperty") == 0) {
-            return "TMap<unknown_t, unknown_t>";
+            result = "TMap\\<FPair\\>"; // Actual key/value type information seems to be lost :>
         } else if (strcmp(type_name, "ComponentProperty") == 0) {
-            return "UComponent*";
+            result = std::string(get_object_name(field->as<UComponentProperty>()->component)) + "*";
         } else if (strcmp(type_name, "DelegateProperty") == 0) {
-            return "UDelegate*";
-        } else if (strcmp(type_name, "Const") == 0) {
-            return "UConst*";
+            result = "FScriptDelegate";
         } else if (strcmp(type_name, "InterfaceProperty") == 0) {
-            return "UInterface*";
-        } else if (strcmp(type_name, "State") == 0) {
-            return "UState*";
+            result = std::string(get_object_name(field->as<UInterfaceProperty>()->interface_class)) + "*";
+        } else if (strcmp(type_name, "State") == 0 || strcmp(type_name, "Enum") == 0 || strcmp(type_name, "Const") == 0
+            || strcmp(type_name, "ScriptStruct") == 0 || strcmp(type_name, "Function") == 0) {
+            result = "unknown_t"; // should not happen
         } else {
-            return "unknown_t";
+            result = get_object_name(field);
         }
+        return result;
     };
 
     stream << "# Classes" << std::endl << std::endl;
@@ -158,7 +157,7 @@ auto dump_engine_to_markdown() -> void
         stream << "## " << class_name << std::endl << std::endl;
 
         if (class_object->super_field) {
-            stream << "Instance of: ";
+            stream << "Inherits: ";
 
             auto super_field = class_object->super_field;
             while (super_field) {
@@ -189,7 +188,7 @@ auto dump_engine_to_markdown() -> void
         auto child_field = class_object->children;
         if (child_field) {
             auto has_properties = false;
-            auto has_states = false; // These are like mixins or trait functions; is return value always void?
+            auto has_states = false; // These are like mixins or trait functions; is return value type always void?
             auto has_script_structs = false;
             auto has_consts = false;
             auto has_enums = false;
@@ -228,8 +227,8 @@ auto dump_engine_to_markdown() -> void
 
                     if (strstr(type_name, "Property")) {
                         auto type_object = child_field->as<UProperty>();
-                        stream << "|" << child_name << "|" << resolve_type(type_name) << "|0x" << std::hex
-                               << type_object->property_size << "|0x" << std::hex << type_object->offset << "|"
+                        stream << "|" << child_name << "|" << resolve_type(child_field) << "|0x" << std::hex
+                               << type_object->element_size << "|0x" << std::hex << type_object->offset << "|"
                                << std::endl;
                     }
 
@@ -254,21 +253,27 @@ auto dump_engine_to_markdown() -> void
                             auto state_child_name = get_object_name(state_child);
                             stream << "|" << state_child_name << "_" << state_name << "(";
 
+                            auto has_parameters = false;
+
                             if (state_child->super_field) {
                                 auto state_parameter = state_child->super_field->as<UState>()->children;
+                                if (state_parameter) {
+                                    has_parameters = true;
+                                }
+
                                 while (state_parameter) {
-                                    stream << "<br>&nbsp;&nbsp;&nbsp;&nbsp;";
-
-                                    auto state_parameter_name = get_object_name(state_parameter);
-                                    auto state_parameter_type = get_class_object_name(state_parameter);
-
-                                    stream << state_parameter_name << ": " << resolve_type(state_parameter_type) << ",";
+                                    stream << "<br>&nbsp;&nbsp;&nbsp;&nbsp;" << get_object_name(state_parameter) << ": "
+                                           << resolve_type(state_parameter) << ",";
 
                                     state_parameter = state_parameter->next;
                                 }
                             }
 
-                            stream << "<br>) -> ()|" << std::endl;
+                            if (has_parameters) {
+                                stream << "<br>";
+                            }
+
+                            stream << ") -> ()|" << std::endl;
                         }
                     }
 
@@ -291,23 +296,30 @@ auto dump_engine_to_markdown() -> void
 
                         stream << function_name << "(";
 
-                        auto return_value_type = "()";
+                        auto return_value_type = std::string("()");
+                        auto has_parameters = false;
 
                         while (function_parameter) {
                             auto parameter_name = get_object_name(function_parameter);
                             auto parameter_type = get_class_object_name(function_parameter);
 
                             if (strcmp(parameter_name, "ReturnValue") == 0) {
-                                return_value_type = resolve_type(parameter_type);
+                                return_value_type = resolve_type(function_parameter);
                             } else {
+                                has_parameters = true;
+
                                 stream << "<br>&nbsp;&nbsp;&nbsp;&nbsp;" << parameter_name << ": "
-                                       << resolve_type(parameter_type) << ",";
+                                       << resolve_type(function_parameter) << ",";
                             }
 
                             function_parameter = function_parameter->next;
                         }
 
-                        stream << "<br>) -> " << return_value_type << "|" << std::endl;
+                        if (has_parameters) {
+                            stream << "<br>";
+                        }
+
+                        stream << ") -> " << return_value_type << "|" << std::endl;
                     }
 
                     child_field = child_field->next;
@@ -356,6 +368,64 @@ auto dump_engine_to_markdown() -> void
                     if (strstr(type_name, "Const")) {
                         auto value = child_field->as<UConst>()->value;
                         stream << "|" << child_name << "|" << value.str() << "|" << std::endl;
+                    }
+
+                    child_field = child_field->next;
+                }
+            }
+
+            if (has_script_structs) {
+                stream << std::endl;
+                stream << "### Script Structs" << std::endl << std::endl;
+                stream << "|Struct|Size|" << std::endl;
+                stream << "|---|:-:|" << std::endl;
+
+                child_field = class_object->children;
+                while (child_field) {
+                    auto child_name = get_object_name(child_field);
+                    auto type_name = get_class_object_name(child_field);
+
+                    if (strstr(type_name, "ScriptStruct")) {
+                        stream << "|" << child_name << " {";
+
+                        auto script_struct = child_field->as<UScriptStruct>();
+                        auto struct_member = script_struct->children;
+
+                        while (struct_member) {
+                            auto member_name = get_object_name(struct_member);
+                            auto member_type = get_class_object_name(struct_member);
+
+                            // TODO: recursive
+                            if (strstr(member_type, "ScriptStruct")) {
+                                stream << "<br>&nbsp;&nbsp;&nbsp;&nbsp;" << member_name << " {";
+
+                                auto member_script_struct = struct_member->as<UScriptStruct>();
+                                auto member_struct_member = member_script_struct->children;
+
+                                while (member_struct_member) {
+                                    auto member_struct_name = get_object_name(member_struct_member);
+                                    auto member_struct_property = member_struct_member->as<UProperty>();
+
+                                    stream << "<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+                                           << member_struct_name << ": " << resolve_type(member_struct_member)
+                                           << ", // 0x" << std::hex << member_struct_property->offset;
+
+                                    member_struct_member = member_struct_member->next;
+                                }
+
+                                stream << "<br>&nbsp;&nbsp;&nbsp;&nbsp;}";
+                            } else {
+                                auto member_property = struct_member->as<UProperty>();
+
+                                stream << "<br>&nbsp;&nbsp;&nbsp;&nbsp;" << member_name << ": "
+                                       << resolve_type(struct_member) << ", // 0x" << std::hex
+                                       << member_property->offset;
+                            }
+
+                            struct_member = struct_member->next;
+                        }
+
+                        stream << "<br>}|0x" << std::hex << script_struct->property_size << "|" << std::endl;
                     }
 
                     child_field = child_field->next;

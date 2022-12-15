@@ -553,7 +553,7 @@ struct UInterfaceProperty : UProperty {
 };
 
 struct UStructProperty : UProperty {
-    UStruct* struct_struct; // 0x84
+    UStruct* property_struct; // 0x84
 };
 
 struct UArrayProperty : UProperty {
