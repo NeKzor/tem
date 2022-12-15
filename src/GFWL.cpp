@@ -23,6 +23,8 @@ auto gfwlMemCheckPatch = Memory::Patch();
 std::map<uint32_t, std::tuple<uintptr_t, const char*, uint32_t, uintptr_t>> addressesToUnhook = {};
 bool suspended_gfwl_main_thread = false;
 
+auto hook_gfwl(Memory::ModuleInfo& xlive) -> void;
+
 DECL_DETOUR_API(signed int, __stdcall, xlive_3, int a1, signed int a2, signed int a3);
 DECL_DETOUR_API(signed int, __stdcall, xlive_4, int a1);
 DECL_DETOUR_API(signed int, __stdcall, xlive_6, int a1, int a2, signed int* a3);
@@ -228,10 +230,10 @@ auto hook_gfwl(Memory::ModuleInfo& xlive) -> void
     HOOK_ORDINAL(14, "XSocketAccept");
     HOOK_ORDINAL(15, "XSocketSelect");
     HOOK_ORDINAL(18, "XSocketRecv"); // called frequently
-    HOOK_ORDINAL(20, "XSocketRecvFrom");
+    HOOK_ORDINAL(20, "XSocketRecvFrom"); // called frequently when in multiplayer lobby
     HOOK_ORDINAL(22, "XSocketSend"); // called frequently
     HOOK_ORDINAL(24, "XSocketSendTo");
-    HOOK_ORDINAL(27, "XSocketWSAGetLastError");
+    HOOK_ORDINAL(27, "XSocketWSAGetLastError"); // called frequently when online
     HOOK_ORDINAL(51, "XNetStartup");
     HOOK_ORDINAL(52, "XNetCleanup");
     HOOK_ORDINAL(53, "XNetRandom");
@@ -252,8 +254,8 @@ auto hook_gfwl(Memory::ModuleInfo& xlive) -> void
     HOOK_ORDINAL(84, "XNetSetSystemLinkPort");
     HOOK_ORDINAL(651, "XNotifyGetNext"); // called frequently
     HOOK_ORDINAL(652, "XNotifyPositionUI");
-    HOOK_ORDINAL(1082, "XGetOverlappedExtendedError");
-    HOOK_ORDINAL(1083, "XGetOverlappedResult");
+    HOOK_ORDINAL(1082, "XGetOverlappedExtendedError"); // called frequently when online
+    HOOK_ORDINAL(1083, "XGetOverlappedResult"); // called frequently when online
     HOOK_ORDINAL(5001, "XLiveInput"); // called frequently
     HOOK_ORDINAL(5002, "XLiveRender"); // called frequently
     HOOK_ORDINAL(5003, "XLiveUninitialize"); // manually reconstructed
@@ -267,7 +269,7 @@ auto hook_gfwl(Memory::ModuleInfo& xlive) -> void
     HOOK_ORDINAL(5212, "XShowCustomPlayerListUI"); // called frequently
     HOOK_ORDINAL(5215, "XShowGuideUI");
     HOOK_ORDINAL(5216, "XShowKeyboardUI");
-    HOOK_ORDINAL(5251, "XCloseHandle");
+    HOOK_ORDINAL(5251, "XCloseHandle"); // called frequently acquiring a handle
     HOOK_ORDINAL(5252, "XShowGamerCardUI");
     HOOK_ORDINAL(5256, "XEnumerate");
     HOOK_ORDINAL(5258, "XLiveSignout");
@@ -278,7 +280,7 @@ auto hook_gfwl(Memory::ModuleInfo& xlive) -> void
     HOOK_ORDINAL(5270, "XNotifyCreateListener");
     HOOK_ORDINAL(5271, "XShowPlayersUI");
     HOOK_ORDINAL(5274, "XUserAwardGamerPicture");
-    HOOK_ORDINAL(5275, "XShowFriendsUI"); // manually reconstructed
+    //HOOK_ORDINAL(5275, "XShowFriendsUI"); // manually reconstructed, TODO: this crashes
     HOOK_ORDINAL(5277, "XUserSetContext");
     HOOK_ORDINAL(5279, "XUserReadAchievementPicture");
     HOOK_ORDINAL(5280, "XUserCreateAchievementEnumerator");
@@ -534,7 +536,8 @@ DETOUR_API(int, __stdcall, xlive_18, int a1, int a2, int a3, int a4)
 }
 DETOUR_API(signed int, __stdcall, xlive_20, int a1, int a2, int a3, char a4, int a5, DWORD* a6)
 {
-    log_xlive_call(20);
+    // called frequently when in multiplayer lobby
+    //log_xlive_call(20);
     return xlive_20(a1, a2, a3, a4, a5, a6);
 }
 DETOUR_API(int, __stdcall, xlive_22, int a1, int a2, int a3, int a4)
@@ -549,7 +552,8 @@ DETOUR_API(signed int, __stdcall, xlive_24, int a1, int a2, int a3, int a4, int 
 }
 DETOUR_API(DWORD, __stdcall, xlive_27)
 {
-    log_xlive_call(27);
+   // called frequently when online
+   // log_xlive_call(27);
     return xlive_27();
 }
 DETOUR_API(int, __stdcall, xlive_51, int a1)
@@ -656,14 +660,14 @@ DETOUR_API(int, __stdcall, xlive_652, LONG Value)
 }
 DETOUR_API(DWORD, __stdcall, xlive_1082, int a1)
 {
-    // called on login
-    log_xlive_call(1082);
+    // called on login, frequently when online
+    //log_xlive_call(1082);
     return xlive_1082(a1);
 }
 DETOUR_API(DWORD, __stdcall, xlive_1083, int a1, DWORD* a2, int a3)
 {
-    // called on login or when gfwl ui opens
-    log_xlive_call(1083);
+    // called on login or when gfwl ui opens, frequently when online
+    //log_xlive_call(1083);
     return xlive_1083(a1, a2, a3);
 }
 DETOUR_API(signed int, __stdcall, xlive_5001, int a1)
@@ -738,7 +742,8 @@ DETOUR_API(signed int, __stdcall, xlive_5216, int a1, int a2, int a3, int a4, in
 }
 DETOUR_API(int, __stdcall, xlive_5251, HANDLE hObject)
 {
-    log_xlive_call(5251);
+    // called frequently acquiring a handle
+    //log_xlive_call(5251);
     return xlive_5251(hObject);
 }
 DETOUR_API(signed int, __stdcall, xlive_5252, int a1, __int64 a2)
