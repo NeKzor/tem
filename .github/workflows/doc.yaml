@@ -21,6 +21,8 @@ jobs:
         mdbook build
         popd
     - name: Deploy
-      run: ./deploy
+      run: |
+        chmod +x deploy
+        ./deploy
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
