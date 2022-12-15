@@ -1,5 +1,7 @@
 # Tron: Evolution Mod (TEM)
 
+[![doc](https://github.com/NeKzor/tem/actions/workflows/doc.yaml/badge.svg)](https://github.com/NeKzor/tem/actions/workflows/doc.yaml)
+
 ![tem.gif](/doc/src/images/tem.gif)
 
 ## Motivation
