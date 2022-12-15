@@ -116,11 +116,11 @@ struct Color {
 
 struct FURL : FString {
     FString host; // 0x0C
-    uint32_t port; // 0x18
+    int port; // 0x18
     FString map; // 0x1C
     TArray<FString> op; // 0x28
     FString portal; // 0x34
-    uint32_t valid; // 0x40
+    int valid; // 0x40
 };
 
 struct PgTeamInfo {
@@ -304,6 +304,53 @@ struct PgHud {
     char pad_01FC[68]; // 0x1FC
 };
 
+struct DLCItem : FName {
+    FString dlc_key; // 0x08
+    TArray<FString> live_conent; // 0x14
+    int live_license_flag; // 0x20
+    TArray<FString> dlc_content; // 0x24
+};
+
+struct PgDLCUtils : UObject {
+    TArray<DLCItem> dlc_items; // 0x3C
+    FString ps3_dlc_folder; // 0x48
+};
+
+struct PgUnlockItemPlayerSkin : UObject {
+    char pad_003C[132]; // 0x3C
+    int skin_index; // 0xC0
+    char pad_00C4[28]; // 0xC4
+};
+
+struct PgMPLoadoutBuilder : UObject {
+    char pad_003C[48]; // 0x3C
+};
+
+struct PgUnlockItemDiscPower : UObject {
+    char pad_003C[144]; // 0x3C
+};
+
+struct PgUnlockItemPlayerUpgrade : UObject {
+    char pad_003C[256]; // 0x3C
+};
+
+struct PgStoryLoadoutBuilder : UObject {
+    TArray<PgUnlockItemDiscPower*> inventory_items; // 0x3C
+    TArray<PgUnlockItemPlayerUpgrade*> upgrades; // 0x48
+};
+
+struct PgUnlockSystem : UObject {
+    TArray<PgUnlockItemPlayerSkin*> all_items; // 0x3C
+    int num_loadout_slots; // 0x48
+    int current_loadout; // 0x4C
+    PgMPLoadoutBuilder* loadout_builder; // 0x50
+    PgStoryLoadoutBuilder* story_builder; // 0x54
+    int max_loadouts; // 0x58
+    char pad_005C[24]; // 0x5C
+    FString login_options; // 0x74
+    FString override_connection_string; // 0x80
+};
+
 #define PLAYER_CONTROLLER_FLAGS__GOD_MODE (1 << 1)
 
 struct PgPlayerController {
@@ -363,6 +410,8 @@ struct PgPlayerController {
     char unk18[260];
     UObject* player_cam; // 0x5d0
     PgPawn* pawn4; // 0x5d4
+    char unk19[364]; // 0x5d8
+    PgUnlockSystem* unlock_system; // 0x744
 
     inline auto set_god_mode(bool on) -> void
     {
@@ -422,19 +471,19 @@ struct UField : UObject {
 struct UStruct : UField {
     char pad_0044[8]; // 0x44
     UField* children; // 0x4C
-    uint32_t property_size; // 0x50
+    int property_size; // 0x50
     char pad_0054[60]; // 0x54
 };
 
 struct UFunction : UStruct {
-    uint32_t function_flags; // 0x90
+    int function_flags; // 0x90
     uint16_t i_native; // 0x94
     uint16_t rep_offset; // 0x96
     FName friendly_name; // 0x98
     uint16_t num_params; // 0xA0
     uint16_t params_size; // 0xA2
-    uint32_t return_value_offset; // 0xA4
-    uint32_t padding; // 0xA8
+    int return_value_offset; // 0xA4
+    int padding; // 0xA8
     void* func; // 0xAC
 
     inline auto is(unsigned int index) -> bool { return this->name.index == index; }
@@ -461,12 +510,12 @@ struct UScriptStruct : UStruct {
 };
 
 struct UProperty : UField {
-    uint32_t array_dim; // 0x44
-    uint32_t element_size; // 0x48
-    uint32_t property_flags; // 0x4C
-    uint32_t property_size; // 0x50
+    int array_dim; // 0x44
+    int element_size; // 0x48
+    int property_flags; // 0x4C
+    int property_size; // 0x50
     char pad_0054[16]; // 0x54
-    uint32_t offset; // 0x64
+    int offset; // 0x64
     char pad_0064[28]; // 0x68
 };
 
@@ -479,7 +528,7 @@ struct UIntProperty : UProperty {};
 struct UFloatProperty : UProperty {};
 
 struct UBoolProperty : UProperty {
-    uint32_t bit_mask; // 0x84
+    int bit_mask; // 0x84
 };
 
 struct UStrProperty : UProperty {};

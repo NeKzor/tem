@@ -625,12 +625,24 @@ DETOUR_STD(HRESULT, Present, IDirect3DDevice9* device, RECT* pSourceRect, RECT* 
                     }
                     create_hover_tooltip("Dump engine names and objects. Game will freeze for a few seconds.");
 
-                    //// PgCheatManager::DebugJumpToLevel
-                    //if (ImGui::MenuItem("DebugJumpToLevel")) {
-                    //    auto cheat_manager = tem.engine->get_local_player()->actor->cheat_manager;
-                    //    Memory::VMT<void(__stdcall*)(FString * levelname)>(cheat_manager, 87)(&level_103_B);
-                    //    console->Println("CALLED PgCheatManager::DebugJumpToLevel");
+                    //// PgUnlockSystem::SetPlayerSkin
+                    //if (ImGui::MenuItem("PgUnlockSystem::SetPlayerSkin")) {
+                    //    struct PgUnlockItemPlayerSkin {};
+
+                    //    auto controller = tem.player_controller();
+                    //    auto unlock_system = controller->unlock_system;
+                    //    console->Println("PgUnlockSystem 0x{:04x}", uintptr_t(unlock_system));
+
+                    //    auto blackguard_skin_addr = uintptr_t(0x18220000);
+                    //    auto blackguard_skin = reinterpret_cast<PgUnlockItemPlayerSkin*>(&blackguard_skin_addr);
+                    //    console->Println("BG Skin 0x{:04x}", uintptr_t(blackguard_skin));
+
+                    //    auto SetPlayerSkin = Memory::VMT<void(__thiscall*)(PgUnlockSystem * thisptr, PgUnlockItemPlayerSkin* skin)>(unlock_system, 106);
+
+                    //    SetPlayerSkin(unlock_system, blackguard_skin);
+                    //    console->Println("CALLED PgUnlockSystem::SetPlayerSkin 0x{:04x}", uintptr_t(SetPlayerSkin));
                     //}
+                    //create_hover_tooltip("Test.");
                 }
                 ImGui::EndMenu();
             }
