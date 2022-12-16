@@ -7,6 +7,7 @@ title = "Tron: Evolution Mod"
 
 [output.html]
 additional-css = ["custom.css"]
+cname = "tem.nekz.me"
 git-repository-url = "https://github.com/NeKzor/tem"
 git-repository-icon = "fa-github"
 
