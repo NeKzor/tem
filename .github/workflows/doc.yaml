@@ -2,27 +2,46 @@ name: doc
 
 on:
   push:
+    branches: ["master"]
     paths:
     - 'doc/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
 
 jobs:
-  gh-pages:
-    name: GitHub Pages
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: doc
     if: "!contains(github.event.head_commit.message, '[cd skip]')"
     steps:
-    - name: Checkout
-      uses: actions/checkout@v3
-    - name: Install Dependencies
-      run: cargo install mdbook --no-default-features --features search --vers "^0.4.22"
-    - name: Build
-      run: |
-        pushd doc
-        mdbook build
-        popd
-    - name: Deploy
-      run: |
-        chmod +x deploy
-        ./deploy
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Install Dependencies
+        run: |
+          mkdir bin
+          curl -sSL https://github.com/rust-lang/mdBook/releases/download/v0.4.22/mdbook-v0.4.22-x86_64-unknown-linux-gnu.tar.gz | tar -xz --directory=bin
+          chmod +x bin/mdbook
+      - name: Build
+        run: bin/mdbook build
+      - name: Setup Pages
+        uses: actions/configure-pages@v2
+      - name: Upload
+        uses: actions/upload-pages-artifact@v1
+        with:
+          path: 'book'
+      - name: Deploy
+        id: deployment
+        uses: actions/deploy-pages@v1
