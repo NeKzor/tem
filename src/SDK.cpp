@@ -15,7 +15,7 @@ FString::FString()
 }
 FString::FString(const wchar_t* text)
 {
-    this->size =text && *text ? std::wcslen(text) + 1 : 0;
+    this->size = text && *text ? std::wcslen(text) + 1 : 0;
     this->max = this->size;
 
     if (this->size) {
@@ -26,14 +26,8 @@ FString::FString(const std::wstring& text)
     : FString(text.c_str())
 {
 }
-auto FString::str() -> std::string
-{
-    return wchar_to_utf8(this->data);
-}
-auto FString::str() const -> std::string
-{
-    return wchar_to_utf8(this->data);
-}
+auto FString::str() -> std::string { return wchar_to_utf8(this->data); }
+auto FString::str() const -> std::string { return wchar_to_utf8(this->data); }
 auto wchar_to_utf8(const wchar_t* data) -> std::string
 {
     auto size = data && *data ? std::wcslen(data) + 1 : 0;

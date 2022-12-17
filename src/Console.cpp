@@ -1,8 +1,8 @@
 /*
-* Copyright (c) 2022 NeKz
-* 
-* SPDX-License-Identifier: MIT
-*/
+ * Copyright (c) 2022 NeKz
+ *
+ * SPDX-License-Identifier: MIT
+ */
 
 #include "Console.hpp"
 #include "TEM.hpp"
@@ -24,9 +24,7 @@ auto Console::Shutdown() -> void
     this->output = nullptr;
     this->input = nullptr;
 }
-auto Console::Tick() -> void
-{
-}
+auto Console::Tick() -> void {}
 auto Console::PrintInternal(std::string&& message) -> void
 {
     OutputDebugStringA(("[tem] " + message).c_str());

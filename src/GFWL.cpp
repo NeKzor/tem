@@ -201,7 +201,7 @@ auto hook_gfwl(Memory::ModuleInfo& xlive) -> void
     auto handle = GetModuleHandleA(xlive.path);
     console->Println("[gfwl] xlive.dll handle 0x{:04x}", uintptr_t(handle));
 
-    #define HOOK_ORDINAL(ordinal, name)                                                                                    \
+#define HOOK_ORDINAL(ordinal, name)                                                                                    \
     auto ordinal_##ordinal##_address = uintptr_t(GetProcAddress(handle, LPCSTR(ordinal)));                             \
     if (ordinal_##ordinal##_address) {                                                                                 \
         addressesToUnhook.insert_or_assign(ordinal, std::make_tuple(ordinal_##ordinal##_address, name, 0, 0));         \
@@ -372,7 +372,7 @@ auto change_gfwl_main_thread(bool suspend) -> bool
 
     auto ntdll_NtQueryInformationThread
         = Memory::GetSymbolAddress<decltype(NtQueryInformationThread)*>(ntdll.base, "NtQueryInformationThread");
-    
+
     if (!ntdll_NtQueryInformationThread) {
         console->Println("[gfwl] Unable to find NtQueryInformationThread :(");
         return false;
@@ -385,7 +385,7 @@ auto change_gfwl_main_thread(bool suspend) -> bool
 
     auto process = GetCurrentProcess();
     auto process_id = GetCurrentProcessId();
-    
+
     auto entry = THREADENTRY32();
     entry.dwSize = sizeof(THREADENTRY32);
 
@@ -399,7 +399,7 @@ auto change_gfwl_main_thread(bool suspend) -> bool
                     ntdll_NtQueryInformationThread(handle, (THREADINFOCLASS)ThreadQuerySetWin32StartAddress,
                         &start_address, sizeof(start_address), NULL);
 
-                    if (start_address == main_thread_start_address ) {
+                    if (start_address == main_thread_start_address) {
                         if (index++ == GFWL_MAIN_THREAD_INDEX) {
                             auto result = suspend ? SuspendThread(handle) : ResumeThread(handle);
                             if (result != -1) {
@@ -552,8 +552,8 @@ DETOUR_API(signed int, __stdcall, xlive_24, int a1, int a2, int a3, int a4, int 
 }
 DETOUR_API(DWORD, __stdcall, xlive_27)
 {
-   // called frequently when online
-   // log_xlive_call(27);
+    // called frequently when online
+    // log_xlive_call(27);
     return xlive_27();
 }
 DETOUR_API(int, __stdcall, xlive_51, int a1)

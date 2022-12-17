@@ -636,7 +636,7 @@ auto dump_engine_to_json() -> void
                                 { "name", get_object_name(member_struct_member) },
                                 { "type", resolve_type(member_struct_member) },
                                 { "offset", member_struct_member->as<UProperty>()->offset },
-                             };
+                            };
 
                             member_struct_member = member_struct_member->next;
                         }

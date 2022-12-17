@@ -1,8 +1,8 @@
 /*
-* Copyright (c) 2022 NeKz
-* 
-* SPDX-License-Identifier: MIT
-*/
+ * Copyright (c) 2022 NeKz
+ *
+ * SPDX-License-Identifier: MIT
+ */
 
 #pragma once
 #ifdef _WIN32
@@ -63,7 +63,10 @@ typedef std::vector<int> Offset;
 typedef std::vector<const Pattern*> Patterns;
 
 #define PATTERN(name, sig, ...)                                                                                        \
-    Memory::Pattern name { sig, Memory::Offset({ __VA_ARGS__ }) }
+    Memory::Pattern name                                                                                               \
+    {                                                                                                                  \
+        sig, Memory::Offset({ __VA_ARGS__ })                                                                           \
+    }
 #define PATTERNS(name, ...) Memory::Patterns name({ __VA_ARGS__ })
 
 auto Scan(const char* moduleName, const Pattern* pattern) -> std::vector<uintptr_t>;
@@ -101,7 +104,10 @@ template <typename T = uintptr_t> inline auto Deref(uintptr_t source, T* destina
 {
     *destination = *reinterpret_cast<T*>(source);
 }
-template <typename T = uintptr_t> inline auto DerefDeref(uintptr_t source) -> T { return **reinterpret_cast<T**>(source); }
+template <typename T = uintptr_t> inline auto DerefDeref(uintptr_t source) -> T
+{
+    return **reinterpret_cast<T**>(source);
+}
 template <typename T = uintptr_t> inline auto DerefDeref(uintptr_t source, T* destination) -> void
 {
     *destination = **reinterpret_cast<T**>(source);

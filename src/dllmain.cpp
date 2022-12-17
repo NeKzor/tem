@@ -1,8 +1,8 @@
 /*
-* Copyright (c) 2022 NeKz
-* 
-* SPDX-License-Identifier: MIT
-*/
+ * Copyright (c) 2022 NeKz
+ *
+ * SPDX-License-Identifier: MIT
+ */
 
 #include "TEM.hpp"
 #include <Windows.h>

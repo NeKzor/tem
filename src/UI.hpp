@@ -1,12 +1,12 @@
 /*
-* Copyright (c) 2022 NeKz
-* 
-* SPDX-License-Identifier: MIT
-*/
+ * Copyright (c) 2022 NeKz
+ *
+ * SPDX-License-Identifier: MIT
+ */
 
 #pragma once
-#include <atomic>
 #include <Windows.h>
+#include <atomic>
 
 struct UI {
     HWND window_handle = nullptr;

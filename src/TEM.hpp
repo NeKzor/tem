@@ -1,8 +1,8 @@
 /*
-* Copyright (c) 2022 NeKz
-* 
-* SPDX-License-Identifier: MIT
-*/
+ * Copyright (c) 2022 NeKz
+ *
+ * SPDX-License-Identifier: MIT
+ */
 
 #pragma once
 #include "Memory.hpp"
@@ -51,8 +51,7 @@ struct TEM {
     inline auto pawn() -> PgPawn*;
     auto console_command(std::wstring command) -> void;
 
-    std::map<std::string, std::pair<int, std::vector<int>>> command_to_key_move =
-    {
+    std::map<std::string, std::pair<int, std::vector<int>>> command_to_key_move = {
         { "Axis aBaseY Speed=1.0", { MV_FORWARD, {} } }, // W
         { "Axis aStrafe Speed=-1.0 | ForceWallJump", { MV_LEFT, {} } }, // A
         { "Axis aBaseY Speed=-1.0", { MV_BACKWARD, {} } }, // S
