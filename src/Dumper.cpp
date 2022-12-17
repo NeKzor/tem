@@ -252,8 +252,8 @@ auto dump_engine_to_markdown() -> void
 
             if (has_states) {
                 navigation << "[States](./classes.md#" << class_name_lowercase << "-states)|";
-                stream << std::endl <<  "<a id=\"" << class_name_lowercase << "-states\"></a>" << std::endl;
-                stream <<"### States" << std::endl << std::endl;
+                stream << std::endl << "<a id=\"" << class_name_lowercase << "-states\"></a>" << std::endl;
+                stream << "### States" << std::endl << std::endl;
                 stream << "|Signature|" << std::endl;
                 stream << "|---|" << std::endl;
 
@@ -424,7 +424,6 @@ auto dump_engine_to_markdown() -> void
                             auto member_name = get_object_name(struct_member);
                             auto member_type = get_class_object_name(struct_member);
 
-                            // TODO: recursive
                             if (strstr(member_type, "ScriptStruct")) {
                                 stream << "<br>&nbsp;&nbsp;&nbsp;&nbsp;" << member_name << " {";
 
@@ -474,21 +473,85 @@ auto dump_engine_to_markdown() -> void
     }
 }
 
-// TODO: figure this out
 auto dump_engine_to_json() -> void
 {
-    auto g_Names = reinterpret_cast<TArray<FNameEntry*>*>(Offsets::g_Names);
-    console->Println("[dumper] g_Names: 0x{:04x} (size = {})", uintptr_t(g_Names), g_Names->size);
+    auto g_Objects = *reinterpret_cast<TArray<UObject*>*>(Offsets::g_Objects);
+    auto g_Names = *reinterpret_cast<TArray<FNameEntry*>*>(Offsets::g_Names);
 
-    auto names = g_Names->data;
+    auto get_name
+        = [&g_Names](FName& name) -> const char* { return g_Names[name.index] ? g_Names[name.index]->name : "unk"; };
+
+    auto get_object_name = [&g_Names](UObject* object) -> const char* {
+        return object && g_Names[object->name.index] ? g_Names[object->name.index]->name : "unk";
+    };
+
+    auto get_outer_object_name = [&g_Names](UObject* object) -> const char* {
+        return object->outer_object && g_Names[object->outer_object->name.index]
+            ? g_Names[object->outer_object->name.index]->name
+            : "unk";
+    };
+
+    auto get_class_object_name = [&g_Names](UObject* object) -> const char* {
+        return object->class_object && g_Names[object->class_object->name.index]
+            ? g_Names[object->class_object->name.index]->name
+            : "unk";
+    };
+
+    auto get_function_friendly_name = [&g_Names](UFunction* function) -> const char* {
+        return function && g_Names[function->friendly_name.index] ? g_Names[function->friendly_name.index]->name
+                                                                  : "unk";
+    };
+
+    std::function<std::string(UField*)> resolve_type;
+
+    resolve_type = [&get_class_object_name, &get_object_name, &resolve_type](UField* field) -> std::string {
+        auto result = std::string("");
+        auto type_name = get_class_object_name(field);
+
+        if (strcmp(type_name, "StructProperty") == 0) {
+            result = get_object_name(field->as<UStructProperty>()->property_struct);
+        } else if (strcmp(type_name, "IntProperty") == 0) {
+            result = "int";
+        } else if (strcmp(type_name, "ByteProperty") == 0) {
+            result = "char";
+        } else if (strcmp(type_name, "BoolProperty") == 0) {
+            result = "bool";
+        } else if (strcmp(type_name, "FloatProperty") == 0) {
+            result = "float";
+        } else if (strcmp(type_name, "NameProperty") == 0) {
+            result = "FName";
+        } else if (strcmp(type_name, "ArrayProperty") == 0) {
+            result = std::string("TArray<") + resolve_type(field->as<UArrayProperty>()->inner) + ">";
+        } else if (strcmp(type_name, "StrProperty") == 0) {
+            result = "FString";
+        } else if (strcmp(type_name, "ClassProperty") == 0) {
+            result = "UClass*";
+        } else if (strcmp(type_name, "ObjectProperty") == 0) {
+            result = std::string(get_object_name(field->as<UObjectProperty>()->property_class)) + "*";
+        } else if (strcmp(type_name, "MapProperty") == 0) {
+            result = "TMap<FPair>"; // Actual key/value type information seems to be lost :>
+        } else if (strcmp(type_name, "ComponentProperty") == 0) {
+            result = std::string(get_object_name(field->as<UComponentProperty>()->component)) + "*";
+        } else if (strcmp(type_name, "DelegateProperty") == 0) {
+            result = "FScriptDelegate";
+        } else if (strcmp(type_name, "InterfaceProperty") == 0) {
+            result = std::string(get_object_name(field->as<UInterfaceProperty>()->interface_class)) + "*";
+        } else if (strcmp(type_name, "State") == 0 || strcmp(type_name, "Enum") == 0 || strcmp(type_name, "Const") == 0
+            || strcmp(type_name, "ScriptStruct") == 0 || strcmp(type_name, "Function") == 0) {
+            result = "unknown_t"; // should not happen
+        } else {
+            result = get_object_name(field);
+        }
+        return result;
+    };
 
     using Json = nlohmann::json;
+
     {
         auto json = Json{};
 
-        for (auto i = 0u; i < g_Names->size; ++i) {
-            auto item = names[i];
-
+        foreach_item(item, g_Names)
+        {
             if (item && item->index == i << 1 && item->name) {
                 json["data"] += {
                     { "name", item->name },
@@ -497,14 +560,9 @@ auto dump_engine_to_json() -> void
             }
         }
 
-        std::ofstream name_stream("tron_evolution_names_dump.json");
+        std::ofstream name_stream("names.json");
         name_stream << json;
     }
-
-    auto g_Objects = reinterpret_cast<TArray<UObject*>*>(Offsets::g_Objects);
-    console->Println("[dumper] g_Objects: 0x{:04x} (size = {})", uintptr_t(g_Objects), g_Objects->size);
-
-    auto objects = g_Objects->data;
 
     {
         auto json = Json{};
@@ -517,29 +575,87 @@ auto dump_engine_to_json() -> void
             child["offset"] = type_object->offset;
         };
         std::function<void(Json&, UField*)> add_field_data;
-        add_field_data = [&names, &add_property_data, &add_field_data](Json& child, UField* child_field) -> void {
-            auto type_name = child_field->class_object && names[child_field->class_object->name.index]
-                ? names[child_field->class_object->name.index]->name
-                : "unk";
+        add_field_data
+            = [&get_class_object_name, &get_function_friendly_name, &get_name, &get_object_name, &add_property_data,
+                  &add_field_data, &resolve_type](Json& child, UField* child_field) -> void {
+            child["name"] = get_object_name(child_field);
+
+            auto type_name = get_class_object_name(child_field);
             child["type"] = type_name;
 
             if (strcmp(type_name, "Function") == 0) {
                 auto type_object = child_field->as<UFunction>();
-                child["paramsSize"] = type_object->params_size;
                 child["functionFlags"] = type_object->function_flags;
                 child["iNative"] = type_object->i_native;
                 child["repOffset"] = type_object->rep_offset;
-                child["friendlyName"]
-                    = names[type_object->friendly_name.index] ? names[type_object->friendly_name.index]->name : "unk";
+                child["friendlyName"] = get_function_friendly_name(type_object);
                 child["numParams"] = type_object->num_params;
                 child["paramsSize"] = type_object->params_size;
                 child["returnValueOffset"] = type_object->return_value_offset;
                 child["func"] = uintptr_t(type_object->func);
+                child["functionName"] = get_object_name(type_object);
+
+                auto parameters = Json::array();
+
+                auto function_parameter = type_object->children;
+                while (function_parameter) {
+                    auto parameter_name = get_object_name(function_parameter);
+
+                    if (strcmp(parameter_name, "ReturnValue") == 0 && !child.contains("returnValueType")) {
+                        child["returnValueType"] = resolve_type(function_parameter);
+                    } else {
+                        parameters += {
+                            { "name", parameter_name },
+                            { "type", resolve_type(function_parameter) },
+                        };
+                    }
+
+                    function_parameter = function_parameter->next;
+                }
+
+                child["parameters"] = parameters;
             } else if (strcmp(type_name, "ScriptStruct") == 0) {
                 auto type_object = child_field->as<UScriptStruct>();
+                child["structName"] = get_object_name(type_object);
+                child["propertySize"] = type_object->property_size;
+
+                auto members = Json::array();
+
+                auto struct_member = type_object->children;
+                while (struct_member) {
+                    auto member = Json::object();
+                    member["name"] = get_object_name(struct_member);
+
+                    auto member_type = get_class_object_name(struct_member);
+                    if (strstr(member_type, "ScriptStruct")) {
+                        auto struct_members = Json::array();
+
+                        auto member_struct_member = struct_member->as<UScriptStruct>()->children;
+                        while (member_struct_member) {
+                            struct_members += {
+                                { "name", get_object_name(member_struct_member) },
+                                { "type", resolve_type(member_struct_member) },
+                                { "offset", member_struct_member->as<UProperty>()->offset },
+                             };
+
+                            member_struct_member = member_struct_member->next;
+                        }
+
+                        member["members"] = struct_members;
+                    } else {
+                        member["type"] = resolve_type(struct_member);
+                        member["offset"] = struct_member->as<UProperty>()->offset;
+                    }
+
+                    members += member;
+                    struct_member = struct_member->next;
+                }
+
+                child["members"] = members;
             } else if (strcmp(type_name, "StructProperty") == 0) {
                 auto type_object = child_field->as<UStructProperty>();
                 add_property_data(child, type_object);
+                child["structName"] = get_object_name(type_object->property_struct);
             } else if (strcmp(type_name, "IntProperty") == 0) {
                 auto type_object = child_field->as<UIntProperty>();
                 add_property_data(child, type_object);
@@ -573,31 +689,30 @@ auto dump_engine_to_json() -> void
             } else if (strcmp(type_name, "ObjectProperty") == 0) {
                 auto type_object = child_field->as<UObjectProperty>();
                 add_property_data(child, type_object);
+                child["objectName"] = get_object_name(type_object->property_class);
             } else if (strcmp(type_name, "Enum") == 0) {
                 auto type_object = child_field->as<UEnum>();
                 auto enum_names = Json::array();
 
                 foreach_item(item, type_object->names)
                 {
-                    if (item.index == i << 1 && names[item.index]) {
-                        enum_names += {
-                            { "name", names[item.index]->name },
-                            { "number", item.mumber },
-                        };
-                    }
+                    enum_names += {
+                        { "name", get_name(item) },
+                        { "number", item.mumber },
+                    };
                 }
 
                 child["names"] = enum_names;
             } else if (strcmp(type_name, "MapProperty") == 0) {
                 auto type_object = child_field->as<UMapProperty>();
 
-                if (type_object->key) {
+                if (type_object->key) { // No type information :>
                     auto key_child = Json::object({});
                     add_field_data(key_child, type_object->key);
                     child["key"] = key_child;
                 }
 
-                if (type_object->value) {
+                if (type_object->value) { // No type information :>
                     auto value_child = Json::object({});
                     add_field_data(value_child, type_object->value);
                     child["value"] = value_child;
@@ -606,53 +721,65 @@ auto dump_engine_to_json() -> void
             } else if (strcmp(type_name, "ComponentProperty") == 0) {
                 auto type_object = child_field->as<UComponentProperty>();
                 add_property_data(child, type_object);
+                child["componentName"] = get_object_name(type_object->component);
             } else if (strcmp(type_name, "DelegateProperty") == 0) {
                 auto type_object = child_field->as<UDelegateProperty>();
                 add_property_data(child, type_object);
             } else if (strcmp(type_name, "Const") == 0) {
                 auto type_object = child_field->as<UConst>();
+                child["value"] = type_object->value.str();
             } else if (strcmp(type_name, "InterfaceProperty") == 0) {
                 auto type_object = child_field->as<UInterfaceProperty>();
                 add_property_data(child, type_object);
+                child["interfaceName"] = get_object_name(type_object->interface_class);
             } else if (strcmp(type_name, "State") == 0) {
                 auto type_object = child_field->as<UState>();
+                child["stateName"] = get_object_name(type_object);
+
+                auto state_child = type_object->children;
+                if (state_child) {
+                    auto state_child_name = get_object_name(state_child);
+                    child["stateNamePrefix"] = state_child_name;
+
+                    if (state_child->super_field) {
+                        auto parameters = Json::array();
+
+                        auto state_parameter = state_child->super_field->as<UState>()->children;
+                        while (state_parameter) {
+                            parameters += {
+                                { "name", get_object_name(state_parameter) },
+                                { "type", resolve_type(state_parameter) },
+                            };
+
+                            state_parameter = state_parameter->next;
+                        }
+
+                        child["parameters"] = parameters;
+                    }
+                }
             }
         };
 
-        for (auto i = 0u; i < g_Objects->size; ++i) {
-            auto item = objects[i];
+        auto unique_classes = std::set<UClass*>();
+
+        foreach_item(item, g_Objects)
+        {
             if (!item || !item->name.index) {
                 continue;
             }
 
-            auto base_name = std::string(names[item->name.index] ? names[item->name.index]->name : "");
-
-            auto outer_name = std::string();
-            auto outer = item->outer_object;
-            while (outer) {
-                outer_name
-                    = std::string(names[outer->name.index] ? names[outer->name.index]->name : "") + "::" + outer_name;
-                outer = outer->outer_object;
-            }
-
-            auto class_name = std::string(item->class_object && names[item->class_object->name.index]
-                    ? names[item->class_object->name.index]->name
-                    : "");
-
             auto class_object = item->class_object;
-            if (!class_object) {
+            if (!class_object || unique_classes.contains(class_object)) {
                 continue;
             }
 
-            auto child_field = class_object->children;
+            unique_classes.emplace(class_object);
+
             auto children = Json::array();
+            auto child_field = class_object->children;
 
             while (child_field) {
-                auto child_name = names[child_field->name.index];
-
-                auto child = Json::object({
-                    { "name", child_name ? child_name->name : "unk" },
-                });
+                auto child = Json::object();
 
                 add_field_data(child, child_field);
 
@@ -660,17 +787,31 @@ auto dump_engine_to_json() -> void
                 child_field = child_field->next;
             }
 
+            auto inherits = Json::array();
+
+            if (class_object->super_field) {
+                auto super_field = class_object->super_field;
+                while (super_field) {
+                    inherits += {
+                        { "name", get_object_name(super_field) },
+                        { "propertySize", super_field->class_object ? super_field->class_object->property_size : 0 },
+                    };
+
+                    super_field = super_field->super_field;
+                }
+            }
+
             json["data"] += {
-                { "outerName", outer_name },
-                { "baseName", base_name },
-                { "className", class_name },
-                { "address", uintptr_t(item) },
+                { "className", get_object_name(class_object) },
+                { "inherits", inherits },
+                { "outerName", get_outer_object_name(class_object) },
+                { "propertySize", class_object->property_size },
                 { "children", children },
             };
         }
 
-        std::ofstream object_stream("tron_evolution_objects_dump.json");
-        object_stream << json;
+        std::ofstream classes_stream("classes.json");
+        classes_stream << json;
     }
 }
 
