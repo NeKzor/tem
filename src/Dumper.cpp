@@ -509,13 +509,13 @@ auto dump_engine_to_json() -> void
         auto type_name = get_class_object_name(field);
 
         if (strcmp(type_name, "StructProperty") == 0) {
-            result = get_object_name(field->as<UStructProperty>()->property_struct);
+            result = /*std::string("struct ") + */get_object_name(field->as<UStructProperty>()->property_struct);
         } else if (strcmp(type_name, "IntProperty") == 0) {
             result = "int";
         } else if (strcmp(type_name, "ByteProperty") == 0) {
             result = "char";
         } else if (strcmp(type_name, "BoolProperty") == 0) {
-            result = "bool";
+            result = "int";
         } else if (strcmp(type_name, "FloatProperty") == 0) {
             result = "float";
         } else if (strcmp(type_name, "NameProperty") == 0) {
@@ -527,15 +527,15 @@ auto dump_engine_to_json() -> void
         } else if (strcmp(type_name, "ClassProperty") == 0) {
             result = "UClass*";
         } else if (strcmp(type_name, "ObjectProperty") == 0) {
-            result = std::string(get_object_name(field->as<UObjectProperty>()->property_class)) + "*";
+            result = std::string("struct ") + std::string(get_object_name(field->as<UObjectProperty>()->property_class)) + "*";
         } else if (strcmp(type_name, "MapProperty") == 0) {
             result = "TMap<FPair>"; // Actual key/value type information seems to be lost :>
         } else if (strcmp(type_name, "ComponentProperty") == 0) {
-            result = std::string(get_object_name(field->as<UComponentProperty>()->component)) + "*";
+            result = std::string("struct ") + std::string(get_object_name(field->as<UComponentProperty>()->component)) + "*";
         } else if (strcmp(type_name, "DelegateProperty") == 0) {
             result = "FScriptDelegate";
         } else if (strcmp(type_name, "InterfaceProperty") == 0) {
-            result = std::string(get_object_name(field->as<UInterfaceProperty>()->interface_class)) + "*";
+            result = std::string("FScriptInterface< ") + std::string(get_object_name(field->as<UInterfaceProperty>()->interface_class)) + ">";
         } else if (strcmp(type_name, "State") == 0 || strcmp(type_name, "Enum") == 0 || strcmp(type_name, "Const") == 0
             || strcmp(type_name, "ScriptStruct") == 0 || strcmp(type_name, "Function") == 0) {
             result = "unknown_t"; // should not happen
@@ -567,18 +567,20 @@ auto dump_engine_to_json() -> void
     {
         auto json = Json{};
 
-        auto add_property_data = [](Json& child, UProperty* type_object) -> void {
+        auto add_property_data = [&resolve_type](Json& child, UProperty* type_object) -> void {
             child["arrayDim"] = type_object->array_dim;
             child["elementSize"] = type_object->element_size;
             child["propertyFlags"] = type_object->property_flags;
             child["propertySize"] = type_object->property_size;
             child["offset"] = type_object->offset;
+            child["resolvedType"] = resolve_type(type_object);
         };
         std::function<void(Json&, UField*)> add_field_data;
         add_field_data
             = [&get_class_object_name, &get_function_friendly_name, &get_name, &get_object_name, &add_property_data,
                   &add_field_data, &resolve_type](Json& child, UField* child_field) -> void {
             child["name"] = get_object_name(child_field);
+            child["nameNumber"] = child_field->name.number;
 
             auto type_name = get_class_object_name(child_field);
             child["type"] = type_name;
@@ -596,17 +598,22 @@ auto dump_engine_to_json() -> void
                 child["functionName"] = get_object_name(type_object);
 
                 auto parameters = Json::array();
+                auto has_return_value = false;
 
                 auto function_parameter = type_object->children;
                 while (function_parameter) {
                     auto parameter_name = get_object_name(function_parameter);
 
-                    if (strcmp(parameter_name, "ReturnValue") == 0 && !child.contains("returnValueType")) {
-                        child["returnValueType"] = resolve_type(function_parameter);
+                    if (strcmp(parameter_name, "ReturnValue") == 0 && !has_return_value) {
+                        child["returnValueType"] = get_class_object_name(function_parameter);
+                        child["returnValueResolvedType"] = resolve_type(function_parameter);
+                        has_return_value = true;
                     } else {
                         parameters += {
                             { "name", parameter_name },
-                            { "type", resolve_type(function_parameter) },
+                            { "nameNumber", function_parameter->name.number },
+                            { "type", get_class_object_name(function_parameter) },
+                            { "resolvedType", resolve_type(function_parameter) },
                         };
                     }
 
@@ -625,6 +632,7 @@ auto dump_engine_to_json() -> void
                 while (struct_member) {
                     auto member = Json::object();
                     member["name"] = get_object_name(struct_member);
+                    member["nameNumber"] = struct_member->name.number;
 
                     auto member_type = get_class_object_name(struct_member);
                     if (strstr(member_type, "ScriptStruct")) {
@@ -632,19 +640,27 @@ auto dump_engine_to_json() -> void
 
                         auto member_struct_member = struct_member->as<UScriptStruct>()->children;
                         while (member_struct_member) {
+                            auto member_struct_member_property = member_struct_member->as<UProperty>();
                             struct_members += {
                                 { "name", get_object_name(member_struct_member) },
-                                { "type", resolve_type(member_struct_member) },
-                                { "offset", member_struct_member->as<UProperty>()->offset },
+                                { "nameNumber", member_struct_member->name.number },
+                                { "type", get_class_object_name(member_struct_member) },
+                                { "resolvedType", resolve_type(member_struct_member) },
+                                { "offset", member_struct_member_property->offset },
+                                { "elementSize", member_struct_member_property->element_size },
                             };
 
                             member_struct_member = member_struct_member->next;
                         }
 
                         member["members"] = struct_members;
+                        member["propertySize"] = struct_member->as<UScriptStruct>()->property_size;
                     } else {
-                        member["type"] = resolve_type(struct_member);
-                        member["offset"] = struct_member->as<UProperty>()->offset;
+                        auto member_property = struct_member->as<UProperty>();
+                        member["type"] = get_class_object_name(struct_member);
+                        member["resolvedType"] = resolve_type(struct_member);
+                        member["offset"] = member_property->offset;
+                        member["elementSize"] = member_property->element_size;
                     }
 
                     members += member;
@@ -698,7 +714,7 @@ auto dump_engine_to_json() -> void
                 {
                     enum_names += {
                         { "name", get_name(item) },
-                        { "number", item.mumber },
+                        { "nameNumber", item.number },
                     };
                 }
 
@@ -748,7 +764,9 @@ auto dump_engine_to_json() -> void
                         while (state_parameter) {
                             parameters += {
                                 { "name", get_object_name(state_parameter) },
-                                { "type", resolve_type(state_parameter) },
+                                { "nameNumber", state_parameter->name.index },
+                                { "type", get_class_object_name(state_parameter) },
+                                { "resolvedType", resolve_type(state_parameter) },
                             };
 
                             state_parameter = state_parameter->next;

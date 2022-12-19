@@ -27,7 +27,7 @@ struct FNameEntry {
 
 struct FName {
     unsigned int index; // 0
-    unsigned int mumber; // 4
+    unsigned int number; // 4
 };
 
 struct UClass;
@@ -567,4 +567,18 @@ struct UMapProperty : UProperty {
 
 struct UComponentProperty : UProperty {
     UObject* component; // 0x84
+};
+
+template <typename K = void*, typename V = void*>
+struct FPair {
+    K key;
+    V value;
+    int unk0;
+    int unk1;
+};
+
+template <typename T>
+struct TMap {
+    TArray<T> value; // 0x00
+    char unk0[48]; // 0x12
 };
