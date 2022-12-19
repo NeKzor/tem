@@ -2,6 +2,7 @@
 *.dll
 *.exe
 scripts/
+sdk/
 unlocker/
 CHECKPT
 
