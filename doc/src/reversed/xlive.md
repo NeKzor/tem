@@ -27,7 +27,7 @@ but at least this will bypass the anti-debugging checks.
 |5|0x146ab8|Anti-Debugger|
 |6|0x146ab8|Anti-Debugger|
 |7|0x146ab8|Anti-Debugger|
-|8|0x4f1077||
+|8|0x4f1077|Connection|
 |9|0xda3f3|Notifications|
 |10|0xda3f3|Notifications|
 
@@ -206,3 +206,102 @@ NOTE: XLive has more exported functions than the game has imported.
 |5365|XShowMarketplaceUI||
 |5367|XContentGetMarketplaceCounts||
 |5372|XMarketplaceCreateOfferEnumerator||
+
+### Files
+
+Located in `AppData\Local\Microsoft\Xlive`.
+
+Content:
+  - \<XUID\>\\FFFE07D1\\00010000
+      - \<XUID\>_MountPt
+        - \<TITLE_ID>\.gpd
+        - Account
+        - FFFE07D1.gpd
+        - tile_32.png
+        - tile_64.png
+      - \<XUID\>
+
+Titles:
+- \<TITLE_ID\> (425607F3 for Tron: Evolution)
+  - config.bin
+  - Token.bin
+
+TODO: What is `FFFE07D1` and `00010000`?
+
+TODO: Figure out `FBDX` format.
+
+TODO: Figure out 0x20 + `NOC` format.
+
+### Authentication
+
+Using [Kerberos Protocol][].
+
+Kerberos: `40.64.89.190`
+Xbox: `tgs.prod.xboxlive.com`, `65.55.42.217`
+
+[Kerberos Protocol]: https://en.wikipedia.org/wiki/Kerberos_(protocol)
+
+### Client
+
+Command: `GFWLClient.exe /NoAutoSignIn /NoInterface`
+
+### Catalog
+
+Tron: Evolution Media ID: `66acd000-77fe-1000-9115-d804425607f3`
+
+Host: `catalog.xboxlive.com`
+
+API: GET `/Catalog/Catalog.asmx/Query?methodName=`
+
+#### FindGameOffers
+
+|Names|Values|
+|---|---|
+|Locale|en-US|
+|LegalLocale|en-US|
+|Store|3|
+|PageSize|10|
+|PageNum|1|
+|DetailView|3|
+|OfferFilterLevel|1|
+|MediaIds|66acd000-77fe-1000-9115-d804425607f3|
+|UserTypes|3|
+|MediaTypes|1|
+|MediaTypes|5|
+|MediaTypes|18|
+|MediaTypes|19|
+|MediaTypes|20|
+|MediaTypes|21|
+|MediaTypes|22|
+|MediaTypes|23|
+|MediaTypes|30|
+|MediaTypes|34|
+|MediaTypes|37|
+
+#### FindGames
+
+|Names|Values|
+|---|---|
+|Locale|en-US|
+|LegalLocale|en-US|
+|Store|3|
+|PageSize|10|
+|PageNum|1|
+|DetailView|5|
+|Relations|2|
+|UserTypes|2|
+|UserTypes|3|
+|MediaIds|66acd000-77fe-1000-9115-d804425607f3|
+|MediaTypes|1|
+|MediaTypes|5|
+|MediaTypes|18|
+|MediaTypes|19|
+|MediaTypes|20|
+|MediaTypes|21|
+|MediaTypes|22|
+|MediaTypes|23|
+|MediaTypes|30|
+|MediaTypes|34|
+|MediaTypes|37|
+|ImageFormats|5|
+|ImageSizes|15|
