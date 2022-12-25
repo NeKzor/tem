@@ -11,8 +11,9 @@ Documenting UE3 at the lowest level :)
 
 ### Objects
 
-Engine objects are of type `UObject` which contain enough information to be able to work with the engines's scripting system [Kismet][].
+Engine objects are of type `UObject` which contain enough information to be able to work with the engine's scripting system [UnrealScript][] and [Kismet][].
 
+[UnrealScript]: https://docs.unrealengine.com/udk/Three/UnrealScriptReference.html
 [kismet]: https://docs.unrealengine.com/udk/Three/KismetUserGuide.html
 
 ```cpp
@@ -29,7 +30,7 @@ struct UObject {
 ### Classes
 
 The class `UClass` is needed to get the type information of an object.
-From there it is possible to access all the object's children in a linked list which are of type `UField`. They contain [properties](#properties) but also structs, enums, constants, functions or state [defintions](#definitions).
+From there it is possible to access all the object's children in a linked list which are of type `UField`. They contain [properties](#properties) but also structs, enums, constants, functions or state [definitions](#definitions).
 
 ```cpp
 struct UField : UObject {
