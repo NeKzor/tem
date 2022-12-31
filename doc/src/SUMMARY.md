@@ -8,4 +8,5 @@
 - [Reversed](./reversed/index.md)
     - [Unreal Engine](./reversed/unreal.md)
     - [Save File](./reversed/savefile.md)
+    - [SecuROM](./reversed/securom.md)
     - [XLive](./reversed/xlive.md)

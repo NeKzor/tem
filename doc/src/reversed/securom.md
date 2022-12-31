@@ -1,5 +1,23 @@
 ## SecuROM
 
+- [Context](#context)
+- [Launcher](#launcher)
+- [GetClassNameA](#getclassnamea)
+- [Strings](#strings)
+- [Compression](#compression)
+- [Production Servers](#production-servers)
+- [UI](#ui)
+- [Activation Error Codes](#activation-error-codes)
+- [XLive (GFWL)](#xlive-gfwl)
+- [Hardware ID (HWID)](#hardware-id-hwid)
+  - [Layout](#layout)
+  - [OS Version](#os-operation)
+  - [CPU Info](#cpu-info)
+  - [GPU Info](#gpu-info)
+  - [Network Info](#network-info)
+  - [Volume Info](#volume-info)
+  - [XOR Operation](#xor-operation)
+
 ### Context
 
 [Wikipedia Article][].
@@ -141,3 +159,115 @@ NOTE: Somebody at Sony could not spell `occurred` lol.
 Call to `XLiveSetSponsorToken` (`xlive_5026`) with:
 - Token = product code (most likely)
 - ID = 0x425607F3 | 1112934387
+
+### Hardware ID (HWID)
+
+Consists of five parts which will be hashed in each step with MD5 and [XOR operations](#xor-operation).
+
+|Part|API|
+|---|---|
+|[OS Version][]|[GetVersionEx][]|
+|[CPU Info][]|[GetVersionEx][]|
+|[GPU Info][]|[Direct3DCreate9][], [GetAdapterIdentifier][]|
+|[Network Info][]|[GetAdaptersInfo][]|
+|[Volume Info][]|[GetDriveTypeA][], [GetVolumeInformationA][]|
+
+[OS Version]: #os-version
+[GetVersionEx]: https://learn.microsoft.com/en-us/windows/win32/api/sysinfoapi/nf-sysinfoapi-getversionexa
+[CPU Info]: #cpu-info
+[GetVersionEx]: https://learn.microsoft.com/en-us/windows/win32/api/sysinfoapi/nf-sysinfoapi-getversionexa
+[GPU Info]: #gpu-info
+[Direct3DCreate9]: https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-direct3dcreate9
+[GetAdapterIdentifier]: https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-getadapteridentifier
+[Network Info]: #network-info
+[GetAdaptersInfo]: https://learn.microsoft.com/en-us/windows/win32/api/iphlpapi/nf-iphlpapi-getadaptersinfo
+[Volume Info]: #volume-info
+[GetDriveTypeA]: https://learn.microsoft.com/en-us/windows/win32/api/fileapi/nf-fileapi-getdrivetypea
+[GetVolumeInformationA]: https://learn.microsoft.com/en-us/windows/win32/api/fileapi/nf-fileapi-getvolumeinformationa
+
+### Layout
+
+```cpp
+struct hwid_t {
+	byte unk0;
+	byte version_hash;
+	WORD cpu_hash;
+	byte gpu_hash;
+	byte unk1;
+	byte network_hash;
+	WORD unk2;
+	byte unk3;
+	WORD disk_hash;
+	WORD unk4;
+	byte terminator;
+};
+
+// As string representation
+auto hwid_to_string(hwid_t hwid) -> std::string {
+	return std::format("{:02X}", hwid.unk0)
+		+ std::format("{:02X}", hwid.version_hash)
+		+ std::format("{:04X}", _byteswap_ushort(hwid.cpu_hash))
+		+ std::format("{:02X}", hwid.gpu_hash)
+		+ std::format("{:02X}", hwid.unk1)
+		+ std::format("{:02X}", hwid.network_hash)
+		+ std::format("{:04X}", hwid.unk2)
+		+ std::format("{:02X}", hwid.unk3)
+		+ std::format("{:04X}", _byteswap_ushort(hwid.disk_hash))
+		+ std::format("{:04X}", hwid.unk4);
+}
+```
+
+#### OS Version
+
+Struct: [OSVERSIONINFO](https://learn.microsoft.com/en-us/windows/win32/api/winnt/ns-winnt-osversioninfoa)
+
+|MD5(Nl)|MD5(Nh)|MD5(num)|MD5(data[0])|MD5(data[1])|MD5(data[2])|MD5(data[3])|
+|---|---|---|---|---|---|---|
+|128|0|16|dwProcessorType|dwAllocationGranularity|wProcessorLevel|wProcessorRevision|
+
+#### CPU Info
+
+Struct: [SYSTEM_INFO](https://learn.microsoft.com/en-us/windows/win32/api/sysinfoapi/ns-sysinfoapi-system_info)
+
+|MD5(Nl)|MD5(Nh)|MD5(num)|MD5(data[0])|MD5(data[1])|MD5(data[2])|MD5(data[3])|
+|---|---|---|---|---|---|---|
+|128|0|16|dwProcessorType|dwAllocationGranularity|wProcessorLevel|wProcessorRevision|
+
+#### GPU Info
+
+Struct: [D3DADAPTER_IDENTIFIER9](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dadapter-identifier9)
+
+|MD5(Nl)|MD5(Nh)|MD5(num)|MD5(data[0])|MD5(data[1])|MD5(data[2])|MD5(data[3])|
+|---|---|---|---|---|---|---|
+|128|0|16|VendorId|DeviceId|SubSysId|Revision|
+
+#### Network Info
+
+Struct: [PIP_ADAPTER_INFO](https://learn.microsoft.com/en-us/windows/win32/api/iptypes/ns-iptypes-ip_adapter_info)
+
+NOTE: Skip hashing when adapter type is ethernet (`MIB_IF_TYPE_ETHERNET`).
+
+|MD5(Nl)|MD5(Nh)|MD5(num)|MD5(data[0])|
+|---|---|---|---|
+|48|0|6|Address|
+
+#### Volume Info
+
+|MD5(Nl)|MD5(Nh)|MD5(num)|MD5(data[0])|
+|---|---|---|---|
+|128|0|4|_byteswap_ulong(lpVolumeSerialNumber)|
+
+#### XOR Operation
+
+```cpp
+auto xor_op(byte* dest, byte* src, DWORD size) -> void {
+	for (auto i = 1ul; i <= sizeof(MD5_LONG) * 4ul; ++i) {
+		for (auto j = 0ul; j < size; ++j) {
+			*(dest + j) ^= *(src++);
+		}
+	}
+}
+
+// Each part will xor its calculated MD5 hash
+xor_op(&hwid.version_hash, (byte*)&data[0], sizeof(hwid_t::version_hash));
+```
