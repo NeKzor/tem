@@ -1,6 +1,21 @@
 
 ## XLive (GFWL)
 
+- [Overview](#overview)
+- [Call Order](#call-order)
+- [Threads](#threads)
+- [Modification Check](#modification-check)
+- [Hook Protection](#hook-protection)
+- [Imported Functions (IAT)](#imported-functions-iat)
+- [Files](#files)
+- [Authentication](#authentication)
+- [Client](#client)
+- [Catalog](#catalog)
+  - [FindGameOffers](#findgameoffers)
+  - [FindGames](#findgames)
+
+### Overview
+
 XLive uses several anti-reversing tricks:
 
 |Trick|Bypass|
@@ -10,6 +25,63 @@ XLive uses several anti-reversing tricks:
 |[Hook Protection](#hook-protection)|Substitution|
 |Hardware/Software-Breakpoint Checks|[Thread Suspension](#threads)|
 |Function Obfuscation and Encryption||
+
+### Call Order
+
+#### At launch
+
+- XNetGetTitleXnAddr
+- XLivePreTranslateMessage
+- XUserGetSigninState
+- XLiveInitializeEx
+  - On failure: engine warns of debugger usage and shuts down.
+- XNetStartup
+  - If `XLiveInitializeEx` succeeded.
+- XOnlineStartup
+  - If `XNetStartup` succeeded.
+- XSocketWSAGetLastError
+  - If `XNetStartup` errored.
+- XHVCreateEngine
+- XUserGetSigninInfo
+- XUserGetSigninStat
+- XNotifyCreateListener
+- XNotifyPositionUI
+- XPresenceInitialize
+- XLiveSetDebugLevel
+  - If `XNotifyCreateListener` succeeded.
+- XSocketNTOHS
+  - If `XNotifyCreateListener` succeeded.
+- XNetSetSystemLinkPort
+  - If `XNotifyCreateListener` succeeded.
+- XLiveInput
+  - Called frequently. Game stalls if call errored.
+- XLiveRender
+  - Called frequently.
+- XUserGetName
+- XFriendsCreateEnumerator
+- XUserCreateAchievementEnumerator
+- XUserSetContext
+- XNotifyGetNext
+  - Called frequently.
+
+#### When pressing start
+
+- XShowSigninUI
+
+#### When pressing Live
+
+- XShowGuideUI
+
+#### When starting a game
+
+- XUserGetName
+- XUserGetName
+- XFriendsCreateEnumerator
+- XUserSetContext
+
+### When triggering an achievement
+
+- XUserWriteAchievements
 
 ### Threads
 
@@ -113,6 +185,7 @@ NOTE: XLive has more exported functions than the game has imported.
 |22|XSocketSend|called frequently|
 |24|XSocketSendTo||
 |27|XSocketWSAGetLastError||
+|38|XSocketNTOHS||
 |51|XNetStartup||
 |52|XNetCleanup||
 |53|XNetRandom||
@@ -237,6 +310,7 @@ TODO: Figure out 0x20 + `NOC` format.
 Using [Kerberos Protocol][].
 
 Kerberos: `40.64.89.190`
+
 Xbox: `tgs.prod.xboxlive.com`, `65.55.42.217`
 
 [Kerberos Protocol]: https://en.wikipedia.org/wiki/Kerberos_(protocol)
