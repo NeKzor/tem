@@ -2,7 +2,8 @@
 
 - [Context](#context)
 - [Launcher](#launcher)
-- [GetClassNameA](#getclassnamea)
+- [Spot Check](#spot-check)
+  - [GetClassNameA](#getclassnamea)
 - [Strings](#strings)
 - [Compression](#compression)
 - [Production Servers](#production-servers)
@@ -34,19 +35,126 @@ TL;DR: SecuROM was supposed to be a copy-protection for software. However the id
 
 ### Launcher
 
-From game process:
-- Checks if it was launched from the right executable
-- Checks if it could map a shared file
-
 Creates 20 files in `AppData\Local\Temp\GridGameLauncher_Data_DFE`.
 
 Example filename: `data_dfe_b93b5ee4f6834d365af674dbed527de5`.
 
 TODO: Does DFE have a special meaning?
 
-### GetClassNameA
+From game process:
+- Copies 1732 bytes from the memory mapped file `-=[SMS_GridGame.exe_SMS]=-` into a buffer
+  - Bytes at offset `4-7` represent the launcher handle which is used to trigger "spot checks" through `SendMessageW`
+- Checks if the game was launched from `GridGameLauncher.exe`
+- Does a CRC check of `GridGameLauncher.exe`
+  - Access registry path `HKEY_LOCAL_MACHINE\\Software\\Disney Interactive Studios\\tr2npc`
+	- Gets registry key `InstallPath`
+	- Gets registry key `Language`
+  - Checks if the file `EN/patch.dat` does not exist
+    - Skips rest if it does exist lol. Backdoor???
+  - Opens `GridGameLauncher.exe`
+    - Reads 0x6D1558 bytes (the whole file) into a buffer
+	- XORs 4 bytes at a time with `0xAE19EDA3` from `(0x6D1558 - 40) / 4` to `0x6D1558`
+	- Checks if hash matches with `0x6A85B570` for `EN` language
+		- `RU` = `0xD91791D4`
+		- `CZ` and `PL` = `0xBCD55594`
+	- Triggers a "spot check" if the hash does not match
 
-Joined together with four different parts.
+Layout of copied buffer at launch:
+
+|Offset|Length in bytes|Description|
+|---|---|---|
+|0x0004|4|Launcher handle.|
+|0x0010|||
+|0x0044|2|Message buffer.|
+|0x1DC8|||
+
+### Spot Check
+
+Used to trigger checks and send data or get data from to the launcher.
+Each check does some calculations which might call some kernel32 functions.
+This only seems to be done once for each type if the check succeeded.
+A global map keeps track of the type check by key.
+The game might behave differently if one check fails or gets skipped
+because the results will be checked in different functions.
+
+```cpp
+// This is a simplified version.
+// All names are obviously made up.
+// Also worth to notice is that the checks are implemented by the game devs.
+// Securom probably only provides the obfuscated part which verifies the end result.
+
+enum class SpotChecks {
+	OnlineSystem = 0,
+	Bindings = 1,
+	NoXp = 2,
+	// ...
+}
+
+enum class SpotCheck {
+	Ok = 0,
+	Invalid = 1 ,
+}
+
+struct SpotCheckResult {
+	SpotCheck check;
+}
+
+static TMap<SpotChecks, SpotCheckResult> global_map;
+
+auto result = SpotCheckResult();
+auto index = global_map.find_by_key(SpotChecks::NoXp, &result);
+
+if (index == INVALID_INDEX) {
+	// Trigger a check.
+	// Might also be called multiple times,
+	// passing down the result of the former call.
+	SendMessageW(securom_hwnd, securom_buffer, 2u, 0);
+
+	// Do some calculations.
+	// Calls to kernel32 functions are actually obfuscated.
+	auto data = GetClassNameA();
+	auto tick_count_result = data.split('_').at(3);
+
+	// Verify result.
+	auto new_result = SpotCheckResult();
+
+	if (is_valid_tick_count(tick_count_result)) {
+		new_result.check = SpotCheck::Ok;
+	} else {
+		new_result.check = SpotCheck::Invalid;
+	}
+
+	global_map.insert(SpotChecks::NoXp, new_result);
+}
+
+// Somewhere else...
+
+auto result = SpotCheckResult();
+auto index = global_map.find_by_key(SpotChecks::NoXp, &result);
+
+if (index != INVALID_INDEX && result.check == SpotCheck::Invalid) {
+	// Execute code to troll the player. Thanks :>
+}
+```
+
+|Key|Spot Location|Troll Code|
+|---|---|---|
+|0|Online system function|Weird version change from `1.01` to `1.01.1`|
+|1|Deadzone binding function|Buffers and delays all inputs|
+|2|`UPgOnline::Init` / checked in lobby|Removes weapon from player|
+|3|Triggered when spawning|???|
+|4|Save load manager|Messes with the save file by zero-ing the save data buffer which causes a crash when loading the save<sup>1</sup>|
+|5|Validates save game manager<br>Checks result in  `UPgOnlineGameManager::SetNextMap`|Cannot go past 3rd map|
+|6|Pause Menu<br>Verifies game signature hash|Disables unpause when the game pauses|
+|7|???|XP counter will not go up|
+|8|Main Menu|???|
+|9|Result of manual check if CRC check fails at launch|Game will not launch|
+
+<sup>1</sup> The crash is super weird. Not sure if intended.
+
+#### GetClassNameA
+
+Observed in spot checks. Provides string with four different parts.
 
 Example: `GridGameLauncher.exe_7910_4E63862_FBC446`.
 
