@@ -509,7 +509,7 @@ auto dump_engine_to_json() -> void
         auto type_name = get_class_object_name(field);
 
         if (strcmp(type_name, "StructProperty") == 0) {
-            result = /*std::string("struct ") + */get_object_name(field->as<UStructProperty>()->property_struct);
+            result = get_object_name(field->as<UStructProperty>()->property_struct);
         } else if (strcmp(type_name, "IntProperty") == 0) {
             result = "int";
         } else if (strcmp(type_name, "ByteProperty") == 0) {
@@ -521,21 +521,23 @@ auto dump_engine_to_json() -> void
         } else if (strcmp(type_name, "NameProperty") == 0) {
             result = "FName";
         } else if (strcmp(type_name, "ArrayProperty") == 0) {
-            result = std::string("TArray<") + resolve_type(field->as<UArrayProperty>()->inner) + ">";
+            auto inner = std::string(resolve_type(field->as<UArrayProperty>()->inner));
+            result = std::string("TArray<") + inner + "> ";
         } else if (strcmp(type_name, "StrProperty") == 0) {
             result = "FString";
         } else if (strcmp(type_name, "ClassProperty") == 0) {
             result = "UClass*";
         } else if (strcmp(type_name, "ObjectProperty") == 0) {
-            result = std::string("struct ") + std::string(get_object_name(field->as<UObjectProperty>()->property_class)) + "*";
+            result = std::string(get_object_name(field->as<UObjectProperty>()->property_class)) + "*";
         } else if (strcmp(type_name, "MapProperty") == 0) {
             result = "TMap<FPair>"; // Actual key/value type information seems to be lost :>
         } else if (strcmp(type_name, "ComponentProperty") == 0) {
-            result = std::string("struct ") + std::string(get_object_name(field->as<UComponentProperty>()->component)) + "*";
+            result = std::string(get_object_name(field->as<UComponentProperty>()->component)) + "*";
         } else if (strcmp(type_name, "DelegateProperty") == 0) {
             result = "FScriptDelegate";
         } else if (strcmp(type_name, "InterfaceProperty") == 0) {
-            result = std::string("FScriptInterface< ") + std::string(get_object_name(field->as<UInterfaceProperty>()->interface_class)) + ">";
+            auto inner = std::string(get_object_name(field->as<UInterfaceProperty>()->interface_class));
+            result = std::string("FScriptInterface<") + inner + "> ";
         } else if (strcmp(type_name, "State") == 0 || strcmp(type_name, "Enum") == 0 || strcmp(type_name, "Const") == 0
             || strcmp(type_name, "ScriptStruct") == 0 || strcmp(type_name, "Function") == 0) {
             result = "unknown_t"; // should not happen
@@ -624,6 +626,7 @@ auto dump_engine_to_json() -> void
             } else if (strcmp(type_name, "ScriptStruct") == 0) {
                 auto type_object = child_field->as<UScriptStruct>();
                 child["structName"] = get_object_name(type_object);
+                child["structNameNumber"] = type_object->name.number;
                 child["propertySize"] = type_object->property_size;
 
                 auto members = Json::array();
