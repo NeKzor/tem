@@ -569,16 +569,24 @@ struct UComponentProperty : UProperty {
     UObject* component; // 0x84
 };
 
-template <typename K = void*, typename V = void*>
-struct FPair {
+template <typename K = void*, typename V = void*> struct FPair {
     K key;
     V value;
     int unk0;
     int unk1;
 };
 
-template <typename T>
-struct TMap {
+template <typename T> struct TMap {
     TArray<T> value; // 0x00
     char unk0[48]; // 0x12
+};
+
+struct FScriptDelegate {
+    UObject* object; // 0x00
+    FName function_name; // 0x04
+};
+
+template <typename T> struct FScriptInterface {
+    T* object; // 0x00
+    T* interface_object; // 0x04
 };
