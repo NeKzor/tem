@@ -66,6 +66,25 @@ bool mhInitialized = false;
     auto name##_create_status                                                                                          \
         = MH_CreateHook(reinterpret_cast<LPVOID>(target), name##_Hook, reinterpret_cast<LPVOID*>(&name));              \
     auto name##_enable_status = MH_EnableHook(reinterpret_cast<LPVOID>(target));
+#define MH_QUEUE_HOOK(name, target)                                                                                    \
+    if (!mhInitialized) {                                                                                              \
+        MH_Initialize();                                                                                               \
+        mhInitialized = true;                                                                                          \
+    }                                                                                                                  \
+    name##_Target = uintptr_t(target);                                                                                 \
+    auto name##_create_status                                                                                          \
+        = MH_CreateHook(reinterpret_cast<LPVOID>(target), name##_Hook, reinterpret_cast<LPVOID*>(&name));              \
+    auto name##_enable_status = MH_EnableHook(reinterpret_cast<LPVOID>(target));
+#define MH_QUEUE_HOOK_MID(name, target)                                                                                \
+    if (!mhInitialized) {                                                                                              \
+        MH_Initialize();                                                                                               \
+        mhInitialized = true;                                                                                          \
+    }                                                                                                                  \
+    name##_Target = uintptr_t(target);                                                                                 \
+    auto name##_create_status                                                                                          \
+        = MH_CreateHook(reinterpret_cast<LPVOID>(target), name##_Hook, reinterpret_cast<LPVOID*>(&name));              \
+    auto name##_enable_status = MH_EnableHook(reinterpret_cast<LPVOID>(target));
+#define MH_APPLY_QUEUED() MH_ApplyQueued()
 #define MH_UNHOOK(name)                                                                                                \
     auto name##_disable_status = MH_DisableHook(reinterpret_cast<LPVOID>(name##_Target));                              \
     auto name##_remove_status = MH_RemoveHook(reinterpret_cast<LPVOID>(name##_Target));
