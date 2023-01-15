@@ -17,8 +17,8 @@ If you are from Microsoft: come, go ahead, and laugh at [the pain](/reversed/xli
 - [SecuROM](/reversed/securom.md)
   - [Context](/reversed/securom.md#context)
   - [Launcher](/reversed/securom.md#launcher)
+  - [Data File Encryption (DFE)](/reversed/securom.md#data-file-encryption-dfe)
   - [Spot Check](/reversed/securom.md#spot-check)
-    - [GetClassNameA](/reversed/securom.md#getclassnamea)
   - [Strings](/reversed/securom.md#strings)
   - [Compression](/reversed/securom.md#compression)
   - [Production Servers](/reversed/securom.md#production-servers)
@@ -34,11 +34,11 @@ If you are from Microsoft: come, go ahead, and laugh at [the pain](/reversed/xli
   - [Hook Protection](/reversed/xlive.md#hook-protection)
   - [Imported Functions (IAT)](/reversed/xlive.md#imported-functions-iat)
   - [Files](/reversed/xlive.md#files)
-- [Authentication](/reversed/xlive.md#authentication)
-- [Client](/reversed/xlive.md#client)
-- [Catalog](/reversed/xlive.md#catalog)
-  - [FindGameOffers](/reversed/xlive.md#findgameoffers)
-  - [FindGames](/reversed/xlive.md#findgames)
+  - [Authentication](/reversed/xlive.md#authentication)
+  - [Client](/reversed/xlive.md#client)
+  - [Catalog](/reversed/xlive.md#catalog)
+    - [FindGameOffers](/reversed/xlive.md#findgameoffers)
+    - [FindGames](/reversed/xlive.md#findgames)
 
 ### Version Reference
 
