@@ -2,8 +2,8 @@
 
 - [Context](#context)
 - [Launcher](#launcher)
+- [Data File Encryption](#data-file-encryption-dfe)
 - [Spot Check](#spot-check)
-  - [GetClassNameA](#getclassnamea)
 - [Strings](#strings)
 - [Compression](#compression)
 - [Production Servers](#production-servers)
@@ -28,20 +28,25 @@
 - Part of [Sony DADC][]
 - Lots of controversies including Tron: Evolution :(
 
-TL;DR: SecuROM was supposed to be a copy-protection for software. However the idea and the implementation was flawed as it made it harder or even impossible (!!) to use the protected software, resulting in users to download a protection-free version of their game through torrents.
+TL;DR: SecuROM was supposed to be a copy-protection for software. However the idea and the implementation was flawed
+as it made it harder or even impossible (!!) to use the protected software, resulting in users to download a
+protection-free version of their game through torrents.
 
 [Wikipedia Article]: https://en.wikipedia.org/wiki/SecuROM
 [Sony DADC]: https://en.wikipedia.org/wiki/Sony_Digital_Audio_Disc_Corporation
 
 ### Launcher
 
-Creates 20 files in `AppData\Local\Temp\GridGameLauncher_Data_DFE`.
+Before `GridGameLauncher.exe` starts `GridGame.exe` in a sub-process it will check for the game's activation.
+Since this check depends on your [hardware id](#hardware-id-hwid) a single change in your hardware components will
+affect your activation.
+As it turns out you can plug in any external storage device such as an HDD and
+<b>the game will not be able to launch after activation!!</b>
+This has to be one of the most brain-dead ideas in history of software engineering.
+Thanks again for nothing Sony DADC!
 
-Example filename: `data_dfe_b93b5ee4f6834d365af674dbed527de5`.
+When the game process starts it does the following:
 
-TODO: Does DFE have a special meaning?
-
-From game process:
 - Copies 1732 bytes from the memory mapped file `-=[SMS_GridGame.exe_SMS]=-` into a buffer
   - Bytes at offset `4-7` represent the launcher handle which is used to trigger "spot checks" through `SendMessageW`
 - Checks if the game was launched from `GridGameLauncher.exe`
@@ -50,7 +55,7 @@ From game process:
 	- Gets registry key `InstallPath`
 	- Gets registry key `Language`
   - Checks if the file `EN/patch.dat` does not exist
-    - Skips rest if it does exist lol. Backdoor???
+    - Skips the rest if it does exist lol
   - Opens `GridGameLauncher.exe`
     - Reads 0x6D1558 bytes (the whole file) into a buffer
 	- XORs 4 bytes at a time with `0xAE19EDA3` from `(0x6D1558 - 40) / 4` to `0x6D1558`
@@ -59,18 +64,107 @@ From game process:
 		- `CZ` and `PL` = `0xBCD55594`
 	- Triggers a "spot check" if the hash does not match
 
+This basically means we cannot simply modify the game binary as it does a CRC self-check unless you create a
+`patch.dat` file which seems to be a backdoor implemented by the Disney devs. However even if we want to modify the
+file statically we will not be able to progress without GFWL's signature check. The game is not meant to be playable without GFWL since the engine would just shutdown and crash because of a null pointer dereference somewhere deep
+inside the online subsystem code which requires GFWL to be initialized.
+
+The launcher can simply be replaced by modifying multiple code locations to get it working without GFWL
+or by simply writing your own one:
+
+```cpp
+// NOTE: Make sure that the launcher process has the same name
+//       as the original one "GridGameLauncher.exe"
+
+#define TR2NPC_PATH L"Software\\Disney Interactive Studios\\tr2npc"
+#define GAME_EXE L"GridGame.exe"
+#define BUFFER_SIZE 1723
+
+auto main() -> int
+{
+    println("Creating file mapping...");
+
+	// I wonder what SMS means. SecuROM's Mapping Signature?
+    auto file = std::format(L"-=[SMS_{}_SMS]=-", GAME_EXE);
+
+    auto handle = CreateFileMapping(INVALID_HANDLE_VALUE, NULL, PAGE_READWRITE, 0, BUFFER_SIZE, file.c_str());
+    if (!handle) {
+        println("Could not create file mapping object {}", GetLastError());
+        return 1;
+    }
+
+    auto buffer = MapViewOfFile(handle, FILE_MAP_ALL_ACCESS, 0, 0, BUFFER_SIZE);
+    if (!buffer) {
+        println("Could not map view of file {}", GetLastError());
+        CloseHandle(handle);
+        return 1;
+    }
+
+    STARTUPINFO si;
+    PROCESS_INFORMATION pi;
+
+    ZeroMemory(&si, sizeof(si));
+    si.cb = sizeof(si);
+    ZeroMemory(&pi, sizeof(pi));
+
+    WCHAR install_path[MAX_PATH] = {};
+    auto install_path_size = DWORD(sizeof(install_path));
+
+    auto result = RegGetValueW(
+        HKEY_LOCAL_MACHINE,
+        TR2NPC_PATH,
+        L"InstallPath",
+        RRF_RT_ANY,
+        nullptr,
+        &install_path,
+        &install_path_size);
+
+    if (result != ERROR_SUCCESS) {
+        println("Failed to get registry key value for install path");
+        return 1;
+    }
+
+    auto cmd = std::format(L"{}\\{}", install_path, GAME_EXE);
+    CreateProcessW(NULL, (LPWSTR)cmd.c_str(), NULL, NULL, FALSE, 0, NULL, NULL, &si, &pi);
+
+    println("launched");
+
+    WaitForSingleObject(pi.hProcess, INFINITE);
+
+    println("exited");
+
+    CloseHandle(pi.hProcess);
+    CloseHandle(pi.hThread);
+
+    UnmapViewOfFile((LPCVOID)buffer);
+    CloseHandle(handle);
+
+    return 0;
+}
+```
+
+TODO: Figure out how messages are handled.
+
 Layout of copied buffer at launch:
 
 |Offset|Length in bytes|Description|
 |---|---|---|
-|0x0004|4|Launcher handle.|
-|0x0010|||
-|0x0044|2|Message buffer.|
-|0x1DC8|||
+|0x0004|4|Launcher handle for [spot checks](#spot-check).|
+|0x0044|2|Spot check message buffer.|
+
+### Data File Encryption (DFE)
+
+The launcher creates 20 encrypted files in `AppData\Local\Temp\GridGameLauncher_Data_DFE`.
+
+Example filename: `data_dfe_b93b5ee4f6834d365af674dbed527de5`.
+
+One file is located at install path called `dfe`.
+
+TODO: There are several other files in the install path folder which might also be related to this.
 
 ### Spot Check
 
-Used to trigger checks and send data or get data from to the launcher.
+Used to trigger checks by communicating with the SecuROM launcher by sending signals through `SendMessageW`.
 Each check does some calculations which might call some kernel32 functions.
 This only seems to be done once for each type if the check succeeded.
 A global map keeps track of the type check by key.
@@ -81,7 +175,7 @@ because the results will be checked in different functions.
 // This is a simplified version.
 // All names are obviously made up.
 // Also worth to notice is that the checks are implemented by the game devs.
-// Securom probably only provides the obfuscated part which verifies the end result.
+// SecuROM most likely only provides the obfuscated part which verifies the end result.
 
 enum class SpotChecks {
 	OnlineSystem = 0,
@@ -137,6 +231,10 @@ if (index != INVALID_INDEX && result.check == SpotCheck::Invalid) {
 }
 ```
 
+NOTE: These are not implementation details by SecuROM unless they have some sort of strict guideline for the developers
+on where to call their code and how to troll the player, which is unlikely but you never know how many idiotic
+ideas Sony DADC can come up with lol.
+
 |Key|Spot Location|Troll Code|
 |---|---|---|
 |0|Online system function|Weird version change from `1.01` to `1.01.1`|
@@ -150,11 +248,9 @@ if (index != INVALID_INDEX && result.check == SpotCheck::Invalid) {
 |8|Main Menu|???|
 |9|Result of manual check if CRC check fails at launch|Game will not launch|
 
-<sup>1</sup> The crash is super weird. Not sure if intended.
+<sup>1</sup> The crash is super weird. Not sure if intended. TODO: Might want to investigate.
 
-#### GetClassNameA
-
-Observed in spot checks. Provides string with four different parts.
+Kernel32 function `GetClassNameA` has been observed multiple times in spot checks. It provides a string with four different parts.
 
 Example: `GridGameLauncher.exe_7910_4E63862_FBC446`.
 
@@ -194,7 +290,7 @@ It's made with MFC and ATL.
 
 ### Activation Error Codes
 
-NOTE: Somebody at Sony could not spell `occurred` lol.
+NOTE: Somebody at Sony DADC could not spell `occurred` lol.
 
 |Code|Description|
 |---|---|
