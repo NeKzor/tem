@@ -56,7 +56,9 @@ struct UClass : UState {
 
 ### Properties
 
-NOTE: Element size is the actual size of the property in bytes.
+```admonish warning
+Element size is the actual size of the property in bytes.
+```
 
 ```cpp
 struct UProperty : UField {
@@ -343,7 +345,9 @@ struct FString
 
 #### TMap\<T\>
 
-Note: `FPair` is `TPair` which can variable in size, so this simplified definition is not correct.
+```admonish warning
+`FPair` is `TPair` which can variable in size, so this simplified definition is not correct.
+```
 
 ```cpp
 template <
@@ -369,7 +373,9 @@ struct TMap {
 
 #### FScriptDelegate
 
-TODO: Generic?
+```admonish todo
+Generic?
+```
 
 ```cpp
 struct FScriptDelegate {
@@ -380,7 +386,9 @@ struct FScriptDelegate {
 
 #### FScriptInterface\<T\>
 
-TODO: Object and interface seem to always point to the same address?
+```admonish todo
+Object and interface seem to always point to the same address?
+```
 
 ```cpp
 template <typename T>
@@ -406,9 +414,13 @@ auto UObject::ProcessEvent(UFunction* func, void* params, int result) -> void
 }
 ```
 
-TODO: Dispatch a function in TEM
+```admonish todo
+Dispatch a function in TEM
+```
 
-TODO: Figure out how to dispatch remote function
+```admonish todo
+Figure out how to dispatch remote function
+```
 
 ```cpp
 // Find function in class

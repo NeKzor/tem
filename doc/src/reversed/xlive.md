@@ -17,8 +17,10 @@
 
 ### Overview
 
-NOTE: Some observations are hard to interpret as XLive <i>looooves to crash a lot</i> when attempting to tamper it.
+```admonish warning
+Some observations are hard to interpret as XLive <i>looooves to crash a lot</i> when attempting to tamper it.
 For example: XLive itself has to be modified in order to make it debuggable which might yield incorrect results.
+```
 
 XLive uses several anti-tampering tricks:
 
@@ -153,9 +155,13 @@ The `.cat` file is a security catalogue file which is signed by Microsoft Window
 |Signer|Microsoft LIVE PCA|
 |Signing Time|Saturday, 30 October 2010 01:55:25|
 
-TODO: Isn't it a bit too late to check if the file has been modified if it already launched?
+```admonish todo
+Isn't it a bit too late to check if the file has been modified if it already launched?
+```
 
-TODO: Figure out if Microsoft messed up and we can simply bypass this too.
+```admonish todo
+Figure out if Microsoft messed up and we can simply bypass this too.
+```
 
 ### Modification Check
 
@@ -248,7 +254,9 @@ void decrypt_xlive_5034()
 In very special cases the return address of the caller (the process module) will be used.
 This will fail if we simply call an XLive function from any other module.
 
-TODO: Figure out if it actually is the main module.
+```admonish todo
+Figure out if it actually is the main module.
+```
 
 One odd thing seems to happen with `XLiveCloseProtectedDataContext` though which might be a bug in XLive.
 This function will crash the process if a call to `XLiveUnprotectData` fails to read parts of a corrupted save file.
@@ -256,7 +264,9 @@ However the call to `XLiveCloseProtectedDataContext` will succeed if it gets cal
 
 ### Imported Functions (IAT)
 
-NOTE: XLive has more exported functions than the game has imported.
+```admonish warning
+XLive has more exported functions than the game has imported.
+```
 
 |Ordinal|Name|Notes|
 |---|---|---|
@@ -409,11 +419,17 @@ Titles:
   - config.bin
   - Token.bin
 
-TODO: What is `FFFE07D1` and `00010000`?
+```admonish todo
+What is `FFFE07D1` and `00010000`?
+```
 
-TODO: Figure out `FBDX` format.
+```admonish todo
+Figure out `FBDX` format.
+```
 
-TODO: Figure out 0x20 + `NOC` format.
+```admonish todo
+Figure out 0x20 + `NOC` format.
+```
 
 ### Authentication
 

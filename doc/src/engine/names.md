@@ -11,7 +11,9 @@ struct FName {
 
 ## List
 
-NOTE: Index is automatically right-shifted by one!
+```admonish warning
+Index is automatically right-shifted by one!
+```
 
 Name|Index
 ---|---

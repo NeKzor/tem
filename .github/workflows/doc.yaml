@@ -33,9 +33,11 @@ jobs:
         run: |
           mkdir bin
           curl -sSL https://github.com/rust-lang/mdBook/releases/download/v0.4.22/mdbook-v0.4.22-x86_64-unknown-linux-gnu.tar.gz | tar -xz --directory=bin
+          curl -ssL https://github.com/tommilligan/mdbook-admonish/releases/download/v1.8.0/mdbook-admonish-v1.8.0-x86_64-unknown-linux-gnu.tar.gz | tar -xz --directory=bin
           chmod +x bin/mdbook
+          chmod +x bin/mdbook-admonish
       - name: Build
-        run: bin/mdbook build
+        run: PATH=$PATH:bin/ bin/mdbook build
       - name: Setup Pages
         uses: actions/configure-pages@v2
       - name: Upload

@@ -6,7 +6,7 @@ src = "src"
 title = "Tron: Evolution Mod"
 
 [output.html]
-additional-css = ["custom.css"]
+additional-css = ["custom.css", "mdbook-admonish.css"]
 cname = "tem.nekz.me"
 git-repository-url = "https://github.com/NeKzor/tem"
 git-repository-icon = "fa-github"
@@ -16,3 +16,9 @@ enable = false
 
 [output.html.print]
 enable = false
+
+[preprocessor]
+
+[preprocessor.admonish]
+command = "mdbook-admonish"
+assets_version = "2.0.0" # do not edit: managed by `mdbook-admonish install`

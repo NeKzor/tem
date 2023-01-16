@@ -6,9 +6,13 @@ Located in `%USERPROFILE%\Documents\Disney Interactive Studios\Tron Evolution\Sa
 XUID Folder is formatted as a 16 zero-padded hex-string of type of type `unsigned __int64`.
 Example: `0xE00000FDBD7D2113`.
 
-TODO: What is `XUID`?
+```admonish todo
+ What is `XUID`?
+```
 
-NOTE: Always make a backup of the file! Apparently a game crash during saving can corrupt it lol.
+```admonish warning
+Always make a backup of the file! Apparently a game crash during saving can corrupt it lol.
+```
 
 ### Structure
 

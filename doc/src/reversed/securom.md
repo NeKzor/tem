@@ -143,7 +143,9 @@ auto main() -> int
 }
 ```
 
-TODO: Figure out how messages are handled.
+```admonish todo
+Figure out how messages are handled.
+```
 
 Layout of copied buffer at launch:
 
@@ -160,7 +162,9 @@ Example filename: `data_dfe_b93b5ee4f6834d365af674dbed527de5`.
 
 One file is located at install path called `dfe`.
 
-TODO: There are several other files in the install path folder which might also be related to this.
+```admonish todo
+There are several other files in the install path folder which might also be related to this.
+```
 
 ### Spot Check
 
@@ -231,9 +235,11 @@ if (index != INVALID_INDEX && result.check == SpotCheck::Invalid) {
 }
 ```
 
-NOTE: These are not implementation details by SecuROM unless they have some sort of strict guideline for the developers
+```admonish note
+These are not implementation details by SecuROM unless they have some sort of strict guideline for the developers
 on where to call their code and how to troll the player, which is unlikely but you never know how many idiotic
 ideas Sony DADC can come up with lol.
+```
 
 |Key|Spot Location|Troll Code|
 |---|---|---|
@@ -290,7 +296,9 @@ It's made with MFC and ATL.
 
 ### Activation Error Codes
 
-NOTE: Somebody at Sony DADC could not spell `occurred` lol.
+```admonish bug
+Somebody at Sony DADC could not spell `occurred` lol.
+```
 
 |Code|Description|
 |---|---|
@@ -449,7 +457,9 @@ Struct: [D3DADAPTER_IDENTIFIER9](https://learn.microsoft.com/en-us/windows/win32
 
 Struct: [PIP_ADAPTER_INFO](https://learn.microsoft.com/en-us/windows/win32/api/iptypes/ns-iptypes-ip_adapter_info)
 
-NOTE: Skip hashing when adapter type is ethernet (`MIB_IF_TYPE_ETHERNET`).
+```admonish warning
+Skip hashing when adapter type is ethernet (`MIB_IF_TYPE_ETHERNET`).
+```
 
 |MD5(Nl)|MD5(Nh)|MD5(num)|MD5(data[0])|
 |---|---|---|---|
