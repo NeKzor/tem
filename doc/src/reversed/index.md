@@ -34,6 +34,7 @@ If you are from Microsoft: come, go ahead, and laugh at [the pain](/reversed/xli
     - [Volume Info](/reversed/securom.md#volume-info)
     - [XOR Operation](/reversed/securom.md#xor-operation)
   - [DES Encryption](/reversed/securom.md#des-encryption)
+  - [Unlock Code](/reversed/securom.md#unlock-code)
 - [XLive](/reversed/xlive.md)
   - [Overview](/reversed/xlive.md#overview)
   - [Call Order](/reversed/xlive.md#call-order)

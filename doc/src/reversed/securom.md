@@ -19,6 +19,7 @@
   - [Volume Info](#volume-info)
   - [XOR Operation](#xor-operation)
 - [DES Encryption](#des-encryption)
+- [Unlock Code](#unlock-code)
 
 ### Context
 
@@ -432,7 +433,7 @@ Struct: [OSVERSIONINFO](https://learn.microsoft.com/en-us/windows/win32/api/winn
 
 |MD5(Nl)|MD5(Nh)|MD5(num)|MD5(data[0])|MD5(data[1])|MD5(data[2])|MD5(data[3])|
 |---|---|---|---|---|---|---|
-|128|0|16|dwProcessorType|dwAllocationGranularity|wProcessorLevel|wProcessorRevision|
+|128|0|16|dwProcessorType|dwMajorVersion|dwBuildNumber|dwPlatformId|
 
 #### CPU Info
 
@@ -455,7 +456,7 @@ Struct: [D3DADAPTER_IDENTIFIER9](https://learn.microsoft.com/en-us/windows/win32
 Struct: [PIP_ADAPTER_INFO](https://learn.microsoft.com/en-us/windows/win32/api/iptypes/ns-iptypes-ip_adapter_info)
 
 ```admonish todo
-This does not seem correct. ~~Skip hashing when adapter type is ethernet (`MIB_IF_TYPE_ETHERNET`).~~
+Verify if this is correct: Skip hashing when adapter type is ethernet (`MIB_IF_TYPE_ETHERNET`).
 ```
 
 |MD5(Nl)|MD5(Nh)|MD5(num)|MD5(data[0])|
@@ -483,11 +484,12 @@ auto xor_op(byte* dest, byte* src, DWORD size) -> void {
 xor_op(&hwid.version_hash, (byte*)&data[0], sizeof(hwid_t::version_hash));
 ```
 
-#### DES Encryption
+### DES Encryption
 
-SecuROM uses DES [Cipher Feedback Encryption][] with an old [OpenSSL version from 2005][].
+SecuROM uses DES [Cipher Feedback Encryption][] for the product activation process.
+The OpenSSL version that is used for this is [from 2005][].
 
-![cfb_image][]
+<img src="/images/1920px-CFB_encryption.svg.png" alt="cfb_image" style="background: white;">
 
 ```cpp
 auto encrypt_with_des(
@@ -514,6 +516,193 @@ auto encrypt_with_des(
 ```
 
 [Cipher Feedback Encryption]: https://en.wikipedia.org/wiki/Block_cipher_mode_of_operation#Cipher_feedback_(CFB)
-[cfb_image]: https://upload.wikimedia.org/wikipedia/commons/thumb/9/9d/CFB_encryption.svg/1920px-CFB_encryption.svg.png
-[OpenSSL version from 2005]: https://github.com/openssl/openssl/blob/OpenSSL_0_9_8/crypto/des/cfb_enc.c#L71-L73
+[from 2005]: https://github.com/openssl/openssl/blob/OpenSSL_0_9_8/crypto/des/cfb_enc.c#L71-L73
 
+### Unlock Code
+
+After a fresh game installation, the product has to be activated once through a activation process which roughly works
+like this:
+
+- SecuROM generates unlock request code which contains the users's HWID and serial and sends this to the activation
+  servers
+- Server sends back the generated unlock code
+- SecuROM unpacks the binary and saves the result in the registry
+
+```admonish note
+What's worth mentioning is that the serial code might or might not be used locally afterwards.
+However, for Tron: Evolution it is: The launcher will send the serial to the 2nd DRM which is Games for Windows Live.
+```
+
+SecuROM provides a manual activation in case the automatic one fails.
+This means that the user has to enter the unlock request code + serial manually on SecuROM's web page to request
+the unlock code. When SecuROM decides to shutdown their service, like in the case for Tron: Evolution, users
+would not be able to progress further. The product simply cannot be activated, or can it?
+
+```admonish info
+Who is in charge of Tron: Evolution? It is a bit more complicated than that:
+The original developers were Propaganda Games which closed a few months after the game's release in 2011.
+They were was part of Disney Interactive Studios which then also shut down in 2016.
+SecuROM discontinued its service for Disney in 2019. Usually it's the developers responsibility to remove the DRM.
+Nowadays it is only recommended to keep SecuROM, which is now known as [Denuvo][], for a few months after the game
+launch and then remove it. However nobody is maintaining Tron: Evolution which was the main reason that the current
+publisher had to remove it from Steam and other game stores.
+```
+
+[Denuvo]: https://www.pcgamingwiki.com/wiki/Denuvo
+
+Fortunately, the unlock code can be generated locally without the need of SecuROM's activation servers in the
+following manner:
+
+Generate the user's hardware ID, see chapter [HWID](#hardware-id-hwid).
+
+```cpp
+// Example: "010BE04D5A009B00000037210000"
+auto hwid = generate_user_hwid();
+```
+
+Calculate the RSA plaintext:
+
+\\( c = m^e \mod n \\)
+
+|Variable|Description|
+|---|---|
+|c|Plaintext|
+|m|HWID|
+|e|0xB4109B85B0CAFBD73EDDAB05A9881|
+|n|0x1CF9DFF37F133D15D21CC4F5ADE91F|
+
+```cpp
+// NOTE: All Numbers are "huge" integers. A magic library should handle the maths :)
+auto m = huge_integer_from_hex(hwid);
+auto e = huge_integer_from_hex("B4109B85B0CAFBD73EDDAB05A9881");
+auto n = huge_integer_from_hex("1CF9DFF37F133D15D21CC4F5ADE91F");
+auto c = mod_exp(m, e, n);
+```
+
+Calculate plaintext length. The total length should be 30 but the number can be lower than that.
+Simply fill the rest with 'f' characters.
+
+```cpp
+char plaintext[33];
+convert_plaintext_number_to_hex(c, plaintext, sizeof(plaintext));
+
+auto idx = 0;
+
+while (plaintext[idx] != NULL) {
+	if (!plaintext[idx + 1]) {
+		idx += 1;
+		break;
+	} else {
+		idx += 2;
+	}
+}
+
+plaintext[idx + 1] = 0;
+
+auto max_length = 30;
+auto offset = max_length - idx;
+
+if ((offset & 0x80000000) != 0) {
+	std::cout << "[-] invalid offset!" << std::endl;
+	return 1;
+}
+
+auto new_idx = idx;
+
+if (max_length != idx) {
+	do {
+		auto v = plaintext + new_idx++;
+		*v = 'f';
+		--offset;
+	} while (offset);
+}
+```
+
+Append the original length at the end of the buffer.
+
+```cpp
+convert_int_to_hex_and_append(idx, &plaintext[new_idx]);
+```
+
+Convert hex string to a buffer and XOR everything with the game's appid signature.
+
+```cpp
+// Game signature aka appid (48 bytes)
+// Found in spot check 6
+unsigned char tron_signature[] = {
+	// 1st part (16 bytes)
+	0xF9, 0x83, 0x7A, 0x1D, 0x22, 0x2F, 0x64, 0x74,
+	0x28, 0xCB, 0x13, 0x30, 0x32, 0xD0, 0xD0, 0x0C,
+	// 2nd part (32 bytes)
+	0xE8, 0x96, 0xD4, 0xE1, 0xBD, 0xFC, 0x0E, 0x37,
+	0x8C, 0x8D, 0x17, 0x74, 0x27, 0x27, 0xBC, 0xE0,
+	0xE8, 0x96, 0xD4, 0xE1, 0xBD, 0xFC, 0x0E, 0x37,
+	0xE8, 0x96, 0xD4, 0xE1, 0xBD, 0xFC, 0x0E, 0x37,
+};
+
+char input[56] = {};
+auto inputPtr = input + 4;
+
+convert_hex_to_bytes(inputPtr + 5, plaintext, 32);
+
+for (auto i = 0; i < 16; ++i) {
+	*(inputPtr + 5 + i) ^= *(tron_signature + i);
+}
+```
+
+Calculate MD5 of game's appid and XOR it with the buffer.
+
+```cpp
+// TODO
+
+MD5_CTX ctx = {};
+
+MD5_Init(&ctx);
+MD5_Update(&ctx, tron_signature, sizeof(tron_signature));
+
+unsigned char data[32] = {};
+MD5_Final((unsigned char*)&data[0], &ctx);
+```
+
+Encrypt the game's signature with lots of XOR operations and DES CBF.
+
+```cpp
+// TODO
+```
+
+Now comes the longest process: S-box DES encryption times 2<sup>17</sup>.
+This will take a few seconds depending on the CPU's speed lol.
+
+```cpp
+auto rounds = 0x20000;
+
+do
+{
+	for (auto i = 0; i < 8; ++i) {
+		des_encrypt_with_sbox(input, output, 21);
+		des_encrypt_with_sbox(output, input, 21);
+	}
+	--rounds;
+} while (rounds);
+```
+
+Calculate CRC and XOR it with the buffer.
+
+```cpp
+auto crc = get_crc(output, 24);
+xor_operations(&crc, 4, output, 1u);
+```
+
+Final DES CFB encryption with random seed.
+
+```cpp
+// TODO
+```
+
+Encode rest of the buffer to ASCII and insert hyphens etc.
+
+```cpp
+// TODO
+```
+
+Credits to 80_PA.

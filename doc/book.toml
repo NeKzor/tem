@@ -6,6 +6,7 @@ src = "src"
 title = "Tron: Evolution Mod"
 
 [output.html]
+mathjax-support = true
 additional-css = ["custom.css", "mdbook-admonish.css"]
 cname = "tem.nekz.me"
 git-repository-url = "https://github.com/NeKzor/tem"
