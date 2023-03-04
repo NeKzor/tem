@@ -3,7 +3,6 @@
 *.exe
 scripts/
 sdk/
-unlocker/
 CHECKPT
 
 ## Ignore Visual Studio temporary files, build results, and
