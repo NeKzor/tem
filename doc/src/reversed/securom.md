@@ -18,6 +18,7 @@
   - [Network Info](#network-info)
   - [Volume Info](#volume-info)
   - [XOR Operation](#xor-operation)
+- [DES Encryption](#des-encryption)
 
 ### Context
 
@@ -66,7 +67,8 @@ When the game process starts it does the following:
 
 This basically means we cannot simply modify the game binary as it does a CRC self-check unless you create a
 `patch.dat` file which seems to be a backdoor implemented by the Disney devs. However even if we want to modify the
-file statically we will not be able to progress without GFWL's signature check. The game is not meant to be playable without GFWL since the engine would just shutdown and crash because of a null pointer dereference somewhere deep
+file statically we will not be able to progress without GFWL's signature check. The game is not meant to be playable
+without GFWL since the engine would just shutdown and crash because of a null pointer dereference somewhere deep
 inside the online subsystem code which requires GFWL to be initialized.
 
 The launcher can simply be replaced by modifying multiple code locations to get it working without GFWL
@@ -235,12 +237,6 @@ if (index != INVALID_INDEX && result.check == SpotCheck::Invalid) {
 }
 ```
 
-```admonish note
-These are not implementation details by SecuROM unless they have some sort of strict guideline for the developers
-on where to call their code and how to troll the player, which is unlikely but you never know how many idiotic
-ideas Sony DADC can come up with lol.
-```
-
 |Key|Spot Location|Troll Code|
 |---|---|---|
 |0|Online system function|Weird version change from `1.01` to `1.01.1`|
@@ -256,7 +252,8 @@ ideas Sony DADC can come up with lol.
 
 <sup>1</sup> The crash is super weird. Not sure if intended. TODO: Might want to investigate.
 
-Kernel32 function `GetClassNameA` has been observed multiple times in spot checks. It provides a string with four different parts.
+Kernel32 function `GetClassNameA` has been observed multiple times in spot checks.
+It provides a string with four different parts.
 
 Example: `GridGameLauncher.exe_7910_4E63862_FBC446`.
 
@@ -457,8 +454,8 @@ Struct: [D3DADAPTER_IDENTIFIER9](https://learn.microsoft.com/en-us/windows/win32
 
 Struct: [PIP_ADAPTER_INFO](https://learn.microsoft.com/en-us/windows/win32/api/iptypes/ns-iptypes-ip_adapter_info)
 
-```admonish warning
-Skip hashing when adapter type is ethernet (`MIB_IF_TYPE_ETHERNET`).
+```admonish todo
+This does not seem correct. ~~Skip hashing when adapter type is ethernet (`MIB_IF_TYPE_ETHERNET`).~~
 ```
 
 |MD5(Nl)|MD5(Nh)|MD5(num)|MD5(data[0])|
@@ -485,3 +482,38 @@ auto xor_op(byte* dest, byte* src, DWORD size) -> void {
 // Each part will xor its calculated MD5 hash
 xor_op(&hwid.version_hash, (byte*)&data[0], sizeof(hwid_t::version_hash));
 ```
+
+#### DES Encryption
+
+SecuROM uses DES [Cipher Feedback Encryption][] with an old [OpenSSL version from 2005][].
+
+![cfb_image][]
+
+```cpp
+auto encrypt_with_des(
+	const_DES_cblock* cblock,
+	unsigned char* input,
+	unsigned char* output,
+	size_t length) -> void
+{
+	DES_key_schedule key_schedule = {};
+	DES_cblock result =  {};
+
+	DES_set_key_unchecked(cblock, &key_schedule);
+
+	DES_cfb_encrypt(
+		input,
+		output,
+		8,
+		length,
+		&key_schedule,
+		&result,
+		DES_ENCRYPT
+	);
+}
+```
+
+[Cipher Feedback Encryption]: https://en.wikipedia.org/wiki/Block_cipher_mode_of_operation#Cipher_feedback_(CFB)
+[cfb_image]: https://upload.wikimedia.org/wikipedia/commons/thumb/9/9d/CFB_encryption.svg/1920px-CFB_encryption.svg.png
+[OpenSSL version from 2005]: https://github.com/openssl/openssl/blob/OpenSSL_0_9_8/crypto/des/cfb_enc.c#L71-L73
+
