@@ -17,6 +17,7 @@
 #pragma warning(disable : 4002)
 #pragma warning(disable : 4996)
 
+#include <ctime>
 #include <iostream>
 #include <openssl/md5.h>
 #include <openssl/opensslv.h>
@@ -337,17 +338,6 @@ auto convert_hex_to_bytes(char* new_buf, char* buf, unsigned int length) -> char
 	return result;
 }
 
-auto main2() -> int {
-	char sbuf[32] = {};
-	char buf[32] = { 0x41, 0x42 };
-
-	std::cout << std::format("[+] buf: {}", buf) << std::endl;
-	convert_hex_to_bytes(sbuf, buf, 2);
-	std::cout << std::format("[+] sbuf: {}", sbuf) << std::endl;
-
-	return 0;
-}
-
 auto figure_out_what_this_does_4(unsigned char *data, int data_length, unsigned char *buf, int length) -> signed int
 {
 	unsigned int v4; // esi@4
@@ -479,20 +469,6 @@ auto println(const char* txt) -> void;
 
 auto more_xoring(char* data, int data_length, char* buf, size_t length) -> void
 {
-	std::cout << "more_xoring" << std::endl;
-	if (length == 1) {
-		print_buffer("[+] data: ", (unsigned char*)data, data_length);
-		std::cout << "[+] data: 46A817DD" << std::endl;
-		print_buffer("[+] buf: ", (unsigned char*)buf, data_length * length);
-		std::cout << "[+] buf: 0001C722" << std::endl  << std::endl;
-	} else {
-		print_buffer("[+] data: ", (unsigned char*)data, data_length);
-		std::cout << "[+] data: FDFB582E97D2A0AC950105EDEC5AA61F" << std::endl;
-		print_buffer("[+] buf: ", (unsigned char*)buf, data_length * length);
-		std::cout << "[+] buf: 00000000000B140AD61691106CC4AE788ABF7EFF110000000000000000000000" << std::endl  << std::endl;
-	                              // 0B140AD61691106CC4AE788ABF7EFF11 FF9800FCE91900720000000000
-	}
-
 	size_t length_1; // esi@1
 	signed int buf_end; // edx@1
 	int result; // eax@1
@@ -542,72 +518,21 @@ auto more_xoring(char* data, int data_length, char* buf, size_t length) -> void
 
 auto encrypt_with_des(unsigned char* cblock, char* data, char* buf, size_t length) -> void
 {
-	println("[+] encrypt_with_des");
-	std::cout << length << std::endl;
-
-	if (length == 19) {
-		print_buffer("[+] cblock: ", cblock, 17);
-		println("[+] cblock: F9837A1D222F64744CD0D0A5A80B62DB61");
-
-		print_buffer("[+] data: ", (unsigned char*)data, length);
-		println("[+] data: 000000537FB09EF0F6466B638F66FADF0F4F11");
-
-		print_buffer("[+] buf : ", (unsigned char*)buf, length);
-		println("[+] buf : 000000537FB09EF0F6466B638F66FADF0F4F11");
-
-		std::cout << "[+] length: " << length << std::endl;
-		println("[+] length: 19");
-	} else {
-		print_buffer("[+] cblock: ", cblock, 17);
-		println("[+] cblock: CB57D42C2BC90F0B1D8755F761E5FEF6");
-
-		print_buffer("[+] data: ", (unsigned char*)data, length);
-		println("[+] data: 2401C72265A1E0AA94B19ACCD972118F68211865257A7522EC");
-
-		print_buffer("[+] buf : ", (unsigned char*)buf, length);
-		println("[+] buf : FDFB582E97D2A0AC950105EDEC5AA61F000000000000000000");
-
-		std::cout << "[+] length: " << length << std::endl;
-		println("[+] length: 25");
-	}
-
 	*(cblock + 0) ^= *(cblock + 8);
 	*(cblock + 1) ^= *(cblock + 9);
 	*(cblock + 2) ^= *(cblock + 10);
 	*(cblock + 3) ^= *(cblock + 11);
-
 	*(cblock + 4) ^= *(cblock + 12);
 	*(cblock + 5) ^= *(cblock + 13);
 	*(cblock + 6) ^= *(cblock + 14);
 	*(cblock + 7) ^= *(cblock + 15);
-
 	*(cblock + 8) ^= *(cblock + 16);
-	
-	if (length == 19) {
-		print_buffer("[+] cblock: ", cblock, 17);
-		println("[+] cblock: B553AAB88A2406AF2DD0D0A5A80B62DB61");
-	} else {
-		print_buffer("[+] cblock: ", cblock, 17);
-		println("[+] cblock: D6D081DB4A2CF1FDA88755F761E5FEF6");
-	}
 
 	DES_key_schedule sch_key = {};
-
 	DES_set_key_unchecked((const_DES_cblock*)cblock, &sch_key);
 	
 	DES_cblock result =  {};
-
 	DES_cfb_encrypt((unsigned char*)data, (unsigned char*)buf, 8, length, &sch_key, &result, DES_ENCRYPT);
-
-	if (length == 19) {
-		print_buffer("[+] buf : ", (unsigned char*)buf, length);
-		println("[+] buf : 22AC0F80FA61AE816125488D9A8E7152FDB02E");
-	} else {
-		print_buffer("[+] buf : ", (unsigned char*)buf, length);
-		println("[+] buf : 3A1DAABF0EB2913BBE95D5B36154D0EFBA1BEAEB83D64ADCB3");
-	}
-
-	std::cout << std::endl;
 }
 
 auto println(const char* txt) -> void {
@@ -793,11 +718,9 @@ auto des_encrypt_with_sbox(BYTE *data, BYTE *buf, int length) -> signed int
       current_byte =  &buffer[8];
       byte_mask = 8 * (index + (number >> 4)) + unk_des_mask;
       bits = 8;
-	  //std::cout << "number = 0x" << std::hex << number << std::dec << std::endl;
       do
       {
         *current_byte |= *byte_mask | *(BYTE*)(8 * ((number & 0xF) - (number >> 4)) + 128 + byte_mask);
-	    //std::cout << "*current_byte = 0x" << std::hex << (int)*current_byte << std::dec << std::endl;
         ++current_byte;
         ++byte_mask;
         --bits;
@@ -902,16 +825,12 @@ auto des_encrypt_with_sbox(BYTE *data, BYTE *buf, int length) -> signed int
     do
     {
       v40 = 8 * ((*current_buf_ptr & 0xF) - (*current_buf_ptr >> 4)) + 128;
-	  //std::cout << "v40 = 0x" << std::hex << (int)v40 << std::dec << std::endl;
       byte_mask_1 = 8 * (index_1 + (*current_buf_ptr >> 4)) + unk_des_mask2;
       bits_1 = 8;
       v43 = buffer;
       do
       {
-		//std::cout << "    byte_mask_1 = 0x" << std::hex << (int)byte_mask_1 << std::dec << std::endl;
         BYTE tmp_byte = *byte_mask_1 | *(v40 + byte_mask_1);
-		//std::cout << "    bits_1 = 0x" << std::hex << (int)bits_1 << std::dec << std::endl;
-		//std::cout << "    *v43 = 0x" << std::hex << (int)tmp_byte << std::dec << std::endl << std::endl;
 		*v43++ |= tmp_byte;
 		byte_mask_1 = byte_mask_1 + 1;
 		--bits_1;
@@ -938,11 +857,6 @@ int crc_lookup_table[1024] = {};
 bool crc_lookup_table_initialized = false;
 
 auto get_crc(char* buf, size_t size) -> unsigned int {
-	print_buffer("[+] get_crc(buf): ", (unsigned char*)buf, size);
-	println("[+] get_crc(buf): 01C72265A1E0AA94B19ACCD972118F68211865257A7522EC");
-	std::cout << "[+] get_crc(length): " << size << std::endl;
-	println("[+] get_crc(length): 24");
-
 	if (!crc_lookup_table_initialized ){
 		crc_lookup_table_initialized = true;
 
@@ -985,6 +899,8 @@ auto get_random_hash(unsigned char* buf, size_t size) -> void {
 }
 
 auto main() -> int {
+	auto start = std::time(0);
+
 	auto c = bdNew();
 	auto m = bdNew();
 	auto e = bdNew();
@@ -1012,9 +928,6 @@ auto main() -> int {
 	bdFree(&e);
 	bdFree(&n);
 
-	std::cout << "[+] buf: " << buf << std::endl;
-	println("[+] sho: aafcca83d2d9221f4b4475caeddf9");
-	
 	auto idx = 0;
 
 	while (buf[idx] != NULL) {
@@ -1028,15 +941,11 @@ auto main() -> int {
 
 	buf[idx + 1] = 0;
 
-	std::cout << "[+] idx: " << idx << std::endl;
-	std::cout << "[+] buf: " << buf << std::endl;
-	println("[+] sho: aafcca83d2d9221f4b4475caeddf9");
-
 	auto max_length = 30;
 	auto offset = max_length - idx;
 
 	if ((offset & 0x80000000) != 0) {
-		std::cout << "[-] invalid offset!" << std::endl;
+		std::cout << "[-] invalid plaintext offset!" << std::endl;
 		return 1;
 	}
 
@@ -1050,34 +959,16 @@ auto main() -> int {
 		} while (offset);
 	}
 	
-	std::cout << "[+] idx: " << idx << std::endl;
-	std::cout << "[+] ixx: 29" << std::endl;
-
-	std::cout << "[+] new_idx: " << new_idx << std::endl;
-	std::cout << "[+] new_ixx: " << new_idx << std::endl;
-
-	std::cout << "[+] buf: " << buf << std::endl;
-	println("[+] sho: aafcca83d2d9221f4b4475caeddf9f");
-
 	convert_int_to_hex(idx, &buf[new_idx]);
-
-	std::cout << "[+] buf: " << buf << std::endl;
-	println("[+] sho: aafcca83d2d9221f4b4475caeddf9f1d");
 
 	char sbuf[56] = {};
 	auto sbufPtr = sbuf + 4;
 
 	convert_hex_to_bytes(sbufPtr + 5, buf, 32);
-	
-	print_buffer("[+] sbufPtr: ", (unsigned char*)sbufPtr, sizeof(sbuf) - 4);
-	println("[+] sbufPtr: 0000000000AAFCCA83D2D9221F4B4475CAEDDF9F1D00000000000000000000000000000000000000000000000000000000000000");
 
 	for (auto i = 0; i < 16; ++i) {
 		*(sbufPtr + 5 + i) ^= *(tron_signature + i);
 	}
-
-	print_buffer("[+] xsbufPtr: ", (unsigned char*)sbufPtr + 5, sizeof(sbuf) - 4 - 5);
-	println("[+] xsbufPtr: 537FB09EF0F6466B638F66FADF0F4F110000000000000000000000000000000000000000000000");
 
 	BYTE1(sbuf) = 0x01; // Unlock code activation count
 	WORD1(*sbufPtr) = 0;
@@ -1093,17 +984,8 @@ auto main() -> int {
 	unsigned char data[32] = {};
 	MD5_Final((unsigned char*)&data[0], &ctx);
 
-	print_buffer("[+] data: ", data, sizeof(data));
-	std::cout << "[+] shou: FDFB582E97D2A0AC950105EDEC5AA61F00000000000000000000000000000000" << std::endl  << std::endl;
-	
-	print_buffer("[+] before_xored_sbufPtr: ", (unsigned char*)sbufPtr, sizeof(sbuf) - 4);
-	println("[+] before_xored_sbufPtr: 0000000000537FB09EF0F6466B638F66FADF0F4F110000000000000000000000000000000000000000000000");
-
 	auto dataPtr = data;
 	more_xoring((char*)dataPtr, 16, sbufPtr, 2u);
-
-	print_buffer("[+] xored_sbufPtr: ", (unsigned char*)sbufPtr, 16);
-	println("[+] xored_sbufPtr: 4802000000537FB09EF0F6466B638F66");
 
 	// sigXored = cblock
 	unsigned char sigXored[19] = {};
@@ -1112,24 +994,13 @@ auto main() -> int {
 	}
 	memcpy(sigXored + 16, buf, 3); // TODO: buf is after sigXored/cblock -> one byte is used for xoring
 
-	print_buffer("[+] sigXored: ",sigXored, sizeof(sigXored));
-	println("[+] sigXored: F9837A1D222F64744CD0D0A5A80B62DB");
-
 	unsigned char des_buffer[21] = {}; // TODO: 19?
 	memcpy(des_buffer, sbufPtr + 2, sizeof(des_buffer));
-	
-	print_buffer("[+] des_buffer: ", des_buffer, sizeof(des_buffer));
-	println("[+] des_buffer: 48020000000B140AD61691106CC4AE788ABF7EFF11");
 
 	encrypt_with_des(sigXored, sbufPtr + 2, (char*)des_buffer, sizeof(des_buffer) - 2);
-	
-	print_buffer("[+] des_buffer: ", des_buffer, sizeof(des_buffer));
-	println("[+] des_buffer: 0F80FA61AE816125488D9A8E7152FDB02E0000");
 
 	auto rounds = 0x20000;
 
-	std::cout << "des_encrypt_with_sbox" << std::endl;
-	
 	// TODO: remove ueselss copy and save some memory
 	unsigned char des_buffer2[64] = { *(sbufPtr + 0), *(sbufPtr + 1) };
 	memcpy(des_buffer2 + 2, des_buffer, 19);
@@ -1137,40 +1008,15 @@ auto main() -> int {
 	do
 	{
 		for (auto i = 0; i < 8; ++i) {
-			//print_buffer("[+] des_buffer2: ", des_buffer2, 21);
-			//println("[+] des_buffer2: 480222AC0FD85C56B3779085D18E60C3C3A2133DB7");
-			////println("[+] des_buffer2: 480222AC0F80FA61AE816125488D9A8E7152FDB02E");
-			//print_buffer("[+] sbufPtr: ", (unsigned char*)sbufPtr, 21);
-			//println("[+] sbufPtr: 48020000000B140AD61691106CC4AE788ABF7EFF11");
-			//println("[+] sbufPtr: 4802000000537FB09EF0F6466B638F66FADF0F4F11");
-
 			des_encrypt_with_sbox((BYTE*)des_buffer2, (BYTE*)sbufPtr, 21);
-
-			//print_buffer("[+] des_buffer2: ", des_buffer2, 21);
-			//println("[+] des_buffer2: 480222AC0F80FA61AE816125488D9A8E7152FDB02E");
-			//print_buffer("[+] sbufPtr: ", (unsigned char*)sbufPtr, 21);
-			//println("[+] sbufPtr: 65EEA820CA7E05D996D43B670132072AC088075DC9");
-			//println("[+] sbufPtr: 65EEA820CA260F85C782DCCF7ED6EA9C6572D97E8D");
-
 			des_encrypt_with_sbox((BYTE*)sbufPtr, (BYTE*)des_buffer2, 21);
-
-			//return 0;
 		}
 		--rounds;
 	} while (rounds);
 
 	auto crc = get_crc(sbuf + 1, 24);
 
-	std::cout << "[+] crc: " << std::hex << crc << std::dec << std::endl;
-	println("[+] crc: dd17a846");
-
-	print_buffer("[+] sbuf: ", (unsigned char*)sbuf, sizeof(sbuf));
-	println("[+] sbuf: 0001C72265A1E0AA94B19ACCD972118F68211865257A7522ECFFFA02FCE9190046A817DD0000000000000000000000000000000074FFFA02");
-
 	more_xoring((char*)&crc, 4, sbuf, 1u);
-
-	print_buffer("[+] xored(sbuf): ", (unsigned char*)sbuf, sizeof(sbuf));
-	println("[+] xored(sbuf): 2401C72265A1E0AA94B19ACCD972118F68211865257A7522ECFFFA02FCE9190046A817DD0000000000000000000000000000000074FFFA02");
 
 	unsigned char seed[17] = {};
 	get_random_hash(seed, sizeof(seed) - 1);
@@ -1179,35 +1025,23 @@ auto main() -> int {
 	//       However, for some reason they also use one additional byte at the end from the stack.
 	memcpy(seed + 16, sigXored, 1);
 
-	print_buffer("[+] seed: ", (unsigned char*)seed, sizeof(seed));
-	println("[+] seed: CB57D42C2BC90F0B1D8755F761E5FEF6B5");
-
 	unsigned char data2[32] = {};
 	encrypt_with_des(seed, sbuf, (char*)data2, 25);
 
 	unsigned char v37[40] = {};
 
 	figure_out_what_this_does_4(data2, 25, v37, sizeof(v37));
-
-	print_buffer("[+] v37: ", (unsigned char*)v37, sizeof(v37));
-	println("[+] v37: 1A0907141A1F1A01120D0417031F1612151E0C03060A011A0F170E1701150F1D03141515040E0F16");
 	
-	print_buffer("[+] des_buffer2: ", (unsigned char*)des_buffer2, 21);
-	println("[+] des_buffer2: 480222AC0FD85C56B3779085D18E60C3C3A2133DB7E2957620A6FE002401C72265A1E0AA94B19ACC");
-
 	decode_to_ascii((char*)v37, (char*)des_buffer2, sizeof(v37));
-	
-	print_buffer("[+] des_buffer2: ", (unsigned char*)des_buffer2, 21);
-	println("[+] des_buffer2: 5542394E555A55334C463652355A514C50594535384333554852475233504858354E505036474851");
 
 	char unlock_code_buffer[64] = {};
 	insert_hyphens((char*)des_buffer2, unlock_code_buffer, 40, 5);
 
-	print_buffer_ascii("[+] UC: ", (unsigned char*)unlock_code_buffer, sizeof(unlock_code_buffer));
+	print_buffer_ascii("[+] unlock code: ", (unsigned char*)unlock_code_buffer, sizeof(unlock_code_buffer));
 
-	//_ASSERT(strcmp(unlock_code_buffer, "PKZA9-GUVLN-9ATMR-YGL9G-EVTG7-FC2PH-UDD43-K9G69") == 0);
 	_ASSERT(strcmp(unlock_code_buffer, "UB9NU-ZU3LF-6R5ZQ-LPYE5-8C3UH-RGR3P-HX5NP-P6GHQ") == 0);
 
+	std::cout << "[+] generated code in " << std::difftime(std::time(0), start) << " seconds" << std::endl;
 	std::cout << "[+] done" << std::endl;
 
 	return 0;
