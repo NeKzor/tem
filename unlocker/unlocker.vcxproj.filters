@@ -64,5 +64,8 @@
     <ClInclude Include="lib\BigDigits\bigdtypes.h">
       <Filter>lib\BigDigits</Filter>
     </ClInclude>
+    <ClInclude Include="Unlocker.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -148,6 +148,7 @@
     <ClInclude Include="lib\BigDigits\bigdRand.h" />
     <ClInclude Include="lib\BigDigits\bigdtypes.h" />
     <ClInclude Include="lib\BigDigits\spExtras.h" />
+    <ClInclude Include="Unlocker.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
