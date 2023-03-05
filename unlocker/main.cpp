@@ -19,7 +19,6 @@
 
 // clang-format off
 
-#include <ctime>
 #include <d3d9.h>
 #include <format>
 #include <immintrin.h>
@@ -42,6 +41,15 @@
 #define BYTE3(x) BYTEn(x, 3)
 #define LOW_IND(x, part_type) 0
 #define LOBYTE(x) BYTEn(x, LOW_IND(x, BYTE))
+
+template <typename... Args> auto print(const std::string format, Args&&... args) -> void
+{
+    std::cout << std::vformat(format, std::make_format_args(args...));
+}
+template <typename... Args> auto println(const std::string format, Args&&... args) -> void
+{
+    std::cout << std::vformat(format, std::make_format_args(args...)) << std::endl;
+}
 
 hwid_t::hwid_t()
 {
@@ -148,7 +156,7 @@ auto hwid_t::get_network_hash() -> void
 
         pAdapterInfo = (IP_ADAPTER_INFO*)malloc(sizeof(IP_ADAPTER_INFO) * 8);
         if (!pAdapterInfo) {
-            std::cout << "[-] oom :(" << std::endl;
+            println("[-] oom :(");
             return;
         }
 
@@ -191,7 +199,7 @@ auto hwid_t::get_disk_hash() -> void
 
     for (; volume_name[0] <= *"z"; ++volume_name[0]) {
         auto dtype = GetDriveTypeA((LPCSTR)&volume_name[0]);
-        //std::cout << std::format("[+] volume_name: {} (dtype = {})", volume_name, dtype) << std::endl;
+        //println("[+] volume_name: {} (dtype = {})", volume_name, dtype);
 
         if (dtype != DRIVE_FIXED) {
             continue;
@@ -201,7 +209,7 @@ auto hwid_t::get_disk_hash() -> void
             &volumeSerialNumber, &maximumComponentLength, &fileSystemFlags, (LPSTR)fileSystemNameBuffer,
             sizeof(fileSystemNameBuffer));
 
-        std::cout << std::format("[+] volume {} with serial number: {}", volume_name, volumeSerialNumber) << std::endl;
+        println("[+] volume {} with serial number: {}", volume_name, volumeSerialNumber);
 
         break;
     }
@@ -229,30 +237,6 @@ auto hwid_t::to_string() -> std::string
         + std::format("{:04X}", _byteswap_ushort(this->disk_hash)) + std::format("{:04X}", this->unk4);
 }
 
-auto println(const char* txt) -> void { std::cout << txt << std::endl; }
-
-auto print_buffer(const char* prefix, char* buf, size_t size) -> void
-{
-    auto dataPtr = buf;
-    auto dataPtrIdx = 0;
-    std::cout << prefix;
-    while (dataPtrIdx < size) {
-        std::cout << std::format("{:02X}", dataPtr[dataPtrIdx++]);
-    }
-    std::cout << std::endl;
-}
-
-auto print_buffer_ascii(const char* prefix, char* buf, size_t size) -> void
-{
-    auto dataPtr = buf;
-    auto dataPtrIdx = 0;
-    std::cout << prefix;
-    while (dataPtrIdx < size) {
-        std::cout << dataPtr[dataPtrIdx++];
-    }
-    std::cout << std::endl;
-}
-
 auto string_to_hex(const std::string& input) -> std::string
 {
     static const char hex_digits[] = "0123456789ABCDEF";
@@ -264,46 +248,6 @@ auto string_to_hex(const std::string& input) -> std::string
         output.push_back(hex_digits[c & 15]);
     }
     return output;
-}
-
-auto convert_int_to_hex(unsigned int count, char* buf) -> int
-{
-    char* buf_1; // eax@1
-    unsigned int count_1; // ebp@1
-    unsigned int v4; // edi@2
-    unsigned int v5; // ecx@2
-    char* v6; // edx@6
-    char* v7; // ebp@6
-    int result; // eax@7
-
-    buf_1 = buf;
-    count_1 = count;
-
-    do {
-        v4 = count_1 & 0xF;
-        count_1 >>= 4;
-        v5 = v4 << 24;
-
-        if (v4 <= 9) {
-            *buf++ = (v5 + 0x30000000) >> 24;
-        } else {
-            *buf++ = (v5 + 0x57000000) >> 24;
-        }
-    } while (count_1);
-
-    *buf = 0;
-    v6 = buf - 1;
-    v7 = buf_1;
-
-    do {
-        result = *v6;
-        *v6 = *v7;
-        *v7 = result;
-        --v6;
-        ++v7;
-    } while (v7 < v6);
-
-    return result;
 }
 
 /*
@@ -813,7 +757,7 @@ auto calculate_plaintext_from_hwid(securom_game_t game, hwid_t hwid) -> std::str
     //hwid_str = "010BE04D5A000000000037210000";
     //hwid_str = "010BE04D5A009B00000037210000";
 
-    std::cout << "[+] hwid m: " << hwid_str << std::endl;
+    println("[+] hwid m: {}", hwid_str);
     //_ASSERT(hwid_str.compare("010BE04D5A009B00000037210000") == 0);
 
     auto c = bdNew();
@@ -821,8 +765,8 @@ auto calculate_plaintext_from_hwid(securom_game_t game, hwid_t hwid) -> std::str
     auto e = bdNew();
     auto n = bdNew();
 
-    std::cout << "[+] modulus n: " << game.rsa_modulus_n << std::endl;
-    std::cout << "[+] exponent e: " << game.rsa_exponent_e << std::endl;
+    println("[+] modulus n: {}", game.rsa_modulus_n);
+    println("[+] exponent e: {}", game.rsa_exponent_e);
 
     bdConvFromHex(n, game.rsa_modulus_n);
     bdConvFromHex(e, game.rsa_exponent_e);
@@ -839,7 +783,7 @@ auto calculate_plaintext_from_hwid(securom_game_t game, hwid_t hwid) -> std::str
     bdFree(&e);
     bdFree(&n);
 
-    std::cout << "[+] plaintext c: " << plaintext << std::endl;
+    println("[+] plaintext c: {}", plaintext);
 
     return std::string(plaintext);
 }
@@ -856,7 +800,7 @@ auto process_plaintext(std::string& plaintext) -> bool
     auto offset = max_plaintext_length - plaintext_length;
 
     if ((offset & 0x80000000) != 0) {
-        std::cout << "[-] invalid plaintext offset!" << std::endl;
+        println("[-] invalid plaintext length :(");
         return false;
     }
 
@@ -874,29 +818,26 @@ auto process_plaintext(std::string& plaintext) -> bool
 
 auto main() -> int
 {
-    auto start = std::time(0);
+    auto start = GetTickCount64();
 
     auto game = tron_evolution;
     auto hwid = hwid_t();
 
-    std::cout << std::format("[+] version_hash: {:02x}", hwid.version_hash) << std::endl;
-    std::cout << std::format("[+] cpu_hash: {:02x}", _byteswap_ushort(hwid.cpu_hash)) << std::endl;
-    std::cout << std::format("[+] gpu_hash: {:02x}", hwid.gpu_hash) << std::endl;
-    std::cout << std::format("[+] network_hash: {:02x}", hwid.network_hash) << std::endl;
-    std::cout << std::format("[+] disk_hash: {:02x}", _byteswap_ushort(hwid.disk_hash)) << std::endl;
+    println("[+] version_hash: {:02x}", hwid.version_hash);
+    println("[+] cpu_hash: {:02x}", _byteswap_ushort(hwid.cpu_hash));
+    println("[+] gpu_hash: {:02x}", hwid.gpu_hash);
+    println("[+] network_hash: {:02x}", hwid.network_hash);
+    println("[+] disk_hash: {:02x}", _byteswap_ushort(hwid.disk_hash));
 
     auto plaintext = calculate_plaintext_from_hwid(game, hwid);
     if (!process_plaintext(plaintext)) {
         return 1;
     }
 
-    BYTE buf[33] = {};
-    memcpy(buf, plaintext.c_str(), plaintext.length());
-
     BYTE sbuf[56] = { 0x00, 0x01, 0xC7, 0x22 };
     auto sbufPtr = sbuf + 4;
 
-    convert_hex_to_bytes(sbufPtr + 5, buf, 32);
+    convert_hex_to_bytes(sbufPtr + 5, (BYTE*)plaintext.c_str(), 32);
 
     for (auto i = 0; i < 16; ++i) {
         *(sbufPtr + 5 + i) ^= *(game.appid + i);
@@ -911,17 +852,18 @@ auto main() -> int
     auto dataPtr = data;
     xor_data(dataPtr, 16, sbufPtr, 2u);
 
-    // sigXored = cblock
-    BYTE sigXored[19] = {};
+    BYTE cblock[19] = {};
     for (auto i = 0; i < 16; ++i) {
-        *(sigXored + i) = *(game.appid + i) ^ *(game.appid + i + (16 * 1)) ^ *(game.appid + i + (16 * 2));
+        *(cblock + i) = *(game.appid + i) ^ *(game.appid + i + (16 * 1)) ^ *(game.appid + i + (16 * 2));
     }
-    memcpy(sigXored + 16, buf, 3); // TODO: buf is after sigXored/cblock -> one byte is used for xoring
+
+    // NOTE: For some reason there is one additional byte that is used to xor cblock buffer before it passed to DES encryption.
+    memcpy(cblock + 16, (BYTE*)plaintext.c_str(), 3);
 
     BYTE des_buffer[21] = {}; // TODO: 19?
     memcpy(des_buffer, sbufPtr + 2, sizeof(des_buffer));
 
-    encrypt_with_des(sigXored, sbufPtr + 2, des_buffer, sizeof(des_buffer) - 2);
+    encrypt_with_des(cblock, sbufPtr + 2, des_buffer, sizeof(des_buffer) - 2);
 
     auto rounds = 0x20000;
 
@@ -929,13 +871,28 @@ auto main() -> int
     BYTE des_buffer2[64] = { *(sbufPtr + 0), *(sbufPtr + 1) };
     memcpy(des_buffer2 + 2, des_buffer, 19);
 
+    auto des_calls = 0;
+
+    std::thread des_status_update ([&des_calls]() {
+        const auto total_calls = 0x20000 * 8 * 2;
+        while (des_calls <= total_calls) {
+            print("\r[+] des encryptions: {: 7} of {} ({:.0f}%)", des_calls, total_calls, (des_calls / (float)total_calls) * 100.0f);
+            Sleep(1);
+        }
+    });
+
     do {
         for (auto i = 0; i < 8; ++i) {
             des_encrypt_with_sbox(des_buffer2, sbufPtr, 21);
+            ++des_calls;
             des_encrypt_with_sbox(sbufPtr, des_buffer2, 21);
+            ++des_calls;
         }
         --rounds;
     } while (rounds);
+
+    des_status_update.detach();
+    print("\n");
 
     auto crc = get_crc(sbuf + 1, 24);
 
@@ -944,9 +901,8 @@ auto main() -> int
     BYTE seed[17] = {};
     get_random_hash(seed, sizeof(seed) - 1);
 
-    // TODO: Like above cblock should always be 16 bytes but encrypt_with_des hashes it again.
-    //       However, for some reason they also use one additional byte at the end from the stack.
-    memcpy(seed + 16, sigXored, 1);
+    // NOTE: Like above, one additional byte for cblock xor operations.
+    memcpy(seed + 16, cblock, 1);
 
     BYTE data2[32] = {};
     encrypt_with_des(seed, sbuf, data2, 25);
@@ -959,12 +915,12 @@ auto main() -> int
     char unlock_code_buffer[64] = {};
     insert_hyphens((char*)des_buffer2, unlock_code_buffer, 40, 5);
 
-    print_buffer_ascii("[+] unlock code: ", unlock_code_buffer, sizeof(unlock_code_buffer));
+    println("[+] unlock code: {}", unlock_code_buffer);
 
     _ASSERT(strcmp(unlock_code_buffer, "UB9NU-ZU3LF-6R5ZQ-LPYE5-8C3UH-RGR3P-HX5NP-P6GHQ") == 0);
 
-    std::cout << "[+] generated code in " << std::difftime(std::time(0), start) << " seconds" << std::endl;
-    std::cout << "[+] done" << std::endl;
+    println("[+] generated code in {:.3f} seconds", (GetTickCount64() - start) / 1'000.0f);
+    println("[+] done");
 
     return 0;
 }
