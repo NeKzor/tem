@@ -29,228 +29,243 @@
 #include <immintrin.h>
 #include "lib/BigDigits/bigd.h"
 
-// TODO
-const char* securom_signatures[] = {
-	"001D47B0B0981CC4FC00A6ECCC0244A3", // 0
-	"8A8ABCAFDA0FC5B6A0A6E16F45321", // 4
-	"1CF9DFF37F133D15D21CC4F5ADE91F", // 8
-	"B4109B85B0CAFBD73EDDAB05A9881", // 12
+struct securom_game_t {
+	const char* rsa_modulus_n = nullptr; // N = q * q
+	const char* rsa_exponent_e = nullptr; // GCD(e, (p - 1) * (q - 1)) = 1
+	BYTE appid[48] = {};
 };
 
-// Game signature (48 bytes)
-// Found in spot check 6
-// appid
-unsigned char tron_signature[] = {
-	// 1st part (16 bytes)
-	0xF9, 0x83, 0x7A, 0x1D, 0x22, 0x2F, 0x64, 0x74,
-	0x28, 0xCB, 0x13, 0x30, 0x32, 0xD0, 0xD0, 0x0C,
-	// 2nd part (32 bytes)
-	0xE8, 0x96, 0xD4, 0xE1, 0xBD, 0xFC, 0x0E, 0x37,
-	0x8C, 0x8D, 0x17, 0x74, 0x27, 0x27, 0xBC, 0xE0,
-	0xE8, 0x96, 0xD4, 0xE1, 0xBD, 0xFC, 0x0E, 0x37,
-	0xE8, 0x96, 0xD4, 0xE1, 0xBD, 0xFC, 0x0E, 0x37,
+auto tron_evolution = securom_game_t {
+	.rsa_modulus_n = "1CF9DFF37F133D15D21CC4F5ADE91F",
+	.rsa_exponent_e = "B4109B85B0CAFBD73EDDAB05A9881",
+
+	// Found in spot check 6
+	.appid = {
+		// 1st part (16 bytes)
+		0xF9, 0x83, 0x7A, 0x1D, 0x22, 0x2F, 0x64, 0x74,
+		0x28, 0xCB, 0x13, 0x30, 0x32, 0xD0, 0xD0, 0x0C,
+		// 2nd part (32 bytes)
+		0xE8, 0x96, 0xD4, 0xE1, 0xBD, 0xFC, 0x0E, 0x37,
+		0x8C, 0x8D, 0x17, 0x74, 0x27, 0x27, 0xBC, 0xE0,
+		0xE8, 0x96, 0xD4, 0xE1, 0xBD, 0xFC, 0x0E, 0x37,
+		0xE8, 0x96, 0xD4, 0xE1, 0xBD, 0xFC, 0x0E, 0x37,
+	}
 };
 
 struct hwid_t {
-	byte unk0;
-	byte version_hash;
-	WORD cpu_hash;
-	byte gpu_hash;
-	byte unk1;
-	byte network_hash;
-	WORD unk2;
-	byte unk3;
-	WORD disk_hash;
-	WORD unk4;
-	byte terminator;
-};
+	byte unk0 = 0x01;
+	byte version_hash = 0x00;
+	WORD cpu_hash = 0x00;
+	byte gpu_hash = 0x00;
+	byte unk1 = 0x00;
+	byte network_hash = 0x00;
+	WORD unk2 = 0x00;
+	byte unk3 = 0x00;
+	WORD disk_hash = 0x00;
+	WORD unk4 = 0x00;
+	byte terminator = 0x00;
 
-auto hwid_to_string(hwid_t hwid) -> std::string {
-	return std::format("{:02X}", hwid.unk0)
-		+ std::format("{:02X}", hwid.version_hash)
-		+ std::format("{:04X}", _byteswap_ushort(hwid.cpu_hash))
-		+ std::format("{:02X}", hwid.gpu_hash)
-		+ std::format("{:02X}", hwid.unk1)
-		+ std::format("{:02X}", hwid.network_hash)
-		+ std::format("{:04X}", hwid.unk2)
-		+ std::format("{:02X}", hwid.unk3)
-		+ std::format("{:04X}", _byteswap_ushort(hwid.disk_hash))
-		+ std::format("{:04X}", hwid.unk4);
-}
+	hwid_t()
+	{
+		this->get_version_hash();
+		this->get_cpu_hash();
+		this->get_gpu_hash();
+		this->get_network_hash();
+		this->get_disk_hash();
+	}
 
-auto xor_op(byte* dest, byte* src, DWORD size) -> void {
-	for (auto i = 1ul; i <= sizeof(MD5_LONG) * 4ul; ++i) {
-		for (auto j = 0ul; j < size; ++j) {
-			*(dest + j) ^= *(src++);
+	auto hash_field(byte* dest, byte* src, DWORD size) -> void
+	{
+		for (auto i = 1ul; i <= sizeof(MD5_LONG) * 4ul; ++i) {
+			for (auto j = 0ul; j < size; ++j) {
+				*(dest + j) ^= *(src++);
+			}
 		}
 	}
-}
 
-auto gehwid_t() -> std::string {
-	hwid_t hwid = {
-		.unk0 = 0x01,
-		.unk1 = 0x00,
-		.unk2 = 0x0000,//0xcaca,
-		.unk3 = 0x00,//0xca,
-		.unk4 = 0x0000,
-		.terminator = 0x00,
-	};
+	auto get_version_hash() -> void
+	{
+		OSVERSIONINFO osvi = {};
+		ZeroMemory(&osvi, 0, sizeof(OSVERSIONINFO));
+		osvi.dwOSVersionInfoSize = sizeof(OSVERSIONINFO);
+		GetVersionEx(&osvi);
 
-	OSVERSIONINFO osvi = {};
-	ZeroMemory(&osvi, 0, sizeof(OSVERSIONINFO));
-	osvi.dwOSVersionInfoSize = sizeof(OSVERSIONINFO);
-	GetVersionEx(&osvi);
-
-	MD5_CTX ctx = {};
-
-	MD5_Init(&ctx);
-
-	ctx.Nl = 128;
-	ctx.Nh = 0;
-	ctx.num = MD5_DIGEST_LENGTH;
-	ctx.data[0] = osvi.dwMajorVersion;
-	ctx.data[1] = osvi.dwMinorVersion;
-	ctx.data[2] = osvi.dwBuildNumber;
-	ctx.data[3] = osvi.dwPlatformId;
-
-	unsigned long data[32] = {};
-	MD5_Final((unsigned char*)&data[0], &ctx);
-
-	xor_op(&hwid.version_hash, (byte*)&data[0], sizeof(hwid_t::version_hash));
-
-	SYSTEM_INFO info = {};
-	GetSystemInfo(&info);
-
-	MD5_Init(&ctx);
-
-	ctx.Nl = 128;
-	ctx.Nh = 0;
-	ctx.num = MD5_DIGEST_LENGTH;
-	ctx.data[0] = info.dwProcessorType;
-	ctx.data[1] = info.dwAllocationGranularity;
-	ctx.data[2] = info.wProcessorLevel;
-	ctx.data[3] = info.wProcessorRevision;
-
-	MD5_Final((unsigned char*)&data[0], &ctx);
-
-	xor_op((byte*)&hwid.cpu_hash, (byte*)&data[0], sizeof(hwid_t::cpu_hash));
-
-	auto d3d9Module = LoadLibrary(L"d3d9.dll");
-	if (d3d9Module != NULL) {
-		D3DADAPTER_IDENTIFIER9 gpu = {};
-
-		typedef PDIRECT3D9(__stdcall* _Direct3DCreate9)(UINT SDKVersion);
-		auto Direct3DCreate9 = (_Direct3DCreate9)GetProcAddress((HMODULE)d3d9Module, "Direct3DCreate9");
-		auto d3d9 = Direct3DCreate9(D3D_SDK_VERSION);
-
-		d3d9->GetAdapterIdentifier(D3DADAPTER_DEFAULT, 0, &gpu);
-
-		FreeLibrary(d3d9Module);
-
+		MD5_CTX ctx = {};
 		MD5_Init(&ctx);
 
 		ctx.Nl = 128;
 		ctx.Nh = 0;
 		ctx.num = MD5_DIGEST_LENGTH;
-		ctx.data[0] = gpu.VendorId;
-		ctx.data[1] = gpu.DeviceId;
-		ctx.data[2] = gpu.SubSysId;
-		ctx.data[3] = gpu.Revision;
+		ctx.data[0] = osvi.dwMajorVersion;
+		ctx.data[1] = osvi.dwMinorVersion;
+		ctx.data[2] = osvi.dwBuildNumber;
+		ctx.data[3] = osvi.dwPlatformId;
 
+		unsigned long data[32] = {};
 		MD5_Final((unsigned char*)&data[0], &ctx);
 
-		xor_op((byte*)&hwid.gpu_hash, (byte*)&data[0], sizeof(hwid_t::gpu_hash));
+		this->hash_field(&this->version_hash, (byte*)&data[0], sizeof(hwid_t::version_hash));
 	}
 
-	auto iphlpapiModule = LoadLibrary(L"IPHLPAPI.dll");
-	if (iphlpapiModule != NULL) {
-		PIP_ADAPTER_INFO pAdapterInfo = {};
-		ULONG ulOutBufLen = sizeof(IP_ADAPTER_INFO) * 8;
+	auto get_cpu_hash() -> void
+	{
+		SYSTEM_INFO info = {};
+		GetSystemInfo(&info);
 
-		pAdapterInfo = (IP_ADAPTER_INFO*)malloc(sizeof(IP_ADAPTER_INFO) * 8);
-		if (!pAdapterInfo) {
-			std::cout << "[-] oom :(" << std::endl;
-			return "";
-		}
+		MD5_CTX ctx = {};
+		MD5_Init(&ctx);
 
-		typedef ULONG(__stdcall* _IPHLPAPI_GetAdaptersInfo)(PIP_ADAPTER_INFO AdapterInfo, PULONG SizePointer);
-		auto GetAdaptersInfo = (_IPHLPAPI_GetAdaptersInfo)GetProcAddress((HMODULE)iphlpapiModule, "GetAdaptersInfo");
+		ctx.Nl = 128;
+		ctx.Nh = 0;
+		ctx.num = MD5_DIGEST_LENGTH;
+		ctx.data[0] = info.dwProcessorType;
+		ctx.data[1] = info.dwAllocationGranularity;
+		ctx.data[2] = info.wProcessorLevel;
+		ctx.data[3] = info.wProcessorRevision;
 
-		GetAdaptersInfo(pAdapterInfo, &ulOutBufLen);
-		FreeLibrary(iphlpapiModule);
+		unsigned long data[32] = {};
+		MD5_Final((unsigned char*)&data[0], &ctx);
 
-		// TODO: For some reason this is very wrong??
-		auto checkForEthernet = true;
+		this->hash_field((byte*)&this->cpu_hash, (byte*)&data[0], sizeof(hwid_t::cpu_hash));
+	}
 
-		if (pAdapterInfo->Type == MIB_IF_TYPE_ETHERNET && checkForEthernet) {
+	auto get_gpu_hash() -> void
+	{
+		auto d3d9Module = LoadLibrary(L"d3d9.dll");
+		if (d3d9Module != NULL) {
+			D3DADAPTER_IDENTIFIER9 gpu = {};
+
+			typedef PDIRECT3D9(__stdcall* _Direct3DCreate9)(UINT SDKVersion);
+			auto Direct3DCreate9 = (_Direct3DCreate9)GetProcAddress((HMODULE)d3d9Module, "Direct3DCreate9");
+			auto d3d9 = Direct3DCreate9(D3D_SDK_VERSION);
+
+			d3d9->GetAdapterIdentifier(D3DADAPTER_DEFAULT, 0, &gpu);
+
+			FreeLibrary(d3d9Module);
+
+			MD5_CTX ctx = {};
 			MD5_Init(&ctx);
 
-			ctx.Nl = 48;
+			ctx.Nl = 128;
 			ctx.Nh = 0;
-			ctx.num = MD5_DIGEST_LENGTH - 10;
-			memcpy(&ctx.data[0], pAdapterInfo->Address, sizeof(pAdapterInfo->Address));
+			ctx.num = MD5_DIGEST_LENGTH;
+			ctx.data[0] = gpu.VendorId;
+			ctx.data[1] = gpu.DeviceId;
+			ctx.data[2] = gpu.SubSysId;
+			ctx.data[3] = gpu.Revision;
 
+			unsigned long data[32] = {};
 			MD5_Final((unsigned char*)&data[0], &ctx);
 
-			xor_op(&hwid.network_hash, (byte*)&data[0], sizeof(hwid_t::network_hash));
+			this->hash_field((byte*)&this->gpu_hash, (byte*)&data[0], sizeof(hwid_t::gpu_hash));
 		}
-
-		free((void*)pAdapterInfo);
 	}
 
-	char volumeNameBuffer[MAX_PATH] = {};
-	char fileSystemNameBuffer[MAX_PATH] = {};
-	DWORD volumeSerialNumber = 0;
-	DWORD maximumComponentLength = 0;
-	DWORD fileSystemFlags = 0;
+	auto get_network_hash() -> void
+	{
+		auto iphlpapiModule = LoadLibrary(L"IPHLPAPI.dll");
+		if (iphlpapiModule != NULL) {
+			PIP_ADAPTER_INFO pAdapterInfo = {};
+			ULONG ulOutBufLen = sizeof(IP_ADAPTER_INFO) * 8;
 
-	char volume_name[4] = "c:\\";
+			pAdapterInfo = (IP_ADAPTER_INFO*)malloc(sizeof(IP_ADAPTER_INFO) * 8);
+			if (!pAdapterInfo) {
+				std::cout << "[-] oom :(" << std::endl;
+				return;
+			}
 
-	for (; volume_name[0] <= *"z"; ++volume_name[0]) {
-		auto dtype = GetDriveTypeA((LPCSTR)&volume_name[0]);
-		//std::cout << std::format("[+] volume_name: {} (dtype = {})", volume_name, dtype) << std::endl;
+			typedef ULONG(__stdcall* _IPHLPAPI_GetAdaptersInfo)(PIP_ADAPTER_INFO AdapterInfo, PULONG SizePointer);
+			auto GetAdaptersInfo = (_IPHLPAPI_GetAdaptersInfo)GetProcAddress((HMODULE)iphlpapiModule, "GetAdaptersInfo");
 
-		if (dtype != DRIVE_FIXED) {
-			continue;
+			GetAdaptersInfo(pAdapterInfo, &ulOutBufLen);
+			FreeLibrary(iphlpapiModule);
+
+			auto checkForEthernet = true;
+
+			if (pAdapterInfo->Type == MIB_IF_TYPE_ETHERNET && checkForEthernet) {
+				MD5_CTX ctx = {};
+				MD5_Init(&ctx);
+
+				ctx.Nl = 48;
+				ctx.Nh = 0;
+				ctx.num = MD5_DIGEST_LENGTH - 10;
+				memcpy(&ctx.data[0], pAdapterInfo->Address, sizeof(pAdapterInfo->Address));
+
+				unsigned long data[32] = {};
+				MD5_Final((unsigned char*)&data[0], &ctx);
+
+				this->hash_field(&this->network_hash, (byte*)&data[0], sizeof(hwid_t::network_hash));
+			}
+
+			free((void*)pAdapterInfo);
 		}
-
-		GetVolumeInformationA(
-			(LPCSTR)&volume_name,
-			(LPSTR)volumeNameBuffer,
-			sizeof(volumeNameBuffer),
-			&volumeSerialNumber,
-			&maximumComponentLength,
-			&fileSystemFlags,
-			(LPSTR)fileSystemNameBuffer,
-			sizeof(fileSystemNameBuffer)
-		);
-
-		std::cout << std::format("[+] volume {} with serial number: {}", volume_name, volumeSerialNumber) << std::endl;
-
-		break;
 	}
 
-	MD5_Init(&ctx);
+	auto get_disk_hash() -> void
+	{
+		char volumeNameBuffer[MAX_PATH] = {};
+		char fileSystemNameBuffer[MAX_PATH] = {};
+		DWORD volumeSerialNumber = 0;
+		DWORD maximumComponentLength = 0;
+		DWORD fileSystemFlags = 0;
 
-	ctx.Nl = 32;
-	ctx.Nh = 0;
-	ctx.num = 4;
-	ctx.data[0] = _byteswap_ulong(volumeSerialNumber);
+		char volume_name[4] = "c:\\";
 
-	MD5_Final((unsigned char*)&data[0], &ctx);
+		for (; volume_name[0] <= *"z"; ++volume_name[0]) {
+			auto dtype = GetDriveTypeA((LPCSTR)&volume_name[0]);
+			//std::cout << std::format("[+] volume_name: {} (dtype = {})", volume_name, dtype) << std::endl;
 
-	xor_op((byte*)&hwid.disk_hash, (byte*)&data[0], sizeof(hwid_t::disk_hash));
+			if (dtype != DRIVE_FIXED) {
+				continue;
+			}
 
-	std::cout << std::format("[+] version_hash: {:02x}", hwid.version_hash) << std::endl;
-	std::cout << std::format("[+] cpu_hash: {:02x}", _byteswap_ushort(hwid.cpu_hash)) << std::endl;
-	std::cout << std::format("[+] gpu_hash: {:02x}", hwid.gpu_hash) << std::endl;
-	std::cout << std::format("[+] network_hash: {:02x}", hwid.network_hash) << std::endl;
-	std::cout << std::format("[+] disk_hash: {:02x}", _byteswap_ushort(hwid.disk_hash)) << std::endl;
+			GetVolumeInformationA(
+				(LPCSTR)&volume_name,
+				(LPSTR)volumeNameBuffer,
+				sizeof(volumeNameBuffer),
+				&volumeSerialNumber,
+				&maximumComponentLength,
+				&fileSystemFlags,
+				(LPSTR)fileSystemNameBuffer,
+				sizeof(fileSystemNameBuffer)
+			);
 
-	return hwid_to_string(hwid);
-}
+			std::cout << std::format("[+] volume {} with serial number: {}", volume_name, volumeSerialNumber) << std::endl;
 
-auto string_to_hex(const std::string& input) -> std::string {
+			break;
+		}
+
+		MD5_CTX ctx = {};
+		MD5_Init(&ctx);
+
+		ctx.Nl = 32;
+		ctx.Nh = 0;
+		ctx.num = 4;
+		ctx.data[0] = _byteswap_ulong(volumeSerialNumber);
+
+		unsigned long data[32] = {};
+		MD5_Final((unsigned char*)&data[0], &ctx);
+
+		this->hash_field((byte*)&this->disk_hash, (byte*)&data[0], sizeof(hwid_t::disk_hash));
+	}
+
+	auto to_string() -> std::string
+	{
+		return std::format("{:02X}", this->unk0)
+			+ std::format("{:02X}", this->version_hash)
+			+ std::format("{:04X}", _byteswap_ushort(this->cpu_hash))
+			+ std::format("{:02X}", this->gpu_hash)
+			+ std::format("{:02X}", this->unk1)
+			+ std::format("{:02X}", this->network_hash)
+			+ std::format("{:04X}", this->unk2)
+			+ std::format("{:02X}", this->unk3)
+			+ std::format("{:04X}", _byteswap_ushort(this->disk_hash))
+			+ std::format("{:04X}", this->unk4);
+	}
+};
+
+auto string_to_hex(const std::string& input) -> std::string
+{
 	static const char hex_digits[] = "0123456789ABCDEF";
 
 	std::string output;
@@ -898,68 +913,94 @@ auto get_random_hash(unsigned char* buf, size_t size) -> void {
 	}
 }
 
-auto main() -> int {
-	auto start = std::time(0);
+/*
+* RSA decryption.
+*/
+auto calculate_plaintext_from_hwid(securom_game_t game, hwid_t hwid) -> std::string
+{
+	auto hwid_str = hwid.to_string();
+	//hwid_str = "010BE04D5A000000000037210000";
+	//hwid_str = "010BE04D5A009B00000037210000";
+
+	std::cout << "[+] hwid m: " << hwid_str << std::endl;
+	//_ASSERT(hwid_str.compare("010BE04D5A009B00000037210000") == 0);
 
 	auto c = bdNew();
 	auto m = bdNew();
 	auto e = bdNew();
 	auto n = bdNew();
 
-	auto hwid = gehwid_t();
-	//hwid = "010BE04D5A000000000037210000";
-	//hwid = "010BE04D5A009B00000037210000";
+	std::cout << "[+] modulus n: " << game.rsa_modulus_n << std::endl;
+	std::cout << "[+] exponent e: " << game.rsa_exponent_e << std::endl;
 
-	_ASSERT(strcmp(hwid.c_str(), "010BE04D5A009B00000037210000") == 0);
-	//_ASSERT(hwid.compare("010BE04D5A000000000037210000") == 0);
-
-	bdConvFromHex(n, securom_signatures[2]);
-	bdConvFromHex(e, securom_signatures[3]);
-	bdConvFromHex(m, hwid.c_str());
+	bdConvFromHex(n, game.rsa_modulus_n);
+	bdConvFromHex(e, game.rsa_exponent_e);
+	bdConvFromHex(m, hwid_str.c_str());
 
 	// c = m^e mod n
 	bdModExp(c, m, e, n);
 
-	char buf[33];
-	bdConvToHex(c, buf, sizeof(buf));
+	char plaintext[33];
+	bdConvToHex(c, plaintext, sizeof(plaintext));
 
 	bdFree(&c);
 	bdFree(&m);
 	bdFree(&e);
 	bdFree(&n);
 
-	auto idx = 0;
+	std::cout << "[+] plaintext c: " << plaintext << std::endl;
 
-	while (buf[idx] != NULL) {
-		if (!buf[idx + 1]) {
-			idx += 1;
-			break;
-		} else {
-			idx += 2;
-		}
-	}
+	return std::string(plaintext);
+}
 
-	buf[idx + 1] = 0;
+/*
+* Fill plaintext from string length to 30 characters with the character 'f'.
+* Then append the original string length at the end.
+*/
+auto process_plaintext(std::string& plaintext) -> bool
+{
+	const auto max_plaintext_length = 30;
 
-	auto max_length = 30;
-	auto offset = max_length - idx;
+	auto plaintext_length = plaintext.length();
+	auto offset = max_plaintext_length - plaintext_length;
 
 	if ((offset & 0x80000000) != 0) {
 		std::cout << "[-] invalid plaintext offset!" << std::endl;
-		return 1;
+		return false;
 	}
 
-	auto new_idx = idx;
-
-	if (max_length != idx) {
+	if (max_plaintext_length != plaintext_length) {
 		do {
-			auto v = buf + new_idx++;
-			*v = 'f';
+			plaintext += "f";
 			--offset;
 		} while (offset);
 	}
-	
-	convert_int_to_hex(idx, &buf[new_idx]);
+
+	plaintext += std::format("{:02x}", plaintext_length);
+
+	return true;
+}
+
+auto main() -> int
+{
+	auto start = std::time(0);
+
+	auto game = tron_evolution;
+	auto hwid = hwid_t();
+
+	std::cout << std::format("[+] version_hash: {:02x}", hwid.version_hash) << std::endl;
+	std::cout << std::format("[+] cpu_hash: {:02x}", _byteswap_ushort(hwid.cpu_hash)) << std::endl;
+	std::cout << std::format("[+] gpu_hash: {:02x}", hwid.gpu_hash) << std::endl;
+	std::cout << std::format("[+] network_hash: {:02x}", hwid.network_hash) << std::endl;
+	std::cout << std::format("[+] disk_hash: {:02x}", _byteswap_ushort(hwid.disk_hash)) << std::endl;
+
+	auto plaintext = calculate_plaintext_from_hwid(game, hwid);
+	if (!process_plaintext(plaintext)) {
+		return 1;
+	}
+
+	char buf[33] = {};
+	memcpy(buf, plaintext.c_str(), plaintext.length());
 
 	char sbuf[56] = {};
 	auto sbufPtr = sbuf + 4;
@@ -967,7 +1008,7 @@ auto main() -> int {
 	convert_hex_to_bytes(sbufPtr + 5, buf, 32);
 
 	for (auto i = 0; i < 16; ++i) {
-		*(sbufPtr + 5 + i) ^= *(tron_signature + i);
+		*(sbufPtr + 5 + i) ^= *(game.appid + i);
 	}
 
 	BYTE1(sbuf) = 0x01; // Unlock code activation count
@@ -979,7 +1020,7 @@ auto main() -> int {
 	auto a = sizeof(ctx);
 
 	MD5_Init(&ctx);
-	MD5_Update(&ctx, tron_signature, sizeof(tron_signature));
+	MD5_Update(&ctx, game.appid, sizeof(game.appid));
 
 	unsigned char data[32] = {};
 	MD5_Final((unsigned char*)&data[0], &ctx);
@@ -990,7 +1031,7 @@ auto main() -> int {
 	// sigXored = cblock
 	unsigned char sigXored[19] = {};
 	for (auto i = 0; i < 16; ++i) {
-		*(sigXored + i) = *(tron_signature + i) ^ *(tron_signature + i + (16 * 1)) ^ *(tron_signature + i + (16 * 2));
+		*(sigXored + i) = *(game.appid + i) ^ *(game.appid + i + (16 * 1)) ^ *(game.appid + i + (16 * 2));
 	}
 	memcpy(sigXored + 16, buf, 3); // TODO: buf is after sigXored/cblock -> one byte is used for xoring
 
