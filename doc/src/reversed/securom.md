@@ -637,7 +637,7 @@ Encrypt the game's signature with lots of XOR operations and DES CBF.
 ```cpp
 BYTE cblock[19] = {};
 for (auto i = 0; i < 16; ++i) {
-	*(cblock + i) = *(appid + i) ^ *(appid + i + (16 * 1)) ^ *(game.appid + i + (16 * 2));
+	*(cblock + i) = *(appid + i) ^ *(appid + i + (16 * 1)) ^ *(appid + i + (16 * 2));
 }
 
 memcpy(cblock + 16, (BYTE*)plaintext.c_str(), 3);
@@ -658,7 +658,7 @@ memcpy(des_buffer, data_buffer_ptr + 2, sizeof(des_buffer));
 encrypt_with_des(cblock, data_buffer_ptr + 2, des_buffer, sizeof(des_buffer) - 2);
 ```
 
-Now comes the longest process: S-box DES encryption times 2<sup>17</sup>.
+Now comes the longest process: S-box DES encryption times 2<sup>21</sup>.
 This will take a few seconds depending on the CPU's speed lol.
 
 ```cpp
