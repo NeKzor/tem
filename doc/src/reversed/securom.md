@@ -528,30 +528,18 @@ like this:
 - Server sends back the generated unlock code
 - SecuROM unpacks the binary and saves the result in the registry
 
-```admonish note
-What's worth mentioning is that the serial code might or might not be used locally afterwards.
-However, for Tron: Evolution it is: The launcher will send the serial to the 2nd DRM which is Games for Windows Live.
-```
-
 SecuROM provides a manual activation in case the automatic one fails.
 This means that the user has to enter the unlock request code + serial manually on SecuROM's web page to request
 the unlock code. When SecuROM decides to shutdown their service, like in the case for Tron: Evolution, users
 would not be able to progress further. The product simply cannot be activated, or can it?
 
-```admonish info
-Who is in charge of Tron: Evolution? It is a bit more complicated than that:
-The original developers were Propaganda Games which closed a few months after the game's release in 2011.
-They were was part of Disney Interactive Studios which then also shut down in 2016.
-SecuROM discontinued its service for Disney in 2019. Usually it's the developers responsibility to remove the DRM.
-Nowadays it is only recommended to keep SecuROM, which is now known as [Denuvo][], for a few months after the game
-launch and then remove it. However nobody is maintaining Tron: Evolution which was the main reason that the current
-publisher had to remove it from Steam and other game stores.
-```
-
-[Denuvo]: https://www.pcgamingwiki.com/wiki/Denuvo
-
 Fortunately, the unlock code can be generated locally without the need of SecuROM's activation servers in the
 following manner:
+
+```admonish note
+The complete code can be found in the [unlocker](https://github.com/NeKzor/tem/tree/master/unlocker) folder
+as this is only a summary.
+```
 
 Generate the user's hardware ID, see chapter [HWID](#hardware-id-hwid).
 
@@ -581,55 +569,37 @@ auto c = mod_exp(m, e, n);
 
 Calculate plaintext length. The total length should be 30 but the number can be lower than that.
 Simply fill the rest with 'f' characters.
+Then append the original length at the end of the buffer.
 
 ```cpp
-char plaintext[33];
-convert_plaintext_number_to_hex(c, plaintext, sizeof(plaintext));
+auto plaintext = huge_integer_to_hex_string(c);
 
-auto idx = 0;
+const auto max_plaintext_length = 30;
 
-while (plaintext[idx] != NULL) {
-	if (!plaintext[idx + 1]) {
-		idx += 1;
-		break;
-	} else {
-		idx += 2;
-	}
-}
-
-plaintext[idx + 1] = 0;
-
-auto max_length = 30;
-auto offset = max_length - idx;
+auto plaintext_length = plaintext.length();
+auto offset = max_plaintext_length - plaintext_length;
 
 if ((offset & 0x80000000) != 0) {
-	std::cout << "[-] invalid offset!" << std::endl;
-	return 1;
+	println("[-] invalid plaintext length :(");
+	return false;
 }
 
-auto new_idx = idx;
-
-if (max_length != idx) {
+if (max_plaintext_length != plaintext_length) {
 	do {
-		auto v = plaintext + new_idx++;
-		*v = 'f';
+		plaintext += "f";
 		--offset;
 	} while (offset);
 }
+
+plaintext += std::format("{:02x}", plaintext_length);
 ```
 
-Append the original length at the end of the buffer.
-
-```cpp
-convert_int_to_hex_and_append(idx, &plaintext[new_idx]);
-```
-
-Convert hex string to a buffer and XOR everything with the game's appid signature.
+Convert hex string back to a byte buffer and XOR everything with the game's appid signature.
 
 ```cpp
 // Game signature aka appid (48 bytes)
 // Found in spot check 6
-unsigned char tron_signature[] = {
+unsigned char appid[] = {
 	// 1st part (16 bytes)
 	0xF9, 0x83, 0x7A, 0x1D, 0x22, 0x2F, 0x64, 0x74,
 	0x28, 0xCB, 0x13, 0x30, 0x32, 0xD0, 0xD0, 0x0C,
@@ -640,34 +610,52 @@ unsigned char tron_signature[] = {
 	0xE8, 0x96, 0xD4, 0xE1, 0xBD, 0xFC, 0x0E, 0x37,
 };
 
-char input[56] = {};
-auto inputPtr = input + 4;
+BYTE data_buffer[56] = { 0x00, 0x01, 0xC7, 0x22 };
+auto data_buffer_ptr = data_buffer + 4;
 
-convert_hex_to_bytes(inputPtr + 5, plaintext, 32);
+convert_hex_to_bytes(data_buffer_ptr + 5, (BYTE*)plaintext.c_str(), 32);
 
 for (auto i = 0; i < 16; ++i) {
-	*(inputPtr + 5 + i) ^= *(tron_signature + i);
+	*(data_buffer_ptr + 5 + i) ^= *(appid + i);
 }
 ```
 
 Calculate MD5 of game's appid and XOR it with the buffer.
 
 ```cpp
-// TODO
-
 MD5_CTX ctx = {};
-
 MD5_Init(&ctx);
-MD5_Update(&ctx, tron_signature, sizeof(tron_signature));
+MD5_Update(&ctx, appid, sizeof(appid));
+BYTE data[32] = {};
+MD5_Final(data, &ctx);
 
-unsigned char data[32] = {};
-MD5_Final((unsigned char*)&data[0], &ctx);
+xor_data(data, 16, data_buffer_ptr, 2u);
 ```
 
 Encrypt the game's signature with lots of XOR operations and DES CBF.
 
 ```cpp
-// TODO
+BYTE cblock[19] = {};
+for (auto i = 0; i < 16; ++i) {
+	*(cblock + i) = *(appid + i) ^ *(appid + i + (16 * 1)) ^ *(game.appid + i + (16 * 2));
+}
+
+memcpy(cblock + 16, (BYTE*)plaintext.c_str(), 3);
+
+BYTE des_buffer[21] = {};
+memcpy(des_buffer, data_buffer_ptr + 2, sizeof(des_buffer));
+
+*(cblock + 0) ^= *(cblock + 8);
+*(cblock + 1) ^= *(cblock + 9);
+*(cblock + 2) ^= *(cblock + 10);
+*(cblock + 3) ^= *(cblock + 11);
+*(cblock + 4) ^= *(cblock + 12);
+*(cblock + 5) ^= *(cblock + 13);
+*(cblock + 6) ^= *(cblock + 14);
+*(cblock + 7) ^= *(cblock + 15);
+*(cblock + 8) ^= *(cblock + 16);
+
+encrypt_with_des(cblock, data_buffer_ptr + 2, des_buffer, sizeof(des_buffer) - 2);
 ```
 
 Now comes the longest process: S-box DES encryption times 2<sup>17</sup>.
@@ -676,11 +664,15 @@ This will take a few seconds depending on the CPU's speed lol.
 ```cpp
 auto rounds = 0x20000;
 
-do
-{
+BYTE output_buffer[64] = { *(data_buffer_ptr + 0), *(data_buffer_ptr + 1) };
+memcpy(output_buffer + 2, des_buffer, 19);
+
+do {
 	for (auto i = 0; i < 8; ++i) {
-		des_encrypt_with_sbox(input, output, 21);
-		des_encrypt_with_sbox(output, input, 21);
+		des_encrypt_with_sbox(output_buffer, data_buffer_ptr, 21);
+		++des_calls;
+		des_encrypt_with_sbox(data_buffer_ptr, output_buffer, 21);
+		++des_calls;
 	}
 	--rounds;
 } while (rounds);
@@ -689,20 +681,42 @@ do
 Calculate CRC and XOR it with the buffer.
 
 ```cpp
-auto crc = get_crc(output, 24);
-xor_operations(&crc, 4, output, 1u);
+auto crc = get_crc(data_buffer + 1, 24);
+xor_data((BYTE*)&crc, 4, data_buffer, 1);
 ```
 
 Final DES CFB encryption with random seed.
 
 ```cpp
-// TODO
+BYTE cblock_seed[17] = {};
+get_random_hash(cblock_seed, sizeof(cblock_seed) - 1);
+
+memcpy(cblock_seed + 16, cblock, 1);
+
+*(cblock_seed + 0) ^= *(cblock_seed + 8);
+*(cblock_seed + 1) ^= *(cblock_seed + 9);
+*(cblock_seed + 2) ^= *(cblock_seed + 10);
+*(cblock_seed + 3) ^= *(cblock_seed + 11);
+*(cblock_seed + 4) ^= *(cblock_seed + 12);
+*(cblock_seed + 5) ^= *(cblock_seed + 13);
+*(cblock_seed + 6) ^= *(cblock_seed + 14);
+*(cblock_seed + 7) ^= *(cblock_seed + 15);
+*(cblock_seed + 8) ^= *(cblock_seed + 16);
+
+BYTE unlock_code_des_buffer[32] = {};
+encrypt_with_des(cblock_seed, data_buffer, unlock_code_des_buffer, 25);
+
+BYTE unlock_code_hex_buffer[40] = {};
+decode_des_buffer(unlock_code_des_buffer, 25, unlock_code_hex_buffer, sizeof(unlock_code_hex_buffer));
 ```
 
 Encode rest of the buffer to ASCII and insert hyphens etc.
 
 ```cpp
-// TODO
+decode_to_ascii(unlock_code_hex_buffer, output_buffer, sizeof(unlock_code_hex_buffer));
+
+char unlock_code_buffer[64] = {};
+insert_hyphens((char*)output_buffer, unlock_code_buffer, 40, 5);
 ```
 
 Credits to 80_PA.
