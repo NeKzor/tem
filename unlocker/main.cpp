@@ -17,6 +17,8 @@
 #pragma warning(disable : 4002)
 #pragma warning(disable : 4996)
 
+#define TESTS 0
+
 // clang-format off
 
 #include <d3d9.h>
@@ -30,10 +32,14 @@
 #include "Unlocker.hpp"
 #include "lib/BigDigits/bigd.h"
 
+#if TESTS
+    #include "Tests.hpp"
+#endif
+
 // clang-format on
 
 #ifdef LOBYTE
-    #undef LOBYTE
+#undef LOBYTE
 #endif
 
 #define BYTEn(x, n) (*((char*)&(x) + n))
@@ -44,14 +50,26 @@
 
 template <typename... Args> auto print(const std::string format, Args&&... args) -> void
 {
+#if !TESTS
     std::cout << std::vformat(format, std::make_format_args(args...));
+#endif
 }
 template <typename... Args> auto println(const std::string format, Args&&... args) -> void
 {
+#if !TESTS
     std::cout << std::vformat(format, std::make_format_args(args...)) << std::endl;
+#endif
+}
+auto print_buffer(const char* prefix, BYTE* buffer, size_t size) -> void
+{
+    std::cout << prefix;
+    while (size--) {
+        std::cout << std::format("{:02X}", *buffer++);
+    }
+    std::cout << std::endl;
 }
 
-hwid_t::hwid_t()
+auto hwid_t::init() -> void
 {
     this->get_version_hash();
     this->get_cpu_hash();
@@ -87,10 +105,10 @@ auto hwid_t::get_version_hash() -> void
     ctx.data[2] = osvi.dwBuildNumber;
     ctx.data[3] = osvi.dwPlatformId;
 
-    unsigned long data[32] = {};
-    MD5_Final((unsigned char*)&data[0], &ctx);
+    BYTE data[32] = {};
+    MD5_Final(data, &ctx);
 
-    this->hash_field(&this->version_hash, (byte*)&data[0], sizeof(hwid_t::version_hash));
+    this->hash_field(&this->version_hash, data, sizeof(hwid_t::version_hash));
 }
 
 auto hwid_t::get_cpu_hash() -> void
@@ -109,10 +127,10 @@ auto hwid_t::get_cpu_hash() -> void
     ctx.data[2] = info.wProcessorLevel;
     ctx.data[3] = info.wProcessorRevision;
 
-    unsigned long data[32] = {};
-    MD5_Final((unsigned char*)&data[0], &ctx);
+    BYTE data[32] = {};
+    MD5_Final(data, &ctx);
 
-    this->hash_field((byte*)&this->cpu_hash, (byte*)&data[0], sizeof(hwid_t::cpu_hash));
+    this->hash_field((byte*)&this->cpu_hash, data, sizeof(hwid_t::cpu_hash));
 }
 
 auto hwid_t::get_gpu_hash() -> void
@@ -140,10 +158,10 @@ auto hwid_t::get_gpu_hash() -> void
         ctx.data[2] = gpu.SubSysId;
         ctx.data[3] = gpu.Revision;
 
-        unsigned long data[32] = {};
-        MD5_Final((unsigned char*)&data[0], &ctx);
+        BYTE data[32] = {};
+        MD5_Final(data, &ctx);
 
-        this->hash_field((byte*)&this->gpu_hash, (byte*)&data[0], sizeof(hwid_t::gpu_hash));
+        this->hash_field((byte*)&this->gpu_hash, data, sizeof(hwid_t::gpu_hash));
     }
 }
 
@@ -177,10 +195,10 @@ auto hwid_t::get_network_hash() -> void
             ctx.num = MD5_DIGEST_LENGTH - 10;
             memcpy(&ctx.data[0], pAdapterInfo->Address, sizeof(pAdapterInfo->Address));
 
-            unsigned long data[32] = {};
-            MD5_Final((unsigned char*)&data[0], &ctx);
+            BYTE data[32] = {};
+            MD5_Final(data, &ctx);
 
-            this->hash_field(&this->network_hash, (byte*)&data[0], sizeof(hwid_t::network_hash));
+            this->hash_field(&this->network_hash, data, sizeof(hwid_t::network_hash));
         }
 
         free((void*)pAdapterInfo);
@@ -222,10 +240,10 @@ auto hwid_t::get_disk_hash() -> void
     ctx.num = 4;
     ctx.data[0] = _byteswap_ulong(volumeSerialNumber);
 
-    unsigned long data[32] = {};
-    MD5_Final((unsigned char*)&data[0], &ctx);
+    BYTE data[32] = {};
+    MD5_Final(data, &ctx);
 
-    this->hash_field((byte*)&this->disk_hash, (byte*)&data[0], sizeof(hwid_t::disk_hash));
+    this->hash_field((byte*)&this->disk_hash, data, sizeof(hwid_t::disk_hash));
 }
 
 auto hwid_t::to_string() -> std::string
@@ -236,18 +254,20 @@ auto hwid_t::to_string() -> std::string
         + std::format("{:04X}", this->unk2) + std::format("{:02X}", this->unk3)
         + std::format("{:04X}", _byteswap_ushort(this->disk_hash)) + std::format("{:04X}", this->unk4);
 }
-
-auto string_to_hex(const std::string& input) -> std::string
+auto hwid_t::from_string(std::string value) -> hwid_t
 {
-    static const char hex_digits[] = "0123456789ABCDEF";
-
-    std::string output;
-    output.reserve(input.length() * 2);
-    for (unsigned char c : input) {
-        output.push_back(hex_digits[c >> 4]);
-        output.push_back(hex_digits[c & 15]);
-    }
-    return output;
+    return hwid_t{
+        .unk0 = BYTE(std::stoi(value.substr(0, 2), nullptr, 16)),
+        .version_hash = BYTE(std::stoi(value.substr(2, 2), nullptr, 16)),
+        .cpu_hash = WORD(_byteswap_ushort(std::stoi(value.substr(4, 4), nullptr, 16))),
+        .gpu_hash = BYTE(std::stoi(value.substr(8, 2), nullptr, 16)),
+        .unk1 = BYTE(std::stoi(value.substr(10, 2), nullptr, 16)),
+        .network_hash = BYTE(std::stoi(value.substr(12, 2), nullptr, 16)),
+        .unk2 = WORD(std::stoi(value.substr(14, 4), nullptr, 16)),
+        .unk3 = BYTE(std::stoi(value.substr(18, 2), nullptr, 16)),
+        .disk_hash = WORD(_byteswap_ushort(std::stoi(value.substr(20, 4), nullptr, 16))),
+        .unk4 = WORD(std::stoi(value.substr(24, 4), nullptr, 16)),
+    };
 }
 
 /*
@@ -271,32 +291,34 @@ auto convert_hex_to_bytes(BYTE* output, BYTE* input, size_t length) -> BYTE*
 }
 
 /*
- * TODO
+ * Decode DES input buffer.
+ *
+ * TODO: Figure out what this really does.
  */
-auto figure_out_what_this_does_4(BYTE* input, size_t input_length, BYTE* output, size_t output_length) -> signed int
+auto decode_des_buffer(BYTE* input, size_t input_length, BYTE* output, size_t output_length) -> signed int
 {
     if (input && output) {
         if (output_length > 0) {
-            auto v4 = 31;
-            auto v5 = 0;
-            auto v6 = 1;
-            auto v7 = 0;
-            auto v8 = 0;
+            auto bit_mask = 31;
+            auto to_shift = 0;
+            size_t index = 1;
+            auto current_byte = 0;
+            size_t length = 0;
 
             do {
-                auto v9 = v6 >= input_length ? 0 : input[v6];
-                v7 = input[v6 - 1] | ((v9 << 8) | v7 & 0xFFFF00FF) & 0xFFFFFF00;
-                output[v8] = (v7 & v4) >> v5;
-                v5 += 5;
-                ++v8;
-                v4 *= 32;
+                auto next_byte = index >= input_length ? 0 : input[index];
+                current_byte = input[index - 1] | ((next_byte << 8) | current_byte & 0xFFFF00FF) & 0xFFFFFF00;
+                output[length] = (current_byte & bit_mask) >> to_shift;
+                to_shift += 5;
+                ++length;
+                bit_mask *= 32;
 
-                if (v5 >= 8) {
-                    ++v6;
-                    v4 >>= 8;
-                    v5 -= 8;
+                if (to_shift >= 8) {
+                    ++index;
+                    bit_mask >>= 8;
+                    to_shift -= 8;
                 }
-            } while (v8 < output_length);
+            } while (length < output_length);
         }
 
         return 1;
@@ -344,7 +366,7 @@ auto decode_to_ascii(BYTE* input, BYTE* output, size_t length) -> signed int
     next:
         ++output;
         ++input;
-        auto total_length = index++;
+        size_t total_length = index++;
         if (total_length >= length) {
             return 1;
         }
@@ -411,8 +433,10 @@ auto xor_data(BYTE* input, size_t input_length, BYTE* output, size_t output_leng
 
 /*
  * Encrypt input buffer with DES CFB.
+ *
+ * NOTE: cblock buffer must be 17 bytes long.
  */
-auto encrypt_with_des(BYTE* cblock, BYTE* data, BYTE* buf, size_t length) -> void
+auto encrypt_with_des(BYTE* cblock, BYTE* input, BYTE* output, size_t length) -> void
 {
     *(cblock + 0) ^= *(cblock + 8);
     *(cblock + 1) ^= *(cblock + 9);
@@ -428,9 +452,14 @@ auto encrypt_with_des(BYTE* cblock, BYTE* data, BYTE* buf, size_t length) -> voi
     DES_set_key_unchecked((const_DES_cblock*)cblock, &sch_key);
 
     DES_cblock result = {};
-    DES_cfb_encrypt(data, buf, 8, length, &sch_key, &result, DES_ENCRYPT);
+    DES_cfb_encrypt(input, output, 8, length, &sch_key, &result, DES_ENCRYPT);
 }
 
+/*
+ * DES s-box encryption.
+ *
+ * TODO: Is this an openssl function?
+ */
 auto des_encrypt_with_sbox(BYTE* input, BYTE* output, int length) -> signed int
 {
     signed int index; // ebx@1
@@ -477,7 +506,6 @@ auto des_encrypt_with_sbox(BYTE* input, BYTE* output, int length) -> signed int
     BYTE* data_2; // edx@10
     BYTE result_buffer[20] = {}; // [sp+0h] [bp-44h]@1
     BYTE buffer[24] = {}; // [sp+14h] [bp-30h]@2
-    int offset; // [sp+2Ch] [bp-18h]@1
     int length_1; // [sp+34h] [bp-10h]@1
     BYTE* data_1; // [sp+38h] [bp-Ch]@1
     BYTE* buf_ptr; // [sp+54h] [bp+10h]@2
@@ -496,7 +524,7 @@ auto des_encrypt_with_sbox(BYTE* input, BYTE* output, int length) -> signed int
         do {
             number = (unsigned __int8)*buf_ptr;
             current_byte = &buffer[8];
-            byte_mask = 8 * (index + (number >> 4)) + unk_des_mask;
+            byte_mask = 8 * (index + (number >> 4)) + (BYTE*)des_sbox_mask_1;
             bits = 8;
             do {
                 *current_byte |= *byte_mask | *(BYTE*)(8 * ((number & 0xF) - (number >> 4)) + 128 + byte_mask);
@@ -672,7 +700,7 @@ auto des_encrypt_with_sbox(BYTE* input, BYTE* output, int length) -> signed int
         index_1 = 0;
         do {
             v40 = 8 * ((*current_buf_ptr & 0xF) - (*current_buf_ptr >> 4)) + 128;
-            byte_mask_1 = 8 * (index_1 + (*current_buf_ptr >> 4)) + unk_des_mask2;
+            byte_mask_1 = 8 * (index_1 + (*current_buf_ptr >> 4)) + (BYTE*)des_sbox_mask_2;
             bits_1 = 8;
             v43 = buffer;
             do {
@@ -691,7 +719,6 @@ auto des_encrypt_with_sbox(BYTE* input, BYTE* output, int length) -> signed int
         result_buffer[19] = *data_2;
         data_1 = data_2 + 1;
         --length_1;
-
     } while (length_1);
     return bits_1;
 }
@@ -742,7 +769,7 @@ auto get_random_hash(BYTE* input, size_t size) -> void
     const auto increment = 0x269EC3;
 
     auto seed = start_seed;
-    for (auto i = 0; i < size; ++i) {
+    for (size_t i = 0; i < size; ++i) {
         seed = (seed * multiplier) + increment;
         *(input + i) = (seed >> 16) & 0xff;
     }
@@ -818,10 +845,15 @@ auto process_plaintext(std::string& plaintext) -> bool
 
 auto main() -> int
 {
+#if TESTS
+    return run_all_tests();
+#else
     auto start = GetTickCount64();
 
     auto game = tron_evolution;
     auto hwid = hwid_t();
+
+    hwid.init();
 
     println("[+] version_hash: {:02x}", hwid.version_hash);
     println("[+] cpu_hash: {:02x}", _byteswap_ushort(hwid.cpu_hash));
@@ -834,13 +866,13 @@ auto main() -> int
         return 1;
     }
 
-    BYTE sbuf[56] = { 0x00, 0x01, 0xC7, 0x22 };
-    auto sbufPtr = sbuf + 4;
+    BYTE data_buffer[56] = { 0x00, 0x01, 0xC7, 0x22 };
+    auto data_buffer_ptr = data_buffer + 4;
 
-    convert_hex_to_bytes(sbufPtr + 5, (BYTE*)plaintext.c_str(), 32);
+    convert_hex_to_bytes(data_buffer_ptr + 5, (BYTE*)plaintext.c_str(), 32);
 
     for (auto i = 0; i < 16; ++i) {
-        *(sbufPtr + 5 + i) ^= *(game.appid + i);
+        *(data_buffer_ptr + 5 + i) ^= *(game.appid + i);
     }
 
     MD5_CTX ctx = {};
@@ -849,78 +881,87 @@ auto main() -> int
     BYTE data[32] = {};
     MD5_Final(data, &ctx);
 
-    auto dataPtr = data;
-    xor_data(dataPtr, 16, sbufPtr, 2u);
+    xor_data(data, 16, data_buffer_ptr, 2u);
 
     BYTE cblock[19] = {};
     for (auto i = 0; i < 16; ++i) {
         *(cblock + i) = *(game.appid + i) ^ *(game.appid + i + (16 * 1)) ^ *(game.appid + i + (16 * 2));
     }
 
-    // NOTE: For some reason there is one additional byte that is used to xor cblock buffer before it passed to DES encryption.
+    // NOTE: For some reason there is one additional byte that is used to xor
+    //       cblock buffer before it is passed to the DES encryption function.
     memcpy(cblock + 16, (BYTE*)plaintext.c_str(), 3);
 
     BYTE des_buffer[21] = {}; // TODO: 19?
-    memcpy(des_buffer, sbufPtr + 2, sizeof(des_buffer));
+    memcpy(des_buffer, data_buffer_ptr + 2, sizeof(des_buffer));
 
-    encrypt_with_des(cblock, sbufPtr + 2, des_buffer, sizeof(des_buffer) - 2);
+    encrypt_with_des(cblock, data_buffer_ptr + 2, des_buffer, sizeof(des_buffer) - 2);
 
     auto rounds = 0x20000;
 
     // TODO: remove ueselss copy and save some memory
-    BYTE des_buffer2[64] = { *(sbufPtr + 0), *(sbufPtr + 1) };
-    memcpy(des_buffer2 + 2, des_buffer, 19);
+    BYTE output_buffer[64] = { *(data_buffer_ptr + 0), *(data_buffer_ptr + 1) };
+    memcpy(output_buffer + 2, des_buffer, 19);
 
     auto des_calls = 0;
+    auto des_stopped = std::atomic_bool(false);
 
-    std::thread des_status_update ([&des_calls]() {
+    std::thread des_status_update([&des_calls, &des_stopped]() {
         const auto total_calls = 0x20000 * 8 * 2;
-        while (des_calls <= total_calls) {
-            print("\r[+] des encryptions: {: 7} of {} ({:.0f}%)", des_calls, total_calls, (des_calls / (float)total_calls) * 100.0f);
+        while (!des_stopped.load()) {
+            print("\r[+] des encryptions: {: 7} of {} ({:.0f}%)", des_calls, total_calls,
+                (des_calls / (float)total_calls) * 100.0f);
             Sleep(1);
         }
+        print("\r[+] des encryptions: {: 7} of {} ({:.0f}%)", des_calls, total_calls,
+            (des_calls / (float)total_calls) * 100.0f);
     });
 
     do {
         for (auto i = 0; i < 8; ++i) {
-            des_encrypt_with_sbox(des_buffer2, sbufPtr, 21);
+            des_encrypt_with_sbox(output_buffer, data_buffer_ptr, 21);
             ++des_calls;
-            des_encrypt_with_sbox(sbufPtr, des_buffer2, 21);
+            des_encrypt_with_sbox(data_buffer_ptr, output_buffer, 21);
             ++des_calls;
         }
         --rounds;
     } while (rounds);
 
-    des_status_update.detach();
+    des_stopped.store(true);
+    des_status_update.join();
     print("\n");
 
-    auto crc = get_crc(sbuf + 1, 24);
+    auto crc = get_crc(data_buffer + 1, 24);
+    xor_data((BYTE*)&crc, 4, data_buffer, 1);
 
-    xor_data((BYTE*)&crc, 4, sbuf, 1);
-
-    BYTE seed[17] = {};
-    get_random_hash(seed, sizeof(seed) - 1);
+    BYTE cblock_seed[17] = {};
+    get_random_hash(cblock_seed, sizeof(cblock_seed) - 1);
 
     // NOTE: Like above, one additional byte for cblock xor operations.
-    memcpy(seed + 16, cblock, 1);
+    memcpy(cblock_seed + 16, cblock, 1);
 
-    BYTE data2[32] = {};
-    encrypt_with_des(seed, sbuf, data2, 25);
+    BYTE unlock_code_des_buffer[32] = {};
+    encrypt_with_des(cblock_seed, data_buffer, unlock_code_des_buffer, 25);
 
-    BYTE v37[40] = {};
-    figure_out_what_this_does_4(data2, 25, v37, sizeof(v37));
+    print_buffer("[+] final des buffer: ", unlock_code_des_buffer, 25);
 
-    decode_to_ascii(v37, des_buffer2, sizeof(v37));
+    BYTE unlock_code_hex_buffer[40] = {};
+    decode_des_buffer(unlock_code_des_buffer, 25, unlock_code_hex_buffer, sizeof(unlock_code_hex_buffer));
+
+    print_buffer("[+] uc in hex: ", unlock_code_hex_buffer, sizeof(unlock_code_hex_buffer));
+
+    decode_to_ascii(unlock_code_hex_buffer, output_buffer, sizeof(unlock_code_hex_buffer));
 
     char unlock_code_buffer[64] = {};
-    insert_hyphens((char*)des_buffer2, unlock_code_buffer, 40, 5);
-
-    println("[+] unlock code: {}", unlock_code_buffer);
+    insert_hyphens((char*)output_buffer, unlock_code_buffer, 40, 5);
 
     _ASSERT(strcmp(unlock_code_buffer, "UB9NU-ZU3LF-6R5ZQ-LPYE5-8C3UH-RGR3P-HX5NP-P6GHQ") == 0);
 
     println("[+] generated code in {:.3f} seconds", (GetTickCount64() - start) / 1'000.0f);
     println("[+] done");
+    println("");
+    println("{}", unlock_code_buffer);
 
     return 0;
+#endif
 }

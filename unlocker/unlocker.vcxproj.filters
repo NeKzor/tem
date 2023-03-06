@@ -39,6 +39,9 @@
     <ClCompile Include="lib\BigDigits\bigdRand.c">
       <Filter>lib\BigDigits</Filter>
     </ClCompile>
+    <ClCompile Include="Tests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="lib\BigDigits\LICENSE.txt">
@@ -65,6 +68,9 @@
       <Filter>lib\BigDigits</Filter>
     </ClInclude>
     <ClInclude Include="Unlocker.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Tests.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

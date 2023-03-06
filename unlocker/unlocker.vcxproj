@@ -71,6 +71,9 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <IncludePath>$(IncludePath)</IncludePath>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level2</WarningLevel>
@@ -137,6 +140,7 @@
     <ClCompile Include="lib\BigDigits\bigdRand.c" />
     <ClCompile Include="lib\BigDigits\spExtras.c" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Tests.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="lib\BigDigits\LICENSE.txt" />
@@ -148,6 +152,7 @@
     <ClInclude Include="lib\BigDigits\bigdRand.h" />
     <ClInclude Include="lib\BigDigits\bigdtypes.h" />
     <ClInclude Include="lib\BigDigits\spExtras.h" />
+    <ClInclude Include="Tests.hpp" />
     <ClInclude Include="Unlocker.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
