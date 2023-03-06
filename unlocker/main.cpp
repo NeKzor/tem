@@ -899,7 +899,7 @@ auto main() -> int
 
     auto rounds = 0x20000;
 
-    // TODO: remove ueselss copy and save some memory
+    // TODO: Remove useless copy and save some memory
     BYTE output_buffer[64] = { *(data_buffer_ptr + 0), *(data_buffer_ptr + 1) };
     memcpy(output_buffer + 2, des_buffer, 19);
 
