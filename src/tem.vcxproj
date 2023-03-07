@@ -48,7 +48,7 @@
     <OutDir>C:\Program Files (x86)\Disney Interactive Studios\Tron Evolution\Binaries\Win32Live\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <OutDir>$(SolutionDir)bin\$(Configuration)\$(ProjectName)</OutDir>
+    <OutDir>$(SolutionDir)bin\$(Configuration)\$(ProjectName)\</OutDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>

@@ -75,7 +75,7 @@
     <TargetName>dinput8</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <OutDir>$(SolutionDir)bin\$(Configuration)\$(ProjectName)</OutDir>
+    <OutDir>$(SolutionDir)bin\$(Configuration)\$(ProjectName)\</OutDir>
     <TargetName>dinput8</TargetName>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">

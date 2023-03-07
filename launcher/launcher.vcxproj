@@ -72,10 +72,10 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <TargetName>GridGameLauncher</TargetName>
-    <OutDir>$(SolutionDir)bin\$(Configuration)\$(ProjectName)</OutDir>
+    <OutDir>$(SolutionDir)bin\$(Configuration)\$(ProjectName)\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <OutDir>$(SolutionDir)bin\$(Configuration)\$(ProjectName)</OutDir>
+    <OutDir>$(SolutionDir)bin\$(Configuration)\$(ProjectName)\</OutDir>
     <TargetName>GridGameLauncher</TargetName>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
