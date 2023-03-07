@@ -19,6 +19,9 @@
     <Filter Include="lib\BigDigits">
       <UniqueIdentifier>{53a062ad-0de5-410d-b71f-b67a438ba19d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="lib\openssl">
+      <UniqueIdentifier>{dcf4cebc-94e5-4999-9c7e-f435d0c3c342}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -73,5 +76,424 @@
     <ClInclude Include="Tests.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="lib\openssl\provider.h">
+      <Filter>lib\openssl</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\openssl\rand.h">
+      <Filter>lib\openssl</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\openssl\randerr.h">
+      <Filter>lib\openssl</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\openssl\rc2.h">
+      <Filter>lib\openssl</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\openssl\rc4.h">
+      <Filter>lib\openssl</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\openssl\rc5.h">
+      <Filter>lib\openssl</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\openssl\ripemd.h">
+      <Filter>lib\openssl</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\openssl\rsa.h">
+      <Filter>lib\openssl</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\openssl\rsaerr.h">
+      <Filter>lib\openssl</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\openssl\safestack.h">
+      <Filter>lib\openssl</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\openssl\seed.h">
+      <Filter>lib\openssl</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\openssl\self_test.h">
+      <Filter>lib\openssl</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\openssl\sha.h">
+      <Filter>lib\openssl</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\openssl\srp.h">
+      <Filter>lib\openssl</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\openssl\srtp.h">
+      <Filter>lib\openssl</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\openssl\ssl.h">
+      <Filter>lib\openssl</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\openssl\ssl2.h">
+      <Filter>lib\openssl</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\openssl\ssl3.h">
+      <Filter>lib\openssl</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\openssl\sslerr.h">
+      <Filter>lib\openssl</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\openssl\sslerr_legacy.h">
+      <Filter>lib\openssl</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\openssl\stack.h">
+      <Filter>lib\openssl</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\openssl\store.h">
+      <Filter>lib\openssl</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\openssl\storeerr.h">
+      <Filter>lib\openssl</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\openssl\symhacks.h">
+      <Filter>lib\openssl</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\openssl\tls1.h">
+      <Filter>lib\openssl</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\openssl\trace.h">
+      <Filter>lib\openssl</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\openssl\ts.h">
+      <Filter>lib\openssl</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\openssl\tserr.h">
+      <Filter>lib\openssl</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\openssl\txt_db.h">
+      <Filter>lib\openssl</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\openssl\types.h">
+      <Filter>lib\openssl</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\openssl\ui.h">
+      <Filter>lib\openssl</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\openssl\uierr.h">
+      <Filter>lib\openssl</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\openssl\whrlpool.h">
+      <Filter>lib\openssl</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\openssl\x509.h">
+      <Filter>lib\openssl</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\openssl\x509_vfy.h">
+      <Filter>lib\openssl</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\openssl\x509err.h">
+      <Filter>lib\openssl</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\openssl\x509v3.h">
+      <Filter>lib\openssl</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\openssl\x509v3err.h">
+      <Filter>lib\openssl</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\openssl\__DECC_INCLUDE_EPILOGUE.H">
+      <Filter>lib\openssl</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\openssl\__DECC_INCLUDE_PROLOGUE.H">
+      <Filter>lib\openssl</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\openssl\aes.h">
+      <Filter>lib\openssl</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\openssl\asn1.h">
+      <Filter>lib\openssl</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\openssl\asn1_mac.h">
+      <Filter>lib\openssl</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\openssl\asn1err.h">
+      <Filter>lib\openssl</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\openssl\asn1t.h">
+      <Filter>lib\openssl</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\openssl\async.h">
+      <Filter>lib\openssl</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\openssl\asyncerr.h">
+      <Filter>lib\openssl</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\openssl\bio.h">
+      <Filter>lib\openssl</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\openssl\bioerr.h">
+      <Filter>lib\openssl</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\openssl\blowfish.h">
+      <Filter>lib\openssl</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\openssl\bn.h">
+      <Filter>lib\openssl</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\openssl\bnerr.h">
+      <Filter>lib\openssl</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\openssl\buffer.h">
+      <Filter>lib\openssl</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\openssl\buffererr.h">
+      <Filter>lib\openssl</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\openssl\camellia.h">
+      <Filter>lib\openssl</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\openssl\cast.h">
+      <Filter>lib\openssl</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\openssl\cmac.h">
+      <Filter>lib\openssl</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\openssl\cmp.h">
+      <Filter>lib\openssl</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\openssl\cmp_util.h">
+      <Filter>lib\openssl</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\openssl\cmperr.h">
+      <Filter>lib\openssl</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\openssl\cms.h">
+      <Filter>lib\openssl</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\openssl\cmserr.h">
+      <Filter>lib\openssl</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\openssl\comp.h">
+      <Filter>lib\openssl</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\openssl\comperr.h">
+      <Filter>lib\openssl</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\openssl\conf.h">
+      <Filter>lib\openssl</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\openssl\conf_api.h">
+      <Filter>lib\openssl</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\openssl\conferr.h">
+      <Filter>lib\openssl</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\openssl\configuration.h">
+      <Filter>lib\openssl</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\openssl\conftypes.h">
+      <Filter>lib\openssl</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\openssl\core.h">
+      <Filter>lib\openssl</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\openssl\core_dispatch.h">
+      <Filter>lib\openssl</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\openssl\core_names.h">
+      <Filter>lib\openssl</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\openssl\core_object.h">
+      <Filter>lib\openssl</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\openssl\crmf.h">
+      <Filter>lib\openssl</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\openssl\crmferr.h">
+      <Filter>lib\openssl</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\openssl\crypto.h">
+      <Filter>lib\openssl</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\openssl\cryptoerr.h">
+      <Filter>lib\openssl</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\openssl\cryptoerr_legacy.h">
+      <Filter>lib\openssl</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\openssl\ct.h">
+      <Filter>lib\openssl</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\openssl\cterr.h">
+      <Filter>lib\openssl</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\openssl\decoder.h">
+      <Filter>lib\openssl</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\openssl\decodererr.h">
+      <Filter>lib\openssl</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\openssl\des.h">
+      <Filter>lib\openssl</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\openssl\dh.h">
+      <Filter>lib\openssl</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\openssl\dherr.h">
+      <Filter>lib\openssl</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\openssl\dsa.h">
+      <Filter>lib\openssl</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\openssl\dsaerr.h">
+      <Filter>lib\openssl</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\openssl\dtls1.h">
+      <Filter>lib\openssl</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\openssl\e_os2.h">
+      <Filter>lib\openssl</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\openssl\ebcdic.h">
+      <Filter>lib\openssl</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\openssl\ec.h">
+      <Filter>lib\openssl</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\openssl\ecdh.h">
+      <Filter>lib\openssl</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\openssl\ecdsa.h">
+      <Filter>lib\openssl</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\openssl\ecerr.h">
+      <Filter>lib\openssl</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\openssl\encoder.h">
+      <Filter>lib\openssl</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\openssl\encodererr.h">
+      <Filter>lib\openssl</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\openssl\engine.h">
+      <Filter>lib\openssl</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\openssl\engineerr.h">
+      <Filter>lib\openssl</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\openssl\err.h">
+      <Filter>lib\openssl</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\openssl\ess.h">
+      <Filter>lib\openssl</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\openssl\esserr.h">
+      <Filter>lib\openssl</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\openssl\evp.h">
+      <Filter>lib\openssl</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\openssl\evperr.h">
+      <Filter>lib\openssl</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\openssl\fips_names.h">
+      <Filter>lib\openssl</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\openssl\fipskey.h">
+      <Filter>lib\openssl</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\openssl\hmac.h">
+      <Filter>lib\openssl</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\openssl\http.h">
+      <Filter>lib\openssl</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\openssl\httperr.h">
+      <Filter>lib\openssl</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\openssl\idea.h">
+      <Filter>lib\openssl</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\openssl\kdf.h">
+      <Filter>lib\openssl</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\openssl\kdferr.h">
+      <Filter>lib\openssl</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\openssl\lhash.h">
+      <Filter>lib\openssl</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\openssl\macros.h">
+      <Filter>lib\openssl</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\openssl\md2.h">
+      <Filter>lib\openssl</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\openssl\md4.h">
+      <Filter>lib\openssl</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\openssl\md5.h">
+      <Filter>lib\openssl</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\openssl\mdc2.h">
+      <Filter>lib\openssl</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\openssl\modes.h">
+      <Filter>lib\openssl</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\openssl\obj_mac.h">
+      <Filter>lib\openssl</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\openssl\objects.h">
+      <Filter>lib\openssl</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\openssl\objectserr.h">
+      <Filter>lib\openssl</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\openssl\ocsp.h">
+      <Filter>lib\openssl</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\openssl\ocsperr.h">
+      <Filter>lib\openssl</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\openssl\opensslconf.h">
+      <Filter>lib\openssl</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\openssl\opensslv.h">
+      <Filter>lib\openssl</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\openssl\ossl_typ.h">
+      <Filter>lib\openssl</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\openssl\param_build.h">
+      <Filter>lib\openssl</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\openssl\params.h">
+      <Filter>lib\openssl</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\openssl\pem.h">
+      <Filter>lib\openssl</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\openssl\pem2.h">
+      <Filter>lib\openssl</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\openssl\pemerr.h">
+      <Filter>lib\openssl</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\openssl\pkcs7.h">
+      <Filter>lib\openssl</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\openssl\pkcs7err.h">
+      <Filter>lib\openssl</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\openssl\pkcs12.h">
+      <Filter>lib\openssl</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\openssl\pkcs12err.h">
+      <Filter>lib\openssl</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\openssl\prov_ssl.h">
+      <Filter>lib\openssl</Filter>
+    </ClInclude>
+    <ClInclude Include="lib\openssl\proverr.h">
+      <Filter>lib\openssl</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="lib\openssl\libcrypto.lib">
+      <Filter>lib\openssl</Filter>
+    </Library>
+    <Library Include="lib\openssl\libssl.lib">
+      <Filter>lib\openssl</Filter>
+    </Library>
   </ItemGroup>
 </Project>
