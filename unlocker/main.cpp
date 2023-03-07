@@ -17,7 +17,11 @@
 #pragma warning(disable : 4002)
 #pragma warning(disable : 4996)
 
-#define TESTS 0
+#ifdef BUILD_TESTS
+  #define TESTS 1
+#else
+  #define TESTS 0
+#endif
 
 // clang-format off
 
