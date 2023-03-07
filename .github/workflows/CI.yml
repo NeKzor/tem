@@ -18,8 +18,9 @@ jobs:
   test:
     strategy:
         matrix:
-          target: [unlocker]
-          binary: [unlocker.exe]
+          project: [
+            { target: unlocker, binary: unlocker.exe }
+          ]
 
     runs-on: windows-latest
 
@@ -32,29 +33,34 @@ jobs:
     #  id: changes
     #  with:
     #    filters: |
-    #      ${{ matrix.target }}:
-    #        - '${{ matrix.target }}/**'
+    #      ${{ matrix.project.target }}:
+    #        - '${{ matrix.project.target }}/**'
 
     - name: Add MSBuild to PATH
-      #if: steps.changes.outputs.${{ matrix.target }} == 'true'
+      #if: steps.changes.outputs.${{ matrix.project.target }} == 'true'
       uses: microsoft/setup-msbuild@v1.0.2
 
     - name: Build
-      #if: steps.changes.outputs.${{ matrix.target }} == 'true'
+      #if: steps.changes.outputs.${{ matrix.project.target }} == 'true'
       working-directory: ${{env.GITHUB_WORKSPACE }}
       env:
         CL: /DTESTS=1
-      run: msbuild /m /p:Configuration=Release /p:Platform=x86 /t:${{ matrix.target }}
+      run: msbuild /m /p:Configuration=Release /p:Platform=x86 /t:${{ matrix.project.target }}
 
     - name: Run test
-      #if: steps.changes.outputs.${{ matrix.target }} == 'true'
-      run: ./bin/${{ matrix.target }}/${{ matrix.binary }}
+      #if: steps.changes.outputs.${{ matrix.project.target }} == 'true'
+      run: ./bin/${{ matrix.project.target }}/${{ matrix.project.binary }}
 
   build:
     strategy:
       matrix:
-        target: [tem, injector, launcher, proxy, unlocker]
-        binary: [tem.dll, injector.exe, GridGameLauncher.exe, dinput8.dll, unlocker.exe]
+        project: [
+          { target: tem, binary: tem.dll },
+          { target: injector, binary: injector.exe },
+          { target: launcher, binary: GridGameLauncher.exe },
+          { target: proxy, binary: dinput8.dll },
+          { target: unlocker, binary: unlocker.exe }
+        ]
 
     runs-on: windows-latest
 
@@ -68,11 +74,11 @@ jobs:
 
     - name: Build
       working-directory: ${{env.GITHUB_WORKSPACE }}
-      run: msbuild /m /p:Configuration=Release /p:Platform=x86 /t:${{ matrix.target }}
+      run: msbuild /m /p:Configuration=Release /p:Platform=x86 /t:${{ matrix.project.target }}
 
     - name: Create artifact
       if: github.event_name != 'pull_request'
       uses: actions/upload-artifact@v3
       with:
-          name: ${{ matrix.target }}
-          path: bin/${{ matrix.target }}/${{ matrix.binary }}
+          name: ${{ matrix.project.target }}
+          path: bin/${{ matrix.project.target }}/${{ matrix.project.binary }}
