@@ -40,11 +40,15 @@ jobs:
       #if: steps.changes.outputs.${{ matrix.project.target }} == 'true'
       uses: microsoft/setup-msbuild@v1.0.2
 
+    - name: Install openssl
+      #if: steps.changes.outputs.${{ matrix.project.target }} == 'true'
+      run: choco install openssl
+
     - name: Build
       #if: steps.changes.outputs.${{ matrix.project.target }} == 'true'
       working-directory: ${{env.GITHUB_WORKSPACE }}
       env:
-        CL: /DTESTS=1
+        CL: /DBUILD_TESTS=1
       run: msbuild /m /p:Configuration=Release /p:Platform=x86 /t:${{ matrix.project.target }}
 
     - name: Run test
@@ -72,6 +76,9 @@ jobs:
     - name: Add MSBuild to PATH
       uses: microsoft/setup-msbuild@v1.0.2
 
+    - name: Install openssl
+      run: choco install openssl
+
     - name: Build
       working-directory: ${{env.GITHUB_WORKSPACE }}
       run: msbuild /m /p:Configuration=Release /p:Platform=x86 /t:${{ matrix.project.target }}
@@ -81,4 +88,4 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
           name: ${{ matrix.project.target }}
-          path: bin/${{ matrix.project.target }}/${{ matrix.project.binary }}
+          path: bin/Release/${{ matrix.project.target }}/${{ matrix.project.binary }}
