@@ -847,7 +847,7 @@ auto process_plaintext(std::string& plaintext) -> bool
     return true;
 }
 
-auto main() -> int
+auto main(int argc, char *argv[]) -> int
 {
 #if TESTS
     return run_all_tests();
@@ -965,6 +965,12 @@ auto main() -> int
     println("[+] done");
     println("");
     println("{}", unlock_code_buffer);
+
+    auto silentFlag = argc == 2 && _stricmp(argv[1], "-s" ) == 0;
+    if (!silentFlag) {
+        println("");
+        system("pause");
+    }
 
     return 0;
 #endif
