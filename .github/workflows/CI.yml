@@ -1,0 +1,78 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+    branches: [ "master" ]
+#    paths:
+#    - 'src/**'
+#    - 'injector/**'
+#    - 'launcher/**'
+#    - 'proxy/**'
+#    - 'unlocker/**'
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    strategy:
+        matrix:
+          target: [unlocker]
+          binary: [unlocker.exe]
+
+    runs-on: windows-latest
+
+    #if: contains(github.event.head_commit.message, '[ci test]')
+
+    steps:
+    - uses: actions/checkout@v3
+    
+    #- uses: dorny/paths-filter@v2
+    #  id: changes
+    #  with:
+    #    filters: |
+    #      ${{ matrix.target }}:
+    #        - '${{ matrix.target }}/**'
+
+    - name: Add MSBuild to PATH
+      #if: steps.changes.outputs.${{ matrix.target }} == 'true'
+      uses: microsoft/setup-msbuild@v1.0.2
+
+    - name: Build
+      #if: steps.changes.outputs.${{ matrix.target }} == 'true'
+      working-directory: ${{env.GITHUB_WORKSPACE }}
+      env:
+        CL: /DTESTS=1
+      run: msbuild /m /p:Configuration=Release /p:Platform=x86 /t:${{ matrix.target }}
+
+    - name: Run test
+      #if: steps.changes.outputs.${{ matrix.target }} == 'true'
+      run: ./bin/${{ matrix.target }}/${{ matrix.binary }}
+
+  build:
+    strategy:
+      matrix:
+        target: [tem, injector, launcher, proxy, unlocker]
+        binary: [tem.dll, injector.exe, GridGameLauncher.exe, dinput8.dll, unlocker.exe]
+
+    runs-on: windows-latest
+
+    #if: contains(github.event.head_commit.message, '[ci build]')
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Add MSBuild to PATH
+      uses: microsoft/setup-msbuild@v1.0.2
+
+    - name: Build
+      working-directory: ${{env.GITHUB_WORKSPACE }}
+      run: msbuild /m /p:Configuration=Release /p:Platform=x86 /t:${{ matrix.target }}
+
+    - name: Create artifact
+      if: github.event_name != 'pull_request'
+      uses: actions/upload-artifact@v3
+      with:
+          name: ${{ matrix.target }}
+          path: bin/${{ matrix.target }}/${{ matrix.binary }}
