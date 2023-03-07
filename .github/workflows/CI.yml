@@ -40,10 +40,6 @@ jobs:
       #if: steps.changes.outputs.${{ matrix.project.target }} == 'true'
       uses: microsoft/setup-msbuild@v1.1
 
-    - name: Install openssl
-      #if: steps.changes.outputs.${{ matrix.project.target }} == 'true'
-      run: vcpkg install openssl
-
     - name: Build
       #if: steps.changes.outputs.${{ matrix.project.target }} == 'true'
       working-directory: ${{env.GITHUB_WORKSPACE }}
@@ -75,9 +71,6 @@ jobs:
 
     - name: Add MSBuild to PATH
       uses: microsoft/setup-msbuild@v1.1
-
-    - name: Install openssl
-      run: vcpkg install openssl
 
     - name: Build
       working-directory: ${{env.GITHUB_WORKSPACE }}
