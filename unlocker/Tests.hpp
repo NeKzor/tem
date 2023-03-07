@@ -1,3 +1,9 @@
+/*
+ * Copyright (c) 2022-2023, NeKz
+ *
+ * SPDX-License-Identifier: MIT
+ */
+
 #pragma once
 #include <exception>
 #include <format>

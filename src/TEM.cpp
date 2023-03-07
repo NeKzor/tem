@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2022-2023 NeKz
+ * Copyright (c) 2022-2023, NeKz
  *
  * SPDX-License-Identifier: MIT
  */
@@ -92,7 +92,7 @@ auto shutdown_thread() -> void { FreeLibraryAndExitThread(tem.module_handle, 0);
 
 auto patch_forced_window_minimize() -> void
 {
-    // Skip Call to user32!ShowWindow with SW_MINIMIZE
+    // Skip call to user32!ShowWindow with SW_MINIMIZE
     //     Original: 0F 84 (jz)
     //     Patch:    90 E9 (nop jmp)
 

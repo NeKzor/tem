@@ -75,9 +75,6 @@
     <ClCompile Include="lib\imgui\imgui_impl_win32.cpp">
       <Filter>lib\imgui</Filter>
     </ClCompile>
-    <ClCompile Include="SecuROM.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="lib\minhook\buffer.c">
       <Filter>lib\minhook</Filter>
     </ClCompile>
@@ -151,9 +148,6 @@
     </ClInclude>
     <ClInclude Include="lib\json\json.hpp">
       <Filter>lib\json</Filter>
-    </ClInclude>
-    <ClInclude Include="SecuROM.hpp">
-      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="lib\minhook\buffer.h">
       <Filter>lib\minhook</Filter>
