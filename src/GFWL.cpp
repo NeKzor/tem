@@ -152,18 +152,21 @@ DECL_DETOUR_API(int, __stdcall, xlive_5260, int a1, int a2);
 DECL_DETOUR_API(int, __stdcall, xlive_5300, int a1, int a2, int a3, int a4, int a5, int a6, int a7, int a8);
 DECL_DETOUR_API(int, __stdcall, xlive_5318, int a1, int a2, int a3);
 //DECL_DETOUR_API(int, __stdcall, xlive_5034, int a1, int a2, int a3, int a4, int a5);
-DECL_DETOUR_MID(xlive_5034);
 //DECL_DETOUR_API(int, __stdcall, xlive_5035, int a1, int a2, int a3, int a4, int a5);
-DECL_DETOUR_MID(xlive_5035);
 //DECL_DETOUR_API(int, __stdcall, xlive_5036, int a1, int a2);
+DECL_DETOUR_MID(xlive_5034);
+DECL_DETOUR_MID(xlive_5035);
 DECL_DETOUR_MID(xlive_5036);
 DECL_DETOUR_API(int, __stdcall, xlive_5038, int a1);
+//DECL_DETOUR_MID(xlive_5038);
 DECL_DETOUR_API(int, __stdcall, xlive_5206, int a1);
 DECL_DETOUR_API(int, __stdcall, xlive_5264, int a1, int a2, int a3, int a4, int a5);
 DECL_DETOUR_API(int, __stdcall, xlive_5278, int a1, int a2, int a3);
 DECL_DETOUR_API(int, __stdcall, xlive_5297, int a1, int a2);
 DECL_DETOUR_API(int, __stdcall, xlive_5317, int a1, int a2, int a3, int a4, int a5);
 DECL_DETOUR_API(int, __stdcall, xlive_5332, int a1, int a2);
+
+auto change_gfwl_main_thread(bool suspend) -> bool;
 
 auto patch_gfwl() -> void
 {
@@ -185,6 +188,7 @@ auto patch_gfwl() -> void
     }
 
     //hook_gfwl(xlive);
+    //change_gfwl_main_thread(true);
 }
 
 auto hook_gfwl(Memory::ModuleInfo& xlive) -> void
@@ -216,143 +220,151 @@ auto hook_gfwl(Memory::ModuleInfo& xlive) -> void
     xlive_##ordinal = xlive_##ordinal##_original;                                                                      \
     console->Println("[gfwl] Hooked {} 0x{:04x} at 0x{:04x}", name, xlive_##ordinal##_original, wrapper_address);
 
-    HOOK_ORDINAL(3, "XSocketCreate");
-    HOOK_ORDINAL(4, "XSocketClose");
-    HOOK_ORDINAL(6, "XSocketIOCTLSocket");
-    HOOK_ORDINAL(7, "XSocketSetSockOpt");
-    HOOK_ORDINAL(8, "XSocketGetSockOpt");
-    HOOK_ORDINAL(9, "XSocketGetSockName");
-    HOOK_ORDINAL(11, "XSocketBind");
-    HOOK_ORDINAL(12, "XSocketConnect");
-    HOOK_ORDINAL(13, "XSocketListen");
-    HOOK_ORDINAL(14, "XSocketAccept");
-    HOOK_ORDINAL(15, "XSocketSelect");
-    HOOK_ORDINAL(18, "XSocketRecv"); // called frequently
-    HOOK_ORDINAL(20, "XSocketRecvFrom"); // called frequently when in multiplayer lobby
-    HOOK_ORDINAL(22, "XSocketSend"); // called frequently
-    HOOK_ORDINAL(24, "XSocketSendTo");
-    HOOK_ORDINAL(27, "XSocketWSAGetLastError"); // called frequently when online
-    HOOK_ORDINAL(51, "XNetStartup");
-    HOOK_ORDINAL(52, "XNetCleanup");
-    HOOK_ORDINAL(53, "XNetRandom");
-    HOOK_ORDINAL(55, "XNetRegisterKey");
-    HOOK_ORDINAL(56, "XNetUnregisterKey");
-    HOOK_ORDINAL(57, "XNetXnAddrToInAddr");
-    HOOK_ORDINAL(58, "XNetServerToInAddr");
-    HOOK_ORDINAL(63, "XNetUnregisterInAddr");
-    HOOK_ORDINAL(67, "XNetDnsLookup");
-    HOOK_ORDINAL(68, "XNetDnsRelease");
-    HOOK_ORDINAL(69, "XNetQosListen");
-    HOOK_ORDINAL(70, "XNetQosLookup");
-    HOOK_ORDINAL(71, "XNetQosServiceLookup");
-    HOOK_ORDINAL(72, "XNetQosRelease");
-    HOOK_ORDINAL(73, "XNetGetTitleXnAddr");
-    HOOK_ORDINAL(75, "XNetGetEthernetLinkStatus");
-    HOOK_ORDINAL(77, "XNetQosGetListenStats");
-    HOOK_ORDINAL(84, "XNetSetSystemLinkPort");
-    HOOK_ORDINAL(651, "XNotifyGetNext"); // called frequently
-    HOOK_ORDINAL(652, "XNotifyPositionUI");
-    HOOK_ORDINAL(1082, "XGetOverlappedExtendedError"); // called frequently when online
-    HOOK_ORDINAL(1083, "XGetOverlappedResult"); // called frequently when online
-    HOOK_ORDINAL(5001, "XLiveInput"); // called frequently
-    HOOK_ORDINAL(5002, "XLiveRender"); // called frequently
-    HOOK_ORDINAL(5003, "XLiveUninitialize"); // manually reconstructed
-    HOOK_ORDINAL(5006, "XLiveOnDestroyDevice");
-    HOOK_ORDINAL(5007, "XLiveOnResetDevice");
-    HOOK_ORDINAL(5008, "XHVCreateEngine");
-    HOOK_ORDINAL(5016, "XLivePBufferAllocate"); // manually reconstructed
-    HOOK_ORDINAL(5017, "XLivePBufferFree"); // manually reconstructed
-    HOOK_ORDINAL(5030, "XLivePreTranslateMessage"); // called frequently
-    HOOK_ORDINAL(5031, "XLiveSetDebugLevel");
-    HOOK_ORDINAL(5212, "XShowCustomPlayerListUI"); // called frequently
-    HOOK_ORDINAL(5215, "XShowGuideUI");
-    HOOK_ORDINAL(5216, "XShowKeyboardUI");
-    HOOK_ORDINAL(5251, "XCloseHandle"); // called frequently acquiring a handle
-    HOOK_ORDINAL(5252, "XShowGamerCardUI");
-    HOOK_ORDINAL(5256, "XEnumerate");
-    HOOK_ORDINAL(5258, "XLiveSignout");
-    HOOK_ORDINAL(5262, "XUserGetSigninState"); // called frequently
-    HOOK_ORDINAL(5263, "XUserGetName");
-    HOOK_ORDINAL(5265, "XUserCheckPrivilege");
-    HOOK_ORDINAL(5267, "XUserGetSigninInfo");
-    HOOK_ORDINAL(5270, "XNotifyCreateListener");
-    HOOK_ORDINAL(5271, "XShowPlayersUI");
-    HOOK_ORDINAL(5274, "XUserAwardGamerPicture");
-    //HOOK_ORDINAL(5275, "XShowFriendsUI"); // manually reconstructed, TODO: this crashes
-    HOOK_ORDINAL(5277, "XUserSetContext");
-    HOOK_ORDINAL(5279, "XUserReadAchievementPicture");
-    HOOK_ORDINAL(5280, "XUserCreateAchievementEnumerator");
-    HOOK_ORDINAL(5281, "XUserReadStats");
-    HOOK_ORDINAL(5284, "XUserCreateStatsEnumeratorByRank");
-    HOOK_ORDINAL(5286, "XUserCreateStatsEnumeratorByXuid");
-    HOOK_ORDINAL(5292, "XUserSetContextEx");
-    HOOK_ORDINAL(5293, "XUserSetPropertyEx");
-    HOOK_ORDINAL(5294, "XLivePBufferGetByteArray"); // manually reconstructed
-    HOOK_ORDINAL(5303, "XStringVerify");
-    HOOK_ORDINAL(5305, "XStorageUploadFromMemory");
-    HOOK_ORDINAL(5306, "XStorageEnumerate");
-    HOOK_ORDINAL(5310, "XOnlineStartup");
-    HOOK_ORDINAL(5311, "XOnlineCleanup");
-    HOOK_ORDINAL(5312, "XFriendsCreateEnumerator");
-    HOOK_ORDINAL(5313, "XPresenceInitialize");
-    HOOK_ORDINAL(5314, "XUserMuteListQuery");
-    HOOK_ORDINAL(5315, "XInviteGetAcceptedInfo");
-    HOOK_ORDINAL(5316, "XInviteSend");
-    HOOK_ORDINAL(5320, "XSessionSearchByID");
-    HOOK_ORDINAL(5321, "XSessionSearch");
-    HOOK_ORDINAL(5322, "XSessionModify");
-    HOOK_ORDINAL(5324, "XOnlineGetNatType");
-    HOOK_ORDINAL(5326, "XSessionJoinRemote");
-    HOOK_ORDINAL(5327, "XSessionJoinLocal");
-    HOOK_ORDINAL(5328, "XSessionGetDetails");
-    HOOK_ORDINAL(5329, "XSessionFlushStats");
-    HOOK_ORDINAL(5330, "XSessionDelete"); // manually reconstructed
-    HOOK_ORDINAL(5331, "XUserReadProfileSettings");
-    HOOK_ORDINAL(5333, "XSessionArbitrationRegister");
-    HOOK_ORDINAL(5335, "XTitleServerCreateEnumerator");
-    HOOK_ORDINAL(5336, "XSessionLeaveRemote");
-    HOOK_ORDINAL(5337, "XUserWriteProfileSettings");
-    HOOK_ORDINAL(5338, "XPresenceSubscribe");
-    HOOK_ORDINAL(5340, "XPresenceCreateEnumerator");
-    HOOK_ORDINAL(5342, "XSessionModifySkill");
-    HOOK_ORDINAL(5343, "XSessionCalculateSkill");
-    HOOK_ORDINAL(5344, "XStorageBuildServerPath");
-    HOOK_ORDINAL(5345, "XStorageDownloadToMemory");
-    HOOK_ORDINAL(5350, "XLiveContentCreateAccessHandle");
-    HOOK_ORDINAL(5355, "XLiveContentGetPath");
-    HOOK_ORDINAL(5356, "XLiveContentGetDisplayName");
-    HOOK_ORDINAL(5360, "XLiveContentCreateEnumerator");
-    HOOK_ORDINAL(5365, "XShowMarketplaceUI"); // manually reconstructed
-    HOOK_ORDINAL(5367, "XContentGetMarketplaceCounts");
-    HOOK_ORDINAL(5372, "XMarketplaceCreateOfferEnumerator");
+    //HOOK_ORDINAL(3, "XSocketCreate");
+    //HOOK_ORDINAL(4, "XSocketClose");
+    //HOOK_ORDINAL(6, "XSocketIOCTLSocket");
+    //HOOK_ORDINAL(7, "XSocketSetSockOpt");
+    //HOOK_ORDINAL(8, "XSocketGetSockOpt");
+    //HOOK_ORDINAL(9, "XSocketGetSockName");
+    //HOOK_ORDINAL(11, "XSocketBind");
+    //HOOK_ORDINAL(12, "XSocketConnect");
+    //HOOK_ORDINAL(13, "XSocketListen");
+    //HOOK_ORDINAL(14, "XSocketAccept");
+    //HOOK_ORDINAL(15, "XSocketSelect");
+    //HOOK_ORDINAL(18, "XSocketRecv"); // called frequently
+    //HOOK_ORDINAL(20, "XSocketRecvFrom"); // called frequently when in multiplayer lobby
+    //HOOK_ORDINAL(22, "XSocketSend"); // called frequently
+    //HOOK_ORDINAL(24, "XSocketSendTo");
+    //HOOK_ORDINAL(27, "XSocketWSAGetLastError"); // called frequently when online
+    //HOOK_ORDINAL(51, "XNetStartup");
+    //HOOK_ORDINAL(52, "XNetCleanup");
+    //HOOK_ORDINAL(53, "XNetRandom");
+    //HOOK_ORDINAL(55, "XNetRegisterKey");
+    //HOOK_ORDINAL(56, "XNetUnregisterKey");
+    //HOOK_ORDINAL(57, "XNetXnAddrToInAddr");
+    //HOOK_ORDINAL(58, "XNetServerToInAddr");
+    //HOOK_ORDINAL(63, "XNetUnregisterInAddr");
+    //HOOK_ORDINAL(67, "XNetDnsLookup");
+    //HOOK_ORDINAL(68, "XNetDnsRelease");
+    //HOOK_ORDINAL(69, "XNetQosListen");
+    //HOOK_ORDINAL(70, "XNetQosLookup");
+    //HOOK_ORDINAL(71, "XNetQosServiceLookup");
+    //HOOK_ORDINAL(72, "XNetQosRelease");
+    //HOOK_ORDINAL(73, "XNetGetTitleXnAddr");
+    //HOOK_ORDINAL(75, "XNetGetEthernetLinkStatus");
+    //HOOK_ORDINAL(77, "XNetQosGetListenStats");
+    //HOOK_ORDINAL(84, "XNetSetSystemLinkPort");
+    //HOOK_ORDINAL(651, "XNotifyGetNext"); // called frequently
+    //HOOK_ORDINAL(652, "XNotifyPositionUI");
+    //HOOK_ORDINAL(1082, "XGetOverlappedExtendedError"); // called frequently when online
+    //HOOK_ORDINAL(1083, "XGetOverlappedResult"); // called frequently when online
+    //HOOK_ORDINAL(5001, "XLiveInput"); // called frequently
+    //HOOK_ORDINAL(5002, "XLiveRender"); // called frequently
+    //HOOK_ORDINAL(5003, "XLiveUninitialize"); // manually reconstructed
+    //HOOK_ORDINAL(5006, "XLiveOnDestroyDevice");
+    //HOOK_ORDINAL(5007, "XLiveOnResetDevice");
+    //HOOK_ORDINAL(5008, "XHVCreateEngine");
+    //HOOK_ORDINAL(5016, "XLivePBufferAllocate"); // manually reconstructed
+    //HOOK_ORDINAL(5017, "XLivePBufferFree"); // manually reconstructed
+    //HOOK_ORDINAL(5030, "XLivePreTranslateMessage"); // called frequently
+    //HOOK_ORDINAL(5031, "XLiveSetDebugLevel");
+    //HOOK_ORDINAL(5212, "XShowCustomPlayerListUI"); // called frequently
+    //HOOK_ORDINAL(5215, "XShowGuideUI");
+    //HOOK_ORDINAL(5216, "XShowKeyboardUI");
+    //HOOK_ORDINAL(5251, "XCloseHandle"); // called frequently acquiring a handle
+    //HOOK_ORDINAL(5252, "XShowGamerCardUI");
+    //HOOK_ORDINAL(5256, "XEnumerate");
+    //HOOK_ORDINAL(5258, "XLiveSignout");
+    //HOOK_ORDINAL(5262, "XUserGetSigninState"); // called frequently
+    //HOOK_ORDINAL(5263, "XUserGetName");
+    //HOOK_ORDINAL(5265, "XUserCheckPrivilege");
+    //HOOK_ORDINAL(5267, "XUserGetSigninInfo");
+    //HOOK_ORDINAL(5270, "XNotifyCreateListener");
+    //HOOK_ORDINAL(5271, "XShowPlayersUI");
+    //HOOK_ORDINAL(5274, "XUserAwardGamerPicture");
+    ////HOOK_ORDINAL(5275, "XShowFriendsUI"); // manually reconstructed, TODO: this crashes
+    //HOOK_ORDINAL(5277, "XUserSetContext");
+    //HOOK_ORDINAL(5279, "XUserReadAchievementPicture");
+    //HOOK_ORDINAL(5280, "XUserCreateAchievementEnumerator");
+    //HOOK_ORDINAL(5281, "XUserReadStats");
+    //HOOK_ORDINAL(5284, "XUserCreateStatsEnumeratorByRank");
+    //HOOK_ORDINAL(5286, "XUserCreateStatsEnumeratorByXuid");
+    //HOOK_ORDINAL(5292, "XUserSetContextEx");
+    //HOOK_ORDINAL(5293, "XUserSetPropertyEx");
+    //HOOK_ORDINAL(5294, "XLivePBufferGetByteArray"); // manually reconstructed
+    //HOOK_ORDINAL(5303, "XStringVerify");
+    //HOOK_ORDINAL(5305, "XStorageUploadFromMemory");
+    //HOOK_ORDINAL(5306, "XStorageEnumerate");
+    //HOOK_ORDINAL(5310, "XOnlineStartup");
+    //HOOK_ORDINAL(5311, "XOnlineCleanup");
+    //HOOK_ORDINAL(5312, "XFriendsCreateEnumerator");
+    //HOOK_ORDINAL(5313, "XPresenceInitialize");
+    //HOOK_ORDINAL(5314, "XUserMuteListQuery");
+    //HOOK_ORDINAL(5315, "XInviteGetAcceptedInfo");
+    //HOOK_ORDINAL(5316, "XInviteSend");
+    //HOOK_ORDINAL(5320, "XSessionSearchByID");
+    //HOOK_ORDINAL(5321, "XSessionSearch");
+    //HOOK_ORDINAL(5322, "XSessionModify");
+    //HOOK_ORDINAL(5324, "XOnlineGetNatType");
+    //HOOK_ORDINAL(5326, "XSessionJoinRemote");
+    //HOOK_ORDINAL(5327, "XSessionJoinLocal");
+    //HOOK_ORDINAL(5328, "XSessionGetDetails");
+    //HOOK_ORDINAL(5329, "XSessionFlushStats");
+    //HOOK_ORDINAL(5330, "XSessionDelete"); // manually reconstructed
+    //HOOK_ORDINAL(5331, "XUserReadProfileSettings");
+    //HOOK_ORDINAL(5333, "XSessionArbitrationRegister");
+    //HOOK_ORDINAL(5335, "XTitleServerCreateEnumerator");
+    //HOOK_ORDINAL(5336, "XSessionLeaveRemote");
+    //HOOK_ORDINAL(5337, "XUserWriteProfileSettings");
+    //HOOK_ORDINAL(5338, "XPresenceSubscribe");
+    //HOOK_ORDINAL(5340, "XPresenceCreateEnumerator");
+    //HOOK_ORDINAL(5342, "XSessionModifySkill");
+    //HOOK_ORDINAL(5343, "XSessionCalculateSkill");
+    //HOOK_ORDINAL(5344, "XStorageBuildServerPath");
+    //HOOK_ORDINAL(5345, "XStorageDownloadToMemory");
+    //HOOK_ORDINAL(5350, "XLiveContentCreateAccessHandle");
+    //HOOK_ORDINAL(5355, "XLiveContentGetPath");
+    //HOOK_ORDINAL(5356, "XLiveContentGetDisplayName");
+    //HOOK_ORDINAL(5360, "XLiveContentCreateEnumerator");
+    //HOOK_ORDINAL(5365, "XShowMarketplaceUI"); // manually reconstructed
+    //HOOK_ORDINAL(5367, "XContentGetMarketplaceCounts");
+    //HOOK_ORDINAL(5372, "XMarketplaceCreateOfferEnumerator");
 
     // These failed static analysis caused by obfuscation :>
 
-    HOOK_ORDINAL(38, "XSocketNTOHS");
-    HOOK_ORDINAL(5208, "XShowGameInviteUI");
-    HOOK_ORDINAL(5209, "XShowMessageComposeUI");
-    HOOK_ORDINAL(5250, "XShowAchievementsUI");
-    HOOK_ORDINAL(5259, "XLiveSignin");
-    HOOK_ORDINAL(5260, "XShowSigninUI");
-    HOOK_ORDINAL(5210, "XShowFriendRequestUI"); // weird, might work
-    HOOK_ORDINAL(5214, "XShowPlayerReviewUI"); // weird, might work
-    HOOK_ORDINAL(5300, "XSessionCreate"); // weird, might work
-    HOOK_ORDINAL(5318, "XSessionStart"); // weird, might work
+    //HOOK_ORDINAL(38, "XSocketNTOHS");
+    //HOOK_ORDINAL(5208, "XShowGameInviteUI");
+    //HOOK_ORDINAL(5209, "XShowMessageComposeUI");
+    //HOOK_ORDINAL(5250, "XShowAchievementsUI");
+    //HOOK_ORDINAL(5259, "XLiveSignin");
+    //HOOK_ORDINAL(5260, "XShowSigninUI");
+    //HOOK_ORDINAL(5210, "XShowFriendRequestUI"); // weird, might work
+    //HOOK_ORDINAL(5214, "XShowPlayerReviewUI"); // weird, might work
+    //HOOK_ORDINAL(5300, "XSessionCreate"); // weird, might work
+    //HOOK_ORDINAL(5318, "XSessionStart"); // weird, might work
 
     // These are heavily obfuscated and protected
 
     HOOK_IAT_WRAPPER_MID(0x1A33C6C, 5034, "XLiveProtectData"); // called twice when creating a save
     HOOK_IAT_WRAPPER_MID(0x1A33C66, 5035, "XLiveUnprotectData"); // called when loading a save
     HOOK_IAT_WRAPPER_MID(0x1A33C72, 5036, "XLiveCreateProtectedDataContext"); // called when creating a save
-    HOOK_IAT_WRAPPER(0x1A33C60, 5038, "XLiveCloseProtectedDataContext"); // called when saving/loading a save
-    HOOK_IAT_WRAPPER(0x1A33A50, 5206, "XShowMessagesUI");
-    HOOK_IAT_WRAPPER(0x1A33A3E, 5264, "XUserAreUsersFriends");
-    HOOK_IAT_WRAPPER(0x1A33C30, 5278, "XUserWriteAchievements");
-    HOOK_IAT_WRAPPER(0x1A33B94, 5297, "XLiveInitializeEx");
-    HOOK_IAT_WRAPPER(0x1A33B04, 5317, "XSessionWriteStats");
-    HOOK_IAT_WRAPPER(0x1A33BE8, 5332, "XSessionEnd");
 
-    MH_APPLY_QUEUED();
+    //HOOK_IAT_WRAPPER(0x1A33C6C, 5034, "XLiveProtectData"); // called twice when creating a save
+    //HOOK_IAT_WRAPPER(0x1A33C66, 5035, "XLiveUnprotectData"); // called when loading a save
+    //HOOK_IAT_WRAPPER(0x1A33C72, 5036, "XLiveCreateProtectedDataContext"); // called when creating a save
+
+    HOOK_IAT_WRAPPER(0x1A33C60, 5038, "XLiveCloseProtectedDataContext"); // called when saving/loading a save
+    // CRASH????
+    //HOOK_IAT_WRAPPER_MID(0x1A33C60, 5038, "XLiveCloseProtectedDataContext"); // called when saving/loading a save
+
+    //HOOK_IAT_WRAPPER(0x1A33A50, 5206, "XShowMessagesUI");
+    //HOOK_IAT_WRAPPER(0x1A33A3E, 5264, "XUserAreUsersFriends");
+    //HOOK_IAT_WRAPPER(0x1A33C30, 5278, "XUserWriteAchievements");
+    //HOOK_IAT_WRAPPER(0x1A33B94, 5297, "XLiveInitializeEx");
+    //HOOK_IAT_WRAPPER(0x1A33B04, 5317, "XSessionWriteStats");
+    //HOOK_IAT_WRAPPER(0x1A33BE8, 5332, "XSessionEnd");
+
+    //MH_APPLY_QUEUED();
 }
 
 auto change_gfwl_main_thread(bool suspend) -> bool
@@ -464,6 +476,18 @@ auto log_xlive_call(uint32_t ordinal) -> void
     console->Println("[gfwl] {} (xlive_{} at 0x{:04x})", name, ordinal, function);
 }
 
+auto xlive_debug_break() -> void {
+    change_gfwl_main_thread(true);
+
+    console->Println("[gfwl] waiting for debugger to attach...");
+
+    while (!IsDebuggerPresent()) {
+        Sleep(420);
+    }
+
+    DebugBreak();
+}
+
 #define SAVE_REGISTERS() __asm {\
    __asm pushad \
    __asm pushfd }
@@ -490,6 +514,9 @@ auto log_xlive_call(uint32_t ordinal) -> void
 // clang-format off
 
 typedef uintptr_t hex;
+
+#define dptr(ptr) \
+    ptr ? *(uintptr_t*)ptr : 0
 
 DETOUR_API(signed int, __stdcall, xlive_3, int a1, signed int a2, signed int a3)
 {
@@ -1094,6 +1121,20 @@ DETOUR_API(int, __stdcall, xlive_5318, int a1, int a2, int a3)
     LOG_AND_RETURN("{:x}, {:x}, {:x}", hex(a1), hex(a2), hex(a3));
 }
 //DETOUR_API(int, __stdcall, xlive_5034, int a1, int a2, int a3, int a4, int a5)
+//{
+//    CALL_ORIGINAL(5034, "XLiveProtectData", a1, a2, a3, a4, a5);
+//    LOG_AND_RETURN("{:x}, {:x}, {:x}, {:x} -> {:x}, {:x}", hex(a1), hex(a2), hex(a3), hex(a4), dptr(a4), hex(a5));
+//}
+//DETOUR_API(int, __stdcall, xlive_5035, int a1, int a2, int a3, int a4, int a5)
+//{
+//    CALL_ORIGINAL(5035, "XLiveUnprotectData", a1, a2, a3, a4, a5);
+//    LOG_AND_RETURN("{:x}, {:x}, {:x}, {:x} -> {:x}, {:x} -> {:x}", hex(a1), hex(a2), hex(a3), hex(a4), dptr(a4), a5, dptr(a5));
+//}
+//DETOUR_API(int, __stdcall, xlive_5036, int a1, int a2)
+//{
+//    CALL_ORIGINAL(5036, "XLiveCreateProtectedDataContext", a1, a2);
+//    LOG_AND_RETURN("{:x}, {:x} -> {:x}", hex(a1), hex(a2), dptr(a2));
+//}
 DETOUR_MID(xlive_5034)
 {
     SAVE_REGISTERS();
@@ -1104,10 +1145,7 @@ DETOUR_MID(xlive_5034)
     LOAD_REGISTERS();
 
     JUMP_TO(xlive_5034);
-    //CALL_ORIGINAL(5034, "XLiveProtectData", a1, a2, a3, a4, a5);
-    //LOG_AND_RETURN("{:x}, {:x}, {:x}, {:x}, {:x}", hex(a1), hex(a2), hex(a3), hex(a4), hex(a5));
 }
-//DETOUR_API(int, __stdcall, xlive_5035, int a1, int a2, int a3, int a4, int a5)
 DETOUR_MID(xlive_5035)
 {
     SAVE_REGISTERS();
@@ -1118,10 +1156,7 @@ DETOUR_MID(xlive_5035)
     LOAD_REGISTERS();
 
     JUMP_TO(xlive_5035);
-    //CALL_ORIGINAL(5035, "XLiveUnprotectData", a1, a2, a3, a4, a5);
-    //LOG_AND_RETURN("{:x}, {:x}, {:x}, {:x}, {:x}", hex(a1), hex(a2), hex(a3), hex(*(DWORD*)a4), hex(*(HANDLE*)a5));
 }
-//DETOUR_API(int, __stdcall, xlive_5036, int a1, int a2)
 DETOUR_MID(xlive_5036)
 {
     SAVE_REGISTERS();
@@ -1132,8 +1167,6 @@ DETOUR_MID(xlive_5036)
     LOAD_REGISTERS();
 
     JUMP_TO(xlive_5036);
-    //CALL_ORIGINAL(5036, "XLiveCreateProtectedDataContext", a1, a2);
-    //LOG_AND_RETURN("{:x}, {:x}", hex(a1), hex(a2));
 }
 DETOUR_API(int, __stdcall, xlive_5038, int a1)
 {
