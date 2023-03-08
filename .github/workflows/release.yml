@@ -45,8 +45,11 @@ jobs:
       with:
         path: release
 
+    - name: Create archive
+      run: 7z a ${{ github.ref_name }}-release.zip ./release/injector/*
+
     - name: Create release
-      uses: softprops/action-gh-release@v0.1.13
+      uses: softprops/action-gh-release@v1
       with:
-        files: ./release/**
+        files: ${{ github.ref_name }}-release.zip
         prerelease: ${{ contains(github.ref, 'pre') }}
