@@ -949,15 +949,15 @@ auto main(int argc, char *argv[]) -> int
 
     print_buffer("[+] final des buffer: ", unlock_code_des_buffer, 25);
 
-    BYTE unlock_code_hex_buffer[40] = {};
-    decode_des_buffer(unlock_code_des_buffer, 25, unlock_code_hex_buffer, sizeof(unlock_code_hex_buffer));
+    BYTE unlock_code_hex_buffer[41] = {};
+    decode_des_buffer(unlock_code_des_buffer, 25, unlock_code_hex_buffer, sizeof(unlock_code_hex_buffer) - 1);
 
-    print_buffer("[+] uc in hex: ", unlock_code_hex_buffer, sizeof(unlock_code_hex_buffer));
+    print_buffer("[+] uc in hex: ", unlock_code_hex_buffer, sizeof(unlock_code_hex_buffer) - 1);
 
-    decode_to_ascii(unlock_code_hex_buffer, output_buffer, sizeof(unlock_code_hex_buffer));
+    decode_to_ascii(unlock_code_hex_buffer, output_buffer, sizeof(unlock_code_hex_buffer) - 1);
 
     char unlock_code_buffer[64] = {};
-    insert_hyphens((char*)output_buffer, unlock_code_buffer, 40, 5);
+    insert_hyphens((char*)output_buffer, unlock_code_buffer, sizeof(unlock_code_hex_buffer) - 1, 5);
 
     _ASSERT(strcmp(unlock_code_buffer, "UB9NU-ZU3LF-6R5ZQ-LPYE5-8C3UH-RGR3P-HX5NP-P6GHQ") == 0);
 
