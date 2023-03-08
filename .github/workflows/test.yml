@@ -4,8 +4,8 @@ on:
   push:
   pull_request:
     branches: [ "master" ]
-    #paths:
-    #- 'unlocker/**'
+    paths:
+    - 'unlocker/**'
 
 permissions:
   contents: read
@@ -19,6 +19,8 @@ jobs:
           ]
 
     runs-on: windows-latest
+
+    if: "!contains(github.event.head_commit.message, '[ci skip]')"
 
     steps:
     - uses: actions/checkout@v3
