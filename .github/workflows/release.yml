@@ -1,0 +1,55 @@
+name: release
+
+on:
+  push:
+    tags:
+    - '*'
+  workflow_dispatch:
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        project: [
+          { target: tem, binary: tem.dll },
+          { target: injector, binary: injector.exe },
+          { target: launcher, binary: GridGameLauncher.exe },
+          { target: proxy, binary: dinput8.dll },
+          { target: unlocker, binary: unlocker.exe }
+        ]
+
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Add MSBuild to PATH
+      uses: microsoft/setup-msbuild@v1.1
+
+    - name: Build
+      working-directory: ${{env.GITHUB_WORKSPACE }}
+      run: msbuild /m /p:Configuration=Release /p:Platform=x86 /t:${{ matrix.project.target }}
+
+    - name: Create artifact
+      uses: actions/upload-artifact@v3
+      with:
+          name: ${{ matrix.project.target }}
+          path: bin/Release/${{ matrix.project.target }}/${{ matrix.project.binary }}
+
+  release:
+    runs-on: windows-latest
+    needs: build
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Download artifacts
+      uses: actions/download-artifact@v3
+      with:
+        path: release
+
+    - name: Create release
+      uses: softprops/action-gh-release@v1
+      with:
+        files: 'release/*'
+        prerelease: ${{ contains(github.ref, 'pre') }}
