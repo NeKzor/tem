@@ -10,11 +10,11 @@ jobs:
     strategy:
       matrix:
         project: [
-          #{ target: tem, binary: tem.dll },
-          { target: injector, binary: injector.exe }
-          #{ target: launcher, binary: GridGameLauncher.exe },
-          #{ target: proxy, binary: dinput8.dll },
-          #{ target: unlocker, binary: unlocker.exe }
+          { target: tem, binary: tem.dll },
+          { target: injector, binary: injector.exe },
+          { target: launcher, binary: GridGameLauncher.exe },
+          { target: proxy, binary: dinput8.dll },
+          { target: unlocker, binary: unlocker.exe }
         ]
 
     runs-on: windows-latest
@@ -46,7 +46,7 @@ jobs:
         path: release
 
     - name: Create archive
-      run: 7z a ${{ github.ref_name }}-release.zip ./release/injector/*
+      run: 7z a ${{ github.ref_name }}-release.zip ./release/tem/* ./release/injector/* ./release/launcher/* ./release/proxy/* ./release/unlocker/*
 
     - name: Create release
       uses: softprops/action-gh-release@v1
