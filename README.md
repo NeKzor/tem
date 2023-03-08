@@ -1,6 +1,8 @@
 # Tron: Evolution Mod (TEM)
 
-[![doc](https://github.com/NeKzor/tem/actions/workflows/doc.yaml/badge.svg)](https://github.com/NeKzor/tem/actions/workflows/doc.yaml)
+[![build](https://github.com/NeKzor/tem/actions/workflows/build.yml/badge.svg)](https://github.com/NeKzor/tem/actions/workflows/build.yml)
+[![test](https://github.com/NeKzor/tem/actions/workflows/test.yml/badge.svg)](https://github.com/NeKzor/tem/actions/workflows/test.yml)
+[![doc](https://github.com/NeKzor/tem/actions/workflows/doc.yml/badge.svg)](https://github.com/NeKzor/tem/actions/workflows/doc.yml)
 
 ![tem.gif](/doc/src/images/tem.gif)
 
