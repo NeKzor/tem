@@ -4,17 +4,16 @@ on:
   push:
     tags:
     - '*'
-  workflow_dispatch:
 
 jobs:
   build:
     strategy:
       matrix:
         project: [
-          { target: tem, binary: tem.dll },
-          { target: injector, binary: injector.exe },
-          { target: launcher, binary: GridGameLauncher.exe },
-          { target: proxy, binary: dinput8.dll },
+          #{ target: tem, binary: tem.dll },
+          #{ target: injector, binary: injector.exe },
+          #{ target: launcher, binary: GridGameLauncher.exe },
+          #{ target: proxy, binary: dinput8.dll },
           { target: unlocker, binary: unlocker.exe }
         ]
 
