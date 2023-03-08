@@ -2,6 +2,13 @@ name: build
 
 on:
   push:
+    branches: [ "master" ]
+    paths:
+    - 'src/**'
+    - 'injector/**'
+    - 'launcher/**'
+    - 'proxy/**'
+    - 'unlocker/**'
   pull_request:
     branches: [ "master" ]
     paths:
@@ -10,6 +17,7 @@ on:
     - 'launcher/**'
     - 'proxy/**'
     - 'unlocker/**'
+  workflow_dispatch:
 
 permissions:
   contents: read
