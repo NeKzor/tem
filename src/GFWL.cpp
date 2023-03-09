@@ -9,6 +9,7 @@
 #include "Memory.hpp"
 #include "Offsets.hpp"
 #include "Platform.hpp"
+#include "SDK.hpp"
 #include <Windows.h>
 #include <intrin.h>
 #include <map>
@@ -152,10 +153,10 @@ DECL_DETOUR_API(int, __stdcall, xlive_5260, int a1, int a2);
 DECL_DETOUR_API(int, __stdcall, xlive_5300, int a1, int a2, int a3, int a4, int a5, int a6, int a7, int a8);
 DECL_DETOUR_API(int, __stdcall, xlive_5318, int a1, int a2, int a3);
 //DECL_DETOUR_API(int, __stdcall, xlive_5034, int a1, int a2, int a3, int a4, int a5);
-//DECL_DETOUR_API(int, __stdcall, xlive_5035, int a1, int a2, int a3, int a4, int a5);
+DECL_DETOUR_API(int, __stdcall, xlive_5035, BYTE* protected_data, DWORD size_of_protected_data, BYTE* unprotected_data, DWORD* size_of_data, HANDLE* protected_data_handle);
 //DECL_DETOUR_API(int, __stdcall, xlive_5036, int a1, int a2);
 DECL_DETOUR_MID(xlive_5034);
-DECL_DETOUR_MID(xlive_5035);
+//DECL_DETOUR_MID(xlive_5035);
 DECL_DETOUR_MID(xlive_5036);
 DECL_DETOUR_API(int, __stdcall, xlive_5038, int a1);
 //DECL_DETOUR_MID(xlive_5038);
@@ -187,7 +188,7 @@ auto patch_gfwl() -> void
         return console->Println("[gfwl] Unable to patch memory check :(");
     }
 
-    //hook_gfwl(xlive);
+    hook_gfwl(xlive);
     //change_gfwl_main_thread(true);
 }
 
@@ -345,12 +346,12 @@ auto hook_gfwl(Memory::ModuleInfo& xlive) -> void
 
     // These are heavily obfuscated and protected
 
-    HOOK_IAT_WRAPPER_MID(0x1A33C6C, 5034, "XLiveProtectData"); // called twice when creating a save
-    HOOK_IAT_WRAPPER_MID(0x1A33C66, 5035, "XLiveUnprotectData"); // called when loading a save
-    HOOK_IAT_WRAPPER_MID(0x1A33C72, 5036, "XLiveCreateProtectedDataContext"); // called when creating a save
+    //HOOK_IAT_WRAPPER_MID(0x1A33C6C, 5034, "XLiveProtectData"); // called twice when creating a save
+    //HOOK_IAT_WRAPPER_MID(0x1A33C66, 5035, "XLiveUnprotectData"); // called when loading a save
+    //HOOK_IAT_WRAPPER_MID(0x1A33C72, 5036, "XLiveCreateProtectedDataContext"); // called when creating a save
 
     //HOOK_IAT_WRAPPER(0x1A33C6C, 5034, "XLiveProtectData"); // called twice when creating a save
-    //HOOK_IAT_WRAPPER(0x1A33C66, 5035, "XLiveUnprotectData"); // called when loading a save
+    HOOK_IAT_WRAPPER(0x1A33C66, 5035, "XLiveUnprotectData"); // called when loading a save
     //HOOK_IAT_WRAPPER(0x1A33C72, 5036, "XLiveCreateProtectedDataContext"); // called when creating a save
 
     HOOK_IAT_WRAPPER(0x1A33C60, 5038, "XLiveCloseProtectedDataContext"); // called when saving/loading a save
@@ -364,7 +365,7 @@ auto hook_gfwl(Memory::ModuleInfo& xlive) -> void
     //HOOK_IAT_WRAPPER(0x1A33B04, 5317, "XSessionWriteStats");
     //HOOK_IAT_WRAPPER(0x1A33BE8, 5332, "XSessionEnd");
 
-    //MH_APPLY_QUEUED();
+    MH_APPLY_QUEUED();
 }
 
 auto change_gfwl_main_thread(bool suspend) -> bool
@@ -476,7 +477,11 @@ auto log_xlive_call(uint32_t ordinal) -> void
     console->Println("[gfwl] {} (xlive_{} at 0x{:04x})", name, ordinal, function);
 }
 
-auto xlive_debug_break() -> void {
+auto xlive_debug_break(bool resume_main_thread = true) -> void {
+    if (IsDebuggerPresent()) {
+        return;
+    }
+
     change_gfwl_main_thread(true);
 
     console->Println("[gfwl] waiting for debugger to attach...");
@@ -486,6 +491,10 @@ auto xlive_debug_break() -> void {
     }
 
     DebugBreak();
+
+    if (resume_main_thread) {
+        change_gfwl_main_thread(false);
+    }
 }
 
 #define SAVE_REGISTERS() __asm {\
@@ -1125,11 +1134,45 @@ DETOUR_API(int, __stdcall, xlive_5318, int a1, int a2, int a3)
 //    CALL_ORIGINAL(5034, "XLiveProtectData", a1, a2, a3, a4, a5);
 //    LOG_AND_RETURN("{:x}, {:x}, {:x}, {:x} -> {:x}, {:x}", hex(a1), hex(a2), hex(a3), hex(a4), dptr(a4), hex(a5));
 //}
-//DETOUR_API(int, __stdcall, xlive_5035, int a1, int a2, int a3, int a4, int a5)
-//{
-//    CALL_ORIGINAL(5035, "XLiveUnprotectData", a1, a2, a3, a4, a5);
-//    LOG_AND_RETURN("{:x}, {:x}, {:x}, {:x} -> {:x}, {:x} -> {:x}", hex(a1), hex(a2), hex(a3), hex(a4), dptr(a4), a5, dptr(a5));
-//}
+DETOUR_API(int, __stdcall, xlive_5035, BYTE* protected_data, DWORD size_of_protected_data, BYTE* unprotected_data, DWORD* size_of_data, HANDLE* protected_data_handle)
+{
+    // XLive decrypts the protected data buffer, which checks against your logged in GFWL account. We simply do not call
+    // the original function and instead write the same CRC values from the save file back into the buffer, making the
+    // save manager succeed verifying it. This means that we can now load any save file :^)
+
+    //xlive_debug_break(false);
+
+    struct unprotected_buffer_t {
+        uint32_t header_crc;
+        uint32_t body_crc;
+    };
+    static_assert(sizeof(unprotected_buffer_t) == 8);
+
+    if (!unprotected_data) {
+        if (size_of_data) {
+            *size_of_data = sizeof(unprotected_buffer_t);
+            return 0;
+        }
+    } else {
+        auto pg_save_load = *reinterpret_cast<PgSaveLoad**>(Offsets::pg_save_load);
+        if (pg_save_load
+            && pg_save_load->file_manager
+            && pg_save_load->file_manager->save_file
+            && pg_save_load->file_manager->save_file->buffer) {
+            auto unprotected_buffer = reinterpret_cast<unprotected_buffer_t*>(unprotected_data);
+            auto save_buffer = pg_save_load->file_manager->save_file->buffer;
+
+            unprotected_buffer->header_crc = save_buffer->header.header_crc;
+            unprotected_buffer->body_crc = save_buffer->header.body_crc;
+            return 0;
+        }
+    }
+
+    //CALL_ORIGINAL(5035, "XLiveUnprotectData", protected_data, size_of_protected_data, unprotected_data, size_of_data, protected_data_handle);
+    //LOG_AND_RETURN("{:x}, {:x}, {:x}, {:x} -> {:x}, {:x} -> {:x}", hex(protected_data), hex(size_of_protected_data), hex(unprotected_data), hex(size_of_data), dptr(size_of_data), hex(protected_data_handle), dptr(protected_data_handle));
+
+    return -1;
+}
 //DETOUR_API(int, __stdcall, xlive_5036, int a1, int a2)
 //{
 //    CALL_ORIGINAL(5036, "XLiveCreateProtectedDataContext", a1, a2);
@@ -1146,17 +1189,17 @@ DETOUR_MID(xlive_5034)
 
     JUMP_TO(xlive_5034);
 }
-DETOUR_MID(xlive_5035)
-{
-    SAVE_REGISTERS();
-
-    print_stack(5);
-    log_xlive_call(5035);
-
-    LOAD_REGISTERS();
-
-    JUMP_TO(xlive_5035);
-}
+//DETOUR_MID(xlive_5035)
+//{
+//    SAVE_REGISTERS();
+//
+//    print_stack(5);
+//    log_xlive_call(5035);
+//
+//    LOAD_REGISTERS();
+//
+//    JUMP_TO(xlive_5035);
+//}
 DETOUR_MID(xlive_5036)
 {
     SAVE_REGISTERS();
@@ -1170,6 +1213,7 @@ DETOUR_MID(xlive_5036)
 }
 DETOUR_API(int, __stdcall, xlive_5038, int a1)
 {
+    // Isn't it interesting how this function crashes if we do not hook it?
     CALL_ORIGINAL(5038, "XLiveCloseProtectedDataContext", a1);
     LOG_AND_RETURN("{:x}", hex(a1));
 }

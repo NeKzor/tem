@@ -24,6 +24,7 @@ int xlive_main_thread_start_address = 0x146AB8;
 // GridGame
 int forced_window_minimize = 0x13587B8;
 int save_filename = 0x21AA580;
+int pg_save_load = 0x22B571C;
 
 // D3D9
 int Reset = 16;

@@ -24,6 +24,7 @@ extern int xlive_main_thread_start_address;
 // GridGame
 extern int forced_window_minimize;
 extern int save_filename;
+extern int pg_save_load;
 
 // D3D9
 extern int Reset;

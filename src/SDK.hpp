@@ -351,6 +351,41 @@ struct PgUnlockSystem : UObject {
     FString override_connection_string; // 0x80
 };
 
+struct PgSaveFileHeader {
+    uint32_t version; // 0x00
+    uint32_t body_size; // 0x04
+    uint32_t body_crc; // 0x08
+    char pad_000C[1008]; // 0x0c
+    uint32_t header_crc; // 0x3fc
+};
+static_assert(offsetof(PgSaveFileHeader, header_crc) == 0x3fc);
+
+struct PgSaveFileBuffer {
+    uintptr_t vtable; // 0x00
+    char pad_00004[68]; // 0x04
+    PgSaveFileHeader header; // 0x48
+};
+static_assert(offsetof(PgSaveFileBuffer, header) == 0x48);
+
+struct PgSaveLoadFile {
+    uintptr_t vtable; // 0x00
+    PgSaveFileBuffer* buffer; // 0x04
+};
+static_assert(offsetof(PgSaveLoadFile, buffer) == 0x04);
+
+struct PgSaveLoadFileManager {
+    uintptr_t vtable; // 0x00
+    char pad_0004[4]; // 0x04
+    PgSaveLoadFile* save_file; // 0x08
+};
+static_assert(offsetof(PgSaveLoadFileManager, save_file) == 0x08);
+
+struct PgSaveLoad {
+    uintptr_t vtable; // 0x00
+    PgSaveLoadFileManager* file_manager; // 0x04
+};
+static_assert(offsetof(PgSaveLoad, file_manager) == 0x04);
+
 #define PLAYER_CONTROLLER_FLAGS__GOD_MODE (1 << 1)
 
 struct PgPlayerController {
