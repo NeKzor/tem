@@ -40,6 +40,9 @@ DETOUR_API(HRESULT, __stdcall, DirectInput8Create, HINSTANCE hinst, DWORD dwVers
     /*while(!IsDebuggerPresent()) {
         Sleep(420);
     }*/
+  
+    auto tem = LoadLibraryA("tem.dll");
+    println("Loaded tem.dll {:x}", uintptr_t(tem));
 
     return result;
 }
@@ -54,7 +57,7 @@ auto init_proxy() -> void
     auto dinput8_path = std::string(system_dir) + "\\dinput8.dll";
     auto dinput8 = LoadLibraryA(dinput8_path.c_str());
 
-    println("Orginal dinput8.dll {:x} in {}", int(dinput8), system_dir);
+    println("Original dinput8.dll {:x} in {}", int(dinput8), system_dir);
 
     if (!dinput8) {
         return;
@@ -72,9 +75,6 @@ auto init_proxy() -> void
     PROXY_IMPORT(DirectInput8Create);
 
 #undef PROXY_IMPORT
-  
-    auto tem = LoadLibraryA("tem.dll");
-    println("Loaded tem.dll {:x}", uintptr_t(tem));
 }
 
 auto once = false;
