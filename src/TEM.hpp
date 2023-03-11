@@ -27,8 +27,8 @@ struct TEM {
     HMODULE module_handle = 0;
     HANDLE ui_init_thread = 0;
 
-    bool is_attached = false;
-    bool is_detached = false;
+    std::atomic_bool is_attached = false;
+    std::atomic_bool is_detached = false;
 
     UEngine* engine;
 

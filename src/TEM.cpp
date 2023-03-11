@@ -31,6 +31,7 @@ auto tem_attach(HMODULE module) -> int
         return 0;
     }
 
+    tem.is_attached = true;
     tem.module_handle = module;
 
     console = new Console();
@@ -46,8 +47,6 @@ auto tem_attach(HMODULE module) -> int
     console->Println(TEM_WELCOME);
     console->Println(TEM_VERSION);
 
-    tem.is_attached = true;
-
     return 0;
 }
 
@@ -57,9 +56,11 @@ auto tem_detach() -> void
         return;
     }
 
+    tem.is_detached = true;
+    ui.is_shutdown = true;
+
     console->Println("[tem] Shutdown module {}", uintptr_t(tem.module_handle));
 
-    ui.is_shutdown = true;
     WaitForSingleObject(tem.ui_init_thread, 2000);
 
     destroy_ui();
@@ -79,13 +80,11 @@ auto tem_detach() -> void
     if (tem.is_super_user && controller) {
         controller->set_god_mode(false);
     }
-
+    
     unpatch_gfwl();
 
     console->Println("Cya :^)");
     console->Shutdown();
-
-    tem.is_detached = true;
 }
 
 auto shutdown_thread() -> void { FreeLibraryAndExitThread(tem.module_handle, 0); }
