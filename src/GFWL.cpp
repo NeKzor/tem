@@ -82,54 +82,11 @@ DECL_DETOUR_API(int, __stdcall, xlive_5251, HANDLE hObject);
 DECL_DETOUR_API(signed int, __stdcall, xlive_5252, int a1, __int64 a2);
 DECL_DETOUR_API(int, __stdcall, xlive_5256, int a1, int a2, int a3, DWORD* a4, int a5);
 DECL_DETOUR_API(signed int, __stdcall, xlive_5258, int a1);
-DECL_DETOUR_API(signed int, __stdcall, xlive_5262, int a1);
+DECL_DETOUR_API(XUSER_SIGNIN_STATE, __stdcall, xlive_5262, int a1);
 DECL_DETOUR_API(int, __stdcall, xlive_5263, uint32_t user_index, CHAR* user_name, uint32_t user_name_length);
 DECL_DETOUR_API(int, __stdcall, xlive_5265, unsigned int a1, int a2, DWORD* a3);
-
-#define PROPERTY_NUMPLAYERS 0x10000001
-#define PROPERTY_SKILLRATING 0x10000006
-#define PROPERTY_PRIVATE 0x10000013
-#define PROPERTY_DLCFLAGS 0x10000015
-#define PROPERTY_TIMELIMIT 0x10000017
-#define PROPERTY_TIMECURRENT 0x10000018
-#define PROPERTY_VERSION 0x1000001A
-#define PROPERTY_SESSIONID 0x20000016
-#define CONTEXT_GAME_MODE_MULTIPLAYER 0
-#define CONTEXT_MODE 3
-#define CONTEXT_MAP 4
-#define X_CONTEXT_GAME_TYPE_RANKED 0
-#define X_CONTEXT_GAME_TYPE_STANDARD 1
-#define X_CONTEXT_PRESENCE 0x8001
-#define X_CONTEXT_GAME_TYPE 0x800A
-#define X_CONTEXT_GAME_MODE 0x800B
-#define XPRIVILEGE_PRESENCE_FRIENDS_ONLY 0xF3
-#define XPRIVILEGE_PRESENCE 0xF4
-#define XPRIVILEGE_PURCHASE_CONTENT 0xF5
-#define XPRIVILEGE_USER_CREATED_CONTENT_FRIENDS_ONLY 0xF6
-#define XPRIVILEGE_USER_CREATED_CONTENT 0xF7
-#define XPRIVILEGE_PROFILE_VIEWING_FRIENDS_ONLY 0xF8
-#define XPRIVILEGE_PROFILE_VIEWING 0xF9
-#define XPRIVILEGE_COMMUNICATIONS_FRIENDS_ONLY 0xFB
-#define XPRIVILEGE_COMMUNICATIONS 0xFC
-#define XPRIVILEGE_MULTIPLAYER_SESSIONS 0xFE
-
-enum class XUSER_SIGNIN_STATE {
-    NotSignedIn = 0,
-    SignedInLocally = 1,
-    SignedInToLive = 2,
-};
-
-struct XUSER_SIGNIN_INFO {
-    ULONGLONG xuid;
-    DWORD flags;
-    XUSER_SIGNIN_STATE user_signin_state;
-    DWORD guest_number;
-    DWORD sponsor_user_index;
-    CHAR user_name[16];
-};
-
 DECL_DETOUR_API(signed int, __stdcall, xlive_5267, uint32_t user_index, uint32_t flags, XUSER_SIGNIN_INFO* signin_info);
-DECL_DETOUR_API(int, __stdcall, xlive_5270, int a1, int a2);
+DECL_DETOUR_API(int, __stdcall, xlive_5270, __int64 a1);
 DECL_DETOUR_API(signed int, __stdcall, xlive_5271, int a1);
 DECL_DETOUR_API(signed int, __stdcall, xlive_5274, int a1, int a2, int a3, int a4);
 DECL_DETOUR_API(signed int, __stdcall, xlive_5275, int a1);
@@ -535,17 +492,20 @@ auto xlive_debug_break(bool resume_main_thread = true) -> void
    __asm popad }
 #define JUMP_TO(address) __asm jmp address
 
-auto __skip_rv = -1;
+auto __skip_call = false;
+auto __skip_rv = 0;
 
 #define NEVER_SKIP_AND_RETURN(rv) {};
-#define SKIP_AND_RETURN(rv) auto __skip_rv = rv;
+#define SKIP_AND_RETURN(rv) \
+    auto __skip_call = true; \
+    auto __skip_rv = rv;
 //#define SKIP_AND_RETURN(rv) {};
 
 #define CALL_ORIGINAL(_ordinal, _name, ...)                                                                            \
     auto ordinal = _ordinal;                                                                                           \
     auto name = _name;                                                                                                 \
     auto original = xlive_##_ordinal;                                                                                  \
-    if (__skip_rv >= 0) {                                                                                              \
+    if (__skip_call) {                                                                                           \
         return __skip_rv;                                                                                              \
     }                                                                                                                  \
     auto result = original(##__VA_ARGS__)
@@ -658,7 +618,7 @@ DETOUR_API(int, __stdcall, xlive_51, int a1)
 }
 DETOUR_API(int, __stdcall, xlive_52)
 {
-    NEVER_SKIP_AND_RETURN(0);
+    SKIP_AND_RETURN(0);
     CALL_ORIGINAL(52, "XNetCleanup");
     LOG_AND_RETURN("");
 }
@@ -785,13 +745,13 @@ DETOUR_API(unsigned int, __stdcall, xlive_5002)
 }
 DETOUR_API(int, __stdcall, xlive_5003)
 {
-    NEVER_SKIP_AND_RETURN(0);
+    SKIP_AND_RETURN(0);
     CALL_ORIGINAL(5003, "XLiveUninitialize");
     LOG_AND_RETURN("");
 }
 DETOUR_API(signed int, __stdcall, xlive_5006)
 {
-    NEVER_SKIP_AND_RETURN(0);
+    SKIP_AND_RETURN(0);
     CALL_ORIGINAL(5006, "XLiveOnDestroyDevice");
     LOG_AND_RETURN("");
 }
@@ -924,12 +884,21 @@ DETOUR_API(signed int, __stdcall, xlive_5258, int a1)
     CALL_ORIGINAL(5258, "XLiveSignout", a1);
     LOG_AND_RETURN("{:x}", hex(a1));
 }
-auto xlive_5262_calls = 0;
-DETOUR_API(signed int, __stdcall, xlive_5262, int a1)
+DETOUR_API(XUSER_SIGNIN_STATE, __stdcall, xlive_5262, int a1)
 {
-    xlive_5262_calls += 1;
-    println("XUserGetSigninState = {}", xlive_5262_calls > 7 ? 1 : 0);
-    SKIP_AND_RETURN(xlive_5262_calls > 7 ? 1 : 0);
+    // The game makes exactly seven calls to this function before it can log into an account.
+
+    static auto calls_to_user_get_signin_state = 0;
+
+    auto can_login = calls_to_user_get_signin_state >= 7;
+    if (!can_login) {
+        calls_to_user_get_signin_state += 1;
+    }
+
+    auto loginState =  can_login ? XUSER_SIGNIN_STATE::SignedInLocally : XUSER_SIGNIN_STATE::NotSignedIn;
+    println("[gfwl] Forcing XUserGetSigninState -> {}", loginState);
+
+    SKIP_AND_RETURN(loginState);
 
     // called on login and then frequently after
     CALL_ORIGINAL(5262, "XUserGetSigninState", a1);
@@ -942,9 +911,9 @@ DETOUR_API(int, __stdcall, xlive_5263, uint32_t user_index, CHAR* user_name, uin
     // called after login
     CALL_ORIGINAL(5263, "XUserGetName", user_index, user_name, user_name_length);
 
-    println("user_index = {:X}", user_index);
-    println("user_name = {}", user_name);
-    println("user_name_length = {:X}", user_name_length);
+    println("[gfwl] user_index = {:X}", user_index);
+    println("[gfwl] user_name = {}", user_name);
+    println("[gfwl] user_name_length = {:X}", user_name_length);
 
     LOG_AND_RETURN("{:x}, {:x}, {:x}", hex(user_index), hex(user_name), hex(user_name_length));
 }
@@ -956,35 +925,41 @@ DETOUR_API(int, __stdcall, xlive_5265, unsigned int a1, int a2, DWORD* a3)
 DETOUR_API(signed int, __stdcall, xlive_5267, uint32_t user_index, uint32_t flags, XUSER_SIGNIN_INFO* signin_info)
 {
     if (signin_info) {
-        signin_info->xuid = 0xE00000FDAD8D3F73;
+        // TODO: Figure out new self-made login system:
+        //          - Fallback to GFWL?
+        //          - Should we auto-login? Which GFWL account should it be?
+
+        signin_info->xuid = 0xE00000FDAD8D3F73; // TODO: This should be variable
         signin_info->flags = 0;
         signin_info->user_signin_state = XUSER_SIGNIN_STATE::SignedInLocally;
         signin_info->guest_number = 0;
         signin_info->sponsor_user_index = 254;
-        memcpy(signin_info->user_name, "NeKz", 5);
+        memcpy(signin_info->user_name, "NeKz", 5); // TODO: This should be variable
         return 0;
     }
 
     SKIP_AND_RETURN(0);
+
     // called after login
     CALL_ORIGINAL(5267, "XUserGetSigninInfo", user_index, flags, signin_info);
     
     if (signin_info) {
-        println("signin_info->xuid = {:X}", (unsigned __int64)signin_info->xuid);
-        println("signin_info->flags = {}", (unsigned long)signin_info->flags);
-        println("signin_info->user_signin_state = {}", (uint32_t)signin_info->user_signin_state);
-        println("signin_info->guest_number = {}", (unsigned long)signin_info->guest_number);
-        println("signin_info->sponsor_user_index = {}", (unsigned long)signin_info->sponsor_user_index);
-        println("signin_info->user_name = {}", signin_info->user_name);
+        println("[gfwl] signin_info->xuid = {:X}", signin_info->xuid);
+        println("[gfwl] signin_info->flags = {}", signin_info->flags);
+        println("[gfwl] signin_info->user_signin_state = {}", uint32_t(signin_info->user_signin_state));
+        println("[gfwl] signin_info->guest_number = {}", signin_info->guest_number);
+        println("[gfwl] signin_info->sponsor_user_index = {}", signin_info->sponsor_user_index);
+        println("[gfwl] signin_info->user_name = {}", signin_info->user_name);
     }
 
     LOG_AND_RETURN("{:x}, {:x}, {:x}", hex(user_index), hex(flags), hex(signin_info));
 }
-DETOUR_API(int, __stdcall, xlive_5270, int a1, int a2)
+DETOUR_API(int, __stdcall, xlive_5270, __int64 a1)
 {
-    NEVER_SKIP_AND_RETURN(0);
-    CALL_ORIGINAL(5270, "XNotifyCreateListener", a1, a2);
-    LOG_AND_RETURN("{:x}, {:x}", hex(a1), hex(a2));
+    // NOTE: The game needs a value or it will fail to initialize.
+    SKIP_AND_RETURN(1);
+    CALL_ORIGINAL(5270, "XNotifyCreateListener", a1);
+    LOG_AND_RETURN("{:x}", a1);
 }
 DETOUR_API(signed int, __stdcall, xlive_5271, int a1)
 {
@@ -1033,13 +1008,13 @@ DETOUR_API(int, __stdcall, xlive_5284, int a1, int a2, int a3, int a4, void* Src
     };
 
     auto a5 = (XUSER_STATS_SPEC*)Src;
-    println("view_id = {}", a5->view_id);
-    println("num_column_ids = {}", a5->num_column_ids);
-    println("rgw_column_ids[0] = {}", a5->rgw_column_ids[0]);
-    println("rgw_column_ids[1] = {}", a5->rgw_column_ids[1]);
-    println("rgw_column_ids[2] = {}", a5->rgw_column_ids[2]);
-    println("rgw_column_ids[3] = {}", a5->rgw_column_ids[3]);
-    println("rgw_column_ids[4] = {}", a5->rgw_column_ids[4]);
+    println("[gfwl] view_id = {}", a5->view_id);
+    println("[gfwl] num_column_ids = {}", a5->num_column_ids);
+    println("[gfwl] rgw_column_ids[0] = {}", a5->rgw_column_ids[0]);
+    println("[gfwl] rgw_column_ids[1] = {}", a5->rgw_column_ids[1]);
+    println("[gfwl] rgw_column_ids[2] = {}", a5->rgw_column_ids[2]);
+    println("[gfwl] rgw_column_ids[3] = {}", a5->rgw_column_ids[3]);
+    println("[gfwl] rgw_column_ids[4] = {}", a5->rgw_column_ids[4]);
 
     SKIP_AND_RETURN(0);
     CALL_ORIGINAL(5284, "XUserCreateStatsEnumeratorByRank", a1, a2, a3, a4, Src, a6, a7);
@@ -1091,15 +1066,16 @@ DETOUR_API(int, __stdcall, xlive_5310)
 }
 DETOUR_API(int, __stdcall, xlive_5311)
 {
-    NEVER_SKIP_AND_RETURN(0);
+    SKIP_AND_RETURN(0);
     CALL_ORIGINAL(5311, "XOnlineCleanup");
     LOG_AND_RETURN("");
 }
 DETOUR_API(signed int, __stdcall, xlive_5312, int a1, int a2, int a3, int a4, int a5)
 {
+    // NOTE: The game needs a value or it will loop forever when exiting.
+    SKIP_AND_RETURN(1);
+
     // called after login, or when loading/exiting main menu
-    // TODO: GAME STALLS?
-    //SKIP_AND_RETURN(0);
     CALL_ORIGINAL(5312, "XFriendsCreateEnumerator", a1, a2, a3, a4, a5);
     LOG_AND_RETURN("{:x}, {:x}, {:x}, {:x}, {:x}", hex(a1), hex(a2), hex(a3), hex(a4), hex(a5));
 }
@@ -1426,6 +1402,7 @@ DETOUR_API(int, __stdcall, xlive_5278, int a1, int a2, int a3)
 }
 DETOUR_API(int, __stdcall, xlive_5297, int a1, int a2)
 {
+    SKIP_AND_RETURN(0);
     CALL_ORIGINAL(5297, "XLiveInitializeEx", a1, a2);
     LOG_AND_RETURN("{:x}, {:x}", hex(a1), hex(a2));
 }
