@@ -111,7 +111,6 @@
     <ClCompile Include="lib\minhook\hook.c" />
     <ClCompile Include="lib\minhook\trampoline.c" />
     <ClCompile Include="Memory.cpp" />
-    <ClCompile Include="Offsets.cpp" />
     <ClCompile Include="SDK.cpp" />
     <ClCompile Include="TEM.cpp" />
     <ClCompile Include="UI.cpp" />
