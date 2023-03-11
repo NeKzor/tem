@@ -36,9 +36,13 @@ auto tem_attach(HMODULE module) -> int
 
     println("[tem] Initializing...");
 
+    Hooks::initialize();
+
     patch_gfwl();
     patch_forced_window_minimize();
     hook_process_event();
+
+    Hooks::apply_queued();
 
     tem.ui_init_thread = CreateThread(0, 0, LPTHREAD_START_ROUTINE(init_ui), 0, 0, 0);
 
@@ -59,6 +63,8 @@ auto tem_detach() -> void
 
     println("[tem] Shutdown module {}", uintptr_t(tem.module_handle));
 
+    Hooks::uninitialize();
+
     WaitForSingleObject(tem.ui_init_thread, 2000);
 
     destroy_ui();
@@ -66,13 +72,6 @@ auto tem_detach() -> void
     if (forcedWindowMinimizePatch.Restore()) {
         println("[tem] Restored forced window minimize patch");
     }
-
-    MH_UNHOOK(ProcessEvent);
-    println("[tem] Unhooked UEngine::ProcessEvent");
-    MH_UNHOOK(GetTeamColor);
-    println("[tem] Unhooked PgTeamInfo::GetTeamColor");
-    MH_UNHOOK(ConsoleCommand);
-    println("[tem] Unhooked UGameViewportClient::ConsoleCommand");
 
     // FIXME: Engine pointer might be invalid at this point.
     //        It's probably better to remove the copy from tem.
@@ -110,20 +109,15 @@ auto hook_process_event() -> void
     tem.engine = Memory::Deref<UEngine*>(Offsets::g_Engine);
     println("[tem] g_Engine: 0x{:04x}", uintptr_t(tem.engine));
 
-    auto processEventAddress = Memory::VMT(tem.engine, Offsets::ProcessEvent);
-    println("[tem] ProcessEvent: 0x{:04x}", processEventAddress);
+    auto processEvent = Memory::VMT(tem.engine, Offsets::ProcessEvent);
 
-    MH_HOOK(ProcessEvent, processEventAddress);
-    println("[tem] Hooked UEngine::ProcessEvent at 0x{:04x}", processEventAddress);
-
-    MH_HOOK(GetTeamColor, Offsets::GetTeamColor);
-    println("[tem] Hooked PgTeamInfo::GetTeamColor at 0x{:04x}", Offsets::GetTeamColor);
+    Hooks::queue("UEngine::ProcessEvent", &ProcessEvent, ProcessEvent_Hook, processEvent);
+    Hooks::queue("PgTeamInfo::GetTeamColor", &GetTeamColor, GetTeamColor_Hook, Offsets::GetTeamColor);
 
     auto viewport_client = tem.engine->viewport_client;
     if (viewport_client) {
-        auto consoleCommandAddr = Memory::VMT(viewport_client, Offsets::ConsoleCommand);
-        MH_HOOK(ConsoleCommand, consoleCommandAddr);
-        println("[tem] Hooked UGameViewportClient::ConsoleCommand at 0x{:04x}", consoleCommandAddr);
+        auto consoleCommand = Memory::VMT(viewport_client, Offsets::ConsoleCommand);
+        Hooks::queue("UGameViewportClient::ConsoleCommand", &ConsoleCommand, ConsoleCommand_Hook, consoleCommand);
     }
 }
 

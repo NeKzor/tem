@@ -122,14 +122,11 @@ auto init_ui() -> void
             break;
         }
 
-        auto reset = Memory::VMT<_Reset>(device, Offsets::Reset);
-        auto present = Memory::VMT<_Present>(device, Offsets::Present);
+        auto reset = Memory::VMT(device, Offsets::Reset);
+        auto present = Memory::VMT(device, Offsets::Present);
 
-        println("[ui] IDirect3DDevice9::Reset: 0x{:04x}", uintptr_t(reset));
-        println("[ui] IDirect3DDevice9::Present: 0x{:04x}", uintptr_t(present));
-
-        MH_HOOK(Reset, reset);
-        MH_HOOK(Present, present);
+        Hooks::hook("IDirect3DDevice9::Reset", &Reset, Reset_Hook, reset);
+        Hooks::hook("IDirect3DDevice9::Present", &Present, Present_Hook, present);
 
         device->Release();
 
@@ -141,16 +138,7 @@ auto init_ui() -> void
 auto destroy_ui() -> void
 {
     ui.is_shutdown = true;
-
-    if (ui.hooked) {
-        MH_UNHOOK(Reset);
-        println("[ui] Unhooked IDirect3DDevice9::Reset");
-
-        MH_UNHOOK(Present);
-        println("[ui] Unhooked IDirect3DDevice9::Present");
-
-        ui.hooked = false;
-    }
+    ui.hooked = false;
 
     if (ui.initialized) {
         ImGui_ImplDX9_Shutdown();

@@ -114,9 +114,9 @@ DECL_DETOUR_API(int, __stdcall, xlive_5265, unsigned int a1, int a2, DWORD* a3);
 #define XPRIVILEGE_MULTIPLAYER_SESSIONS 0xFE
 
 enum class XUSER_SIGNIN_STATE {
-	NotSignedIn = 0,
-	SignedInLocally = 1,
-	SignedInToLive = 2,
+    NotSignedIn = 0,
+    SignedInLocally = 1,
+    SignedInToLive = 2,
 };
 
 struct XUSER_SIGNIN_INFO {
@@ -196,7 +196,8 @@ DECL_DETOUR_API(int, __stdcall, xlive_5260, int a1, int a2);
 DECL_DETOUR_API(int, __stdcall, xlive_5300, int a1, int a2, int a3, int a4, int a5, int a6, int a7, int a8);
 DECL_DETOUR_API(int, __stdcall, xlive_5318, int a1, int a2, int a3);
 DECL_DETOUR_API(int, __stdcall, xlive_5034, int a1, int a2, int a3, int a4, int a5);
-DECL_DETOUR_API(int, __stdcall, xlive_5035, BYTE* protected_data, DWORD size_of_protected_data, BYTE* unprotected_data, DWORD* size_of_data, HANDLE* protected_data_handle);
+DECL_DETOUR_API(int, __stdcall, xlive_5035, BYTE* protected_data, DWORD size_of_protected_data, BYTE* unprotected_data,
+    DWORD* size_of_data, HANDLE* protected_data_handle);
 DECL_DETOUR_API(int, __stdcall, xlive_5036, int a1, int a2);
 //DECL_DETOUR_MID(xlive_5034);
 //DECL_DETOUR_MID(xlive_5035);
@@ -244,25 +245,22 @@ auto hook_gfwl(Memory::ModuleInfo& xlive) -> void
     auto ordinal_##ordinal##_address = uintptr_t(GetProcAddress(handle, LPCSTR(ordinal)));                             \
     if (ordinal_##ordinal##_address) {                                                                                 \
         addressesToUnhook.insert_or_assign(ordinal, std::make_tuple(ordinal_##ordinal##_address, name, 0, 0));         \
-        MH_QUEUE_HOOK(xlive_##ordinal, ordinal_##ordinal##_address);                                                   \
-        println("[gfwl] Hooked xlive_{} at 0x{:04x}", ordinal, ordinal_##ordinal##_address);                  \
+        Hooks::queue(name, &xlive_##ordinal, xlive_##ordinal##_Hook, ordinal_##ordinal##_address);                     \
     } else {                                                                                                           \
-        println("[gfwl] Unable to hook xlive_" #ordinal);                                                     \
+        println("[gfwl] Unable to get address of xlive_" #ordinal);                                                    \
     }
 
 #define HOOK_IAT_WRAPPER(wrapper_address, ordinal, name)                                                               \
     addressesToUnhook.insert_or_assign(ordinal, std::make_tuple(wrapper_address, name, 0, 0));                         \
     auto xlive_##ordinal##_original = **(uintptr_t**)(wrapper_address + 2);                                            \
-    MH_QUEUE_HOOK(xlive_##ordinal, wrapper_address);                                                                   \
-    xlive_##ordinal = _xlive_##ordinal(xlive_##ordinal##_original);                                                    \
-    println("[gfwl] Hooked {} 0x{:04x} at 0x{:04x}", name, xlive_##ordinal##_original, wrapper_address);
+    Hooks::queue(name, &xlive_##ordinal, xlive_##ordinal##_Hook, wrapper_address);                                     \
+    xlive_##ordinal = _xlive_##ordinal(xlive_##ordinal##_original);
 
 #define HOOK_IAT_WRAPPER_MID(wrapper_address, ordinal, name)                                                           \
     addressesToUnhook.insert_or_assign(ordinal, std::make_tuple(wrapper_address, name, 0, 0));                         \
     auto xlive_##ordinal##_original = **(uintptr_t**)(wrapper_address + 2);                                            \
-    MH_HOOK_MID(xlive_##ordinal, wrapper_address);                                                                     \
-    xlive_##ordinal = xlive_##ordinal##_original;                                                                      \
-    println("[gfwl] Hooked {} 0x{:04x} at 0x{:04x}", name, xlive_##ordinal##_original, wrapper_address);
+    Hooks::queue(name, &xlive_##ordinal, xlive_##ordinal##_Hook, wrapper_address);                                     \
+    xlive_##ordinal = xlive_##ordinal##_original;
 
     HOOK_ORDINAL(3, "XSocketCreate");
     HOOK_ORDINAL(4, "XSocketClose");
@@ -405,8 +403,6 @@ auto hook_gfwl(Memory::ModuleInfo& xlive) -> void
     HOOK_IAT_WRAPPER(0x1A33B94, 5297, "XLiveInitializeEx");
     HOOK_IAT_WRAPPER(0x1A33B04, 5317, "XSessionWriteStats");
     HOOK_IAT_WRAPPER(0x1A33BE8, 5332, "XSessionEnd");
-
-    MH_APPLY_QUEUED();
 }
 
 auto change_gfwl_main_thread(bool suspend) -> bool
@@ -480,14 +476,6 @@ auto unpatch_gfwl() -> void
         change_gfwl_main_thread(false);
     }
 
-    for (auto& address : addressesToUnhook) {
-        auto function = std::get<0>(address.second);
-        auto name = std::get<1>(address.second);
-
-        MH_UNHOOK_TARGET(function);
-        println("[gfwl] Unhooked {} at 0x{:04x}", name, function);
-    }
-
     addressesToUnhook.clear();
 
     if (gfwlMemCheckPatch.Restore()) {
@@ -518,7 +506,8 @@ auto log_xlive_call(uint32_t ordinal) -> void
     println("[gfwl] {} (xlive_{} at 0x{:04x})", name, ordinal, function);
 }
 
-auto xlive_debug_break(bool resume_main_thread = true) -> void {
+auto xlive_debug_break(bool resume_main_thread = true) -> void
+{
     if (IsDebuggerPresent()) {
         return;
     }
@@ -566,7 +555,7 @@ auto __skip_rv = -1;
     return result
 
 #define LOG_AND_RETURN(fmt, ...)                                                                                       \
-    println("[gfwl] [{:04}] [0x{:x}] [0x{:x}] {}(" fmt ") -> {:x} | {}", ordinal, uintptr_t(original),        \
+    println("[gfwl] [{:04}] [0x{:x}] [0x{:x}] {}(" fmt ") -> {:x} | {}", ordinal, uintptr_t(original),                 \
         uintptr_t(_ReturnAddress()), name, ##__VA_ARGS__, result, result);                                             \
     return result
 
