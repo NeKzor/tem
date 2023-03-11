@@ -35,7 +35,7 @@ DECL_DETOUR_API(int, __stdcall, xlive_9, int a1, int a2, int a3);
 DECL_DETOUR_API(int, __stdcall, xlive_11, int a1, int a2, int a3);
 DECL_DETOUR_API(signed int, __stdcall, xlive_12, int a1, int a2, int a3);
 DECL_DETOUR_API(signed int, __stdcall, xlive_13, int a1, signed int a2);
-DECL_DETOUR_API(void*, __stdcall, xlive_14, void* a1, int a2, int a3);
+DECL_DETOUR_API(uintptr_t, __stdcall, xlive_14, void* a1, int a2, int a3);
 DECL_DETOUR_API(int, __stdcall, xlive_15, int a1, int a2, int a3, int a4, DWORD a5);
 DECL_DETOUR_API(int, __stdcall, xlive_18, int a1, int a2, int a3, int a4);
 DECL_DETOUR_API(signed int, __stdcall, xlive_20, int a1, int a2, int a3, char a4, int a5, DWORD* a6);
@@ -83,9 +83,52 @@ DECL_DETOUR_API(signed int, __stdcall, xlive_5252, int a1, __int64 a2);
 DECL_DETOUR_API(int, __stdcall, xlive_5256, int a1, int a2, int a3, DWORD* a4, int a5);
 DECL_DETOUR_API(signed int, __stdcall, xlive_5258, int a1);
 DECL_DETOUR_API(signed int, __stdcall, xlive_5262, int a1);
-DECL_DETOUR_API(int, __stdcall, xlive_5263, int a1, CHAR* a2, int a3);
+DECL_DETOUR_API(int, __stdcall, xlive_5263, uint32_t user_index, CHAR* user_name, uint32_t user_name_length);
 DECL_DETOUR_API(int, __stdcall, xlive_5265, unsigned int a1, int a2, DWORD* a3);
-DECL_DETOUR_API(signed int, __stdcall, xlive_5267, int a1, int a2, int a3);
+
+#define PROPERTY_NUMPLAYERS 0x10000001
+#define PROPERTY_SKILLRATING 0x10000006
+#define PROPERTY_PRIVATE 0x10000013
+#define PROPERTY_DLCFLAGS 0x10000015
+#define PROPERTY_TIMELIMIT 0x10000017
+#define PROPERTY_TIMECURRENT 0x10000018
+#define PROPERTY_VERSION 0x1000001A
+#define PROPERTY_SESSIONID 0x20000016
+#define CONTEXT_GAME_MODE_MULTIPLAYER 0
+#define CONTEXT_MODE 3
+#define CONTEXT_MAP 4
+#define X_CONTEXT_GAME_TYPE_RANKED 0
+#define X_CONTEXT_GAME_TYPE_STANDARD 1
+#define X_CONTEXT_PRESENCE 0x8001
+#define X_CONTEXT_GAME_TYPE 0x800A
+#define X_CONTEXT_GAME_MODE 0x800B
+#define XPRIVILEGE_PRESENCE_FRIENDS_ONLY 0xF3
+#define XPRIVILEGE_PRESENCE 0xF4
+#define XPRIVILEGE_PURCHASE_CONTENT 0xF5
+#define XPRIVILEGE_USER_CREATED_CONTENT_FRIENDS_ONLY 0xF6
+#define XPRIVILEGE_USER_CREATED_CONTENT 0xF7
+#define XPRIVILEGE_PROFILE_VIEWING_FRIENDS_ONLY 0xF8
+#define XPRIVILEGE_PROFILE_VIEWING 0xF9
+#define XPRIVILEGE_COMMUNICATIONS_FRIENDS_ONLY 0xFB
+#define XPRIVILEGE_COMMUNICATIONS 0xFC
+#define XPRIVILEGE_MULTIPLAYER_SESSIONS 0xFE
+
+enum class XUSER_SIGNIN_STATE {
+	NotSignedIn = 0,
+	SignedInLocally = 1,
+	SignedInToLive = 2,
+};
+
+struct XUSER_SIGNIN_INFO {
+    ULONGLONG xuid;
+    DWORD flags;
+    XUSER_SIGNIN_STATE user_signin_state;
+    DWORD guest_number;
+    DWORD sponsor_user_index;
+    CHAR user_name[16];
+};
+
+DECL_DETOUR_API(signed int, __stdcall, xlive_5267, uint32_t user_index, uint32_t flags, XUSER_SIGNIN_INFO* signin_info);
 DECL_DETOUR_API(int, __stdcall, xlive_5270, int a1, int a2);
 DECL_DETOUR_API(signed int, __stdcall, xlive_5271, int a1);
 DECL_DETOUR_API(signed int, __stdcall, xlive_5274, int a1, int a2, int a3, int a4);
@@ -121,7 +164,7 @@ DECL_DETOUR_API(unsigned int, __stdcall, xlive_5326, int a1, int a2, int a3, int
 DECL_DETOUR_API(signed int, __stdcall, xlive_5327, int a1, int a2, int* a3, int a4, int a5);
 DECL_DETOUR_API(signed int, __stdcall, xlive_5328, int a1, DWORD* a2, int a3, int a4);
 DECL_DETOUR_API(signed int, __stdcall, xlive_5329, int a1, int a2);
-DECL_DETOUR_API(void*, __stdcall, xlive_5330, int a1, int a2);
+DECL_DETOUR_API(uintptr_t, __stdcall, xlive_5330, int a1, int a2);
 DECL_DETOUR_API(signed int, __stdcall, xlive_5331, int a1, int a2, int a3, int a4, DWORD* a5, int a6, int a7);
 DECL_DETOUR_API(signed int, __stdcall, xlive_5333, int a1, int a2, int a3, int a4, int* a5, int a6, int a7);
 DECL_DETOUR_API(unsigned int, __stdcall, xlive_5335, void* Src, int a2, int a3, int a4);
@@ -152,12 +195,12 @@ DECL_DETOUR_API(int, __stdcall, xlive_5259, int a1, int a2, int a3, int a4);
 DECL_DETOUR_API(int, __stdcall, xlive_5260, int a1, int a2);
 DECL_DETOUR_API(int, __stdcall, xlive_5300, int a1, int a2, int a3, int a4, int a5, int a6, int a7, int a8);
 DECL_DETOUR_API(int, __stdcall, xlive_5318, int a1, int a2, int a3);
-//DECL_DETOUR_API(int, __stdcall, xlive_5034, int a1, int a2, int a3, int a4, int a5);
+DECL_DETOUR_API(int, __stdcall, xlive_5034, int a1, int a2, int a3, int a4, int a5);
 DECL_DETOUR_API(int, __stdcall, xlive_5035, BYTE* protected_data, DWORD size_of_protected_data, BYTE* unprotected_data, DWORD* size_of_data, HANDLE* protected_data_handle);
-//DECL_DETOUR_API(int, __stdcall, xlive_5036, int a1, int a2);
-DECL_DETOUR_MID(xlive_5034);
+DECL_DETOUR_API(int, __stdcall, xlive_5036, int a1, int a2);
+//DECL_DETOUR_MID(xlive_5034);
 //DECL_DETOUR_MID(xlive_5035);
-DECL_DETOUR_MID(xlive_5036);
+//DECL_DETOUR_MID(xlive_5036);
 DECL_DETOUR_API(int, __stdcall, xlive_5038, int a1);
 //DECL_DETOUR_MID(xlive_5038);
 DECL_DETOUR_API(int, __stdcall, xlive_5206, int a1);
@@ -221,149 +264,147 @@ auto hook_gfwl(Memory::ModuleInfo& xlive) -> void
     xlive_##ordinal = xlive_##ordinal##_original;                                                                      \
     console->Println("[gfwl] Hooked {} 0x{:04x} at 0x{:04x}", name, xlive_##ordinal##_original, wrapper_address);
 
-    //HOOK_ORDINAL(3, "XSocketCreate");
-    //HOOK_ORDINAL(4, "XSocketClose");
-    //HOOK_ORDINAL(6, "XSocketIOCTLSocket");
-    //HOOK_ORDINAL(7, "XSocketSetSockOpt");
-    //HOOK_ORDINAL(8, "XSocketGetSockOpt");
-    //HOOK_ORDINAL(9, "XSocketGetSockName");
-    //HOOK_ORDINAL(11, "XSocketBind");
-    //HOOK_ORDINAL(12, "XSocketConnect");
-    //HOOK_ORDINAL(13, "XSocketListen");
-    //HOOK_ORDINAL(14, "XSocketAccept");
-    //HOOK_ORDINAL(15, "XSocketSelect");
-    //HOOK_ORDINAL(18, "XSocketRecv"); // called frequently
-    //HOOK_ORDINAL(20, "XSocketRecvFrom"); // called frequently when in multiplayer lobby
-    //HOOK_ORDINAL(22, "XSocketSend"); // called frequently
-    //HOOK_ORDINAL(24, "XSocketSendTo");
-    //HOOK_ORDINAL(27, "XSocketWSAGetLastError"); // called frequently when online
-    //HOOK_ORDINAL(51, "XNetStartup");
-    //HOOK_ORDINAL(52, "XNetCleanup");
-    //HOOK_ORDINAL(53, "XNetRandom");
-    //HOOK_ORDINAL(55, "XNetRegisterKey");
-    //HOOK_ORDINAL(56, "XNetUnregisterKey");
-    //HOOK_ORDINAL(57, "XNetXnAddrToInAddr");
-    //HOOK_ORDINAL(58, "XNetServerToInAddr");
-    //HOOK_ORDINAL(63, "XNetUnregisterInAddr");
-    //HOOK_ORDINAL(67, "XNetDnsLookup");
-    //HOOK_ORDINAL(68, "XNetDnsRelease");
-    //HOOK_ORDINAL(69, "XNetQosListen");
-    //HOOK_ORDINAL(70, "XNetQosLookup");
-    //HOOK_ORDINAL(71, "XNetQosServiceLookup");
-    //HOOK_ORDINAL(72, "XNetQosRelease");
-    //HOOK_ORDINAL(73, "XNetGetTitleXnAddr");
-    //HOOK_ORDINAL(75, "XNetGetEthernetLinkStatus");
-    //HOOK_ORDINAL(77, "XNetQosGetListenStats");
-    //HOOK_ORDINAL(84, "XNetSetSystemLinkPort");
-    //HOOK_ORDINAL(651, "XNotifyGetNext"); // called frequently
-    //HOOK_ORDINAL(652, "XNotifyPositionUI");
-    //HOOK_ORDINAL(1082, "XGetOverlappedExtendedError"); // called frequently when online
-    //HOOK_ORDINAL(1083, "XGetOverlappedResult"); // called frequently when online
-    //HOOK_ORDINAL(5001, "XLiveInput"); // called frequently
-    //HOOK_ORDINAL(5002, "XLiveRender"); // called frequently
-    //HOOK_ORDINAL(5003, "XLiveUninitialize"); // manually reconstructed
-    //HOOK_ORDINAL(5006, "XLiveOnDestroyDevice");
-    //HOOK_ORDINAL(5007, "XLiveOnResetDevice");
-    //HOOK_ORDINAL(5008, "XHVCreateEngine");
-    //HOOK_ORDINAL(5016, "XLivePBufferAllocate"); // manually reconstructed
-    //HOOK_ORDINAL(5017, "XLivePBufferFree"); // manually reconstructed
-    //HOOK_ORDINAL(5030, "XLivePreTranslateMessage"); // called frequently
-    //HOOK_ORDINAL(5031, "XLiveSetDebugLevel");
-    //HOOK_ORDINAL(5212, "XShowCustomPlayerListUI"); // called frequently
-    //HOOK_ORDINAL(5215, "XShowGuideUI");
-    //HOOK_ORDINAL(5216, "XShowKeyboardUI");
-    //HOOK_ORDINAL(5251, "XCloseHandle"); // called frequently acquiring a handle
-    //HOOK_ORDINAL(5252, "XShowGamerCardUI");
-    //HOOK_ORDINAL(5256, "XEnumerate");
-    //HOOK_ORDINAL(5258, "XLiveSignout");
-    //HOOK_ORDINAL(5262, "XUserGetSigninState"); // called frequently
-    //HOOK_ORDINAL(5263, "XUserGetName");
-    //HOOK_ORDINAL(5265, "XUserCheckPrivilege");
-    //HOOK_ORDINAL(5267, "XUserGetSigninInfo");
-    //HOOK_ORDINAL(5270, "XNotifyCreateListener");
-    //HOOK_ORDINAL(5271, "XShowPlayersUI");
-    //HOOK_ORDINAL(5274, "XUserAwardGamerPicture");
-    ////HOOK_ORDINAL(5275, "XShowFriendsUI"); // manually reconstructed, TODO: this crashes
-    //HOOK_ORDINAL(5277, "XUserSetContext");
-    //HOOK_ORDINAL(5279, "XUserReadAchievementPicture");
-    //HOOK_ORDINAL(5280, "XUserCreateAchievementEnumerator");
-    //HOOK_ORDINAL(5281, "XUserReadStats");
-    //HOOK_ORDINAL(5284, "XUserCreateStatsEnumeratorByRank");
-    //HOOK_ORDINAL(5286, "XUserCreateStatsEnumeratorByXuid");
-    //HOOK_ORDINAL(5292, "XUserSetContextEx");
-    //HOOK_ORDINAL(5293, "XUserSetPropertyEx");
-    //HOOK_ORDINAL(5294, "XLivePBufferGetByteArray"); // manually reconstructed
-    //HOOK_ORDINAL(5303, "XStringVerify");
-    //HOOK_ORDINAL(5305, "XStorageUploadFromMemory");
-    //HOOK_ORDINAL(5306, "XStorageEnumerate");
-    //HOOK_ORDINAL(5310, "XOnlineStartup");
-    //HOOK_ORDINAL(5311, "XOnlineCleanup");
-    //HOOK_ORDINAL(5312, "XFriendsCreateEnumerator");
-    //HOOK_ORDINAL(5313, "XPresenceInitialize");
-    //HOOK_ORDINAL(5314, "XUserMuteListQuery");
-    //HOOK_ORDINAL(5315, "XInviteGetAcceptedInfo");
-    //HOOK_ORDINAL(5316, "XInviteSend");
-    //HOOK_ORDINAL(5320, "XSessionSearchByID");
-    //HOOK_ORDINAL(5321, "XSessionSearch");
-    //HOOK_ORDINAL(5322, "XSessionModify");
-    //HOOK_ORDINAL(5324, "XOnlineGetNatType");
-    //HOOK_ORDINAL(5326, "XSessionJoinRemote");
-    //HOOK_ORDINAL(5327, "XSessionJoinLocal");
-    //HOOK_ORDINAL(5328, "XSessionGetDetails");
-    //HOOK_ORDINAL(5329, "XSessionFlushStats");
-    //HOOK_ORDINAL(5330, "XSessionDelete"); // manually reconstructed
-    //HOOK_ORDINAL(5331, "XUserReadProfileSettings");
-    //HOOK_ORDINAL(5333, "XSessionArbitrationRegister");
-    //HOOK_ORDINAL(5335, "XTitleServerCreateEnumerator");
-    //HOOK_ORDINAL(5336, "XSessionLeaveRemote");
-    //HOOK_ORDINAL(5337, "XUserWriteProfileSettings");
-    //HOOK_ORDINAL(5338, "XPresenceSubscribe");
-    //HOOK_ORDINAL(5340, "XPresenceCreateEnumerator");
-    //HOOK_ORDINAL(5342, "XSessionModifySkill");
-    //HOOK_ORDINAL(5343, "XSessionCalculateSkill");
-    //HOOK_ORDINAL(5344, "XStorageBuildServerPath");
-    //HOOK_ORDINAL(5345, "XStorageDownloadToMemory");
-    //HOOK_ORDINAL(5350, "XLiveContentCreateAccessHandle");
-    //HOOK_ORDINAL(5355, "XLiveContentGetPath");
-    //HOOK_ORDINAL(5356, "XLiveContentGetDisplayName");
-    //HOOK_ORDINAL(5360, "XLiveContentCreateEnumerator");
-    //HOOK_ORDINAL(5365, "XShowMarketplaceUI"); // manually reconstructed
-    //HOOK_ORDINAL(5367, "XContentGetMarketplaceCounts");
-    //HOOK_ORDINAL(5372, "XMarketplaceCreateOfferEnumerator");
+    HOOK_ORDINAL(3, "XSocketCreate");
+    HOOK_ORDINAL(4, "XSocketClose");
+    HOOK_ORDINAL(6, "XSocketIOCTLSocket");
+    HOOK_ORDINAL(7, "XSocketSetSockOpt");
+    HOOK_ORDINAL(8, "XSocketGetSockOpt");
+    HOOK_ORDINAL(9, "XSocketGetSockName");
+    HOOK_ORDINAL(11, "XSocketBind");
+    HOOK_ORDINAL(12, "XSocketConnect");
+    HOOK_ORDINAL(13, "XSocketListen");
+    HOOK_ORDINAL(14, "XSocketAccept");
+    HOOK_ORDINAL(15, "XSocketSelect");
+    HOOK_ORDINAL(18, "XSocketRecv"); // called frequently
+    HOOK_ORDINAL(20, "XSocketRecvFrom"); // called frequently when in multiplayer lobby
+    HOOK_ORDINAL(22, "XSocketSend"); // called frequently
+    HOOK_ORDINAL(24, "XSocketSendTo");
+    HOOK_ORDINAL(27, "XSocketWSAGetLastError"); // called frequently when online
+    HOOK_ORDINAL(51, "XNetStartup");
+    HOOK_ORDINAL(52, "XNetCleanup");
+    HOOK_ORDINAL(53, "XNetRandom");
+    HOOK_ORDINAL(55, "XNetRegisterKey");
+    HOOK_ORDINAL(56, "XNetUnregisterKey");
+    HOOK_ORDINAL(57, "XNetXnAddrToInAddr");
+    HOOK_ORDINAL(58, "XNetServerToInAddr");
+    HOOK_ORDINAL(63, "XNetUnregisterInAddr");
+    HOOK_ORDINAL(67, "XNetDnsLookup");
+    HOOK_ORDINAL(68, "XNetDnsRelease");
+    HOOK_ORDINAL(69, "XNetQosListen");
+    HOOK_ORDINAL(70, "XNetQosLookup");
+    HOOK_ORDINAL(71, "XNetQosServiceLookup");
+    HOOK_ORDINAL(72, "XNetQosRelease");
+    HOOK_ORDINAL(73, "XNetGetTitleXnAddr");
+    HOOK_ORDINAL(75, "XNetGetEthernetLinkStatus");
+    HOOK_ORDINAL(77, "XNetQosGetListenStats");
+    HOOK_ORDINAL(84, "XNetSetSystemLinkPort");
+    HOOK_ORDINAL(651, "XNotifyGetNext"); // called frequently
+    HOOK_ORDINAL(652, "XNotifyPositionUI");
+    HOOK_ORDINAL(1082, "XGetOverlappedExtendedError"); // called frequently when online
+    HOOK_ORDINAL(1083, "XGetOverlappedResult"); // called frequently when online
+    HOOK_ORDINAL(5001, "XLiveInput"); // called frequently
+    HOOK_ORDINAL(5002, "XLiveRender"); // called frequently
+    HOOK_ORDINAL(5003, "XLiveUninitialize"); // manually reconstructed
+    HOOK_ORDINAL(5006, "XLiveOnDestroyDevice");
+    HOOK_ORDINAL(5007, "XLiveOnResetDevice");
+    HOOK_ORDINAL(5008, "XHVCreateEngine");
+    HOOK_ORDINAL(5016, "XLivePBufferAllocate"); // manually reconstructed
+    HOOK_ORDINAL(5017, "XLivePBufferFree"); // manually reconstructed
+    HOOK_ORDINAL(5030, "XLivePreTranslateMessage"); // called frequently
+    HOOK_ORDINAL(5031, "XLiveSetDebugLevel");
+    HOOK_ORDINAL(5212, "XShowCustomPlayerListUI"); // called frequently
+    HOOK_ORDINAL(5215, "XShowGuideUI");
+    HOOK_ORDINAL(5216, "XShowKeyboardUI");
+    HOOK_ORDINAL(5251, "XCloseHandle"); // called frequently acquiring a handle
+    HOOK_ORDINAL(5252, "XShowGamerCardUI");
+    HOOK_ORDINAL(5256, "XEnumerate");
+    HOOK_ORDINAL(5258, "XLiveSignout");
+    HOOK_ORDINAL(5262, "XUserGetSigninState"); // called frequently
+    HOOK_ORDINAL(5263, "XUserGetName");
+    HOOK_ORDINAL(5265, "XUserCheckPrivilege");
+    HOOK_ORDINAL(5267, "XUserGetSigninInfo");
+    HOOK_ORDINAL(5270, "XNotifyCreateListener");
+    HOOK_ORDINAL(5271, "XShowPlayersUI");
+    HOOK_ORDINAL(5274, "XUserAwardGamerPicture");
+    //HOOK_ORDINAL(5275, "XShowFriendsUI"); // manually reconstructed, TODO: this crashes
+    HOOK_ORDINAL(5277, "XUserSetContext");
+    HOOK_ORDINAL(5279, "XUserReadAchievementPicture");
+    HOOK_ORDINAL(5280, "XUserCreateAchievementEnumerator");
+    HOOK_ORDINAL(5281, "XUserReadStats");
+    HOOK_ORDINAL(5284, "XUserCreateStatsEnumeratorByRank");
+    HOOK_ORDINAL(5286, "XUserCreateStatsEnumeratorByXuid");
+    HOOK_ORDINAL(5292, "XUserSetContextEx");
+    HOOK_ORDINAL(5293, "XUserSetPropertyEx");
+    HOOK_ORDINAL(5294, "XLivePBufferGetByteArray"); // manually reconstructed
+    HOOK_ORDINAL(5303, "XStringVerify");
+    HOOK_ORDINAL(5305, "XStorageUploadFromMemory");
+    HOOK_ORDINAL(5306, "XStorageEnumerate");
+    HOOK_ORDINAL(5310, "XOnlineStartup");
+    HOOK_ORDINAL(5311, "XOnlineCleanup");
+    HOOK_ORDINAL(5312, "XFriendsCreateEnumerator");
+    HOOK_ORDINAL(5313, "XPresenceInitialize");
+    HOOK_ORDINAL(5314, "XUserMuteListQuery");
+    HOOK_ORDINAL(5315, "XInviteGetAcceptedInfo");
+    HOOK_ORDINAL(5316, "XInviteSend");
+    HOOK_ORDINAL(5320, "XSessionSearchByID");
+    HOOK_ORDINAL(5321, "XSessionSearch");
+    HOOK_ORDINAL(5322, "XSessionModify");
+    HOOK_ORDINAL(5324, "XOnlineGetNatType");
+    HOOK_ORDINAL(5326, "XSessionJoinRemote");
+    HOOK_ORDINAL(5327, "XSessionJoinLocal");
+    HOOK_ORDINAL(5328, "XSessionGetDetails");
+    HOOK_ORDINAL(5329, "XSessionFlushStats");
+    HOOK_ORDINAL(5330, "XSessionDelete"); // manually reconstructed
+    HOOK_ORDINAL(5331, "XUserReadProfileSettings");
+    HOOK_ORDINAL(5333, "XSessionArbitrationRegister");
+    HOOK_ORDINAL(5335, "XTitleServerCreateEnumerator");
+    HOOK_ORDINAL(5336, "XSessionLeaveRemote");
+    HOOK_ORDINAL(5337, "XUserWriteProfileSettings");
+    HOOK_ORDINAL(5338, "XPresenceSubscribe");
+    HOOK_ORDINAL(5340, "XPresenceCreateEnumerator");
+    HOOK_ORDINAL(5342, "XSessionModifySkill");
+    HOOK_ORDINAL(5343, "XSessionCalculateSkill");
+    HOOK_ORDINAL(5344, "XStorageBuildServerPath");
+    HOOK_ORDINAL(5345, "XStorageDownloadToMemory");
+    HOOK_ORDINAL(5350, "XLiveContentCreateAccessHandle");
+    HOOK_ORDINAL(5355, "XLiveContentGetPath");
+    HOOK_ORDINAL(5356, "XLiveContentGetDisplayName");
+    HOOK_ORDINAL(5360, "XLiveContentCreateEnumerator");
+    HOOK_ORDINAL(5365, "XShowMarketplaceUI"); // manually reconstructed
+    HOOK_ORDINAL(5367, "XContentGetMarketplaceCounts");
+    HOOK_ORDINAL(5372, "XMarketplaceCreateOfferEnumerator");
 
     // These failed static analysis caused by obfuscation :>
 
-    //HOOK_ORDINAL(38, "XSocketNTOHS");
-    //HOOK_ORDINAL(5208, "XShowGameInviteUI");
-    //HOOK_ORDINAL(5209, "XShowMessageComposeUI");
-    //HOOK_ORDINAL(5250, "XShowAchievementsUI");
-    //HOOK_ORDINAL(5259, "XLiveSignin");
-    //HOOK_ORDINAL(5260, "XShowSigninUI");
-    //HOOK_ORDINAL(5210, "XShowFriendRequestUI"); // weird, might work
-    //HOOK_ORDINAL(5214, "XShowPlayerReviewUI"); // weird, might work
-    //HOOK_ORDINAL(5300, "XSessionCreate"); // weird, might work
-    //HOOK_ORDINAL(5318, "XSessionStart"); // weird, might work
+    HOOK_ORDINAL(38, "XSocketNTOHS");
+    HOOK_ORDINAL(5208, "XShowGameInviteUI");
+    HOOK_ORDINAL(5209, "XShowMessageComposeUI");
+    HOOK_ORDINAL(5250, "XShowAchievementsUI");
+    HOOK_ORDINAL(5259, "XLiveSignin");
+    HOOK_ORDINAL(5260, "XShowSigninUI");
+    HOOK_ORDINAL(5210, "XShowFriendRequestUI"); // weird, might work
+    HOOK_ORDINAL(5214, "XShowPlayerReviewUI"); // weird, might work
+    HOOK_ORDINAL(5300, "XSessionCreate"); // weird, might work
+    HOOK_ORDINAL(5318, "XSessionStart"); // weird, might work
 
     // These are heavily obfuscated and protected
 
     //HOOK_IAT_WRAPPER_MID(0x1A33C6C, 5034, "XLiveProtectData"); // called twice when creating a save
     //HOOK_IAT_WRAPPER_MID(0x1A33C66, 5035, "XLiveUnprotectData"); // called when loading a save
     //HOOK_IAT_WRAPPER_MID(0x1A33C72, 5036, "XLiveCreateProtectedDataContext"); // called when creating a save
-
-    //HOOK_IAT_WRAPPER(0x1A33C6C, 5034, "XLiveProtectData"); // called twice when creating a save
-    HOOK_IAT_WRAPPER(0x1A33C66, 5035, "XLiveUnprotectData"); // called when loading a save
-    //HOOK_IAT_WRAPPER(0x1A33C72, 5036, "XLiveCreateProtectedDataContext"); // called when creating a save
-
-    HOOK_IAT_WRAPPER(0x1A33C60, 5038, "XLiveCloseProtectedDataContext"); // called when saving/loading a save
-    // CRASH????
     //HOOK_IAT_WRAPPER_MID(0x1A33C60, 5038, "XLiveCloseProtectedDataContext"); // called when saving/loading a save
 
-    //HOOK_IAT_WRAPPER(0x1A33A50, 5206, "XShowMessagesUI");
-    //HOOK_IAT_WRAPPER(0x1A33A3E, 5264, "XUserAreUsersFriends");
-    //HOOK_IAT_WRAPPER(0x1A33C30, 5278, "XUserWriteAchievements");
-    //HOOK_IAT_WRAPPER(0x1A33B94, 5297, "XLiveInitializeEx");
-    //HOOK_IAT_WRAPPER(0x1A33B04, 5317, "XSessionWriteStats");
-    //HOOK_IAT_WRAPPER(0x1A33BE8, 5332, "XSessionEnd");
+    HOOK_IAT_WRAPPER(0x1A33C6C, 5034, "XLiveProtectData"); // called twice when creating a save
+    HOOK_IAT_WRAPPER(0x1A33C66, 5035, "XLiveUnprotectData"); // called when loading a save
+    HOOK_IAT_WRAPPER(0x1A33C72, 5036, "XLiveCreateProtectedDataContext"); // called when creating a save
+    HOOK_IAT_WRAPPER(0x1A33C60, 5038, "XLiveCloseProtectedDataContext"); // called when saving/loading a save
+
+    HOOK_IAT_WRAPPER(0x1A33A50, 5206, "XShowMessagesUI");
+    HOOK_IAT_WRAPPER(0x1A33A3E, 5264, "XUserAreUsersFriends");
+    HOOK_IAT_WRAPPER(0x1A33C30, 5278, "XUserWriteAchievements");
+    HOOK_IAT_WRAPPER(0x1A33B94, 5297, "XLiveInitializeEx");
+    HOOK_IAT_WRAPPER(0x1A33B04, 5317, "XSessionWriteStats");
+    HOOK_IAT_WRAPPER(0x1A33BE8, 5332, "XSessionEnd");
 
     MH_APPLY_QUEUED();
 }
@@ -505,10 +546,19 @@ auto xlive_debug_break(bool resume_main_thread = true) -> void {
    __asm popad }
 #define JUMP_TO(address) __asm jmp address
 
+auto __skip_rv = -1;
+
+#define NEVER_SKIP_AND_RETURN(rv) {};
+#define SKIP_AND_RETURN(rv) auto __skip_rv = rv;
+//#define SKIP_AND_RETURN(rv) {};
+
 #define CALL_ORIGINAL(_ordinal, _name, ...)                                                                            \
     auto ordinal = _ordinal;                                                                                           \
     auto name = _name;                                                                                                 \
     auto original = xlive_##_ordinal;                                                                                  \
+    if (__skip_rv >= 0) {                                                                                              \
+        return __skip_rv;                                                                                              \
+    }                                                                                                                  \
     auto result = original(##__VA_ARGS__)
 
 #define CALL_ORIGINAL_AND_RETURN(ordinal, name, ...)                                                                   \
@@ -572,7 +622,7 @@ DETOUR_API(signed int, __stdcall, xlive_13, int a1, signed int a2)
     CALL_ORIGINAL(13, "XSocketListen", a1, a2);
     LOG_AND_RETURN("{:x}, {:x}", hex(a1), hex(a2));
 }
-DETOUR_API(void*, __stdcall, xlive_14, void* a1, int a2, int a3)
+DETOUR_API(uintptr_t, __stdcall, xlive_14, void* a1, int a2, int a3)
 {
     CALL_ORIGINAL(14, "XSocketAccept", a1, a2, a3);
     LOG_AND_RETURN("{:x}, {:x}, {:x}", hex(a1), hex(a2), hex(a3));
@@ -585,16 +635,20 @@ DETOUR_API(int, __stdcall, xlive_15, int a1, int a2, int a3, int a4, DWORD a5)
 DETOUR_API(int, __stdcall, xlive_18, int a1, int a2, int a3, int a4)
 {
     // called frequently
-    CALL_ORIGINAL_AND_RETURN(18, "XSocketRecv", a1, a2, a3, a4);
+    CALL_ORIGINAL(18, "XSocketRecv", a1, a2, a3, a4);
+    LOG_AND_RETURN("{:x}, {:x}, {:x}, {:x}", hex(a1), hex(a2), hex(a3), hex(a4));
 }
 DETOUR_API(signed int, __stdcall, xlive_20, int a1, int a2, int a3, char a4, int a5, DWORD* a6)
 {
+    SKIP_AND_RETURN(-1);
     // called frequently when in multiplayer lobby
     CALL_ORIGINAL_AND_RETURN(20, "XSocketRecvFrom", a1, a2, a3, a4, a5, a6);
+    LOG_AND_RETURN("{:x}, {:x}, {:x}, {:x}, {:x}, {:x}", hex(a1), hex(a2), hex(a3), hex(a4), hex(a5), hex(a6));
 }
 DETOUR_API(int, __stdcall, xlive_22, int a1, int a2, int a3, int a4)
 {
-    CALL_ORIGINAL_AND_RETURN(22, "XSocketSend", a1, a2, a3, a4);
+    CALL_ORIGINAL(22, "XSocketSend", a1, a2, a3, a4);
+    LOG_AND_RETURN("{:x}, {:x}, {:x}, {:x}", hex(a1), hex(a2), hex(a3), hex(a4));
 }
 DETOUR_API(signed int, __stdcall, xlive_24, int a1, int a2, int a3, int a4, int a5, int a6)
 {
@@ -603,16 +657,19 @@ DETOUR_API(signed int, __stdcall, xlive_24, int a1, int a2, int a3, int a4, int 
 }
 DETOUR_API(DWORD, __stdcall, xlive_27)
 {
+    SKIP_AND_RETURN(0);
     // called frequently when online
     CALL_ORIGINAL_AND_RETURN(27, "XSocketWSAGetLastError");
 }
 DETOUR_API(int, __stdcall, xlive_51, int a1)
 {
+    SKIP_AND_RETURN(0);
     CALL_ORIGINAL(51, "XNetStartup", a1);
     LOG_AND_RETURN("{:x}", hex(a1));
 }
 DETOUR_API(int, __stdcall, xlive_52)
 {
+    NEVER_SKIP_AND_RETURN(0);
     CALL_ORIGINAL(52, "XNetCleanup");
     LOG_AND_RETURN("");
 }
@@ -693,56 +750,71 @@ DETOUR_API(signed int, __stdcall, xlive_77, const void* a1, int a2)
 }
 DETOUR_API(int, __stdcall, xlive_84, int a1)
 {
+    SKIP_AND_RETURN(0);
     CALL_ORIGINAL(84, "XNetSetSystemLinkPort", a1);
     LOG_AND_RETURN("{:x}", hex(a1));
 }
 DETOUR_API(int, __stdcall, xlive_651, int a1, int a2, DWORD* a3, DWORD* a4)
 {
+    SKIP_AND_RETURN(0);
     // Called frequently
     CALL_ORIGINAL_AND_RETURN(651, "XNotifyGetNext", a1, a2, a3, a4);
+    LOG_AND_RETURN("{:x}, {:x}, {:x}, {:x}", hex(a1), hex(a2), hex(a3), hex(a4));
 }
 DETOUR_API(int, __stdcall, xlive_652, LONG Value)
 {
+    SKIP_AND_RETURN(0);
     CALL_ORIGINAL(652, "XNotifyPositionUI", Value);
     LOG_AND_RETURN("{:x}", hex(Value));
 }
 DETOUR_API(DWORD, __stdcall, xlive_1082, int a1)
 {
+    SKIP_AND_RETURN(0);
     // called on login, frequently when online
-    CALL_ORIGINAL_AND_RETURN(1082, "XGetOverlappedExtendedError", a1);
+    CALL_ORIGINAL(1082, "XGetOverlappedExtendedError", a1);
+    LOG_AND_RETURN("{:x}", hex(a1));
 }
 DETOUR_API(DWORD, __stdcall, xlive_1083, int a1, DWORD* a2, int a3)
 {
+    SKIP_AND_RETURN(0);
     // called on login or when gfwl ui opens, frequently when online
     CALL_ORIGINAL_AND_RETURN(1083, "XGetOverlappedResult", a1, a2, a3);
+    LOG_AND_RETURN("{:x}, {:x}, {:x}", hex(a1), hex(a2), hex(a3));
 }
 DETOUR_API(signed int, __stdcall, xlive_5001, int a1)
 {
+    NEVER_SKIP_AND_RETURN(0);
     // frequent call
     CALL_ORIGINAL_AND_RETURN(5001, "XLiveInput", a1);
+    LOG_AND_RETURN("{:x}", hex(a1));
 }
 DETOUR_API(unsigned int, __stdcall, xlive_5002)
 {
+    NEVER_SKIP_AND_RETURN(0);
     // frequent call
     CALL_ORIGINAL_AND_RETURN(5002, "XLiveRender");
 }
 DETOUR_API(int, __stdcall, xlive_5003)
 {
+    NEVER_SKIP_AND_RETURN(0);
     CALL_ORIGINAL(5003, "XLiveUninitialize");
     LOG_AND_RETURN("");
 }
 DETOUR_API(signed int, __stdcall, xlive_5006)
 {
+    NEVER_SKIP_AND_RETURN(0);
     CALL_ORIGINAL(5006, "XLiveOnDestroyDevice");
     LOG_AND_RETURN("");
 }
 DETOUR_API(signed int, __stdcall, xlive_5007, int a1)
 {
+    SKIP_AND_RETURN(0);
     CALL_ORIGINAL(5007, "XLiveOnResetDevice", a1);
     LOG_AND_RETURN("{:x}", hex(a1));
 }
 DETOUR_API(signed int, __stdcall, xlive_5008, int a1, int a2, DWORD* a3)
 {
+    SKIP_AND_RETURN(0);
     CALL_ORIGINAL(5008, "XHVCreateEngine", a1, a2, a3);
     LOG_AND_RETURN("{:x}, {:x}, {:x}", hex(a1), hex(a2), hex(a3));
 }
@@ -758,21 +830,27 @@ DETOUR_API(signed int, __stdcall, xlive_5017, int a1)
 }
 DETOUR_API(int, __stdcall, xlive_5030, HIMC a1)
 {
-    // frequent called when window focused
+    SKIP_AND_RETURN(0);
+    // frequently called when window focused
     CALL_ORIGINAL_AND_RETURN(5030, "XLivePreTranslateMessage", a1);
+    LOG_AND_RETURN("{:x}", hex(a1));
 }
 DETOUR_API(int, __stdcall, xlive_5031, unsigned int a1, DWORD* a2)
 {
+    // Wait, this sounds interesting...
+    SKIP_AND_RETURN(0);
     CALL_ORIGINAL(5031, "XLiveSetDebugLevel", a1, a2);
     LOG_AND_RETURN("{:x}, {:x}", hex(a1), hex(a2));
 }
 DETOUR_API(int, __stdcall, xlive_5212, int a1, int a2, int a3, int a4, int a5, int a6, int a7, int a8, void* Src, void* a10, int a11, int a12)
 {
     // called frequently on login
-    CALL_ORIGINAL_AND_RETURN(5212, "XShowCustomPlayerListUI", a1, a2, a3, a4, a5, a6, a7, a8, Src, a10, a11, a12);
+    CALL_ORIGINAL(5212, "XShowCustomPlayerListUI", a1, a2, a3, a4, a5, a6, a7, a8, Src, a10, a11, a12);
+    LOG_AND_RETURN("{:x}, {:x}, {:x}, {:x}, {:x}, {:x}, {:x}, {:x}, {:x}, {:x}, {:x}, {:x}", hex(a1), hex(a2), hex(a3), hex(a4), hex(a5), hex(a6), hex(a7), hex(a8), hex(Src), hex(a10), hex(a11), hex(a12));
 }
 DETOUR_API(signed int, __stdcall, xlive_5215, int a1)
 {
+    SKIP_AND_RETURN(0);
     CALL_ORIGINAL(5215, "XShowGuideUI", a1);
     LOG_AND_RETURN("{:x}", hex(a1));
 }
@@ -783,16 +861,71 @@ DETOUR_API(signed int, __stdcall, xlive_5216, int a1, int a2, int a3, int a4, in
 }
 DETOUR_API(int, __stdcall, xlive_5251, HANDLE hObject)
 {
+    SKIP_AND_RETURN(1);
     // called frequently acquiring a handle
-    CALL_ORIGINAL_AND_RETURN(5251, "XCloseHandle", hObject);
+    CALL_ORIGINAL(5251, "XCloseHandle", hObject);
+    LOG_AND_RETURN("{:x}", hex(hObject));
 }
 DETOUR_API(signed int, __stdcall, xlive_5252, int a1, __int64 a2)
 {
+    SKIP_AND_RETURN(0);
     CALL_ORIGINAL(5252, "XShowGamerCardUI", a1, a2);
-    LOG_AND_RETURN("{:x}, {:x}", hex(a1), hex(a2));
+    LOG_AND_RETURN("{:x}, {:x}", hex(a1), __int64(a2));
 }
 DETOUR_API(int, __stdcall, xlive_5256, int a1, int a2, int a3, DWORD* a4, int a5)
 {
+    struct XLiveLeaderboardStats {
+        char unk_0000[40]; // 0x00
+        uint32_t xp; // 0x28
+        char unk_002c[20]; // 0x2c
+        uint32_t derezz; // 0x40
+        char unk_0044[20]; // 0x44
+        uint32_t wipes; // 0x58
+        char unk_005c[20]; // 0x5c
+        uint32_t assists; // 0x70
+        char unk_0074[20]; // 0x74
+        uint32_t bits_nodes; // 0x88
+        char unk_008c[20]; // 0x8c
+        uint32_t played; // 0xa0
+        char unk_00a4[28]; // 0xa4
+    };
+    static_assert(offsetof(XLiveLeaderboardStats, xp) == 0x28);
+    static_assert(offsetof(XLiveLeaderboardStats, derezz) == 0x40);
+    static_assert(offsetof(XLiveLeaderboardStats, wipes) == 0x58);
+    static_assert(offsetof(XLiveLeaderboardStats, assists) == 0x70);
+    static_assert(offsetof(XLiveLeaderboardStats, bits_nodes) == 0x88);
+    static_assert(offsetof(XLiveLeaderboardStats, played) == 0xa0);
+    static_assert(sizeof(XLiveLeaderboardStats) == 0xc0);
+
+    struct XLiveLeaderboardEntry {
+        ULONGLONG xuid; // 0x00
+        uint32_t rank; // 0x0x8
+        char unk_000c[12]; // 0x0c
+        char gamer_tag[16]; // 0x18
+        uint32_t columns; // 0x28
+        XLiveLeaderboardStats* stats; // 0x2c
+    };
+    static_assert(offsetof(XLiveLeaderboardEntry, xuid) == 0x00);
+    static_assert(offsetof(XLiveLeaderboardEntry, rank) == 0x08);
+    static_assert(offsetof(XLiveLeaderboardEntry, gamer_tag) == 0x18);
+    static_assert(offsetof(XLiveLeaderboardEntry, columns) == 0x28);
+    static_assert(offsetof(XLiveLeaderboardEntry, stats) == 0x2c);
+    static_assert(sizeof(XLiveLeaderboardEntry) == 0x30);
+
+    struct XLiveLeaderboard {
+        uint32_t unk_0000; // 0x00
+        uint32_t unk_0004; // 0x04
+        uint32_t unk_0008; // 0x08
+        uint32_t unk_000c; // 0x0c
+        uint32_t count; // 0x10
+        XLiveLeaderboardEntry* first_entry; // 0x14
+        XLiveLeaderboardEntry entries[22]; // 0x18
+    };
+    static_assert(offsetof(XLiveLeaderboard, count) == 0x10);
+    static_assert(offsetof(XLiveLeaderboard, first_entry) == 0x14);
+    static_assert(offsetof(XLiveLeaderboard, entries) == 0x18);
+
+    SKIP_AND_RETURN(0);
     // called after login
     CALL_ORIGINAL(5256, "XEnumerate", a1, a2, a3, a4, a5);
     LOG_AND_RETURN("{:x}, {:x}, {:x}, {:x}, {:x}", hex(a1), hex(a2), hex(a3), hex(a4), hex(a5));
@@ -802,30 +935,65 @@ DETOUR_API(signed int, __stdcall, xlive_5258, int a1)
     CALL_ORIGINAL(5258, "XLiveSignout", a1);
     LOG_AND_RETURN("{:x}", hex(a1));
 }
+auto xlive_5262_calls = 0;
 DETOUR_API(signed int, __stdcall, xlive_5262, int a1)
 {
+    xlive_5262_calls += 1;
+    console->Println("XUserGetSigninState = {}", xlive_5262_calls > 7 ? 1 : 0);
+    SKIP_AND_RETURN(xlive_5262_calls > 7 ? 1 : 0);
+
     // called on login and then frequently after
-    CALL_ORIGINAL_AND_RETURN(5262, "XUserGetSigninState", a1);
+    CALL_ORIGINAL(5262, "XUserGetSigninState", a1);
+    LOG_AND_RETURN("{:x}", hex(a1));
 }
-DETOUR_API(int, __stdcall, xlive_5263, int a1, CHAR* a2, int a3)
+DETOUR_API(int, __stdcall, xlive_5263, uint32_t user_index, CHAR* user_name, uint32_t user_name_length)
 {
+    SKIP_AND_RETURN(0);
+
     // called after login
-    CALL_ORIGINAL(5263, "XUserGetName", a1, a2, a3);
-    LOG_AND_RETURN("{:x}, {:x}, {:x}", hex(a1), hex(a2), hex(a3));
+    CALL_ORIGINAL(5263, "XUserGetName", user_index, user_name, user_name_length);
+
+    console->Println("user_index = {:X}", user_index);
+    console->Println("user_name = {}", user_name);
+    console->Println("user_name_length = {:X}", user_name_length);
+
+    LOG_AND_RETURN("{:x}, {:x}, {:x}", hex(user_index), hex(user_name), hex(user_name_length));
 }
 DETOUR_API(int, __stdcall, xlive_5265, unsigned int a1, int a2, DWORD* a3)
 {
     CALL_ORIGINAL(5265, "XUserCheckPrivilege", a1, a2, a3);
     LOG_AND_RETURN("{:x}, {:x}, {:x}", hex(a1), hex(a2), hex(a3));
 }
-DETOUR_API(signed int, __stdcall, xlive_5267, int a1, int a2, int a3)
+DETOUR_API(signed int, __stdcall, xlive_5267, uint32_t user_index, uint32_t flags, XUSER_SIGNIN_INFO* signin_info)
 {
+    if (signin_info) {
+        signin_info->xuid = 0xE00000FDAD8D3F73;
+        signin_info->flags = 0;
+        signin_info->user_signin_state = XUSER_SIGNIN_STATE::SignedInLocally;
+        signin_info->guest_number = 0;
+        signin_info->sponsor_user_index = 254;
+        memcpy(signin_info->user_name, "NeKz", 5);
+        return 0;
+    }
+
+    SKIP_AND_RETURN(0);
     // called after login
-    CALL_ORIGINAL(5267, "XUserGetSigninInfo", a1, a2, a3);
-    LOG_AND_RETURN("{:x}, {:x}, {:x}", hex(a1), hex(a2), hex(a3));
+    CALL_ORIGINAL(5267, "XUserGetSigninInfo", user_index, flags, signin_info);
+    
+    if (signin_info) {
+        console->Println("signin_info->xuid = {:X}", (unsigned __int64)signin_info->xuid);
+        console->Println("signin_info->flags = {}", (unsigned long)signin_info->flags);
+        console->Println("signin_info->user_signin_state = {}", (uint32_t)signin_info->user_signin_state);
+        console->Println("signin_info->guest_number = {}", (unsigned long)signin_info->guest_number);
+        console->Println("signin_info->sponsor_user_index = {}", (unsigned long)signin_info->sponsor_user_index);
+        console->Println("signin_info->user_name = {}", signin_info->user_name);
+    }
+
+    LOG_AND_RETURN("{:x}, {:x}, {:x}", hex(user_index), hex(flags), hex(signin_info));
 }
 DETOUR_API(int, __stdcall, xlive_5270, int a1, int a2)
 {
+    NEVER_SKIP_AND_RETURN(0);
     CALL_ORIGINAL(5270, "XNotifyCreateListener", a1, a2);
     LOG_AND_RETURN("{:x}, {:x}", hex(a1), hex(a2));
 }
@@ -846,6 +1014,7 @@ DETOUR_API(signed int, __stdcall, xlive_5275, int a1)
 }
 DETOUR_API(signed int, __stdcall, xlive_5277, int a1, int a2, int a3)
 {
+    SKIP_AND_RETURN(0);
     CALL_ORIGINAL(5277, "XUserSetContext", a1, a2, a3);
     LOG_AND_RETURN("{:x}, {:x}, {:x}", hex(a1), hex(a2), hex(a3));
 }
@@ -856,6 +1025,7 @@ DETOUR_API(signed int, __stdcall, xlive_5279, int a1, int a2, int a3, int a4, in
 }
 DETOUR_API(signed int, __stdcall, xlive_5280, int a1, int a2, int a3, unsigned int a4, int a5, unsigned int a6, unsigned int a7, int a8, int a9)
 {
+    SKIP_AND_RETURN(0);
     // called after login
     CALL_ORIGINAL(5280, "XUserCreateAchievementEnumerator", a1, a2, a3, a4, a5, a6, a7, a8, a9);
     LOG_AND_RETURN("{:x}, {:x}, {:x}, {:x}, {:x}, {:x}, {:x}, {:x}, {:x}", hex(a1), hex(a2), hex(a3), hex(a4), hex(a5), hex(a6), hex(a7), hex(a8), hex(a9));
@@ -867,6 +1037,22 @@ DETOUR_API(int, __stdcall, xlive_5281, int a1, unsigned int a2, int a3, unsigned
 }
 DETOUR_API(int, __stdcall, xlive_5284, int a1, int a2, int a3, int a4, void* Src, int a6, int a7)
 {
+    struct XUSER_STATS_SPEC {
+	    DWORD view_id;
+	    DWORD num_column_ids;
+	    WORD rgw_column_ids[64];
+    };
+
+    auto a5 = (XUSER_STATS_SPEC*)Src;
+    console->Println("view_id = {}", a5->view_id);
+    console->Println("num_column_ids = {}", a5->num_column_ids);
+    console->Println("rgw_column_ids[0] = {}", a5->rgw_column_ids[0]);
+    console->Println("rgw_column_ids[1] = {}", a5->rgw_column_ids[1]);
+    console->Println("rgw_column_ids[2] = {}", a5->rgw_column_ids[2]);
+    console->Println("rgw_column_ids[3] = {}", a5->rgw_column_ids[3]);
+    console->Println("rgw_column_ids[4] = {}", a5->rgw_column_ids[4]);
+
+    SKIP_AND_RETURN(0);
     CALL_ORIGINAL(5284, "XUserCreateStatsEnumeratorByRank", a1, a2, a3, a4, Src, a6, a7);
     LOG_AND_RETURN("{:x}, {:x}, {:x}, {:x}, {:x}, {:x}, {:x}", hex(a1), hex(a2), hex(a3), hex(a4), hex(Src), hex(a6), hex(a7));
 }
@@ -877,11 +1063,13 @@ DETOUR_API(int, __stdcall, xlive_5286, int a1, int a2, int a3, int a4, int a5, v
 }
 DETOUR_API(int, __stdcall, xlive_5292, int a1, int a2, int a3, int a4)
 {
+    SKIP_AND_RETURN(0);
     CALL_ORIGINAL(5292, "XUserSetContextEx", a1, a2, a3, a4);
     LOG_AND_RETURN("{:x}, {:x}, {:x}, {:x}", hex(a1), hex(a2), hex(a3), hex(a4));
 }
 DETOUR_API(int, __stdcall, xlive_5293, int a1, int a2, int a3, int a4, int a5)
 {
+    SKIP_AND_RETURN(0);
     // called on level load?
     CALL_ORIGINAL(5293, "XUserSetPropertyEx", a1, a2, a3, a4, a5);
     LOG_AND_RETURN("{:x}, {:x}, {:x}, {:x}, {:x}", hex(a1), hex(a2), hex(a3), hex(a4), hex(a5));
@@ -908,27 +1096,33 @@ DETOUR_API(int, __stdcall, xlive_5306, int a1, const unsigned __int16* a2, int a
 }
 DETOUR_API(int, __stdcall, xlive_5310)
 {
+    SKIP_AND_RETURN(0);
     CALL_ORIGINAL(5310, "XOnlineStartup");
     LOG_AND_RETURN("");
 }
 DETOUR_API(int, __stdcall, xlive_5311)
 {
+    NEVER_SKIP_AND_RETURN(0);
     CALL_ORIGINAL(5311, "XOnlineCleanup");
     LOG_AND_RETURN("");
 }
 DETOUR_API(signed int, __stdcall, xlive_5312, int a1, int a2, int a3, int a4, int a5)
 {
     // called after login, or when loading/exiting main menu
+    // TODO: GAME STALLS?
+    //SKIP_AND_RETURN(0);
     CALL_ORIGINAL(5312, "XFriendsCreateEnumerator", a1, a2, a3, a4, a5);
     LOG_AND_RETURN("{:x}, {:x}, {:x}, {:x}, {:x}", hex(a1), hex(a2), hex(a3), hex(a4), hex(a5));
 }
 DETOUR_API(signed int, __stdcall, xlive_5313, int a1)
 {
+    SKIP_AND_RETURN(0);
     CALL_ORIGINAL(5313, "XPresenceInitialize", a1);
     LOG_AND_RETURN("{:x}", hex(a1));
 }
 DETOUR_API(signed int, __stdcall, xlive_5314, int a1, int a2, int a3, int a4)
 {
+    SKIP_AND_RETURN(0);
     CALL_ORIGINAL(5314, "XUserMuteListQuery", a1, a2, a3, a4);
     LOG_AND_RETURN("{:x}, {:x}, {:x}, {:x}", hex(a1), hex(a2), hex(a3), hex(a4));
 }
@@ -959,6 +1153,7 @@ DETOUR_API(signed int, __stdcall, xlive_5322, int a1, int a2, int a3, int a4, in
 }
 DETOUR_T(signed int, xlive_5324, void* a1)
 {
+    SKIP_AND_RETURN(1);
     CALL_ORIGINAL(5324, "XOnlineGetNatType", a1);
     LOG_AND_RETURN("{:x}", hex(a1));
 }
@@ -982,13 +1177,14 @@ DETOUR_API(signed int, __stdcall, xlive_5329, int a1, int a2)
     CALL_ORIGINAL(5329, "XSessionFlushStats", a1, a2);
     LOG_AND_RETURN("{:x}, {:x}", hex(a1), hex(a2));
 }
-DETOUR_API(void*, __stdcall, xlive_5330, int a1, int a2)
+DETOUR_API(uintptr_t, __stdcall, xlive_5330, int a1, int a2)
 {
     CALL_ORIGINAL(5330, "XSessionDelete", a1, a2);
     LOG_AND_RETURN("{:x}, {:x}", hex(a1), hex(a2));
 }
 DETOUR_API(signed int, __stdcall, xlive_5331, int a1, int a2, int a3, int a4, DWORD* a5, int a6, int a7)
 {
+    SKIP_AND_RETURN(0);
     // called after login
     CALL_ORIGINAL(5331, "XUserReadProfileSettings", a1, a2, a3, a4, a5, a6, a7);
     LOG_AND_RETURN("{:x}, {:x}, {:x}, {:x}, {:x}, {:x}, {:x}", hex(a1), hex(a2), hex(a3), hex(a4), hex(a5), hex(a6), hex(a7));
@@ -1066,6 +1262,7 @@ DETOUR_API(signed int, __stdcall, xlive_5360, unsigned int a1, int a2, DWORD* a3
 }
 DETOUR_API(signed int, __stdcall, xlive_5365, int a1, int a2, int a3, int a4, int a5)
 {
+    SKIP_AND_RETURN(0);
     CALL_ORIGINAL(5365, "XShowMarketplaceUI", a1, a2, a3, a4, a5);
     LOG_AND_RETURN("{:x}, {:x}, {:x}, {:x}, {:x}", hex(a1), hex(a2), hex(a3), hex(a4), hex(a5));
 }
@@ -1076,11 +1273,13 @@ DETOUR_API(int, __stdcall, xlive_5367, int a1, int a2, unsigned int a3, int a4, 
 }
 DETOUR_API(int, __stdcall, xlive_5372, HANDLE hObject, int a2, int a3, int a4, int a5, int a6)
 {
+    SKIP_AND_RETURN(0);
     CALL_ORIGINAL(5372, "XMarketplaceCreateOfferEnumerator", hObject, a2, a3, a4, a5, a6);
     LOG_AND_RETURN("{:x}, {:x}, {:x}, {:x}, {:x}, {:x}", hex(hObject), hex(a2), hex(a3), hex(a4), hex(a5), hex(a6));
 }
 DETOUR_API(__int16, __stdcall, xlive_38, __int16 a1)
 {
+    SKIP_AND_RETURN(0);
     CALL_ORIGINAL(38, "XSocketNTOHS", a1);
     LOG_AND_RETURN("{:x}", hex(a1));
 }
@@ -1116,6 +1315,7 @@ DETOUR_API(int, __stdcall, xlive_5259, int a1, int a2, int a3, int a4)
 }
 DETOUR_API(int, __stdcall, xlive_5260, int a1, int a2)
 {
+    SKIP_AND_RETURN(0);
     CALL_ORIGINAL(5260, "XShowSigninUI", a1, a2);
     LOG_AND_RETURN("{:x}, {:x}", hex(a1), hex(a2));
 }
@@ -1129,11 +1329,12 @@ DETOUR_API(int, __stdcall, xlive_5318, int a1, int a2, int a3)
     CALL_ORIGINAL(5318, "XSessionStart", a1, a2, a3);
     LOG_AND_RETURN("{:x}, {:x}, {:x}", hex(a1), hex(a2), hex(a3));
 }
-//DETOUR_API(int, __stdcall, xlive_5034, int a1, int a2, int a3, int a4, int a5)
-//{
-//    CALL_ORIGINAL(5034, "XLiveProtectData", a1, a2, a3, a4, a5);
-//    LOG_AND_RETURN("{:x}, {:x}, {:x}, {:x} -> {:x}, {:x}", hex(a1), hex(a2), hex(a3), hex(a4), dptr(a4), hex(a5));
-//}
+DETOUR_API(int, __stdcall, xlive_5034, int a1, int a2, int a3, int a4, int a5)
+{
+    SKIP_AND_RETURN(0);
+    CALL_ORIGINAL(5034, "XLiveProtectData", a1, a2, a3, a4, a5);
+    LOG_AND_RETURN("{:x}, {:x}, {:x}, {:x} -> {:x}, {:x}", hex(a1), hex(a2), hex(a3), hex(a4), dptr(a4), hex(a5));
+}
 DETOUR_API(int, __stdcall, xlive_5035, BYTE* protected_data, DWORD size_of_protected_data, BYTE* unprotected_data, DWORD* size_of_data, HANDLE* protected_data_handle)
 {
     // XLive decrypts the protected data buffer, which checks against your logged in GFWL account. We simply do not call
@@ -1173,22 +1374,23 @@ DETOUR_API(int, __stdcall, xlive_5035, BYTE* protected_data, DWORD size_of_prote
 
     return -1;
 }
-//DETOUR_API(int, __stdcall, xlive_5036, int a1, int a2)
-//{
-//    CALL_ORIGINAL(5036, "XLiveCreateProtectedDataContext", a1, a2);
-//    LOG_AND_RETURN("{:x}, {:x} -> {:x}", hex(a1), hex(a2), dptr(a2));
-//}
-DETOUR_MID(xlive_5034)
+DETOUR_API(int, __stdcall, xlive_5036, int a1, int a2)
 {
-    SAVE_REGISTERS();
-
-    print_stack(5);
-    log_xlive_call(5034);
-
-    LOAD_REGISTERS();
-
-    JUMP_TO(xlive_5034);
+    SKIP_AND_RETURN(0);
+    CALL_ORIGINAL(5036, "XLiveCreateProtectedDataContext", a1, a2);
+    LOG_AND_RETURN("{:x}, {:x} -> {:x}", hex(a1), hex(a2), dptr(a2));
 }
+//DETOUR_MID(xlive_5034)
+//{
+//    SAVE_REGISTERS();
+//
+//    print_stack(5);
+//    log_xlive_call(5034);
+//
+//    LOAD_REGISTERS();
+//
+//    JUMP_TO(xlive_5034);
+//}
 //DETOUR_MID(xlive_5035)
 //{
 //    SAVE_REGISTERS();
@@ -1200,20 +1402,21 @@ DETOUR_MID(xlive_5034)
 //
 //    JUMP_TO(xlive_5035);
 //}
-DETOUR_MID(xlive_5036)
-{
-    SAVE_REGISTERS();
-
-    print_stack(2);
-    log_xlive_call(5036);
-
-    LOAD_REGISTERS();
-
-    JUMP_TO(xlive_5036);
-}
+//DETOUR_MID(xlive_5036)
+//{
+//    SAVE_REGISTERS();
+//
+//    print_stack(2);
+//    log_xlive_call(5036);
+//
+//    LOAD_REGISTERS();
+//
+//    JUMP_TO(xlive_5036);
+//}
 DETOUR_API(int, __stdcall, xlive_5038, int a1)
 {
     // Isn't it interesting how this function crashes if we do not hook it?
+    SKIP_AND_RETURN(0);
     CALL_ORIGINAL(5038, "XLiveCloseProtectedDataContext", a1);
     LOG_AND_RETURN("{:x}", hex(a1));
 }
