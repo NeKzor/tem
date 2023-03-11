@@ -90,6 +90,14 @@ XLive uses several anti-tampering tricks:
 
 - XUserWriteAchievements
 
+### Game exit
+
+- XLiveUninitialize
+- XOnlineCleanup
+- XLiveOnDestroyDevice
+- XLiveUninitialize
+- XNetCleanup
+
 ### Threads
 
 The game seems like in a playable state even when XLive's "Main" thread gets suspended.
