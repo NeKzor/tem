@@ -34,9 +34,7 @@ auto tem_attach(HMODULE module) -> int
     tem.is_attached = true;
     tem.module_handle = module;
 
-    console = new Console();
-    console->Init();
-    console->Println("[tem] Initializing...");
+    println("[tem] Initializing...");
 
     patch_gfwl();
     patch_forced_window_minimize();
@@ -44,8 +42,8 @@ auto tem_attach(HMODULE module) -> int
 
     tem.ui_init_thread = CreateThread(0, 0, LPTHREAD_START_ROUTINE(init_ui), 0, 0, 0);
 
-    console->Println(TEM_WELCOME);
-    console->Println(TEM_VERSION);
+    println(TEM_WELCOME);
+    println(TEM_VERSION);
 
     return 0;
 }
@@ -59,22 +57,22 @@ auto tem_detach() -> void
     tem.is_detached = true;
     ui.is_shutdown = true;
 
-    console->Println("[tem] Shutdown module {}", uintptr_t(tem.module_handle));
+    println("[tem] Shutdown module {}", uintptr_t(tem.module_handle));
 
     WaitForSingleObject(tem.ui_init_thread, 2000);
 
     destroy_ui();
 
     if (forcedWindowMinimizePatch.Restore()) {
-        console->Println("[tem] Restored forced window minimize patch");
+        println("[tem] Restored forced window minimize patch");
     }
 
     MH_UNHOOK(ProcessEvent);
-    console->Println("[tem] Unhooked UEngine::ProcessEvent");
+    println("[tem] Unhooked UEngine::ProcessEvent");
     MH_UNHOOK(GetTeamColor);
-    console->Println("[tem] Unhooked PgTeamInfo::GetTeamColor");
+    println("[tem] Unhooked PgTeamInfo::GetTeamColor");
     MH_UNHOOK(ConsoleCommand);
-    console->Println("[tem] Unhooked UGameViewportClient::ConsoleCommand");
+    println("[tem] Unhooked UGameViewportClient::ConsoleCommand");
 
     // FIXME: Engine pointer might be invalid at this point.
     //        It's probably better to remove the copy from tem.
@@ -87,8 +85,7 @@ auto tem_detach() -> void
 
     unpatch_gfwl();
 
-    console->Println("Cya :^)");
-    console->Shutdown();
+    println("Cya :^)");
 }
 
 auto shutdown_thread() -> void { FreeLibraryAndExitThread(tem.module_handle, 0); }
@@ -101,32 +98,32 @@ auto patch_forced_window_minimize() -> void
 
     unsigned char nop_jmp[2] = { 0x90, 0xE9 };
     if (forcedWindowMinimizePatch.Execute(Offsets::forced_window_minimize, nop_jmp, sizeof(nop_jmp))) {
-        console->Println(
+        println(
             "[tem] Patched GridGame.exe forced window minimize at 0x{:04x}", forcedWindowMinimizePatch.GetLocation());
     } else {
-        console->Println("[tem] Unable to patch forced window minimize :(");
+        println("[tem] Unable to patch forced window minimize :(");
     }
 }
 
 auto hook_process_event() -> void
 {
     tem.engine = Memory::Deref<UEngine*>(Offsets::g_Engine);
-    console->Println("[tem] g_Engine: 0x{:04x}", uintptr_t(tem.engine));
+    println("[tem] g_Engine: 0x{:04x}", uintptr_t(tem.engine));
 
     auto processEventAddress = Memory::VMT(tem.engine, Offsets::ProcessEvent);
-    console->Println("[tem] ProcessEvent: 0x{:04x}", processEventAddress);
+    println("[tem] ProcessEvent: 0x{:04x}", processEventAddress);
 
     MH_HOOK(ProcessEvent, processEventAddress);
-    console->Println("[tem] Hooked UEngine::ProcessEvent at 0x{:04x}", processEventAddress);
+    println("[tem] Hooked UEngine::ProcessEvent at 0x{:04x}", processEventAddress);
 
     MH_HOOK(GetTeamColor, Offsets::GetTeamColor);
-    console->Println("[tem] Hooked PgTeamInfo::GetTeamColor at 0x{:04x}", Offsets::GetTeamColor);
+    println("[tem] Hooked PgTeamInfo::GetTeamColor at 0x{:04x}", Offsets::GetTeamColor);
 
     auto viewport_client = tem.engine->viewport_client;
     if (viewport_client) {
         auto consoleCommandAddr = Memory::VMT(viewport_client, Offsets::ConsoleCommand);
         MH_HOOK(ConsoleCommand, consoleCommandAddr);
-        console->Println("[tem] Hooked UGameViewportClient::ConsoleCommand at 0x{:04x}", consoleCommandAddr);
+        println("[tem] Hooked UGameViewportClient::ConsoleCommand at 0x{:04x}", consoleCommandAddr);
     }
 }
 
@@ -195,7 +192,7 @@ DETOUR_T(void, ProcessEvent, UObject* object, UFunction* func, void* params, int
 {
 #if 0
     auto log_event = [&]() {
-        console->Println("{}::{} this = 0x{:04x} func = 0x{:04x} params = 0x{:04x}", tem.find_name(object->name),
+        println("{}::{} this = 0x{:04x} func = 0x{:04x} params = 0x{:04x}", tem.find_name(object->name),
             tem.find_name(func->name), uintptr_t(object), uintptr_t(func), uintptr_t(params));
     };
 
@@ -206,20 +203,20 @@ DETOUR_T(void, ProcessEvent, UObject* object, UFunction* func, void* params, int
 
     //// TODO: Find a way to explore multiplayer maps in single player
     //if (object->is(PG_PLAYER_CONTROLLER) && func->is(SET_CAMERA_TARGET_TIMER)) {
-    //    console->Println("Ignoring: PgPlayerController::SetCameraTargetTimer");
+    //    println("Ignoring: PgPlayerController::SetCameraTargetTimer");
     //    return;
     //}
 
     if (object->is(PG_PAWN)) {
         if (func->is(POST_INIT_ANIM_TREE) && !tem.pawn()) {
-            console->Println("PAWN SPAWNED 0x{:04x}", uintptr_t(object));
+            println("PAWN SPAWNED 0x{:04x}", uintptr_t(object));
 
             auto controller = tem.player_controller();
             if (tem.is_super_user && controller) {
                 controller->set_god_mode(true);
             }
         } else if (func->is(DESTROYED) && object->as<PgPawn>()->equals(tem.pawn())) {
-            console->Println("PAWN DESTROYED 0x{:04x}", uintptr_t(object));
+            println("PAWN DESTROYED 0x{:04x}", uintptr_t(object));
         }
 #if 0
         if (GetAsyncKeyState(VK_NUMPAD2) < 0) {
@@ -230,8 +227,6 @@ DETOUR_T(void, ProcessEvent, UObject* object, UFunction* func, void* params, int
         auto delta = GetTickCount64() - tem.last_tick;
         tem.tickrate = delta != 0 ? 1.0f / (delta / 1'0000.0f) : 0.0f;
         tem.last_tick = GetTickCount64();
-
-        console->Tick();
 
         auto pawn = tem.pawn();
         auto controller = tem.player_controller();
@@ -310,7 +305,7 @@ DETOUR_T(Color*, GetTeamColor, PgTeamInfo* team, Color* color, int team_color_in
 
 DETOUR_T(FString*, ConsoleCommand, UGameViewportClient* client, const FString& output, const FString& command)
 {
-    console->Println("[command] {}", command.str().c_str());
+    println("[command] {}", command.str().c_str());
 
     return ConsoleCommand(client, output, command);
 }

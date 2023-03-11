@@ -17,7 +17,7 @@
 auto dump_engine() -> void
 {
     auto g_Names = reinterpret_cast<TArray<FNameEntry*>*>(Offsets::g_Names);
-    console->Println("[dumper] g_Names: 0x{:04x} (size = {})", uintptr_t(g_Names), g_Names->size);
+    println("[dumper] g_Names: 0x{:04x} (size = {})", uintptr_t(g_Names), g_Names->size);
 
     auto names = g_Names->data;
     std::ofstream name_stream("tron_evolution_names_dump.txt");
@@ -33,7 +33,7 @@ auto dump_engine() -> void
     }
 
     auto g_Objects = reinterpret_cast<TArray<UObject*>*>(Offsets::g_Objects);
-    console->Println("[dumper] g_Objects: 0x{:04x} (size = {})", uintptr_t(g_Objects), g_Objects->size);
+    println("[dumper] g_Objects: 0x{:04x} (size = {})", uintptr_t(g_Objects), g_Objects->size);
 
     auto objects = g_Objects->data;
     std::ofstream object_stream("trom_evolution_objects_dump.txt");
@@ -857,5 +857,5 @@ auto dump_console_commands() -> void
                          << std::endl;
     }
 
-    console->Println("[dumper] Dumped {} console commands", list.size);
+    println("[dumper] Dumped {} console commands", list.size);
 }

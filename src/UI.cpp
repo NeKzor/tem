@@ -50,7 +50,7 @@ BOOL CALLBACK enum_window(HWND handle, LPARAM pid)
 
     auto found = strcmp(title, "Tron: Evolution") == 0;
     if (found) {
-        console->Println(
+        println(
             "[ui] enum_window: title = {}, proc_id = {}, handle = {}, pid = {}", title, proc_id, int(handle), int(pid));
         ui.window_handle = handle;
         return false;
@@ -62,34 +62,34 @@ BOOL CALLBACK enum_window(HWND handle, LPARAM pid)
 auto init_ui() -> void
 {
     //auto g_Renderer = Memory::Deref<URenderer*>(Offsets::g_Renderer);
-    //console->Println("[ui] g_Renderer: 0x{:04x}", uintptr_t(g_Renderer));
+    //println("[ui] g_Renderer: 0x{:04x}", uintptr_t(g_Renderer));
 
     //auto device = g_Renderer->device;
-    //console->Println("[ui] device: 0x{:04x}", uintptr_t(device));
+    //println("[ui] device: 0x{:04x}", uintptr_t(device));
 
     ui.window_handle = nullptr;
 
     EnumWindows(enum_window, GetCurrentProcessId());
 
     if (!ui.window_handle) {
-        return console->Println("[ui] Unable to find window handle :(");
+        return println("[ui] Unable to find window handle :(");
     }
 
     auto d3d9dll = LoadLibraryA("d3d9.dll");
     if (!d3d9dll) {
-        return console->Println("[ui] Unable to find d3d9.dll module :(");
+        return println("[ui] Unable to find d3d9.dll module :(");
     }
 
     auto D3DCreate9 = GetProcAddress(d3d9dll, "Direct3DCreate9");
     if (!D3DCreate9) {
-        return console->Println("[ui] Unable to find Direct3DCreate9 :(");
+        return println("[ui] Unable to find Direct3DCreate9 :(");
     }
 
     typedef IDirect3D9*(__stdcall * DIRECT3DCREATE9)(UINT version);
 
     auto d3d9 = DIRECT3DCREATE9(D3DCreate9)(D3D_SDK_VERSION);
     if (!d3d9) {
-        return console->Println("[ui] Direct3DCreate9 returns null :(");
+        return println("[ui] Direct3DCreate9 returns null :(");
     }
 
     IDirect3DDevice9* device = nullptr;
@@ -112,21 +112,21 @@ auto init_ui() -> void
         //}
 
         if (res != D3D_OK) {
-            console->Println("[ui] CreateDevice failed with error code {}", res);
+            println("[ui] CreateDevice failed with error code {}", res);
             Sleep(1000);
             continue;
         }
 
         if (!device) {
-            console->Println("[ui] CreateDevice did not set a device :(");
+            println("[ui] CreateDevice did not set a device :(");
             break;
         }
 
         auto reset = Memory::VMT<_Reset>(device, Offsets::Reset);
         auto present = Memory::VMT<_Present>(device, Offsets::Present);
 
-        console->Println("[ui] IDirect3DDevice9::Reset: 0x{:04x}", uintptr_t(reset));
-        console->Println("[ui] IDirect3DDevice9::Present: 0x{:04x}", uintptr_t(present));
+        println("[ui] IDirect3DDevice9::Reset: 0x{:04x}", uintptr_t(reset));
+        println("[ui] IDirect3DDevice9::Present: 0x{:04x}", uintptr_t(present));
 
         MH_HOOK(Reset, reset);
         MH_HOOK(Present, present);
@@ -144,10 +144,10 @@ auto destroy_ui() -> void
 
     if (ui.hooked) {
         MH_UNHOOK(Reset);
-        console->Println("[ui] Unhooked IDirect3DDevice9::Reset");
+        println("[ui] Unhooked IDirect3DDevice9::Reset");
 
         MH_UNHOOK(Present);
-        console->Println("[ui] Unhooked IDirect3DDevice9::Present");
+        println("[ui] Unhooked IDirect3DDevice9::Present");
 
         ui.hooked = false;
     }
@@ -156,11 +156,11 @@ auto destroy_ui() -> void
         ImGui_ImplDX9_Shutdown();
         ImGui_ImplWin32_Shutdown();
         ImGui::DestroyContext();
-        console->Println("[ui] ImGui Shutdown");
+        println("[ui] ImGui Shutdown");
 
         if (ui.window_proc) {
             SetWindowLongPtr(ui.window_handle, GWLP_WNDPROC, LONG_PTR(ui.window_proc));
-            console->Println("[ui] Restored WindowLongPtr");
+            println("[ui] Restored WindowLongPtr");
         }
 
         ui.initialized = false;
@@ -209,7 +209,7 @@ DETOUR_STD(HRESULT, Present, IDirect3DDevice9* device, RECT* pSourceRect, RECT* 
             ImGui_ImplDX9_Init(device);
             ImGui_ImplWin32_Init(ui.window_handle);
 
-            console->Println("[ui] Intialized");
+            println("[ui] Intialized");
 
             ui.initialized = true;
         }
@@ -589,7 +589,7 @@ DETOUR_STD(HRESULT, Present, IDirect3DDevice9* device, RECT* pSourceRect, RECT* 
                             if (mapping_iter != tem.command_to_key_move.end()) {
                                 auto& mapping = mapping_iter->second;
                                 mapping.second.push_back(binding.name.index);
-                                console->Println("[ui] mapping command {} to key = {}", command_str, key);
+                                println("[ui] mapping command {} to key = {}", command_str, key);
                             }
                         }
                     }
@@ -606,14 +606,14 @@ DETOUR_STD(HRESULT, Present, IDirect3DDevice9* device, RECT* pSourceRect, RECT* 
                     if (ImGui::MenuItem("PgCheatManager::OnScreenWarnings()")) {
                         auto cheat_manager = tem.engine->get_local_player()->actor->cheat_manager;
                         Memory::VMT<int(__stdcall*)()>(cheat_manager, 71)();
-                        console->Println("Called PgCheatManager::OnScreenWarnings()");
+                        println("Called PgCheatManager::OnScreenWarnings()");
                     }
                     create_hover_tooltip("Show Kismet debug warnings.");
 
                     if (ImGui::MenuItem("PgCheatManager::DoApplyXP(69420)")) {
                         auto cheat_manager = tem.engine->get_local_player()->actor->cheat_manager;
                         Memory::VMT<int(__stdcall*)(int xp)>(cheat_manager, 82)(69'420);
-                        console->Println("Called PgCheatManager::DoApplyXP(69420)");
+                        println("Called PgCheatManager::DoApplyXP(69420)");
                     }
                     create_hover_tooltip("Give yourself XP :)");
 
@@ -631,16 +631,16 @@ DETOUR_STD(HRESULT, Present, IDirect3DDevice9* device, RECT* pSourceRect, RECT* 
 
                     //    auto controller = tem.player_controller();
                     //    auto unlock_system = controller->unlock_system;
-                    //    console->Println("PgUnlockSystem 0x{:04x}", uintptr_t(unlock_system));
+                    //    println("PgUnlockSystem 0x{:04x}", uintptr_t(unlock_system));
 
                     //    auto blackguard_skin_addr = uintptr_t(0x18220000);
                     //    auto blackguard_skin = reinterpret_cast<PgUnlockItemPlayerSkin*>(&blackguard_skin_addr);
-                    //    console->Println("BG Skin 0x{:04x}", uintptr_t(blackguard_skin));
+                    //    println("BG Skin 0x{:04x}", uintptr_t(blackguard_skin));
 
                     //    auto SetPlayerSkin = Memory::VMT<void(__thiscall*)(PgUnlockSystem * thisptr, PgUnlockItemPlayerSkin* skin)>(unlock_system, 106);
 
                     //    SetPlayerSkin(unlock_system, blackguard_skin);
-                    //    console->Println("CALLED PgUnlockSystem::SetPlayerSkin 0x{:04x}", uintptr_t(SetPlayerSkin));
+                    //    println("CALLED PgUnlockSystem::SetPlayerSkin 0x{:04x}", uintptr_t(SetPlayerSkin));
                     //}
                     //create_hover_tooltip("Test.");
                 }

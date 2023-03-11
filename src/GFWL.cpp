@@ -217,7 +217,7 @@ auto patch_gfwl() -> void
     auto xlive = Memory::ModuleInfo();
 
     if (!Memory::TryGetModule("xlive.dll", &xlive)) {
-        return console->Println("[gfwl] Unable to find GFWL module :(");
+        return println("[gfwl] Unable to find GFWL module :(");
     }
 
     // Modify memory modification check
@@ -226,9 +226,9 @@ auto patch_gfwl() -> void
 
     unsigned char nop_jmp[2] = { 0x90, 0xE9 };
     if (gfwlMemCheckPatch.Execute(xlive.base + Offsets::xlive_memory_check, nop_jmp, sizeof(nop_jmp))) {
-        console->Println("[gfwl] Patched xlive.dll memory check at 0x{:04x}", gfwlMemCheckPatch.GetLocation());
+        println("[gfwl] Patched xlive.dll memory check at 0x{:04x}", gfwlMemCheckPatch.GetLocation());
     } else {
-        return console->Println("[gfwl] Unable to patch memory check :(");
+        return println("[gfwl] Unable to patch memory check :(");
     }
 
     hook_gfwl(xlive);
@@ -238,16 +238,16 @@ auto patch_gfwl() -> void
 auto hook_gfwl(Memory::ModuleInfo& xlive) -> void
 {
     auto handle = GetModuleHandleA(xlive.path);
-    console->Println("[gfwl] xlive.dll handle 0x{:04x}", uintptr_t(handle));
+    println("[gfwl] xlive.dll handle 0x{:04x}", uintptr_t(handle));
 
 #define HOOK_ORDINAL(ordinal, name)                                                                                    \
     auto ordinal_##ordinal##_address = uintptr_t(GetProcAddress(handle, LPCSTR(ordinal)));                             \
     if (ordinal_##ordinal##_address) {                                                                                 \
         addressesToUnhook.insert_or_assign(ordinal, std::make_tuple(ordinal_##ordinal##_address, name, 0, 0));         \
         MH_QUEUE_HOOK(xlive_##ordinal, ordinal_##ordinal##_address);                                                   \
-        console->Println("[gfwl] Hooked xlive_{} at 0x{:04x}", ordinal, ordinal_##ordinal##_address);                  \
+        println("[gfwl] Hooked xlive_{} at 0x{:04x}", ordinal, ordinal_##ordinal##_address);                  \
     } else {                                                                                                           \
-        console->Println("[gfwl] Unable to hook xlive_" #ordinal);                                                     \
+        println("[gfwl] Unable to hook xlive_" #ordinal);                                                     \
     }
 
 #define HOOK_IAT_WRAPPER(wrapper_address, ordinal, name)                                                               \
@@ -255,14 +255,14 @@ auto hook_gfwl(Memory::ModuleInfo& xlive) -> void
     auto xlive_##ordinal##_original = **(uintptr_t**)(wrapper_address + 2);                                            \
     MH_QUEUE_HOOK(xlive_##ordinal, wrapper_address);                                                                   \
     xlive_##ordinal = _xlive_##ordinal(xlive_##ordinal##_original);                                                    \
-    console->Println("[gfwl] Hooked {} 0x{:04x} at 0x{:04x}", name, xlive_##ordinal##_original, wrapper_address);
+    println("[gfwl] Hooked {} 0x{:04x} at 0x{:04x}", name, xlive_##ordinal##_original, wrapper_address);
 
 #define HOOK_IAT_WRAPPER_MID(wrapper_address, ordinal, name)                                                           \
     addressesToUnhook.insert_or_assign(ordinal, std::make_tuple(wrapper_address, name, 0, 0));                         \
     auto xlive_##ordinal##_original = **(uintptr_t**)(wrapper_address + 2);                                            \
     MH_HOOK_MID(xlive_##ordinal, wrapper_address);                                                                     \
     xlive_##ordinal = xlive_##ordinal##_original;                                                                      \
-    console->Println("[gfwl] Hooked {} 0x{:04x} at 0x{:04x}", name, xlive_##ordinal##_original, wrapper_address);
+    println("[gfwl] Hooked {} 0x{:04x} at 0x{:04x}", name, xlive_##ordinal##_original, wrapper_address);
 
     HOOK_ORDINAL(3, "XSocketCreate");
     HOOK_ORDINAL(4, "XSocketClose");
@@ -413,13 +413,13 @@ auto change_gfwl_main_thread(bool suspend) -> bool
 {
     auto xlive = Memory::ModuleInfo();
     if (!Memory::TryGetModule("xlive.dll", &xlive)) {
-        console->Println("[gfwl] Unable to find GFWL module :(");
+        println("[gfwl] Unable to find GFWL module :(");
         return false;
     }
 
     auto ntdll = Memory::ModuleInfo();
     if (!Memory::TryGetModule("ntdll.dll", &ntdll)) {
-        console->Println("[gfwl] Unable to find ntdll.dll module :(");
+        println("[gfwl] Unable to find ntdll.dll module :(");
         return false;
     }
 
@@ -427,7 +427,7 @@ auto change_gfwl_main_thread(bool suspend) -> bool
         = Memory::GetSymbolAddress<decltype(NtQueryInformationThread)*>(ntdll.base, "NtQueryInformationThread");
 
     if (!ntdll_NtQueryInformationThread) {
-        console->Println("[gfwl] Unable to find NtQueryInformationThread :(");
+        println("[gfwl] Unable to find NtQueryInformationThread :(");
         return false;
     }
 
@@ -456,7 +456,7 @@ auto change_gfwl_main_thread(bool suspend) -> bool
                         if (index++ == GFWL_MAIN_THREAD_INDEX) {
                             auto result = suspend ? SuspendThread(handle) : ResumeThread(handle);
                             if (result != -1) {
-                                console->Println("[gfwl] {} main thread 0x{:04x} of start address 0x{:04x}",
+                                println("[gfwl] {} main thread 0x{:04x} of start address 0x{:04x}",
                                     suspend ? "Suspended" : "Resumed", entry.th32ThreadID, start_address);
                                 return true;
                             }
@@ -485,13 +485,13 @@ auto unpatch_gfwl() -> void
         auto name = std::get<1>(address.second);
 
         MH_UNHOOK_TARGET(function);
-        console->Println("[gfwl] Unhooked {} at 0x{:04x}", name, function);
+        println("[gfwl] Unhooked {} at 0x{:04x}", name, function);
     }
 
     addressesToUnhook.clear();
 
     if (gfwlMemCheckPatch.Restore()) {
-        console->Println("[gfwl] Restored mem check patch");
+        println("[gfwl] Restored mem check patch");
     }
 }
 
@@ -500,7 +500,7 @@ auto __forceinline print_stack(int parameters) -> void
     auto retAddress = uintptr_t(_AddressOfReturnAddress());
     for (int i = 12; i <= 12 + parameters + 1; ++i) {
         auto stack = retAddress + (i << 2);
-        console->Println("[gfwl] stack(0x{:04x}) -> 0x{:08x} | {}", stack, *(uintptr_t*)stack, *(uintptr_t*)stack);
+        println("[gfwl] stack(0x{:04x}) -> 0x{:08x} | {}", stack, *(uintptr_t*)stack, *(uintptr_t*)stack);
     }
 }
 
@@ -515,7 +515,7 @@ auto log_xlive_call(uint32_t ordinal) -> void
 
     auto function = std::get<0>(address);
     auto name = std::get<1>(address);
-    console->Println("[gfwl] {} (xlive_{} at 0x{:04x})", name, ordinal, function);
+    println("[gfwl] {} (xlive_{} at 0x{:04x})", name, ordinal, function);
 }
 
 auto xlive_debug_break(bool resume_main_thread = true) -> void {
@@ -525,7 +525,7 @@ auto xlive_debug_break(bool resume_main_thread = true) -> void {
 
     change_gfwl_main_thread(true);
 
-    console->Println("[gfwl] waiting for debugger to attach...");
+    println("[gfwl] waiting for debugger to attach...");
 
     while (!IsDebuggerPresent()) {
         Sleep(420);
@@ -566,7 +566,7 @@ auto __skip_rv = -1;
     return result
 
 #define LOG_AND_RETURN(fmt, ...)                                                                                       \
-    console->Println("[gfwl] [{:04}] [0x{:x}] [0x{:x}] {}(" fmt ") -> {:x} | {}", ordinal, uintptr_t(original),        \
+    println("[gfwl] [{:04}] [0x{:x}] [0x{:x}] {}(" fmt ") -> {:x} | {}", ordinal, uintptr_t(original),        \
         uintptr_t(_ReturnAddress()), name, ##__VA_ARGS__, result, result);                                             \
     return result
 
@@ -939,7 +939,7 @@ auto xlive_5262_calls = 0;
 DETOUR_API(signed int, __stdcall, xlive_5262, int a1)
 {
     xlive_5262_calls += 1;
-    console->Println("XUserGetSigninState = {}", xlive_5262_calls > 7 ? 1 : 0);
+    println("XUserGetSigninState = {}", xlive_5262_calls > 7 ? 1 : 0);
     SKIP_AND_RETURN(xlive_5262_calls > 7 ? 1 : 0);
 
     // called on login and then frequently after
@@ -953,9 +953,9 @@ DETOUR_API(int, __stdcall, xlive_5263, uint32_t user_index, CHAR* user_name, uin
     // called after login
     CALL_ORIGINAL(5263, "XUserGetName", user_index, user_name, user_name_length);
 
-    console->Println("user_index = {:X}", user_index);
-    console->Println("user_name = {}", user_name);
-    console->Println("user_name_length = {:X}", user_name_length);
+    println("user_index = {:X}", user_index);
+    println("user_name = {}", user_name);
+    println("user_name_length = {:X}", user_name_length);
 
     LOG_AND_RETURN("{:x}, {:x}, {:x}", hex(user_index), hex(user_name), hex(user_name_length));
 }
@@ -981,12 +981,12 @@ DETOUR_API(signed int, __stdcall, xlive_5267, uint32_t user_index, uint32_t flag
     CALL_ORIGINAL(5267, "XUserGetSigninInfo", user_index, flags, signin_info);
     
     if (signin_info) {
-        console->Println("signin_info->xuid = {:X}", (unsigned __int64)signin_info->xuid);
-        console->Println("signin_info->flags = {}", (unsigned long)signin_info->flags);
-        console->Println("signin_info->user_signin_state = {}", (uint32_t)signin_info->user_signin_state);
-        console->Println("signin_info->guest_number = {}", (unsigned long)signin_info->guest_number);
-        console->Println("signin_info->sponsor_user_index = {}", (unsigned long)signin_info->sponsor_user_index);
-        console->Println("signin_info->user_name = {}", signin_info->user_name);
+        println("signin_info->xuid = {:X}", (unsigned __int64)signin_info->xuid);
+        println("signin_info->flags = {}", (unsigned long)signin_info->flags);
+        println("signin_info->user_signin_state = {}", (uint32_t)signin_info->user_signin_state);
+        println("signin_info->guest_number = {}", (unsigned long)signin_info->guest_number);
+        println("signin_info->sponsor_user_index = {}", (unsigned long)signin_info->sponsor_user_index);
+        println("signin_info->user_name = {}", signin_info->user_name);
     }
 
     LOG_AND_RETURN("{:x}, {:x}, {:x}", hex(user_index), hex(flags), hex(signin_info));
@@ -1044,13 +1044,13 @@ DETOUR_API(int, __stdcall, xlive_5284, int a1, int a2, int a3, int a4, void* Src
     };
 
     auto a5 = (XUSER_STATS_SPEC*)Src;
-    console->Println("view_id = {}", a5->view_id);
-    console->Println("num_column_ids = {}", a5->num_column_ids);
-    console->Println("rgw_column_ids[0] = {}", a5->rgw_column_ids[0]);
-    console->Println("rgw_column_ids[1] = {}", a5->rgw_column_ids[1]);
-    console->Println("rgw_column_ids[2] = {}", a5->rgw_column_ids[2]);
-    console->Println("rgw_column_ids[3] = {}", a5->rgw_column_ids[3]);
-    console->Println("rgw_column_ids[4] = {}", a5->rgw_column_ids[4]);
+    println("view_id = {}", a5->view_id);
+    println("num_column_ids = {}", a5->num_column_ids);
+    println("rgw_column_ids[0] = {}", a5->rgw_column_ids[0]);
+    println("rgw_column_ids[1] = {}", a5->rgw_column_ids[1]);
+    println("rgw_column_ids[2] = {}", a5->rgw_column_ids[2]);
+    println("rgw_column_ids[3] = {}", a5->rgw_column_ids[3]);
+    println("rgw_column_ids[4] = {}", a5->rgw_column_ids[4]);
 
     SKIP_AND_RETURN(0);
     CALL_ORIGINAL(5284, "XUserCreateStatsEnumeratorByRank", a1, a2, a3, a4, Src, a6, a7);
