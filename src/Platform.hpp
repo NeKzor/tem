@@ -51,65 +51,67 @@
 #define DETOUR_MID(name) __declspec(naked) void name##_Hook()
 
 namespace Hooks {
-static auto initialize() -> void {
+static auto initialize() -> void
+{
     auto status = MH_Initialize();
-    if (status  == MH_STATUS::MH_OK) {
-        println("[hooks] Initialized hooking engine");
-    } else {
-        println("[hooks] Failed to initialize hooking engine | MH_STATUS = {}", int(status));
+    if (status != MH_STATUS::MH_OK) {
+        return println("[hooks] Failed to initialize hooking engine | MH_STATUS = {}", int(status));
     }
+
+    println("[hooks] Initialized hooking engine");
 }
-static auto uninitialize() -> void {
+static auto uninitialize() -> void
+{
     auto status = MH_Uninitialize();
-    if (status == MH_STATUS::MH_OK) {
-        println("[hooks] Uninitialized hooking engine");
-    } else {
-        println("[hooks] Failed to uninitialize hooking engine | MH_STATUS = {}", int(status));
+    if (status != MH_STATUS::MH_OK) {
+        return println("[hooks] Failed to uninitialize hooking engine | MH_STATUS = {}", int(status));
     }
+
+    println("[hooks] Uninitialized hooking engine");
 }
-static auto apply_queued() -> void {
+static auto apply_queued() -> void
+{
     auto status = MH_ApplyQueued();
-    if (status == MH_STATUS::MH_OK) {
-        println("[hooks] Applied all queued hooks");
-    } else {
-        println("[hooks] Failed to apply all queued hooks | MH_STATUS = {}", int(status));
+    if (status != MH_STATUS::MH_OK) {
+        return println("[hooks] Failed to apply all queued hooks | MH_STATUS = {}", int(status));
     }
+
+    println("[hooks] Applied all queued hooks");
 }
 
 template <typename Original, typename Hook>
 static auto hook(const char* name, Original* trampoline, Hook hook, uintptr_t original) -> void
 {
     auto create_status = MH_CreateHook(LPVOID(original), LPVOID(hook), reinterpret_cast<LPVOID*>(trampoline));
-    if (create_status == MH_STATUS::MH_OK) {
-        println("[hooks] Created hook {} at 0x{:x}", name, original);
-    } else {
-        println("[hooks] Failed to create hook {} at 0x{:x} | MH_STATUS = {}", name, original, int(create_status));
+    if (create_status != MH_STATUS::MH_OK) {
+        return println(
+            "[hooks] Failed to create hook {} at 0x{:x} | MH_STATUS = {}", name, original, int(create_status));
     }
 
-    auto queue_status = MH_EnableHook(LPVOID(original));
-    if (queue_status == MH_STATUS::MH_OK) {
-        println("[hooks] Enabled hook {} at 0x{:x}", name, original);
-    } else {
-        println("[hooks] Failed to enabled hook {} at 0x{:x} | MH_STATUS = {}", name, original, int(queue_status));
+    auto enable_status = MH_EnableHook(LPVOID(original));
+    if (enable_status != MH_STATUS::MH_OK) {
+        return println(
+            "[hooks] Failed to enable hook {} at 0x{:x} | MH_STATUS = {}", name, original, int(enable_status));
     }
+
+    println("[hooks] Hooked {} at 0x{:x}", name, original);
 }
 
 template <typename Trampoline, typename Hook>
 static auto queue(const char* name, Trampoline* trampoline, Hook hook, uintptr_t original) -> void
 {
     auto create_status = MH_CreateHook(LPVOID(original), LPVOID(hook), reinterpret_cast<LPVOID*>(trampoline));
-    if (create_status == MH_STATUS::MH_OK) {
-        println("[hooks] Created hook {} at 0x{:x}", name, original);
-    } else {
-        println("[hooks] Failed to create hook {} at 0x{:x} | MH_STATUS = {}", name, original, int(create_status));
+    if (create_status != MH_STATUS::MH_OK) {
+        return println(
+            "[hooks] Failed to create hook {} at 0x{:x} | MH_STATUS = {}", name, original, int(create_status));
     }
 
     auto queue_status = MH_QueueEnableHook(LPVOID(original));
-    if (queue_status == MH_STATUS::MH_OK) {
-        println("[hooks] Queued hook {} at 0x{:x}", name, original);
-    } else {
-        println("[hooks] Failed to queue hook {} at 0x{:x} | MH_STATUS = {}", name, original, int(queue_status));
+    if (queue_status != MH_STATUS::MH_OK) {
+        return println("[hooks] Failed to queue hook {} at 0x{:x} | MH_STATUS = {}", name, original, int(queue_status));
     }
+
+    println("[hooks] Hooking {} at 0x{:x}", name, original);
 }
 
 }
