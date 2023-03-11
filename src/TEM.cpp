@@ -76,11 +76,15 @@ auto tem_detach() -> void
     MH_UNHOOK(ConsoleCommand);
     console->Println("[tem] Unhooked UGameViewportClient::ConsoleCommand");
 
+    // FIXME: Engine pointer might be invalid at this point.
+    //        It's probably better to remove the copy from tem.
+    tem.engine = Memory::Deref<UEngine*>(Offsets::g_Engine);
+
     auto controller = tem.player_controller();
     if (tem.is_super_user && controller) {
         controller->set_god_mode(false);
     }
-    
+
     unpatch_gfwl();
 
     console->Println("Cya :^)");
