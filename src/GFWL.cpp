@@ -26,6 +26,7 @@ bool suspended_gfwl_main_thread = false;
 
 auto hook_gfwl(Memory::ModuleInfo& xlive) -> void;
 
+#if !USE_XDEAD
 DECL_DETOUR_API(signed int, __stdcall, xlive_3, int a1, signed int a2, signed int a3);
 DECL_DETOUR_API(signed int, __stdcall, xlive_4, int a1);
 DECL_DETOUR_API(signed int, __stdcall, xlive_6, int a1, int a2, signed int* a3);
@@ -167,11 +168,76 @@ DECL_DETOUR_API(int, __stdcall, xlive_5278, int a1, int a2, int a3);
 DECL_DETOUR_API(int, __stdcall, xlive_5297, int a1, int a2);
 DECL_DETOUR_API(int, __stdcall, xlive_5317, int a1, int a2, int a3, int a4, int a5);
 DECL_DETOUR_API(int, __stdcall, xlive_5332, int a1, int a2);
+#else
+XDEAD_CALLBACK(signed int, XFriendsCreateEnumerator, int a1, int a2, int a3, int a4, int a5)
+{
+    // called after login, or when loading/exiting main menu
+    
+    // NOTE: The game needs a value or it will loop forever when exiting.
+    return 1;
+}
+XDEAD_CALLBACK(int, XNotifyCreateListener, __int64 a1)
+{
+    // NOTE: The game needs a value or it will fail to initialize.
+    return 1;
+}
+XDEAD_CALLBACK(XUSER_SIGNIN_STATE, XUserGetSigninState, int a1)
+{
+    // The game makes exactly seven calls to this function before it can log into an account.
+
+    static auto calls_to_user_get_signin_state = 0;
+
+    auto can_login = calls_to_user_get_signin_state >= 7;
+    if (!can_login) {
+        calls_to_user_get_signin_state += 1;
+    }
+
+    auto loginState =  can_login ? XUSER_SIGNIN_STATE::SignedInLocally : XUSER_SIGNIN_STATE::NotSignedIn;
+    println("[gfwl] Forcing XUserGetSigninState -> {}", loginState);
+
+    return loginState;
+}
+XDEAD_CALLBACK(int, XLiveUnprotectData, BYTE* protected_data, DWORD size_of_protected_data, BYTE* unprotected_data, DWORD* size_of_data, HANDLE* protected_data_handle)
+{
+    // XLive decrypts the protected data buffer, which checks against your logged in GFWL account. We simply do not call
+    // the original function and instead write the same CRC values from the save file back into the buffer, making the
+    // save manager succeed verifying it. This means that we can now load any save file :^)
+
+    struct unprotected_buffer_t {
+        uint32_t header_crc;
+        uint32_t body_crc;
+    };
+    static_assert(sizeof(unprotected_buffer_t) == 8);
+
+    if (!unprotected_data) {
+        if (size_of_data) {
+            *size_of_data = sizeof(unprotected_buffer_t);
+            return 0;
+        }
+    } else {
+        auto pg_save_load = *reinterpret_cast<PgSaveLoad**>(Offsets::pg_save_load);
+        if (pg_save_load
+            && pg_save_load->file_manager
+            && pg_save_load->file_manager->save_file
+            && pg_save_load->file_manager->save_file->buffer) {
+            auto unprotected_buffer = reinterpret_cast<unprotected_buffer_t*>(unprotected_data);
+            auto save_buffer = pg_save_load->file_manager->save_file->buffer;
+
+            unprotected_buffer->header_crc = save_buffer->header.header_crc;
+            unprotected_buffer->body_crc = save_buffer->header.body_crc;
+            return 0;
+        }
+    }
+
+    return -1;
+}
+#endif
 
 auto change_gfwl_main_thread(bool suspend) -> bool;
 
 auto patch_gfwl() -> void
 {
+#if !USE_XDEAD
     auto xlive = Memory::ModuleInfo();
 
     if (!Memory::TryGetModule("xlive.dll", &xlive)) {
@@ -191,10 +257,50 @@ auto patch_gfwl() -> void
 
     hook_gfwl(xlive);
     //change_gfwl_main_thread(true);
+#else
+    auto xdead = Memory::GetModuleHandleByName("xlive.dll");
+    if (!xdead) {
+        return println("[gfwl] Unable to find xlive.dll :(");
+    }
+
+    auto xdead_add_listener = Memory::GetSymbolAddress<xdead::add_listener_t>(xdead, "xdead_add_listener");
+    if (!xdead_add_listener) {
+        return println("[gfwl] Unable to find xdead_add_listener :(");
+    }
+
+    auto status = xdead_add_listener(xdead::XFriendsCreateEnumerator, XFriendsCreateEnumerator_callback, 0);
+    if (status == xdead::ListenerStatus::Ok) {
+        println("[gfwl] Added listener for XFriendsCreateEnumerator");
+    } else {
+        println("[gfwl] Failed to add listener for XFriendsCreateEnumerator = {}", int(status));
+    }
+
+    status = xdead_add_listener(xdead::XNotifyCreateListener, XNotifyCreateListener_callback, 0);
+    if (status == xdead::ListenerStatus::Ok) {
+        println("[gfwl] Added listener for XNotifyCreateListener");
+    } else {
+        println("[gfwl] Failed to add listener for XNotifyCreateListener = {}", int(status));
+    }
+
+    status = xdead_add_listener(xdead::XUserGetSigninState, XUserGetSigninState_callback, 0);
+    if (status == xdead::ListenerStatus::Ok) {
+        println("[gfwl] Added listener for XUserGetSigninState");
+    } else {
+        println("[gfwl] Failed to add listener for XUserGetSigninState = {}", int(status));
+    }
+
+    status = xdead_add_listener(xdead::XLiveUnprotectData, XLiveUnprotectData_callback, 0);
+    if (status == xdead::ListenerStatus::Ok) {
+        println("[gfwl] Added listener for XLiveUnprotectData");
+    } else {
+        println("[gfwl] Failed to add listener for XLiveUnprotectData = {}", int(status));
+    }
+#endif
 }
 
 auto hook_gfwl(Memory::ModuleInfo& xlive) -> void
 {
+#if !USE_XDEAD
     auto handle = GetModuleHandleA(xlive.path);
     println("[gfwl] xlive.dll handle 0x{:04x}", uintptr_t(handle));
 
@@ -360,10 +466,12 @@ auto hook_gfwl(Memory::ModuleInfo& xlive) -> void
     HOOK_IAT_WRAPPER(0x1A33B94, 5297, "XLiveInitializeEx");
     HOOK_IAT_WRAPPER(0x1A33B04, 5317, "XSessionWriteStats");
     HOOK_IAT_WRAPPER(0x1A33BE8, 5332, "XSessionEnd");
+#endif
 }
 
 auto change_gfwl_main_thread(bool suspend) -> bool
 {
+#if !USE_XDEAD
     auto xlive = Memory::ModuleInfo();
     if (!Memory::TryGetModule("xlive.dll", &xlive)) {
         println("[gfwl] Unable to find GFWL module :(");
@@ -424,11 +532,13 @@ auto change_gfwl_main_thread(bool suspend) -> bool
     }
 
     CloseHandle(snapshot);
+#endif
     return false;
 }
 
 auto unpatch_gfwl() -> void
 {
+#if !USE_XDEAD
     if (suspended_gfwl_main_thread) {
         change_gfwl_main_thread(false);
     }
@@ -438,8 +548,22 @@ auto unpatch_gfwl() -> void
     if (gfwlMemCheckPatch.Restore()) {
         println("[gfwl] Restored mem check patch");
     }
+#else
+    auto xdead = Memory::GetModuleHandleByName("xlive.dll");
+    if (!xdead) {
+        return println("[gfwl] Unable to find xlive.dll :(");
+    }
+
+    auto xdead_remove_all_listeners = Memory::GetSymbolAddress<xdead::remove_all_listeners_T>(xdead, "xdead_remove_all_listeners");
+    if (!xdead_remove_all_listeners) {
+        return println("[gfwl] Unable to get xdead_remove_all_listeners :(");
+    }
+
+    xdead_remove_all_listeners();
+#endif
 }
 
+#if !USE_XDEAD
 auto __forceinline print_stack(int parameters) -> void
 {
     auto retAddress = uintptr_t(_AddressOfReturnAddress());
@@ -1417,3 +1541,4 @@ DETOUR_API(int, __stdcall, xlive_5332, int a1, int a2)
     LOG_AND_RETURN("{:x}, {:x}", hex(a1), hex(a2));
 }
 // clang-format on
+#endif
