@@ -50,7 +50,6 @@ jobs:
       uses: microsoft/setup-msbuild@v1.1
 
     - name: Build
-      if: steps.changes.outputs.tem == 'true'
       working-directory: ${{env.GITHUB_WORKSPACE }}
       shell: pwsh
       run: |
