@@ -7,16 +7,6 @@ on:
 
 jobs:
   build:
-    strategy:
-      matrix:
-        project: [
-          { target: tem, binary: tem.dll },
-          { target: injector, binary: injector.exe },
-          { target: launcher, binary: GridGameLauncher.exe },
-          { target: proxy, binary: dinput8.dll },
-          { target: unlocker, binary: unlocker.exe }
-        ]
-
     runs-on: windows-latest
 
     steps:
@@ -27,26 +17,22 @@ jobs:
 
     - name: Build
       working-directory: ${{env.GITHUB_WORKSPACE }}
-      run: msbuild /m /p:Configuration=Release /p:Platform=x86 /t:${{ matrix.project.target }}
+      run: |
+        msbuild /m /p:Configuration=Release /p:Platform=x86 /t:tem;injector;launcher;proxy;unlocker
 
-    - name: Create artifact
-      uses: actions/upload-artifact@v3
-      with:
-          name: ${{ matrix.project.target }}
-          path: bin/Release/${{ matrix.project.target }}/${{ matrix.project.binary }}
+        $Env:BUILD_WITH_XDEAD = '1'
+        $Env:CL = '/D BUILD_WITH_XDEAD'
 
-  release:
-    runs-on: windows-latest
-    needs: build
-
-    steps:
-    - name: Download artifacts
-      uses: actions/download-artifact@v3
-      with:
-        path: release
+        msbuild /m /p:Configuration=Release /p:Platform=x86 /t:tem
 
     - name: Create archive
-      run: 7z a ${{ github.ref_name }}-release.zip ./release/tem/* ./release/injector/* ./release/launcher/* ./release/proxy/* ./release/unlocker/*
+      run: |
+        7z a ${{ github.ref_name }}-release.zip `
+          ./bin/Release/tem/*.dll `
+          ./bin/Release/injector/*.exe `
+          ./bin/Release/launcher/*.exe `
+          ./bin/Release/proxy/*.dll  `
+          ./bin/Release/unlocker/*.exe
 
     - name: Create release
       uses: softprops/action-gh-release@v1
