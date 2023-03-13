@@ -112,6 +112,7 @@
     <ClCompile Include="lib\minhook\trampoline.c" />
     <ClCompile Include="Memory.cpp" />
     <ClCompile Include="SDK.cpp" />
+    <ClCompile Include="SpotChecks.cpp" />
     <ClCompile Include="TEM.cpp" />
     <ClCompile Include="UI.cpp" />
   </ItemGroup>
@@ -140,6 +141,7 @@
     <ClInclude Include="Offsets.hpp" />
     <ClInclude Include="Platform.hpp" />
     <ClInclude Include="SDK.hpp" />
+    <ClInclude Include="SpotChecks.hpp" />
     <ClInclude Include="TEM.hpp" />
     <ClInclude Include="UI.hpp" />
   </ItemGroup>

@@ -613,8 +613,10 @@ template <typename K = void*, typename V = void*> struct FPair {
 
 template <typename T> struct TMap {
     TArray<T> value; // 0x00
-    char unk0[48]; // 0x12
+    char unk0[48]; // 0x0c
 };
+static_assert(offsetof(TMap<int>, unk0) == 0x0c);
+static_assert(sizeof(TMap<int>) == 0x3c);
 
 struct FScriptDelegate {
     UObject* object; // 0x00

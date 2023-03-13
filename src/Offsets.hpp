@@ -5,6 +5,7 @@
 
 */
 #pragma once
+#include <cstdint>
 
 namespace Offsets {
 
@@ -27,6 +28,8 @@ const function_offset_t xlive_main_thread_start_address = 0x146AB8;
 const function_offset_t forced_window_minimize = 0x13587B8;
 const object_offset_t save_filename = 0x21AA580;
 const object_offset_t pg_save_load = 0x22B571C;
+const object_offset_t spot_check_map = 0x22BCC08;
+const function_offset_t spot_check_map_insert = 0xA20BD0;
 
 // D3D9
 const vtable_offset_t Reset = 16;

@@ -12,6 +12,7 @@
 #include "Offsets.hpp"
 #include "Platform.hpp"
 #include "SDK.hpp"
+#include "SpotChecks.hpp"
 #include "UI.hpp"
 
 TEM tem = {};
@@ -41,6 +42,7 @@ auto tem_attach(HMODULE module) -> int
     patch_gfwl();
     patch_forced_window_minimize();
     hook_process_event();
+    bypass_spot_checks();
 
     Hooks::apply_queued();
 

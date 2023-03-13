@@ -84,6 +84,9 @@
     <ClCompile Include="lib\minhook\hde\hde64.c">
       <Filter>lib\minhook\hde</Filter>
     </ClCompile>
+    <ClCompile Include="SpotChecks.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Memory.hpp">
@@ -163,6 +166,9 @@
     </ClInclude>
     <ClInclude Include="lib\minhook\hde\table64.h">
       <Filter>lib\minhook\hde</Filter>
+    </ClInclude>
+    <ClInclude Include="SpotChecks.hpp">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
