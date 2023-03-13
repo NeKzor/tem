@@ -52,7 +52,6 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(BUILD_WITH_XDEAD)' == '1'">
     <TargetName>tem-xdead</TargetName>
-    <PreprocessorDefinitions>BUILD_WITH_XDEAD;%(PreprocessorDefinitions)</PreprocessorDefinitions>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>

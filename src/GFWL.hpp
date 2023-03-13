@@ -9,7 +9,7 @@
 #include <cinttypes>
 #include <format>
 
-#ifdef BUIILD_WITH_XDEAD
+#ifdef BUILD_WITH_XDEAD
     #define USE_XDEAD 1
 #else
     #define USE_XDEAD 0
