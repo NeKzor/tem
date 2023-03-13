@@ -40,9 +40,6 @@ DETOUR_API(HRESULT, __stdcall, DirectInput8Create, HINSTANCE hinst, DWORD dwVers
     /*while(!IsDebuggerPresent()) {
         Sleep(420);
     }*/
-  
-    auto tem = LoadLibraryA("tem.dll");
-    println("Loaded tem.dll {:x}", uintptr_t(tem));
 
     return result;
 }
@@ -73,6 +70,9 @@ auto init_proxy() -> void
     }
 
     PROXY_IMPORT(DirectInput8Create);
+  
+    auto tem = LoadLibraryA("tem.dll");
+    println("Loaded tem.dll {:x}", uintptr_t(tem));
 
 #undef PROXY_IMPORT
 }
