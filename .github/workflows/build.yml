@@ -54,17 +54,20 @@ jobs:
       working-directory: ${{env.GITHUB_WORKSPACE }}
       shell: pwsh
       run: |
-        $targets = @(
-            if ('${{ steps.changes.outputs.tem }}' -eq 'true') { 'tem' } else { '' }
-            if ('${{ steps.changes.outputs.injector }}' -eq 'true') { 'injector' } else { '' }
-            if ('${{ steps.changes.outputs.launcher }}' -eq 'true') { 'launcher' } else { '' }
-            if ('${{ steps.changes.outputs.proxy }}' -eq 'true') { 'proxy' } else { '' }
-            if ('${{ steps.changes.outputs.unlocker }}' -eq 'true') { 'unlocker' } else { '' }
-        )
+        $targets = @()
+
+        if ('${{ steps.changes.outputs.tem }}' -eq 'true') { $targets += 'tem' }
+        if ('${{ steps.changes.outputs.injector }}' -eq 'true') { $targets += 'injector' }
+        if ('${{ steps.changes.outputs.launcher }}' -eq 'true') { $targets += 'launcher' }
+        if ('${{ steps.changes.outputs.proxy }}' -eq 'true') { $targets += 'proxy' }
+        if ('${{ steps.changes.outputs.unlocker }}' -eq 'true') { $targets += 'unlocker' }
+
         msbuild /m /p:Configuration=Release /p:Platform=x86 /t:$($targets -join  ';')
 
         if ('${{ steps.changes.outputs.tem }}' -eq 'true') {
-          set BUILD_WITH_XDEAD=1
+          $Env:BUILD_WITH_XDEAD = '1'
+          $Env:CL = '/D BUILD_WITH_XDEAD'
+
           msbuild /p:Configuration=Release /p:Platform=x86 /t:tem
         }
 
