@@ -24,33 +24,54 @@ permissions:
 
 jobs:
   build:
-    strategy:
-      matrix:
-        project: [
-          { target: tem, binary: tem.dll },
-          { target: injector, binary: injector.exe },
-          { target: launcher, binary: GridGameLauncher.exe },
-          { target: proxy, binary: dinput8.dll },
-          { target: unlocker, binary: unlocker.exe }
-        ]
-
     runs-on: windows-latest
 
-    if: contains(github.event.head_commit.message, '[ci build]')
+    if: "!contains(github.event.head_commit.message, '[ci skip]')"
 
     steps:
     - uses: actions/checkout@v3
+
+    - uses: dorny/paths-filter@v2.11.1
+      id: changes
+      with:
+        filters: |
+          tem:
+            - 'src/**'
+          injector:
+            - 'injector/**'
+          launcher:
+            - 'launcher/**'
+          proxy:
+            - 'proxy/**'
+          unlocker:
+            - 'unlocker/**'
 
     - name: Add MSBuild to PATH
       uses: microsoft/setup-msbuild@v1.1
 
     - name: Build
+      if: steps.changes.outputs.tem == 'true'
       working-directory: ${{env.GITHUB_WORKSPACE }}
-      run: msbuild /m /p:Configuration=Release /p:Platform=x86 /t:${{ matrix.project.target }}
+      shell: pwsh
+      run: |
+        $targets = @(
+            if ('${{ steps.changes.outputs.tem }}' -eq 'true') { 'tem' } else { '' }
+            if ('${{ steps.changes.outputs.injector }}' -eq 'true') { 'injector' } else { '' }
+            if ('${{ steps.changes.outputs.launcher }}' -eq 'true') { 'launcher' } else { '' }
+            if ('${{ steps.changes.outputs.proxy }}' -eq 'true') { 'proxy' } else { '' }
+            if ('${{ steps.changes.outputs.unlocker }}' -eq 'true') { 'unlocker' } else { '' }
+        )
+        msbuild /m /p:Configuration=Release /p:Platform=x86 /t:$($targets -join  ';')
+
+        if ('${{ steps.changes.outputs.tem }}' -eq 'true') {
+          set BUILD_WITH_XDEAD=1
+          msbuild /p:Configuration=Release /p:Platform=x86 /t:tem
+        }
 
     - name: Create artifact
       if: github.event_name != 'pull_request'
       uses: actions/upload-artifact@v3
       with:
-          name: ${{ matrix.project.target }}
-          path: bin/Release/${{ matrix.project.target }}/${{ matrix.project.binary }}
+        path: |
+          bin/Release/**/*.dll
+          bin/Release/**/*.exe
