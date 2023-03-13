@@ -311,14 +311,14 @@ DETOUR_STD(HRESULT, Present, IDirect3DDevice9* device, RECT* pSourceRect, RECT* 
             }
         }
 
-        //if (tem.engine) {
+        //if (tem.engine()) {
         //    y += padding_between_elements;
         //    ImGui::SetNextWindowPos(ImVec2(x, y));
         //    ImGui::SetNextWindowSize(ImVec2(200, 30));
         //    ImGui::Begin("transition", nullptr,
         //        ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoSavedSettings);
         //    auto get_transition = [&]() -> const char* {
-        //        switch (tem.engine->transition_type) {
+        //        switch (tem.engine()->transition_type) {
         //        case TT_None:
         //            return "None";
         //        case TT_Paused:
@@ -342,7 +342,7 @@ DETOUR_STD(HRESULT, Present, IDirect3DDevice9* device, RECT* pSourceRect, RECT* 
         //}
 
         if (ui.show_inputs && tem.player_controller() && tem.player_controller()->player_input
-            && !tem.engine->is_paused()) {
+            && !tem.engine()->is_paused()) {
             auto mode = 3;
             auto buttons = 0;
 
@@ -527,8 +527,8 @@ DETOUR_STD(HRESULT, Present, IDirect3DDevice9* device, RECT* pSourceRect, RECT* 
                 }
                 ImGui::EndMenu();
             }
-            if (ImGui::BeginMenu("Level") && tem.engine) {
-                auto current_level = tem.engine->get_level_name();
+            if (ImGui::BeginMenu("Level") && tem.engine()) {
+                auto current_level = tem.engine()->get_level_name();
 
                 for (auto& [level_name, display_name] : game_levels) {
                     if (display_name == "Main Menu") {
@@ -591,17 +591,17 @@ DETOUR_STD(HRESULT, Present, IDirect3DDevice9* device, RECT* pSourceRect, RECT* 
                 }
                 create_hover_tooltip("Enemies in range will be super weak.");
 
-                if (tem.engine && tem.engine->get_local_player() && tem.engine->get_local_player()->actor
-                    && tem.engine->get_local_player()->actor->cheat_manager) {
+                if (tem.engine() && tem.engine()->get_local_player() && tem.engine()->get_local_player()->actor
+                    && tem.engine()->get_local_player()->actor->cheat_manager) {
                     if (ImGui::MenuItem("PgCheatManager::OnScreenWarnings()")) {
-                        auto cheat_manager = tem.engine->get_local_player()->actor->cheat_manager;
+                        auto cheat_manager = tem.engine()->get_local_player()->actor->cheat_manager;
                         Memory::VMT<int(__stdcall*)()>(cheat_manager, 71)();
                         println("Called PgCheatManager::OnScreenWarnings()");
                     }
                     create_hover_tooltip("Show Kismet debug warnings.");
 
                     if (ImGui::MenuItem("PgCheatManager::DoApplyXP(69420)")) {
-                        auto cheat_manager = tem.engine->get_local_player()->actor->cheat_manager;
+                        auto cheat_manager = tem.engine()->get_local_player()->actor->cheat_manager;
                         Memory::VMT<int(__stdcall*)(int xp)>(cheat_manager, 82)(69'420);
                         println("Called PgCheatManager::DoApplyXP(69420)");
                     }

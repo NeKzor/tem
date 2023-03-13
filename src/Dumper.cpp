@@ -838,13 +838,13 @@ auto dump_engine_to_json() -> void
 
 auto dump_console_commands() -> void
 {
-    if (!tem.engine || !tem.engine->viewport_client || !tem.engine->viewport_client->viewport_console) {
+    if (!tem.engine() || !tem.engine()->viewport_client || !tem.engine()->viewport_client->viewport_console) {
         return;
     }
 
     std::wofstream console_commands("tron_evolution_console_commands.md");
 
-    auto list = tem.engine->viewport_client->viewport_console->auto_complete_list;
+    auto list = tem.engine()->viewport_client->viewport_console->auto_complete_list;
 
     console_commands << "# Console Commands" << std::endl << std::endl;
     console_commands << "Count: " << list.size << std::endl << std::endl;

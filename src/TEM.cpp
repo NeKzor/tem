@@ -20,7 +20,6 @@ TEM tem = {};
 auto forcedWindowMinimizePatch = Memory::Patch();
 
 auto patch_forced_window_minimize() -> void;
-auto hook_process_event() -> void;
 
 DECL_DETOUR_T(void, ProcessEvent, UObject* object, UFunction* func, void* params, int result);
 DECL_DETOUR_T(Color*, GetTeamColor, PgTeamInfo* team, Color* color, int team_color_index);
@@ -41,12 +40,9 @@ auto tem_attach(HMODULE module) -> int
 
     patch_gfwl();
     patch_forced_window_minimize();
-    hook_process_event();
     bypass_spot_checks();
 
     Hooks::apply_queued();
-
-    tem.ui_init_thread = CreateThread(0, 0, LPTHREAD_START_ROUTINE(init_ui), 0, 0, 0);
 
     println(TEM_WELCOME);
     println(TEM_VERSION);
@@ -75,10 +71,6 @@ auto tem_detach() -> void
         println("[tem] Restored forced window minimize patch");
     }
 
-    // FIXME: Engine pointer might be invalid at this point.
-    //        It's probably better to remove the copy from tem.
-    tem.engine = Memory::Deref<UEngine*>(Offsets::g_Engine);
-
     auto controller = tem.player_controller();
     if (tem.is_super_user && controller) {
         controller->set_god_mode(false);
@@ -106,20 +98,31 @@ auto patch_forced_window_minimize() -> void
     }
 }
 
-auto hook_process_event() -> void
+auto hook_engine_functions() -> void
 {
-    tem.engine = Memory::Deref<UEngine*>(Offsets::g_Engine);
-    println("[tem] g_Engine: 0x{:04x}", uintptr_t(tem.engine));
+    auto engine = tem.engine();
+    println("[tem] g_Engine: 0x{:x}", uintptr_t(engine));
 
-    auto processEvent = Memory::VMT(tem.engine, Offsets::ProcessEvent);
+    if (!engine) {
+        return println("[tem] Unable to get engine :(");
+    }
+
+    auto processEvent = Memory::VMT(engine, Offsets::ProcessEvent);
 
     Hooks::queue("UEngine::ProcessEvent", &ProcessEvent, ProcessEvent_Hook, processEvent);
     Hooks::queue("PgTeamInfo::GetTeamColor", &GetTeamColor, GetTeamColor_Hook, Offsets::GetTeamColor);
 
-    auto viewport_client = tem.engine->viewport_client;
+    auto viewport_client = engine->viewport_client;
     if (viewport_client) {
         auto consoleCommand = Memory::VMT(viewport_client, Offsets::ConsoleCommand);
         Hooks::queue("UGameViewportClient::ConsoleCommand", &ConsoleCommand, ConsoleCommand_Hook, consoleCommand);
+    }
+
+    Hooks::apply_queued();
+
+    // TODO: Is there a better way to initialize the UI?
+    if (!tem.ui_init_thread) {
+        tem.ui_init_thread = CreateThread(0, 0, LPTHREAD_START_ROUTINE(init_ui), 0, 0, 0);
     }
 }
 
@@ -151,13 +154,17 @@ auto TEM::find_name_index(const char* name) -> int
 
     return -1;
 }
+inline auto TEM::engine() -> UEngine*
+{
+    return Memory::Deref<UEngine*>(Offsets::g_Engine);
+}
 inline auto TEM::player_controller() -> PgPlayerController*
 {
-    if (!engine || !engine->get_local_player()) {
+    if (!this->engine() || !this->engine()->get_local_player()) {
         return nullptr;
     }
 
-    return engine->get_local_player()->actor;
+    return this->engine()->get_local_player()->actor;
 }
 inline auto TEM::pawn() -> PgPawn*
 {
@@ -169,11 +176,11 @@ inline auto TEM::pawn() -> PgPawn*
 }
 auto TEM::console_command(std::wstring command) -> void
 {
-    if (!engine || !engine->viewport_client) {
+    if (!this->engine() || !this->engine()->viewport_client) {
         return;
     }
 
-    auto viewport_client = tem.engine->viewport_client;
+    auto viewport_client = this->engine()->viewport_client;
 
     using _ConsoleCommand
         = FString*(__thiscall*)(UGameViewportClient * client, const FString& output, const FString& command);

@@ -10,6 +10,7 @@
 #include "Offsets.hpp"
 #include "Platform.hpp"
 #include "SDK.hpp"
+#include "TEM.hpp"
 #include <Windows.h>
 #include <intrin.h>
 #include <map>
@@ -169,10 +170,15 @@ DECL_DETOUR_API(int, __stdcall, xlive_5297, int a1, int a2);
 DECL_DETOUR_API(int, __stdcall, xlive_5317, int a1, int a2, int a3, int a4, int a5);
 DECL_DETOUR_API(int, __stdcall, xlive_5332, int a1, int a2);
 #else
+XDEAD_CALLBACK(signed int, XLiveInitializeEx, int a1, int a2)
+{
+    hook_engine_functions();
+    return 0;
+}
 XDEAD_CALLBACK(signed int, XFriendsCreateEnumerator, int a1, int a2, int a3, int a4, int a5)
 {
     // called after login, or when loading/exiting main menu
-    
+
     // NOTE: The game needs a value or it will loop forever when exiting.
     return 1;
 }
@@ -192,12 +198,13 @@ XDEAD_CALLBACK(XUSER_SIGNIN_STATE, XUserGetSigninState, int a1)
         calls_to_user_get_signin_state += 1;
     }
 
-    auto loginState =  can_login ? XUSER_SIGNIN_STATE::SignedInLocally : XUSER_SIGNIN_STATE::NotSignedIn;
+    auto loginState = can_login ? XUSER_SIGNIN_STATE::SignedInLocally : XUSER_SIGNIN_STATE::NotSignedIn;
     println("[gfwl] Forcing XUserGetSigninState -> {}", loginState);
 
     return loginState;
 }
-XDEAD_CALLBACK(int, XLiveUnprotectData, BYTE* protected_data, DWORD size_of_protected_data, BYTE* unprotected_data, DWORD* size_of_data, HANDLE* protected_data_handle)
+XDEAD_CALLBACK(int, XLiveUnprotectData, BYTE* protected_data, DWORD size_of_protected_data, BYTE* unprotected_data,
+    DWORD* size_of_data, HANDLE* protected_data_handle)
 {
     // XLive decrypts the protected data buffer, which checks against your logged in GFWL account. We simply do not call
     // the original function and instead write the same CRC values from the save file back into the buffer, making the
@@ -216,9 +223,7 @@ XDEAD_CALLBACK(int, XLiveUnprotectData, BYTE* protected_data, DWORD size_of_prot
         }
     } else {
         auto pg_save_load = *reinterpret_cast<PgSaveLoad**>(Offsets::pg_save_load);
-        if (pg_save_load
-            && pg_save_load->file_manager
-            && pg_save_load->file_manager->save_file
+        if (pg_save_load && pg_save_load->file_manager && pg_save_load->file_manager->save_file
             && pg_save_load->file_manager->save_file->buffer) {
             auto unprotected_buffer = reinterpret_cast<unprotected_buffer_t*>(unprotected_data);
             auto save_buffer = pg_save_load->file_manager->save_file->buffer;
@@ -268,33 +273,24 @@ auto patch_gfwl() -> void
         return println("[gfwl] Unable to find xdead_add_listener :(");
     }
 
-    auto status = xdead_add_listener(xdead::XFriendsCreateEnumerator, XFriendsCreateEnumerator_callback, 0);
-    if (status == xdead::ListenerStatus::Ok) {
-        println("[gfwl] Added listener for XFriendsCreateEnumerator");
-    } else {
-        println("[gfwl] Failed to add listener for XFriendsCreateEnumerator = {}", int(status));
+#define XDEAD_HOOK(name)                                                                                               \
+    {                                                                                                                  \
+        auto status = xdead_add_listener(xdead::name, name##_callback, 0);                                             \
+        if (status == xdead::ListenerStatus::Ok) {                                                                     \
+            println("[gfwl] Added listener for " #name);                                                               \
+        } else {                                                                                                       \
+            println("[gfwl] Failed to add listener for " #name " = {}", int(status));                                  \
+        }                                                                                                              \
     }
 
-    status = xdead_add_listener(xdead::XNotifyCreateListener, XNotifyCreateListener_callback, 0);
-    if (status == xdead::ListenerStatus::Ok) {
-        println("[gfwl] Added listener for XNotifyCreateListener");
-    } else {
-        println("[gfwl] Failed to add listener for XNotifyCreateListener = {}", int(status));
-    }
+    XDEAD_HOOK(XLiveInitializeEx);
+    XDEAD_HOOK(XFriendsCreateEnumerator);
+    XDEAD_HOOK(XNotifyCreateListener);
+    XDEAD_HOOK(XUserGetSigninState);
+    XDEAD_HOOK(XLiveUnprotectData);
+    XDEAD_HOOK(XLiveUnprotectData);
+#undef XDEAD_HOOK
 
-    status = xdead_add_listener(xdead::XUserGetSigninState, XUserGetSigninState_callback, 0);
-    if (status == xdead::ListenerStatus::Ok) {
-        println("[gfwl] Added listener for XUserGetSigninState");
-    } else {
-        println("[gfwl] Failed to add listener for XUserGetSigninState = {}", int(status));
-    }
-
-    status = xdead_add_listener(xdead::XLiveUnprotectData, XLiveUnprotectData_callback, 0);
-    if (status == xdead::ListenerStatus::Ok) {
-        println("[gfwl] Added listener for XLiveUnprotectData");
-    } else {
-        println("[gfwl] Failed to add listener for XLiveUnprotectData = {}", int(status));
-    }
 #endif
 }
 
@@ -554,7 +550,8 @@ auto unpatch_gfwl() -> void
         return println("[gfwl] Unable to find xlive.dll :(");
     }
 
-    auto xdead_remove_all_listeners = Memory::GetSymbolAddress<xdead::remove_all_listeners_T>(xdead, "xdead_remove_all_listeners");
+    auto xdead_remove_all_listeners
+        = Memory::GetSymbolAddress<xdead::remove_all_listeners_T>(xdead, "xdead_remove_all_listeners");
     if (!xdead_remove_all_listeners) {
         return println("[gfwl] Unable to get xdead_remove_all_listeners :(");
     }
@@ -620,8 +617,8 @@ auto __skip_call = false;
 auto __skip_rv = 0;
 
 #define NEVER_SKIP_AND_RETURN(rv) {};
-#define SKIP_AND_RETURN(rv) \
-    auto __skip_call = true; \
+#define SKIP_AND_RETURN(rv)                                                                                            \
+    auto __skip_call = true;                                                                                           \
     auto __skip_rv = rv;
 //#define SKIP_AND_RETURN(rv) {};
 
@@ -629,7 +626,7 @@ auto __skip_rv = 0;
     auto ordinal = _ordinal;                                                                                           \
     auto name = _name;                                                                                                 \
     auto original = xlive_##_ordinal;                                                                                  \
-    if (__skip_call) {                                                                                           \
+    if (__skip_call) {                                                                                                 \
         return __skip_rv;                                                                                              \
     }                                                                                                                  \
     auto result = original(##__VA_ARGS__)
@@ -1526,6 +1523,8 @@ DETOUR_API(int, __stdcall, xlive_5278, int a1, int a2, int a3)
 }
 DETOUR_API(int, __stdcall, xlive_5297, int a1, int a2)
 {
+    hook_engine_functions();
+
     SKIP_AND_RETURN(0);
     CALL_ORIGINAL(5297, "XLiveInitializeEx", a1, a2);
     LOG_AND_RETURN("{:x}, {:x}", hex(a1), hex(a2));

@@ -30,8 +30,6 @@ struct TEM {
     std::atomic_bool is_attached = false;
     std::atomic_bool is_detached = false;
 
-    UEngine* engine;
-
     float tickrate = 0.0f;
     ULONGLONG last_tick = 0;
 
@@ -47,6 +45,7 @@ struct TEM {
     auto find_name(FName name) -> std::string_view;
     auto find_name_index(const char* name) -> int;
 
+    inline auto engine() -> UEngine*;
     inline auto player_controller() -> PgPlayerController*;
     inline auto pawn() -> PgPawn*;
     auto console_command(std::wstring command) -> void;
@@ -70,6 +69,7 @@ extern TEM tem;
 extern auto tem_attach(HMODULE module) -> int;
 extern auto tem_detach() -> void;
 extern auto shutdown_thread() -> void;
+extern auto hook_engine_functions() -> void;
 
 // TODO: somebody come up with better level names
 const std::vector<std::pair<std::string, std::string>> game_levels = {
