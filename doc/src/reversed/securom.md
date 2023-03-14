@@ -66,8 +66,8 @@ When the game process starts it does the following:
 		- `CZ` and `PL` = `0xBCD55594`
 	- Triggers a "spot check" if the hash does not match
 
-This basically means we cannot simply modify the game binary as it does a CRC self-check unless you create a
-`patch.dat` file which seems to be a backdoor implemented by the Disney devs. However even if we want to modify the
+This basically means we cannot simply modify the game binary as it does a CRC self-check, unless you create a
+`patch.dat` file which seems to be a backdoor implemented by the game devs. However, even if we want to modify the
 file statically we will not be able to progress without GFWL's signature check. The game is not meant to be playable
 without GFWL since the engine would just shutdown and crash because of a null pointer dereference somewhere deep
 inside the online subsystem code which requires GFWL to be initialized.
@@ -79,29 +79,29 @@ or by simply writing your own one:
 // NOTE: Make sure that the launcher process has the same name
 //       as the original one "GridGameLauncher.exe"
 
-#define TR2NPC_PATH L"Software\\Disney Interactive Studios\\tr2npc"
 #define GAME_EXE L"GridGame.exe"
-#define BUFFER_SIZE 1723
+#define SECUROM_BUFFER_SIZE 1723
+#define TR2NPC_PATH L"Software\\Disney Interactive Studios\\tr2npc"
 
 auto main() -> int
 {
-    println("Creating file mapping...");
-
-	// I wonder what SMS means. SecuROM's Mapping Signature?
+    // I wonder what SMS means. SecuROM's Mapping Signature?
     auto file = std::format(L"-=[SMS_{}_SMS]=-", GAME_EXE);
 
-    auto handle = CreateFileMapping(INVALID_HANDLE_VALUE, NULL, PAGE_READWRITE, 0, BUFFER_SIZE, file.c_str());
+    auto handle = CreateFileMapping(INVALID_HANDLE_VALUE, NULL, PAGE_READWRITE, 0, SECUROM_BUFFER_SIZE, file.c_str());
     if (!handle) {
         println("Could not create file mapping object {}", GetLastError());
         return 1;
     }
 
-    auto buffer = MapViewOfFile(handle, FILE_MAP_ALL_ACCESS, 0, 0, BUFFER_SIZE);
+    auto buffer = MapViewOfFile(handle, FILE_MAP_ALL_ACCESS, 0, 0, SECUROM_BUFFER_SIZE);
     if (!buffer) {
         println("Could not map view of file {}", GetLastError());
         CloseHandle(handle);
         return 1;
     }
+
+    println("Created file mapping");
 
     STARTUPINFO si;
     PROCESS_INFORMATION pi;
@@ -114,23 +114,22 @@ auto main() -> int
     auto install_path_size = DWORD(sizeof(install_path));
 
     auto result = RegGetValueW(
-        HKEY_LOCAL_MACHINE,
-        TR2NPC_PATH,
-        L"InstallPath",
-        RRF_RT_ANY,
-        nullptr,
-        &install_path,
-        &install_path_size);
+        HKEY_LOCAL_MACHINE, TR2NPC_PATH, L"InstallPath", RRF_RT_ANY, nullptr, &install_path, &install_path_size);
 
     if (result != ERROR_SUCCESS) {
-        println("Failed to get registry key value for install path");
+        println("Failed to find installation path");
         return 1;
     }
 
     auto cmd = std::format(L"{}\\{}", install_path, GAME_EXE);
     CreateProcessW(NULL, (LPWSTR)cmd.c_str(), NULL, NULL, FALSE, 0, NULL, NULL, &si, &pi);
 
-    println("launched");
+    wprintln(L"Launched {}", cmd);
+
+    println("hProcess = {:x}", uintptr_t(pi.hProcess));
+    println("hThread = {:x}", uintptr_t(pi.hThread));
+    println("dwProcessId = {:x}", uintptr_t(pi.dwProcessId));
+    println("dwThreadId = {:x}", uintptr_t(pi.dwThreadId));
 
     WaitForSingleObject(pi.hProcess, INFINITE);
 
@@ -139,7 +138,7 @@ auto main() -> int
     CloseHandle(pi.hProcess);
     CloseHandle(pi.hThread);
 
-    UnmapViewOfFile((LPCVOID)buffer);
+    UnmapViewOfFile(LPCVOID(buffer));
     CloseHandle(handle);
 
     return 0;
