@@ -57,7 +57,7 @@ jobs:
       working-directory: ${{env.GITHUB_WORKSPACE }}
       shell: pwsh
       run: |
-        msbuild /m /p:Configuration=Release /p:Platform=x86 /t:${{ join(fromJson(steps.changes.outputs.changes), ';') }}
+        msbuild /m /p:Configuration=Release /p:Platform=x86 /t:${{ join(fromJson(steps.changes.outputs.changes), '`;') }}
 
         if ('${{ steps.changes.outputs.tem }}' -eq 'true') {
           $Env:BUILD_WITH_XDEAD = '1'
