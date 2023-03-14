@@ -9,6 +9,8 @@ on:
     - 'launcher/**'
     - 'proxy/**'
     - 'unlocker/**'
+    paths-ignore:
+    - '**/README.md'
   pull_request:
     branches: [ "master" ]
     paths:
@@ -17,6 +19,8 @@ on:
     - 'launcher/**'
     - 'proxy/**'
     - 'unlocker/**'
+    paths-ignore:
+    - '**/README.md'
   workflow_dispatch:
 
 permissions:
