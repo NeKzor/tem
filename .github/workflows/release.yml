@@ -18,7 +18,7 @@ jobs:
     - name: Build
       working-directory: ${{env.GITHUB_WORKSPACE }}
       run: |
-        msbuild /m /p:Configuration=Release /p:Platform=x86 /t:tem;injector;launcher;proxy;unlocker
+        msbuild /m /p:Configuration=Release /p:Platform=x86 /t:tem`;injector`;launcher`;proxy`;unlocker
 
         $Env:BUILD_WITH_XDEAD = '1'
         $Env:CL = '/D BUILD_WITH_XDEAD'
