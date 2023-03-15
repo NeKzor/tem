@@ -15,7 +15,8 @@ This means we can start the launcher from anywhere we want.
 ## Flaw #2 - CRC Bypass
 
 The game calculates the CRC value of the `GridGameLauncher.exe` file and matches it against the expected value,
-depending which language is used (`RU`, `CZ/PL` or international). Maybe the game developers used this internally and
+depending which language is used (`RU`, `CZ/PL` or international). This calculation can be bypassed by creating an empty
+`patch.dat` file in the same directory of the game. Maybe the game developers used this internally and
 forgot to remove it like they forgot to remove the developer console? Or maybe this was supposed to be a DLC update
 hack but they could not update the launcher? Regardless, I will call this a backdoor :^\)
 
