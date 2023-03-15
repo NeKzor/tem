@@ -482,15 +482,15 @@ DETOUR_STD(HRESULT, Present, IDirect3DDevice9* device, RECT* pSourceRect, RECT* 
                 }
                 create_hover_tooltip("Change player color.");
 
-#if !USE_XDEAD
-                ImGui::Separator();
-                if (ImGui::MenuItem("Anti Anti Debugger", nullptr, suspended_gfwl_main_thread)) {
-                    if (change_gfwl_main_thread(!suspended_gfwl_main_thread)) {
-                        suspended_gfwl_main_thread = !suspended_gfwl_main_thread;
+                if (!is_using_xdead) {
+                    ImGui::Separator();
+                    if (ImGui::MenuItem("Anti Anti Debugger", nullptr, suspended_gfwl_main_thread)) {
+                        if (change_gfwl_main_thread(!suspended_gfwl_main_thread)) {
+                            suspended_gfwl_main_thread = !suspended_gfwl_main_thread;
+                        }
                     }
+                    create_hover_tooltip("Suspend GFWL main thread. This will make GFWL unresponsible.");
                 }
-                create_hover_tooltip("Suspend GFWL main thread. This will make GFWL unresponsible.");
-#endif
 
                 //ImGui::Separator();
                 //if (ImGui::MenuItem("Settings")) {

@@ -9,17 +9,12 @@
 #include <cinttypes>
 #include <format>
 
-#ifdef BUILD_WITH_XDEAD
-    #define USE_XDEAD 1
-#else
-    #define USE_XDEAD 0
-#endif
-
 extern auto patch_gfwl() -> void;
 extern auto unpatch_gfwl() -> void;
 extern auto change_gfwl_main_thread(bool suspend) -> bool;
 
 extern bool suspended_gfwl_main_thread;
+extern bool is_using_xdead;
 
 #define PROPERTY_NUMPLAYERS 0x10000001
 #define PROPERTY_SKILLRATING 0x10000006
@@ -70,7 +65,6 @@ struct XUSER_SIGNIN_INFO {
     CHAR user_name[16];
 };
 
-#if USE_XDEAD
 namespace xdead {
     #define XDEAD_CALLBACK(type, name, ...) type __stdcall name##_callback(##__VA_ARGS__)
     #define XDEAD_FUNCTION_NAME(name, ordinal) static constexpr auto name = ordinal
@@ -229,4 +223,3 @@ namespace xdead {
     using remove_listener_t = decltype(&remove_listener);
     using remove_all_listeners_T = decltype(&remove_all_listeners);
 }
-#endif

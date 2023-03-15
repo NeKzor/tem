@@ -23,11 +23,13 @@
 
 auto gfwlMemCheckPatch = Memory::Patch();
 std::map<uint32_t, std::tuple<uintptr_t, const char*, uint32_t, uintptr_t>> addressesToUnhook = {};
+
 bool suspended_gfwl_main_thread = false;
+bool is_using_xdead = false;
 
 auto hook_gfwl(Memory::ModuleInfo& xlive) -> void;
 
-#if !USE_XDEAD
+#pragma region DECL_XLIVE_HOOKS
 DECL_DETOUR_API(signed int, __stdcall, xlive_3, int a1, signed int a2, signed int a3);
 DECL_DETOUR_API(signed int, __stdcall, xlive_4, int a1);
 DECL_DETOUR_API(signed int, __stdcall, xlive_6, int a1, int a2, signed int* a3);
@@ -169,7 +171,9 @@ DECL_DETOUR_API(int, __stdcall, xlive_5278, int a1, int a2, int a3);
 DECL_DETOUR_API(int, __stdcall, xlive_5297, int a1, int a2);
 DECL_DETOUR_API(int, __stdcall, xlive_5317, int a1, int a2, int a3, int a4, int a5);
 DECL_DETOUR_API(int, __stdcall, xlive_5332, int a1, int a2);
-#else
+#pragma endregion DECL_XLIVE_HOOKS
+
+#pragma region XDEAD_CALLBACKS
 XDEAD_CALLBACK(signed int, XLiveInitializeEx, int a1, int a2)
 {
     hook_engine_functions();
@@ -236,42 +240,21 @@ XDEAD_CALLBACK(int, XLiveUnprotectData, BYTE* protected_data, DWORD size_of_prot
 
     return -1;
 }
-#endif
+#pragma endregion XDEAD_CALLBACKS
 
 auto change_gfwl_main_thread(bool suspend) -> bool;
 
 auto patch_gfwl() -> void
 {
-#if !USE_XDEAD
-    auto xlive = Memory::ModuleInfo();
-
-    if (!Memory::TryGetModule("xlive.dll", &xlive)) {
-        return println("[gfwl] Unable to find GFWL module :(");
-    }
-
-    // Modify memory modification check
-    //      Original: 0F 84 (jz)
-    //      Patch:    90 E9 (nop jmp)
-
-    unsigned char nop_jmp[2] = { 0x90, 0xE9 };
-    if (gfwlMemCheckPatch.Execute(xlive.base + Offsets::xlive_memory_check, nop_jmp, sizeof(nop_jmp))) {
-        println("[gfwl] Patched xlive.dll memory check at 0x{:04x}", gfwlMemCheckPatch.GetLocation());
-    } else {
-        return println("[gfwl] Unable to patch memory check :(");
-    }
-
-    hook_gfwl(xlive);
-    //change_gfwl_main_thread(true);
-#else
-    auto xdead = Memory::GetModuleHandleByName("xlive.dll");
-    if (!xdead) {
+    auto xlive = Memory::GetModuleHandleByName("xlive.dll");
+    if (!xlive) {
         return println("[gfwl] Unable to find xlive.dll :(");
     }
 
-    auto xdead_add_listener = Memory::GetSymbolAddress<xdead::add_listener_t>(xdead, "xdead_add_listener");
-    if (!xdead_add_listener) {
-        return println("[gfwl] Unable to find xdead_add_listener :(");
-    }
+    auto xdead_add_listener = Memory::GetSymbolAddress<xdead::add_listener_t>(xlive, "xdead_add_listener");
+    if (xdead_add_listener) {
+        println("[gfwl] Detected XDead module!");
+        is_using_xdead = true;
 
 #define XDEAD_HOOK(name)                                                                                               \
     {                                                                                                                  \
@@ -283,20 +266,38 @@ auto patch_gfwl() -> void
         }                                                                                                              \
     }
 
-    XDEAD_HOOK(XLiveInitializeEx);
-    XDEAD_HOOK(XFriendsCreateEnumerator);
-    XDEAD_HOOK(XNotifyCreateListener);
-    XDEAD_HOOK(XUserGetSigninState);
-    XDEAD_HOOK(XLiveUnprotectData);
-    XDEAD_HOOK(XLiveUnprotectData);
+        XDEAD_HOOK(XLiveInitializeEx);
+        XDEAD_HOOK(XFriendsCreateEnumerator);
+        XDEAD_HOOK(XNotifyCreateListener);
+        XDEAD_HOOK(XUserGetSigninState);
+        XDEAD_HOOK(XLiveUnprotectData);
+        XDEAD_HOOK(XLiveUnprotectData);
 #undef XDEAD_HOOK
+    } else {
+        auto xlive = Memory::ModuleInfo();
 
-#endif
+        if (!Memory::TryGetModule("xlive.dll", &xlive)) {
+            return println("[gfwl] Unable to find xlive.dll :(");
+        }
+
+        // Modify memory modification check
+        //      Original: 0F 84 (jz)
+        //      Patch:    90 E9 (nop jmp)
+
+        unsigned char nop_jmp[2] = { 0x90, 0xE9 };
+        if (gfwlMemCheckPatch.Execute(xlive.base + Offsets::xlive_memory_check, nop_jmp, sizeof(nop_jmp))) {
+            println("[gfwl] Patched xlive.dll memory check at 0x{:04x}", gfwlMemCheckPatch.GetLocation());
+        } else {
+            return println("[gfwl] Unable to patch memory check :(");
+        }
+
+        hook_gfwl(xlive);
+        //change_gfwl_main_thread(true);
+    }
 }
 
 auto hook_gfwl(Memory::ModuleInfo& xlive) -> void
 {
-#if !USE_XDEAD
     auto handle = GetModuleHandleA(xlive.path);
     println("[gfwl] xlive.dll handle 0x{:04x}", uintptr_t(handle));
 
@@ -462,12 +463,14 @@ auto hook_gfwl(Memory::ModuleInfo& xlive) -> void
     HOOK_IAT_WRAPPER(0x1A33B94, 5297, "XLiveInitializeEx");
     HOOK_IAT_WRAPPER(0x1A33B04, 5317, "XSessionWriteStats");
     HOOK_IAT_WRAPPER(0x1A33BE8, 5332, "XSessionEnd");
-#endif
 }
 
 auto change_gfwl_main_thread(bool suspend) -> bool
 {
-#if !USE_XDEAD
+    if (is_using_xdead) {
+        return false;
+    }
+
     auto xlive = Memory::ModuleInfo();
     if (!Memory::TryGetModule("xlive.dll", &xlive)) {
         println("[gfwl] Unable to find GFWL module :(");
@@ -528,39 +531,38 @@ auto change_gfwl_main_thread(bool suspend) -> bool
     }
 
     CloseHandle(snapshot);
-#endif
+
     return false;
 }
 
 auto unpatch_gfwl() -> void
 {
-#if !USE_XDEAD
-    if (suspended_gfwl_main_thread) {
-        change_gfwl_main_thread(false);
-    }
+    if (!is_using_xdead) {
+        if (suspended_gfwl_main_thread) {
+            change_gfwl_main_thread(false);
+        }
 
-    addressesToUnhook.clear();
+        addressesToUnhook.clear();
 
-    if (gfwlMemCheckPatch.Restore()) {
-        println("[gfwl] Restored mem check patch");
-    }
-#else
-    auto xdead = Memory::GetModuleHandleByName("xlive.dll");
-    if (!xdead) {
-        return println("[gfwl] Unable to find xlive.dll :(");
-    }
+        if (gfwlMemCheckPatch.Restore()) {
+            println("[gfwl] Restored mem check patch");
+        }
+    } else {
+        auto xlive = Memory::GetModuleHandleByName("xlive.dll");
+        if (!xlive) {
+            return println("[gfwl] Unable to find xlive.dll :(");
+        }
 
-    auto xdead_remove_all_listeners
-        = Memory::GetSymbolAddress<xdead::remove_all_listeners_T>(xdead, "xdead_remove_all_listeners");
-    if (!xdead_remove_all_listeners) {
-        return println("[gfwl] Unable to get xdead_remove_all_listeners :(");
-    }
+        auto xdead_remove_all_listeners
+            = Memory::GetSymbolAddress<xdead::remove_all_listeners_T>(xlive, "xdead_remove_all_listeners");
+        if (!xdead_remove_all_listeners) {
+            return println("[gfwl] Unable to get xdead_remove_all_listeners :(");
+        }
 
-    xdead_remove_all_listeners();
-#endif
+        xdead_remove_all_listeners();
+    }
 }
 
-#if !USE_XDEAD
 auto __forceinline print_stack(int parameters) -> void
 {
     auto retAddress = uintptr_t(_AddressOfReturnAddress());
@@ -647,6 +649,7 @@ typedef uintptr_t hex;
 #define dptr(ptr) \
     ptr ? *(uintptr_t*)ptr : 0
 
+#pragma region XLIVE_DETOUR_API
 DETOUR_API(signed int, __stdcall, xlive_3, int a1, signed int a2, signed int a3)
 {
     CALL_ORIGINAL(3, "XSocketCreate", a1, a2, a3);
@@ -1540,4 +1543,4 @@ DETOUR_API(int, __stdcall, xlive_5332, int a1, int a2)
     LOG_AND_RETURN("{:x}, {:x}", hex(a1), hex(a2));
 }
 // clang-format on
-#endif
+#pragma endregion XLIVE_DETOUR_API
