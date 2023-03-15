@@ -54,15 +54,7 @@ jobs:
     - name: Build
       working-directory: ${{env.GITHUB_WORKSPACE }}
       shell: pwsh
-      run: |
-        msbuild /m /p:Configuration=Release /p:Platform=x86 /t:${{ join(fromJson(steps.changes.outputs.changes), '`;') }}
-
-        if ('${{ steps.changes.outputs.tem }}' -eq 'true') {
-          $Env:BUILD_WITH_XDEAD = '1'
-          $Env:CL = '/D BUILD_WITH_XDEAD'
-
-          msbuild /p:Configuration=Release /p:Platform=x86 /t:tem
-        }
+      run: msbuild /m /p:Configuration=Release /p:Platform=x86 /t:${{ join(fromJson(steps.changes.outputs.changes), '`;') }}
 
     - name: Create artifact
       if: github.event_name != 'pull_request'
