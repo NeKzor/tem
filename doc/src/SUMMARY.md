@@ -1,6 +1,7 @@
 # Tron: Evolution Mod
 
 - [Mod](./index.md)
+  - [Installation](./tem/installation.md)
 - [Engine](./engine/index.md)
     - [Console Commands](./engine/commands.md)
     - [Classes Dump](./engine/classes.md)
