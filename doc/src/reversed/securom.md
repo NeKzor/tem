@@ -52,7 +52,7 @@ When the game process starts it does the following:
 - Copies 1732 bytes from the memory mapped file `-=[SMS_GridGame.exe_SMS]=-` into a buffer
   - Bytes at offset `4-7` represent the launcher handle which is used to trigger "spot checks" through `SendMessageW`
 - Checks if the game was launched from `GridGameLauncher.exe`
-- Does a CRC check of `GridGameLauncher.exe`
+- Does a CRC of `GridGameLauncher.exe`
   - Access registry path `HKEY_LOCAL_MACHINE\\Software\\Disney Interactive Studios\\tr2npc`
 	- Gets registry key `InstallPath`
 	- Gets registry key `Language`
@@ -248,7 +248,7 @@ if (index != INVALID_INDEX && result.check == SpotCheck::Invalid) {
 |6|Pause Menu<br>Verifies game signature hash|Disables unpause when the game pauses|
 |7|???|XP counter will not go up|
 |8|Main Menu|???|
-|9|Result of manual check if CRC check fails at launch|Game will not launch|
+|9|Result of manual check if CRC fails at launch|Game will not launch|
 
 <sup>1</sup> The crash is super weird. Not sure if intended. TODO: Might want to investigate.
 
