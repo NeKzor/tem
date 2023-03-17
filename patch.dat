@@ -1,0 +1,16 @@
+This file is needed to skip a cyclic redundancy check in GridGame.exe which
+allows TEM to ship its own GridGameLauncher.exe without patching any of the
+original files. The contents of this file are meaningless to the game as it only
+checks if the file can be opened. TEM handles the rest in order to bypass all
+SecuROM spot checks.
+
+The original launcher is unhealthy for you and your machine! Here are the
+advantages with the new launcher:
+* No brain-dead checks that disallow hardware changes
+* No useless inter process communication
+* No slow game starts
+
+Thanks to Propaganda Games for making Tron: Evolution and for implementing this
+backdoor! Bye bye SecuROM :D
+
+~ NeKz

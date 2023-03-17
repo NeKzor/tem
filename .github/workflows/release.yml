@@ -26,7 +26,8 @@ jobs:
           ./bin/Release/injector/*.exe `
           ./bin/Release/launcher/*.exe `
           ./bin/Release/proxy/*.dll  `
-          ./bin/Release/unlocker/*.exe
+          ./bin/Release/unlocker/*.exe `
+          ./patch.dat
 
     - name: Create release
       uses: softprops/action-gh-release@v1
