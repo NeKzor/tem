@@ -28,6 +28,7 @@ struct TEM {
     HANDLE ui_init_thread = 0;
 
     std::atomic_bool is_attached = false;
+    std::atomic_bool is_hooked = false;
     std::atomic_bool is_detached = false;
 
     float tickrate = 0.0f;

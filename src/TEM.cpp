@@ -42,6 +42,10 @@ auto tem_attach(HMODULE module) -> int
     patch_forced_window_minimize();
     bypass_spot_checks();
 
+    if (tem.engine()) {
+        hook_engine_functions();
+    }
+
     Hooks::apply_queued();
 
     println(TEM_WELCOME);
@@ -100,6 +104,10 @@ auto patch_forced_window_minimize() -> void
 
 auto hook_engine_functions() -> void
 {
+    if (tem.is_hooked) {
+        return;
+    }
+
     auto engine = tem.engine();
     println("[tem] g_Engine: 0x{:x}", uintptr_t(engine));
 
@@ -124,6 +132,8 @@ auto hook_engine_functions() -> void
     if (!tem.ui_init_thread) {
         tem.ui_init_thread = CreateThread(0, 0, LPTHREAD_START_ROUTINE(init_ui), 0, 0, 0);
     }
+
+    tem.is_hooked = true;
 }
 
 auto TEM::find_name(FName name) -> std::string_view
