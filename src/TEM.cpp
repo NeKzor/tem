@@ -241,8 +241,10 @@ DETOUR_T(void, ProcessEvent, UObject* object, UFunction* func, void* params, int
                 if (pawn->is_vehicle()) {
                     auto player_pawn = pawn->get_outer_pawn();
                     player_pawn->energy = player_pawn->max_energy;
+                    player_pawn->powerup_attacking_damage_scaling = 999.0f;
                 } else {
                     pawn->energy = pawn->max_energy;
+                    pawn->powerup_attacking_damage_scaling = 999.0f;
                 }
 
                 if (controller) {

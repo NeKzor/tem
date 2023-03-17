@@ -158,6 +158,11 @@ struct PgPawn {
     char unk8[276]; // 956
     int energy; // 1232
     int max_energy; // 1236
+    char pad_1240[4008]; // 1240
+    int player_skin_index; // 0x1480
+    float powerup_attacking_damage_scaling; // 0x1484
+    float powerup_damage_scaling; // 0x1488
+    int is_invisible; // 0x148c
 
     inline auto is_in_team(PgTeamInfo* team) -> bool
     {
@@ -185,6 +190,11 @@ struct PgPawn {
         return outer;
     }
 };
+static_assert(offsetof(PgPawn, max_energy) == 1236);
+static_assert(offsetof(PgPawn, player_skin_index) == 0x1480);
+static_assert(offsetof(PgPawn, powerup_attacking_damage_scaling) == 0x1484);
+static_assert(offsetof(PgPawn, powerup_damage_scaling) == 0x1488);
+static_assert(offsetof(PgPawn, is_invisible) == 0x148c);
 
 struct FAutoCompleteCommand {
     FString command; // 0
