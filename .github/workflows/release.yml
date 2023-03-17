@@ -17,13 +17,12 @@ jobs:
 
     - name: Build
       working-directory: ${{env.GITHUB_WORKSPACE }}
-      run: msbuild /m /p:Configuration=Release /p:Platform=x86 /t:tem`;injector`;launcher`;proxy`;unlocker
+      run: msbuild /m /p:Configuration=Release /p:Platform=x86 /t:tem`;launcher`;proxy`;unlocker
 
     - name: Create archive
       run: |
         7z a ${{ github.ref_name }}-release.zip `
           ./bin/Release/tem/*.dll `
-          ./bin/Release/injector/*.exe `
           ./bin/Release/launcher/*.exe `
           ./bin/Release/proxy/*.dll  `
           ./bin/Release/unlocker/*.exe `
