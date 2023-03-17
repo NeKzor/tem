@@ -10,6 +10,7 @@ A mod for Tron: Evolution.
 - Superuser
 	- Unlimited Health
 	- Unlimited Energy
+	- High Damage Multiplier
 - RGB Suit
 - Anti-Anti-Debugger
 - HUD
