@@ -1,7 +1,7 @@
 # Tron: Evolution Mod
 
-- [Mod](./index.md)
-  - [Getting started](./tem/getting-started.md)
+- [TEM](./index.md)
+  - [Getting started](./getting-started.md)
 - [Engine](./engine/index.md)
     - [Console Commands](./engine/commands.md)
     - [Classes Dump](./engine/classes.md)
