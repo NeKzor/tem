@@ -21,7 +21,7 @@ jobs:
 
     - name: Create archive
       run: |
-        7z a ${{ github.ref_name }}-release.zip `
+        7z a tem-${{ github.ref_name }}.zip `
           ./bin/Release/tem/*.dll `
           ./bin/Release/launcher/*.exe `
           ./bin/Release/proxy/*.dll  `
@@ -31,5 +31,9 @@ jobs:
     - name: Create release
       uses: softprops/action-gh-release@v1
       with:
-        files: ${{ github.ref_name }}-release.zip
+        title: TEM ${{ github.ref_name }}
+        body: |
+          [READ requirements first](https://tem.nekz.me/getting-started.html)
+          [Download tem-${{ github.ref_name }}.zip](https://github.com/NeKzor/tem/releases/download/${{ github.ref_name }}/tem-${{ github.ref_name }}.zip)
+        files: tem-${{ github.ref_name }}.zip
         prerelease: ${{ contains(github.ref, 'pre') }}
