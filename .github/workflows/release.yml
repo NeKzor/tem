@@ -31,7 +31,7 @@ jobs:
     - name: Create release
       uses: softprops/action-gh-release@v1
       with:
-        title: TEM ${{ github.ref_name }}
+        name: TEM ${{ github.ref_name }}
         body: |
           [READ requirements first](https://tem.nekz.me/getting-started.html)
           [Download tem-${{ github.ref_name }}.zip](https://github.com/NeKzor/tem/releases/download/${{ github.ref_name }}/tem-${{ github.ref_name }}.zip)
