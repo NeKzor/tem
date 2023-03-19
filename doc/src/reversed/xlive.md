@@ -86,11 +86,11 @@ XLive uses several anti-tampering tricks:
 - XFriendsCreateEnumerator
 - XUserSetContext
 
-### When triggering an achievement
+#### When triggering an achievement
 
 - XUserWriteAchievements
 
-### Game exit
+#### Game exit
 
 - XLiveUninitialize
 - XOnlineCleanup
