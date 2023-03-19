@@ -100,7 +100,7 @@ XLive uses several anti-tampering tricks:
 
 ### Threads
 
-The game seems like in a playable state even when XLive's "Main" thread gets suspended.
+The game seems to be in a playable state even when XLive's "Main" thread gets suspended.
 Obviously this will make it freeze if you want to interact with XLive
 but at least this will bypass the anti-debugging checks.
 
@@ -150,8 +150,8 @@ void xlive()
 }
 ```
 
-This is too painful to try and verify. All of this is a lot more complicated with 8 "Main" threads and a ton of different debugger checks.
-It's actually hilarious if you see the amount of debugger confusion for yourself.
+This is too painful to try and verify. All of this is a lot more complicated with 8 "Main" threads and a ton of
+different debugger checks. It's actually hilarious if you see the amount of debugger confusion for yourself.
 
 ### Signature Check
 
@@ -173,7 +173,8 @@ Figure out if Microsoft messed up and we can simply bypass this too.
 
 ### Modification Check
 
-From current observation the game seems to always check for modifications when loading the [save file][] by calling `XLiveUnprotectData`. There is a simple `two-byte-patch` method that was originally found by several people in 2009
+From current observation the game seems to always check for modifications when loading the [save file][] by calling
+`XLiveUnprotectData`. There is a simple `two-byte-patch` method that was originally found by several people in 2009
 and before which eliminates this check.
 
 [save file]: ./reversed/savefile.md
