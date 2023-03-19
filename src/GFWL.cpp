@@ -29,6 +29,9 @@ bool is_using_xdead = false;
 
 auto hook_gfwl(Memory::ModuleInfo& xlive) -> void;
 
+auto handle_xlive_unprotected_data(BYTE* protected_data, DWORD size_of_protected_data, BYTE* unprotected_data,
+    DWORD* size_of_data, HANDLE* protected_data_handle) -> int;
+
 #pragma region DECL_XLIVE_HOOKS
 DECL_DETOUR_API(signed int, __stdcall, xlive_3, int a1, signed int a2, signed int a3);
 DECL_DETOUR_API(signed int, __stdcall, xlive_4, int a1);
@@ -210,35 +213,7 @@ XDEAD_CALLBACK(XUSER_SIGNIN_STATE, XUserGetSigninState, int a1)
 XDEAD_CALLBACK(int, XLiveUnprotectData, BYTE* protected_data, DWORD size_of_protected_data, BYTE* unprotected_data,
     DWORD* size_of_data, HANDLE* protected_data_handle)
 {
-    // XLive decrypts the protected data buffer, which checks against your logged in GFWL account. We simply do not call
-    // the original function and instead write the same CRC values from the save file back into the buffer, making the
-    // save manager succeed verifying it. This means that we can now load any save file :^)
-
-    struct unprotected_buffer_t {
-        uint32_t header_crc;
-        uint32_t body_crc;
-    };
-    static_assert(sizeof(unprotected_buffer_t) == 8);
-
-    if (!unprotected_data) {
-        if (size_of_data) {
-            *size_of_data = sizeof(unprotected_buffer_t);
-            return 0;
-        }
-    } else {
-        auto pg_save_load = *reinterpret_cast<PgSaveLoad**>(Offsets::pg_save_load);
-        if (pg_save_load && pg_save_load->file_manager && pg_save_load->file_manager->save_file
-            && pg_save_load->file_manager->save_file->buffer) {
-            auto unprotected_buffer = reinterpret_cast<unprotected_buffer_t*>(unprotected_data);
-            auto save_buffer = pg_save_load->file_manager->save_file->buffer;
-
-            unprotected_buffer->header_crc = save_buffer->header.header_crc;
-            unprotected_buffer->body_crc = save_buffer->header.body_crc;
-            return 0;
-        }
-    }
-
-    return -1;
+    return handle_xlive_unprotected_data(protected_data, size_of_protected_data, unprotected_data, size_of_data, protected_data_handle);
 }
 #pragma endregion XDEAD_CALLBACKS
 
@@ -561,6 +536,39 @@ auto unpatch_gfwl() -> void
 
         xdead_remove_all_listeners();
     }
+}
+
+// XLive decrypts the protected data buffer, which checks against your logged in GFWL account. We simply do not call
+// the original function and instead write the same CRC values from the save file back into the buffer, making the
+// save manager succeed verifying it. This means that we can now load any save file :^)
+auto handle_xlive_unprotected_data(BYTE* protected_data, DWORD size_of_protected_data, BYTE* unprotected_data,
+    DWORD* size_of_data, HANDLE* protected_data_handle) -> int {
+
+    struct unprotected_buffer_t {
+        uint32_t header_crc;
+        uint32_t body_crc;
+    };
+    static_assert(sizeof(unprotected_buffer_t) == 8);
+
+    if (!unprotected_data) {
+        if (size_of_data) {
+            *size_of_data = sizeof(unprotected_buffer_t);
+            return 0;
+        }
+    } else {
+        auto pg_save_load = *reinterpret_cast<PgSaveLoad**>(Offsets::pg_save_load);
+        if (pg_save_load && pg_save_load->file_manager && pg_save_load->file_manager->save_file
+            && pg_save_load->file_manager->save_file->buffer) {
+            auto unprotected_buffer = reinterpret_cast<unprotected_buffer_t*>(unprotected_data);
+            auto save_buffer = pg_save_load->file_manager->save_file->buffer;
+
+            unprotected_buffer->header_crc = save_buffer->header.header_crc;
+            unprotected_buffer->body_crc = save_buffer->header.body_crc;
+            return 0;
+        }
+    }
+
+    return -1;
 }
 
 auto __forceinline print_stack(int parameters) -> void
@@ -1426,42 +1434,9 @@ DETOUR_API(int, __stdcall, xlive_5034, int a1, int a2, int a3, int a4, int a5)
 }
 DETOUR_API(int, __stdcall, xlive_5035, BYTE* protected_data, DWORD size_of_protected_data, BYTE* unprotected_data, DWORD* size_of_data, HANDLE* protected_data_handle)
 {
-    // XLive decrypts the protected data buffer, which checks against your logged in GFWL account. We simply do not call
-    // the original function and instead write the same CRC values from the save file back into the buffer, making the
-    // save manager succeed verifying it. This means that we can now load any save file :^)
-
-    //xlive_debug_break(false);
-
-    struct unprotected_buffer_t {
-        uint32_t header_crc;
-        uint32_t body_crc;
-    };
-    static_assert(sizeof(unprotected_buffer_t) == 8);
-
-    if (!unprotected_data) {
-        if (size_of_data) {
-            *size_of_data = sizeof(unprotected_buffer_t);
-            return 0;
-        }
-    } else {
-        auto pg_save_load = *reinterpret_cast<PgSaveLoad**>(Offsets::pg_save_load);
-        if (pg_save_load
-            && pg_save_load->file_manager
-            && pg_save_load->file_manager->save_file
-            && pg_save_load->file_manager->save_file->buffer) {
-            auto unprotected_buffer = reinterpret_cast<unprotected_buffer_t*>(unprotected_data);
-            auto save_buffer = pg_save_load->file_manager->save_file->buffer;
-
-            unprotected_buffer->header_crc = save_buffer->header.header_crc;
-            unprotected_buffer->body_crc = save_buffer->header.body_crc;
-            return 0;
-        }
-    }
-
     //CALL_ORIGINAL(5035, "XLiveUnprotectData", protected_data, size_of_protected_data, unprotected_data, size_of_data, protected_data_handle);
     //LOG_AND_RETURN("{:x}, {:x}, {:x}, {:x} -> {:x}, {:x} -> {:x}", hex(protected_data), hex(size_of_protected_data), hex(unprotected_data), hex(size_of_data), dptr(size_of_data), hex(protected_data_handle), dptr(protected_data_handle));
-
-    return -1;
+    return handle_xlive_unprotected_data(protected_data, size_of_protected_data, unprotected_data, size_of_data, protected_data_handle);
 }
 DETOUR_API(int, __stdcall, xlive_5036, int a1, int a2)
 {
