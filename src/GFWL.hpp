@@ -65,6 +65,63 @@ struct XUSER_SIGNIN_INFO {
     CHAR user_name[16];
 };
 
+struct XLiveLeaderboardStats {
+    char unk_0000[40]; // 0x00
+    uint32_t xp; // 0x28
+    char unk_002c[20]; // 0x2c
+    uint32_t derezz; // 0x40
+    char unk_0044[20]; // 0x44
+    uint32_t wipes; // 0x58
+    char unk_005c[20]; // 0x5c
+    uint32_t assists; // 0x70
+    char unk_0074[20]; // 0x74
+    uint32_t bits_nodes; // 0x88
+    char unk_008c[20]; // 0x8c
+    uint32_t played; // 0xa0
+    char unk_00a4[28]; // 0xa4
+};
+static_assert(offsetof(XLiveLeaderboardStats, xp) == 0x28);
+static_assert(offsetof(XLiveLeaderboardStats, derezz) == 0x40);
+static_assert(offsetof(XLiveLeaderboardStats, wipes) == 0x58);
+static_assert(offsetof(XLiveLeaderboardStats, assists) == 0x70);
+static_assert(offsetof(XLiveLeaderboardStats, bits_nodes) == 0x88);
+static_assert(offsetof(XLiveLeaderboardStats, played) == 0xa0);
+static_assert(sizeof(XLiveLeaderboardStats) == 0xc0);
+
+struct XLiveLeaderboardEntry {
+    ULONGLONG xuid; // 0x00
+    uint32_t rank; // 0x0x8
+    char unk_000c[12]; // 0x0c
+    char gamer_tag[16]; // 0x18
+    uint32_t columns; // 0x28
+    XLiveLeaderboardStats* stats; // 0x2c
+};
+static_assert(offsetof(XLiveLeaderboardEntry, xuid) == 0x00);
+static_assert(offsetof(XLiveLeaderboardEntry, rank) == 0x08);
+static_assert(offsetof(XLiveLeaderboardEntry, gamer_tag) == 0x18);
+static_assert(offsetof(XLiveLeaderboardEntry, columns) == 0x28);
+static_assert(offsetof(XLiveLeaderboardEntry, stats) == 0x2c);
+static_assert(sizeof(XLiveLeaderboardEntry) == 0x30);
+
+struct XLiveLeaderboard {
+    uint32_t unk_0000; // 0x00
+    uint32_t unk_0004; // 0x04
+    uint32_t unk_0008; // 0x08
+    uint32_t unk_000c; // 0x0c
+    uint32_t count; // 0x10
+    XLiveLeaderboardEntry* first_entry; // 0x14
+    XLiveLeaderboardEntry entries[22]; // 0x18
+};
+static_assert(offsetof(XLiveLeaderboard, count) == 0x10);
+static_assert(offsetof(XLiveLeaderboard, first_entry) == 0x14);
+static_assert(offsetof(XLiveLeaderboard, entries) == 0x18);
+
+struct XUSER_STATS_SPEC {
+	DWORD view_id;
+	DWORD num_column_ids;
+	WORD rgw_column_ids[64];
+};
+
 namespace xdead {
     #define XDEAD_CALLBACK(type, name, ...) type __stdcall name##_callback(##__VA_ARGS__)
     #define XDEAD_FUNCTION_NAME(name, ordinal) static constexpr auto name = ordinal
