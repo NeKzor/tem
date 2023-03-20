@@ -246,7 +246,6 @@ auto patch_gfwl() -> void
         XDEAD_HOOK(XNotifyCreateListener);
         XDEAD_HOOK(XUserGetSigninState);
         XDEAD_HOOK(XLiveUnprotectData);
-        XDEAD_HOOK(XLiveUnprotectData);
 #undef XDEAD_HOOK
     } else {
         auto xlive = Memory::ModuleInfo();
