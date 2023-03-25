@@ -5,9 +5,10 @@
  *
  *
  * This generates the unlock code for SecuROM's manual activation.
- * Code is based on on 80_PA.
+ * Code is based on 80_PA.
  *
- * Read for more information: https://tem.nekz.me/reversed/securom.html#unlock-code
+ * For more information:
+ *  https://tem.nekz.me/reversed/securom.html#unlock-code
  *
  * Example output:
  *	UB9NU-ZU3LF-6R5ZQ-LPYE5-8C3UH-RGR3P-HX5NP-P6GHQ
