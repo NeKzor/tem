@@ -1,5 +1,5 @@
 
-## XLive (GFWL)
+## XLive (Games for Windows Live)
 
 - [Overview](#overview)
 - [Call Order](#call-order)

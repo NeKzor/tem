@@ -49,6 +49,7 @@ Because of XDead, we can easily get the game to run under Linux with [Wine][].
   `HKEY_LOCAL_MACHINE\Software\Disney Interactive Studios\tr2npc`:
   - `InstallPath REG_SZ "C:\Program Files (x86)\Disney Interactive Studios\Tron Evolution\Binaries\Win32Live"`
   - `Language REG_SZ "EN"` (other supported languages are `DE`, `FR`, `ES`, `IT`, `JP`, `RU`, `PL`, `NL`, `CZ`)
+- Disable default logging for more performance with `WINEDEBUG=-all`
 - By default Wine loads its own `dinput8.dll` version. Simply use `WINEDLLOVERRIDES="dinput8=n"` to use TEM's proxy.
 
 ```bash
@@ -59,7 +60,7 @@ winetricks -q physx dinput8
 wine regedit
 
 # Launch
-WINEDLLOVERRIDES="dinput8=n" wine GridGameLauncher.exe
+WINEDEBUG=-all WINEDLLOVERRIDES="dinput8=n" wine GridGameLauncher.exe
 ```
 
 [Wine]: https://www.winehq.org

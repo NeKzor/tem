@@ -9,7 +9,7 @@
 ## Motivation
 
 - Internals of Unreal Engine 3
-- Internals of GFWL
+- Internals of Games for Windows Live
 - Internals of SecuROM
 - Open Source
 - Keeping abandonware alive :^)
