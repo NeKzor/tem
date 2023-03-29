@@ -19,8 +19,6 @@ TEM tem = {};
 
 auto forcedWindowMinimizePatch = Memory::Patch();
 
-auto patch_forced_window_minimize() -> void;
-
 DECL_DETOUR_T(void, ProcessEvent, UObject* object, UFunction* func, void* params, int result);
 DECL_DETOUR_T(Color*, GetTeamColor, PgTeamInfo* team, Color* color, int team_color_index);
 DECL_DETOUR_T(FString*, ConsoleCommand, UGameViewportClient* client, const FString& output, const FString& command);
@@ -43,8 +41,11 @@ auto tem_attach(HMODULE module) -> int
     Hooks::initialize();
 
     patch_gfwl();
-    patch_forced_window_minimize();
     bypass_spot_checks();
+
+#if _DEBUG
+    patch_forced_window_minimize(true);
+#endif
 
     // Actual intialization happens in a hooked GFWL function.
     // This check here is only for DLL injection.
@@ -78,10 +79,7 @@ auto tem_detach() -> void
     Hooks::uninitialize();
 
     ui_shutdown();
-
-    if (forcedWindowMinimizePatch.Restore()) {
-        println("[tem] Restored forced window minimize patch");
-    }
+    patch_forced_window_minimize(false);
 
     auto controller = tem.player_controller();
     if (tem.is_super_user && controller) {
@@ -134,18 +132,30 @@ auto tem_init() -> void
  */
 auto tem_shutdown() -> void { FreeLibraryAndExitThread(tem.module_handle, 0); }
 
-auto patch_forced_window_minimize() -> void
+auto patch_forced_window_minimize(bool enable) -> void
 {
     // Skip call to user32!ShowWindow with SW_MINIMIZE
     //     Original: 0F 84 (jz)
     //     Patch:    90 E9 (nop jmp)
 
-    unsigned char nop_jmp[2] = { 0x90, 0xE9 };
-    if (forcedWindowMinimizePatch.Execute(Offsets::forced_window_minimize, nop_jmp, sizeof(nop_jmp))) {
+    if (enable) {
+        unsigned char nop_jmp[2] = { 0x90, 0xE9 };
+        if (!forcedWindowMinimizePatch.Execute(Offsets::forced_window_minimize, nop_jmp, sizeof(nop_jmp))) {
+            tem.disabled_forced_window_minimize = false;
+            return println("[tem] Unable to patch forced window minimize :(");
+        }
+
+        tem.disabled_forced_window_minimize = true;
+
         println(
-            "[tem] Patched GridGame.exe forced window minimize at 0x{:04x}", forcedWindowMinimizePatch.GetLocation());
+                "[tem] Patched GridGame.exe forced window minimize at 0x{:04x}", forcedWindowMinimizePatch.GetLocation());
     } else {
-        println("[tem] Unable to patch forced window minimize :(");
+        if (!forcedWindowMinimizePatch.Restore()) {
+            return println("[tem] Unable to restore forced window minimize :(");
+        }
+
+        tem.disabled_forced_window_minimize = false;
+        println("[tem] Restored forced window minimize patch");
     }
 }
 

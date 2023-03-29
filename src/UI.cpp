@@ -436,6 +436,11 @@ DETOUR_STD(HRESULT, Present, IDirect3DDevice9* device, RECT* pSourceRect, RECT* 
                 }
                 create_hover_tooltip("Change player color.");
 
+                if (ImGui::MenuItem("Disable Window Minimize", nullptr, tem.disabled_forced_window_minimize)) {
+                    patch_forced_window_minimize(!tem.disabled_forced_window_minimize);
+                }
+                create_hover_tooltip("This makes it possible to keep the game open even when tabbed out.");
+
                 if (!is_using_xdead) {
                     ImGui::Separator();
                     if (ImGui::MenuItem("Anti Anti Debugger", nullptr, suspended_gfwl_main_thread)) {

@@ -37,6 +37,7 @@ struct TEM {
     bool want_weak_enemies = false;
     bool want_rgb_suit = false;
     bool is_noclipping = false;
+    bool disabled_forced_window_minimize = false;
 
     int rgb_last_color = 0;
     float rgb_last_update = 0.0f;
@@ -70,6 +71,8 @@ extern auto tem_attach(HMODULE module) -> int;
 extern auto tem_detach() -> void;
 extern auto tem_init() -> void;
 extern auto tem_shutdown() -> void;
+
+extern auto patch_forced_window_minimize(bool enable) -> void;
 
 // TODO: somebody come up with better level names
 const std::vector<std::pair<std::string, std::string>> game_levels = {
