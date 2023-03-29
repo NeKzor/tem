@@ -428,6 +428,13 @@ DETOUR_STD(HRESULT, Present, IDirect3DDevice9* device, RECT* pSourceRect, RECT* 
             if (ImGui::BeginMenu("TEM")) {
                 if (ImGui::MenuItem("Superuser", nullptr, tem.is_super_user)) {
                     tem.is_super_user = !tem.is_super_user;
+
+                    if (!tem.is_super_user) {
+                        auto controller = tem.player_controller();
+                        if (controller) {
+                            controller->set_god_mode(false);
+                        }
+                    }
                 }
                 create_hover_tooltip("Give player unlimted health and energy.");
 
