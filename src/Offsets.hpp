@@ -15,7 +15,7 @@ typedef uint32_t vtable_offset_t, object_offset_t, function_offset_t;
 const object_offset_t g_Objects = 0x2278E7C;
 const object_offset_t g_Names = 0x2278E4C;
 const object_offset_t g_Engine = 0x2286CA8;
-const object_offset_t g_Renderer = 0x227DDF0;
+const object_offset_t g_pD3DDevice = 0x22B4C50;
 const vtable_offset_t ProcessEvent = 62;
 const function_offset_t GetTeamColor = 0x1439DF0;
 const vtable_offset_t ConsoleCommand = 71;

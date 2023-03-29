@@ -10,7 +10,7 @@
 #include <map>
 
 #define TEM_WELCOME "Tron Evolution Mod by NeKz :^)"
-#define TEM_VERSION "Version 0.1.0"
+#define TEM_VERSION "Version 0.1.0 (" __TIMESTAMP__  ")"
 
 #define MV_FORWARD (1 << 3)
 #define MV_BACKWARD (1 << 4)
@@ -25,7 +25,6 @@
 
 struct TEM {
     HMODULE module_handle = 0;
-    HANDLE ui_init_thread = 0;
 
     std::atomic_bool is_attached = false;
     std::atomic_bool is_hooked = false;
@@ -69,8 +68,8 @@ extern TEM tem;
 
 extern auto tem_attach(HMODULE module) -> int;
 extern auto tem_detach() -> void;
-extern auto shutdown_thread() -> void;
-extern auto hook_engine_functions() -> void;
+extern auto tem_init() -> void;
+extern auto tem_shutdown() -> void;
 
 // TODO: somebody come up with better level names
 const std::vector<std::pair<std::string, std::string>> game_levels = {

@@ -29,5 +29,5 @@ struct UI {
 
 extern UI ui;
 
-extern auto init_ui() -> void;
-extern auto destroy_ui() -> void;
+extern auto ui_init() -> void;
+extern auto ui_shutdown() -> void;

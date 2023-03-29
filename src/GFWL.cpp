@@ -11,6 +11,7 @@
 #include "Platform.hpp"
 #include "SDK.hpp"
 #include "TEM.hpp"
+#include "UI.hpp"
 #include <Windows.h>
 #include <intrin.h>
 #include <map>
@@ -177,9 +178,9 @@ DECL_DETOUR_API(int, __stdcall, xlive_5332, int a1, int a2);
 #pragma endregion DECL_XLIVE_HOOKS
 
 #pragma region XDEAD_CALLBACKS
-XDEAD_CALLBACK(signed int, XLiveInitializeEx, int a1, int a2)
+XDEAD_CALLBACK(signed int, XHVCreateEngine, int a1, int a2, DWORD* a3)
 {
-    hook_engine_functions();
+    tem_init();
     return 0;
 }
 XDEAD_CALLBACK(signed int, XFriendsCreateEnumerator, int a1, int a2, int a3, int a4, int a5)
@@ -241,7 +242,7 @@ auto patch_gfwl() -> void
         }                                                                                                              \
     }
 
-        XDEAD_HOOK(XLiveInitializeEx);
+        XDEAD_HOOK(XHVCreateEngine);
         XDEAD_HOOK(XFriendsCreateEnumerator);
         XDEAD_HOOK(XNotifyCreateListener);
         XDEAD_HOOK(XUserGetSigninState);
@@ -265,10 +266,7 @@ auto patch_gfwl() -> void
             return println("[gfwl] Unable to patch memory check :(");
         }
 
-#if _DEBUG
         hook_gfwl(xlive);
-        //change_gfwl_main_thread(true);
-#endif
     }
 }
 
@@ -298,6 +296,7 @@ auto hook_gfwl(Memory::ModuleInfo& xlive) -> void
     Hooks::queue(name, &xlive_##ordinal, xlive_##ordinal##_Hook, wrapper_address);                                     \
     xlive_##ordinal = xlive_##ordinal##_original;
 
+#if _DEBUG
     HOOK_ORDINAL(3, "XSocketCreate");
     HOOK_ORDINAL(4, "XSocketClose");
     HOOK_ORDINAL(6, "XSocketIOCTLSocket");
@@ -439,6 +438,10 @@ auto hook_gfwl(Memory::ModuleInfo& xlive) -> void
     HOOK_IAT_WRAPPER(0x1A33B94, 5297, "XLiveInitializeEx");
     HOOK_IAT_WRAPPER(0x1A33B04, 5317, "XSessionWriteStats");
     HOOK_IAT_WRAPPER(0x1A33BE8, 5332, "XSessionEnd");
+#else
+    // Functions here should always be hooked
+    HOOK_ORDINAL(5008, "XHVCreateEngine");
+#endif
 }
 
 auto change_gfwl_main_thread(bool suspend) -> bool
@@ -870,6 +873,8 @@ DETOUR_API(signed int, __stdcall, xlive_5007, int a1)
 }
 DETOUR_API(signed int, __stdcall, xlive_5008, int a1, int a2, DWORD* a3)
 {
+    tem_init();
+
     CALL_ORIGINAL(5008, "XHVCreateEngine", a1, a2, a3);
     LOG_AND_RETURN("{:x}, {:x}, {:x}", hex(a1), hex(a2), hex(a3));
 }
@@ -1349,8 +1354,6 @@ DETOUR_API(int, __stdcall, xlive_5278, int a1, int a2, int a3)
 }
 DETOUR_API(int, __stdcall, xlive_5297, int a1, int a2)
 {
-    hook_engine_functions();
-
     CALL_ORIGINAL(5297, "XLiveInitializeEx", a1, a2);
     LOG_AND_RETURN("{:x}, {:x}", hex(a1), hex(a2));
 }

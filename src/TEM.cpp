@@ -25,6 +25,10 @@ DECL_DETOUR_T(void, ProcessEvent, UObject* object, UFunction* func, void* params
 DECL_DETOUR_T(Color*, GetTeamColor, PgTeamInfo* team, Color* color, int team_color_index);
 DECL_DETOUR_T(FString*, ConsoleCommand, UGameViewportClient* client, const FString& output, const FString& command);
 
+/*
+ * This gets called once the module loads.
+ * Here we immediately patch GFWL and all spot checks.
+ */
 auto tem_attach(HMODULE module) -> int
 {
     if (tem.is_attached) {
@@ -42,11 +46,13 @@ auto tem_attach(HMODULE module) -> int
     patch_forced_window_minimize();
     bypass_spot_checks();
 
+    // Actual intialization happens in a hooked GFWL function.
+    // This check here is only for DLL injection.
     if (tem.engine()) {
-        hook_engine_functions();
+        tem_init();
+    } else {
+        Hooks::apply_queued();
     }
-
-    Hooks::apply_queued();
 
     println(TEM_WELCOME);
     println(TEM_VERSION);
@@ -54,6 +60,10 @@ auto tem_attach(HMODULE module) -> int
     return 0;
 }
 
+/*
+ * This gets called once the module unloads.
+ * Unhook all functions and restore all patches.
+ */
 auto tem_detach() -> void
 {
     if (tem.is_detached) {
@@ -67,9 +77,7 @@ auto tem_detach() -> void
 
     Hooks::uninitialize();
 
-    WaitForSingleObject(tem.ui_init_thread, 2000);
-
-    destroy_ui();
+    ui_shutdown();
 
     if (forcedWindowMinimizePatch.Restore()) {
         println("[tem] Restored forced window minimize patch");
@@ -85,24 +93,12 @@ auto tem_detach() -> void
     println("Cya :^)");
 }
 
-auto shutdown_thread() -> void { FreeLibraryAndExitThread(tem.module_handle, 0); }
-
-auto patch_forced_window_minimize() -> void
-{
-    // Skip call to user32!ShowWindow with SW_MINIMIZE
-    //     Original: 0F 84 (jz)
-    //     Patch:    90 E9 (nop jmp)
-
-    unsigned char nop_jmp[2] = { 0x90, 0xE9 };
-    if (forcedWindowMinimizePatch.Execute(Offsets::forced_window_minimize, nop_jmp, sizeof(nop_jmp))) {
-        println(
-            "[tem] Patched GridGame.exe forced window minimize at 0x{:04x}", forcedWindowMinimizePatch.GetLocation());
-    } else {
-        println("[tem] Unable to patch forced window minimize :(");
-    }
-}
-
-auto hook_engine_functions() -> void
+/*
+ * This intializes all engine hooks and the UI.
+ * This should be called once the pointers for the engine and the D3D
+ * device are set. The GFWL method XHVCreateEngine is perfect for this.
+ */
+auto tem_init() -> void
 {
     if (tem.is_hooked) {
         return;
@@ -126,14 +122,31 @@ auto hook_engine_functions() -> void
         Hooks::queue("UGameViewportClient::ConsoleCommand", &ConsoleCommand, ConsoleCommand_Hook, consoleCommand);
     }
 
+    ui_init();
+
     Hooks::apply_queued();
 
-    // TODO: Is there a better way to initialize the UI?
-    if (!tem.ui_init_thread) {
-        tem.ui_init_thread = CreateThread(0, 0, LPTHREAD_START_ROUTINE(init_ui), 0, 0, 0);
-    }
-
     tem.is_hooked = true;
+}
+
+/*
+ * This signals the process to unload the module.
+ */
+auto tem_shutdown() -> void { FreeLibraryAndExitThread(tem.module_handle, 0); }
+
+auto patch_forced_window_minimize() -> void
+{
+    // Skip call to user32!ShowWindow with SW_MINIMIZE
+    //     Original: 0F 84 (jz)
+    //     Patch:    90 E9 (nop jmp)
+
+    unsigned char nop_jmp[2] = { 0x90, 0xE9 };
+    if (forcedWindowMinimizePatch.Execute(Offsets::forced_window_minimize, nop_jmp, sizeof(nop_jmp))) {
+        println(
+            "[tem] Patched GridGame.exe forced window minimize at 0x{:04x}", forcedWindowMinimizePatch.GetLocation());
+    } else {
+        println("[tem] Unable to patch forced window minimize :(");
+    }
 }
 
 auto TEM::find_name(FName name) -> std::string_view
@@ -164,10 +177,7 @@ auto TEM::find_name_index(const char* name) -> int
 
     return -1;
 }
-inline auto TEM::engine() -> UEngine*
-{
-    return Memory::Deref<UEngine*>(Offsets::g_Engine);
-}
+inline auto TEM::engine() -> UEngine* { return Memory::Deref<UEngine*>(Offsets::g_Engine); }
 inline auto TEM::player_controller() -> PgPlayerController*
 {
     if (!this->engine() || !this->engine()->get_local_player()) {
@@ -209,7 +219,7 @@ DETOUR_T(void, ProcessEvent, UObject* object, UFunction* func, void* params, int
             tem.find_name(func->name), uintptr_t(object), uintptr_t(func), uintptr_t(params));
     };
 
-    if ((GetAsyncKeyState(VK_NUMPAD1) < 0) && ui.game_window_is_focused() && !tem.engine->is_paused()) {
+    if ((GetAsyncKeyState(VK_NUMPAD1) < 0) && ui.game_window_is_focused() && tem.engine() && !tem.engine()->is_paused()) {
         log_event();
     }
 #endif

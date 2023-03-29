@@ -36,7 +36,7 @@ DECL_DETOUR_STD(HRESULT, Reset, IDirect3DDevice9* device, D3DPRESENT_PARAMETERS*
 DECL_DETOUR_STD(HRESULT, Present, IDirect3DDevice9* device, RECT* pSourceRect, RECT* pDestRect,
     HWND hDestWindowOverride, RGNDATA* pDirtyRegion);
 
-BOOL CALLBACK enum_window(HWND handle, LPARAM pid)
+BOOL CALLBACK ui_window(HWND handle, LPARAM pid)
 {
     auto proc_id = DWORD();
     GetWindowThreadProcessId(handle, &proc_id);
@@ -51,7 +51,7 @@ BOOL CALLBACK enum_window(HWND handle, LPARAM pid)
     auto found = strcmp(title, "Tron: Evolution") == 0;
     if (found) {
         println(
-            "[ui] enum_window: title = {}, proc_id = {}, handle = {}, pid = {}", title, proc_id, int(handle), int(pid));
+            "[ui] Window: title = {}, proc_id = {}, handle = {}, pid = {}", title, proc_id, int(handle), int(pid));
         ui.window_handle = handle;
         return false;
     }
@@ -59,83 +59,37 @@ BOOL CALLBACK enum_window(HWND handle, LPARAM pid)
     return true;
 }
 
-auto init_ui() -> void
+auto ui_init() -> void
 {
-    //auto g_Renderer = Memory::Deref<URenderer*>(Offsets::g_Renderer);
-    //println("[ui] g_Renderer: 0x{:04x}", uintptr_t(g_Renderer));
-
-    //auto device = g_Renderer->device;
-    //println("[ui] device: 0x{:04x}", uintptr_t(device));
+    if (ui.hooked) {
+        return;
+    }
 
     ui.window_handle = nullptr;
 
-    EnumWindows(enum_window, GetCurrentProcessId());
+    EnumWindows(ui_window, GetCurrentProcessId());
 
     if (!ui.window_handle) {
         return println("[ui] Unable to find window handle :(");
     }
 
-    auto d3d9dll = LoadLibraryA("d3d9.dll");
-    if (!d3d9dll) {
-        return println("[ui] Unable to find d3d9.dll module :(");
+    auto g_pD3DDevice = Memory::Deref<void*>(Offsets::g_pD3DDevice);
+    if (!g_pD3DDevice) {
+        return println("[ui] g_pD3DDevice is null :(");
     }
 
-    auto D3DCreate9 = GetProcAddress(d3d9dll, "Direct3DCreate9");
-    if (!D3DCreate9) {
-        return println("[ui] Unable to find Direct3DCreate9 :(");
-    }
+    println("[ui] g_pD3DDevice: 0x{:x}", uintptr_t(g_pD3DDevice));
 
-    typedef IDirect3D9*(__stdcall * DIRECT3DCREATE9)(UINT version);
+    auto reset = Memory::VMT(g_pD3DDevice, Offsets::Reset);
+    auto present = Memory::VMT(g_pD3DDevice, Offsets::Present);
 
-    auto d3d9 = DIRECT3DCREATE9(D3DCreate9)(D3D_SDK_VERSION);
-    if (!d3d9) {
-        return println("[ui] Direct3DCreate9 returns null :(");
-    }
+    Hooks::queue("IDirect3DDevice9::Reset", &Reset, Reset_Hook, reset);
+    Hooks::queue("IDirect3DDevice9::Present", &Present, Present_Hook, present);
 
-    IDirect3DDevice9* device = nullptr;
-
-    D3DPRESENT_PARAMETERS d3dpp = {
-        .SwapEffect = D3DSWAPEFFECT_DISCARD,
-        .hDeviceWindow = ui.window_handle,
-    };
-
-    while (!ui.is_shutdown) {
-        d3dpp.Windowed = true;
-
-        auto res = d3d9->CreateDevice(D3DADAPTER_DEFAULT, D3DDEVTYPE_HAL, d3dpp.hDeviceWindow,
-            D3DCREATE_SOFTWARE_VERTEXPROCESSING, &d3dpp, &device);
-
-        //if (res != D3D_OK) {
-        //    d3dpp.Windowed = false;
-        //    res = d3d9->CreateDevice(D3DADAPTER_DEFAULT, D3DDEVTYPE_HAL, d3dpp.hDeviceWindow,
-        //        D3DCREATE_SOFTWARE_VERTEXPROCESSING, &d3dpp, &device);
-        //}
-
-        if (res != D3D_OK) {
-            println("[ui] CreateDevice failed with error code {}", res);
-            Sleep(1000);
-            continue;
-        }
-
-        if (!device) {
-            println("[ui] CreateDevice did not set a device :(");
-            break;
-        }
-
-        auto reset = Memory::VMT(device, Offsets::Reset);
-        auto present = Memory::VMT(device, Offsets::Present);
-
-        Hooks::hook("IDirect3DDevice9::Reset", &Reset, Reset_Hook, reset);
-        Hooks::hook("IDirect3DDevice9::Present", &Present, Present_Hook, present);
-
-        device->Release();
-
-        ui.hooked = true;
-        break;
-    }
+    ui.hooked = true;
 }
 
-auto destroy_ui() -> void
+auto ui_shutdown() -> void
 {
     ui.is_shutdown = true;
     ui.hooked = false;
@@ -497,7 +451,7 @@ DETOUR_STD(HRESULT, Present, IDirect3DDevice9* device, RECT* pSourceRect, RECT* 
                 //}
                 ImGui::Separator();
                 if (ImGui::MenuItem("Shutdown")) {
-                    CreateRemoteThread(GetCurrentProcess(), 0, 0, LPTHREAD_START_ROUTINE(shutdown_thread), 0, 0, 0);
+                    CreateRemoteThread(GetCurrentProcess(), 0, 0, LPTHREAD_START_ROUTINE(tem_shutdown), 0, 0, 0);
                 }
                 create_hover_tooltip("Unload TEM module.");
 
