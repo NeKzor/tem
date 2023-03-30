@@ -166,13 +166,13 @@ DETOUR_STD(HRESULT, Present, IDirect3DDevice9* device, RECT* pSourceRect, RECT* 
         auto x = 10.0f;
         auto y = 90.0f;
         auto padding_between_elements = 20.0f;
+        auto flags = ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoSavedSettings
+                        | ImGuiWindowFlags_NoBackground | ImGuiWindowFlags_NoDecoration;
 
         if (ui.show_fps) {
             y += padding_between_elements;
             ImGui::SetNextWindowPos(ImVec2(x, y));
-            ImGui::Begin("fps", nullptr,
-                ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoSavedSettings
-                    | ImGuiWindowFlags_NoBackground | ImGuiWindowFlags_NoDecoration);
+            ImGui::Begin("fps", nullptr, flags);
             ImGui::Text("fps: %.2f", ImGui::GetIO().Framerate);
             ImGui::End();
         }
@@ -202,9 +202,7 @@ DETOUR_STD(HRESULT, Present, IDirect3DDevice9* device, RECT* pSourceRect, RECT* 
                 y += padding_between_elements;
                 ImGui::SetNextWindowPos(ImVec2(x, y));
                 ImGui::SetNextWindowSize(ImVec2(135, 30));
-                ImGui::Begin("timer", nullptr,
-                    ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoSavedSettings
-                        | ImGuiWindowFlags_NoBackground | ImGuiWindowFlags_NoDecoration);
+                ImGui::Begin("timer", nullptr, flags);
                 ImGui::Text("timer: %s", timer);
                 ImGui::End();
             }
@@ -212,9 +210,7 @@ DETOUR_STD(HRESULT, Present, IDirect3DDevice9* device, RECT* pSourceRect, RECT* 
                 y += padding_between_elements;
                 ImGui::SetNextWindowPos(ImVec2(x, y));
                 ImGui::SetNextWindowSize(ImVec2(265, 30));
-                ImGui::Begin("position", nullptr,
-                    ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoSavedSettings
-                        | ImGuiWindowFlags_NoBackground | ImGuiWindowFlags_NoDecoration);
+                ImGui::Begin("position", nullptr, flags);
                 ImGui::Text("pos: %.3f %.3f %.3f", player->position.x, player->position.y, player->position.z);
                 ImGui::End();
             }
@@ -222,9 +218,7 @@ DETOUR_STD(HRESULT, Present, IDirect3DDevice9* device, RECT* pSourceRect, RECT* 
                 y += padding_between_elements;
                 ImGui::SetNextWindowPos(ImVec2(x, y));
                 ImGui::SetNextWindowSize(ImVec2(110, 30));
-                ImGui::Begin("angle", nullptr,
-                    ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoSavedSettings
-                        | ImGuiWindowFlags_NoBackground | ImGuiWindowFlags_NoDecoration);
+                ImGui::Begin("angle", nullptr, flags);
                 ImGui::Text("ang: %.3f", player->rotation.degree());
                 ImGui::End();
             }
@@ -232,9 +226,7 @@ DETOUR_STD(HRESULT, Present, IDirect3DDevice9* device, RECT* pSourceRect, RECT* 
                 y += padding_between_elements;
                 ImGui::SetNextWindowPos(ImVec2(x, y));
                 ImGui::SetNextWindowSize(ImVec2(265, 30));
-                ImGui::Begin("velocity", nullptr,
-                    ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoSavedSettings
-                        | ImGuiWindowFlags_NoBackground | ImGuiWindowFlags_NoDecoration);
+                ImGui::Begin("velocity", nullptr, flags);
                 ImGui::Text("vel: %.3f %.3f", player->velocity.length_2d(), player->velocity.length());
                 ImGui::End();
             }
@@ -242,9 +234,7 @@ DETOUR_STD(HRESULT, Present, IDirect3DDevice9* device, RECT* pSourceRect, RECT* 
                 y += padding_between_elements;
                 ImGui::SetNextWindowPos(ImVec2(x, y));
                 ImGui::SetNextWindowSize(ImVec2(110, 30));
-                ImGui::Begin("health", nullptr,
-                    ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoSavedSettings
-                        | ImGuiWindowFlags_NoBackground | ImGuiWindowFlags_NoDecoration);
+                ImGui::Begin("health", nullptr, flags);
                 ImGui::Text("hp: %i", player->health);
                 ImGui::End();
             }
@@ -252,9 +242,7 @@ DETOUR_STD(HRESULT, Present, IDirect3DDevice9* device, RECT* pSourceRect, RECT* 
                 y += padding_between_elements;
                 ImGui::SetNextWindowPos(ImVec2(x, y));
                 ImGui::SetNextWindowSize(ImVec2(265, 30));
-                ImGui::Begin("enemy_health", nullptr,
-                    ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoSavedSettings
-                        | ImGuiWindowFlags_NoBackground | ImGuiWindowFlags_NoDecoration);
+                ImGui::Begin("enemy_health", nullptr, flags);
                 if (tem.player_controller() && tem.player_controller()->enemy) {
                     ImGui::Text("enemy hp: %i", tem.player_controller()->enemy->health);
                 } else {
@@ -348,9 +336,7 @@ DETOUR_STD(HRESULT, Present, IDirect3DDevice9* device, RECT* pSourceRect, RECT* 
             }
 
             ImGui::SetNextWindowPos(ImVec2(x, y));
-            ImGui::Begin("inputs", nullptr,
-                ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoSavedSettings
-                    | ImGuiWindowFlags_NoBackground | ImGuiWindowFlags_NoDecoration);
+            ImGui::Begin("inputs", nullptr, flags);
 
             auto draw_list = ImGui::GetWindowDrawList();
 
