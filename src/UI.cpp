@@ -50,8 +50,7 @@ BOOL CALLBACK ui_window(HWND handle, LPARAM pid)
 
     auto found = strcmp(title, "Tron: Evolution") == 0;
     if (found) {
-        println(
-            "[ui] Window: title = {}, proc_id = {}, handle = {}, pid = {}", title, proc_id, int(handle), int(pid));
+        println("[ui] Window: title = {}, proc_id = {}, handle = {}, pid = {}", title, proc_id, int(handle), int(pid));
         ui.window_handle = handle;
         return false;
     }
@@ -297,8 +296,41 @@ DETOUR_STD(HRESULT, Present, IDirect3DDevice9* device, RECT* pSourceRect, RECT* 
 
         if (ui.show_inputs && tem.player_controller() && tem.player_controller()->player_input
             && !tem.engine()->is_paused()) {
-            auto mode = 3;
-            auto buttons = 0;
+            typedef uint8_t mode;
+            typedef uint8_t row;
+            typedef uint8_t col;
+            typedef uint8_t len;
+
+            struct IHudElement {
+                mode required_mode;
+                col col;
+                row row;
+                len length;
+                const char* text;
+                uint32_t move;
+            };
+
+            struct IHudContext {
+                mode mode = 4;
+                int buttons = 0;
+                float size = 40.0f;
+                float padding = 2.0f;
+                float x_offset = 0.0f;
+                float y_offset = 0.0f;
+                ImU32 color = IM_COL32(0, 0, 0, 235);
+                ImU32 shadow_color = IM_COL32(0, 0, 0, 100);
+                ImU32 font_color = IM_COL32(255, 255, 255, 255);
+                ImU32 font_shadow_color = IM_COL32(255, 255, 255, 64);
+                bool draw_shadow = true;
+                int element = 0;
+                float max_x = 0.0f;
+                float max_y = 0.0f;
+                int max_rows = 6;
+            } ctx;
+
+            ctx.x_offset = x;
+            ctx.y_offset
+                = ImGui::GetIO().DisplaySize.y - (ctx.max_rows * ctx.size) - ((ctx.max_rows - 1) * ctx.padding);
 
             auto player_input = tem.player_controller()->player_input;
 
@@ -310,116 +342,87 @@ DETOUR_STD(HRESULT, Present, IDirect3DDevice9* device, RECT* pSourceRect, RECT* 
                     auto& key = mapping.second;
 
                     if (std::find(key.begin(), key.end(), key_name.index) != key.end()) {
-                        buttons |= flag;
+                        ctx.buttons |= flag;
                     }
                 }
             }
-
-            auto mv_forward = buttons & MV_FORWARD;
-            auto mv_backward = buttons & MV_BACKWARD;
-            auto mv_left = buttons & MV_LEFT;
-            auto mv_right = buttons & MV_RIGHT;
-            auto mv_jump = buttons & MV_JUMP;
-            auto mv_disc_attack = buttons & MV_DISC_ATTACK;
-            auto mv_sprint = buttons & MV_SPRINT;
-            auto mv_disc_power = buttons & MV_DISC_POWER;
-            auto mv_melee_attack = buttons & MV_MELEE_ATTACK;
-            auto mv_block = buttons & MV_BLOCK;
-
-            auto size = 60.0f;
-            auto padding = 2.0f;
-
-            auto x_offset = x;
-            auto y_offset = ImGui::GetIO().DisplaySize.y - (4 * size) - (3 * padding);
-
-            auto color = IM_COL32(0, 0, 0, 235);
-            auto shadow_color = IM_COL32(0, 0, 0, 100);
-            auto font_color = IM_COL32(255, 255, 255, 255);
-            auto font_shadow_color = IM_COL32(255, 255, 255, 64);
-
-            static const char* symbols[] = { "W", "A", "S", "D", "S", "C", "S", "F", "L", "R" };
-            auto shadow = true;
 
             ImGui::SetNextWindowPos(ImVec2(x, y));
             ImGui::Begin("inputs", nullptr,
                 ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoSavedSettings
                     | ImGuiWindowFlags_NoBackground | ImGuiWindowFlags_NoDecoration);
+
             auto draw_list = ImGui::GetWindowDrawList();
 
-            auto element = 0;
-            auto max_x = 0.0f;
-            auto max_y = 0.0f;
+            auto draw_element = [&ctx, &draw_list](IHudElement element) {
+                auto x = ctx.x_offset + (element.col * ctx.size) + ((element.col + 1) * ctx.padding);
+                auto y = ctx.y_offset + (element.row * ctx.size) + ((element.row + 1) * ctx.padding);
 
-            auto DrawElement = [x_offset, y_offset, mode, shadow, color, size, shadow_color, draw_list, padding,
-                                   font_color, font_shadow_color, &element, &max_x,
-                                   &max_y](int value, bool button, int col, int row, int length = 1) {
-                auto x = x_offset + (col * size) + ((col + 1) * padding);
-                auto y = y_offset + (row * size) + ((row + 1) * padding);
-                if (mode >= value && (button || shadow)) {
-                    auto x0 = x + ((col + 1) * padding);
-                    auto y0 = y + ((row + 1) * padding);
-                    auto x1 = x + ((((col + 1) * padding) + size) * length);
-                    auto y1 = y + ((row + 1) * padding + size);
+                auto enabled = ctx.mode >= element.required_mode;
+                auto is_pressed = ctx.buttons & element.move;
+                auto draw_button = is_pressed || ctx.draw_shadow;
 
-                    draw_list->AddRectFilled(ImVec2(x0, y0), ImVec2(x1, y1), button ? color : shadow_color);
+                if (enabled && draw_button) {
+                    auto x0 = x + ((element.col + 1) * ctx.padding);
+                    auto y0 = y + ((element.row + 1) * ctx.padding);
+                    auto x1 = x + ((((element.col + 1) * ctx.padding) + ctx.size) * element.length);
+                    auto y1 = y + ((element.row + 1) * ctx.padding + ctx.size);
 
-                    auto text = symbols[element];
-                    auto text_size = ImGui::CalcTextSize(text);
+                    draw_list->AddRectFilled(ImVec2(x0, y0), ImVec2(x1, y1), is_pressed ? ctx.color : ctx.shadow_color);
+
+                    auto text_size = ImGui::CalcTextSize(element.text);
+                    auto text_color = is_pressed ? ctx.font_color : ctx.font_shadow_color;
 
                     auto xc = x0 + ((x1 - x0) / 2);
                     auto yc = y0 + ((y1 - y0) / 2);
+                    auto tx = xc - (text_size.x / 2);
+                    auto ty = yc - (text_size.y / 2);
 
-                    draw_list->AddText(ImVec2(xc - (text_size.x / 2), yc - (text_size.y / 2)),
-                        button ? font_color : font_shadow_color, text);
+                    draw_list->AddText(ImVec2(tx, ty), text_color, element.text);
 
-                    if (x1 > max_x) {
-                        max_x = x1;
+                    if (x1 > ctx.max_x) {
+                        ctx.max_x = x1;
                     }
 
-                    if (y1 > max_y) {
-                        max_y = y1;
+                    if (y1 > ctx.max_y) {
+                        ctx.max_y = y1;
                     }
                 }
-                ++element;
+
+                ++ctx.element;
             };
 
             /*
                 Layout:
-                    row|col0|1|2|3|4|5|6|7|8
-                    ---|---------------------
-                      0|       w
-                      1|shft|a|s|d|f
-                      2|ctrl|spacebar   |l|r
+                    row|col0|1|2|3|4|5|6|7|8|9
+                    ---|----------------------
+                      0|    |1|2|3|4
+                      2|       w
+                      3|    |a|s|d|f
+                      4|shft|   |c
+                      5|ctrl|spacebar     |l|r
             */
 
-            const int row0 = 0;
-            const int row1 = 1;
-            const int row2 = 2;
+            draw_element(IHudElement{ mode(4), col(1), row(0), len(1), "1", MV_SWITCH_TO_HEAVY_DISC });
+            draw_element(IHudElement{ mode(4), col(2), row(0), len(1), "2", MV_SWITCH_TO_BOMB_DISC });
+            draw_element(IHudElement{ mode(4), col(3), row(0), len(1), "3", MV_SWITCH_TO_STASIS_DISC });
+            draw_element(IHudElement{ mode(4), col(4), row(0), len(1), "4", MV_SWITCH_TO_CORRUPTION_DISC });
 
-            const int col0 = 0;
-            const int col1 = 1;
-            const int col2 = 2;
-            const int col3 = 3;
-            const int col4 = 4;
-            const int col5 = 5;
-            const int col6 = 6;
-            const int col7 = 7;
-            const int col8 = 8;
+            draw_element(IHudElement{ mode(1), col(2), row(1), len(1), "W", MV_FORWARD });
+            draw_element(IHudElement{ mode(1), col(1), row(2), len(1), "A", MV_LEFT });
+            draw_element(IHudElement{ mode(1), col(2), row(2), len(1), "S", MV_BACKWARD });
+            draw_element(IHudElement{ mode(1), col(3), row(2), len(1), "D", MV_RIGHT });
 
-            DrawElement(1, mv_forward, col2, row0); // w
-            DrawElement(1, mv_left, col1, row1); // a
-            DrawElement(1, mv_backward, col2, row1); // s
-            DrawElement(1, mv_right, col3, row1); // d
+            draw_element(IHudElement{ mode(2), col(0), row(3), len(1), "S", MV_SPRINT });
+            draw_element(IHudElement{ mode(2), col(0), row(4), len(1), "C", MV_BLOCK });
+            draw_element(IHudElement{ mode(2), col(1), row(4), len(7), "S", MV_JUMP });
+            draw_element(IHudElement{ mode(2), col(4), row(2), len(1), "F", MV_DISC_POWER });
+            draw_element(IHudElement{ mode(2), col(3), row(3), len(1), "C", MV_CAMERA_RESET });
 
-            DrawElement(2, mv_sprint, col0, row1); // shft
-            DrawElement(2, mv_block, col0, row2); // ctrl
-            DrawElement(2, mv_jump, col1, row2, col6); // spacebar
-            DrawElement(2, mv_disc_power, col4, row1); // f
+            draw_element(IHudElement{ mode(3), col(8), row(4), len(1), "L", MV_DISC_ATTACK });
+            draw_element(IHudElement{ mode(3), col(9), row(4), len(1), "R", MV_MELEE_ATTACK });
 
-            DrawElement(3, mv_disc_attack, col7, row2); // l
-            DrawElement(3, mv_melee_attack, col8, row2); // r
-
-            ImGui::Dummy(ImVec2(max_x, max_y));
+            ImGui::Dummy(ImVec2(ctx.max_x, ctx.max_y));
 
             ImGui::End();
         }

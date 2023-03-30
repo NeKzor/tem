@@ -22,6 +22,11 @@
 #define MV_DISC_POWER (1 << 10)
 #define MV_MELEE_ATTACK (1 << 11)
 #define MV_BLOCK (1 << 12)
+#define MV_CAMERA_RESET (1 << 13)
+#define MV_SWITCH_TO_HEAVY_DISC (1 << 14)
+#define MV_SWITCH_TO_BOMB_DISC (1 << 15)
+#define MV_SWITCH_TO_STASIS_DISC (1 << 16)
+#define MV_SWITCH_TO_CORRUPTION_DISC (1 << 17)
 
 struct TEM {
     HMODULE module_handle = 0;
@@ -57,11 +62,16 @@ struct TEM {
         { "Axis aBaseY Speed=-1.0", { MV_BACKWARD, {} } }, // S
         { "Axis aStrafe Speed=1.0 | ForceWallJump", { MV_RIGHT, {} } }, // D
         { "GB_Y", { MV_DISC_POWER, {} } }, // F
+        { "GB_RightThumbstick", { MV_CAMERA_RESET, {} } }, // C
         { "GB_RightTrigger", { MV_SPRINT, {} } }, // LeftShift
         { "GB_LeftTrigger", { MV_BLOCK, {} } }, // LeftControl
         { "GB_A", { MV_JUMP, {} } }, // SpaceBar
         { "GB_X", { MV_DISC_ATTACK, {} } }, // LeftMouseButton
         { "GB_B | CANCELMATINEE", { MV_MELEE_ATTACK, {} } }, // RightMouseButton
+        { "GB_DPad_Left | SwitchToPower HeavyDiscPower_INV", { MV_SWITCH_TO_HEAVY_DISC, {} } }, // 1
+        { "GB_DPad_Right | SwitchToPower BombDiscPower_INV", { MV_SWITCH_TO_BOMB_DISC, {} } }, // 2
+        { "GB_DPad_Up | SwitchToPower StasisDiscPower_INV", { MV_SWITCH_TO_STASIS_DISC, {} } }, // 3
+        { "GB_DPad_Down | SwitchToPower CorruptionDiscPower_INV", { MV_SWITCH_TO_CORRUPTION_DISC, {} } }, // 4
     };
 };
 
