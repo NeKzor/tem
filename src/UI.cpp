@@ -252,36 +252,6 @@ DETOUR_STD(HRESULT, Present, IDirect3DDevice9* device, RECT* pSourceRect, RECT* 
             }
         }
 
-        //if (tem.engine()) {
-        //    y += padding_between_elements;
-        //    ImGui::SetNextWindowPos(ImVec2(x, y));
-        //    ImGui::SetNextWindowSize(ImVec2(200, 30));
-        //    ImGui::Begin("transition", nullptr,
-        //        ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoSavedSettings);
-        //    auto get_transition = [&]() -> const char* {
-        //        switch (tem.engine()->transition_type) {
-        //        case TT_None:
-        //            return "None";
-        //        case TT_Paused:
-        //            return "Paused";
-        //        case TT_Loading:
-        //            return "Loading";
-        //        case TT_Saving:
-        //            return "Saving";
-        //        case TT_Connecting:
-        //            return "Connecting";
-        //        case TT_Precaching:
-        //            return "Precaching";
-        //        case TT_MAX:
-        //            return "MAX";
-        //        default:
-        //            return "unknown";
-        //        }
-        //    };
-        //    ImGui::Text("transiton: %s", get_transition());
-        //    ImGui::End();
-        //}
-
         if (ui.show_inputs && tem.player_controller() && tem.player_controller()->player_input
             && !tem.engine()->is_paused()) {
             typedef uint8_t mode;
