@@ -568,6 +568,31 @@ DETOUR_STD(HRESULT, Present, IDirect3DDevice9* device, RECT* pSourceRect, RECT* 
                 if (ImGui::MenuItem("Flags", nullptr, ui.show_flags)) {
                     ui.show_flags = !ui.show_flags;
                 }
+                if (ImGui::MenuItem("Inputs", nullptr, ui.show_inputs)) {
+                    ui.show_inputs = !ui.show_inputs;
+
+                    // TODO: This should be called when the settings change
+                    auto player_input = tem.player_controller() ? tem.player_controller()->player_input : nullptr;
+                    if (player_input) {
+                        for (auto& [key, value] : tem.command_to_key_move) {
+                            auto& keys = value.second;
+                            keys.clear();
+                        }
+
+                        foreach_item(binding, player_input->bindings)
+                        {
+                            auto key = tem.find_name(binding.name);
+                            auto command_str = binding.command.str();
+                            auto mapping_iter = tem.command_to_key_move.find(command_str);
+
+                            if (mapping_iter != tem.command_to_key_move.end()) {
+                                auto& mapping = mapping_iter->second;
+                                mapping.second.push_back(binding.name.index);
+                                println("[ui] mapping command {} to key = {}", command_str, key);
+                            }
+                        }
+                    }
+                }
                 ImGui::EndMenu();
             }
             if (ImGui::BeginMenu("Level") && tem.engine()) {
@@ -603,32 +628,6 @@ DETOUR_STD(HRESULT, Present, IDirect3DDevice9* device, RECT* pSourceRect, RECT* 
                 ImGui::EndMenu();
             }
             if (ImGui::BeginMenu("Experimental")) {
-                if (ImGui::MenuItem("Inputs", nullptr, ui.show_inputs)) {
-                    ui.show_inputs = !ui.show_inputs;
-
-                    auto player_input = tem.player_controller() ? tem.player_controller()->player_input : nullptr;
-                    if (player_input) {
-                        for (auto& [key, value] : tem.command_to_key_move) {
-                            auto& keys = value.second;
-                            keys.clear();
-                        }
-
-                        foreach_item(binding, player_input->bindings)
-                        {
-                            auto key = tem.find_name(binding.name);
-                            auto command_str = binding.command.str();
-                            auto mapping_iter = tem.command_to_key_move.find(command_str);
-
-                            if (mapping_iter != tem.command_to_key_move.end()) {
-                                auto& mapping = mapping_iter->second;
-                                mapping.second.push_back(binding.name.index);
-                                println("[ui] mapping command {} to key = {}", command_str, key);
-                            }
-                        }
-                    }
-                }
-                create_hover_tooltip("Show game inputs.");
-
                 if (ImGui::MenuItem("Weak Enemies", nullptr, tem.want_weak_enemies)) {
                     tem.want_weak_enemies = !tem.want_weak_enemies;
                 }
