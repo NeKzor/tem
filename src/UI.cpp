@@ -250,6 +250,121 @@ DETOUR_STD(HRESULT, Present, IDirect3DDevice9* device, RECT* pSourceRect, RECT* 
                 }
                 ImGui::End();
             }
+            if (ui.show_flags) {
+                auto y_offset = y;
+                auto max_rows = 40;
+                auto row = 0;
+                auto column = 0;
+
+#define pawn_flag(_flag, _name)                                                                                        \
+    if (row == max_rows - 1) {                                                                                         \
+        y = y_offset + padding_between_elements;                                                                       \
+        column += 1;                                                                                                   \
+        row = 1;                                                                                                       \
+    } else {                                                                                                           \
+        y += padding_between_elements;                                                                                 \
+        row += 1;                                                                                                      \
+    }                                                                                                                  \
+    ImGui::SetNextWindowPos(ImVec2(x + (column * 250), y));                                                            \
+    ImGui::SetNextWindowSize(ImVec2(ImGui::GetIO().DisplaySize.x, 30));                                                \
+    ImGui::Begin(_name, nullptr, flags);                                                                               \
+    ImGui::TextColored(player->##_flag ? ImVec4(0, 255, 0, 255) : ImVec4(255, 0, 0, 255), _name " %s",                 \
+        player->##_flag ? "ON" : "OFF");                                                                               \
+    ImGui::End();
+
+                // TODO: Support PgVehicle, UTVehicle, UTVehicleBase, SVehicle, Vehicle, Actor
+                if (!player->is_vehicle()) {
+                    // PgPawn
+                    pawn_flag(mDisablePhysicsWhenNotInRagdoll, "DisablePhysicsWhenNotInRagdoll");
+                    pawn_flag(mChangeToVehicle, "ChangeToVehicle");
+                    pawn_flag(mCanPromote, "CanPromote");
+                    pawn_flag(mEnergyCheat, "EnergyCheat");
+                    pawn_flag(mFreezeEffected, "FreezeEffected");
+                    pawn_flag(mUseDefaultInventory, "UseDefaultInventory");
+                    pawn_flag(mUsingPosEnergyActor, "UsingPosEnergyActor");
+                    pawn_flag(mUsingNegEnergyActor, "UsingNegEnergyActor");
+                    pawn_flag(mIsSprinting, "IsSprinting");
+                    pawn_flag(mIsBlocking, "IsBlocking");
+                    pawn_flag(mWantsToBlock, "WantsToBlock");
+                    pawn_flag(mIgnoreBlockingPgPawns, "IgnoreBlockingPgPawns");
+                    pawn_flag(mLockDesiredRotation, "mLockDesiredRotation");
+                    pawn_flag(mDebugWorldMobility, "DebugWorldMobility");
+                    pawn_flag(mPendingRecovery, "PendingRecovery");
+                    pawn_flag(mIsInvulnerable, "IsInvulnerable");
+                    pawn_flag(mIsStunned, "IsStunned");
+                    pawn_flag(mEnhancerEnergyActorPosUseOnly, "EnhancerEnergyActorPosUseOnly");
+                    pawn_flag(mCanBeExecuted, "CanBeExecuted");
+                    pawn_flag(mPerformingExecute, "PerformingExecute");
+                    // GamePawn
+                    pawn_flag(bLastHitWasHeadShot, "LastHitWasHeadShot");
+                    pawn_flag(bRespondToExplosions, "RespondToExplosions");
+                }
+                // Pawn
+                pawn_flag(bUpAndOut, "UpAndOut");
+                pawn_flag(bIsWalking, "IsWalking");
+                pawn_flag(bWantsToCrouch, "WantsToCrouch");
+                pawn_flag(bIsCrouched, "IsCrouched");
+                pawn_flag(bTryToUncrouch, "TryToUncrouch");
+                pawn_flag(bCanCrouch, "CanCrouch");
+                pawn_flag(bCrawler, "Crawler");
+                pawn_flag(bReducedSpeed, "ReducedSpeed");
+                pawn_flag(bJumpCapable, "JumpCapable");
+                pawn_flag(bCanJump, "CanJump");
+                pawn_flag(bCanWalk, "CanWalk");
+                pawn_flag(bCanSwim, "CanSwim");
+                pawn_flag(bCanFly, "CanFly");
+                pawn_flag(bCanClimbLadders, "CanClimbLadders");
+                pawn_flag(bCanStrafe, "CanStrafe");
+                pawn_flag(bAvoidLedges, "AvoidLedges");
+                pawn_flag(bStopAtLedges, "StopAtLedges");
+                pawn_flag(bAllowLedgeOverhang, "AllowLedgeOverhang");
+                pawn_flag(bSimulateGravity, "SimulateGravity");
+                pawn_flag(bIgnoreForces, "IgnoreForces");
+                pawn_flag(bCanWalkOffLedges, "CanWalkOffLedges");
+                pawn_flag(bCanBeBaseForPawns, "CanBeBaseForPawns");
+                pawn_flag(bSimGravityDisabled, "SimGravityDisabled");
+                pawn_flag(bDirectHitWall, "DirectHitWall");
+                pawn_flag(bPushesRigidBodies, "PushesRigidBodies");
+                pawn_flag(bForceFloorCheck, "ForceFloorCheck");
+                pawn_flag(bForceKeepAnchor, "ForceKeepAnchor");
+                pawn_flag(bCanMantle, "CanMantle");
+                pawn_flag(bCanClimbUp, "CanClimbUp");
+                pawn_flag(bCanClimbCeilings, "CanClimbCeilings");
+                pawn_flag(bCanSwatTurn, "CanSwatTurn");
+                pawn_flag(bCanLeap, "CanLeap");
+                pawn_flag(bCanCoverSlip, "CanCoverSlip");
+                pawn_flag(bDisplayPathErrors, "DisplayPathErrors");
+                pawn_flag(bIsFemale, "IsFemale");
+                pawn_flag(bCanPickupInventory, "CanPickupInventory");
+                pawn_flag(bAmbientCreature, "AmbientCreature");
+                pawn_flag(bLOSHearing, "LOSHearing");
+                pawn_flag(bMuffledHearing, "MuffledHearing");
+                pawn_flag(bDontPossess, "DontPossess");
+                pawn_flag(bAutoFire, "AutoFire");
+                pawn_flag(bRollToDesired, "RollToDesired");
+                pawn_flag(bStationary, "Stationary");
+                pawn_flag(bCachedRelevant, "CachedRelevant");
+                pawn_flag(bSpecialHUD, "SpecialHUD");
+                pawn_flag(bNoWeaponFiring, "NoWeaponFiring");
+                pawn_flag(bCanUse, "CanUse");
+                pawn_flag(bModifyReachSpecCost, "ModifyReachSpecCost");
+                pawn_flag(bModifyNavPointDest, "ModifyNavPointDest");
+                pawn_flag(bPathfindsAsVehicle, "PathfindsAsVehicle");
+                pawn_flag(bRunPhysicsWithNoController, "RunPhysicsWithNoController");
+                pawn_flag(bForceMaxAccel, "ForceMaxAccel");
+                pawn_flag(bLimitFallAccel, "LimitFallAccel");
+                pawn_flag(bReplicateHealthToAll, "ReplicateHealthToAll");
+                pawn_flag(bForceRMVelocity, "ForceRMVelocity");
+                pawn_flag(bForceRegularVelocity, "ForceRegularVelocity");
+                pawn_flag(bPlayedDeath, "PlayedDeath");
+                pawn_flag(bDesiredRotationSet, "DesiredRotationSet");
+                pawn_flag(bLockDesiredRotation, "bLockDesiredRotation");
+                pawn_flag(bUnlockWhenReached, "UnlockWhenReached");
+                pawn_flag(bNeedsBaseTickedFirst, "NeedsBaseTickedFirst");
+                pawn_flag(bDebugShowCameraLocation, "DebugShowCameraLocation");
+
+#undef pawn_flag
+            }
         }
 
         if (ui.show_inputs && tem.player_controller() && tem.player_controller()->player_input
@@ -449,6 +564,9 @@ DETOUR_STD(HRESULT, Present, IDirect3DDevice9* device, RECT* pSourceRect, RECT* 
                 }
                 if (ImGui::MenuItem("Enemy Health", nullptr, ui.show_enemy_health)) {
                     ui.show_enemy_health = !ui.show_enemy_health;
+                }
+                if (ImGui::MenuItem("Flags", nullptr, ui.show_flags)) {
+                    ui.show_flags = !ui.show_flags;
                 }
                 ImGui::EndMenu();
             }

@@ -144,7 +144,70 @@ struct PgPawn {
     Vector3 velocity; // 316
     char unk3[176]; // 328
     PgPawn* next_pawn; // 504
-    char unk4[232]; // 508
+    char pad_1fc[12]; // 0x1fc
+    bool bUpAndOut : 1; // 0x208
+    bool bIsWalking : 1; // 0x208
+    bool bWantsToCrouch : 1; // 0x208
+    bool bIsCrouched : 1; // 0x208
+    bool bTryToUncrouch : 1; // 0x208
+    bool bCanCrouch : 1; // 0x208
+    bool bCrawler : 1; // 0x208
+    bool bReducedSpeed : 1; // 0x208
+    bool bJumpCapable : 1; // 0x208
+    bool bCanJump : 1; // 0x208
+    bool bCanWalk : 1; // 0x208
+    bool bCanSwim : 1; // 0x208
+    bool bCanFly : 1; // 0x208
+    bool bCanClimbLadders : 1; // 0x208
+    bool bCanStrafe : 1; // 0x208
+    bool bAvoidLedges : 1; // 0x208
+    bool bStopAtLedges : 1; // 0x208
+    bool bAllowLedgeOverhang : 1; // 0x208
+    bool bSimulateGravity : 1; // 0x208
+    bool bIgnoreForces : 1; // 0x208
+    bool bCanWalkOffLedges : 1; // 0x208
+    bool bCanBeBaseForPawns : 1; // 0x208
+    bool bSimGravityDisabled : 1; // 0x208
+    bool bDirectHitWall : 1; // 0x208
+    bool bPushesRigidBodies : 1; // 0x208
+    bool bForceFloorCheck : 1; // 0x208
+    bool bForceKeepAnchor : 1; // 0x208
+    bool bCanMantle : 1; // 0x208
+    bool bCanClimbUp : 1; // 0x208
+    bool bCanClimbCeilings : 1; // 0x208
+    bool bCanSwatTurn : 1; // 0x208
+    bool bCanLeap : 1; // 0x208
+    bool bCanCoverSlip : 1; // 0x20c
+    bool bDisplayPathErrors : 1; // 0x20c
+    bool bIsFemale : 1; // 0x20c
+    bool bCanPickupInventory : 1; // 0x20c
+    bool bAmbientCreature : 1; // 0x20c
+    bool bLOSHearing : 1; // 0x20c
+    bool bMuffledHearing : 1; // 0x20c
+    bool bDontPossess : 1; // 0x20c
+    bool bAutoFire : 1; // 0x20c
+    bool bRollToDesired : 1; // 0x20c
+    bool bStationary : 1; // 0x20c
+    bool bCachedRelevant : 1; // 0x20c
+    bool bSpecialHUD : 1; // 0x20c
+    bool bNoWeaponFiring : 1; // 0x20c
+    bool bCanUse : 1; // 0x20c
+    bool bModifyReachSpecCost : 1; // 0x20c
+    bool bModifyNavPointDest : 1; // 0x20c
+    bool bPathfindsAsVehicle : 1; // 0x20c
+    bool bRunPhysicsWithNoController : 1; // 0x20c
+    bool bForceMaxAccel : 1; // 0x20c
+    bool bLimitFallAccel : 1; // 0x20c
+    bool bReplicateHealthToAll : 1; // 0x20c
+    bool bForceRMVelocity : 1; // 0x20c
+    bool bForceRegularVelocity : 1; // 0x20c
+    bool bPlayedDeath : 1; // 0x20c
+    bool bDesiredRotationSet : 1; // 0x20c
+    bool bLockDesiredRotation : 1; // 0x20c
+    bool bUnlockWhenReached : 1; // 0x20c
+    bool bNeedsBaseTickedFirst : 1; // 0x20c
+    bool bDebugShowCameraLocation : 1; // 0x20c
+    char pad_210[740 - 0x210]; // 0x210
     int health; // 740
     int max_health; // 744
     int least_health; // 748
@@ -154,11 +217,34 @@ struct PgPawn {
     char unk6[72]; // 848
     PgPawn* driven_vehicle; // 920
     char unk7[28]; // 924
-    Rotation rotation; // 952
-    char unk8[276]; // 956
-    int energy; // 1232
-    int max_energy; // 1236
-    char pad_1240[4008]; // 1240
+    Rotation rotation; // 0x3B8
+    char unk_3BC[92]; // 0x3BC
+    bool bLastHitWasHeadShot : 1; // 0x418
+    bool bRespondToExplosions : 1; // 0x418
+    char unk_41c[180]; // 0x41c
+    int energy; // 0x4d0
+    int max_energy; // 0x4d4
+    bool mEnergyCheat : 1; // 0x4d8
+    bool mFreezeEffected : 1; // 0x4d8
+    bool mUseDefaultInventory : 1; // 0x4d8
+    bool mUsingPosEnergyActor : 1; // 0x4d8
+    bool mUsingNegEnergyActor : 1; // 0x4d8
+    bool mIsSprinting : 1; // 0x4d8
+    bool mIsBlocking : 1; // 0x4d8
+    bool mWantsToBlock : 1; // 0x4d8
+    bool mIgnoreBlockingPgPawns : 1; // 0x4d8
+    bool mLockDesiredRotation : 1; // 0x4d8
+    bool mDebugWorldMobility : 1; // 0x4d8
+    bool mDisablePhysicsWhenNotInRagdoll : 1; // 0x4d8
+    bool mPendingRecovery : 1; // 0x4d8
+    bool mIsInvulnerable : 1; // 0x4d8
+    bool mIsStunned : 1; // 0x4d8
+    bool mChangeToVehicle : 1; // 0x4d8
+    bool mCanPromote : 1; // 0x4d8
+    bool mEnhancerEnergyActorPosUseOnly : 1; // 0x4d8
+    bool mCanBeExecuted : 1; // 0x4d8
+    bool mPerformingExecute : 1; // 0x4d8
+    char pad_4e0[4004]; // 0x4e0
     int player_skin_index; // 0x1480
     float powerup_attacking_damage_scaling; // 0x1484
     float powerup_damage_scaling; // 0x1488
@@ -190,7 +276,12 @@ struct PgPawn {
         return outer;
     }
 };
-static_assert(offsetof(PgPawn, max_energy) == 1236);
+static_assert(offsetof(PgPawn, pad_1fc) == 0x1fc);
+static_assert(offsetof(PgPawn, pad_210) == 0x210);
+static_assert(offsetof(PgPawn, rotation) == 0x3B8);
+static_assert(offsetof(PgPawn, health) == 0x2e4);
+static_assert(offsetof(PgPawn, energy) == 0x4d0);
+static_assert(offsetof(PgPawn, max_energy) == 0x4d4);
 static_assert(offsetof(PgPawn, player_skin_index) == 0x1480);
 static_assert(offsetof(PgPawn, powerup_attacking_damage_scaling) == 0x1484);
 static_assert(offsetof(PgPawn, powerup_damage_scaling) == 0x1488);

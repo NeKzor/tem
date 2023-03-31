@@ -21,6 +21,7 @@ struct UI {
     bool show_velocity = true;
     bool show_health = false;
     bool show_enemy_health = false;
+    bool show_flags = false;
     bool show_inputs = false;
     std::atomic<bool> is_shutdown = false;
 
