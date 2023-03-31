@@ -15,14 +15,14 @@ enum class SpotCheckKey : SpotCheckId {
     ChangeVersion,
     DelayInputs,
     RemoveWeapon,
-    Unknown3,
+    DisableTargetSelector,
     CorruptSaveFile,
     FirstThreeMapsOnly,
     DisableUnpause,
     DisableXP,
-    Unknown8,
+    UnknownKey8,
     DoNotLaunchTheGame,
-    Unknown10,
+    UnusedKey10,
     MAX,
 };
 

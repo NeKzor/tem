@@ -17,14 +17,14 @@ static std::vector<SpotCheckPair> fixed_spot_check_data = {
     decl_spot_check_ok(SpotCheckKey::ChangeVersion),
     decl_spot_check_ok(SpotCheckKey::DelayInputs),
     decl_spot_check_ok(SpotCheckKey::RemoveWeapon),
-    decl_spot_check_ok(SpotCheckKey::Unknown3),
+    decl_spot_check_ok(SpotCheckKey::DisableTargetSelector),
     decl_spot_check_ok(SpotCheckKey::CorruptSaveFile),
     decl_spot_check_ok(SpotCheckKey::FirstThreeMapsOnly),
     decl_spot_check_ok(SpotCheckKey::DisableUnpause),
     decl_spot_check_ok(SpotCheckKey::DisableXP),
-    decl_spot_check_ok(SpotCheckKey::Unknown8),
+    decl_spot_check_ok(SpotCheckKey::UnknownKey8),
     decl_spot_check_ok(SpotCheckKey::DoNotLaunchTheGame),
-    decl_spot_check_ok(SpotCheckKey::Unknown10),
+    decl_spot_check_ok(SpotCheckKey::UnusedKey10),
 };
 
 auto bypass_spot_checks() -> void
