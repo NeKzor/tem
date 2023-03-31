@@ -14,6 +14,7 @@
 #include "SDK.hpp"
 #include "SpotChecks.hpp"
 #include "UI.hpp"
+#include <intrin.h>
 
 TEM tem = {};
 
@@ -340,7 +341,7 @@ DETOUR_T(Color*, GetTeamColor, PgTeamInfo* team, Color* color, int team_color_in
 
 DETOUR_T(FString*, ConsoleCommand, UGameViewportClient* client, const FString& output, const FString& command)
 {
-    println("[command] {}", command.str().c_str());
+    println("[command] [{:x}] {}", uintptr_t(_ReturnAddress()), command.str().c_str());
 
     return ConsoleCommand(client, output, command);
 }
