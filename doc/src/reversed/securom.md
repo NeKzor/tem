@@ -240,15 +240,16 @@ if (index != INVALID_INDEX && result.check == SpotCheck::Invalid) {
 |Key|Spot Location|Troll Code|
 |---|---|---|
 |0|Online system function|Weird version change from `1.01` to `1.01.1`|
-|1|Deadzone binding function|Buffers and delays all inputs|
+|1|`PgPlayerInput` / deadzone binding function|Buffers and delays all inputs|
 |2|`UPgOnline::Init` / checked in lobby|Removes weapon from player|
-|3|Triggered when spawning|???|
+|3|`PgPlayerController` / triggered when spawning|Disables targeting enemies|
 |4|Save load manager|Messes with the save file by zero-ing the save data buffer which causes a crash when loading the save<sup>1</sup>|
 |5|Validates save game manager<br>Checks result in  `UPgOnlineGameManager::SetNextMap`|Cannot go past 3rd map|
 |6|Pause Menu<br>Verifies game signature hash|Disables unpause when the game pauses|
-|7|???|XP counter will not go up|
+|7|`PgGameInfo::CreateTeams`|XP counter will not go up|
 |8|Main Menu|???|
 |9|Result of manual check if CRC fails at launch|Game will not launch|
+|10|*Unused*|*Unused*|
 
 <sup>1</sup> The crash is super weird. Not sure if intended. TODO: Might want to investigate.
 
