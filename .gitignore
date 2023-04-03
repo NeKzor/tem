@@ -288,3 +288,8 @@ yarn-debug.log*
 yarn-error.log*
 
 yarn.lock
+
+debug/
+target/
+Cargo.lock
+**/*.rs.bk

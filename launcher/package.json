@@ -1,0 +1,34 @@
+{
+  "name": "launcher",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "tauri": "tauri",
+    "tailwind:watch": "set TAILWIND_MODE=watch&& set NODE_ENV=development&& postcss src/tailwind.css -o src/styles.css -w",
+    "tailwind:build": "set TAILWIND_MODE=build&& set NODE_ENV=production&& postcss src/tailwind.css -o src/styles.css"
+  },
+  "dependencies": {
+    "@heroicons/react": "^2.0.17",
+    "@material-tailwind/react": "^1.4.2",
+    "@tauri-apps/api": "^1.2.0",
+    "postcss-cli": "^10.1.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@tauri-apps/cli": "^1.2.2",
+    "@types/node": "^18.7.10",
+    "@types/react": "^18.0.15",
+    "@types/react-dom": "^18.0.6",
+    "@vitejs/plugin-react": "^3.0.0",
+    "autoprefixer": "^10.4.14",
+    "postcss": "^8.4.21",
+    "tailwindcss": "^3.3.1",
+    "typescript": "^4.6.4",
+    "vite": "^4.0.0"
+  }
+}

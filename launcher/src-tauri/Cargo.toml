@@ -1,0 +1,24 @@
+[package]
+name = "tem-launcher"
+version = "0.1.0"
+description = "A custom launcher for Tron: Evolution."
+authors = ["NeKz"]
+license = "MIT"
+repository = "https://github.com/NeKzor/tem"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[build-dependencies]
+tauri-build = { version = "1.2", features = [] }
+
+[dependencies]
+tauri = { version = "1.2", features = ["shell-open"] }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+rust-ini = "0.18.0"
+
+[features]
+# this feature is used for production builds or when `devPath` points to the filesystem
+# DO NOT REMOVE!!
+custom-protocol = ["tauri/custom-protocol"]
