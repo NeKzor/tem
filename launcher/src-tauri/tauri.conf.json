@@ -13,6 +13,11 @@
   "tauri": {
     "allowlist": {
       "all": false,
+      "fs": {
+        "readFile": true,
+        "writeFile": true,
+        "scope": ["$APPLOCALDATA/*"]
+      },
       "shell": {
         "all": false,
         "open": true
@@ -27,7 +32,7 @@
         "icons/icon.icns",
         "icons/icon.ico"
       ],
-      "identifier": "com.tauri.dev",
+      "identifier": "tem.nekz.me",
       "targets": "all"
     },
     "security": {
@@ -39,10 +44,10 @@
     "windows": [
       {
         "fullscreen": false,
-        "resizable": true,
-        "title": "launcher",
-        "width": 800,
-        "height": 600
+        "resizable": false,
+        "title": "TEM Launcher",
+        "width": 1280,
+        "height": 620
       }
     ]
   }

@@ -103,10 +103,12 @@ type SortOption = {
 };
 
 type SortOrderOption = 'createdAt-asc' | 'createdAt-desc' | 'name-asc' | 'name-desc';
+type CheckForUpdatesOption = 'disabled' | 'on-launcher-start' | 'on-launcher-exit';
 
 interface AppConfig {
     configs: LauncherConfig[];
     sort: SortOption;
+    checkForUpdates: CheckForUpdatesOption;
 }
 
 const getSorter =
@@ -127,28 +129,33 @@ const getSorter =
         return 0;
     };
 
+const configFile = 'config.json';
+
 const loadConfig = async () => {
-    return await readTextFile('config.json', { dir: BaseDirectory.AppConfig })
+    return await readTextFile(configFile, { dir: BaseDirectory.AppLocalData })
         .then((text) => JSON.parse(text) as AppConfig)
-        .catch(() => {
-            console.log('failed to read config.json');
+        .catch((err) => {
+            console.log(`failed to read ${configFile}`, err);
         });
 };
 
 const saveConfig = async (config: AppConfig) => {
-    await writeTextFile('config.json', JSON.stringify(config), { dir: BaseDirectory.AppConfig })
-        .then((result) => {
-            console.log('result', result);
+    console.log('saving config', config);
+    await writeTextFile(configFile, JSON.stringify(config), { dir: BaseDirectory.AppLocalData })
+        .then(() => {
+            console.log('saved config');
         })
-        .catch(() => {
-            console.log('failed to write config.json');
+        .catch((err) => {
+            console.log('failed to write ${configFile', err);
         });
 };
+
+const maxConfigsAllowed = 4;
 
 function App() {
     const [consoleBuffer, setConsoleBuffer] = useState<string[]>([]);
     const [command, setCommand] = useState('');
-    const [checkForUpdates, setCheckForUpdates] = useState('disabled');
+    const [checkForUpdates, setCheckForUpdates] = useState<CheckForUpdatesOption>('disabled');
     const [configs, setConfigs] = useState<LauncherConfig[]>([]);
     const [mods, setMods] = useState<LauncherMods>(defaultMods);
     const [config, setConfig] = useState<LauncherConfig>(defaultConfig);
@@ -158,6 +165,15 @@ function App() {
     const [deleteDialog, setDeleteDialog] = useState(false);
     const [sort, setSort] = useState<SortOption>({ key: 'createdAt', direction: 'asc' });
     const [sortOrder, setSortOrder] = useState<SortOrderOption>('createdAt-asc');
+    const [shouldSaveConfig, setShouldSaveConfig] = useState(false);
+
+    useEffect(() => {
+        if (shouldSaveConfig) {
+            console.log('saving config');
+            setShouldSaveConfig(false);
+            saveConfig({ configs, sort, checkForUpdates });
+        }
+    }, [shouldSaveConfig]);
 
     const onChangeSortOrder = useCallback(
         (value?: string) => {
@@ -166,17 +182,25 @@ function App() {
             setSort(sort);
             setSortOrder(value as SortOrderOption);
             setConfigs(configs.sort(getSorter(sort)));
+            console.log('saving order');
+            setShouldSaveConfig(true);
         },
-        [configs, setSort, setSortOrder, setConfigs],
+        [configs, setSort, setSortOrder, setConfigs, setShouldSaveConfig],
     );
 
     const onChangeEdit = useCallback(
         (config?: LauncherConfig) => {
             if (!editDialog) {
+                const isFirstConfig = configs.length === 0;
                 setConfig(
                     JSON.parse(
                         JSON.stringify(
-                            config ?? ({ ...defaultConfig, isDefault: configs.length === 0 } as LauncherConfig),
+                            config ??
+                                ({
+                                    ...defaultConfig,
+                                    name: isFirstConfig ? 'Default' : '',
+                                    isDefault: isFirstConfig,
+                                } as LauncherConfig),
                         ),
                     ),
                 );
@@ -217,8 +241,9 @@ function App() {
         }
 
         setEditDialog(false);
-        saveConfig({ configs, sort });
-    }, [sort, config, configs, setConfig, setEditDialog]);
+        console.log('conf save');
+        setShouldSaveConfig(true);
+    }, [sort, config, configs, setConfig, setEditDialog, setShouldSaveConfig]);
 
     const onChangeDelete = useCallback(
         (config: LauncherConfig) => {
@@ -243,12 +268,13 @@ function App() {
         const index = configs.findIndex(({ createdAt }) => createdAt === configToDelete?.createdAt);
         if (index !== -1) {
             setConfigs([...configs.slice(0, index), ...configs.slice(index + 1)]);
+            console.log('conf save 2');
+            setShouldSaveConfig(true);
         }
 
-        saveConfig({ configs, sort });
         setConfigNameToDelete('');
         setDeleteDialog(false);
-    }, [configToDelete, setConfigNameToDelete, setDeleteDialog]);
+    }, [configToDelete, setConfigNameToDelete, setDeleteDialog, setShouldSaveConfig]);
 
     const canConfirmDeletion = useMemo(() => {
         return configNameToDelete === configToDelete?.name;
@@ -266,21 +292,22 @@ function App() {
     useEffect(() => {
         loadConfig().then((config) => {
             if (config) {
+                console.log('found config');
                 setSort(config.sort);
                 setSortOrder([config.sort.key, config.sort.direction].join('-') as SortOrderOption);
                 setConfigs(config.configs);
             }
         });
-    }, [setConfigs, setConsoleBuffer]);
+    }, []);
 
-    useEffect(() => {
-        invoke('console.buffer')
-            .then((newConsoleBuffer) => setConsoleBuffer([...consoleBuffer, ...(newConsoleBuffer as string[])]))
-            .catch((error) => setConsoleBuffer([...consoleBuffer, error as string]));
-    }, [setConsoleBuffer]);
+    // useEffect(() => {
+    //     invoke('console_buffer')
+    //         .then((newConsoleBuffer) => setConsoleBuffer([...consoleBuffer, ...(newConsoleBuffer as string[])]))
+    //         .catch((error) => setConsoleBuffer([...consoleBuffer, error as string]));
+    // }, [setConsoleBuffer]);
 
     const onClickExecute = useCallback(() => {
-        invoke('console.execute', { command })
+        invoke('console_execute', { text: command })
             .then((line) => setConsoleBuffer([...consoleBuffer, line as string]))
             .catch((error) => setConsoleBuffer([...consoleBuffer, error as string]));
         setCommand('');
@@ -302,6 +329,8 @@ function App() {
     const onChangeCheckForUpdates = useCallback(
         (value: any) => {
             setCheckForUpdates(value);
+            console.log('updates save');
+            setShouldSaveConfig(true);
         },
         [setCheckForUpdates],
     );
@@ -332,15 +361,19 @@ function App() {
                     </TabsHeader>
                     <TabsBody>
                         <TabPanel key="tem" value="tem">
-                            <div className="flex items-center gap-2 mb-6 mt-2">
+                            <div className="flex flex-row gap-2 mb-6 mt-2">
                                 <div>
-                                    <Button className="flex items-center gap-3" onClick={() => onChangeEdit()}>
+                                    <Button
+                                        className="flex items-center gap-3"
+                                        disabled={configs.length === maxConfigsAllowed}
+                                        onClick={() => onChangeEdit()}
+                                    >
                                         <PlusIcon strokeWidth={2} className="h-5 w-5" />
                                         Create Config
                                     </Button>
                                 </div>
                                 {configs.length > 1 && (
-                                    <div className="ml-4">
+                                    <div className="absolute right-0 mr-4">
                                         <Select
                                             variant="static"
                                             label="Sort by"
@@ -462,7 +495,7 @@ function App() {
                                         <XMarkIcon strokeWidth={2} className="h-5 w-5" />
                                     </IconButton>
                                 </DialogHeader>
-                                <DialogBody divider>
+                                <DialogBody className="pt-0" divider>
                                     <Input
                                         className="w-4"
                                         value={config.name}
@@ -631,16 +664,17 @@ function App() {
                             </DialogFooter>
                         </Dialog>
                         <TabPanel key="console" value="console">
-                            <div className="pb-2">
+                            <div className="flex pb-2">
                                 <Textarea
-                                    className="!border-t-blue-gray-200 focus:!border-t-blue-500"
+                                    value={consoleBuffer.join('\n')}
+                                    className="!border-t-blue-gray-200 focus:!border-t-blue-500 h-[60vh]"
                                     labelProps={{
                                         className: 'before:content-none after:content-none',
                                     }}
                                     readOnly
                                 />
                             </div>
-                            <div className="relative flex w-full">
+                            <div className="relative w-full">
                                 <Input
                                     value={command}
                                     onChange={onChangeCommand}
@@ -665,7 +699,7 @@ function App() {
                             </div>
                         </TabPanel>
                         <TabPanel key="settings" value="settings">
-                            <div className="flex flex-col w-72 gap-6">
+                            <div className="flex flex-col w-72 gap-6 mt-4 min-h-[200px]">
                                 <Select
                                     variant="static"
                                     label="Check for updates"
@@ -677,13 +711,12 @@ function App() {
                                     <Option value="on-launcher-exit">On launcher exit</Option>
                                 </Select>
                             </div>
-                            <Typography>TEM Launcher pre-0.1.0</Typography>
                         </TabPanel>
                     </TabsBody>
                 </Tabs>
             </main>
-            <footer className="fixed bottom-0 w-full bg-white p-8">
-                <hr className="my-8 border-blue-gray-50" />
+            <footer className="fixed bottom-0 w-full bg-white p-8 pt-0 z-50">
+                <hr className="mb-8 border-blue-gray-50" />
                 <div className="flex flex-row flex-wrap items-center justify-center gap-y-6 gap-x-12 bg-white text-center md:justify-between">
                     <Typography color="blue-gray" className="text-center font-normal">
                         &copy; 2023 TEM
