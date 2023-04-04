@@ -61,6 +61,16 @@ interface LauncherConfig {
     useXDead: boolean;
 }
 
+interface LauncherMod {
+    name: string;
+    version: string;
+}
+
+interface LauncherMods {
+    tem: LauncherMod;
+    xdead: LauncherMod;
+}
+
 const defaultConfig: LauncherConfig = {
     name: '',
     createdAt: 0,
@@ -76,12 +86,28 @@ const defaultConfig: LauncherConfig = {
     useXDead: false,
 };
 
+const defaultMods: LauncherMods = {
+    tem: {
+        name: 'TEM',
+        version: 'pre-0.1.0-20230401',
+    },
+    xdead: {
+        name: 'XDead',
+        version: '0.1.0',
+    },
+};
+
 type SortOption = {
     key: keyof LauncherConfig;
     direction: 'asc' | 'desc';
 };
 
 type SortOrderOption = 'createdAt-asc' | 'createdAt-desc' | 'name-asc' | 'name-desc';
+
+interface AppConfig {
+    configs: LauncherConfig[];
+    sort: SortOption;
+}
 
 const getSorter =
     ({ key, direction }: SortOption) =>
@@ -101,21 +127,16 @@ const getSorter =
         return 0;
     };
 
-const loadConfig = () => {
-    return readTextFile('config.json', { dir: BaseDirectory.AppConfig })
-        .then((text) => JSON.parse(text))
+const loadConfig = async () => {
+    return await readTextFile('config.json', { dir: BaseDirectory.AppConfig })
+        .then((text) => JSON.parse(text) as AppConfig)
         .catch(() => {
             console.log('failed to read config.json');
         });
 };
 
-interface AppConfig {
-    configs: LauncherConfig[];
-    sort: SortOption;
-}
-
-const saveConfig = (config: AppConfig) => {
-    return writeTextFile('config.json', JSON.stringify(config), { dir: BaseDirectory.AppConfig })
+const saveConfig = async (config: AppConfig) => {
+    await writeTextFile('config.json', JSON.stringify(config), { dir: BaseDirectory.AppConfig })
         .then((result) => {
             console.log('result', result);
         })
@@ -128,8 +149,8 @@ function App() {
     const [consoleBuffer, setConsoleBuffer] = useState<string[]>([]);
     const [command, setCommand] = useState('');
     const [checkForUpdates, setCheckForUpdates] = useState('disabled');
-
     const [configs, setConfigs] = useState<LauncherConfig[]>([]);
+    const [mods, setMods] = useState<LauncherMods>(defaultMods);
     const [config, setConfig] = useState<LauncherConfig>(defaultConfig);
     const [editDialog, setEditDialog] = useState(false);
     const [configToDelete, setConfigToDelete] = useState<LauncherConfig | undefined>(undefined);
@@ -152,12 +173,18 @@ function App() {
     const onChangeEdit = useCallback(
         (config?: LauncherConfig) => {
             if (!editDialog) {
-                setConfig(JSON.parse(JSON.stringify(config ?? defaultConfig)));
+                setConfig(
+                    JSON.parse(
+                        JSON.stringify(
+                            config ?? ({ ...defaultConfig, isDefault: configs.length === 0 } as LauncherConfig),
+                        ),
+                    ),
+                );
                 setEditDialog(true);
                 // TODO: focus first input element
             }
         },
-        [editDialog, setConfig, setEditDialog],
+        [configs, editDialog, setConfig, setEditDialog],
     );
 
     const isEdit = useMemo(() => config.createdAt !== 0, [config]);
@@ -280,7 +307,7 @@ function App() {
     );
 
     return (
-        <div>
+        <div className="flex flex-col h-screen justify-between">
             <main>
                 <Tabs value="tem">
                     <TabsHeader>
@@ -305,17 +332,30 @@ function App() {
                     </TabsHeader>
                     <TabsBody>
                         <TabPanel key="tem" value="tem">
-                            <Select variant="static" label="Sort by" value={sortOrder} onChange={onChangeSortOrder}>
-                                <Option value="createdAt-asc">Date (oldest)</Option>
-                                <Option value="createdAt-desc">Date (newest)</Option>
-                                <Option value="name-asc">Name (asc.)</Option>
-                                <Option value="name-desc">Name (desc.)</Option>
-                            </Select>
-                            <Button className="flex items-center gap-3" onClick={() => onChangeEdit()}>
-                                <PlusIcon strokeWidth={2} className="h-5 w-5" />
-                                Create Config
-                            </Button>
-                            <div className="grid grid-cols-3 gap-3">
+                            <div className="flex items-center gap-2 mb-6 mt-2">
+                                <div>
+                                    <Button className="flex items-center gap-3" onClick={() => onChangeEdit()}>
+                                        <PlusIcon strokeWidth={2} className="h-5 w-5" />
+                                        Create Config
+                                    </Button>
+                                </div>
+                                {configs.length > 1 && (
+                                    <div className="ml-4">
+                                        <Select
+                                            variant="static"
+                                            label="Sort by"
+                                            value={sortOrder}
+                                            onChange={onChangeSortOrder}
+                                        >
+                                            <Option value="createdAt-asc">Date (oldest)</Option>
+                                            <Option value="createdAt-desc">Date (newest)</Option>
+                                            <Option value="name-asc">Name (asc.)</Option>
+                                            <Option value="name-desc">Name (desc.)</Option>
+                                        </Select>
+                                    </div>
+                                )}
+                            </div>
+                            <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4 mb-4">
                                 {configs.map((config, idx) => {
                                     return (
                                         <div key={idx}>
@@ -374,20 +414,27 @@ function App() {
                                                     </Typography>
                                                     {config.useTEM && (
                                                         <div className="group mt-4 inline-flex flex-wrap items-center gap-3">
-                                                            <Tooltip content="Version 0.1.0">
+                                                            <Tooltip content={mods.tem.version}>
                                                                 <span className="rounded-full border border-blue-500/5 bg-blue-500/5 p-3 text-blue-500 transition-colors hover:border-blue-500/10 hover:bg-blue-500/10 hover:!opacity-100 group-hover:opacity-70">
                                                                     TEM
                                                                 </span>
                                                             </Tooltip>
                                                         </div>
                                                     )}
-                                                    {config.useXDead && (
-                                                        <div className="group mt-4 inline-flex flex-wrap items-center gap-3">
-                                                            <Tooltip content="Version 0.1.0">
+                                                    {config.useTEM && config.useXDead && (
+                                                        <div className="group mt-4 ml-2 inline-flex flex-wrap items-center gap-3">
+                                                            <Tooltip content={mods.xdead.version}>
                                                                 <span className="rounded-full border border-green-500/5 bg-green-500/5 p-3 text-green-500 transition-colors hover:border-green-500/10 hover:bg-green-500/10 hover:!opacity-100 group-hover:opacity-70">
                                                                     XDead
                                                                 </span>
                                                             </Tooltip>
+                                                        </div>
+                                                    )}
+                                                    {!config.useTEM && (
+                                                        <div className="group mt-4 inline-flex flex-wrap items-center gap-3">
+                                                            <span className="rounded-full border border-gray-500/5 bg-gray-500/5 p-3 text-gray-500 transition-colors hover:border-gray-500/10 hover:bg-gray-500/10 hover:!opacity-100 group-hover:opacity-70">
+                                                                No Mods
+                                                            </span>
                                                         </div>
                                                     )}
                                                 </CardBody>
@@ -636,8 +683,11 @@ function App() {
                 </Tabs>
             </main>
             <footer className="fixed bottom-0 w-full bg-white p-8">
+                <hr className="my-8 border-blue-gray-50" />
                 <div className="flex flex-row flex-wrap items-center justify-center gap-y-6 gap-x-12 bg-white text-center md:justify-between">
-                    <div></div>
+                    <Typography color="blue-gray" className="text-center font-normal">
+                        &copy; 2023 TEM
+                    </Typography>
                     <ul className="flex flex-wrap items-center gap-y-2 gap-x-8">
                         <li>
                             <Typography
@@ -701,10 +751,6 @@ function App() {
                         </li>
                     </ul>
                 </div>
-                <hr className="my-8 border-blue-gray-50" />
-                <Typography color="blue-gray" className="text-center font-normal">
-                    &copy; 2023 TEM
-                </Typography>
             </footer>
         </div>
     );
