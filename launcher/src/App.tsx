@@ -32,10 +32,11 @@ import {
     DialogHeader,
     DialogBody,
     DialogFooter,
+    Switch,
 } from '@material-tailwind/react';
 import {
     Bars3Icon,
-    ChevronRightIcon,
+    PlusIcon,
     CommandLineIcon,
     PencilIcon,
     WrenchIcon,
@@ -43,102 +44,188 @@ import {
     TrashIcon,
     XMarkIcon,
 } from '@heroicons/react/24/solid';
-
-interface LauncherMod {
-    name: string;
-    version: string;
-}
+import { readTextFile, writeTextFile, BaseDirectory } from '@tauri-apps/api/fs';
 
 interface LauncherConfig {
     name: string;
+    createdAt: number;
+    modifiedAt: number;
     resolution: {
-        w: number;
-        h: number;
+        width: number;
+        height: number;
     };
     isFullscreen: boolean;
-    showSplashScreen: boolean;
-    mods: LauncherMod[];
+    disableSplashScreen: boolean;
+    isDefault: boolean;
+    useTEM: boolean;
+    useXDead: boolean;
 }
 
-const testConfigs: LauncherConfig[] = [
-    {
-        name: "NeKz's Debug Launch Config",
-        resolution: {
-            w: 1280,
-            h: 720,
-        },
-        isFullscreen: false,
-        showSplashScreen: false,
-        mods: [
-            {
-                name: 'TEM',
-                version: 'pre-0.1.0-20230401',
-            },
-            {
-                name: 'XDead',
-                version: 'pre-0.1.0',
-            },
-        ],
+const defaultConfig: LauncherConfig = {
+    name: '',
+    createdAt: 0,
+    modifiedAt: 0,
+    resolution: {
+        width: window.screen.width,
+        height: window.screen.height,
     },
-    {
-        name: 'Fullscreen Mode',
-        resolution: {
-            w: 1920,
-            h: 1080,
-        },
-        isFullscreen: true,
-        showSplashScreen: false,
-        mods: [
-            {
-                name: 'TEM',
-                version: 'pre-0.1.0-20230401',
-            },
-            {
-                name: 'XDead',
-                version: 'pre-0.1.0',
-            },
-        ],
-    },
-];
+    isFullscreen: true,
+    disableSplashScreen: true,
+    isDefault: false,
+    useTEM: true,
+    useXDead: false,
+};
+
+type SortOption = {
+    key: keyof LauncherConfig;
+    direction: 'asc' | 'desc';
+};
+
+type SortOrderOption = 'createdAt-asc' | 'createdAt-desc' | 'name-asc' | 'name-desc';
+
+const getSorter =
+    ({ key, direction }: SortOption) =>
+    (a: LauncherConfig, b: LauncherConfig) => {
+        if (key === 'createdAt') {
+            if (a.createdAt !== b.createdAt) {
+                if (direction === 'asc') {
+                    return a.createdAt < b.createdAt ? -1 : 1;
+                }
+                return a.createdAt < b.createdAt ? 1 : -1;
+            }
+        } else if (a[key] !== b[key]) {
+            return direction === 'asc'
+                ? a[key].toString().localeCompare(b[key].toString())
+                : b[key].toString().localeCompare(a[key].toString());
+        }
+        return 0;
+    };
+
+const loadConfig = () => {
+    return readTextFile('config.json', { dir: BaseDirectory.AppConfig })
+        .then((text) => JSON.parse(text))
+        .catch(() => {
+            console.log('failed to read config.json');
+        });
+};
+
+interface AppConfig {
+    configs: LauncherConfig[];
+    sort: SortOption;
+}
+
+const saveConfig = (config: AppConfig) => {
+    return writeTextFile('config.json', JSON.stringify(config), { dir: BaseDirectory.AppConfig })
+        .then((result) => {
+            console.log('result', result);
+        })
+        .catch(() => {
+            console.log('failed to write config.json');
+        });
+};
 
 function App() {
     const [consoleBuffer, setConsoleBuffer] = useState<string[]>([]);
-    const [command, setcommand] = useState('');
+    const [command, setCommand] = useState('');
     const [checkForUpdates, setCheckForUpdates] = useState('disabled');
 
     const [configs, setConfigs] = useState<LauncherConfig[]>([]);
+    const [config, setConfig] = useState<LauncherConfig>(defaultConfig);
     const [editDialog, setEditDialog] = useState(false);
-    const [configToDelete, setConfigToDelete] = useState('');
+    const [configToDelete, setConfigToDelete] = useState<LauncherConfig | undefined>(undefined);
+    const [configNameToDelete, setConfigNameToDelete] = useState('');
     const [deleteDialog, setDeleteDialog] = useState(false);
+    const [sort, setSort] = useState<SortOption>({ key: 'createdAt', direction: 'asc' });
+    const [sortOrder, setSortOrder] = useState<SortOrderOption>('createdAt-asc');
 
-    const onClickEdit = useCallback(() => setEditDialog(true), [setEditDialog]);
+    const onChangeSortOrder = useCallback(
+        (value?: string) => {
+            const [key, direction] = value?.split('-') ?? '';
+            const sort = { key, direction } as SortOption;
+            setSort(sort);
+            setSortOrder(value as SortOrderOption);
+            setConfigs(configs.sort(getSorter(sort)));
+        },
+        [configs, setSort, setSortOrder, setConfigs],
+    );
+
+    const onChangeEdit = useCallback(
+        (config?: LauncherConfig) => {
+            if (!editDialog) {
+                setConfig(JSON.parse(JSON.stringify(config ?? defaultConfig)));
+                setEditDialog(true);
+                // TODO: focus first input element
+            }
+        },
+        [editDialog, setConfig, setEditDialog],
+    );
+
+    const isEdit = useMemo(() => config.createdAt !== 0, [config]);
+
     const onClickCloseEditDialog = useCallback(() => {
         setEditDialog(false);
     }, [setEditDialog]);
 
-    const onChangeDelete = useCallback(() => setDeleteDialog(true), [setDeleteDialog]);
+    const onClickEditConfig = useCallback(() => {
+        if (!config.createdAt) {
+            config.createdAt = new Date().getTime();
+            config.modifiedAt = config.createdAt;
+        } else {
+            config.modifiedAt = new Date().getTime();
+        }
+
+        const orderConfigs = (configs: LauncherConfig[]) => configs.sort(getSorter(sort));
+        const updateDefault = (config: LauncherConfig) => {
+            config.isDefault = false;
+            return config;
+        };
+
+        const updated = config.isDefault ? configs.map(updateDefault) : configs;
+        const index = configs.findIndex(({ createdAt }) => createdAt === config.createdAt);
+
+        if (index !== -1) {
+            setConfigs(orderConfigs([...updated.slice(0, index), ...updated.slice(index + 1), config]));
+        } else {
+            setConfigs(orderConfigs([...updated, config]));
+        }
+
+        setEditDialog(false);
+        saveConfig({ configs, sort });
+    }, [sort, config, configs, setConfig, setEditDialog]);
+
+    const onChangeDelete = useCallback(
+        (config: LauncherConfig) => {
+            if (!deleteDialog) {
+                setConfigToDelete(config);
+                setDeleteDialog(true);
+            }
+        },
+        [deleteDialog, setConfigToDelete, setDeleteDialog],
+    );
+
     const onClickCloseDeleteDialog = useCallback(() => {
-        setConfigToDelete('');
+        setConfigNameToDelete('');
         setDeleteDialog(false);
-    }, [setConfigToDelete, setDeleteDialog]);
+    }, [setConfigNameToDelete, setDeleteDialog]);
 
     const onChangeConfigToDelete = useCallback(({ target }: any) => {
-        setConfigToDelete(target.value as string);
+        setConfigNameToDelete(target.value as string);
     }, []);
 
     const onClickDeleteConfig = useCallback(() => {
-        invoke('config.delete', { name: configToDelete })
-            .then(() => {})
-            .catch((error) => setConsoleBuffer([...consoleBuffer, error as string]))
-            .finally(() => {
-                setConfigToDelete('');
-                setDeleteDialog(false);
-            });
-    }, [setConfigToDelete, setDeleteDialog]);
+        const index = configs.findIndex(({ createdAt }) => createdAt === configToDelete?.createdAt);
+        if (index !== -1) {
+            setConfigs([...configs.slice(0, index), ...configs.slice(index + 1)]);
+        }
+
+        saveConfig({ configs, sort });
+        setConfigNameToDelete('');
+        setDeleteDialog(false);
+    }, [configToDelete, setConfigNameToDelete, setDeleteDialog]);
 
     const canConfirmDeletion = useMemo(() => {
-        return configToDelete === "NeKz's Debug Launch Config";
-    }, [configToDelete]);
+        return configNameToDelete === configToDelete?.name;
+    }, [configToDelete, configNameToDelete]);
 
     const onKeyDownConfigToDelete = useCallback(
         (event: React.KeyboardEvent) => {
@@ -150,10 +237,13 @@ function App() {
     );
 
     useEffect(() => {
-        invoke('launcher.configs')
-            .then((configs) => setConfigs(configs as LauncherConfig[]))
-            .catch((error) => setConsoleBuffer([...consoleBuffer, error as string]))
-            .finally(() => setConfigs(testConfigs));
+        loadConfig().then((config) => {
+            if (config) {
+                setSort(config.sort);
+                setSortOrder([config.sort.key, config.sort.direction].join('-') as SortOrderOption);
+                setConfigs(config.configs);
+            }
+        });
     }, [setConfigs, setConsoleBuffer]);
 
     useEffect(() => {
@@ -166,11 +256,11 @@ function App() {
         invoke('console.execute', { command })
             .then((line) => setConsoleBuffer([...consoleBuffer, line as string]))
             .catch((error) => setConsoleBuffer([...consoleBuffer, error as string]));
-        setcommand('');
-    }, [setcommand, command]);
+        setCommand('');
+    }, [setCommand, command]);
 
     const onChangeCommand = useCallback(({ target }: any) => {
-        setcommand(target.value as string);
+        setCommand(target.value as string);
     }, []);
 
     const onKeyDownCommand = useCallback(
@@ -190,7 +280,7 @@ function App() {
     );
 
     return (
-        <div className="container">
+        <div>
             <main>
                 <Tabs value="tem">
                     <TabsHeader>
@@ -215,10 +305,20 @@ function App() {
                     </TabsHeader>
                     <TabsBody>
                         <TabPanel key="tem" value="tem">
-                            <div className="grid grid-cols-3 gap-4">
-                                {configs.map((config) => {
+                            <Select variant="static" label="Sort by" value={sortOrder} onChange={onChangeSortOrder}>
+                                <Option value="createdAt-asc">Date (oldest)</Option>
+                                <Option value="createdAt-desc">Date (newest)</Option>
+                                <Option value="name-asc">Name (asc.)</Option>
+                                <Option value="name-desc">Name (desc.)</Option>
+                            </Select>
+                            <Button className="flex items-center gap-3" onClick={() => onChangeEdit()}>
+                                <PlusIcon strokeWidth={2} className="h-5 w-5" />
+                                Create Config
+                            </Button>
+                            <div className="grid grid-cols-3 gap-3">
+                                {configs.map((config, idx) => {
                                     return (
-                                        <div key={config.name}>
+                                        <div key={idx}>
                                             <Card className="w-full max-w-[26rem] shadow-lg">
                                                 <CardBody>
                                                     <div className="mb-3 flex items-center justify-between">
@@ -242,7 +342,7 @@ function App() {
                                                             <MenuList>
                                                                 <MenuItem
                                                                     className="flex items-center gap-2"
-                                                                    onClick={onClickEdit}
+                                                                    onClick={() => onChangeEdit(config)}
                                                                 >
                                                                     <PencilIcon strokeWidth={2} className="h-4 w-4" />
                                                                     <Typography variant="small" className="font-normal">
@@ -251,7 +351,7 @@ function App() {
                                                                 </MenuItem>
                                                                 <MenuItem
                                                                     className="flex items-center gap-2 hover:bg-red-500"
-                                                                    onClick={onChangeDelete}
+                                                                    onClick={() => onChangeDelete(config)}
                                                                 >
                                                                     <TrashIcon strokeWidth={2} className="h-4 w-4" />
                                                                     <Typography variant="small" className="font-normal">
@@ -262,32 +362,38 @@ function App() {
                                                         </Menu>
                                                     </div>
                                                     <Typography color="gray">
-                                                        Resolution {config.resolution.w} x {config.resolution.h}
+                                                        Resolution {config.resolution.width} x{' '}
+                                                        {config.resolution.height}
                                                     </Typography>
                                                     <Typography color="gray">
                                                         {config.isFullscreen ? 'Fullscreen' : 'Windowed'}
                                                     </Typography>
-                                                    {config.showSplashScreen && (
-                                                        <Typography color="gray">Splash Screen Disabled</Typography>
+                                                    <Typography color="gray">
+                                                        Splash Screen{' '}
+                                                        {config.disableSplashScreen ? 'Disabled' : 'Enabled'}
+                                                    </Typography>
+                                                    {config.useTEM && (
+                                                        <div className="group mt-4 inline-flex flex-wrap items-center gap-3">
+                                                            <Tooltip content="Version 0.1.0">
+                                                                <span className="rounded-full border border-blue-500/5 bg-blue-500/5 p-3 text-blue-500 transition-colors hover:border-blue-500/10 hover:bg-blue-500/10 hover:!opacity-100 group-hover:opacity-70">
+                                                                    TEM
+                                                                </span>
+                                                            </Tooltip>
+                                                        </div>
                                                     )}
-                                                    {config.mods.map((mod) => {
-                                                        return (
-                                                            <div
-                                                                className="group mt-4 inline-flex flex-wrap items-center gap-3"
-                                                                key={mod.name}
-                                                            >
-                                                                <Tooltip content={'Version ' + mod.version}>
-                                                                    <span className="rounded-full border border-green-500/5 bg-green-500/5 p-3 text-green-500 transition-colors hover:border-green-500/10 hover:bg-green-500/10 hover:!opacity-100 group-hover:opacity-70">
-                                                                        {mod.name}
-                                                                    </span>
-                                                                </Tooltip>
-                                                            </div>
-                                                        );
-                                                    })}
+                                                    {config.useXDead && (
+                                                        <div className="group mt-4 inline-flex flex-wrap items-center gap-3">
+                                                            <Tooltip content="Version 0.1.0">
+                                                                <span className="rounded-full border border-green-500/5 bg-green-500/5 p-3 text-green-500 transition-colors hover:border-green-500/10 hover:bg-green-500/10 hover:!opacity-100 group-hover:opacity-70">
+                                                                    XDead
+                                                                </span>
+                                                            </Tooltip>
+                                                        </div>
+                                                    )}
                                                 </CardBody>
                                                 <CardFooter className="pt-3">
                                                     <Button disabled size="lg" fullWidth={true}>
-                                                        Launch
+                                                        Launch {config.isDefault ? ' (default)' : ''}
                                                     </Button>
                                                 </CardFooter>
                                             </Card>
@@ -295,8 +401,145 @@ function App() {
                                     );
                                 })}
                             </div>
+                            <Dialog size="md" open={editDialog} handler={onChangeEdit}>
+                                <DialogHeader className="justify-between">
+                                    <Typography variant="h5" color="blue-gray">
+                                        {isEdit ? 'Edit' : 'Create'} Config
+                                    </Typography>
+                                    <IconButton
+                                        color="blue-gray"
+                                        size="sm"
+                                        variant="text"
+                                        onClick={onClickCloseEditDialog}
+                                    >
+                                        <XMarkIcon strokeWidth={2} className="h-5 w-5" />
+                                    </IconButton>
+                                </DialogHeader>
+                                <DialogBody divider>
+                                    <Input
+                                        className="w-4"
+                                        value={config.name}
+                                        variant="outlined"
+                                        label="Name"
+                                        autoFocus={true}
+                                        containerProps={{ className: 'mt-4' }}
+                                        onChange={({ target: { value } }) =>
+                                            setConfig((oldConfig) => ({ ...oldConfig, name: value }))
+                                        }
+                                    />
+                                    <div className="flex items-center gap-4">
+                                        <Input
+                                            value={config.resolution.width.toString()}
+                                            variant="outlined"
+                                            label="Window Width"
+                                            type="number"
+                                            containerProps={{ className: 'mt-4' }}
+                                            onChange={({ target: { value } }) =>
+                                                setConfig((oldConfig) => ({
+                                                    ...oldConfig,
+                                                    resolution: {
+                                                        ...oldConfig.resolution,
+                                                        width: parseInt(value, 10),
+                                                    },
+                                                }))
+                                            }
+                                        />
+                                        <Input
+                                            value={config.resolution.height.toString()}
+                                            variant="outlined"
+                                            label="Window Height"
+                                            type="number"
+                                            containerProps={{ className: 'mt-4' }}
+                                            onChange={({ target: { value } }) =>
+                                                setConfig((oldConfig) => ({
+                                                    ...oldConfig,
+                                                    resolution: {
+                                                        ...oldConfig.resolution,
+                                                        height: parseInt(value, 10),
+                                                    },
+                                                }))
+                                            }
+                                        />
+                                    </div>
+                                    <div className="mt-4">
+                                        <Switch
+                                            id="fullscreen"
+                                            label="Fullscreen"
+                                            defaultChecked={config.isFullscreen}
+                                            onChange={() =>
+                                                setConfig((oldConfig) => ({
+                                                    ...oldConfig,
+                                                    isFullscreen: !oldConfig.isFullscreen,
+                                                }))
+                                            }
+                                        />
+                                    </div>
+                                    <div className="mt-4">
+                                        <Switch
+                                            id="splash-screen"
+                                            label="Disable splash screen"
+                                            defaultChecked={config.disableSplashScreen}
+                                            onChange={() =>
+                                                setConfig((oldConfig) => ({
+                                                    ...oldConfig,
+                                                    disableSplashScreen: !oldConfig.disableSplashScreen,
+                                                }))
+                                            }
+                                        />
+                                    </div>
+                                    <div className="mt-4">
+                                        <Switch
+                                            id="tem"
+                                            label="Use TEM"
+                                            defaultChecked={config.useTEM}
+                                            onChange={() =>
+                                                setConfig((oldConfig) => ({
+                                                    ...oldConfig,
+                                                    useTEM: !oldConfig.useTEM,
+                                                }))
+                                            }
+                                        />
+                                    </div>
+                                    <div className="mt-4">
+                                        <Switch
+                                            id="xdead"
+                                            label="Use XDead"
+                                            defaultChecked={config.useXDead}
+                                            onChange={() =>
+                                                setConfig((oldConfig) => ({
+                                                    ...oldConfig,
+                                                    useXDead: !oldConfig.useXDead,
+                                                }))
+                                            }
+                                        />
+                                    </div>
+                                    <div className="mt-4">
+                                        <Switch
+                                            id="default"
+                                            label="Use this as default"
+                                            defaultChecked={config.isDefault}
+                                            onChange={() =>
+                                                setConfig((oldConfig) => ({
+                                                    ...oldConfig,
+                                                    isDefault: !oldConfig.isDefault,
+                                                }))
+                                            }
+                                        />
+                                    </div>
+                                </DialogBody>
+                                <DialogFooter>
+                                    <Button
+                                        size="sm"
+                                        variant="filled"
+                                        disabled={!config.name}
+                                        onClick={onClickEditConfig}
+                                    >
+                                        <span>Save</span>
+                                    </Button>
+                                </DialogFooter>
+                            </Dialog>
                         </TabPanel>
-                        <Dialog size="lg" open={deleteDialog} handler={onChangeDelete}>
+                        <Dialog size="md" open={deleteDialog} handler={onChangeDelete}>
                             <DialogHeader className="justify-between">
                                 <Typography variant="h5" color="blue-gray">
                                     Delete Config
@@ -311,12 +554,12 @@ function App() {
                                 </IconButton>
                             </DialogHeader>
                             <DialogBody divider>
-                                <Typography>The configuration "NeKz's Debug Launch Config" will be deleted.</Typography>
+                                <Typography>The configuration "{configToDelete?.name}" will be deleted.</Typography>
                                 <Typography>This action cannot be undone.</Typography>
                                 <br />
-                                <Typography>Please type "NeKz's Debug Launch Config" to confirm.</Typography>
+                                <Typography>Please type "{configToDelete?.name}" to confirm.</Typography>
                                 <Input
-                                    value={configToDelete}
+                                    value={configNameToDelete}
                                     onChange={onChangeConfigToDelete}
                                     className="mt-2 !border-t-blue-gray-200 focus:!border-t-blue-500"
                                     labelProps={{
