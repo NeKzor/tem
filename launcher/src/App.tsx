@@ -166,6 +166,17 @@ function App() {
     const [sort, setSort] = useState<SortOption>({ key: 'createdAt', direction: 'asc' });
     const [sortOrder, setSortOrder] = useState<SortOrderOption>('createdAt-asc');
     const [shouldSaveConfig, setShouldSaveConfig] = useState(false);
+    const [gameLaunched, setGameLaunched] = useState(false);
+
+    const onClickLaunch = (config: LauncherConfig) => {
+        invoke('launch_config', { config })
+            .then(() => {
+                setGameLaunched(true);
+            })
+            .catch((err) => {
+                console.error(err);
+            });
+    };
 
     useEffect(() => {
         if (shouldSaveConfig) {
@@ -472,7 +483,12 @@ function App() {
                                                     )}
                                                 </CardBody>
                                                 <CardFooter className="pt-3">
-                                                    <Button disabled size="lg" fullWidth={true}>
+                                                    <Button
+                                                        disabled={gameLaunched}
+                                                        size="lg"
+                                                        fullWidth={true}
+                                                        onClick={() => onClickLaunch(config)}
+                                                    >
                                                         Launch {config.isDefault ? ' (default)' : ''}
                                                     </Button>
                                                 </CardFooter>
