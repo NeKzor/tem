@@ -4,12 +4,12 @@
  * SPDX-License-Identifier: MIT
  */
 
-import { createElement, useCallback, useEffect, useMemo, useState } from 'react';
+import { createElement, useCallback, useEffect, useState } from 'react';
 import { invoke } from '@tauri-apps/api/tauri';
+import { listen } from '@tauri-apps/api/event';
 import {
     Button,
     Card,
-    CardHeader,
     CardBody,
     CardFooter,
     Input,
@@ -222,7 +222,7 @@ function App() {
         [configs, editDialog, setConfig, setEditDialog],
     );
 
-    const isEdit = useMemo(() => config.createdAt !== 0, [config]);
+    const isEdit = config.createdAt !== 0;
 
     const onClickCloseEditDialog = useCallback(() => {
         setEditDialog(false);
@@ -287,9 +287,7 @@ function App() {
         setDeleteDialog(false);
     }, [configToDelete, setConfigNameToDelete, setDeleteDialog, setShouldSaveConfig]);
 
-    const canConfirmDeletion = useMemo(() => {
-        return configNameToDelete === configToDelete?.name;
-    }, [configToDelete, configNameToDelete]);
+    const canConfirmDeletion = configNameToDelete === configToDelete?.name;
 
     const onKeyDownConfigToDelete = useCallback(
         (event: React.KeyboardEvent) => {
@@ -301,14 +299,26 @@ function App() {
     );
 
     useEffect(() => {
-        loadConfig().then((config) => {
-            if (config) {
-                console.log('found config');
-                setSort(config.sort);
-                setSortOrder([config.sort.key, config.sort.direction].join('-') as SortOrderOption);
-                setConfigs(config.configs);
-            }
+        if (!configs.length) {
+            loadConfig().then((config) => {
+                if (config) {
+                    console.log('found config');
+                    setSort(config.sort);
+                    setSortOrder([config.sort.key, config.sort.direction].join('-') as SortOrderOption);
+                    setConfigs(config.configs);
+                }
+            });
+        }
+
+        const unlistenGameEvent = listen('game-event', (event) => {
+            console.log('event', event);
         });
+
+        console.log('initialized');
+
+        return () => {
+            unlistenGameEvent.then(() => console.log('uninitialized'));
+        };
     }, []);
 
     // useEffect(() => {
@@ -318,9 +328,10 @@ function App() {
     // }, [setConsoleBuffer]);
 
     const onClickExecute = useCallback(() => {
-        invoke('console_execute', { text: command })
-            .then((line) => setConsoleBuffer([...consoleBuffer, line as string]))
-            .catch((error) => setConsoleBuffer([...consoleBuffer, error as string]));
+        const text = command;
+        invoke('console_execute', { text })
+            .then((line) => setConsoleBuffer([...consoleBuffer, `> ${text}`, line as string]))
+            .catch((error) => setConsoleBuffer([...consoleBuffer, `> ${text}`, error as string]));
         setCommand('');
     }, [setCommand, command]);
 
