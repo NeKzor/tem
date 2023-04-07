@@ -59,7 +59,6 @@ async fn launch_config(
 
     rewrite_grid_engine_config(&config);
     set_game_mods(&config, &state);
-    launch_game(&window, &state);
 
     Ok(())
 }
@@ -117,13 +116,12 @@ fn rewrite_grid_engine_config(config: &LauncherConfig) {
     let mut line_index = 1;
 
     for line in reader.lines() {
-        if line.is_err() {
+        let Ok(line) = line else {
             println!("error at line {line_index}");
             line_index += 1;
             continue;
-        }
+        };
 
-        let line = line.unwrap();
         let text = line.trim();
         let is_empty = text.len() == 0;
         if is_empty {
@@ -243,7 +241,7 @@ fn set_game_mods(config: &LauncherConfig, state: &AppState) {
     }
 }
 
-fn launch_game(window: &tauri::Window, state: &AppState) {
+fn launch_game(state: &AppState) {
     use std::process::Command;
     use windows::core::PCSTR;
     use windows::Win32::Foundation::*;
@@ -251,7 +249,7 @@ fn launch_game(window: &tauri::Window, state: &AppState) {
 
     println!("game is installed in {:#?}", state.game_install_path);
 
-    let file = format!("-=[SMS_{}_SMS]=-", GAME_EXE);
+    let file = format!("-=[SMS_{GAME_EXE}_SMS]=-");
 
     let result = unsafe {
         CreateFileMappingA(
@@ -264,12 +262,11 @@ fn launch_game(window: &tauri::Window, state: &AppState) {
         )
     };
 
-    if result.is_err() {
+    let Ok(handle) = result else {
         println!("Could not create file mapping object {:#?}", result.err());
         return;
-    }
+    };
 
-    let handle = result.unwrap();
     let result = unsafe { MapViewOfFile(handle, FILE_MAP_ALL_ACCESS, 0, 0, SECUROM_BUFFER_SIZE) };
 
     if result.is_ok() {
@@ -279,27 +276,9 @@ fn launch_game(window: &tauri::Window, state: &AppState) {
             .spawn()
             .expect(format!("failed to start {GAME_EXE}").as_str());
 
-        window
-            .emit(
-                "game-event",
-                EventPayload {
-                    message: "launched".into(),
-                },
-            )
-            .unwrap();
-
         child
             .wait()
             .expect(format!("failed to wait on {GAME_EXE}").as_str());
-
-        window
-            .emit(
-                "game-event",
-                EventPayload {
-                    message: "exited".into(),
-                },
-            )
-            .unwrap();
 
         println!("game exited");
     } else {
@@ -336,7 +315,9 @@ fn get_game_install_path() -> String {
         return "".into();
     }
 
-    let install_path = String::from_utf16(install_path_buffer.as_slice()).unwrap();
+    let install_path = String::from_utf16(install_path_buffer.as_slice())
+        .expect("failed to create valid utf16 string for install path");
+
     install_path.trim_end_matches(char::from(0)).into()
 }
 
@@ -345,9 +326,11 @@ fn main() {
         game_install_path: get_game_install_path(),
     };
 
-    tauri::Builder::default()
-        .manage(state)
-        .invoke_handler(tauri::generate_handler![launch_config, console_execute])
-        .run(tauri::generate_context!())
-        .expect("error while running tauri application");
+    launch_game(&state);
+
+    // tauri::Builder::default()
+    //     .manage(state)
+    //     .invoke_handler(tauri::generate_handler![launch_config, console_execute])
+    //     .run(tauri::generate_context!())
+    //     .expect("error while running tauri application");
 }
