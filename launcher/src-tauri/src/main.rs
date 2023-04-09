@@ -6,6 +6,8 @@
 
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
+use std::os::windows::prelude::OsStrExt;
+
 use serde::{Deserialize, Serialize};
 
 const CON_PREFIX: &str = "[launcher]";
@@ -59,6 +61,7 @@ async fn launch_config(
 
     rewrite_grid_engine_config(&config);
     set_game_mods(&config, &state);
+    launch_game(&state);
 
     Ok(())
 }
@@ -138,13 +141,13 @@ fn rewrite_grid_engine_config(config: &LauncherConfig) {
             if is_system_settings {
                 match key {
                     "ResX" => {
-                        println!("Set RexX to {}", config.resolution.width);
-                        write!(writer, "RexX={}\r\n", config.resolution.width).unwrap();
+                        println!("Set ResX to {}", config.resolution.width);
+                        write!(writer, "ResX={}\r\n", config.resolution.width).unwrap();
                         continue;
                     }
                     "ResY" => {
-                        println!("Set RexY to {}", config.resolution.height);
-                        write!(writer, "RexY={}\r\n", config.resolution.height).unwrap();
+                        println!("Set ResY to {}", config.resolution.height);
+                        write!(writer, "ResY={}\r\n", config.resolution.height).unwrap();
                         continue;
                     }
                     "Fullscreen" => {
@@ -243,9 +246,11 @@ fn set_game_mods(config: &LauncherConfig, state: &AppState) {
 
 fn launch_game(state: &AppState) {
     use std::process::Command;
-    use windows::core::PCSTR;
+    use windows::core::{PCSTR, PCWSTR, PWSTR};
+    use windows::w;
     use windows::Win32::Foundation::*;
     use windows::Win32::System::Memory::*;
+    use windows::Win32::System::Threading::*;
 
     println!("game is installed in {:#?}", state.game_install_path);
 
@@ -272,13 +277,54 @@ fn launch_game(state: &AppState) {
     if result.is_ok() {
         println!("created file mapping");
 
-        let mut child = Command::new(format!("{}\\{GAME_EXE}", state.game_install_path))
-            .spawn()
-            .expect(format!("failed to start {GAME_EXE}").as_str());
+        let cmd = format!("{}\\{GAME_EXE}", state.game_install_path);
+        println!("launching {cmd}");
 
-        child
-            .wait()
-            .expect(format!("failed to wait on {GAME_EXE}").as_str());
+        let si = STARTUPINFOW {
+            cb: std::mem::size_of::<STARTUPINFOW>() as u32,
+            ..Default::default()
+        };
+        let mut pi = PROCESS_INFORMATION::default();
+
+        let mut cmd = std::ffi::OsString::from(cmd)
+            .encode_wide()
+            .chain(Some(0))
+            .collect::<Vec<u16>>();
+
+        unsafe {
+            let result = CreateProcessW(
+                None,
+                PWSTR(cmd.as_mut_ptr()),
+                None,
+                None,
+                FALSE,
+                PROCESS_CREATION_FLAGS(0u32),
+                None,
+                None,
+                &si,
+                &mut pi,
+            );
+
+            println!("CreateProcessW = {:#?}", result);
+        }
+
+        println!("hProcess {:#?}", pi.hProcess);
+        println!("hThread {:#?}", pi.hThread);
+        println!("dwProcessId {:#?}", pi.dwProcessId);
+        println!("dwThreadId {:#?}", pi.dwThreadId);
+
+        unsafe {
+            let result = WaitForSingleObject(pi.hProcess, INFINITE);
+            println!("WaitForSingleObject = {:#?}", result);
+        }
+
+        // let mut child = Command::new(cmd)
+        //     .spawn()
+        //     .expect(format!("failed to start {GAME_EXE}").as_str());
+
+        // child
+        //     .wait()
+        //     .expect(format!("failed to wait on {GAME_EXE}").as_str());
 
         println!("game exited");
     } else {
