@@ -254,7 +254,7 @@ fn launch_game(state: &AppState) {
 
     println!("game is installed in {:#?}", state.game_install_path);
 
-    let file = format!("-=[SMS_{GAME_EXE}_SMS]=-");
+    let file = format!("-=[SMS_{GAME_EXE}_SMS]=-\0");
 
     let result = unsafe {
         CreateFileMappingA(
