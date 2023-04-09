@@ -162,11 +162,34 @@ The launcher creates 20 encrypted files in `AppData\Local\Temp\GridGameLauncher_
 
 Example filename: `data_dfe_b93b5ee4f6834d365af674dbed527de5`.
 
-One file is located at install path called `dfe`.
+Other multiple file are located at installation path folder:
 
 ```admonish todo
-There are several other files in the install path folder which might also be related to this.
+Check what SecuROM does with these files. They could just be useless garbage as they also seem to appear in different games with the exact same size.
 ```
+
+|Filename|Size in bytes|
+|---|:-:|
+|Layer06.Arch01|18955|
+|aliasdiffanhl3.bin|884|
+|const_ovr.bin|22596|
+|coord_abstr5.hal|16643|
+|cyc_nan.bik|11772|
+|dest_fix2.bin|7423|
+|dfe|300460|
+|dith_l3.bin|9417|
+|engined2.bin|14905|
+|f10.kea|11649|
+|jay_mix.bin|25009|
+|krn_snd.bin|14368|
+|lght_jmp_mod.hal|25369|
+|patpon.pat|22272|
+|srh50.bin|30604|
+|starter.bin|24894|
+|story_opl.dia|4884|
+|vorbis_sub.sub|21992|
+|w1n_000.nfs|1961|
+|wrk_sdl.bin|929|
 
 ### Spot Check
 
