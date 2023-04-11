@@ -45,6 +45,7 @@ import {
     XMarkIcon,
 } from '@heroicons/react/24/solid';
 import { readTextFile, writeTextFile, BaseDirectory } from '@tauri-apps/api/fs';
+import { event } from '@tauri-apps/api';
 
 interface LauncherConfig {
     name: string;
@@ -168,12 +169,15 @@ function App() {
     const [shouldSaveConfig, setShouldSaveConfig] = useState(false);
     const [gameLaunched, setGameLaunched] = useState(false);
 
+    console.log('gameLaunched', gameLaunched);
+
     const onClickLaunch = (config: LauncherConfig) => {
         invoke('launch_config', { config })
             .then(() => {
                 setGameLaunched(true);
             })
             .catch((err) => {
+                setGameLaunched(false);
                 console.error(err);
             });
     };
@@ -306,20 +310,22 @@ function App() {
                     setSort(config.sort);
                     setSortOrder([config.sort.key, config.sort.direction].join('-') as SortOrderOption);
                     setConfigs(config.configs);
+
                 }
             });
         }
 
-        const unlistenGameEvent = listen('game-event', (event) => {
-            console.log('event', event);
+        const unlistenGameLaunched = listen('game-launched', (event: event.Event<boolean>) => {
+            console.log({ event });
+            setGameLaunched(event.payload);
         });
 
         console.log('initialized');
 
         return () => {
-            unlistenGameEvent.then(() => console.log('uninitialized'));
+            unlistenGameLaunched.then(() => console.log('uninitialized'));
         };
-    }, []);
+    }, [setSort, setSortOrder, setConfigs, setGameLaunched]);
 
     // useEffect(() => {
     //     invoke('console_buffer')

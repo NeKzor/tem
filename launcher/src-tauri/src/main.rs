@@ -61,7 +61,7 @@ async fn launch_config(
 
     rewrite_grid_engine_config(&config);
     set_game_mods(&config, &state);
-    launch_game(&state);
+    launch_game(&window, &state);
 
     Ok(())
 }
@@ -244,7 +244,7 @@ fn set_game_mods(config: &LauncherConfig, state: &AppState) {
     }
 }
 
-fn launch_game(state: &AppState) {
+fn launch_game(window: &tauri::Window, state: &AppState) {
     use std::process::Command;
     use windows::core::{PCSTR, PCWSTR, PWSTR};
     use windows::w;
@@ -313,6 +313,10 @@ fn launch_game(state: &AppState) {
         println!("dwProcessId {:#?}", pi.dwProcessId);
         println!("dwThreadId {:#?}", pi.dwThreadId);
 
+        window
+            .emit("game-launched", true)
+            .expect("game launched event");
+
         unsafe {
             let result = WaitForSingleObject(pi.hProcess, INFINITE);
             println!("WaitForSingleObject = {:#?}", result);
@@ -325,6 +329,10 @@ fn launch_game(state: &AppState) {
         // child
         //     .wait()
         //     .expect(format!("failed to wait on {GAME_EXE}").as_str());
+
+        window
+            .emit("game-launched", false)
+            .expect("game exited event");
 
         println!("game exited");
     } else {
@@ -372,11 +380,9 @@ fn main() {
         game_install_path: get_game_install_path(),
     };
 
-    launch_game(&state);
-
-    // tauri::Builder::default()
-    //     .manage(state)
-    //     .invoke_handler(tauri::generate_handler![launch_config, console_execute])
-    //     .run(tauri::generate_context!())
-    //     .expect("error while running tauri application");
+    tauri::Builder::default()
+        .manage(state)
+        .invoke_handler(tauri::generate_handler![launch_config, console_execute])
+        .run(tauri::generate_context!())
+        .expect("error while running tauri application");
 }
