@@ -169,16 +169,15 @@ function App() {
     const [shouldSaveConfig, setShouldSaveConfig] = useState(false);
     const [gameLaunched, setGameLaunched] = useState(false);
 
-    console.log('gameLaunched', gameLaunched);
-
     const onClickLaunch = (config: LauncherConfig) => {
+        setGameLaunched(true);
+
         invoke('launch_config', { config })
-            .then(() => {
-                setGameLaunched(true);
-            })
             .catch((err) => {
-                setGameLaunched(false);
                 console.error(err);
+            })
+            .finally(() => {
+                setGameLaunched(false);
             });
     };
 
@@ -323,9 +322,12 @@ function App() {
         console.log('initialized');
 
         return () => {
-            unlistenGameLaunched.then(() => console.log('uninitialized'));
+            unlistenGameLaunched.then((unlisten) => {
+                unlisten();
+                console.log('uninitialized');
+            });
         };
-    }, [setSort, setSortOrder, setConfigs, setGameLaunched]);
+    }, []);
 
     // useEffect(() => {
     //     invoke('console_buffer')
