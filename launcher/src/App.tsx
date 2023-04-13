@@ -47,6 +47,9 @@ import {
 import { readTextFile, writeTextFile, BaseDirectory } from '@tauri-apps/api/fs';
 import { event } from '@tauri-apps/api';
 
+const configFile = 'config.json';
+const maxConfigsAllowed = 4;
+
 interface LauncherConfig {
     name: string;
     createdAt: number;
@@ -87,8 +90,6 @@ interface LauncherMods {
     tem: LauncherMod;
     xdead: LauncherMod;
 }
-
-const defaultConfig = createLauncherConfig();
 
 const defaultMods: LauncherMods = {
     tem: {
@@ -133,8 +134,6 @@ const getSorter =
         return 0;
     };
 
-const configFile = 'config.json';
-
 const loadConfig = async () => {
     return await readTextFile(configFile, { dir: BaseDirectory.AppLocalData })
         .then((text) => JSON.parse(text) as AppConfig)
@@ -154,15 +153,13 @@ const saveConfig = async (config: AppConfig) => {
         });
 };
 
-const maxConfigsAllowed = 4;
-
 function App() {
     const [consoleBuffer, setConsoleBuffer] = useState<string[]>([]);
     const [command, setCommand] = useState('');
     const [checkForUpdates, setCheckForUpdates] = useState<CheckForUpdatesOption>('disabled');
     const [configs, setConfigs] = useState<LauncherConfig[]>([]);
     const [mods, setMods] = useState<LauncherMods>(defaultMods);
-    const [config, setConfig] = useState<LauncherConfig>(defaultConfig);
+    const [config, setConfig] = useState<LauncherConfig>(createLauncherConfig);
     const [editDialog, setEditDialog] = useState(false);
     const [configToDelete, setConfigToDelete] = useState<LauncherConfig | undefined>(undefined);
     const [configNameToDelete, setConfigNameToDelete] = useState('');
@@ -211,16 +208,11 @@ function App() {
             if (!editDialog) {
                 const isFirstConfig = configs.length === 0;
                 setConfig(
-                    JSON.parse(
-                        JSON.stringify(
-                            config ??
-                                ({
-                                    ...defaultConfig,
-                                    name: isFirstConfig ? 'Default' : '',
-                                    isDefault: isFirstConfig,
-                                } as LauncherConfig),
-                        ),
-                    ),
+                    structuredClone(config) ??
+                        createLauncherConfig({
+                            name: isFirstConfig ? 'Default' : '',
+                            isDefault: isFirstConfig,
+                        }),
                 );
                 setEditDialog(true);
                 setTimeout(() => {
@@ -247,18 +239,22 @@ function App() {
             }
 
             setConfigs((configs) => {
-                const orderConfigs = (configs: LauncherConfig[]) => configs.sort(getSorter(sort));
-                const updateDefault = (config: LauncherConfig) => {
+                const unsetDefault = (config: LauncherConfig) => {
                     config.isDefault = false;
                     return config;
                 };
+                const orderConfigs = (configs: LauncherConfig[]) => {
+                    return configs.sort(getSorter(sort));
+                };
 
-                const updated = config.isDefault ? configs.map(updateDefault) : configs;
+                const updated = config.isDefault ? configs.map(unsetDefault) : configs;
                 const index = configs.findIndex(({ createdAt }) => createdAt === config.createdAt);
 
-                return index !== -1
-                    ? orderConfigs([...updated.slice(0, index), ...updated.slice(index + 1), config])
-                    : orderConfigs([...updated, config]);
+                return orderConfigs(
+                    index !== -1
+                        ? [...updated.slice(0, index), ...updated.slice(index + 1), config]
+                        : [...updated, config],
+                );
             });
 
             setEditDialog(false);
