@@ -51,16 +51,32 @@ interface LauncherConfig {
     name: string;
     createdAt: number;
     modifiedAt: number;
-    resolution: {
-        width: number;
-        height: number;
-    };
+    windowWidth: number;
+    windowHeight: number;
     isFullscreen: boolean;
     disableSplashScreen: boolean;
     isDefault: boolean;
     useTEM: boolean;
     useXDead: boolean;
 }
+
+const createLauncherConfig = (data?: Partial<LauncherConfig>): LauncherConfig => {
+    return Object.assign<LauncherConfig, Partial<LauncherConfig> | undefined>(
+        {
+            name: '',
+            createdAt: 0,
+            modifiedAt: 0,
+            windowWidth: window.screen.width,
+            windowHeight: window.screen.height,
+            isFullscreen: true,
+            disableSplashScreen: true,
+            isDefault: false,
+            useTEM: true,
+            useXDead: false,
+        },
+        data,
+    );
+};
 
 interface LauncherMod {
     name: string;
@@ -72,20 +88,7 @@ interface LauncherMods {
     xdead: LauncherMod;
 }
 
-const defaultConfig: LauncherConfig = {
-    name: '',
-    createdAt: 0,
-    modifiedAt: 0,
-    resolution: {
-        width: window.screen.width,
-        height: window.screen.height,
-    },
-    isFullscreen: true,
-    disableSplashScreen: true,
-    isDefault: false,
-    useTEM: true,
-    useXDead: false,
-};
+const defaultConfig = createLauncherConfig();
 
 const defaultMods: LauncherMods = {
     tem: {
@@ -196,11 +199,11 @@ function App() {
             const sort = { key, direction } as SortOption;
             setSort(sort);
             setSortOrder(value as SortOrderOption);
-            setConfigs(configs.sort(getSorter(sort)));
+            setConfigs((configs) => configs.sort(getSorter(sort)));
             console.log('saving order');
             setShouldSaveConfig(true);
         },
-        [configs, setSort, setSortOrder, setConfigs, setShouldSaveConfig],
+        [setSort, setSortOrder, setConfigs, setShouldSaveConfig],
     );
 
     const onChangeEdit = useCallback(
@@ -234,33 +237,35 @@ function App() {
         setEditDialog(false);
     }, [setEditDialog]);
 
-    const onClickEditConfig = useCallback(() => {
-        if (!config.createdAt) {
-            config.createdAt = new Date().getTime();
-            config.modifiedAt = config.createdAt;
-        } else {
-            config.modifiedAt = new Date().getTime();
-        }
+    const onClickEditConfig = useCallback(
+        (config: LauncherConfig) => {
+            if (!config.createdAt) {
+                config.createdAt = new Date().getTime();
+                config.modifiedAt = config.createdAt;
+            } else {
+                config.modifiedAt = new Date().getTime();
+            }
 
-        const orderConfigs = (configs: LauncherConfig[]) => configs.sort(getSorter(sort));
-        const updateDefault = (config: LauncherConfig) => {
-            config.isDefault = false;
-            return config;
-        };
+            setConfigs((configs) => {
+                const orderConfigs = (configs: LauncherConfig[]) => configs.sort(getSorter(sort));
+                const updateDefault = (config: LauncherConfig) => {
+                    config.isDefault = false;
+                    return config;
+                };
 
-        const updated = config.isDefault ? configs.map(updateDefault) : configs;
-        const index = configs.findIndex(({ createdAt }) => createdAt === config.createdAt);
+                const updated = config.isDefault ? configs.map(updateDefault) : configs;
+                const index = configs.findIndex(({ createdAt }) => createdAt === config.createdAt);
 
-        if (index !== -1) {
-            setConfigs(orderConfigs([...updated.slice(0, index), ...updated.slice(index + 1), config]));
-        } else {
-            setConfigs(orderConfigs([...updated, config]));
-        }
+                return index !== -1
+                    ? orderConfigs([...updated.slice(0, index), ...updated.slice(index + 1), config])
+                    : orderConfigs([...updated, config]);
+            });
 
-        setEditDialog(false);
-        console.log('conf save');
-        setShouldSaveConfig(true);
-    }, [sort, config, configs, setConfig, setEditDialog, setShouldSaveConfig]);
+            setEditDialog(false);
+            setShouldSaveConfig(true);
+        },
+        [sort, setConfig, setEditDialog, setShouldSaveConfig],
+    );
 
     const onChangeDelete = useCallback(
         (config: LauncherConfig) => {
@@ -284,8 +289,7 @@ function App() {
     const onClickDeleteConfig = useCallback(() => {
         const index = configs.findIndex(({ createdAt }) => createdAt === configToDelete?.createdAt);
         if (index !== -1) {
-            setConfigs([...configs.slice(0, index), ...configs.slice(index + 1)]);
-            console.log('conf save 2');
+            setConfigs((configs) => [...configs.slice(0, index), ...configs.slice(index + 1)]);
             setShouldSaveConfig(true);
         }
 
@@ -311,8 +315,7 @@ function App() {
                     console.log('found config');
                     setSort(config.sort);
                     setSortOrder([config.sort.key, config.sort.direction].join('-') as SortOrderOption);
-                    setConfigs(config.configs);
-
+                    setConfigs(config.configs.map(createLauncherConfig));
                 }
             });
         }
@@ -468,8 +471,7 @@ function App() {
                                                         </Menu>
                                                     </div>
                                                     <Typography color="gray">
-                                                        Resolution {config.resolution.width} x{' '}
-                                                        {config.resolution.height}
+                                                        Resolution {config.windowWidth} x {config.windowHeight}
                                                     </Typography>
                                                     <Typography color="gray">
                                                         {config.isFullscreen ? 'Fullscreen' : 'Windowed'}
@@ -548,7 +550,7 @@ function App() {
                                     />
                                     <div className="flex items-center gap-4">
                                         <Input
-                                            value={config.resolution.width.toString()}
+                                            value={config.windowWidth.toString()}
                                             variant="outlined"
                                             label="Window Width"
                                             type="number"
@@ -556,15 +558,12 @@ function App() {
                                             onChange={({ target: { value } }) =>
                                                 setConfig((oldConfig) => ({
                                                     ...oldConfig,
-                                                    resolution: {
-                                                        ...oldConfig.resolution,
-                                                        width: parseInt(value, 10),
-                                                    },
+                                                    windowWidth: parseInt(value, 10),
                                                 }))
                                             }
                                         />
                                         <Input
-                                            value={config.resolution.height.toString()}
+                                            value={config.windowHeight.toString()}
                                             variant="outlined"
                                             label="Window Height"
                                             type="number"
@@ -572,10 +571,7 @@ function App() {
                                             onChange={({ target: { value } }) =>
                                                 setConfig((oldConfig) => ({
                                                     ...oldConfig,
-                                                    resolution: {
-                                                        ...oldConfig.resolution,
-                                                        height: parseInt(value, 10),
-                                                    },
+                                                    windowHeight: parseInt(value, 10),
                                                 }))
                                             }
                                         />
@@ -651,7 +647,7 @@ function App() {
                                         size="sm"
                                         variant="filled"
                                         disabled={!config.name}
-                                        onClick={onClickEditConfig}
+                                        onClick={() => onClickEditConfig(config)}
                                     >
                                         <span>Save</span>
                                     </Button>

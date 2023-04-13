@@ -26,29 +26,20 @@ struct EventPayload {
 }
 
 #[derive(Serialize, Deserialize, Debug)]
-struct GameResolution {
-    width: i32,
-    height: i32,
-}
-
-#[derive(Serialize, Deserialize, Debug)]
+#[serde(rename_all = "camelCase")]
 struct LauncherConfig {
     name: String,
-    #[serde(rename = "createdAt")]
     created_at: i64,
-    #[serde(rename = "modifiedAt")]
     modified_at: i64,
-    resolution: GameResolution,
-    #[serde(rename = "isFullscreen")]
+    window_width: i32,
+    window_height: i32,
     is_fullscreen: bool,
-    #[serde(rename = "disableSplashScreen")]
     disable_splash_screen: bool,
-    #[serde(rename = "isDefault")]
     is_default: bool,
     #[serde(rename = "useTEM")]
     use_tem: bool,
     #[serde(rename = "useXDead")]
-    use_x_dead: bool,
+    use_xdead: bool,
 }
 
 #[tauri::command]
@@ -141,13 +132,13 @@ fn rewrite_grid_engine_config(config: &LauncherConfig) {
             if is_system_settings {
                 match key {
                     "ResX" => {
-                        println!("Set ResX to {}", config.resolution.width);
-                        write!(writer, "ResX={}\r\n", config.resolution.width).unwrap();
+                        println!("Set ResX to {}", config.window_width);
+                        write!(writer, "ResX={}\r\n", config.window_width).unwrap();
                         continue;
                     }
                     "ResY" => {
-                        println!("Set ResY to {}", config.resolution.height);
-                        write!(writer, "ResY={}\r\n", config.resolution.height).unwrap();
+                        println!("Set ResY to {}", config.window_height);
+                        write!(writer, "ResY={}\r\n", config.window_height).unwrap();
                         continue;
                     }
                     "Fullscreen" => {
@@ -222,7 +213,7 @@ fn set_game_mods(config: &LauncherConfig, state: &AppState) {
             // TODO: install dinput8.dll
         }
 
-        if config.use_x_dead {
+        if config.use_xdead {
             if !xdead_path.exists() {
                 // TODO: install xlive.dll
             }
@@ -245,9 +236,7 @@ fn set_game_mods(config: &LauncherConfig, state: &AppState) {
 }
 
 fn launch_game(window: &tauri::Window, state: &AppState) {
-    use std::process::Command;
-    use windows::core::{PCSTR, PCWSTR, PWSTR};
-    use windows::w;
+    use windows::core::{PCSTR, PWSTR};
     use windows::Win32::Foundation::*;
     use windows::Win32::System::Memory::*;
     use windows::Win32::System::Threading::*;
