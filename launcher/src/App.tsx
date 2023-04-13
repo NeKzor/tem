@@ -111,7 +111,7 @@ type SortOrderOption = 'createdAt-asc' | 'createdAt-desc' | 'name-asc' | 'name-d
 type CheckForUpdatesOption = 'disabled' | 'on-launcher-start' | 'on-launcher-exit';
 
 interface AppConfig {
-    configs: LauncherConfig[];
+    configs: Partial<LauncherConfig>[];
     sort: SortOption;
     checkForUpdates: CheckForUpdatesOption;
 }
@@ -309,9 +309,17 @@ function App() {
             loadConfig().then((config) => {
                 if (config) {
                     console.log('found config');
+
+                    const configs = config.configs.map(createLauncherConfig);
+                    setConfigs(configs);
+
+                    const defaultConfig = configs.find(({ isDefault }) => isDefault);
+                    if (defaultConfig) {
+                        onClickLaunch(defaultConfig);
+                    }
+
                     setSort(config.sort);
                     setSortOrder([config.sort.key, config.sort.direction].join('-') as SortOrderOption);
-                    setConfigs(config.configs.map(createLauncherConfig));
                 }
             });
         }
