@@ -4,7 +4,7 @@
  * SPDX-License-Identifier: MIT
  */
 
-import { createElement, useCallback, useEffect, useState } from 'react';
+import { createElement, useCallback, useEffect, useRef, useState } from 'react';
 import { invoke } from '@tauri-apps/api/tauri';
 import { listen } from '@tauri-apps/api/event';
 import {
@@ -147,7 +147,7 @@ const saveConfig = async (config: AppConfig) => {
             console.log('saved config');
         })
         .catch((err) => {
-            console.log('failed to write ${configFile', err);
+            console.log(`failed to write ${configFile}`, err);
         });
 };
 
@@ -168,6 +168,7 @@ function App() {
     const [sortOrder, setSortOrder] = useState<SortOrderOption>('createdAt-asc');
     const [shouldSaveConfig, setShouldSaveConfig] = useState(false);
     const [gameLaunched, setGameLaunched] = useState(false);
+    const nameRef = useRef<HTMLInputElement>(null);
 
     const onClickLaunch = (config: LauncherConfig) => {
         setGameLaunched(true);
@@ -219,7 +220,9 @@ function App() {
                     ),
                 );
                 setEditDialog(true);
-                // TODO: focus first input element
+                setTimeout(() => {
+                    nameRef.current?.querySelector('input')?.focus();
+                }, 100);
             }
         },
         [configs, editDialog, setConfig, setEditDialog],
@@ -532,6 +535,7 @@ function App() {
                                 </DialogHeader>
                                 <DialogBody className="pt-0" divider>
                                     <Input
+                                        ref={nameRef}
                                         className="w-4"
                                         value={config.name}
                                         variant="outlined"
