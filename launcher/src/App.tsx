@@ -551,10 +551,10 @@ function App() {
                                             label="Window Width"
                                             type="number"
                                             containerProps={{ className: 'mt-4' }}
-                                            onChange={({ target: { value } }) =>
+                                            onChange={({ target: { valueAsNumber } }) =>
                                                 setConfig((oldConfig) => ({
                                                     ...oldConfig,
-                                                    windowWidth: parseInt(value, 10),
+                                                    windowWidth: valueAsNumber,
                                                 }))
                                             }
                                         />
@@ -564,10 +564,10 @@ function App() {
                                             label="Window Height"
                                             type="number"
                                             containerProps={{ className: 'mt-4' }}
-                                            onChange={({ target: { value } }) =>
+                                            onChange={({ target: { valueAsNumber } }) =>
                                                 setConfig((oldConfig) => ({
                                                     ...oldConfig,
-                                                    windowHeight: parseInt(value, 10),
+                                                    windowHeight: valueAsNumber,
                                                 }))
                                             }
                                         />
