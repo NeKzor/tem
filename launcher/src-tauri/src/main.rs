@@ -9,6 +9,8 @@
 use std::os::windows::prelude::OsStrExt;
 
 use serde::{Deserialize, Serialize};
+use tauri::{AppHandle, Manager};
+use tauri::{CustomMenuItem, SystemTray, SystemTrayEvent, SystemTrayMenu, SystemTrayMenuItem};
 
 const CON_PREFIX: &str = "[launcher]";
 const CONFIG_PATH: &str =
@@ -364,14 +366,79 @@ fn get_game_install_path() -> String {
     install_path.trim_end_matches(char::from(0)).into()
 }
 
+fn show_launcher(app: &AppHandle) {
+    let window = app.get_window("main").expect("unable to find main window");
+    window.show().expect("unable to hide main window");
+    window
+        .unminimize()
+        .expect("unable to unminimize main window");
+    window
+        .set_focus()
+        .expect("unable to set focus to main window");
+}
+
 fn main() {
     let state = AppState {
         game_install_path: get_game_install_path(),
     };
 
+    let tray_menu = SystemTrayMenu::new()
+        .add_item(CustomMenuItem::new("show".to_string(), "TEM Launcher"))
+        .add_native_item(SystemTrayMenuItem::Separator)
+        .add_item(CustomMenuItem::new("quit".to_string(), "Quit"));
+
     tauri::Builder::default()
+        .system_tray(SystemTray::new().with_menu(tray_menu))
+        .on_system_tray_event(|app, event| match event {
+            SystemTrayEvent::LeftClick { .. } => {
+                show_launcher(app);
+            }
+            SystemTrayEvent::MenuItemClick { id, .. } => match id.as_str() {
+                "show" => {
+                    show_launcher(app);
+                }
+                "quit" => {
+                    let window = app.get_window("main").expect("unable to find main window");
+                    window.close().expect("unable to close main window");
+                }
+                _ => {}
+            },
+            _ => {}
+        })
         .manage(state)
         .invoke_handler(tauri::generate_handler![launch_config, console_execute])
+        .setup(|app| {
+            let tem_dll = app
+                .path_resolver()
+                .resolve_resource("mods/tem/tem.dll")
+                .expect("failed to resolve tem");
+
+            if !tem_dll.exists() {
+                // TODO: download latest release
+            }
+
+            println!("tem_dll {}", tem_dll.exists());
+
+            let xdead = app
+                .path_resolver()
+                .resolve_resource("mods/xdead/xdead.dll")
+                .expect("failed to resolve xdead");
+
+            if !xdead.exists() {
+                // TODO: download latest release
+            }
+
+            println!("xdead {}", xdead.exists());
+
+            Ok(())
+        })
+        .on_window_event(|event| match event.event() {
+            tauri::WindowEvent::CloseRequested { api, .. } => {
+                event.window().hide().unwrap();
+                api.prevent_close();
+            }
+            _ => {}
+        })
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }

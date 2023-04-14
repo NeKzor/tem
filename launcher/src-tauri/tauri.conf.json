@@ -24,6 +24,9 @@
       }
     },
     "bundle": {
+      "resources": [
+        "mods/*"
+      ],
       "active": true,
       "icon": [
         "icons/32x32.png",
@@ -49,6 +52,10 @@
         "width": 1280,
         "height": 620
       }
-    ]
+    ],
+    "systemTray": {
+      "iconPath": "icons/icon.png",
+      "iconAsTemplate": true
+    }
   }
 }
