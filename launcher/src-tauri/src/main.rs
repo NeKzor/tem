@@ -6,12 +6,14 @@
 
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
+use std::io::{Read, Write};
 use std::os::windows::prelude::OsStrExt;
 
 use serde::{Deserialize, Serialize};
 use tauri::{AppHandle, Manager};
 use tauri::{CustomMenuItem, SystemTray, SystemTrayEvent, SystemTrayMenu, SystemTrayMenuItem};
 
+const APP_USER_AGENT: &str = "TEM Launcher v0.1.0";
 const CON_PREFIX: &str = "[launcher]";
 const CONFIG_PATH: &str =
     "Documents\\Disney Interactive Studios\\Tron Evolution\\UnrealEngine3\\GridGame\\Config";
@@ -42,6 +44,42 @@ struct LauncherConfig {
     use_tem: bool,
     #[serde(rename = "useXDead")]
     use_xdead: bool,
+}
+
+#[derive(Deserialize, Debug)]
+#[allow(dead_code)]
+struct GitHubReleaseAsset {
+    url: String,
+    id: i64,
+    node_id: String,
+    name: String,
+    label: String,
+    content_type: String,
+    state: String,
+    size: i64,
+    download_count: i64,
+    created_at: String,
+    updated_at: String,
+    browser_download_url: String,
+}
+
+#[derive(Deserialize, Debug)]
+#[allow(dead_code)]
+struct GitHubRelease {
+    url: String,
+    assets_url: String,
+    upload_url: String,
+    html_url: String,
+    id: i64,
+    node_id: String,
+    tag_name: String,
+    target_commitish: String,
+    name: String,
+    draft: bool,
+    prerelease: bool,
+    created_at: String,
+    published_at: String,
+    assets: Vec<GitHubReleaseAsset>,
 }
 
 #[tauri::command]
@@ -82,7 +120,7 @@ fn rewrite_grid_engine_config(config: &LauncherConfig) {
     let config_path = format!("{user_profile}\\{CONFIG_PATH}");
 
     use std::fs;
-    use std::io::{BufRead, BufReader, BufWriter, Write};
+    use std::io::{BufRead, BufReader, BufWriter};
     use std::path::Path;
 
     let config_file_path = format!("{config_path}\\GridEngine.ini");
@@ -377,6 +415,85 @@ fn show_launcher(app: &AppHandle) {
         .expect("unable to set focus to main window");
 }
 
+async fn download_mod(github_release_url: &str, mod_files: Vec<&str>, mod_dir: std::path::PathBuf) {
+    std::fs::create_dir_all(&mod_dir).expect("unable to create mod dir");
+
+    let mut mod_release = mod_dir.clone();
+    mod_release.push("release.txt");
+
+    let mut release_version = String::new();
+
+    if let Ok(mut release_file) = std::fs::OpenOptions::new().read(true).open(&mod_release) {
+        release_file
+            .read_to_string(&mut release_version)
+            .expect("unable to read release file");
+    }
+
+    let client = reqwest::Client::builder()
+        .user_agent(APP_USER_AGENT)
+        .build()
+        .expect("unable to build http client");
+
+    let releases = client
+        .get(github_release_url)
+        .send()
+        .await
+        .expect("request to GitHub releases failed")
+        .json::<Vec<GitHubRelease>>()
+        .await
+        .expect("failed to deserialize json response of GitHub releases");
+
+    let allow_unstable_releases = true;
+    let Some(release) = releases.iter().find(|release| allow_unstable_releases || !release.prerelease) else {
+        println!("no release found");
+        return;
+    };
+
+    let Some(asset) = release.assets.iter().nth(0) else {
+        println!("no asset found");
+        return;
+    };
+
+    if release_version == asset.name {
+        println!("already using latest release");
+        return;
+    }
+
+    println!("updating to latest release");
+
+    let file = client
+        .get(&asset.browser_download_url)
+        .send()
+        .await
+        .expect("failed to download asset");
+
+    println!("downloaded latest asset {}", asset.name);
+
+    std::fs::OpenOptions::new()
+        .create(true)
+        .write(true)
+        .truncate(true)
+        .open(&mod_release)
+        .expect("unable to read or create release version")
+        .write_all(asset.name.as_bytes())
+        .expect("unable to write release version");
+
+    let reader = std::io::Cursor::new(file.bytes().await.expect("unable to read response"));
+
+    let mut zip = zip::ZipArchive::new(reader).expect("unable to create zip archive");
+
+    for file_name in mod_files {
+        if let Ok(mut file) = zip.by_name(file_name) {
+            let mut file_path = mod_dir.clone();
+            file_path.push(file_name);
+
+            let mut outfile = std::fs::File::create(file_path).expect("unable to create file");
+
+            std::io::copy(&mut file, &mut outfile).expect("unable to copy to to file");
+        }
+    }
+}
+
 fn main() {
     let state = AppState {
         game_install_path: get_game_install_path(),
@@ -408,27 +525,35 @@ fn main() {
         .manage(state)
         .invoke_handler(tauri::generate_handler![launch_config, console_execute])
         .setup(|app| {
-            let tem_dll = app
+            // TODO: read app config option on when to check for updates
+
+            let tem_dir = app
                 .path_resolver()
-                .resolve_resource("mods/tem/tem.dll")
-                .expect("failed to resolve tem");
+                .resolve_resource("mods/tem/")
+                .expect("failed to resolve tem dir");
 
-            if !tem_dll.exists() {
-                // TODO: download latest release
-            }
-
-            println!("tem_dll {}", tem_dll.exists());
-
-            let xdead = app
+            let xdead_dir = app
                 .path_resolver()
-                .resolve_resource("mods/xdead/xdead.dll")
-                .expect("failed to resolve xdead");
+                .resolve_resource("mods/xdead/")
+                .expect("failed to resolve xdead dir");
 
-            if !xdead.exists() {
-                // TODO: download latest release
-            }
+            tauri::async_runtime::spawn(async move {
+                download_mod(
+                    "https://api.github.com/repos/NeKzor/tem/releases",
+                    vec!["dinput8.dll", "patch.dat", "tem.dll"],
+                    tem_dir,
+                )
+                .await;
+            });
 
-            println!("xdead {}", xdead.exists());
+            tauri::async_runtime::spawn(async move {
+                download_mod(
+                    "https://api.github.com/repos/NeKzor/xdead/releases",
+                    vec!["xdead.dll"],
+                    xdead_dir,
+                )
+                .await;
+            });
 
             Ok(())
         })

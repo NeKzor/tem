@@ -5,5 +5,5 @@
  */
 
 fn main() {
-  tauri_build::build()
+    tauri_build::build()
 }
