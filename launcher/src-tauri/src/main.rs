@@ -19,6 +19,7 @@ const CONFIG_PATH: &str =
     "Documents\\Disney Interactive Studios\\Tron Evolution\\UnrealEngine3\\GridGame\\Config";
 const GAME_EXE: &str = "GridGame.exe";
 const SECUROM_BUFFER_SIZE: usize = 1723;
+const TEM_FILES: [&str; 3] = ["dinput8.dll", "patch.dat", "tem.dll"];
 
 struct AppState {
     game_install_path: String,
@@ -86,13 +87,13 @@ struct GitHubRelease {
 async fn launch_config(
     config: LauncherConfig,
     window: tauri::Window,
-    state: tauri::State<'_, AppState>,
+    app_handle: tauri::AppHandle,
 ) -> Result<(), ()> {
     println!("launching game with config: {}", config.name);
 
     rewrite_grid_engine_config(&config);
-    set_game_mods(&config, &state);
-    launch_game(&window, &state);
+    set_game_mods(&config, &app_handle);
+    launch_game(&window, &app_handle);
 
     Ok(())
 }
@@ -234,52 +235,75 @@ fn rewrite_grid_engine_config(config: &LauncherConfig) {
     }
 }
 
-fn set_game_mods(config: &LauncherConfig, state: &AppState) {
+fn set_game_mods(config: &LauncherConfig, app_handle: &tauri::AppHandle) {
     use std::path::Path;
 
-    let tem_game_path = format!("{}\\tem.dll", state.game_install_path);
-    let dinput8_game_path = format!("{}\\dinput8.dll", state.game_install_path);
-    let xdead_game_path = format!("{}\\xlive.dll", state.game_install_path);
+    let state = app_handle.state::<AppState>();
+    let tem_path = format!("{}\\tem.dll", state.game_install_path);
+    let xdead_path = format!("{}\\xlive.dll", state.game_install_path);
 
-    let tem_path = Path::new(tem_game_path.as_str());
-    let dinput8_path = Path::new(dinput8_game_path.as_str());
-    let xdead_path = Path::new(xdead_game_path.as_str());
+    let tem_mod = Path::new(tem_path.as_str());
+    let xdead_mod = Path::new(xdead_path.as_str());
 
     if config.use_tem {
-        if !tem_path.exists() {
-            // TODO: install tem.dll
-        }
-        if !dinput8_path.exists() {
-            // TODO: install dinput8.dll
+        if !tem_mod.exists() {
+            let tem_dir = app_handle
+                .path_resolver()
+                .resolve_resource("mods/tem/")
+                .expect("failed to resolve tem dir");
+
+            for file_name in TEM_FILES {
+                let mut tem_file = tem_dir.clone();
+                tem_file.push(file_name);
+
+                std::fs::copy(
+                    tem_file,
+                    Path::new(format!("{}\\{file_name}", state.game_install_path).as_str()),
+                )
+                .expect("unable to copy file");
+            }
         }
 
         if config.use_xdead {
-            if !xdead_path.exists() {
-                // TODO: install xlive.dll
+            if !xdead_mod.exists() {
+                let xdead_dir = app_handle
+                    .path_resolver()
+                    .resolve_resource("mods/xdead/")
+                    .expect("failed to resolve xdead dir");
+
+                let file_name = "xlive.dll";
+                let mut xdead_file = xdead_dir.clone();
+                xdead_file.push(file_name);
+
+                std::fs::copy(xdead_file, xdead_mod).expect("unable to copy file");
             }
         } else {
-            if xdead_path.exists() {
-                // TODO: remove xlive.dll
+            if xdead_mod.exists() {
+                std::fs::remove_file(xdead_mod).expect("unable to remove file");
             }
         }
     } else {
-        if tem_path.exists() {
-            // TODO: remove tem.dll
+        if tem_mod.exists() {
+            for file_name in TEM_FILES {
+                std::fs::remove_file(Path::new(
+                    format!("{}\\{file_name}", state.game_install_path).as_str(),
+                ))
+                .expect("unable to remove file");
+            }
         }
-        if dinput8_path.exists() {
-            // TODO: remove dinput8.dll
-        }
-        if xdead_path.exists() {
-            // TODO: remove xlive.dll
+        if xdead_mod.exists() {
+            std::fs::remove_file(xdead_mod).expect("unable to remove file");
         }
     }
 }
 
-fn launch_game(window: &tauri::Window, state: &AppState) {
+fn launch_game(window: &tauri::Window, app_handle: &AppHandle) {
     use windows::core::{PCSTR, PWSTR};
     use windows::Win32::Foundation::*;
     use windows::Win32::System::Memory::*;
     use windows::Win32::System::Threading::*;
+
+    let state = app_handle.state::<AppState>();
 
     println!("game is installed in {:#?}", state.game_install_path);
 
@@ -527,33 +551,33 @@ fn main() {
         .setup(|app| {
             // TODO: read app config option on when to check for updates
 
-            let tem_dir = app
-                .path_resolver()
-                .resolve_resource("mods/tem/")
-                .expect("failed to resolve tem dir");
+            // let tem_dir = app
+            //     .path_resolver()
+            //     .resolve_resource("mods/tem/")
+            //     .expect("failed to resolve tem dir");
 
-            let xdead_dir = app
-                .path_resolver()
-                .resolve_resource("mods/xdead/")
-                .expect("failed to resolve xdead dir");
+            // let xdead_dir = app
+            //     .path_resolver()
+            //     .resolve_resource("mods/xdead/")
+            //     .expect("failed to resolve xdead dir");
 
-            tauri::async_runtime::spawn(async move {
-                download_mod(
-                    "https://api.github.com/repos/NeKzor/tem/releases",
-                    vec!["dinput8.dll", "patch.dat", "tem.dll"],
-                    tem_dir,
-                )
-                .await;
-            });
+            // tauri::async_runtime::spawn(async move {
+            //     download_mod(
+            //         "https://api.github.com/repos/NeKzor/tem/releases",
+            //         TEM_FILES.into(),
+            //         tem_dir,
+            //     )
+            //     .await;
+            // });
 
-            tauri::async_runtime::spawn(async move {
-                download_mod(
-                    "https://api.github.com/repos/NeKzor/xdead/releases",
-                    vec!["xdead.dll"],
-                    xdead_dir,
-                )
-                .await;
-            });
+            // tauri::async_runtime::spawn(async move {
+            //     download_mod(
+            //         "https://api.github.com/repos/NeKzor/xdead/releases",
+            //         vec!["xlive.dll"],
+            //         xdead_dir,
+            //     )
+            //     .await;
+            // });
 
             Ok(())
         })
