@@ -10,8 +10,10 @@ use std::io::{Read, Write};
 use std::os::windows::prelude::OsStrExt;
 
 use serde::{Deserialize, Serialize};
-use tauri::{AppHandle, Manager};
-use tauri::{CustomMenuItem, SystemTray, SystemTrayEvent, SystemTrayMenu, SystemTrayMenuItem};
+use tauri::{
+    AppHandle, CustomMenuItem, Manager, SystemTray, SystemTrayEvent, SystemTrayMenu,
+    SystemTrayMenuItem, Window, WindowEvent,
+};
 
 const APP_USER_AGENT: &str = "TEM Launcher v0.1.0";
 const CON_PREFIX: &str = "[launcher]";
@@ -28,6 +30,50 @@ struct AppState {
 #[derive(Clone, serde::Serialize)]
 struct EventPayload {
     message: String,
+}
+
+#[derive(Serialize, Deserialize, Debug)]
+enum SortOptionDirection {
+    #[serde(rename = "asc")]
+    Ascending,
+    #[serde(rename = "desc")]
+    Descending,
+}
+
+#[derive(Serialize, Deserialize, Debug)]
+struct SortOption {
+    key: String,
+    direction: SortOptionDirection,
+}
+
+#[derive(Serialize, Deserialize, Debug)]
+enum SortOrderOption {
+    #[serde(rename = "createdAt-asc")]
+    CreatedAtAsc,
+    #[serde(rename = "createdAt-desc")]
+    CreatedAtDesc,
+    #[serde(rename = "name-asc")]
+    NameAscending,
+    #[serde(rename = "name-desc")]
+    NameDescending,
+}
+
+#[derive(Serialize, Deserialize, Debug)]
+enum CheckForUpdatesOption {
+    #[serde(rename = "disabled")]
+    Disabled,
+    #[serde(rename = "on-launcher-start")]
+    OnLauncherStart,
+    #[serde(rename = "on-launcher-exit")]
+    OnLauncherExit,
+}
+
+#[derive(Serialize, Deserialize, Debug)]
+#[serde(rename_all = "camelCase")]
+struct AppConfig {
+    configs: Vec<LauncherConfig>,
+    sort: SortOption,
+    check_for_updates: CheckForUpdatesOption,
 }
 
 #[derive(Serialize, Deserialize, Debug)]
@@ -86,14 +132,14 @@ struct GitHubRelease {
 #[tauri::command]
 async fn launch_config(
     config: LauncherConfig,
-    window: tauri::Window,
-    app_handle: tauri::AppHandle,
+    window: Window,
+    app: AppHandle,
 ) -> Result<(), ()> {
     println!("launching game with config: {}", config.name);
 
     rewrite_grid_engine_config(&config);
-    set_game_mods(&config, &app_handle);
-    launch_game(&window, &app_handle);
+    set_game_mods(&config, &app);
+    launch_game(&window, &app);
 
     Ok(())
 }
@@ -235,10 +281,10 @@ fn rewrite_grid_engine_config(config: &LauncherConfig) {
     }
 }
 
-fn set_game_mods(config: &LauncherConfig, app_handle: &tauri::AppHandle) {
+fn set_game_mods(config: &LauncherConfig, app: &AppHandle) {
     use std::path::Path;
 
-    let state = app_handle.state::<AppState>();
+    let state = app.state::<AppState>();
     let tem_path = format!("{}\\tem.dll", state.game_install_path);
     let xdead_path = format!("{}\\xlive.dll", state.game_install_path);
 
@@ -247,7 +293,7 @@ fn set_game_mods(config: &LauncherConfig, app_handle: &tauri::AppHandle) {
 
     if config.use_tem {
         if !tem_mod.exists() {
-            let tem_dir = app_handle
+            let tem_dir = app
                 .path_resolver()
                 .resolve_resource("mods/tem/")
                 .expect("failed to resolve tem dir");
@@ -266,7 +312,7 @@ fn set_game_mods(config: &LauncherConfig, app_handle: &tauri::AppHandle) {
 
         if config.use_xdead {
             if !xdead_mod.exists() {
-                let xdead_dir = app_handle
+                let xdead_dir = app
                     .path_resolver()
                     .resolve_resource("mods/xdead/")
                     .expect("failed to resolve xdead dir");
@@ -297,13 +343,13 @@ fn set_game_mods(config: &LauncherConfig, app_handle: &tauri::AppHandle) {
     }
 }
 
-fn launch_game(window: &tauri::Window, app_handle: &AppHandle) {
+fn launch_game(window: &Window, app: &AppHandle) {
     use windows::core::{PCSTR, PWSTR};
     use windows::Win32::Foundation::*;
     use windows::Win32::System::Memory::*;
     use windows::Win32::System::Threading::*;
 
-    let state = app_handle.state::<AppState>();
+    let state = app.state::<AppState>();
 
     println!("game is installed in {:#?}", state.game_install_path);
 
@@ -518,6 +564,22 @@ async fn download_mod(github_release_url: &str, mod_files: Vec<&str>, mod_dir: s
     }
 }
 
+fn load_config(app: &AppHandle) -> Result<AppConfig, std::io::Error> {
+    let mut app_local_data = app
+        .path_resolver()
+        .app_local_data_dir()
+        .expect("failed to resolve local data dir");
+
+    app_local_data.push("config.json");
+
+    let config_file = std::fs::File::open(app_local_data)?;
+
+    Result::Ok(
+        serde_json::from_reader(std::io::BufReader::new(config_file))
+            .expect("unable to deserialize app config"),
+    )
+}
+
 fn main() {
     let state = AppState {
         game_install_path: get_game_install_path(),
@@ -541,6 +603,41 @@ fn main() {
                 "quit" => {
                     let window = app.get_window("main").expect("unable to find main window");
                     window.close().expect("unable to close main window");
+
+                    if let Ok(config) = load_config(&app) {
+                        match config.check_for_updates {
+                            CheckForUpdatesOption::OnLauncherExit => {
+                                let tem_dir = app
+                                    .path_resolver()
+                                    .resolve_resource("mods/tem/")
+                                    .expect("failed to resolve tem dir");
+
+                                let xdead_dir = app
+                                    .path_resolver()
+                                    .resolve_resource("mods/xdead/")
+                                    .expect("failed to resolve xdead dir");
+
+                                tauri::async_runtime::block_on(async move {
+                                    download_mod(
+                                        "https://api.github.com/repos/NeKzor/tem/releases",
+                                        TEM_FILES.into(),
+                                        tem_dir,
+                                    )
+                                    .await;
+                                });
+
+                                tauri::async_runtime::block_on(async move {
+                                    download_mod(
+                                        "https://api.github.com/repos/NeKzor/xdead/releases",
+                                        vec!["xlive.dll"],
+                                        xdead_dir,
+                                    )
+                                    .await;
+                                });
+                            }
+                            _ => {}
+                        }
+                    }
                 }
                 _ => {}
             },
@@ -549,40 +646,45 @@ fn main() {
         .manage(state)
         .invoke_handler(tauri::generate_handler![launch_config, console_execute])
         .setup(|app| {
-            // TODO: read app config option on when to check for updates
+            if let Ok(config) = load_config(&app.app_handle()) {
+                match config.check_for_updates {
+                    CheckForUpdatesOption::OnLauncherStart => {
+                        let tem_dir = app
+                            .path_resolver()
+                            .resolve_resource("mods/tem/")
+                            .expect("failed to resolve tem dir");
 
-            // let tem_dir = app
-            //     .path_resolver()
-            //     .resolve_resource("mods/tem/")
-            //     .expect("failed to resolve tem dir");
+                        let xdead_dir = app
+                            .path_resolver()
+                            .resolve_resource("mods/xdead/")
+                            .expect("failed to resolve xdead dir");
 
-            // let xdead_dir = app
-            //     .path_resolver()
-            //     .resolve_resource("mods/xdead/")
-            //     .expect("failed to resolve xdead dir");
+                        tauri::async_runtime::spawn(async move {
+                            download_mod(
+                                "https://api.github.com/repos/NeKzor/tem/releases",
+                                TEM_FILES.into(),
+                                tem_dir,
+                            )
+                            .await;
+                        });
 
-            // tauri::async_runtime::spawn(async move {
-            //     download_mod(
-            //         "https://api.github.com/repos/NeKzor/tem/releases",
-            //         TEM_FILES.into(),
-            //         tem_dir,
-            //     )
-            //     .await;
-            // });
-
-            // tauri::async_runtime::spawn(async move {
-            //     download_mod(
-            //         "https://api.github.com/repos/NeKzor/xdead/releases",
-            //         vec!["xlive.dll"],
-            //         xdead_dir,
-            //     )
-            //     .await;
-            // });
+                        tauri::async_runtime::spawn(async move {
+                            download_mod(
+                                "https://api.github.com/repos/NeKzor/xdead/releases",
+                                vec!["xlive.dll"],
+                                xdead_dir,
+                            )
+                            .await;
+                        });
+                    }
+                    _ => {}
+                }
+            }
 
             Ok(())
         })
         .on_window_event(|event| match event.event() {
-            tauri::WindowEvent::CloseRequested { api, .. } => {
+            WindowEvent::CloseRequested { api, .. } => {
                 event.window().hide().unwrap();
                 api.prevent_close();
             }

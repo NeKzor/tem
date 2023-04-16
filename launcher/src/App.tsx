@@ -320,6 +320,7 @@ function App() {
 
                     setSort(config.sort);
                     setSortOrder([config.sort.key, config.sort.direction].join('-') as SortOrderOption);
+                    setCheckForUpdates(config.checkForUpdates);
                 }
             });
         }
