@@ -8,28 +8,32 @@
 
 use std::io::{Read, Write};
 use std::os::windows::prelude::OsStrExt;
+use std::process::Command;
 
 use serde::{Deserialize, Serialize};
 use tauri::{
-    AppHandle, CustomMenuItem, Manager, SystemTray, SystemTrayEvent, SystemTrayMenu,
+    AppHandle, CustomMenuItem, Manager, State, SystemTray, SystemTrayEvent, SystemTrayMenu,
     SystemTrayMenuItem, Window, WindowEvent,
 };
 
-const APP_USER_AGENT: &str = "TEM Launcher v0.1.0";
-const CON_PREFIX: &str = "[launcher]";
+const APP_USER_AGENT: &str = concat!("TEM Launcher ", env!("CARGO_PKG_VERSION"));
 const CONFIG_PATH: &str =
-    "Documents\\Disney Interactive Studios\\Tron Evolution\\UnrealEngine3\\GridGame\\Config";
+    r"Documents\Disney Interactive Studios\Tron Evolution\UnrealEngine3\GridGame\Config";
 const GAME_EXE: &str = "GridGame.exe";
 const SECUROM_BUFFER_SIZE: usize = 1723;
 const TEM_FILES: [&str; 3] = ["dinput8.dll", "patch.dat", "tem.dll"];
 
-struct AppState {
-    game_install_path: String,
+macro_rules! log {
+    ($window:ident, $($arg:tt)*) => {{
+        let message = format!($($arg)*);
+        println!("{}" , message);
+        $window.emit("log", message).unwrap();
+    }};
 }
 
-#[derive(Clone, serde::Serialize)]
-struct EventPayload {
-    message: String,
+struct AppState {
+    game_install_path: String,
+    game_config_path: String,
 }
 
 #[derive(Serialize, Deserialize, Debug)]
@@ -130,14 +134,8 @@ struct GitHubRelease {
 }
 
 #[tauri::command]
-async fn launch_config(
-    config: LauncherConfig,
-    window: Window,
-    app: AppHandle,
-) -> Result<(), ()> {
-    println!("launching game with config: {}", config.name);
-
-    rewrite_grid_engine_config(&config);
+async fn launch_config(config: LauncherConfig, window: Window, app: AppHandle) -> Result<(), ()> {
+    rewrite_grid_engine_config(&window, &app, &config);
     set_game_mods(&config, &app);
     launch_game(&window, &app);
 
@@ -145,33 +143,48 @@ async fn launch_config(
 }
 
 #[tauri::command]
-fn console_execute(text: String) -> String {
+fn console_execute(text: String, state: State<'_, AppState>) -> String {
     let text = text.trim();
     let (command, args) = text
         .split_once(" ")
         .or(Some((text.as_ref(), "")))
         .expect("failed to split command");
 
-    match command {
-        "echo" => format!("{CON_PREFIX} {args}"),
-        _ => format!("{CON_PREFIX} unknown command: {command}"),
+    match command.to_lowercase().as_str() {
+        "echo" => args.to_string(),
+        "ua" | "user-agent" => APP_USER_AGENT.into(),
+        "game" => {
+            let folder = state.game_install_path.clone();
+
+            if let Ok(..) = Command::new("explorer").arg(&folder).spawn() {
+                folder
+            } else {
+                "Unable to open game folder".into()
+            }
+        }
+        "config" => {
+            let folder = state.game_config_path.clone();
+
+            if let Ok(..) = Command::new("explorer").args(&[&folder]).spawn() {
+                folder
+            } else {
+                "Unable to open config folder".into()
+            }
+        }
+        "help" => "Commands: user-agent, game, config".into(),
+        _ => format!("Unknown command: {command}"),
     }
 }
 
-fn rewrite_grid_engine_config(config: &LauncherConfig) {
-    let user_profile = std::env::vars()
-        .find(|(key, _)| key == "USERPROFILE")
-        .expect("env var USERPROFILE not set")
-        .1;
-
-    let config_path = format!("{user_profile}\\{CONFIG_PATH}");
-
+fn rewrite_grid_engine_config(window: &Window, app: &AppHandle, config: &LauncherConfig) {
     use std::fs;
     use std::io::{BufRead, BufReader, BufWriter};
     use std::path::Path;
 
-    let config_file_path = format!("{config_path}\\GridEngine.ini");
-    let backup_file_path = format!("{config_path}\\GridEngine.backup.ini");
+    let state = app.state::<AppState>();
+
+    let config_file_path = format!("{}\\GridEngine.ini", state.game_config_path);
+    let backup_file_path = format!("{}\\GridEngine.backup.ini", state.game_config_path);
 
     if !Path::new(&backup_file_path).exists() {
         fs::copy(&config_file_path, &backup_file_path).expect("failed to create a backup file");
@@ -198,7 +211,7 @@ fn rewrite_grid_engine_config(config: &LauncherConfig) {
 
     for line in reader.lines() {
         let Ok(line) = line else {
-            println!("error at line {line_index}");
+            log!(window, "Error at line {line_index}");
             line_index += 1;
             continue;
         };
@@ -219,17 +232,18 @@ fn rewrite_grid_engine_config(config: &LauncherConfig) {
             if is_system_settings {
                 match key {
                     "ResX" => {
-                        println!("Set ResX to {}", config.window_width);
+                        log!(window, "Set ResX to {}", config.window_width);
                         write!(writer, "ResX={}\r\n", config.window_width).unwrap();
                         continue;
                     }
                     "ResY" => {
-                        println!("Set ResY to {}", config.window_height);
+                        log!(window, "Set ResY to {}", config.window_height);
                         write!(writer, "ResY={}\r\n", config.window_height).unwrap();
                         continue;
                     }
                     "Fullscreen" => {
-                        println!(
+                        log!(
+                            window,
                             "Set Fullscreen to {}",
                             if config.is_fullscreen {
                                 "True"
@@ -253,7 +267,8 @@ fn rewrite_grid_engine_config(config: &LauncherConfig) {
                 }
             } else if is_fullscreen_movie {
                 if text.starts_with(";StartupMovies") || text.starts_with("StartupMovies") {
-                    println!(
+                    log!(
+                        window,
                         "{} StartupMovies={value}",
                         if config.disable_splash_screen {
                             "Disabled"
@@ -351,7 +366,11 @@ fn launch_game(window: &Window, app: &AppHandle) {
 
     let state = app.state::<AppState>();
 
-    println!("game is installed in {:#?}", state.game_install_path);
+    log!(
+        window,
+        "Game is installed in {:#?}",
+        state.game_install_path
+    );
 
     let file = format!("-=[SMS_{GAME_EXE}_SMS]=-\0");
 
@@ -367,17 +386,17 @@ fn launch_game(window: &Window, app: &AppHandle) {
     };
 
     let Ok(handle) = result else {
-        println!("Could not create file mapping object {:#?}", result.err());
+        log!(window, "Could not create file mapping object {:#?}", result.err());
         return;
     };
 
     let result = unsafe { MapViewOfFile(handle, FILE_MAP_ALL_ACCESS, 0, 0, SECUROM_BUFFER_SIZE) };
 
     if result.is_ok() {
-        println!("created file mapping");
+        log!(window, "Created file mapping");
 
         let cmd = format!("{}\\{GAME_EXE}", state.game_install_path);
-        println!("launching {cmd}");
+        log!(window, "Launching {cmd}");
 
         let si = STARTUPINFOW {
             cb: std::mem::size_of::<STARTUPINFOW>() as u32,
@@ -391,7 +410,7 @@ fn launch_game(window: &Window, app: &AppHandle) {
             .collect::<Vec<u16>>();
 
         unsafe {
-            let result = CreateProcessW(
+            CreateProcessW(
                 None,
                 PWSTR(cmd.as_mut_ptr()),
                 None,
@@ -403,39 +422,23 @@ fn launch_game(window: &Window, app: &AppHandle) {
                 &si,
                 &mut pi,
             );
-
-            println!("CreateProcessW = {:#?}", result);
         }
-
-        println!("hProcess {:#?}", pi.hProcess);
-        println!("hThread {:#?}", pi.hThread);
-        println!("dwProcessId {:#?}", pi.dwProcessId);
-        println!("dwThreadId {:#?}", pi.dwThreadId);
 
         window
             .emit("game-launched", true)
             .expect("game launched event");
 
         unsafe {
-            let result = WaitForSingleObject(pi.hProcess, INFINITE);
-            println!("WaitForSingleObject = {:#?}", result);
+            WaitForSingleObject(pi.hProcess, INFINITE);
         }
-
-        // let mut child = Command::new(cmd)
-        //     .spawn()
-        //     .expect(format!("failed to start {GAME_EXE}").as_str());
-
-        // child
-        //     .wait()
-        //     .expect(format!("failed to wait on {GAME_EXE}").as_str());
 
         window
             .emit("game-launched", false)
             .expect("game exited event");
 
-        println!("game exited");
+        log!(window, "Game exited");
     } else {
-        println!("Could not map view of file {:#?}", result.err());
+        log!(window, "Could not map view of file {:#?}", result.err());
     }
 
     unsafe {
@@ -483,6 +486,15 @@ fn show_launcher(app: &AppHandle) {
     window
         .set_focus()
         .expect("unable to set focus to main window");
+}
+
+fn get_game_config_path() -> String {
+    let user_profile = std::env::vars()
+        .find(|(key, _)| key == "USERPROFILE")
+        .expect("env var USERPROFILE not set")
+        .1;
+
+    format!("{user_profile}\\{CONFIG_PATH}")
 }
 
 async fn download_mod(github_release_url: &str, mod_files: Vec<&str>, mod_dir: std::path::PathBuf) {
@@ -583,6 +595,7 @@ fn load_config(app: &AppHandle) -> Result<AppConfig, std::io::Error> {
 fn main() {
     let state = AppState {
         game_install_path: get_game_install_path(),
+        game_config_path: get_game_config_path(),
     };
 
     let tray_menu = SystemTrayMenu::new()

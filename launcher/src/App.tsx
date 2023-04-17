@@ -153,6 +153,8 @@ const saveConfig = async (config: AppConfig) => {
         });
 };
 
+const now = () => new Date().toISOString().replace('T', ' ').slice(0, -1);
+
 function App() {
     const [consoleBuffer, setConsoleBuffer] = useState<string[]>([]);
     const [command, setCommand] = useState('');
@@ -325,7 +327,7 @@ function App() {
             });
 
             const toVersion = (release: string) => {
-                release = release.replace(/\.zip$/, '');
+                release = release.replace(/^(tem|xdead)\-/, '').replace(/\.zip$/, '');
                 return release ? release : 'unknown version';
             };
 
@@ -346,27 +348,26 @@ function App() {
             setGameLaunched(event.payload);
         });
 
+        const unlistenLog = listen('log', (event: event.Event<string>) => {
+            console.log({ event });
+            setConsoleBuffer((buffer) => [...buffer, `[${now()}] ${event.payload}`]);
+        });
+
         console.log('initialized');
 
         return () => {
-            unlistenGameLaunched.then((unlisten) => {
-                unlisten();
+            Promise.all([unlistenGameLaunched, unlistenLog]).then((unlistenAll) => {
+                unlistenAll.forEach((unlisten) => unlisten());
                 console.log('uninitialized');
             });
         };
     }, []);
 
-    // useEffect(() => {
-    //     invoke('console_buffer')
-    //         .then((newConsoleBuffer) => setConsoleBuffer([...consoleBuffer, ...(newConsoleBuffer as string[])]))
-    //         .catch((error) => setConsoleBuffer([...consoleBuffer, error as string]));
-    // }, [setConsoleBuffer]);
-
     const onClickExecute = useCallback(() => {
         const text = command;
         invoke('console_execute', { text })
-            .then((line) => setConsoleBuffer([...consoleBuffer, `> ${text}`, line as string]))
-            .catch((error) => setConsoleBuffer([...consoleBuffer, `> ${text}`, error as string]));
+            .then((line) => setConsoleBuffer([...consoleBuffer, `[${now()}] > ${text}`, `[${now()}] ${line}`]))
+            .catch((error) => setConsoleBuffer([...consoleBuffer, `[${now()}] > ${text}`, `[${now()}] ${error}`]));
         setCommand('');
     }, [setCommand, command]);
 
