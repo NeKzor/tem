@@ -725,6 +725,7 @@ function App() {
                                 <Textarea
                                     value={consoleBuffer.join('\n')}
                                     className="!border-t-blue-gray-200 focus:!border-t-blue-500 h-[380px]"
+                                    style={{ fontFamily: 'Consolas' }}
                                     labelProps={{
                                         className: 'before:content-none after:content-none',
                                     }}
@@ -736,6 +737,7 @@ function App() {
                                     value={command}
                                     onChange={onChangeCommand}
                                     className="!border-t-blue-gray-200 focus:!border-t-blue-500"
+                                    style={{ fontFamily: 'Consolas' }}
                                     labelProps={{
                                         className: 'before:content-none after:content-none',
                                     }}

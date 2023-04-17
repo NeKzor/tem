@@ -734,6 +734,9 @@ video {
 .h-\[110px\] {
   height: 110px;
 }
+.h-\[380px\] {
+  height: 380px;
+}
 .h-\[58px\] {
   height: 58px;
 }
@@ -749,15 +752,6 @@ video {
 }
 .h-screen {
   height: 100vh;
-}
-.h-\[70vh\] {
-  height: 70vh;
-}
-.h-\[60vh\] {
-  height: 60vh;
-}
-.h-\[380px\] {
-  height: 380px;
 }
 .max-h-96 {
   max-height: 24rem;
