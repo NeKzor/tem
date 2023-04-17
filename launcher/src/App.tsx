@@ -323,6 +323,22 @@ function App() {
                     setCheckForUpdates(config.checkForUpdates);
                 }
             });
+
+            const toVersion = (release: string) => {
+                release = release.replace(/\.zip$/, '');
+                return release ? release : 'unknown version';
+            };
+
+            // TODO: update once we downloaded a new version
+            readTextFile('mods/tem/release.txt', { dir: BaseDirectory.Resource })
+                .then((release) => setMods((mods) => ({ ...mods, tem: { ...mods.tem, version: toVersion(release) } })))
+                .catch(console.error);
+
+            readTextFile('mods/xdead/release.txt', { dir: BaseDirectory.Resource })
+                .then((release) =>
+                    setMods((mods) => ({ ...mods, xdead: { ...mods.xdead, version: toVersion(release) } })),
+                )
+                .catch(console.error);
         }
 
         const unlistenGameLaunched = listen('game-launched', (event: event.Event<boolean>) => {

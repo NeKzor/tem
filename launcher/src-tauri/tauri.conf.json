@@ -16,7 +16,10 @@
       "fs": {
         "readFile": true,
         "writeFile": true,
-        "scope": ["$APPLOCALDATA/*"]
+        "scope": [
+          "$APPLOCALDATA/config.json",
+          "$RESOURCE/mods/*/release.txt"
+        ]
       },
       "shell": {
         "all": false,
