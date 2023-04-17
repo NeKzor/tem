@@ -723,7 +723,7 @@ function App() {
                             <div className="flex pb-2">
                                 <Textarea
                                     value={consoleBuffer.join('\n')}
-                                    className="!border-t-blue-gray-200 focus:!border-t-blue-500 h-[60vh]"
+                                    className="!border-t-blue-gray-200 focus:!border-t-blue-500 h-[380px]"
                                     labelProps={{
                                         className: 'before:content-none after:content-none',
                                     }}
