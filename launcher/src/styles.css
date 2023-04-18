@@ -753,6 +753,9 @@ video {
 .h-screen {
   height: 100vh;
 }
+.h-\[385px\] {
+  height: 385px;
+}
 .max-h-96 {
   max-height: 24rem;
 }
@@ -1235,6 +1238,10 @@ video {
 }
 .border-t-transparent {
   border-top-color: transparent;
+}
+.\!border-t-gray-200 {
+  --tw-border-opacity: 1 !important;
+  border-top-color: rgb(238 238 238 / var(--tw-border-opacity)) !important;
 }
 .bg-amber-500 {
   --tw-bg-opacity: 1;
@@ -1776,6 +1783,9 @@ video {
 }
 .font-sans {
   font-family: Roboto, sans-serif;
+}
+.font-\[\'Consolas\'\] {
+  font-family: 'Consolas';
 }
 .\!text-\[11px\] {
   font-size: 11px !important;
@@ -3366,12 +3376,24 @@ video {
   --tw-border-opacity: 1;
   border-color: rgb(255 235 59 / var(--tw-border-opacity));
 }
+.focus\:\!border-gray-500:focus {
+  --tw-border-opacity: 1 !important;
+  border-color: rgb(158 158 158 / var(--tw-border-opacity)) !important;
+}
 .focus\:\!border-t-blue-500:focus {
   --tw-border-opacity: 1 !important;
   border-top-color: rgb(33 150 243 / var(--tw-border-opacity)) !important;
 }
 .focus\:border-t-transparent:focus {
   border-top-color: transparent;
+}
+.focus\:\!border-t-gray-500:focus {
+  --tw-border-opacity: 1 !important;
+  border-top-color: rgb(158 158 158 / var(--tw-border-opacity)) !important;
+}
+.focus\:\!border-t-green-500:focus {
+  --tw-border-opacity: 1 !important;
+  border-top-color: rgb(76 175 80 / var(--tw-border-opacity)) !important;
 }
 .focus\:bg-blue-gray-50:focus {
   --tw-bg-opacity: 1;

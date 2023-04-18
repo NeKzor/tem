@@ -4,7 +4,7 @@
  * SPDX-License-Identifier: MIT
  */
 
-import { createElement, useCallback, useEffect, useRef, useState } from 'react';
+import { createElement, useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { invoke } from '@tauri-apps/api/tauri';
 import { listen } from '@tauri-apps/api/event';
 import {
@@ -49,6 +49,7 @@ import { event } from '@tauri-apps/api';
 
 const configFile = 'config.json';
 const maxConfigsAllowed = 4;
+const maxConsoleLines = 200;
 
 interface LauncherConfig {
     name: string;
@@ -155,6 +156,16 @@ const saveConfig = async (config: AppConfig) => {
 
 const now = () => new Date().toISOString().replace('T', ' ').slice(0, -1);
 
+const appendBuffer = (buffer: string[], ...lines: string[]) => {
+    if (buffer.length >= maxConsoleLines) {
+        const newBuffer = buffer.slice(lines.length);
+        newBuffer.push(...lines);
+        return newBuffer;
+    }
+
+    return [...buffer, ...lines];
+};
+
 function App() {
     const [consoleBuffer, setConsoleBuffer] = useState<string[]>([]);
     const [command, setCommand] = useState('');
@@ -171,6 +182,7 @@ function App() {
     const [shouldSaveConfig, setShouldSaveConfig] = useState(false);
     const [gameLaunched, setGameLaunched] = useState(false);
     const nameRef = useRef<HTMLInputElement>(null);
+    const consoleRef = useRef<HTMLInputElement>(null);
 
     const onClickLaunch = (config: LauncherConfig) => {
         setGameLaunched(true);
@@ -226,6 +238,7 @@ function App() {
     );
 
     const isEdit = config.createdAt !== 0;
+    const commandTrimmed = command.trim();
 
     const onClickCloseEditDialog = useCallback(() => {
         setEditDialog(false);
@@ -350,7 +363,7 @@ function App() {
 
         const unlistenLog = listen('log', (event: event.Event<string>) => {
             console.log({ event });
-            setConsoleBuffer((buffer) => [...buffer, `[${now()}] ${event.payload}`]);
+            setConsoleBuffer((buffer) => appendBuffer(buffer, `[${now()}] ${event.payload}`));
         });
 
         console.log('initialized');
@@ -363,11 +376,23 @@ function App() {
         };
     }, []);
 
+    useLayoutEffect(() => {
+        if (consoleRef.current?.firstElementChild) {
+            consoleRef.current.firstElementChild.scrollTop = consoleRef.current.firstElementChild.scrollHeight;
+        }
+    }, [consoleBuffer]);
+
     const onClickExecute = useCallback(() => {
         const text = command;
+
+        const updateBuffer = (line: unknown) => {
+            setConsoleBuffer((buffer) => appendBuffer(buffer, `[${now()}] > ${text}`, `[${now()}] ${line}`));
+        };
+
         invoke('console_execute', { text })
-            .then((line) => setConsoleBuffer([...consoleBuffer, `[${now()}] > ${text}`, `[${now()}] ${line}`]))
-            .catch((error) => setConsoleBuffer([...consoleBuffer, `[${now()}] > ${text}`, `[${now()}] ${error}`]));
+            .then(updateBuffer)
+            .catch(updateBuffer);
+
         setCommand('');
     }, [setCommand, command]);
 
@@ -723,9 +748,9 @@ function App() {
                         <TabPanel key="console" value="console">
                             <div className="flex pb-2">
                                 <Textarea
+                                    ref={consoleRef}
                                     value={consoleBuffer.join('\n')}
-                                    className="!border-t-blue-gray-200 focus:!border-t-blue-500 h-[380px]"
-                                    style={{ fontFamily: 'Consolas' }}
+                                    className="!border-t-blue-gray-200 focus:!border-t-blue-500 h-[385px] font-['Consolas']"
                                     labelProps={{
                                         className: 'before:content-none after:content-none',
                                     }}
@@ -736,20 +761,19 @@ function App() {
                                 <Input
                                     value={command}
                                     onChange={onChangeCommand}
-                                    className="!border-t-blue-gray-200 focus:!border-t-blue-500"
-                                    style={{ fontFamily: 'Consolas' }}
+                                    className="!border-t-blue-gray-200 focus:!border-t-blue-500 font-['Consolas']"
                                     labelProps={{
                                         className: 'before:content-none after:content-none',
                                     }}
                                     containerProps={{
                                         className: 'min-w-0',
                                     }}
-                                    onKeyDown={onKeyDownCommand}
+                                    onKeyDown={commandTrimmed ? onKeyDownCommand : undefined}
                                 />
                                 <Button
                                     size="sm"
-                                    color={command ? 'blue' : 'blue-gray'}
-                                    disabled={!command}
+                                    color={commandTrimmed ? 'blue' : 'blue-gray'}
+                                    disabled={!commandTrimmed}
                                     className="!absolute right-1 top-1 rounded"
                                     onClick={onClickExecute}
                                 >
