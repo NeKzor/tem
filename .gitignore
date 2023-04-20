@@ -1,8 +1,9 @@
 .vscode/
-*.dll
-*.exe
+launcher/dist/
 scripts/
 sdk/
+*.dll
+*.exe
 CHECKPT
 
 ## Ignore Visual Studio temporary files, build results, and
