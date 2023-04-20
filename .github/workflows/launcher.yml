@@ -1,0 +1,36 @@
+name: launcher
+
+on:
+  push:
+    branches: [ "master", "launcher-ui" ]
+    paths:
+    - 'launcher/src/**'
+    - 'launcher/src-tauri/**'
+    - '!**/README.md'
+  pull_request:
+    branches: [ "master" ]
+    paths:
+    - 'launcher/src/**'
+    - 'launcher/src-tauri/**'
+    - '!**/README.md'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: windows-latest
+    
+    if: "!contains(github.event.head_commit.message, '[ci skip]')"
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Install
+        run: npm install
+        working-directory: launcher
+
+      - name: Build
+        run: npm run tauri -- build
+        working-directory: launcher
