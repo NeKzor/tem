@@ -1,5 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
-import { invoke } from '@tauri-apps/api/tauri';
+import { useCallback, useContext, useEffect, useRef, useState } from 'react';
 import { listen } from '@tauri-apps/api/event';
 import {
     Button,
@@ -23,41 +22,12 @@ import {
     Switch,
 } from '@material-tailwind/react';
 import { Bars3Icon, PlusIcon, PencilIcon, TrashIcon, XMarkIcon } from '@heroicons/react/24/solid';
-import { readTextFile, writeTextFile, BaseDirectory } from '@tauri-apps/api/fs';
+import { readTextFile, BaseDirectory } from '@tauri-apps/api/fs';
 import { event } from '@tauri-apps/api';
-import { AppConfig, LauncherConfig, LauncherMods, SortOption, SortOrderOption } from '../Types';
+import { LauncherConfig, LauncherMods, SortOption, SortOrderOption, createLauncherConfig, defaultMods } from '../Types';
+import AppState, { DispatchAction } from '../AppState';
 
-const configFile = 'config.json';
 const maxConfigsAllowed = 4;
-
-const createLauncherConfig = (data?: Partial<LauncherConfig>): LauncherConfig => {
-    return Object.assign<LauncherConfig, Partial<LauncherConfig> | undefined>(
-        {
-            name: '',
-            createdAt: 0,
-            modifiedAt: 0,
-            windowWidth: window.screen.width,
-            windowHeight: window.screen.height,
-            isFullscreen: true,
-            disableSplashScreen: true,
-            isDefault: false,
-            useTEM: true,
-            useXDead: false,
-        },
-        data,
-    );
-};
-
-export const defaultMods: LauncherMods = {
-    tem: {
-        name: 'TEM',
-        version: 'unknown version',
-    },
-    xdead: {
-        name: 'XDead',
-        version: 'unknown version',
-    },
-};
 
 const getSorter =
     ({ key, direction }: SortOption) =>
@@ -77,70 +47,79 @@ const getSorter =
         return 0;
     };
 
-const loadConfig = async () => {
-    return await readTextFile(configFile, { dir: BaseDirectory.AppLocalData })
-        .then((text) => JSON.parse(text) as AppConfig)
-        .catch((err) => {
-            console.log(`failed to read ${configFile}`, err);
-        });
-};
+function Launcher({
+    gameLaunched,
+    onGameLaunched,
+}: {
+    gameLaunched: boolean;
+    onGameLaunched: (value: boolean) => void;
+}) {
+    const {
+        state: { configs, sort },
+        dispatch,
+    } = useContext(AppState);
 
-const saveConfig = async (setConfig: (config: AppConfig) => AppConfig) => {
-    console.log('saving config');
-    await writeTextFile(configFile, JSON.stringify(config), { dir: BaseDirectory.AppLocalData })
-        .then(() => {
-            console.log('saved config');
-        })
-        .catch((err) => {
-            console.log(`failed to write ${configFile}`, err);
-        });
-};
-
-function Launcher() {
-    const [configs, setConfigs] = useState<LauncherConfig[]>([]);
     const [mods, setMods] = useState<LauncherMods>(defaultMods);
     const [config, setConfig] = useState<LauncherConfig>(createLauncherConfig);
     const [editDialog, setEditDialog] = useState(false);
     const [configToDelete, setConfigToDelete] = useState<LauncherConfig | undefined>(undefined);
     const [configNameToDelete, setConfigNameToDelete] = useState('');
     const [deleteDialog, setDeleteDialog] = useState(false);
-    const [sort, setSort] = useState<SortOption>({ key: 'createdAt', direction: 'asc' });
     const [sortOrder, setSortOrder] = useState<SortOrderOption>('createdAt-asc');
-    const [shouldSaveConfig, setShouldSaveConfig] = useState(false);
-    const [gameLaunched, setGameLaunched] = useState(false);
     const nameRef = useRef<HTMLInputElement>(null);
-
-    const onClickLaunch = (config: LauncherConfig) => {
-        setGameLaunched(true);
-
-        invoke('launch_config', { config })
-            .catch((err) => {
-                console.error(err);
-            })
-            .finally(() => {
-                setGameLaunched(false);
-            });
-    };
+    const isEdit = config.createdAt !== 0;
 
     useEffect(() => {
-        if (shouldSaveConfig) {
-            console.log('saving config');
-            setShouldSaveConfig(false);
-            saveConfig((config) => ({ ...config, configs, sort }));
-        }
-    }, [shouldSaveConfig]);
+        setSortOrder([sort.key, sort.direction].join('-') as SortOrderOption);
+    }, [sort, setSortOrder]);
+
+    useEffect(() => {
+        const toVersion = (release: string) => {
+            release = release.replace(/^(tem|xdead)\-/, '').replace(/\.zip$/, '');
+            return release ? release : 'unknown version';
+        };
+
+        // TODO: update once we downloaded a new version
+        readTextFile('mods/tem/release.txt', { dir: BaseDirectory.Resource })
+            .then((release) => setMods((mods) => ({ ...mods, tem: { ...mods.tem, version: toVersion(release) } })))
+            .catch(console.error);
+
+        readTextFile('mods/xdead/release.txt', { dir: BaseDirectory.Resource })
+            .then((release) => setMods((mods) => ({ ...mods, xdead: { ...mods.xdead, version: toVersion(release) } })))
+            .catch(console.error);
+
+        const unlistenGameLaunched = listen('game-launched', (event: event.Event<boolean>) => {
+            console.log({ event });
+            onGameLaunched(event.payload);
+        });
+
+        console.log('initialized');
+
+        return () => {
+            Promise.all([unlistenGameLaunched]).then((unlistenAll) => {
+                unlistenAll.forEach((unlisten) => unlisten());
+                console.log('uninitialized');
+            });
+        };
+    }, []);
+
+    const onClickLaunch = (config: LauncherConfig) => {
+        onGameLaunched(true);
+        dispatch(DispatchAction.LaunchConfig({ config, onComplete: () => onGameLaunched(false) }));
+    };
 
     const onChangeSortOrder = useCallback(
         (value?: string) => {
+            setSortOrder(value as SortOrderOption);
+
             const [key, direction] = value?.split('-') ?? '';
             const sort = { key, direction } as SortOption;
-            setSort(sort);
-            setSortOrder(value as SortOrderOption);
-            setConfigs((configs) => configs.sort(getSorter(sort)));
-            console.log('saving order');
-            setShouldSaveConfig(true);
+
+            dispatch(DispatchAction.SetSort(sort));
+            dispatch(DispatchAction.SetConfigs((configs) => configs.sort(getSorter(sort))));
+            dispatch(DispatchAction.SaveConfig());
         },
-        [setSort, setSortOrder, setConfigs, setShouldSaveConfig],
+        [dispatch, setSortOrder],
     );
 
     const onChangeEdit = useCallback(
@@ -163,8 +142,6 @@ function Launcher() {
         [configs, editDialog, setConfig, setEditDialog],
     );
 
-    const isEdit = config.createdAt !== 0;
-
     const onClickCloseEditDialog = useCallback(() => {
         setEditDialog(false);
     }, [setEditDialog]);
@@ -178,29 +155,31 @@ function Launcher() {
                 config.modifiedAt = new Date().getTime();
             }
 
-            setConfigs((configs) => {
-                const unsetDefault = (config: LauncherConfig) => {
-                    config.isDefault = false;
-                    return config;
-                };
-                const orderConfigs = (configs: LauncherConfig[]) => {
-                    return configs.sort(getSorter(sort));
-                };
+            dispatch(
+                DispatchAction.SetConfigs((configs) => {
+                    const unsetDefault = (config: LauncherConfig) => {
+                        config.isDefault = false;
+                        return config;
+                    };
+                    const orderConfigs = (configs: LauncherConfig[]) => {
+                        return configs.sort(getSorter(sort));
+                    };
 
-                const updated = config.isDefault ? configs.map(unsetDefault) : configs;
-                const index = configs.findIndex(({ createdAt }) => createdAt === config.createdAt);
+                    const updated = config.isDefault ? configs.map(unsetDefault) : configs;
+                    const index = configs.findIndex(({ createdAt }) => createdAt === config.createdAt);
 
-                return orderConfigs(
-                    index !== -1
-                        ? [...updated.slice(0, index), ...updated.slice(index + 1), config]
-                        : [...updated, config],
-                );
-            });
+                    return orderConfigs(
+                        index !== -1
+                            ? [...updated.slice(0, index), ...updated.slice(index + 1), config]
+                            : [...updated, config],
+                    );
+                }),
+            );
 
             setEditDialog(false);
-            setShouldSaveConfig(true);
+            dispatch(DispatchAction.SaveConfig());
         },
-        [sort, setConfig, setEditDialog, setShouldSaveConfig],
+        [sort, configs, setConfig, setEditDialog],
     );
 
     const onChangeDelete = useCallback(
@@ -225,13 +204,13 @@ function Launcher() {
     const onClickDeleteConfig = useCallback(() => {
         const index = configs.findIndex(({ createdAt }) => createdAt === configToDelete?.createdAt);
         if (index !== -1) {
-            setConfigs((configs) => [...configs.slice(0, index), ...configs.slice(index + 1)]);
-            setShouldSaveConfig(true);
+            dispatch(DispatchAction.SetConfigs((configs) => [...configs.slice(0, index), ...configs.slice(index + 1)]));
+            dispatch(DispatchAction.SaveConfig());
         }
 
         setConfigNameToDelete('');
         setDeleteDialog(false);
-    }, [configToDelete, setConfigNameToDelete, setDeleteDialog, setShouldSaveConfig]);
+    }, [configToDelete, setConfigNameToDelete, setDeleteDialog]);
 
     const canConfirmDeletion = configNameToDelete === configToDelete?.name;
 
@@ -243,58 +222,6 @@ function Launcher() {
         },
         [onClickDeleteConfig, canConfirmDeletion],
     );
-
-    useEffect(() => {
-        if (!configs.length) {
-            loadConfig().then((config) => {
-                if (config) {
-                    console.log('found config');
-
-                    const configs = config.configs.map(createLauncherConfig);
-                    setConfigs(configs);
-
-                    const defaultConfig = configs.find(({ isDefault }) => isDefault);
-                    if (defaultConfig) {
-                        onClickLaunch(defaultConfig);
-                    }
-
-                    setSort(config.sort);
-                    setSortOrder([config.sort.key, config.sort.direction].join('-') as SortOrderOption);
-                    setCheckForUpdates(config.checkForUpdates);
-                }
-            });
-
-            const toVersion = (release: string) => {
-                release = release.replace(/^(tem|xdead)\-/, '').replace(/\.zip$/, '');
-                return release ? release : 'unknown version';
-            };
-
-            // TODO: update once we downloaded a new version
-            readTextFile('mods/tem/release.txt', { dir: BaseDirectory.Resource })
-                .then((release) => setMods((mods) => ({ ...mods, tem: { ...mods.tem, version: toVersion(release) } })))
-                .catch(console.error);
-
-            readTextFile('mods/xdead/release.txt', { dir: BaseDirectory.Resource })
-                .then((release) =>
-                    setMods((mods) => ({ ...mods, xdead: { ...mods.xdead, version: toVersion(release) } })),
-                )
-                .catch(console.error);
-        }
-
-        const unlistenGameLaunched = listen('game-launched', (event: event.Event<boolean>) => {
-            console.log({ event });
-            setGameLaunched(event.payload);
-        });
-
-        console.log('initialized');
-
-        return () => {
-            Promise.all([unlistenGameLaunched]).then((unlistenAll) => {
-                unlistenAll.forEach((unlisten) => unlisten());
-                console.log('uninitialized');
-            });
-        };
-    }, []);
 
     return (
         <>

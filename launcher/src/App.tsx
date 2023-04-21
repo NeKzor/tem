@@ -4,17 +4,37 @@
  * SPDX-License-Identifier: MIT
  */
 
-import { createElement, useMemo, useReducer } from 'react';
+import { createElement, useCallback, useEffect, useMemo, useReducer, useState } from 'react';
 import { Tabs, TabsHeader, TabsBody, Tab, TabPanel } from '@material-tailwind/react';
 import { CommandLineIcon, WrenchIcon, RocketLaunchIcon } from '@heroicons/react/24/solid';
 import Footer from './components/Footer';
 import Settings from './views/Settings';
 import Launcher from './views/Launcher';
 import Console from './views/Console';
-import AppState, { AppReducer } from './AppState';
+import AppState, { AppReducer, DispatchAction, loadState } from './AppState';
+import { createLauncherConfig } from './Types';
 
 function App() {
     const [state, dispatch] = useReducer(...AppReducer);
+    const [gameLaunched, setGameLaunched] = useState(false);
+
+    useEffect(() => {
+        loadState().then((state) => {
+            if (state) {
+                console.log('found config');
+
+                const configs = state.configs?.map(createLauncherConfig) ?? [];
+                dispatch(DispatchAction.LoadConfig({ ...state, configs }));
+
+                const config = configs.find(({ isDefault }) => isDefault);
+                if (config) {
+                    dispatch(DispatchAction.LaunchConfig({ config, onComplete: () => setGameLaunched(false) }));
+                }
+            }
+        });
+    }, []);
+
+    const onGameLaunched = useCallback((value: boolean) => setGameLaunched(value), [setGameLaunched]);
 
     const context = useMemo(() => ({ state, dispatch }), [state, dispatch]);
 
@@ -45,7 +65,7 @@ function App() {
                         </TabsHeader>
                         <TabsBody>
                             <TabPanel key="tem" value="tem">
-                                <Launcher />
+                                <Launcher gameLaunched={gameLaunched} onGameLaunched={onGameLaunched} />
                             </TabPanel>
                             <TabPanel key="console" value="console">
                                 <Console />
