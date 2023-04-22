@@ -1,31 +1,14 @@
 import { useCallback, useContext, useEffect, useRef, useState } from 'react';
 import { listen } from '@tauri-apps/api/event';
-import {
-    Button,
-    Card,
-    CardBody,
-    CardFooter,
-    Input,
-    Typography,
-    Tooltip,
-    IconButton,
-    Select,
-    Option,
-    Menu,
-    MenuHandler,
-    MenuList,
-    MenuItem,
-    Dialog,
-    DialogHeader,
-    DialogBody,
-    DialogFooter,
-    Switch,
-} from '@material-tailwind/react';
-import { Bars3Icon, PlusIcon, PencilIcon, TrashIcon, XMarkIcon } from '@heroicons/react/24/solid';
+import { Button, Select, Option } from '@material-tailwind/react';
+import { PlusIcon } from '@heroicons/react/24/solid';
 import { readTextFile, BaseDirectory } from '@tauri-apps/api/fs';
 import { event } from '@tauri-apps/api';
 import { LauncherConfig, LauncherMods, SortOption, SortOrderOption, createLauncherConfig, defaultMods } from '../Types';
 import AppState, { DispatchAction } from '../AppState';
+import ConfigCard from '../components/ConfigCard';
+import ConfigEditDialog from '../components/ConfigEditDialog';
+import ConfigDeleteDialog from '../components/ConfigDeleteDialog';
 
 const maxConfigsAllowed = 4;
 
@@ -60,14 +43,11 @@ function Launcher({
     } = useContext(AppState);
 
     const [mods, setMods] = useState<LauncherMods>(defaultMods);
-    const [config, setConfig] = useState<LauncherConfig>(createLauncherConfig);
+    const [configToEdit, setConfigToEdit] = useState(createLauncherConfig);
     const [editDialog, setEditDialog] = useState(false);
     const [configToDelete, setConfigToDelete] = useState<LauncherConfig | undefined>(undefined);
-    const [configNameToDelete, setConfigNameToDelete] = useState('');
     const [deleteDialog, setDeleteDialog] = useState(false);
     const [sortOrder, setSortOrder] = useState<SortOrderOption>('createdAt-asc');
-    const nameRef = useRef<HTMLInputElement>(null);
-    const isEdit = config.createdAt !== 0;
 
     useEffect(() => {
         setSortOrder([sort.key, sort.direction].join('-') as SortOrderOption);
@@ -126,7 +106,7 @@ function Launcher({
         (config?: LauncherConfig) => {
             if (!editDialog) {
                 const isFirstConfig = configs.length === 0;
-                setConfig(
+                setConfigToEdit(
                     structuredClone(config) ??
                         createLauncherConfig({
                             name: isFirstConfig ? 'Default' : '',
@@ -134,12 +114,9 @@ function Launcher({
                         }),
                 );
                 setEditDialog(true);
-                setTimeout(() => {
-                    nameRef.current?.querySelector('input')?.focus();
-                }, 100);
             }
         },
-        [configs, editDialog, setConfig, setEditDialog],
+        [configs, editDialog, setConfigToEdit, setEditDialog],
     );
 
     const onClickCloseEditDialog = useCallback(() => {
@@ -179,7 +156,7 @@ function Launcher({
             setEditDialog(false);
             dispatch(DispatchAction.SaveConfig());
         },
-        [sort, configs, setConfig, setEditDialog],
+        [sort, configs, setConfigToEdit, setEditDialog],
     );
 
     const onChangeDelete = useCallback(
@@ -193,13 +170,8 @@ function Launcher({
     );
 
     const onClickCloseDeleteDialog = useCallback(() => {
-        setConfigNameToDelete('');
         setDeleteDialog(false);
-    }, [setConfigNameToDelete, setDeleteDialog]);
-
-    const onChangeConfigToDelete = useCallback(({ target }: any) => {
-        setConfigNameToDelete(target.value as string);
-    }, []);
+    }, [setDeleteDialog]);
 
     const onClickDeleteConfig = useCallback(() => {
         const index = configs.findIndex(({ createdAt }) => createdAt === configToDelete?.createdAt);
@@ -208,20 +180,10 @@ function Launcher({
             dispatch(DispatchAction.SaveConfig());
         }
 
-        setConfigNameToDelete('');
         setDeleteDialog(false);
-    }, [configToDelete, setConfigNameToDelete, setDeleteDialog]);
+    }, [configToDelete, setDeleteDialog]);
 
-    const canConfirmDeletion = configNameToDelete === configToDelete?.name;
-
-    const onKeyDownConfigToDelete = useCallback(
-        (event: React.KeyboardEvent) => {
-            if (event.key === 'Enter' && canConfirmDeletion) {
-                onClickDeleteConfig();
-            }
-        },
-        [onClickDeleteConfig, canConfirmDeletion],
-    );
+    const onClickCreateConfig = useCallback(() => onChangeEdit(), [onChangeEdit]);
 
     return (
         <>
@@ -230,7 +192,7 @@ function Launcher({
                     <Button
                         className="flex items-center gap-3"
                         disabled={configs.length === maxConfigsAllowed}
-                        onClick={() => onChangeEdit()}
+                        onClick={onClickCreateConfig}
                     >
                         <PlusIcon strokeWidth={2} className="h-5 w-5" />
                         Create Config
@@ -251,258 +213,32 @@ function Launcher({
                 {configs.map((config, idx) => {
                     return (
                         <div key={idx}>
-                            <Card className="w-full max-w-[26rem] shadow-lg">
-                                <CardBody>
-                                    <div className="mb-3 flex items-center justify-between">
-                                        <Typography variant="h5" color="blue-gray" className="font-medium">
-                                            {config.name}
-                                        </Typography>
-                                        <Menu placement="bottom-end">
-                                            <MenuHandler>
-                                                <IconButton
-                                                    color="blue-gray"
-                                                    variant="text"
-                                                    className="!absolute top-4 right-4 rounded-full"
-                                                >
-                                                    <Bars3Icon className="h-6 w-6" />
-                                                </IconButton>
-                                            </MenuHandler>
-                                            <MenuList>
-                                                <MenuItem
-                                                    className="flex items-center gap-2"
-                                                    onClick={() => onChangeEdit(config)}
-                                                >
-                                                    <PencilIcon strokeWidth={2} className="h-4 w-4" />
-                                                    <Typography variant="small" className="font-normal">
-                                                        Edit
-                                                    </Typography>
-                                                </MenuItem>
-                                                <MenuItem
-                                                    className="flex items-center gap-2 hover:bg-red-500"
-                                                    onClick={() => onChangeDelete(config)}
-                                                >
-                                                    <TrashIcon strokeWidth={2} className="h-4 w-4" />
-                                                    <Typography variant="small" className="font-normal">
-                                                        Delete
-                                                    </Typography>
-                                                </MenuItem>
-                                            </MenuList>
-                                        </Menu>
-                                    </div>
-                                    <Typography color="gray">
-                                        Resolution {config.windowWidth} x {config.windowHeight}
-                                    </Typography>
-                                    <Typography color="gray">
-                                        {config.isFullscreen ? 'Fullscreen' : 'Windowed'}
-                                    </Typography>
-                                    <Typography color="gray">
-                                        Splash Screen {config.disableSplashScreen ? 'Disabled' : 'Enabled'}
-                                    </Typography>
-                                    {config.useTEM && (
-                                        <div className="group mt-4 inline-flex flex-wrap items-center gap-3">
-                                            <Tooltip content={mods.tem.version}>
-                                                <span className="rounded-full border border-blue-500/5 bg-blue-500/5 p-3 text-blue-500 transition-colors hover:border-blue-500/10 hover:bg-blue-500/10 hover:!opacity-100 group-hover:opacity-70">
-                                                    TEM
-                                                </span>
-                                            </Tooltip>
-                                        </div>
-                                    )}
-                                    {config.useTEM && config.useXDead && (
-                                        <div className="group mt-4 ml-2 inline-flex flex-wrap items-center gap-3">
-                                            <Tooltip content={mods.xdead.version}>
-                                                <span className="rounded-full border border-green-500/5 bg-green-500/5 p-3 text-green-500 transition-colors hover:border-green-500/10 hover:bg-green-500/10 hover:!opacity-100 group-hover:opacity-70">
-                                                    XDead
-                                                </span>
-                                            </Tooltip>
-                                        </div>
-                                    )}
-                                    {!config.useTEM && (
-                                        <div className="group mt-4 inline-flex flex-wrap items-center gap-3">
-                                            <span className="rounded-full border border-gray-500/5 bg-gray-500/5 p-3 text-gray-500 transition-colors hover:border-gray-500/10 hover:bg-gray-500/10 hover:!opacity-100 group-hover:opacity-70">
-                                                No Mods
-                                            </span>
-                                        </div>
-                                    )}
-                                </CardBody>
-                                <CardFooter className="pt-3">
-                                    <Button
-                                        disabled={gameLaunched}
-                                        size="lg"
-                                        fullWidth={true}
-                                        onClick={() => onClickLaunch(config)}
-                                    >
-                                        Launch {config.isDefault ? ' (default)' : ''}
-                                    </Button>
-                                </CardFooter>
-                            </Card>
+                            <ConfigCard
+                                config={config}
+                                mods={mods}
+                                gameLaunched={gameLaunched}
+                                onClickLaunch={onClickLaunch}
+                                onChangeEdit={onChangeEdit}
+                                onChangeDelete={onChangeDelete}
+                            />
                         </div>
                     );
                 })}
             </div>
-            <Dialog size="md" open={editDialog} handler={onChangeEdit}>
-                <DialogHeader className="justify-between">
-                    <Typography variant="h5" color="blue-gray">
-                        {isEdit ? 'Edit' : 'Create'} Config
-                    </Typography>
-                    <IconButton color="blue-gray" size="sm" variant="text" onClick={onClickCloseEditDialog}>
-                        <XMarkIcon strokeWidth={2} className="h-5 w-5" />
-                    </IconButton>
-                </DialogHeader>
-                <DialogBody className="pt-0" divider>
-                    <Input
-                        ref={nameRef}
-                        className="w-4"
-                        value={config.name}
-                        variant="outlined"
-                        label="Name"
-                        autoFocus={true}
-                        containerProps={{ className: 'mt-4' }}
-                        onChange={({ target: { value } }) => setConfig((oldConfig) => ({ ...oldConfig, name: value }))}
-                    />
-                    <div className="flex items-center gap-4">
-                        <Input
-                            value={config.windowWidth.toString()}
-                            variant="outlined"
-                            label="Window Width"
-                            type="number"
-                            containerProps={{ className: 'mt-4' }}
-                            onChange={({ target: { valueAsNumber } }) =>
-                                setConfig((oldConfig) => ({
-                                    ...oldConfig,
-                                    windowWidth: valueAsNumber,
-                                }))
-                            }
-                        />
-                        <Input
-                            value={config.windowHeight.toString()}
-                            variant="outlined"
-                            label="Window Height"
-                            type="number"
-                            containerProps={{ className: 'mt-4' }}
-                            onChange={({ target: { valueAsNumber } }) =>
-                                setConfig((oldConfig) => ({
-                                    ...oldConfig,
-                                    windowHeight: valueAsNumber,
-                                }))
-                            }
-                        />
-                    </div>
-                    <div className="mt-4">
-                        <Switch
-                            id="fullscreen"
-                            label="Fullscreen"
-                            defaultChecked={config.isFullscreen}
-                            onChange={() =>
-                                setConfig((oldConfig) => ({
-                                    ...oldConfig,
-                                    isFullscreen: !oldConfig.isFullscreen,
-                                }))
-                            }
-                        />
-                    </div>
-                    <div className="mt-4">
-                        <Switch
-                            id="splash-screen"
-                            label="Disable splash screen"
-                            defaultChecked={config.disableSplashScreen}
-                            onChange={() =>
-                                setConfig((oldConfig) => ({
-                                    ...oldConfig,
-                                    disableSplashScreen: !oldConfig.disableSplashScreen,
-                                }))
-                            }
-                        />
-                    </div>
-                    <div className="mt-4">
-                        <Switch
-                            id="tem"
-                            label="Use TEM"
-                            defaultChecked={config.useTEM}
-                            onChange={() =>
-                                setConfig((oldConfig) => ({
-                                    ...oldConfig,
-                                    useTEM: !oldConfig.useTEM,
-                                }))
-                            }
-                        />
-                    </div>
-                    <div className="mt-4">
-                        <Switch
-                            id="xdead"
-                            label="Use XDead"
-                            defaultChecked={config.useXDead}
-                            onChange={() =>
-                                setConfig((oldConfig) => ({
-                                    ...oldConfig,
-                                    useXDead: !oldConfig.useXDead,
-                                }))
-                            }
-                        />
-                    </div>
-                    <div className="mt-4">
-                        <Switch
-                            id="default"
-                            label="Use this as default"
-                            defaultChecked={config.isDefault}
-                            onChange={() =>
-                                setConfig((oldConfig) => ({
-                                    ...oldConfig,
-                                    isDefault: !oldConfig.isDefault,
-                                }))
-                            }
-                        />
-                    </div>
-                </DialogBody>
-                <DialogFooter>
-                    <Button
-                        size="sm"
-                        variant="filled"
-                        disabled={!config.name}
-                        onClick={() => onClickEditConfig(config)}
-                    >
-                        <span>Save</span>
-                    </Button>
-                </DialogFooter>
-            </Dialog>
-            <Dialog size="md" open={deleteDialog} handler={onChangeDelete}>
-                <DialogHeader className="justify-between">
-                    <Typography variant="h5" color="blue-gray">
-                        Delete Config
-                    </Typography>
-                    <IconButton color="blue-gray" size="sm" variant="text" onClick={onClickCloseDeleteDialog}>
-                        <XMarkIcon strokeWidth={2} className="h-5 w-5" />
-                    </IconButton>
-                </DialogHeader>
-                <DialogBody divider>
-                    <Typography>The configuration "{configToDelete?.name}" will be deleted.</Typography>
-                    <Typography>This action cannot be undone.</Typography>
-                    <br />
-                    <Typography>Please type "{configToDelete?.name}" to confirm.</Typography>
-                    <Input
-                        value={configNameToDelete}
-                        onChange={onChangeConfigToDelete}
-                        className="mt-2 !border-t-blue-gray-200 focus:!border-t-blue-500"
-                        labelProps={{
-                            className: 'before:content-none after:content-none',
-                        }}
-                        containerProps={{
-                            className: 'min-w-0',
-                        }}
-                        onKeyDown={onKeyDownConfigToDelete}
-                    />
-                </DialogBody>
-                <DialogFooter>
-                    <Button
-                        size="sm"
-                        variant="filled"
-                        color="red"
-                        disabled={!canConfirmDeletion}
-                        onClick={onClickDeleteConfig}
-                    >
-                        <span>Confirm Deletion</span>
-                    </Button>
-                </DialogFooter>
-            </Dialog>
+            <ConfigEditDialog
+                editDialog={editDialog}
+                configToEdit={configToEdit}
+                onChangeEdit={onChangeEdit}
+                onClickEditConfig={onClickEditConfig}
+                onClickCloseEditDialog={onClickCloseEditDialog}
+            />
+            <ConfigDeleteDialog
+                deleteDialog={deleteDialog}
+                configToDelete={configToDelete}
+                onChangeDelete={onChangeDelete}
+                onClickDeleteConfig={onClickDeleteConfig}
+                onClickCloseDeleteDialog={onClickCloseDeleteDialog}
+            />
         </>
     );
 }
