@@ -10,7 +10,8 @@ function Settings() {
 
     const onChangeCheckForUpdates = useCallback(
         (value: any) => {
-            dispatch({ action: DispatchAction.SetCheckForUpdates, payload: value });
+            dispatch(DispatchAction.SetCheckForUpdates(value));
+            dispatch(DispatchAction.SaveConfig());
         },
         [dispatch],
     );
