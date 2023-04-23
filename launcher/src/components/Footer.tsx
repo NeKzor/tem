@@ -1,5 +1,33 @@
 import { Typography } from '@material-tailwind/react';
 
+type FooterLink = {
+    label: string;
+    url: string;
+};
+
+const links: FooterLink[] = [
+    {
+        label: 'Documentation',
+        url: 'https://tem.nekz.me',
+    },
+    {
+        label: 'Repository',
+        url: 'https://github.com/NeKzor/tem',
+    },
+    {
+        label: 'Issues',
+        url: 'https://github.com/NeKzor/tem/issues',
+    },
+    {
+        label: 'Discussions',
+        url: 'https://github.com/NeKzor/tem/discussions',
+    },
+    {
+        label: 'Project',
+        url: 'https://github.com/users/NeKzor/projects/1/views/1',
+    },
+];
+
 function Footer() {
     return (
         <footer className="fixed bottom-0 w-full bg-white p-8 pt-0 z-50">
@@ -9,66 +37,23 @@ function Footer() {
                     &copy; 2023 TEM
                 </Typography>
                 <ul className="flex flex-wrap items-center gap-y-2 gap-x-8">
-                    <li>
-                        <Typography
-                            as="a"
-                            href="https://tem.nekz.me"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            color="blue-gray"
-                            className="font-normal transition-colors hover:text-blue-500 focus:text-blue-500"
-                        >
-                            Documentation
-                        </Typography>
-                    </li>
-                    <li>
-                        <Typography
-                            as="a"
-                            href="https://github.com/NeKzor/tem"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            color="blue-gray"
-                            className="font-normal transition-colors hover:text-blue-500 focus:text-blue-500"
-                        >
-                            Repository
-                        </Typography>
-                    </li>
-                    <li>
-                        <Typography
-                            as="a"
-                            href="https://github.com/NeKzor/tem/issues"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            color="blue-gray"
-                            className="font-normal transition-colors hover:text-blue-500 focus:text-blue-500"
-                        >
-                            Issues
-                        </Typography>
-                    </li>
-                    <li>
-                        <Typography
-                            as="a"
-                            href="https://github.com/NeKzor/tem/discussions"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            color="blue-gray"
-                            className="font-normal transition-colors hover:text-blue-500 focus:text-blue-500"
-                        >
-                            Discussions
-                        </Typography>
-                    </li>
-                    <li>
-                        <Typography
-                            as="a"
-                            href="https://github.com/users/NeKzor/projects/1/views/1"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            color="blue-gray"
-                            className="font-normal transition-colors hover:text-blue-500 focus:text-blue-500"
-                        >
-                            Project
-                        </Typography>
-                    </li>
+                    {links.map((link) => {
+                        return (
+                            <li>
+                                <Typography
+                                    as="a"
+                                    href={link.url}
+                                    title={link.url}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    color="blue-gray"
+                                    className="font-normal transition-colors hover:text-blue-500 focus:text-blue-500"
+                                >
+                                    {link.label}
+                                </Typography>
+                            </li>
+                        );
+                    })}
                 </ul>
             </div>
         </footer>
