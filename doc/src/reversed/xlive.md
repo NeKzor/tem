@@ -163,6 +163,8 @@ The `.cat` file is a security catalogue file which is signed by Microsoft Window
 |Signer|Microsoft LIVE PCA|
 |Signing Time|Saturday, 30 October 2010 01:55:25|
 
+XLive does periodic checks on the code segments of all loaded files that have catalogue entries, including itself.
+
 ```admonish todo
 Isn't it a bit too late to check if the file has been modified if it already launched?
 ```
@@ -428,17 +430,20 @@ Titles:
   - config.bin
   - Token.bin
 
-```admonish todo
-What is `FFFE07D1` and `00010000`?
-```
+The XUID for each profile is a 64-bit number generated from the "PCID" stored in the registry,
+`E0000YYYXXXXXXXX`, where XXXXXXX is a snippet of the PCID and YYY is an incrementing value.
 
-```admonish todo
-Figure out `FBDX` format.
-```
+FFFE07D1 is to signify the "Xbox 360 Dashboard" title, and 00010000 to signify that the content is a User Profile.
+The .gpd files are endian-reversed [Xbox 360 XBDF files][], used to store achievements and some statistics
+(Gamer Profile Data) for each game played. The "Account" file is an endian-reversed [Xbox 360 STFS header][],
+without a console signature or attached filesystem (as it is all in _MountPt).
 
-```admonish todo
-Figure out 0x20 + `NOC` format.
-```
+config.bin stores the "machine account" and other XLive configuration data for the title, and Token.bin stores
+an encrypted copy of the 5x5 product key used for sign-in.
+
+[Xbox 360 XDBF files]: https://free60.org/System-Software/Formats/XDBF/
+
+[Xbox 360 STFS header]: https://free60.org/System-Software/Formats/STFS/
 
 ### Authentication
 
