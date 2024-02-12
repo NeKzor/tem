@@ -434,7 +434,7 @@ The XUID for each profile is a 64-bit number generated from the "PCID" stored in
 `E0000YYYXXXXXXXX`, where XXXXXXX is a snippet of the PCID and YYY is an incrementing value.
 
 FFFE07D1 is to signify the "Xbox 360 Dashboard" title, and 00010000 to signify that the content is a User Profile.
-The .gpd files are endian-reversed [Xbox 360 XBDF files][], used to store achievements and some statistics
+The .gpd files are endian-reversed [Xbox 360 XDBF files][], used to store achievements and some statistics
 (Gamer Profile Data) for each game played. The "Account" file is an endian-reversed [Xbox 360 STFS header][],
 without a console signature or attached filesystem (as it is all in _MountPt).
 
