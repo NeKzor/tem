@@ -12,7 +12,7 @@
  * Represents the reverse engineered game.
  */
 struct securom_game_t {
-    const char* rsa_modulus_n = nullptr; // N = q * q
+    const char* rsa_modulus_n = nullptr; // N = p * q
     const char* rsa_exponent_e = nullptr; // GCD(e, (p - 1) * (q - 1)) = 1
     BYTE appid[48] = {};
 };
