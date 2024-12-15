@@ -7,6 +7,7 @@
 #pragma once
 #include <math.h>
 #include <string>
+#include <cstdint>
 
 #define PG_PAWN 0x197B
 #define PLAYER_CONTROLLER 0xAAF
@@ -18,16 +19,16 @@
 #define SET_CAMERA_TARGET_TIMER 0x841E
 
 struct FNameEntry {
-    int unk0; // 0
-    int unk1; // 4
-    int index; // 8
-    int unk2; // 12
+    uint32_t unk0; // 0
+    uint32_t unk1; // 4
+    uint32_t index; // 8
+    uint32_t unk2; // 12
     char name[1024]; // 16
 };
 
 struct FName {
-    unsigned int index; // 0
-    unsigned int number; // 4
+    uint32_t index; // 0
+    uint32_t number; // 4
 };
 
 struct UClass;
@@ -49,8 +50,8 @@ struct UObject {
 
 template <typename T> struct TArray {
     T* data; // 0
-    unsigned int size; // 4
-    unsigned int max; // 8
+    uint32_t size; // 4
+    uint32_t max; // 8
 
     inline auto operator[](unsigned int index) -> T { return this->at(index); }
     inline auto at(unsigned int index) -> T
@@ -97,7 +98,7 @@ struct Rotation {
     unsigned short value; // 0
     unsigned short sign; // 2
 
-    inline auto degree() -> float { return (this->value / float(0xffffui16)) * 360.0f; }
+    inline auto degree() -> float { return (this->value / float(uint16_t(0xffff))) * 360.0f; }
 };
 
 struct Color {

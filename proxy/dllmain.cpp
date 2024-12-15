@@ -12,11 +12,11 @@
 #define ORIGINAL(name) name##_original
 
 #define DECL_DETOUR_API(type, cc, name, ...)  \
-    using _##name = type(cc*)(##__VA_ARGS__); \
+    using _##name = type(cc*)(__VA_ARGS__); \
     _##name ORIGINAL(name);                   \
-    EXPORT type cc name(##__VA_ARGS__)
+    EXPORT type cc name(__VA_ARGS__)
 
-#define DETOUR_API(type, cc, name, ...) EXPORT type cc name(##__VA_ARGS__)
+#define DETOUR_API(type, cc, name, ...) EXPORT type cc name(__VA_ARGS__)
 
 DECL_DETOUR_API(HRESULT, __stdcall, DirectInput8Create, HINSTANCE hinst, DWORD dwVersion, REFIID riidltf, LPVOID* ppvOut, void* punkOuter);
 
@@ -27,7 +27,7 @@ DETOUR_API(HRESULT, __stdcall, DirectInput8Create, HINSTANCE hinst, DWORD dwVers
     println(
         "[0x{:06x}] [0x{:06x}] {}({:x}, {:x}, {:x}, {:x}, {:x}) -> {:x} | {}",
         uintptr_t(function),
-        uintptr_t(_ReturnAddress()),
+        uintptr_t(__builtin_extract_return_addr(__builtin_return_address(0))),
         "DirectInput8Create",
         uintptr_t(hinst),
         uintptr_t(dwVersion),

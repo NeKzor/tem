@@ -5,6 +5,7 @@
  */
 
 #include "SDK.hpp"
+#include <algorithm>
 #include <windows.h>
 
 FString::FString()

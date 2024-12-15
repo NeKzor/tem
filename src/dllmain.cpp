@@ -5,7 +5,7 @@
  */
 
 #include "TEM.hpp"
-#include <Windows.h>
+#include <windows.h>
 
 auto APIENTRY DllMain(HMODULE module, DWORD reason, LPVOID reserved) -> BOOL
 {

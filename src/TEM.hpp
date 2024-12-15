@@ -7,6 +7,7 @@
 #pragma once
 #include "Memory.hpp"
 #include "SDK.hpp"
+#include <thread>
 #include <map>
 
 #define TEM_WELCOME "Tron Evolution Mod by NeKz :^)"

@@ -15,9 +15,10 @@
 #include "lib/imgui/imgui.h"
 #include "lib/imgui/imgui_impl_dx9.h"
 #include "lib/imgui/imgui_impl_win32.h"
-#include <Windows.h>
+#include <windows.h>
 #include <d3d9.h>
 #include <d3dcompiler.h>
+#include <algorithm>
 #include <format>
 #include <fstream>
 #include <map>
@@ -268,8 +269,8 @@ DETOUR_STD(HRESULT, Present, IDirect3DDevice9* device, RECT* pSourceRect, RECT* 
     ImGui::SetNextWindowPos(ImVec2(x + (column * 250), y));                                                            \
     ImGui::SetNextWindowSize(ImVec2(ImGui::GetIO().DisplaySize.x, 30));                                                \
     ImGui::Begin(_name, nullptr, flags);                                                                               \
-    ImGui::TextColored(player->##_flag ? ImVec4(0, 255, 0, 255) : ImVec4(255, 0, 0, 255), _name " %s",                 \
-        player->##_flag ? "ON" : "OFF");                                                                               \
+    ImGui::TextColored(player->_flag ? ImVec4(0, 255, 0, 255) : ImVec4(255, 0, 0, 255), _name " %s",                 \
+        player->_flag ? "ON" : "OFF");                                                                               \
     ImGui::End();
 
                 // TODO: Support PgVehicle, UTVehicle, UTVehicleBase, SVehicle, Vehicle, Actor

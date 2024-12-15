@@ -12,7 +12,7 @@
 #include "SDK.hpp"
 #include "TEM.hpp"
 #include "UI.hpp"
-#include <Windows.h>
+#include <windows.h>
 #include <intrin.h>
 #include <map>
 #include <processthreadsapi.h>
@@ -87,14 +87,14 @@ DECL_DETOUR_API(int, __stdcall, xlive_5212, int, int, int, int, int, int, int, i
 DECL_DETOUR_API(signed int, __stdcall, xlive_5215, int a1);
 DECL_DETOUR_API(signed int, __stdcall, xlive_5216, int a1, int a2, int a3, int a4, int a5, int a6, int a7, int a8);
 DECL_DETOUR_API(int, __stdcall, xlive_5251, HANDLE hObject);
-DECL_DETOUR_API(signed int, __stdcall, xlive_5252, int a1, __int64 a2);
+DECL_DETOUR_API(signed int, __stdcall, xlive_5252, int a1, int64_t a2);
 DECL_DETOUR_API(int, __stdcall, xlive_5256, int a1, int a2, int a3, DWORD* a4, int a5);
 DECL_DETOUR_API(signed int, __stdcall, xlive_5258, int a1);
 DECL_DETOUR_API(XUSER_SIGNIN_STATE, __stdcall, xlive_5262, int a1);
 DECL_DETOUR_API(int, __stdcall, xlive_5263, uint32_t user_index, CHAR* user_name, uint32_t user_name_length);
 DECL_DETOUR_API(int, __stdcall, xlive_5265, unsigned int a1, int a2, DWORD* a3);
 DECL_DETOUR_API(signed int, __stdcall, xlive_5267, uint32_t user_index, uint32_t flags, XUSER_SIGNIN_INFO* signin_info);
-DECL_DETOUR_API(int, __stdcall, xlive_5270, __int64 a1);
+DECL_DETOUR_API(int, __stdcall, xlive_5270, int64_t a1);
 DECL_DETOUR_API(signed int, __stdcall, xlive_5271, int a1);
 DECL_DETOUR_API(signed int, __stdcall, xlive_5274, int a1, int a2, int a3, int a4);
 DECL_DETOUR_API(signed int, __stdcall, xlive_5275, int a1);
@@ -190,7 +190,7 @@ XDEAD_CALLBACK(signed int, XFriendsCreateEnumerator, int a1, int a2, int a3, int
     // NOTE: The game needs a value or it will loop forever when exiting.
     return 1;
 }
-XDEAD_CALLBACK(int, XNotifyCreateListener, __int64 a1)
+XDEAD_CALLBACK(int, XNotifyCreateListener, int64_t a1)
 {
     // NOTE: The game needs a value or it will fail to initialize.
     return 1;
@@ -234,7 +234,7 @@ auto patch_gfwl() -> void
 
 #define XDEAD_HOOK(name)                                                                                               \
     {                                                                                                                  \
-        auto status = xdead_add_listener(xdead::name, name##_callback, 0);                                             \
+        auto status = xdead_add_listener(xdead::name, (void*)name##_callback, 0);                                             \
         if (status == xdead::ListenerStatus::Ok) {                                                                     \
             println("[gfwl] Added listener for " #name);                                                               \
         } else {                                                                                                       \
@@ -494,7 +494,7 @@ auto change_gfwl_main_thread(bool suspend) -> bool
                     if (start_address == main_thread_start_address) {
                         if (index++ == GFWL_MAIN_THREAD_INDEX) {
                             auto result = suspend ? SuspendThread(handle) : ResumeThread(handle);
-                            if (result != -1) {
+                            if (result != (unsigned long)-1) {
                                 println("[gfwl] {} main thread 0x{:04x} of start address 0x{:04x}",
                                     suspend ? "Suspended" : "Resumed", entry.th32ThreadID, start_address);
                                 return true;
@@ -575,9 +575,12 @@ auto handle_xlive_unprotected_data(BYTE* protected_data, DWORD size_of_protected
     return -1;
 }
 
-auto __forceinline print_stack(int parameters) -> void
+auto __attribute__((noinline)) print_stack(int parameters) -> void
 {
-    auto retAddress = uintptr_t(_AddressOfReturnAddress());
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wframe-address"
+    auto retAddress = uintptr_t(__builtin_return_address(1));
+#pragma GCC diagnostic pop
     for (int i = 12; i <= 12 + parameters + 1; ++i) {
         auto stack = retAddress + (i << 2);
         println("[gfwl] stack(0x{:04x}) -> 0x{:08x} | {}", stack, *(uintptr_t*)stack, *(uintptr_t*)stack);
@@ -619,19 +622,17 @@ auto xlive_debug_break(bool resume_main_thread = true) -> void
     }
 }
 
-#define SAVE_REGISTERS() __asm {\
-   __asm pushad \
-   __asm pushfd }
-#define LOAD_REGISTERS() __asm {\
-   __asm popfd \
-   __asm popad }
-#define JUMP_TO(address) __asm jmp address
+#define SAVE_REGISTERS() __asm ("pushal;"); \
+   __asm ("pushfl;");
+#define LOAD_REGISTERS() __asm ("popfl;"); \
+   __asm ("popal;");
+#define JUMP_TO(address) __asm ("jmp *%0;" :: "r"(address));
 
 #define CALL_ORIGINAL(_ordinal, _name, ...)                                                                            \
     auto ordinal = _ordinal;                                                                                           \
     auto name = _name;                                                                                                 \
     auto original = xlive_##_ordinal;                                                                                  \
-    auto result = original(##__VA_ARGS__)
+    auto result = original(__VA_ARGS__)
 
 #define CALL_ORIGINAL_AND_RETURN(ordinal, name, ...)                                                                   \
     CALL_ORIGINAL(ordinal, name, ##__VA_ARGS__);                                                                       \
@@ -639,7 +640,7 @@ auto xlive_debug_break(bool resume_main_thread = true) -> void
 
 #define LOG_AND_RETURN(fmt, ...)                                                                                       \
     println("[gfwl] [{:04}] [0x{:x}] [0x{:x}] {}(" fmt ") -> {:x} | {}", ordinal, uintptr_t(original),                 \
-        uintptr_t(_ReturnAddress()), name, ##__VA_ARGS__, result, result);                                             \
+        uintptr_t(__builtin_extract_return_addr(__builtin_return_address(0))), name, ##__VA_ARGS__, result, result);   \
     return result
 
 // clang-format off
@@ -922,10 +923,10 @@ DETOUR_API(int, __stdcall, xlive_5251, HANDLE hObject)
     CALL_ORIGINAL(5251, "XCloseHandle", hObject);
     LOG_AND_RETURN("{:x}", hex(hObject));
 }
-DETOUR_API(signed int, __stdcall, xlive_5252, int a1, __int64 a2)
+DETOUR_API(signed int, __stdcall, xlive_5252, int a1, int64_t a2)
 {
     CALL_ORIGINAL(5252, "XShowGamerCardUI", a1, a2);
-    LOG_AND_RETURN("{:x}, {:x}", hex(a1), __int64(a2));
+    LOG_AND_RETURN("{:x}, {:x}", hex(a1), int64_t(a2));
 }
 DETOUR_API(int, __stdcall, xlive_5256, int a1, int a2, int a3, DWORD* a4, int a5)
 {
@@ -976,7 +977,7 @@ DETOUR_API(signed int, __stdcall, xlive_5267, uint32_t user_index, uint32_t flag
     CALL_ORIGINAL(5267, "XUserGetSigninInfo", user_index, flags, signin_info);
     LOG_AND_RETURN("{:x}, {:x}, {:x}", hex(user_index), hex(flags), hex(signin_info));
 }
-DETOUR_API(int, __stdcall, xlive_5270, __int64 a1)
+DETOUR_API(int, __stdcall, xlive_5270, int64_t a1)
 {
     // NOTE: The game needs a value or it will fail to initialize.
     CALL_ORIGINAL(5270, "XNotifyCreateListener", a1);

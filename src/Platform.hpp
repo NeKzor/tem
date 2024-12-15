@@ -5,6 +5,7 @@
  */
 
 #pragma once
+#include "Console.hpp"
 #include "lib/minhook/MinHook.h"
 
 #define DECL_DETOUR(name, firstparam, ...)                                                                             \
@@ -29,15 +30,15 @@
     static uintptr_t name##_Target;                                                                                    \
     static type __stdcall name##_Hook(firstparam, ##__VA_ARGS__)
 #define DECL_DETOUR_API(type, cc, name, ...)                                                                           \
-    using _##name = type(cc*)(##__VA_ARGS__);                                                                          \
+    using _##name = type(cc*)(__VA_ARGS__);                                                                            \
     static _##name name;                                                                                               \
     static uintptr_t name##_Target;                                                                                    \
-    static type cc name##_Hook(##__VA_ARGS__)
+    static type cc name##_Hook(__VA_ARGS__)
 #define DECL_DETOUR_S(type, cc, name, ...)                                                                             \
-    using _##name = type (*)(##__VA_ARGS__);                                                                           \
+    using _##name = type (*)(__VA_ARGS__);                                                                           \
     static _##name name;                                                                                               \
     static uintptr_t name##_Target;                                                                                    \
-    static type cc name##_Hook(##__VA_ARGS__)
+    static type cc name##_Hook(__VA_ARGS__)
 #define DECL_DETOUR_MID(name)                                                                                          \
     static uintptr_t name;                                                                                             \
     static uintptr_t name##_Target;                                                                                    \
@@ -47,8 +48,8 @@
 #define DETOUR_T(type, name, firstparam, ...) type __fastcall name##_Hook(firstparam, int edx, ##__VA_ARGS__)
 #define DETOUR_B(name, firstparam, ...) int __fastcall name##_Hook(firstparam, int edx, ##__VA_ARGS__)
 #define DETOUR_STD(type, name, firstparam, ...) type __stdcall name##_Hook(firstparam, ##__VA_ARGS__)
-#define DETOUR_API(type, cc, name, ...) type cc name##_Hook(##__VA_ARGS__)
-#define DETOUR_MID(name) __declspec(naked) void name##_Hook()
+#define DETOUR_API(type, cc, name, ...) type cc name##_Hook(__VA_ARGS__)
+#define DETOUR_MID(name) __attribute__((naked)) void name##_Hook()
 
 namespace Hooks {
 static auto initialize() -> void

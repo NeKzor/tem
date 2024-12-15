@@ -5,7 +5,7 @@
  */
 
 #pragma once
-#include <Windows.h>
+#include <windows.h>
 #include <cinttypes>
 #include <format>
 
@@ -123,7 +123,7 @@ struct XUSER_STATS_SPEC {
 };
 
 namespace xdead {
-    #define XDEAD_CALLBACK(type, name, ...) type __stdcall name##_callback(##__VA_ARGS__)
+    #define XDEAD_CALLBACK(type, name, ...) type __stdcall name##_callback(__VA_ARGS__)
     #define XDEAD_FUNCTION_NAME(name, ordinal) static constexpr auto name = ordinal
 
     /// <summary>

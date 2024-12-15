@@ -341,7 +341,7 @@ DETOUR_T(Color*, GetTeamColor, PgTeamInfo* team, Color* color, int team_color_in
 
 DETOUR_T(FString*, ConsoleCommand, UGameViewportClient* client, const FString& output, const FString& command)
 {
-    println("[command] [{:x}] {}", uintptr_t(_ReturnAddress()), command.str().c_str());
+    println("[command] [{:x}] {}", uintptr_t(__builtin_extract_return_addr(__builtin_return_address(0))), command.str().c_str());
 
     return ConsoleCommand(client, output, command);
 }

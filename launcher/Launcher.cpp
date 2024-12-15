@@ -16,7 +16,7 @@
  * Read for more information: https://tem.nekz.me/reversed/securom.html#launcher
  */
 
-#include <Windows.h>
+#include <windows.h>
 #include <conio.h>
 #include <format>
 #include <iostream>
