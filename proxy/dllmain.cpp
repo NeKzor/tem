@@ -11,12 +11,21 @@
 #define EXPORT __declspec(dllexport)
 #define ORIGINAL(name) name##_original
 
-#define DECL_DETOUR_API(type, cc, name, ...)  \
-    using _##name = type(cc*)(__VA_ARGS__); \
-    _##name ORIGINAL(name);                   \
-    EXPORT type cc name(__VA_ARGS__)
+#ifdef __GNUC__
+    #define DECL_DETOUR_API(type, cc, name, ...) \
+        using _##name = type(cc*)(__VA_ARGS__);  \
+        _##name ORIGINAL(name);                  \
+        EXPORT type cc name##_Hook(__VA_ARGS__)
 
-#define DETOUR_API(type, cc, name, ...) EXPORT type cc name(__VA_ARGS__)
+    #define DETOUR_API(type, cc, name, ...) EXPORT type cc name##_Hook(__VA_ARGS__)
+#else
+    #define DECL_DETOUR_API(type, cc, name, ...) \
+        using _##name = type(cc*)(__VA_ARGS__);  \
+        _##name ORIGINAL(name);                  \
+        EXPORT type cc name(__VA_ARGS__)
+
+    #define DETOUR_API(type, cc, name, ...) EXPORT type cc name(__VA_ARGS__)
+#endif
 
 DECL_DETOUR_API(HRESULT, __stdcall, DirectInput8Create, HINSTANCE hinst, DWORD dwVersion, REFIID riidltf, LPVOID* ppvOut, void* punkOuter);
 
@@ -43,6 +52,12 @@ DETOUR_API(HRESULT, __stdcall, DirectInput8Create, HINSTANCE hinst, DWORD dwVers
 
     return result;
 }
+
+#ifdef __GNUC__
+extern "C" void __attribute__((naked, dllexport)) DirectInput8Create() {
+    __asm__("jmp *%0;" :: "r"(DirectInput8Create_Hook));
+}
+#endif
 
 auto init_proxy() -> void
 {
