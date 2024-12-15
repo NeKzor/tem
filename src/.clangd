@@ -1,0 +1,19 @@
+CompileFlags:
+  Add: [
+    "-std=c++2b",
+    "--target=i686-w64-mingw32",
+    "-DUNICODE",
+    "-D_UNICODE",
+    "-I/usr/i686-w64-mingw32/include",
+    "-I/usr/lib/gcc/i686-w64-mingw32/13-win32/include/c++",
+    "-I/usr/lib/gcc/i686-w64-mingw32/13-win32/include/c++/i686-w64-mingw32",
+    "-Wall",
+    "-Wextra",
+    "-Wno-expansion-to-defined",
+    "-Wno-unknown-pragmas",
+    "-Wno-deprecated-declarations",
+    "-Wno-unused-function",
+    "-Wno-unused-variable",
+    "-Wno-unused-parameter",
+    "-Wno-cast-function-type"
+  ]
