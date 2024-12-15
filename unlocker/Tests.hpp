@@ -28,13 +28,13 @@ struct UnitTest {
 
 #define EXPECT_TRUE(condition)                                                                                         \
     if (!condition) {                                                                                                  \
-        throw std::exception(std::format("[failed] {} - {}\n - condition \"{}\" evaluated to to false",                \
+        throw std::runtime_error(std::format("[failed] {} - {}\n - condition \"{}\" evaluated to to false",            \
             test->case_name, test->description, #condition)                                                            \
                                  .c_str());                                                                            \
     }
 #define EXPECT_EQ(actual, expected)                                                                                    \
     if (!(actual == expected)) {                                                                                       \
-        throw std::exception(std::format(                                                                              \
+        throw std::runtime_error(std::format(                                                                          \
             "[failed] {} - {}\n - expected: {}\n - actual: {}", test->case_name, test->description, expected, actual)  \
                                  .c_str());                                                                            \
     }

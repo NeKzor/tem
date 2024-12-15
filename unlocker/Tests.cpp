@@ -212,7 +212,7 @@ auto run_all_tests() -> int
             std::cout << std::format("[succeeded] {} - {}", test_case->case_name, test_case->description) << std::endl
                       << std::endl;
             ++succeeded;
-        } catch (std::exception ex) {
+        } catch (const std::exception &ex) {
             std::cout << ex.what() << std::endl << std::endl;
             ++failed;
         }

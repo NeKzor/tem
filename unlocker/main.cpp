@@ -34,6 +34,9 @@
 #include <openssl/md5.h>
 #include <openssl/opensslv.h>
 #include <openssl/des.h>
+#include <winnt.h>
+#include <thread>
+#include <crtdbg.h>
 #include "Unlocker.hpp"
 #include "lib/BigDigits/bigd.h"
 
@@ -95,7 +98,7 @@ auto hwid_t::hash_field(BYTE* dest, BYTE* src, DWORD size) -> void
 auto hwid_t::get_version_hash() -> void
 {
     OSVERSIONINFO osvi = {};
-    ZeroMemory(&osvi, 0, sizeof(OSVERSIONINFO));
+    ZeroMemory(&osvi, sizeof(OSVERSIONINFO));
     osvi.dwOSVersionInfoSize = sizeof(OSVERSIONINFO);
     GetVersionEx(&osvi);
 
@@ -312,7 +315,7 @@ auto decode_des_buffer(BYTE* input, size_t input_length, BYTE* output, size_t ou
 
             do {
                 auto next_byte = index >= input_length ? 0 : input[index];
-                current_byte = input[index - 1] | ((next_byte << 8) | current_byte & 0xFFFF00FF) & 0xFFFFFF00;
+                current_byte = input[index - 1] | (((next_byte << 8) | (current_byte & 0xFFFF00FF)) & 0xFFFFFF00);
                 output[length] = (current_byte & bit_mask) >> to_shift;
                 to_shift += 5;
                 ++length;
