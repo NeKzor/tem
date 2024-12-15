@@ -6,6 +6,7 @@
 
 #pragma once
 #include "Memory.hpp"
+#include "Offsets.hpp"
 #include "SDK.hpp"
 #include <thread>
 #include <map>
@@ -52,9 +53,23 @@ struct TEM {
     auto find_name(FName name) -> std::string_view;
     auto find_name_index(const char* name) -> int;
 
-    inline auto engine() -> UEngine*;
-    inline auto player_controller() -> PgPlayerController*;
-    inline auto pawn() -> PgPawn*;
+    inline auto engine() -> UEngine* { return Memory::Deref<UEngine*>(Offsets::g_Engine); }
+    inline auto player_controller() -> PgPlayerController*
+    {
+        if (!this->engine() || !this->engine()->get_local_player()) {
+            return nullptr;
+        }
+
+        return this->engine()->get_local_player()->actor;
+    }
+    inline auto pawn() -> PgPawn*
+    {
+        if (!player_controller()) {
+            return nullptr;
+        }
+
+        return player_controller()->pawn;
+    }
     auto console_command(std::wstring command) -> void;
 
     std::map<std::string, std::pair<int, std::vector<int>>> command_to_key_move = {
@@ -78,10 +93,10 @@ struct TEM {
 
 extern TEM tem;
 
-extern auto tem_attach(HMODULE module) -> int;
+extern auto __stdcall tem_attach(HMODULE module) -> int;
 extern auto tem_detach() -> void;
 extern auto tem_init() -> void;
-extern auto tem_shutdown() -> void;
+extern auto __stdcall tem_shutdown() -> void;
 
 extern auto patch_forced_window_minimize(bool enable) -> void;
 

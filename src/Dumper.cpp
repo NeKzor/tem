@@ -27,7 +27,7 @@ auto dump_engine() -> void
     for (auto i = 0u; i < g_Names->size; ++i) {
         auto item = names[i];
 
-        if (item && item->index == i << 1 && item->name) {
+        if (item && item->index == i << 1) {
             name_stream << std::format("{} // 0x{:x}\n", item->name, item->index >> 1);
         }
     }
@@ -554,7 +554,7 @@ auto dump_engine_to_json() -> void
 
         foreach_item(item, g_Names)
         {
-            if (item && item->index == i << 1 && item->name) {
+            if (item && item->index == i << 1) {
                 json["data"] += {
                     { "name", item->name },
                     { "index", item->index >> 1 },

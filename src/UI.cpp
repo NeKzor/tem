@@ -42,7 +42,7 @@ BOOL CALLBACK ui_window(HWND handle, LPARAM pid)
     auto proc_id = DWORD();
     GetWindowThreadProcessId(handle, &proc_id);
 
-    if (proc_id != pid) {
+    if (proc_id != (unsigned long)pid) {
         return true;
     }
 

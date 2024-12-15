@@ -28,7 +28,7 @@ DECL_DETOUR_T(FString*, ConsoleCommand, UGameViewportClient* client, const FStri
  * This gets called once the module loads.
  * Here we immediately patch GFWL and all spot checks.
  */
-auto tem_attach(HMODULE module) -> int
+auto __stdcall tem_attach(HMODULE module) -> int
 {
     if (tem.is_attached) {
         return 0;
@@ -131,7 +131,7 @@ auto tem_init() -> void
 /*
  * This signals the process to unload the module.
  */
-auto tem_shutdown() -> void { FreeLibraryAndExitThread(tem.module_handle, 0); }
+auto __stdcall tem_shutdown() -> void { FreeLibraryAndExitThread(tem.module_handle, 0); }
 
 auto patch_forced_window_minimize(bool enable) -> void
 {
@@ -167,7 +167,7 @@ auto TEM::find_name(FName name) -> std::string_view
 
     for (auto i = 0u; i < g_Names->size; ++i) {
         auto item = names[i];
-        if (item && item->index == i << 1 && item->index == name.index << 1 && item->name) {
+        if (item && item->index == i << 1 && item->index == name.index << 1) {
             return item->name;
         }
     }
@@ -181,29 +181,12 @@ auto TEM::find_name_index(const char* name) -> int
 
     for (auto i = 0u; i < g_Names->size; ++i) {
         auto item = names[i];
-        if (item && item->index == i << 1 && item->name && strcmp(item->name, name) == 0) {
+        if (item && item->index == i << 1 && strcmp(item->name, name) == 0) {
             return item->index >> 1;
         }
     }
 
     return -1;
-}
-inline auto TEM::engine() -> UEngine* { return Memory::Deref<UEngine*>(Offsets::g_Engine); }
-inline auto TEM::player_controller() -> PgPlayerController*
-{
-    if (!this->engine() || !this->engine()->get_local_player()) {
-        return nullptr;
-    }
-
-    return this->engine()->get_local_player()->actor;
-}
-inline auto TEM::pawn() -> PgPawn*
-{
-    if (!player_controller()) {
-        return nullptr;
-    }
-
-    return player_controller()->pawn;
 }
 auto TEM::console_command(std::wstring command) -> void
 {
