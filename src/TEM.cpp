@@ -34,6 +34,10 @@ auto __stdcall tem_attach(HMODULE module) -> int
         return 0;
     }
 
+    AttachConsole(ATTACH_PARENT_PROCESS);
+    freopen("CONOUT$", "w", stdout);
+    freopen("CONOUT$", "w", stderr);
+
     tem.is_attached = true;
     tem.module_handle = module;
 
