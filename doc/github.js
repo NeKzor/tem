@@ -12,7 +12,8 @@ if (document.location.pathname === '/getting-started.html') {
                 }
             };
 
-            addRelease('#stable-release', false);
+            //addRelease('#stable-release', false);
+            addRelease('#unstable-release', true);
         })
         .catch(console.error);
 }
