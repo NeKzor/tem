@@ -855,7 +855,16 @@ auto main(int argc, char *argv[]) -> int
 #else
     auto start = GetTickCount64();
 
-    auto game = tron_evolution;
+    securom_game_t game;
+
+    if (argc >= 2) {
+        if (std::string(argv[1]) == "russian")
+            game = tron_evolution_russian
+        else if (std::string(argv[1]) == "polish" || std::string(argv[1]) == "czech")
+            game = tron_evolution_polish_czech
+    }
+    else
+        game = tron_evolution;
     auto hwid = hwid_t();
 
     hwid.init();
